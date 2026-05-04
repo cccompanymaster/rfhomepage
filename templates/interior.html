@@ -6,6 +6,9 @@
     <title>여백 스튜디오 — 덜어낸 자리에 머무는 하루</title>
     <meta name="description" content="여백 스튜디오는 사는 사람의 하루를 먼저 듣고, 머물 수 있는 자리만 남기는 인테리어를 디자인합니다." />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/common.css" />
     <style>
@@ -19,8 +22,8 @@
         --line: #e2e1dc;
       }
       html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); font-feature-settings:'tnum'; }
-      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      body { font-family: 'IBM Plex Sans KR', 'Pretendard Variable', system-ui, sans-serif; background: var(--bg); color: var(--ink); font-feature-settings:'tnum'; font-weight: 400; }
+      .serif { font-family: 'IBM Plex Sans KR', 'Pretendard Variable', sans-serif; font-weight: 500; letter-spacing: -0.025em; }
       .container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
       @media (min-width: 768px) { .container-x { padding: 0 48px; } }
       .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }

@@ -6,6 +6,9 @@
     <title>Stackline — 흩어진 업무 데이터를 한 줄로</title>
     <meta name="description" content="Stackline은 슬랙·노션·시트에 흩어진 데이터를 한 줄의 업무 흐름으로 정리해주는 협업 자동화 도구입니다." />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/common.css" />
     <style>
@@ -19,7 +22,9 @@
         --line: rgba(255,255,255,.08);
       }
       html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; font-feature-settings: 'cv11', 'ss01', 'tnum'; }
+      .number-tabular, code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+      h1, h2, h3 { font-weight: 800; letter-spacing: -0.035em; }
       .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
       @media (min-width: 768px) { .container-x { padding: 0 40px; } }
       .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }

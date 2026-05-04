@@ -6,6 +6,9 @@
     <title>한울정밀 — 미크론 단위에서 시작되는 신뢰</title>
     <meta name="description" content="한울정밀은 자동차·반도체 정밀부품 가공 전문 기업입니다. ±2㎛의 공차 안에서, 33년의 신뢰." />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/common.css" />
     <style>
@@ -20,8 +23,9 @@
         --line: #d8dde3;
       }
       html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
-      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      body { font-family: 'IBM Plex Sans KR', 'Pretendard Variable', system-ui, sans-serif; background: var(--bg); color: var(--ink); font-weight: 400; }
+      .serif { font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 600; letter-spacing: -0.025em; }
+      .stat .serif, dd.serif, dl .serif { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; letter-spacing: -0.02em; }
       .container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
       @media (min-width: 768px) { .container-x { padding: 0 48px; } }
       .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
