@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>정평 법무법인 — 바르게 듣고, 정확하게 답합니다</title>
+    <meta name="description" content="정평 법무법인은 사건의 결을 끝까지 듣고, 가능한 답을 정확하게 드립니다. 형사·민사·기업·가사 — 분야별 전담 변호사가 함께합니다." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #fbfaf7;
+        --bg-soft: #f3f0e8;
+        --primary: #0e1a2b;
+        --primary-soft: #1f2d44;
+        --accent: #c9a961;
+        --ink: #14202e;
+        --ink-soft: #5b6776;
+        --line: #e6dfd0;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .ph { background: linear-gradient(135deg, #1f2d44, #0e1a2b 60%, #000); position: relative; overflow: hidden; }
+      .ph::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(201,169,97,.18), transparent 50%); }
+      .ph-mark { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Noto Serif KR', serif; color: rgba(201,169,97,.55); font-size: clamp(48px, 8vw, 120px); font-weight: 600; letter-spacing: -0.04em; z-index: 1; }
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(251,250,247,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+      .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; background: var(--primary); color: #fff; border-radius: 2px; font-weight: 600; font-size: 15px; transition: background .2s ease; }
+      .btn-primary:hover { background: #000; }
+      .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; color: var(--primary); border-radius: 2px; font-weight: 600; font-size: 15px; border: 1px solid var(--primary); }
+      .btn-ghost:hover { background: var(--primary); color: #fff; }
+      .field { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 2px; background: #fff; font-size: 15px; }
+      .field:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,169,97,.15); }
+      .row { border-top: 1px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color: var(--primary)">正平 정평</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#stance" class="hover:text-[color:var(--primary)]">우리의 자세</a>
+          <a href="#fields" class="hover:text-[color:var(--primary)]">자문 분야</a>
+          <a href="#lawyers" class="hover:text-[color:var(--primary)]">변호사</a>
+          <a href="#cases" class="hover:text-[color:var(--primary)]">대표 사례</a>
+          <a href="#contact" class="hover:text-[color:var(--primary)]">상담 신청</a>
+        </nav>
+        <a href="#contact" class="btn-primary text-sm" style="padding: 10px 18px">상담 예약</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="container-x pt-20 md:pt-32 pb-24 md:pb-40">
+        <div class="grid md:grid-cols-12 gap-12 items-end">
+          <div class="md:col-span-8 reveal">
+            <p class="eyebrow mb-8">LAW FIRM JEONGPYEONG · EST. 2009</p>
+            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
+              바르게 듣고,<br />정확하게 답합니다.
+            </h1>
+            <p class="mt-10 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
+              사건은 모두 다릅니다. 정평은 같은 답을 미리 준비해 두지 않습니다.<br />
+              의뢰인의 이야기를 끝까지 듣고, 그 자리에 맞는 길을 찾아 드립니다.
+            </p>
+            <div class="mt-12 flex flex-wrap gap-3">
+              <a href="#contact" class="btn-primary">상담 예약하기 <span aria-hidden="true">→</span></a>
+              <a href="#fields" class="btn-ghost">자문 분야 보기</a>
+            </div>
+          </div>
+          <div class="md:col-span-4 reveal">
+            <dl class="space-y-6">
+              <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
+                <dt style="color: var(--ink-soft)">설립</dt>
+                <dd class="serif text-2xl">2009</dd>
+              </div>
+              <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
+                <dt style="color: var(--ink-soft)">소속 변호사</dt>
+                <dd class="serif text-2xl">14<span class="text-sm">명</span></dd>
+              </div>
+              <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
+                <dt style="color: var(--ink-soft)">자문 기업</dt>
+                <dd class="serif text-2xl">220<span class="text-sm">+</span></dd>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <dt style="color: var(--ink-soft)">누적 자문</dt>
+                <dd class="serif text-2xl">3,800<span class="text-sm">건</span></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- STANCE -->
+      <section id="stance" class="py-24 md:py-36" style="background: var(--primary); color: #f5efe0">
+        <div class="container-x">
+          <div class="grid md:grid-cols-12 gap-12">
+            <div class="md:col-span-5 reveal">
+              <p class="eyebrow mb-6">우리의 자세</p>
+              <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+                먼저 듣는<br />법률사무소.
+              </h2>
+            </div>
+            <div class="md:col-span-7 space-y-10">
+              <div class="reveal row pt-8" style="border-color: rgba(201,169,97,.25)">
+                <p class="serif text-lg" style="color: var(--accent)">01.</p>
+                <h3 class="mt-2 text-xl font-semibold">사건의 결을 끝까지 듣습니다</h3>
+                <p class="mt-3 leading-relaxed" style="color: rgba(245,239,224,.7)">
+                  같은 죄명, 같은 청구라도 사건의 사정은 모두 다릅니다.
+                  의뢰인이 처한 자리부터 충분히 듣는 일이 변론의 시작입니다.
+                </p>
+              </div>
+              <div class="reveal row pt-8" style="border-color: rgba(201,169,97,.25)">
+                <p class="serif text-lg" style="color: var(--accent)">02.</p>
+                <h3 class="mt-2 text-xl font-semibold">가능한 결과를 솔직히 말씀드립니다</h3>
+                <p class="mt-3 leading-relaxed" style="color: rgba(245,239,224,.7)">
+                  유리한 가능성과 함께, 짚고 가야 할 위험도 같이 설명드립니다.
+                  결과를 약속하기보다 함께 준비하는 길을 권합니다.
+                </p>
+              </div>
+              <div class="reveal row pt-8" style="border-color: rgba(201,169,97,.25)">
+                <p class="serif text-lg" style="color: var(--accent)">03.</p>
+                <h3 class="mt-2 text-xl font-semibold">한 사건, 한 명의 책임 변호사</h3>
+                <p class="mt-3 leading-relaxed" style="color: rgba(245,239,224,.7)">
+                  접수부터 종결까지 책임 변호사가 직접 살핍니다.
+                  중간에 담당이 바뀌거나, 후임 변호사에게 인계되는 일이 없습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIELDS -->
+      <section id="fields" class="container-x py-24 md:py-36">
+        <div class="flex flex-wrap items-end justify-between gap-6 mb-14 reveal">
+          <div>
+            <p class="eyebrow mb-4">자문 분야</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              사건마다 다른 결,<br />변호인도 같을 수 없습니다.
+            </h2>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-x-12">
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">형사</h3><span class="text-xs" style="color:var(--ink-soft)">CRIMINAL</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">경제·강력·교통·디지털 성범죄 등 분야별 전담. 수사 단계 동행, 양형 자료 준비, 항소·상고까지 일관된 책임.</p>
+          </article>
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">민사·손해배상</h3><span class="text-xs" style="color:var(--ink-soft)">CIVIL</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">계약 분쟁, 부동산, 임대차, 채권 회수, 손해배상 청구 — 합의 가능성과 소송의 실익을 함께 검토합니다.</p>
+          </article>
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">기업 자문</h3><span class="text-xs" style="color:var(--ink-soft)">CORPORATE</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">스타트업 설립·투자, 주주 분쟁, 노무, 컴플라이언스. 월정 자문으로 일상의 의사결정에 함께합니다.</p>
+          </article>
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">가사·상속</h3><span class="text-xs" style="color:var(--ink-soft)">FAMILY</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">이혼, 양육, 재산분할, 상속 분쟁. 격앙된 자리에서 한 걸음 떨어진 시점으로, 차분히 정리해 드립니다.</p>
+          </article>
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">행정·조세</h3><span class="text-xs" style="color:var(--ink-soft)">ADMIN</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">처분 취소, 영업 제재, 조세 불복. 행정청·과세관청과의 절차적 다툼에서 의뢰인의 자리를 명확히 합니다.</p>
+          </article>
+          <article class="reveal py-8 row">
+            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">지식재산</h3><span class="text-xs" style="color:var(--ink-soft)">IP</span></div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">상표·저작권 분쟁, 영업비밀, 라이선스 자문. 창작자와 기업 양쪽의 입장을 모두 다뤄온 경험.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- LAWYERS -->
+      <section id="lawyers" class="py-24 md:py-36" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-2xl mb-14">
+            <p class="eyebrow mb-4">변호사</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              이름을 걸고,<br />사건의 끝까지 함께합니다.
+            </h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <article class="reveal">
+              <div class="ph aspect-[4/5]"><div class="ph-mark">徐</div></div>
+              <p class="mt-6 text-sm" style="color: var(--accent)">대표변호사 · 기업 / 형사</p>
+              <h3 class="serif text-2xl mt-1">서정민 변호사</h3>
+              <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
+                <li>· 서울대학교 법과대학 졸업</li>
+                <li>· 사법연수원 35기 수료</li>
+                <li>· 전 서울중앙지방검찰청 부장검사</li>
+              </ul>
+            </article>
+            <article class="reveal">
+              <div class="ph aspect-[4/5]"><div class="ph-mark">韓</div></div>
+              <p class="mt-6 text-sm" style="color: var(--accent)">파트너 · 민사 / 가사</p>
+              <h3 class="serif text-2xl mt-1">한지윤 변호사</h3>
+              <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
+                <li>· 연세대학교 법학전문대학원 졸업</li>
+                <li>· 변호사 11년차</li>
+                <li>· 가사·상속 분야 700건 이상 수임</li>
+              </ul>
+            </article>
+            <article class="reveal">
+              <div class="ph aspect-[4/5]"><div class="ph-mark">吳</div></div>
+              <p class="mt-6 text-sm" style="color: var(--accent)">파트너 · IP / 행정</p>
+              <h3 class="serif text-2xl mt-1">오재호 변호사</h3>
+              <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
+                <li>· 고려대학교 법학과 졸업</li>
+                <li>· 미국 Columbia LL.M.</li>
+                <li>· 기술기업 자문 경력 9년</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CASES -->
+      <section id="cases" class="container-x py-24 md:py-36">
+        <div class="reveal max-w-2xl mb-14">
+          <p class="eyebrow mb-4">대표 사례</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+            결과보다,<br />과정으로 남기는 자취.
+          </h2>
+        </div>
+        <div class="space-y-0">
+          <article class="reveal py-8 row grid md:grid-cols-12 gap-6">
+            <p class="md:col-span-2 serif text-lg" style="color: var(--accent)">2025</p>
+            <div class="md:col-span-7">
+              <h3 class="text-lg font-semibold">상장 IT기업 대표이사 배임 혐의 무혐의 처분</h3>
+              <p class="mt-2" style="color: var(--ink-soft)">초기 진술부터 함께 동행, 거래 구조 분석으로 고의·임무위배 부존재 입증.</p>
+            </div>
+            <p class="md:col-span-3 text-sm md:text-right" style="color: var(--ink-soft)">형사 / 경제범죄</p>
+          </article>
+          <article class="reveal py-8 row grid md:grid-cols-12 gap-6">
+            <p class="md:col-span-2 serif text-lg" style="color: var(--accent)">2024</p>
+            <div class="md:col-span-7">
+              <h3 class="text-lg font-semibold">제조업체 임차분쟁 — 보증금 전액 회수</h3>
+              <p class="mt-2" style="color: var(--ink-soft)">계약 해지 사유 정리 및 점유이전 가처분 병행, 본안 전 합의 도출.</p>
+            </div>
+            <p class="md:col-span-3 text-sm md:text-right" style="color: var(--ink-soft)">민사 / 부동산</p>
+          </article>
+          <article class="reveal py-8 row grid md:grid-cols-12 gap-6">
+            <p class="md:col-span-2 serif text-lg" style="color: var(--accent)">2024</p>
+            <div class="md:col-span-7">
+              <h3 class="text-lg font-semibold">시리즈A 스타트업 공동창업자 분쟁 자문</h3>
+              <p class="mt-2" style="color: var(--ink-soft)">지분 베스팅 재설계와 비경쟁 합의로 회사 운영 중단 없이 종결.</p>
+            </div>
+            <p class="md:col-span-3 text-sm md:text-right" style="color: var(--ink-soft)">기업 자문</p>
+          </article>
+          <article class="reveal py-8 row grid md:grid-cols-12 gap-6">
+            <p class="md:col-span-2 serif text-lg" style="color: var(--accent)">2023</p>
+            <div class="md:col-span-7">
+              <h3 class="text-lg font-semibold">상속재산 분할 조정 사건 — 형제 합의 종결</h3>
+              <p class="mt-2" style="color: var(--ink-soft)">감정평가 자료 정비 및 단계별 분할안 제안으로 소송 없이 마무리.</p>
+            </div>
+            <p class="md:col-span-3 text-sm md:text-right" style="color: var(--ink-soft)">가사 / 상속</p>
+          </article>
+        </div>
+        <p class="mt-10 text-sm" style="color: var(--ink-soft)">· 의뢰인 식별 정보를 가린 사례 일부입니다.</p>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="py-24 md:py-36" style="background: var(--bg-soft)">
+        <div class="container-x grid md:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="eyebrow mb-4">상담 신청</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              먼저 한 통의<br />이야기로 시작합니다.
+            </h2>
+            <p class="mt-8 leading-relaxed" style="color: var(--ink-soft)">
+              초기 상담은 30분, 별도의 상담료 없이 진행됩니다.
+              사건 자료가 정리되어 있지 않아도 괜찮습니다.
+              연락처를 남겨 주시면 변호사가 직접 회신드립니다.
+            </p>
+            <dl class="mt-12 space-y-4">
+              <div class="row pt-4 flex justify-between"><dt style="color:var(--ink-soft)">대표전화</dt><dd class="serif text-xl">02 · 555 · 0900</dd></div>
+              <div class="row pt-4 flex justify-between"><dt style="color:var(--ink-soft)">이메일</dt><dd>contact@jeongpyeong.kr</dd></div>
+              <div class="row pt-4 flex justify-between"><dt style="color:var(--ink-soft)">사무소</dt><dd class="text-right">서울 서초구 서초대로 OO길 15<br />JP빌딩 12층</dd></div>
+            </dl>
+          </div>
+
+          <form class="bg-white p-8 reveal" onsubmit="event.preventDefault(); alert('상담 신청이 접수되었습니다. 확인 후 연락드리겠습니다.');" style="border:1px solid var(--line)">
+            <h3 class="serif text-2xl mb-6">초기 상담 신청서</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label>
+                <input class="field" required placeholder="홍길동" />
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label>
+                <input class="field" required type="tel" placeholder="010-0000-0000" />
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">사건 분야</label>
+                <select class="field" required>
+                  <option value="">분야를 선택해 주세요</option>
+                  <option>형사</option><option>민사·손해배상</option><option>기업 자문</option>
+                  <option>가사·상속</option><option>행정·조세</option><option>지식재산</option>
+                  <option>아직 정리 중입니다</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">간단한 사건 개요</label>
+                <textarea class="field" rows="4" placeholder="기억나시는 만큼만 적어 주셔도 괜찮습니다."></textarea>
+              </div>
+              <button type="submit" class="btn-primary w-full justify-center mt-2">상담 요청 보내기</button>
+              <p class="text-xs mt-2" style="color: var(--ink-soft)">· 작성 정보는 상담 안내 외 다른 목적으로 사용되지 않으며, 비밀유지의무가 적용됩니다.</p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-14 text-sm" style="background: var(--primary); color: rgba(245,239,224,.7)">
+      <div class="container-x flex flex-wrap justify-between gap-6">
+        <div>
+          <p class="serif text-lg" style="color: var(--accent)">정평 법무법인</p>
+          <p class="mt-3">서울 서초구 서초대로 OO길 15, JP빌딩 12층</p>
+          <p>대표변호사 서정민 · 사업자등록번호 000-00-00000</p>
+        </div>
+        <div class="text-right">
+          <a href="../index.html" class="hover:underline" style="color: var(--accent)">← 쇼룸으로 돌아가기</a>
+          <p class="mt-2">© 2026 LAW FIRM JEONGPYEONG</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin: '0px 0px -10% 0px', threshold: .05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>

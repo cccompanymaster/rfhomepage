@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>산일호 풀빌라 — 산이 가장 가까운 하룻밤</title>
+    <meta name="description" content="산일호는 강원도 인제 자작나무숲 자락의 4실 단독 풀빌라입니다. 산을 올려다보며 잠드는 하룻밤." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #f7f3eb;
+        --bg-soft: #ebe2cf;
+        --primary: #3a4a3a;
+        --primary-soft: #5a6e5a;
+        --accent: #8a7448;
+        --ink: #2a2418;
+        --ink-soft: #6f6650;
+        --line: #d8cfb6;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 48px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .ph { background: linear-gradient(160deg, #c4ccba 0%, #8a9d80 50%, #4a5a48 100%); position: relative; overflow: hidden; }
+      .ph::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.4), transparent 55%); }
+      .ph-mark { position:absolute; inset:0; display:grid; place-items:center; font-family:'Noto Serif KR',serif; color:rgba(255,255,255,.45); font-size:clamp(48px,9vw,140px); font-weight:600; letter-spacing:-.04em; z-index:1;}
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(247,243,235,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#f5efde; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
+      .btn-primary:hover { background:#1f2c1f; }
+      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
+      .btn-ghost:hover { background:var(--primary); color:#fff; }
+      .row { border-top: 1px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color:var(--primary)">산일호 山一號</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#about">소개</a>
+          <a href="#rooms">객실</a>
+          <a href="#facility">부대시설</a>
+          <a href="#around">주변</a>
+          <a href="#book">예약</a>
+        </nav>
+        <a href="#book" class="btn-primary text-sm" style="padding:10px 18px">예약하기</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="relative">
+        <div class="ph absolute inset-0"><div class="ph-mark">山</div></div>
+        <div class="container-x relative pt-28 md:pt-44 pb-32 md:pb-48 text-center" style="color: #fff">
+          <p class="eyebrow mb-8 reveal" style="color:#dccfa6">강원도 인제 · 자작나무숲 자락</p>
+          <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.1] tracking-tight reveal">
+            산이 가장 가까운<br />하룻밤.
+          </h1>
+          <p class="mt-10 text-base md:text-lg max-w-xl mx-auto reveal" style="color: rgba(255,255,255,.85)">
+            네 채의 단독 풀빌라. 옆집 소리도 들리지 않는 거리에서, 산을 올려다보며 잠드는 시간.
+          </p>
+          <div class="mt-12 flex flex-wrap gap-3 justify-center reveal">
+            <a href="#book" class="btn-primary" style="background:#fff; color:var(--primary)">자리 예약하기 →</a>
+            <a href="#rooms" class="btn-ghost" style="color:#fff; border-color:rgba(255,255,255,.6)">객실 둘러보기</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="container-x py-24 md:py-32">
+        <div class="grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-5 reveal">
+            <p class="eyebrow mb-4">ABOUT</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              한 채의 집,<br />한 가족의 시간.
+            </h2>
+          </div>
+          <div class="md:col-span-7 space-y-5 leading-relaxed text-base md:text-lg reveal" style="color: var(--ink-soft)">
+            <p>산일호는 단지가 아닌, 흩어진 네 채의 집입니다. 옆 객실의 소음이나, 풀장을 함께 쓰는 일이 없습니다.</p>
+            <p>각 채마다 독립된 마당과 자쿠지·노천탕이 있고, 거실의 큰 창은 모두 산을 바라봅니다.</p>
+            <p>식사는 직접 해 드시거나, 사전에 신청하시면 인근 한식 명인의 도시락을 마당으로 가져다 드립니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROOMS -->
+      <section id="rooms" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal mb-14 max-w-2xl">
+            <p class="eyebrow mb-4">ROOMS</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">네 채, 각각의 결.</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <article class="reveal">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">솔채</div></div>
+              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">솔채</h3><span class="text-sm" style="color:var(--ink-soft)">2인 / 자쿠지</span></div>
+              <p class="mt-3" style="color: var(--ink-soft)">소나무 숲을 정면으로 바라보는 가장 작은 채. 두 분만의 조용한 하룻밤에.</p>
+              <p class="mt-3 serif text-lg">평일 ₩390,000~</p>
+            </article>
+            <article class="reveal mt-12 md:mt-20">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">자작채</div></div>
+              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">자작채</h3><span class="text-sm" style="color:var(--ink-soft)">4인 / 풀 + 자쿠지</span></div>
+              <p class="mt-3" style="color: var(--ink-soft)">자작나무숲이 가장 가까운 채. 4인 가족이 머물기에 알맞은 단층 구조.</p>
+              <p class="mt-3 serif text-lg">평일 ₩520,000~</p>
+            </article>
+            <article class="reveal">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">달채</div></div>
+              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">달채</h3><span class="text-sm" style="color:var(--ink-soft)">4인 / 노천탕</span></div>
+              <p class="mt-3" style="color: var(--ink-soft)">밤이 가장 잘 보이는 자리. 노천탕에서 보이는 별이 단연 좋습니다.</p>
+              <p class="mt-3 serif text-lg">평일 ₩560,000~</p>
+            </article>
+            <article class="reveal mt-12 md:mt-20">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">산마루채</div></div>
+              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">산마루채</h3><span class="text-sm" style="color:var(--ink-soft)">6인 / 풀 + 노천탕</span></div>
+              <p class="mt-3" style="color: var(--ink-soft)">가장 높은 지대에 자리한 단독 채. 거실의 큰 창에서 산이 정면으로 들어옵니다.</p>
+              <p class="mt-3 serif text-lg">평일 ₩720,000~</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FACILITY -->
+      <section id="facility" class="container-x py-24 md:py-32">
+        <div class="grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-4 reveal">
+            <p class="eyebrow mb-4">FACILITY</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">필요한 것, 모두 안에.</h2>
+          </div>
+          <div class="md:col-span-8 grid grid-cols-2 gap-x-10 gap-y-8 reveal">
+            <div><h3 class="font-semibold">전 객실 풀·자쿠지</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">계절별 적정 온수 유지</p></div>
+            <div><h3 class="font-semibold">바비큐 화로</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">목재·도구 모두 비치</p></div>
+            <div><h3 class="font-semibold">조식 도시락 신청</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">전날 18시까지 사전 예약</p></div>
+            <div><h3 class="font-semibold">반려동물 동반 (지정 객실)</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">솔채·자작채 가능</p></div>
+            <div><h3 class="font-semibold">전기차 충전</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">완속 충전기 4기</p></div>
+            <div><h3 class="font-semibold">큐레이션 책장</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">계절마다 새로 들이는 책 30권</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AROUND -->
+      <section id="around" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal mb-14 max-w-2xl">
+            <p class="eyebrow mb-4">AROUND</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">차로 30분 안의 자리들.</h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <article class="reveal">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">林</div></div>
+              <h3 class="mt-5 text-lg font-semibold">원대리 자작나무숲</h3>
+              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 12분. 4계절 모두 좋습니다.</p>
+            </article>
+            <article class="reveal">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">川</div></div>
+              <h3 class="mt-5 text-lg font-semibold">내린천 산책로</h3>
+              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 18분. 아침 산책으로 좋습니다.</p>
+            </article>
+            <article class="reveal">
+              <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">膳</div></div>
+              <h3 class="mt-5 text-lg font-semibold">오일장 · 한식 명인집</h3>
+              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 25분. 직접 다녀온 곳만 안내드립니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOOK -->
+      <section id="book" class="py-24 md:py-32" style="background: var(--primary); color: #f5efde">
+        <div class="container-x text-center max-w-2xl mx-auto reveal">
+          <p class="eyebrow mb-4" style="color: #dccfa6">BOOK</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">조용한 하룻밤을<br />골라드릴게요.</h2>
+          <p class="mt-8 leading-relaxed" style="color: rgba(245,239,222,.75)">
+            예약은 네이버·인스타그램 DM·전화 모두 받습니다.<br />
+            성수기·기념일 일정은 1개월 전부터 빠르게 마감됩니다.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-3 justify-center">
+            <a href="#" class="btn-primary" style="background:#fff; color:var(--primary)">네이버에서 예약 →</a>
+            <a href="tel:033-555-0001" class="btn-ghost" style="color:#fff; border-color:rgba(255,255,255,.5)">033 · 555 · 0001</a>
+          </div>
+          <p class="mt-12 text-sm" style="color: #dccfa6">강원특별자치도 인제군 OO면 OO길 123</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
+      <div class="container-x flex flex-wrap justify-between gap-4">
+        <span>© 2026 산일호 풀빌라 · 사업자등록번호 000-00-00000</span>
+        <a href="../index.html" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>

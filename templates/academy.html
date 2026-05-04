@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>메리트 입시컨설팅 — 길을 잘 아는 사람과 걷는 1년</title>
+    <meta name="description" content="메리트는 1:1 입시 컨설팅으로 학생의 결을 끝까지 따라가는 학습 멘토링입니다. 진학과 함께, 한 사람의 1년을 책임집니다." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #fdfcf6;
+        --bg-soft: #f3f0e2;
+        --primary: #1e3a5f;
+        --primary-soft: #2f5285;
+        --accent: #f0b429;
+        --ink: #15243a;
+        --ink-soft: #5d6a7e;
+        --line: #e1ddc8;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .ph { background: linear-gradient(135deg, #d6e4f0, #8aa9c9 60%, #4a6e96); position: relative; overflow: hidden; }
+      .ph-mark { position:absolute; inset:0; display:grid; place-items:center; font-family:'Noto Serif KR',serif; color:rgba(30,58,95,.32); font-size:clamp(48px,9vw,140px); font-weight:600; letter-spacing:-.04em;}
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(253,252,246,.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
+      .btn-primary:hover { background:#0f2541; }
+      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
+      .btn-ghost:hover { background:var(--primary); color:#fff; }
+      .field { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:8px; background:#fff; font-size:15px;}
+      .field:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,180,41,.2);}
+      .stat-card { background:#fff; border-radius:18px; padding:32px 28px; border:1px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="font-bold tracking-tight text-lg" style="color:var(--primary)">MERIT <span class="serif" style="color:var(--accent)">·</span> 메리트</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#why">선택 이유</a>
+          <a href="#record">합격 실적</a>
+          <a href="#curriculum">커리큘럼</a>
+          <a href="#mentors">컨설턴트</a>
+          <a href="#consult">상담 신청</a>
+        </nav>
+        <a href="#consult" class="btn-primary text-sm" style="padding:10px 18px">상담 신청</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
+        <div class="grid md:grid-cols-12 gap-12 items-end">
+          <div class="md:col-span-7 reveal">
+            <p class="eyebrow mb-6">1:1 입시컨설팅 · EST. 2014</p>
+            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
+              길을 잘 아는<br />사람과 걷는 <span style="color: var(--accent)">1년</span>.
+            </h1>
+            <p class="mt-8 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
+              메리트는 학생의 결을 끝까지 따라가는 1:1 컨설팅입니다.<br />
+              진학 결과와 함께, 한 사람의 1년을 책임집니다.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a href="#consult" class="btn-primary">무료 진단 신청 <span aria-hidden="true">→</span></a>
+              <a href="#record" class="btn-ghost">합격 실적 보기</a>
+            </div>
+          </div>
+          <div class="md:col-span-5 reveal grid grid-cols-2 gap-3">
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 정시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)">71<span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 수시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)">94<span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">의·치·약·수의대</p><p class="serif text-3xl mt-2" style="color: var(--primary)">12<span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">SKY · KAIST</p><p class="serif text-3xl mt-2" style="color: var(--primary)">38<span class="text-base">명</span></p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY -->
+      <section id="why" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal mb-14 max-w-2xl">
+            <p class="eyebrow mb-4">선택 이유</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              잘하는 학원이 아니라,<br />지치지 않게 함께 가는 컨설팅.
+            </h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6">
+            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
+              <p class="serif text-3xl" style="color:var(--accent)">01</p>
+              <h3 class="mt-6 text-xl font-semibold">한 명, 한 명의 컨설턴트</h3>
+              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">담당 컨설턴트가 1년 내내 바뀌지 않습니다. 학생의 지난 시험·과목별 패턴을 가장 잘 아는 사람이 끝까지 함께합니다.</p>
+            </article>
+            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
+              <p class="serif text-3xl" style="color:var(--accent)">02</p>
+              <h3 class="mt-6 text-xl font-semibold">주간 1:1 점검</h3>
+              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">매주 30분, 학습량과 멘탈을 함께 점검합니다. 시험은 결국 한 학기 단위의 페이스 관리라는 걸 알기에.</p>
+            </article>
+            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
+              <p class="serif text-3xl" style="color:var(--accent)">03</p>
+              <h3 class="mt-6 text-xl font-semibold">학부모와 함께 보는 진단표</h3>
+              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">학생·학부모·컨설턴트가 같은 진단표를 봅니다. 모르는 것에 대한 불안을 함께 줄이는 일이 시작입니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECORD -->
+      <section id="record" class="container-x py-24 md:py-32">
+        <div class="reveal mb-14 max-w-2xl">
+          <p class="eyebrow mb-4">2025 합격 실적</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+            한 줄로 정리한,<br />지난 한 해의 자취.
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-2">
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">서울대학교</span><span style="color:var(--ink-soft)">정시 8 / 수시 6</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">연세대학교</span><span style="color:var(--ink-soft)">정시 11 / 수시 9</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">고려대학교</span><span style="color:var(--ink-soft)">정시 7 / 수시 12</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">KAIST · POSTECH</span><span style="color:var(--ink-soft)">정시 4 / 수시 5</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">서강 / 한양 / 성균관</span><span style="color:var(--ink-soft)">정시 14 / 수시 22</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">의·치·약·수의대</span><span style="color:var(--ink-soft)">12명</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">교대 · 사범대</span><span style="color:var(--ink-soft)">정시 6 / 수시 10</span></div>
+          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">예체능 (서울대 미대 외)</span><span style="color:var(--ink-soft)">정시 5 / 수시 9</span></div>
+        </div>
+        <p class="mt-8 text-sm" style="color: var(--ink-soft)">· 학생 본인 동의 하에 정리한 실적입니다. 일부 중복 합격은 한 명으로 합산했습니다.</p>
+      </section>
+
+      <!-- CURRICULUM -->
+      <section id="curriculum" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal mb-14 max-w-2xl">
+            <p class="eyebrow mb-4">커리큘럼</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">12개월,<br />학년별 4단계.</h2>
+          </div>
+          <div class="grid md:grid-cols-4 gap-6">
+            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
+              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 01 · 3 — 5월</p>
+              <h3 class="mt-3 text-lg font-semibold">진단</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">과목별 강·약점 분석. 1년 학습 동선과 목표 대학을 함께 그립니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
+              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 02 · 6 — 8월</p>
+              <h3 class="mt-3 text-lg font-semibold">기초 정리</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">시험에서 ‘아는데 틀리는’ 자리부터 메웁니다. 동시 EBS 연계 분석.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
+              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 03 · 9 — 11월</p>
+              <h3 class="mt-3 text-lg font-semibold">실전 가속</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">주 2회 모의고사 분석 · 주 1회 멘탈 점검 면담 병행.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
+              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 04 · 12월 — 다음 해</p>
+              <h3 class="mt-3 text-lg font-semibold">정시·수시 매니징</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">대학별 환산점·면접 준비. 등록 마감일까지 함께 의사결정.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MENTORS -->
+      <section id="mentors" class="container-x py-24 md:py-32">
+        <div class="reveal mb-14 max-w-2xl">
+          <p class="eyebrow mb-4">컨설턴트</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">합격 직후의 그 길을<br />가장 잘 기억하는 사람.</h2>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6">
+          <article class="reveal">
+            <div class="ph aspect-[4/5] rounded-2xl"><div class="ph-mark">강</div></div>
+            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">대표 컨설턴트</p>
+            <h3 class="serif text-xl mt-1">강윤도</h3>
+            <p class="mt-2 text-sm" style="color: var(--ink-soft)">서울대 경영 · 11년차</p>
+          </article>
+          <article class="reveal">
+            <div class="ph aspect-[4/5] rounded-2xl"><div class="ph-mark">윤</div></div>
+            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">국어 · 영어</p>
+            <h3 class="serif text-xl mt-1">윤서영</h3>
+            <p class="mt-2 text-sm" style="color: var(--ink-soft)">연세대 영문 · 8년차</p>
+          </article>
+          <article class="reveal">
+            <div class="ph aspect-[4/5] rounded-2xl"><div class="ph-mark">장</div></div>
+            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">수학 · 과학</p>
+            <h3 class="serif text-xl mt-1">장도현</h3>
+            <p class="mt-2 text-sm" style="color: var(--ink-soft)">KAIST 화학 · 7년차</p>
+          </article>
+          <article class="reveal">
+            <div class="ph aspect-[4/5] rounded-2xl"><div class="ph-mark">오</div></div>
+            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">의대 · 약대 전담</p>
+            <h3 class="serif text-xl mt-1">오정인</h3>
+            <p class="mt-2 text-sm" style="color: var(--ink-soft)">고려대 의예 · 6년차</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONSULT -->
+      <section id="consult" class="py-24 md:py-32" style="background: var(--primary); color: #fff">
+        <div class="container-x grid md:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="eyebrow mb-4" style="color: var(--accent)">무료 진단 상담</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              먼저, 한 시간의<br />진단으로 시작합니다.
+            </h2>
+            <p class="mt-8 leading-relaxed" style="color: rgba(255,255,255,.75)">
+              학생·학부모 동석 가능. 지난 시험지 한 회분만 가져오시면 됩니다.
+              상담 후 등록 여부는 그 자리에서 결정하지 않으셔도 됩니다.
+            </p>
+            <dl class="mt-10 space-y-4">
+              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:var(--accent)">대표전화</dt><dd>02 · 555 · 0101</dd></div>
+              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:var(--accent)">위치</dt><dd>서울 강남구 도곡로 OO길 8, 3층</dd></div>
+            </dl>
+          </div>
+          <form class="bg-white p-8 rounded-2xl reveal" onsubmit="event.preventDefault(); alert('상담 신청이 접수되었습니다. 확인 후 연락드리겠습니다.');" style="color: var(--ink)">
+            <h3 class="serif text-2xl mb-6">무료 진단 신청서</h3>
+            <div class="space-y-4">
+              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학생 성함</label><input class="field" required /></div>
+              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학년</label>
+                <select class="field" required><option value="">선택</option><option>고1</option><option>고2</option><option>고3</option><option>N수</option><option>중3</option></select>
+              </div>
+              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학부모 연락처</label><input class="field" required type="tel" /></div>
+              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">목표 / 가장 어려운 과목 (선택)</label><textarea class="field" rows="3"></textarea></div>
+              <button class="btn-primary w-full justify-center mt-2">신청하기</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
+      <div class="container-x flex flex-wrap justify-between gap-4">
+        <span>© 2026 메리트 입시컨설팅 · 사업자등록번호 000-00-00000</span>
+        <a href="../index.html" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>

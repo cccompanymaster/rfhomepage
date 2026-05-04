@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>오월의 다정 — 하루의 가장 다정한 한 잔</title>
+    <meta name="description" content="오월의 다정은 매일 같은 자리에서 오늘의 한 잔을 내려드립니다. 직접 로스팅한 원두와 계절을 담은 디저트로." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #faf6ee;
+        --bg-soft: #f1e8d6;
+        --primary: #5a3e1f;
+        --primary-soft: #8b6a44;
+        --accent: #c98e4a;
+        --ink: #3a2a17;
+        --ink-soft: #806c54;
+        --line: #e6dcc6;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .ph { background: linear-gradient(135deg, #f5e6d3, #ddc8a3 60%, #b88c54); position: relative; overflow: hidden; }
+      .ph::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 25% 30%, rgba(255,255,255,.5), transparent 55%); }
+      .ph-mark { position:absolute; inset:0; display:grid; place-items:center; font-family:'Noto Serif KR',serif; color:rgba(90,62,31,.45); font-size:clamp(48px,8vw,120px); font-weight:600; letter-spacing:-.04em; z-index:1;}
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(250,246,238,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
+      .btn-primary:hover { background:#3d2a14; }
+      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
+      .btn-ghost:hover { background:var(--primary); color:#fff; }
+      .menu-row { display:grid; grid-template-columns: 1fr auto; gap:24px; padding: 22px 0; border-top: 1px solid var(--line); }
+      .menu-row:last-child { border-bottom: 1px solid var(--line); }
+      .dots { flex:1; border-bottom: 1px dotted var(--line); margin: 0 12px 8px; }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color: var(--primary)">오월의 다정</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#story" class="hover:text-[color:var(--primary)]">우리 이야기</a>
+          <a href="#signature" class="hover:text-[color:var(--primary)]">시그니처</a>
+          <a href="#menu" class="hover:text-[color:var(--primary)]">메뉴</a>
+          <a href="#space" class="hover:text-[color:var(--primary)]">공간</a>
+          <a href="#visit" class="hover:text-[color:var(--primary)]">오시는 길</a>
+        </nav>
+        <a href="#visit" class="btn-primary text-sm" style="padding:10px 18px">예약 / 매장 방문</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="container-x pt-12 md:pt-20 pb-24 md:pb-32">
+        <div class="reveal">
+          <p class="eyebrow mb-6">SINCE 2018 · 성수동</p>
+          <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.1] tracking-tight max-w-4xl">
+            하루의 가장<br />다정한 한 잔.
+          </h1>
+        </div>
+        <div class="mt-12 grid md:grid-cols-12 gap-10 items-end">
+          <div class="md:col-span-7 reveal">
+            <div class="ph aspect-[16/10] rounded-3xl"><div class="ph-mark">오월</div></div>
+          </div>
+          <div class="md:col-span-5 reveal">
+            <p class="text-base md:text-lg leading-relaxed" style="color: var(--ink-soft)">
+              아침의 첫 잔, 점심 뒤의 한 모금, 늦은 오후의 또 한 잔.<br />
+              일 년 중 가장 다정한 달의 이름을 빌려, 매일 같은 자리에서 오늘의 한 잔을 내려드립니다.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#menu" class="btn-primary">오늘의 메뉴 보기 <span aria-hidden="true">→</span></a>
+              <a href="#visit" class="btn-ghost">오시는 길</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STORY -->
+      <section id="story" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-5 reveal">
+            <p class="eyebrow mb-4">우리 이야기</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              가까운 동네에<br />오래 머무는 일.
+            </h2>
+          </div>
+          <div class="md:col-span-7 space-y-5 leading-relaxed text-base md:text-lg reveal" style="color: var(--ink-soft)">
+            <p>오월의 다정은 골목 안 작은 자리에서 시작했습니다. 2주에 한 번 직접 산지를 골라 볶고, 매일 같은 시간 문을 엽니다.</p>
+            <p>화려한 단독 메뉴보다 매일 마실 수 있는 한 잔을 만드는 일에 더 마음을 씁니다. 문을 닫는 시간보다 문을 여는 시간이 더 중요하다고 믿어서요.</p>
+            <p>오늘도 단골 손님의 이름과 평소 마시는 잔을 외우는, 그 정도의 다정함을 지키려 합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIGNATURE -->
+      <section id="signature" class="container-x py-24 md:py-32">
+        <div class="reveal mb-14 max-w-2xl">
+          <p class="eyebrow mb-4">시그니처</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+            계절을 담은<br />세 가지 한 잔.
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="reveal">
+            <div class="ph aspect-square rounded-2xl"><div class="ph-mark">라떼</div></div>
+            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 01</p>
+            <h3 class="serif text-2xl mt-1">오월라떼</h3>
+            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">진한 에스프레소와 우유, 한 줄기 흑임자 시럽. 어른의 라떼라고 부르는 분도 있어요.</p>
+          </article>
+          <article class="reveal">
+            <div class="ph aspect-square rounded-2xl"><div class="ph-mark">청배</div></div>
+            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 02</p>
+            <h3 class="serif text-2xl mt-1">청배 에이드</h3>
+            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">충주 청배를 직접 졸여 만든 청. 톡 쏘는 청량감 끝에 은근한 단맛이 남습니다.</p>
+          </article>
+          <article class="reveal">
+            <div class="ph aspect-square rounded-2xl"><div class="ph-mark">밤</div></div>
+            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 03</p>
+            <h3 class="serif text-2xl mt-1">밤 크림 더치</h3>
+            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">12시간 콜드브루 위에 무가당 밤 크림을 한 겹. 가을·겨울 한정 메뉴입니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- MENU -->
+      <section id="menu" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-4 reveal">
+            <p class="eyebrow mb-4">메뉴</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">매일 마실 수 있는<br />한 잔.</h2>
+            <p class="mt-6" style="color: var(--ink-soft)">전 메뉴 매장·테이크아웃 동일가, 디카페인 옵션은 +500원.</p>
+          </div>
+          <div class="md:col-span-8 reveal">
+            <h3 class="serif text-xl mb-2">COFFEE</h3>
+            <div>
+              <div class="menu-row"><div><p class="font-medium">아메리카노</p><p class="text-sm" style="color:var(--ink-soft)">자체 블렌드, 산미보다 단맛이 길게</p></div><p class="serif text-lg">5,000</p></div>
+              <div class="menu-row"><div><p class="font-medium">카페라떼</p><p class="text-sm" style="color:var(--ink-soft)">매일 들어오는 단일목장 우유</p></div><p class="serif text-lg">5,500</p></div>
+              <div class="menu-row"><div><p class="font-medium">바닐라 빈 라떼</p><p class="text-sm" style="color:var(--ink-soft)">통 바닐라빈을 우려낸 직접 시럽</p></div><p class="serif text-lg">6,000</p></div>
+              <div class="menu-row"><div><p class="font-medium">콜드브루</p><p class="text-sm" style="color:var(--ink-soft)">12시간 저온 추출, 깊은 단맛</p></div><p class="serif text-lg">5,500</p></div>
+            </div>
+            <h3 class="serif text-xl mb-2 mt-12">NON-COFFEE</h3>
+            <div>
+              <div class="menu-row"><div><p class="font-medium">호지차 라떼</p><p class="text-sm" style="color:var(--ink-soft)">교토산 호지차, 부드러운 끝맛</p></div><p class="serif text-lg">6,000</p></div>
+              <div class="menu-row"><div><p class="font-medium">유자차</p><p class="text-sm" style="color:var(--ink-soft)">고흥 유자청, 직접 담급니다</p></div><p class="serif text-lg">6,000</p></div>
+              <div class="menu-row"><div><p class="font-medium">청배 에이드 <span class="text-xs" style="color:var(--accent)">SIG</span></p></div><p class="serif text-lg">6,500</p></div>
+            </div>
+            <h3 class="serif text-xl mb-2 mt-12">DESSERT</h3>
+            <div>
+              <div class="menu-row"><div><p class="font-medium">바스크 치즈케이크</p></div><p class="serif text-lg">6,500</p></div>
+              <div class="menu-row"><div><p class="font-medium">밤 휘낭시에 (2개)</p></div><p class="serif text-lg">5,000</p></div>
+              <div class="menu-row"><div><p class="font-medium">우유잼 스콘</p></div><p class="serif text-lg">4,500</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPACE -->
+      <section id="space" class="container-x py-24 md:py-32">
+        <div class="reveal mb-14 max-w-2xl">
+          <p class="eyebrow mb-4">공간</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+            오래 머물러도<br />지치지 않는 자리.
+          </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div class="ph aspect-[3/4] rounded-2xl reveal"><div class="ph-mark">창</div></div>
+          <div class="ph aspect-[3/4] rounded-2xl reveal mt-8"><div class="ph-mark">자리</div></div>
+          <div class="ph aspect-[3/4] rounded-2xl reveal"><div class="ph-mark">잔</div></div>
+          <div class="ph aspect-[3/4] rounded-2xl reveal mt-8"><div class="ph-mark">꽃</div></div>
+        </div>
+      </section>
+
+      <!-- VISIT -->
+      <section id="visit" class="py-24 md:py-32" style="background: var(--primary); color: #fdf6ea">
+        <div class="container-x grid md:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="eyebrow mb-4" style="color: #f0c685">오시는 길</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              월요일을 빼고<br />매일 같은 자리에.
+            </h2>
+            <dl class="mt-12 space-y-4 text-base">
+              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">화 — 일</dt><dd>10:00 — 21:00</dd></div>
+              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">월요일</dt><dd>휴무</dd></div>
+              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">라스트 오더</dt><dd>20:30</dd></div>
+            </dl>
+          </div>
+          <div class="reveal">
+            <div class="ph aspect-[4/3] rounded-2xl"><div class="ph-mark">지도</div></div>
+            <p class="mt-6 text-lg leading-relaxed">서울특별시 성동구 성수이로 OO길 17<br />OO역 3번 출구 도보 6분, 골목 안쪽 단독주택 1층</p>
+            <p class="mt-3" style="color:#f0c685">@ohwol_dajeong · 02-555-0526</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-10 text-sm" style="background: var(--bg); color: var(--ink-soft)">
+      <div class="container-x flex flex-wrap justify-between gap-4">
+        <span>© 2026 오월의 다정 · 사업자등록번호 000-00-00000</span>
+        <a href="../index.html" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>

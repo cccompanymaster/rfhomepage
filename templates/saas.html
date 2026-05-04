@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stackline — 흩어진 업무 데이터를 한 줄로</title>
+    <meta name="description" content="Stackline은 슬랙·노션·시트에 흩어진 데이터를 한 줄의 업무 흐름으로 정리해주는 협업 자동화 도구입니다." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #08070d;
+        --bg-soft: #0f0e18;
+        --primary: #7c5cff;
+        --primary-soft: #b8a9ff;
+        --ink: #f3f3f7;
+        --ink-soft: rgba(243,243,247,.6);
+        --line: rgba(255,255,255,.08);
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .grad-text { background: linear-gradient(135deg, #fff 0%, #c7b8ff 50%, #7c5cff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .ph { background: linear-gradient(135deg, #1a1530 0%, #08070d 100%); position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; }
+      .ph::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 30% 20%, rgba(124,92,255,.25), transparent 55%); }
+      .ph-mark { position:absolute; inset:0; display:grid; place-items:center; color: rgba(255,255,255,.18); font-size: clamp(48px,7vw,100px); font-weight:700; letter-spacing:-.04em; z-index:1; font-family:'Pretendard Variable',sans-serif; }
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(8,7,13,.7); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary-soft); font-weight: 600; }
+      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:13px 24px; background:#fff; color:#08070d; border-radius:999px; font-weight:600; font-size:14px; transition:.2s; }
+      .btn-primary:hover { background: var(--primary-soft); }
+      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:13px 22px; color:#fff; border:1px solid var(--line); border-radius:999px; font-weight:500; font-size:14px;}
+      .btn-ghost:hover { border-color: var(--primary); color: var(--primary-soft); }
+      .card { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 18px; padding: 28px; transition:.3s; }
+      .card:hover { border-color: rgba(124,92,255,.4); transform: translateY(-3px); }
+      .pricing { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 18px; padding: 36px; }
+      .pricing.feat { border-color: var(--primary); background: linear-gradient(180deg, rgba(124,92,255,.08), transparent); }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="font-bold tracking-tight text-lg flex items-center gap-2">
+          <span class="inline-block w-6 h-6 rounded" style="background: linear-gradient(135deg, var(--primary), var(--primary-soft))"></span>
+          Stackline
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#problem">문제</a>
+          <a href="#features">기능</a>
+          <a href="#price">가격</a>
+          <a href="#voice">고객 사례</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#" class="text-sm hidden sm:inline" style="color: var(--ink-soft)">로그인</a>
+          <a href="#cta" class="btn-primary text-sm">14일 무료 시작</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="container-x pt-20 md:pt-28 pb-24 md:pb-32 text-center">
+        <p class="eyebrow mb-6 reveal">FOR PRODUCT TEAMS · 2026</p>
+        <h1 class="grad-text text-5xl md:text-7xl lg:text-[88px] font-bold leading-[1.05] tracking-tight max-w-4xl mx-auto reveal">
+          흩어진 업무 데이터를<br />한 줄로 잇습니다.
+        </h1>
+        <p class="mt-8 text-base md:text-lg max-w-2xl mx-auto reveal" style="color: var(--ink-soft)">
+          슬랙의 결정, 노션의 기록, 시트의 숫자가 같은 화면에서 한 번에 흐릅니다.
+          더 이상 ‘어디 있더라’를 묻지 않는, 가장 단순한 협업의 흐름.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3 justify-center reveal">
+          <a href="#cta" class="btn-primary">14일 무료 체험 →</a>
+          <a href="#features" class="btn-ghost">기능 둘러보기</a>
+        </div>
+        <div class="mt-16 reveal">
+          <div class="ph aspect-[16/9] max-w-5xl mx-auto"><div class="ph-mark">Stackline · Live Dashboard</div></div>
+        </div>
+        <p class="mt-12 text-sm" style="color: var(--ink-soft)">신뢰하는 팀들 · 320+ teams</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-x-12 gap-y-4 opacity-60 text-sm">
+          <span>TOSS</span><span>당근</span><span>NAVER</span><span>OO Lab</span><span>BANKSALAD</span><span>RIIID</span>
+        </div>
+      </section>
+
+      <!-- PROBLEM -->
+      <section id="problem" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-3xl mb-14">
+            <p class="eyebrow mb-4">PROBLEM</p>
+            <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">
+              일이 늘어난 게 아닙니다.<br />
+              <span style="color: var(--primary-soft)">정보가 흩어져 있을 뿐.</span>
+            </h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="card reveal">
+              <p class="text-3xl font-bold" style="color: var(--primary-soft)">×4</p>
+              <h3 class="mt-4 text-lg font-semibold">평균 4개의 도구</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">한 가지 결정에 평균 4개 도구를 오갑니다. 그 이동만으로 하루 1시간이 사라집니다.</p>
+            </div>
+            <div class="card reveal">
+              <p class="text-3xl font-bold" style="color: var(--primary-soft)">37%</p>
+              <h3 class="mt-4 text-lg font-semibold">‘어디 있더라’의 시간</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">팀원이 정보를 찾는 데 쓰는 평균 시간 비율. 결정을 위한 검색이 결정 자체보다 깁니다.</p>
+            </div>
+            <div class="card reveal">
+              <p class="text-3xl font-bold" style="color: var(--primary-soft)">2.4×</p>
+              <h3 class="mt-4 text-lg font-semibold">중복 문서</h3>
+              <p class="mt-3 text-sm" style="color: var(--ink-soft)">한 회의 결정이 평균 2.4개의 문서로 흩어집니다. 어느 것이 최신인지는 누구도 모릅니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features" class="container-x py-24 md:py-32">
+        <div class="reveal max-w-3xl mb-14">
+          <p class="eyebrow mb-4">CORE FEATURES</p>
+          <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">결정과 데이터, 같은 줄 위에.</h2>
+        </div>
+        <div class="space-y-20">
+          <article class="grid md:grid-cols-12 gap-10 items-center reveal">
+            <div class="md:col-span-5">
+              <p class="text-sm font-semibold" style="color: var(--primary-soft)">FEATURE 01</p>
+              <h3 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">한 줄로 흐르는 워크플로우</h3>
+              <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">슬랙의 메시지에 ‘/track’ 한 번이면 바로 노션 기록과 KPI 시트가 함께 업데이트됩니다.</p>
+            </div>
+            <div class="md:col-span-7"><div class="ph aspect-[16/10]"><div class="ph-mark">/track flow</div></div></div>
+          </article>
+          <article class="grid md:grid-cols-12 gap-10 items-center reveal">
+            <div class="md:col-span-7 md:order-1 order-2"><div class="ph aspect-[16/10]"><div class="ph-mark">Source of Truth</div></div></div>
+            <div class="md:col-span-5 md:order-2 order-1">
+              <p class="text-sm font-semibold" style="color: var(--primary-soft)">FEATURE 02</p>
+              <h3 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">단일 소스 오브 트루스</h3>
+              <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">최신 결정은 항상 한 곳에 살아 있습니다. 여기저기 흩어진 문서도 자동으로 동기화됩니다.</p>
+            </div>
+          </article>
+          <article class="grid md:grid-cols-12 gap-10 items-center reveal">
+            <div class="md:col-span-5">
+              <p class="text-sm font-semibold" style="color: var(--primary-soft)">FEATURE 03</p>
+              <h3 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">실시간 의사결정 로그</h3>
+              <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">왜 그런 결정을 내렸는지가 함께 남습니다. 한 달 뒤 자신을 가장 많이 도와주는 데이터.</p>
+            </div>
+            <div class="md:col-span-7"><div class="ph aspect-[16/10]"><div class="ph-mark">Decision Log</div></div></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="price" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-2xl mx-auto text-center mb-14">
+            <p class="eyebrow mb-4">PRICING</p>
+            <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">팀의 크기에 따라, 함께 자랍니다.</h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="pricing reveal">
+              <h3 class="text-lg font-semibold">Starter</h3>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">3명까지 무료</p>
+              <p class="mt-6 text-4xl font-bold">₩0</p>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">/ 월</p>
+              <ul class="mt-8 space-y-3 text-sm" style="color: var(--ink-soft)">
+                <li>· 워크플로우 5개</li>
+                <li>· 슬랙·노션 연동</li>
+                <li>· 30일 결정 로그</li>
+              </ul>
+              <a href="#cta" class="btn-ghost w-full justify-center mt-8">무료로 시작</a>
+            </div>
+            <div class="pricing feat reveal">
+              <p class="text-xs font-semibold mb-2" style="color: var(--primary-soft)">MOST POPULAR</p>
+              <h3 class="text-lg font-semibold">Team</h3>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">10–50명 팀에 최적</p>
+              <p class="mt-6 text-4xl font-bold">₩12,000</p>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">/ 사용자 / 월</p>
+              <ul class="mt-8 space-y-3 text-sm" style="color: var(--ink-soft)">
+                <li>· 워크플로우 무제한</li>
+                <li>· 모든 도구 연동</li>
+                <li>· 1년 결정 로그</li>
+                <li>· 우선 지원 (24시간 내)</li>
+              </ul>
+              <a href="#cta" class="btn-primary w-full justify-center mt-8">14일 무료 체험</a>
+            </div>
+            <div class="pricing reveal">
+              <h3 class="text-lg font-semibold">Enterprise</h3>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">SSO · 보안 정책 맞춤</p>
+              <p class="mt-6 text-4xl font-bold">문의</p>
+              <p class="text-sm mt-1" style="color: var(--ink-soft)">맞춤 견적</p>
+              <ul class="mt-8 space-y-3 text-sm" style="color: var(--ink-soft)">
+                <li>· SSO · SAML · SCIM</li>
+                <li>· VPC 단독 배포</li>
+                <li>· 전담 매니저</li>
+              </ul>
+              <a href="#cta" class="btn-ghost w-full justify-center mt-8">영업팀 문의</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VOICE -->
+      <section id="voice" class="container-x py-24 md:py-32">
+        <div class="reveal mb-14 max-w-2xl">
+          <p class="eyebrow mb-4">CUSTOMER STORIES</p>
+          <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">팀이 가벼워졌다는 말, 가장 많이 들었습니다.</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <figure class="card reveal">
+            <blockquote class="text-lg leading-relaxed">“회의 후 ‘지금 뭐가 정해진 거였지’를 묻는 일이 사라졌습니다. PM 한 명이 추가된 것과 비슷한 효과예요.”</blockquote>
+            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">최영진 · OOLab CTO</figcaption>
+          </figure>
+          <figure class="card reveal">
+            <blockquote class="text-lg leading-relaxed">“노션과 슬랙을 그대로 쓰면서, 사이의 마찰이 사라졌습니다. 새로 익힐 도구가 없다는 게 가장 큰 장점.”</blockquote>
+            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">박민서 · OO 핀테크 프로덕트 리드</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="cta" class="container-x py-24 md:py-32">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <h2 class="grad-text text-3xl md:text-5xl font-bold leading-tight tracking-tight">14일, 신용카드 없이.</h2>
+          <p class="mt-6" style="color: var(--ink-soft)">설치 없이 워크스페이스에 연결하면 5분 안에 시작합니다.</p>
+          <a href="#" class="btn-primary mt-10">무료로 시작하기 →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t py-10 text-sm" style="color: var(--ink-soft); border-color: var(--line)">
+      <div class="container-x flex flex-wrap justify-between gap-4">
+        <span>© 2026 Stackline, Inc.</span>
+        <a href="../index.html" class="hover:text-white">← 쇼룸으로 돌아가기</a>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>

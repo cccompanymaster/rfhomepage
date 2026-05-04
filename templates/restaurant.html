@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>화월 — 계절을 담아낸 일곱 코스</title>
+    <meta name="description" content="화월(花月)은 한 달의 계절을 한 끼에 담는 모던 한식 다이닝입니다. 일곱 가지 코스, 한정된 자리." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --bg-soft: #141414;
+        --primary: #d4af37;
+        --primary-soft: #b58e1f;
+        --ink: #f3ead2;
+        --ink-soft: rgba(243,234,210,.65);
+        --line: rgba(212,175,55,.18);
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .ph { background: radial-gradient(ellipse at 30% 20%, #2a2a2a, #0a0a0a 70%); position: relative; overflow: hidden; }
+      .ph::after { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 80%, rgba(212,175,55,.18), transparent 55%); }
+      .ph-mark { position:absolute; inset:0; display:grid; place-items:center; font-family:'Noto Serif KR',serif; color:rgba(212,175,55,.35); font-size:clamp(48px,9vw,140px); font-weight:600; letter-spacing:-.04em; z-index:1; }
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(10,10,10,.75); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
+      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:transparent; color:var(--primary); border:1px solid var(--primary); font-weight:600; font-size:14px; letter-spacing:.05em; transition:.2s; }
+      .btn-primary:hover { background:var(--primary); color:#0a0a0a; }
+      .row { border-top: 1px solid var(--line); }
+      .field { width:100%; padding:14px 16px; background:transparent; border:1px solid var(--line); color:var(--ink); font-size:15px; }
+      .field:focus { outline:none; border-color: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="serif text-2xl font-semibold tracking-tight" style="color: var(--primary)">花月</a>
+        <nav class="hidden md:flex items-center gap-10 text-sm" style="color: var(--ink-soft)">
+          <a href="#chef" class="hover:text-[color:var(--primary)]">셰프</a>
+          <a href="#course" class="hover:text-[color:var(--primary)]">코스</a>
+          <a href="#pairing" class="hover:text-[color:var(--primary)]">페어링</a>
+          <a href="#space" class="hover:text-[color:var(--primary)]">공간</a>
+          <a href="#reserve" class="hover:text-[color:var(--primary)]">예약</a>
+        </nav>
+        <a href="#reserve" class="btn-primary text-sm" style="padding:10px 20px">RESERVE</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="relative overflow-hidden">
+        <div class="ph absolute inset-0"><div class="ph-mark">花月</div></div>
+        <div class="container-x relative pt-32 md:pt-44 pb-32 md:pb-48">
+          <div class="reveal">
+            <p class="eyebrow mb-8">MODERN KOREAN DINING · SEOUL</p>
+            <h1 class="serif text-5xl md:text-7xl lg:text-[88px] font-semibold leading-[1.1] tracking-tight max-w-4xl">
+              계절을 담아낸<br />일곱 코스.
+            </h1>
+            <p class="mt-10 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
+              한 달은 한 가지 식재로 시작합니다. 산과 바다에서 가장 정성껏 기른 식재를 골라,<br />
+              일곱 번의 정찬으로 옮겨 드립니다.
+            </p>
+            <div class="mt-12 flex flex-wrap gap-3">
+              <a href="#reserve" class="btn-primary">자리를 예약합니다 <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHEF -->
+      <section id="chef" class="container-x py-24 md:py-36">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+          <div class="md:col-span-5 reveal">
+            <div class="ph aspect-[4/5]"><div class="ph-mark">廚</div></div>
+          </div>
+          <div class="md:col-span-7 reveal">
+            <p class="eyebrow mb-6">CHEF</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              한 사람의 손,<br />한 계절의 자리.
+            </h2>
+            <p class="mt-8 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">
+              화월의 모든 코스는 셰프 김유한이 직접 다듬은 식재로 구성됩니다.
+              한 번에 14개의 자리만을 운영하는 이유는,
+              한 분의 손님께 단 한 번뿐인 코스를 내드리기 위해서입니다.
+            </p>
+            <ul class="mt-10 space-y-3 text-sm" style="color: var(--ink-soft)">
+              <li class="row pt-3">· 전 도쿄 ‘니혼료리 사쿠라이’ 부주방</li>
+              <li class="row pt-3">· 전 청담 ‘담연’ 헤드 셰프</li>
+              <li class="row pt-3">· 미쉐린 가이드 서울 2024 셀렉티드</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- COURSE -->
+      <section id="course" class="py-24 md:py-36" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-2xl mb-16">
+            <p class="eyebrow mb-4">COURSE</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              5월의 일곱 자리.
+            </h2>
+            <p class="mt-6" style="color: var(--ink-soft)">매월 첫째 주에 새 코스를 공개합니다. 5월의 주제는 ‘죽순’.</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-x-12">
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">一</span><span class="text-xs" style="color:var(--ink-soft)">아뮤즈</span></div>
+              <h3 class="serif text-2xl mt-3">햇 죽순과 두유 거품</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">담양 죽순의 첫 자리. 두유 거품과 차조기 오일.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">二</span><span class="text-xs" style="color:var(--ink-soft)">전채</span></div>
+              <h3 class="serif text-2xl mt-3">새조개와 미나리</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">남해 새조개를 살짝 데쳐, 미나리유와 함께.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">三</span><span class="text-xs" style="color:var(--ink-soft)">탕</span></div>
+              <h3 class="serif text-2xl mt-3">맑은 죽순탕</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">12시간 다시마 우린 국물에, 죽순과 표고.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">四</span><span class="text-xs" style="color:var(--ink-soft)">생선</span></div>
+              <h3 class="serif text-2xl mt-3">참돔 솔잎 구이</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">제철 참돔, 솔잎 향을 입혀 차분하게.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">五</span><span class="text-xs" style="color:var(--ink-soft)">육류</span></div>
+              <h3 class="serif text-2xl mt-3">한우 안심과 봄나물</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">35일 드라이에이징 한우, 두릅·취나물 사이드.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">六</span><span class="text-xs" style="color:var(--ink-soft)">식사</span></div>
+              <h3 class="serif text-2xl mt-3">죽순 솥밥</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">갓 지은 솥밥, 죽순과 들기름. 김치 한 가지.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">七</span><span class="text-xs" style="color:var(--ink-soft)">디저트</span></div>
+              <h3 class="serif text-2xl mt-3">청매실 빙수</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">초여름의 청매실, 직접 끓인 시럽과 함께.</p>
+            </article>
+            <article class="reveal py-8 row">
+              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">茶</span><span class="text-xs" style="color:var(--ink-soft)">마지막 한 잔</span></div>
+              <h3 class="serif text-2xl mt-3">하동 우전 차</h3>
+              <p class="mt-3" style="color:var(--ink-soft)">하루의 끝을 마무리하는 첫물 차.</p>
+            </article>
+          </div>
+
+          <p class="mt-12 text-sm" style="color: var(--ink-soft)">· 코스 1인 ₩220,000 (서비스 별도) · 채식·알레르기 사전 안내 시 조정 가능</p>
+        </div>
+      </section>
+
+      <!-- PAIRING -->
+      <section id="pairing" class="container-x py-24 md:py-36">
+        <div class="grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-5 reveal">
+            <p class="eyebrow mb-4">PAIRING</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              코스에 따라 흐르는<br />다섯 잔.
+            </h2>
+          </div>
+          <div class="md:col-span-7 reveal space-y-6">
+            <div class="row pt-6 flex items-baseline justify-between">
+              <div>
+                <h3 class="text-xl font-semibold">와인 페어링</h3>
+                <p class="text-sm mt-1" style="color: var(--ink-soft)">자연주의 와인 중심, 코스마다 한 잔씩 5잔</p>
+              </div>
+              <p class="serif text-xl">+₩90,000</p>
+            </div>
+            <div class="row pt-6 flex items-baseline justify-between">
+              <div>
+                <h3 class="text-xl font-semibold">전통주 페어링</h3>
+                <p class="text-sm mt-1" style="color: var(--ink-soft)">국내 양조장의 청주·약주 5종</p>
+              </div>
+              <p class="serif text-xl">+₩70,000</p>
+            </div>
+            <div class="row pt-6 flex items-baseline justify-between">
+              <div>
+                <h3 class="text-xl font-semibold">논알콜 페어링</h3>
+                <p class="text-sm mt-1" style="color: var(--ink-soft)">계절 차·발효 음료 5종</p>
+              </div>
+              <p class="serif text-xl">+₩45,000</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPACE -->
+      <section id="space" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal mb-12 max-w-xl">
+            <p class="eyebrow mb-4">SPACE</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">14석의 정찬.</h2>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="ph aspect-[3/4] reveal"><div class="ph-mark">席</div></div>
+            <div class="ph aspect-[3/4] mt-8 reveal"><div class="ph-mark">器</div></div>
+            <div class="ph aspect-[3/4] reveal"><div class="ph-mark">膳</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESERVE -->
+      <section id="reserve" class="container-x py-24 md:py-36">
+        <div class="grid md:grid-cols-12 gap-12">
+          <div class="md:col-span-5 reveal">
+            <p class="eyebrow mb-4">RESERVE</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              한 분의 시간,<br />한 번의 정찬.
+            </h2>
+            <p class="mt-8 leading-relaxed" style="color: var(--ink-soft)">
+              하루 두 타임, 18:00 / 20:30 — 코스는 약 2시간 30분 진행됩니다.
+              매월 1일 자정 다음 달 예약이 열립니다.
+            </p>
+          </div>
+          <form class="md:col-span-7 reveal" onsubmit="event.preventDefault(); alert('예약 요청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label><input class="field" required /></div>
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label><input class="field" required type="tel" /></div>
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 날짜</label><input class="field" required type="date" /></div>
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">시간</label><select class="field" required><option value="">선택</option><option>18:00</option><option>20:30</option></select></div>
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">인원</label><select class="field" required><option>1명</option><option>2명</option><option>3명</option><option>4명</option></select></div>
+              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">페어링</label><select class="field"><option>없음</option><option>와인</option><option>전통주</option><option>논알콜</option></select></div>
+              <div class="md:col-span-2"><label class="block text-sm mb-2" style="color: var(--ink-soft)">알레르기 / 요청 사항</label><textarea class="field" rows="3"></textarea></div>
+            </div>
+            <button class="btn-primary mt-8 w-full md:w-auto justify-center">예약 요청 보내기</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-14 text-sm" style="color: var(--ink-soft); border-top: 1px solid var(--line)">
+      <div class="container-x flex flex-wrap justify-between gap-6">
+        <div>
+          <p class="serif text-xl" style="color: var(--primary)">花月 화월</p>
+          <p class="mt-3">서울특별시 강남구 도산대로 OO길 22, 2층</p>
+          <p>예약 02-555-0507 · reserve@hwawol.kr</p>
+        </div>
+        <div class="text-right">
+          <a href="../index.html" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+          <p class="mt-2">© 2026 HWAWOL</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+  </body>
+</html>
