@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>라온치과의원 — 치과가 처음인 마음으로</title>
+    <meta
+      name="description"
+      content="라온치과의원은 진료를 마치고 댁으로 돌아가신 뒤의 회복까지 함께 지켜봅니다. 정직한 진단, 통증 최소화, 그리고 끝까지 이어지는 사후 관리."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #fdfdfb;
+        --bg-soft: #f3faf6;
+        --primary: #0f5d4a;
+        --primary-soft: #d6f0e6;
+        --accent: #5fb59a;
+        --ink: #16221d;
+        --ink-soft: #5e6b6f;
+        --line: #e6ebe7;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family:
+          'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+          system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        font-feature-settings: 'tnum';
+      }
+      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; }
+      .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
+
+      /* 부드러운 등장 애니메이션 */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+
+      /* 플레이스홀더 일러스트 */
+      .ph {
+        background:
+          radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.6), transparent 50%),
+          radial-gradient(ellipse at 80% 80%, rgba(95,181,154,.3), transparent 50%),
+          linear-gradient(135deg, var(--primary-soft), #eaf6f0);
+        position: relative;
+        overflow: hidden;
+      }
+      .ph-mark {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-family: 'Noto Serif KR', serif;
+        color: rgba(15, 93, 74, 0.25);
+        font-size: clamp(48px, 8vw, 120px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
+
+      /* 헤더 */
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(253, 253, 251, 0.78);
+        backdrop-filter: saturate(180%) blur(14px);
+        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      /* 섹션 라벨 */
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* 카드 */
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 32px 28px;
+        transition:
+          transform 0.4s ease,
+          border-color 0.3s ease,
+          box-shadow 0.4s ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 20px 40px -25px rgba(15, 93, 74, 0.25);
+      }
+
+      /* 폼 */
+      .field {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        font-size: 15px;
+        color: var(--ink);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .field:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(95, 181, 154, 0.15);
+      }
+
+      /* 버튼 */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 26px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 15px;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+      .btn-primary:hover { background: #0a4438; transform: translateY(-1px); }
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 22px;
+        color: var(--primary);
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 15px;
+        border: 1px solid var(--primary);
+        transition: background 0.2s ease;
+      }
+      .btn-ghost:hover { background: var(--primary-soft); }
+    </style>
+  </head>
+  <body>
+    <!-- ====================== HEADER ====================== -->
+    <header class="top">
+      <div class="container-x flex items-center justify-between h-16">
+        <a href="#top" class="flex items-center gap-2 font-bold tracking-tight">
+          <span
+            class="inline-grid place-items-center w-8 h-8 rounded-full text-white text-sm"
+            style="background: var(--primary)"
+            >라</span
+          >
+          라온치과의원
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+          <a href="#promise" class="hover:text-[color:var(--primary)]">진료철학</a>
+          <a href="#services" class="hover:text-[color:var(--primary)]">진료과목</a>
+          <a href="#doctors" class="hover:text-[color:var(--primary)]">의료진</a>
+          <a href="#voice" class="hover:text-[color:var(--primary)]">환자 후기</a>
+          <a href="#visit" class="hover:text-[color:var(--primary)]">오시는 길</a>
+        </nav>
+        <a href="#book" class="btn-primary text-sm" style="padding: 10px 18px">진료 예약</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ====================== HERO ====================== -->
+      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+          <div class="md:col-span-7 reveal">
+            <p class="eyebrow mb-6">동네에서 오래, 라온치과의원</p>
+            <h1
+              class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.18] tracking-tight"
+            >
+              치과가 처음인<br />마음으로,<br />끝까지 정성껏.
+            </h1>
+            <p
+              class="mt-8 text-base md:text-lg leading-relaxed max-w-xl"
+              style="color: var(--ink-soft)"
+            >
+              라온치과는 환자분이 진료실에 머무는 시간보다,<br />
+              댁으로 돌아가신 뒤의 회복을 더 오래 생각합니다.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a href="#book" class="btn-primary">
+                진료 예약하기
+                <span aria-hidden="true">→</span>
+              </a>
+              <a href="#visit" class="btn-ghost">진료시간 보기</a>
+            </div>
+            <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md">
+              <div>
+                <dt class="text-xs" style="color: var(--ink-soft)">개원</dt>
+                <dd class="serif text-2xl mt-1">2014</dd>
+              </div>
+              <div>
+                <dt class="text-xs" style="color: var(--ink-soft)">누적 환자</dt>
+                <dd class="serif text-2xl mt-1">38,200<span class="text-sm">+</span></dd>
+              </div>
+              <div>
+                <dt class="text-xs" style="color: var(--ink-soft)">재진율</dt>
+                <dd class="serif text-2xl mt-1">92%</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="md:col-span-5 reveal">
+            <div class="ph rounded-3xl aspect-[4/5]">
+              <div class="ph-mark">라온</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== PROMISE ====================== -->
+      <section id="promise" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-2xl mb-16">
+            <p class="eyebrow mb-4">우리의 약속</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              꼭 필요한 진료만,<br />가장 부드러운 방식으로.
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <article class="card reveal">
+              <span
+                class="serif text-4xl"
+                style="color: var(--accent)"
+                >01</span
+              >
+              <h3 class="mt-6 text-xl font-semibold tracking-tight">정직한 진단</h3>
+              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
+                지금 꼭 해야 하는 진료와 더 지켜봐도 되는 진료를
+                구분해 말씀드립니다. 환자분의 시간과 비용을
+                먼저 헤아리는 것이 진단의 시작입니다.
+              </p>
+            </article>
+            <article class="card reveal">
+              <span class="serif text-4xl" style="color: var(--accent)">02</span>
+              <h3 class="mt-6 text-xl font-semibold tracking-tight">통증 최소화</h3>
+              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
+                긴장이 풀릴 만큼 천천히, 가능한 부드럽게.
+                마취 전 표면 마취부터 진료 중 호흡 가이드까지,
+                작은 단계마다 환자분의 신호를 먼저 살핍니다.
+              </p>
+            </article>
+            <article class="card reveal">
+              <span class="serif text-4xl" style="color: var(--accent)">03</span>
+              <h3 class="mt-6 text-xl font-semibold tracking-tight">끝까지 이어지는 관리</h3>
+              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
+                치료가 끝나도 끝이 아닙니다. 정기 점검 알림,
+                회복 경과 안내, 보철물 사후 점검까지 — 진료
+                후의 시간을 함께 책임지는 것이 라온의 약속입니다.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== SERVICES ====================== -->
+      <section id="services" class="container-x py-24 md:py-32">
+        <div class="flex flex-wrap items-end justify-between gap-6 mb-14 reveal">
+          <div>
+            <p class="eyebrow mb-4">진료과목</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              치아의 일생을<br />함께 돌봅니다.
+            </h2>
+          </div>
+          <p class="max-w-md" style="color: var(--ink-soft)">
+            한 가지 진료에 치우치지 않습니다. 보존부터 심미까지,
+            치아의 모든 단계를 한 곳에서 일관되게 관리합니다.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- 6 services -->
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">임플란트</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 01</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              단단하게, 자연치아처럼. 잇몸뼈 상태 진단부터
+              사후 점검까지 한 분의 의료진이 책임집니다.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">신경치료</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 02</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              치아를 지키는 가장 보수적인 선택. 발치를 미루기 위한
+              가장 정성스러운 방법으로 진행합니다.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">치아교정</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 03</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              시작하기 가장 좋은 때는, 지금. 와이어부터 투명교정까지
+              생활 패턴에 맞춰 함께 골라드립니다.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">보철·심미</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 04</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              닳고 깨진 자리를 자연스러운 결로 되살립니다.
+              표정에 어울리는 색과 형태를 함께 디자인합니다.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">잇몸치료</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 05</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              오래 쓰려면, 잇몸부터. 일상에서 이어갈 수 있는
+              관리 습관까지 함께 안내해드립니다.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-baseline justify-between">
+              <h3 class="text-xl font-semibold">어린이 진료</h3>
+              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 06</span>
+            </div>
+            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
+              치과가 무섭지 않도록. 첫 진료의 기억이 평생을 좌우한다는
+              마음으로 천천히 다가갑니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ====================== DOCTORS ====================== -->
+      <section id="doctors" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x">
+          <div class="reveal max-w-2xl mb-14">
+            <p class="eyebrow mb-4">의료진 소개</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              한 사람의 치아를<br />한 명의 의사가 끝까지.
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <article class="reveal">
+              <div class="ph rounded-2xl aspect-[4/5]">
+                <div class="ph-mark">원장</div>
+              </div>
+              <div class="mt-6">
+                <p class="text-sm" style="color: var(--accent)">대표원장</p>
+                <h3 class="serif text-3xl mt-1">김라온</h3>
+                <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
+                  <li>· 서울대학교 치과대학 졸업</li>
+                  <li>· 전 OO대학교 치과병원 보철과 임상강사</li>
+                  <li>· 대한치과보철학회 정회원</li>
+                  <li>· 임플란트 임상 14년</li>
+                </ul>
+              </div>
+            </article>
+            <article class="reveal">
+              <div class="ph rounded-2xl aspect-[4/5]">
+                <div class="ph-mark">부원장</div>
+              </div>
+              <div class="mt-6">
+                <p class="text-sm" style="color: var(--accent)">부원장</p>
+                <h3 class="serif text-3xl mt-1">이서연</h3>
+                <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
+                  <li>· 연세대학교 치과대학 졸업</li>
+                  <li>· 전 OO치과병원 교정과 진료의</li>
+                  <li>· 대한치과교정학회 인정의</li>
+                  <li>· 어린이·청소년 진료 전담</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== VOICE ====================== -->
+      <section id="voice" class="container-x py-24 md:py-32">
+        <div class="reveal max-w-2xl mb-14">
+          <p class="eyebrow mb-4">환자분의 목소리</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+            오래 다녀주신<br />분들의 이야기.
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <figure class="card reveal">
+            <blockquote class="serif text-xl leading-relaxed" style="color: var(--ink)">
+              “스케일링만 받으러 갔는데,<br />다음 예약을 잡고 나오게 되는 곳이에요.”
+            </blockquote>
+            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
+              30대 직장인 · 정기검진
+            </figcaption>
+          </figure>
+          <figure class="card reveal">
+            <blockquote class="serif text-xl leading-relaxed">
+              “통증이 심한 신경치료였는데,<br />대기실에서부터 안심이 됐습니다.”
+            </blockquote>
+            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
+              40대 자영업 · 신경치료
+            </figcaption>
+          </figure>
+          <figure class="card reveal">
+            <blockquote class="serif text-xl leading-relaxed">
+              “아이가 치과를 무서워하지 않게 됐어요.<br />그것만으로도 감사한 일이에요.”
+            </blockquote>
+            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
+              30대 어머니 · 어린이 진료
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ====================== VISIT ====================== -->
+      <section id="visit" class="py-24 md:py-32" style="background: var(--bg-soft)">
+        <div class="container-x grid md:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="eyebrow mb-4">진료 안내</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+              월요일부터 토요일,<br />같은 자리에서 기다립니다.
+            </h2>
+
+            <dl class="mt-12 divide-y" style="border-color: var(--line)">
+              <div class="flex justify-between py-4">
+                <dt class="font-semibold">평일</dt>
+                <dd style="color: var(--ink-soft)">10:00 — 19:00</dd>
+              </div>
+              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
+                <dt class="font-semibold">점심시간</dt>
+                <dd style="color: var(--ink-soft)">13:00 — 14:00</dd>
+              </div>
+              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
+                <dt class="font-semibold">토요일</dt>
+                <dd style="color: var(--ink-soft)">10:00 — 14:00 (점심시간 없음)</dd>
+              </div>
+              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
+                <dt class="font-semibold">일요일·공휴일</dt>
+                <dd style="color: var(--ink-soft)">휴진</dd>
+              </div>
+            </dl>
+
+            <div class="mt-12">
+              <p class="text-sm" style="color: var(--ink-soft)">위치</p>
+              <p class="mt-2 text-lg leading-relaxed">
+                서울특별시 OO구 OO로 OO길 5, 2층<br />
+                OO역 3번 출구에서 도보 4분
+              </p>
+              <p class="mt-6 text-sm" style="color: var(--ink-soft)">전화</p>
+              <a class="serif text-3xl mt-1 inline-block" href="tel:0212345678" style="color: var(--primary)">
+                02 · 1234 · 5678
+              </a>
+            </div>
+          </div>
+
+          <!-- 예약 폼 -->
+          <form id="book" class="card reveal" onsubmit="event.preventDefault(); alert('예약 요청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
+            <p class="eyebrow mb-4">진료 예약</p>
+            <h3 class="serif text-2xl mb-6">편하실 때 연락드릴게요.<br />정보를 남겨주세요.</h3>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label>
+                <input class="field" required placeholder="홍길동" />
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label>
+                <input class="field" required type="tel" placeholder="010-0000-0000" />
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 진료</label>
+                <select class="field" required>
+                  <option value="">진료를 선택해 주세요</option>
+                  <option>임플란트 상담</option>
+                  <option>신경치료</option>
+                  <option>치아교정 상담</option>
+                  <option>보철·심미</option>
+                  <option>잇몸치료</option>
+                  <option>어린이 진료</option>
+                  <option>정기검진</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm mb-2" style="color: var(--ink-soft)">하실 말씀 (선택)</label>
+                <textarea class="field" rows="3" placeholder="궁금한 점이나 알려주실 사항을 자유롭게 적어주세요."></textarea>
+              </div>
+              <button type="submit" class="btn-primary w-full justify-center mt-2">
+                예약 요청 보내기
+              </button>
+              <p class="text-xs mt-2" style="color: var(--ink-soft)">
+                · 작성해 주신 정보는 진료 예약 안내 외 다른 목적으로 사용되지 않습니다.
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ====================== CTA ====================== -->
+      <section class="py-28 text-center" style="background: var(--primary); color: #fff">
+        <div class="container-x">
+          <p class="serif text-3xl md:text-5xl leading-tight tracking-tight reveal">
+            이 닦는 일처럼 가까이,<br />라온이 함께하겠습니다.
+          </p>
+          <a href="#book" class="inline-block mt-10 px-8 py-4 rounded-full bg-white font-semibold reveal" style="color: var(--primary)">
+            지금 예약하기
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container-x py-14 text-sm" style="color: var(--ink-soft)">
+      <div class="flex flex-wrap justify-between gap-6">
+        <div>
+          <p class="font-semibold" style="color: var(--ink)">라온치과의원</p>
+          <p class="mt-2">대표원장 김라온 · 사업자등록번호 000-00-00000</p>
+          <p>의료기관 종별 치과의원 · 의료광고 사전심의필 (제2025-XXX호)</p>
+        </div>
+        <div class="text-right">
+          <a href="/" class="hover:underline">← 쇼룸으로 돌아가기</a>
+          <p class="mt-2">© 2026 라온치과의원</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* 스크롤 등장 */
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
