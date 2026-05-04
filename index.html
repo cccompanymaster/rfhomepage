@@ -6,27 +6,34 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>홈페이지 레퍼런스 쇼룸 — 12 Industries</title>
+    <title>RF.studio — 한 화면에 담은 열두 가지 결</title>
     <meta
       name="description"
-      content="업종별로 정성껏 만든 12개의 원페이지 홈페이지 레퍼런스. 클릭하면 실제 페이지를 볼 수 있습니다."
+      content="업종별로 정성껏 만든 12개의 원페이지 홈페이지 컬렉션. 데스크톱·모바일 목업으로 라이브 페이지를 그대로 미리 보세요."
     />
 
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/common.css" />
     <style>
       body { background: var(--bg); color: var(--text); }
-      .gradient-text {
-        background: linear-gradient(135deg, #fff 0%, #b8a9ff 50%, #7c5cff 100%);
+      .serif { font-family: 'Noto Serif KR', serif; }
+      .grad-text {
+        background: linear-gradient(135deg, #fff 0%, #d8caff 55%, #7c5cff 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
       }
-      /* 업종별 placeholder 그라데이션 토큰 */
+      .number-tabular { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+      /* placeholder gradients per industry */
       .ph-dental    { --ph-from:#d6f0e6; --ph-to:#f0fbf6; color:#0f5d4a; }
       .ph-law       { --ph-from:#1f2937; --ph-to:#374151; color:#fff; }
       .ph-cafe      { --ph-from:#f5e6d3; --ph-to:#ede0c8; color:#5a3e1f; }
@@ -39,16 +46,60 @@
       .ph-studio    { --ph-from:#0a0a0a; --ph-to:#1a1a1a; color:#fff; }
       .ph-academy   { --ph-from:#d6e4f0; --ph-to:#b8cee8; color:#1e3a5f; }
       .ph-manufacture{--ph-from:#d1d5db; --ph-to:#9ca3af; color:#1f2937; }
+
+      /* hero scroll cue */
+      .scroll-cue {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        color: var(--text-quiet);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .scroll-cue::before {
+        content: '';
+        width: 28px;
+        height: 1px;
+        background: var(--text-quiet);
+      }
+
+      /* hero count list */
+      .index-row {
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        gap: 16px;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+        align-items: baseline;
+        color: var(--text-dim);
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+      .index-row:hover { color: var(--text); }
+      .index-row .num { color: var(--text-quiet); font-feature-settings: 'tnum'; }
+      .index-row .name { font-weight: 600; color: var(--text); }
+      .index-row .cat  { font-size: 12px; color: var(--text-quiet); letter-spacing: 0.06em; text-transform: uppercase; }
     </style>
   </head>
   <body>
+    <!-- ambient bg -->
+    <div class="bg-blobs" aria-hidden="true"></div>
+
     <!-- ====================== HEADER ====================== -->
-    <header class="container-x py-8 flex items-center justify-between">
-      <a href="/" class="font-bold text-lg tracking-tight">RF.studio</a>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
-        <a href="#showroom" class="hover:text-white">쇼룸</a>
-        <a href="#about" class="hover:text-white">소개</a>
-        <a href="#contact" class="hover:text-white">문의</a>
+    <header class="container-x py-6 flex items-center justify-between relative z-10">
+      <a href="/" class="font-bold text-lg tracking-tight flex items-center gap-2">
+        <span
+          class="w-6 h-6 rounded-md inline-block"
+          style="background: linear-gradient(135deg, #7c5cff, #ff7ac6)"
+        ></span>
+        RF.studio
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-dim)">
+        <a href="#showroom" class="hover:text-white transition">쇼룸</a>
+        <a href="#index" class="hover:text-white transition">전체 인덱스</a>
+        <a href="#about" class="hover:text-white transition">소개</a>
+        <a href="#contact" class="hover:text-white transition">문의</a>
       </nav>
       <a
         href="#contact"
@@ -58,31 +109,49 @@
     </header>
 
     <!-- ====================== HERO ====================== -->
-    <section class="container-x pt-16 pb-24 md:pt-28 md:pb-36">
-      <p class="text-sm font-medium text-white/50 mb-6 tracking-wider">
-        ONE-PAGE HOMEPAGE REFERENCES · 2026
+    <section class="container-x pt-20 md:pt-32 pb-24 md:pb-36 relative">
+      <p class="text-xs md:text-sm font-medium mb-8 tracking-[0.22em]" style="color: var(--text-quiet)">
+        ONE-PAGE HOMEPAGE COLLECTION · 12 INDUSTRIES · 2026
       </p>
       <h1
-        class="gradient-text text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight max-w-4xl"
+        class="grad-text serif text-5xl md:text-7xl lg:text-[104px] font-semibold leading-[1.05] tracking-tight max-w-5xl"
       >
-        업종의 결을 살린<br />
-        12개의 원페이지 홈페이지.
+        한 화면에 담은,<br />열두 가지 결.
       </h1>
-      <p class="mt-8 text-white/60 text-base md:text-lg max-w-2xl leading-relaxed">
-        브랜드의 무드와 고객의 동선을 함께 설계한, 한 화면에 머무는 홈페이지.<br />
-        실제 라이브 페이지를 데스크톱·모바일에서 그대로 살펴보세요.
-      </p>
+      <div class="mt-10 grid md:grid-cols-12 gap-8 items-end">
+        <p class="md:col-span-7 text-base md:text-lg leading-relaxed" style="color: var(--text-dim)">
+          업종마다 다른 톤·서체·여백을 그대로 살린 열두 개의 원페이지 홈페이지.
+          데스크톱과 모바일 목업으로 실제 라이브 페이지를 그대로 미리 봅니다.
+          마음에 드는 결을 고르시면, 같은 결 위에 브랜드만 옮겨 드립니다.
+        </p>
+        <div class="md:col-span-5 md:text-right">
+          <a href="#showroom" class="scroll-cue hover:text-white transition">쇼룸 둘러보기</a>
+        </div>
+      </div>
     </section>
 
-    <!-- ====================== SHOWROOM GRID ====================== -->
-    <section id="showroom" class="container-x pb-32">
-      <div class="flex items-end justify-between mb-10">
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">전체 레퍼런스</h2>
-        <span class="text-sm text-white/40">12 / 12</span>
+    <!-- ====================== SHOWROOM ====================== -->
+    <section id="showroom" class="container-x pb-24">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <div>
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">SHOWROOM</p>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">전체 레퍼런스</h2>
+        </div>
+        <span class="text-sm number-tabular" style="color: var(--text-quiet)">12 / 12 references</span>
+      </div>
+
+      <!-- 카테고리 칩 (시각적) -->
+      <div class="cat-chips">
+        <span class="cat-chip" data-active="true"><span class="dot"></span>전체 · 12</span>
+        <span class="cat-chip"><span class="dot"></span>의료 · 뷰티</span>
+        <span class="cat-chip"><span class="dot"></span>F&B · 숙박</span>
+        <span class="cat-chip"><span class="dot"></span>전문 서비스</span>
+        <span class="cat-chip"><span class="dot"></span>라이프스타일</span>
+        <span class="cat-chip"><span class="dot"></span>테크 · 교육</span>
+        <span class="cat-chip"><span class="dot"></span>산업</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        <!-- 카드 12개 — JS 없이 정적으로 렌더 -->
         <!-- 1. 치과 -->
         <a class="ref-card" href="./templates/dental.html">
           <div class="ref-card-meta">
@@ -91,28 +160,21 @@
           </div>
           <h3 class="ref-card-title">라온치과의원</h3>
           <p class="ref-card-tag">치과가 처음인 마음으로, 끝까지 정성껏</p>
+          <div class="ref-card-swatch">
+            <span style="background:#0f5d4a"></span><span style="background:#5fb59a"></span><span style="background:#d6f0e6"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-dental">라온치과</div>
-                <iframe
-                  class="preview-frame preview-desktop absolute inset-0"
-                  data-src="./templates/dental.html"
-                  loading="lazy"
-                  title="라온치과 미리보기"
-                ></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/dental.html" loading="lazy" title="라온치과 미리보기"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-dental">라온</div>
-                  <iframe
-                    class="preview-frame preview-mobile absolute inset-0"
-                    data-src="./templates/dental.html"
-                    loading="lazy"
-                    title="라온치과 모바일 미리보기"
-                  ></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/dental.html" loading="lazy" title="라온치과 모바일"></iframe>
                 </div>
               </div>
             </div>
@@ -127,11 +189,14 @@
           </div>
           <h3 class="ref-card-title">정평 법무법인</h3>
           <p class="ref-card-tag">바르게 듣고, 정확하게 답합니다</p>
+          <div class="ref-card-swatch">
+            <span style="background:#0e1a2b"></span><span style="background:#c9a961"></span><span style="background:#fbfaf7"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-law">정평</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/law.html" loading="lazy" title="정평 법무법인 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/law.html" loading="lazy" title="정평 미리보기"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
@@ -153,18 +218,21 @@
           </div>
           <h3 class="ref-card-title">오월의 다정</h3>
           <p class="ref-card-tag">하루의 가장 다정한 한 잔</p>
+          <div class="ref-card-swatch">
+            <span style="background:#5a3e1f"></span><span style="background:#c98e4a"></span><span style="background:#f5e6d3"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-cafe">오월의 다정</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/cafe.html" loading="lazy" title="카페 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/cafe.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-cafe">오월</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/cafe.html" loading="lazy" title="카페 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/cafe.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -179,18 +247,21 @@
           </div>
           <h3 class="ref-card-title">화월 — 한식 다이닝</h3>
           <p class="ref-card-tag">계절을 담아낸 일곱 코스</p>
+          <div class="ref-card-swatch">
+            <span style="background:#0a0a0a"></span><span style="background:#d4af37"></span><span style="background:#f3ead2"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-restaurant">화월</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/restaurant.html" loading="lazy" title="화월 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/restaurant.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-restaurant">花月</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/restaurant.html" loading="lazy" title="화월 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/restaurant.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -205,18 +276,21 @@
           </div>
           <h3 class="ref-card-title">여백 스튜디오</h3>
           <p class="ref-card-tag">덜어낸 자리에 머무는 하루</p>
+          <div class="ref-card-swatch">
+            <span style="background:#1f2426"></span><span style="background:#8a8278"></span><span style="background:#fafaf9"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-interior">여백</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/interior.html" loading="lazy" title="여백 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/interior.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-interior">YB</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/interior.html" loading="lazy" title="여백 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/interior.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -231,18 +305,21 @@
           </div>
           <h3 class="ref-card-title">루티드 필라테스</h3>
           <p class="ref-card-tag">뿌리부터 단단해지는 나의 코어</p>
+          <div class="ref-card-swatch">
+            <span style="background:#2d4a3a"></span><span style="background:#8aab8d"></span><span style="background:#f6f3ec"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-pilates">ROOTED</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/pilates.html" loading="lazy" title="루티드 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/pilates.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-pilates">RT</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/pilates.html" loading="lazy" title="루티드 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/pilates.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -257,18 +334,21 @@
           </div>
           <h3 class="ref-card-title">단정 에스테틱</h3>
           <p class="ref-card-tag">단정한 매일을 위한 피부 루틴</p>
+          <div class="ref-card-swatch">
+            <span style="background:#9b3a4e"></span><span style="background:#c08b76"></span><span style="background:#fde4e8"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-beauty">단정</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/beauty.html" loading="lazy" title="단정 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/beauty.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-beauty">DJ</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/beauty.html" loading="lazy" title="단정 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/beauty.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -283,18 +363,21 @@
           </div>
           <h3 class="ref-card-title">Stackline</h3>
           <p class="ref-card-tag">흩어진 업무 데이터를 한 줄로</p>
+          <div class="ref-card-swatch">
+            <span style="background:#08070d"></span><span style="background:#7c5cff"></span><span style="background:#c7b8ff"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-saas">Stackline</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/saas.html" loading="lazy" title="Stackline 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/saas.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-saas">SL</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/saas.html" loading="lazy" title="Stackline 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/saas.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -304,23 +387,26 @@
         <!-- 9. 풀빌라 -->
         <a class="ref-card" href="./templates/pension.html">
           <div class="ref-card-meta">
-            <span class="ref-card-industry">Pool Villa · Pension</span>
+            <span class="ref-card-industry">Pool Villa</span>
             <span class="ref-card-num">09 / 12</span>
           </div>
           <h3 class="ref-card-title">산일호 풀빌라</h3>
           <p class="ref-card-tag">산이 가장 가까운 하룻밤</p>
+          <div class="ref-card-swatch">
+            <span style="background:#3a4a3a"></span><span style="background:#8a7448"></span><span style="background:#f7f3eb"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-pension">산일호</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/pension.html" loading="lazy" title="산일호 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/pension.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
-                  <div class="preview-placeholder ph-pension">山1</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/pension.html" loading="lazy" title="산일호 모바일"></iframe>
+                  <div class="preview-placeholder ph-pension">山</div>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/pension.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -335,18 +421,21 @@
           </div>
           <h3 class="ref-card-title">무드그래프 스튜디오</h3>
           <p class="ref-card-tag">분위기까지 담는 한 컷</p>
+          <div class="ref-card-swatch">
+            <span style="background:#0a0a0a"></span><span style="background:#d4d4d4"></span><span style="background:#f5f5f5"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-studio">MOODGRAPH</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/studio.html" loading="lazy" title="무드그래프 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/studio.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-studio">MG</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/studio.html" loading="lazy" title="무드그래프 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/studio.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -361,25 +450,28 @@
           </div>
           <h3 class="ref-card-title">메리트 입시컨설팅</h3>
           <p class="ref-card-tag">길을 잘 아는 사람과 걷는 1년</p>
+          <div class="ref-card-swatch">
+            <span style="background:#1e3a5f"></span><span style="background:#f0b429"></span><span style="background:#fdfcf6"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-academy">MERIT</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/academy.html" loading="lazy" title="메리트 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/academy.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-academy">M</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/academy.html" loading="lazy" title="메리트 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/academy.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
           </div>
         </a>
 
-        <!-- 12. 제조 / B2B -->
+        <!-- 12. 제조 -->
         <a class="ref-card" href="./templates/manufacture.html">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Manufacture · B2B</span>
@@ -387,18 +479,21 @@
           </div>
           <h3 class="ref-card-title">한울정밀</h3>
           <p class="ref-card-tag">미크론 단위에서 시작되는 신뢰</p>
+          <div class="ref-card-swatch">
+            <span style="background:#1a2733"></span><span style="background:#006fb5"></span><span style="background:#d1d8e0"></span>
+          </div>
           <div class="ref-card-mockups">
             <div class="mockup-desktop">
               <div class="mockup-desktop-screen">
                 <div class="preview-placeholder ph-manufacture">한울정밀</div>
-                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/manufacture.html" loading="lazy" title="한울정밀 미리보기"></iframe>
+                <iframe class="preview-frame preview-desktop absolute inset-0" data-src="./templates/manufacture.html" loading="lazy"></iframe>
               </div>
             </div>
             <div class="mockup-mobile-wrap">
               <div class="mockup-mobile">
                 <div class="mockup-mobile-screen">
                   <div class="preview-placeholder ph-manufacture">HW</div>
-                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/manufacture.html" loading="lazy" title="한울정밀 모바일"></iframe>
+                  <iframe class="preview-frame preview-mobile absolute inset-0" data-src="./templates/manufacture.html" loading="lazy"></iframe>
                 </div>
               </div>
             </div>
@@ -407,52 +502,81 @@
       </div>
     </section>
 
+    <!-- ====================== INDEX (text list) ====================== -->
+    <section id="index" class="container-x py-24 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-10 mb-10">
+        <div class="md:col-span-4">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">FULL INDEX</p>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">한 페이지로 보는 12.</h2>
+        </div>
+        <p class="md:col-span-8 self-end" style="color: var(--text-dim)">
+          업종 · 브랜드 · 한 줄 소개를 한 번에. 클릭하면 해당 레퍼런스로 이동합니다.
+        </p>
+      </div>
+      <div>
+        <a href="./templates/dental.html" class="index-row"><span class="num">01</span><span><span class="name">라온치과의원</span> · 치과가 처음인 마음으로, 끝까지 정성껏</span><span class="cat">Dental</span></a>
+        <a href="./templates/law.html" class="index-row"><span class="num">02</span><span><span class="name">정평 법무법인</span> · 바르게 듣고, 정확하게 답합니다</span><span class="cat">Law</span></a>
+        <a href="./templates/cafe.html" class="index-row"><span class="num">03</span><span><span class="name">오월의 다정</span> · 하루의 가장 다정한 한 잔</span><span class="cat">Cafe</span></a>
+        <a href="./templates/restaurant.html" class="index-row"><span class="num">04</span><span><span class="name">화월</span> · 계절을 담아낸 일곱 코스</span><span class="cat">Dining</span></a>
+        <a href="./templates/interior.html" class="index-row"><span class="num">05</span><span><span class="name">여백 스튜디오</span> · 덜어낸 자리에 머무는 하루</span><span class="cat">Interior</span></a>
+        <a href="./templates/pilates.html" class="index-row"><span class="num">06</span><span><span class="name">루티드 필라테스</span> · 뿌리부터 단단해지는 코어</span><span class="cat">Pilates</span></a>
+        <a href="./templates/beauty.html" class="index-row"><span class="num">07</span><span><span class="name">단정 에스테틱</span> · 단정한 매일을 위한 피부 루틴</span><span class="cat">Beauty</span></a>
+        <a href="./templates/saas.html" class="index-row"><span class="num">08</span><span><span class="name">Stackline</span> · 흩어진 업무 데이터를 한 줄로</span><span class="cat">SaaS</span></a>
+        <a href="./templates/pension.html" class="index-row"><span class="num">09</span><span><span class="name">산일호 풀빌라</span> · 산이 가장 가까운 하룻밤</span><span class="cat">Villa</span></a>
+        <a href="./templates/studio.html" class="index-row"><span class="num">10</span><span><span class="name">무드그래프 스튜디오</span> · 분위기까지 담는 한 컷</span><span class="cat">Studio</span></a>
+        <a href="./templates/academy.html" class="index-row"><span class="num">11</span><span><span class="name">메리트 입시컨설팅</span> · 길을 잘 아는 사람과 걷는 1년</span><span class="cat">Edu</span></a>
+        <a href="./templates/manufacture.html" class="index-row" style="border-bottom:1px solid var(--line)"><span class="num">12</span><span><span class="name">한울정밀</span> · 미크론 단위에서 시작되는 신뢰</span><span class="cat">B2B</span></a>
+      </div>
+    </section>
+
     <!-- ====================== ABOUT ====================== -->
     <section id="about" class="container-x py-24 border-t border-white/5">
-      <div class="grid md:grid-cols-2 gap-16 items-start">
-        <div>
-          <p class="text-xs tracking-widest text-white/40 mb-4">ABOUT</p>
-          <h2 class="text-3xl md:text-4xl font-bold leading-tight tracking-tight">
-            한 화면에 담을 수 있는<br />가장 정성스러운 순서.
+      <div class="grid md:grid-cols-12 gap-12 items-start">
+        <div class="md:col-span-5">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">ABOUT</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
+            업종이 달라도<br />좋은 홈페이지에는<br />공통의 흐름이 있습니다.
           </h2>
         </div>
-        <div class="text-white/60 leading-relaxed space-y-4 text-base md:text-lg">
+        <div class="md:col-span-7 leading-relaxed text-base md:text-lg space-y-5" style="color: var(--text-dim)">
           <p>
-            업종이 달라도 좋은 홈페이지에는 공통점이 있습니다.
-            첫 화면에서 고객의 마음을 멈추게 하고,
-            스크롤이 흘러갈수록 자연스럽게 신뢰가 쌓이는 흐름.
+            첫 화면에서 마음을 멈추게 하고, 스크롤이 흘러갈수록 자연스럽게
+            신뢰가 쌓이는 흐름. 좋은 홈페이지에는 결정적 한 컷보다,
+            한 호흡씩 이어지는 리듬이 있습니다.
           </p>
           <p>
-            저희는 그 흐름을 업종마다 다르게 설계합니다.
+            저희는 이 리듬을 업종마다 다르게 설계합니다.
             병원의 신중함, 카페의 다정함, 스타트업의 명료함 —
             결이 다른 만큼 폰트 한 개, 여백 하나까지 다르게 둡니다.
+          </p>
+          <p style="color: var(--text)">
+            12개의 결을 먼저 만들어 두었습니다. 마음에 드는 결을 고르시면,
+            그 위에 브랜드만 정성껏 옮겨 드립니다.
           </p>
         </div>
       </div>
     </section>
 
     <!-- ====================== CONTACT ====================== -->
-    <section
-      id="contact"
-      class="container-x py-24 md:py-32 border-t border-white/5"
-    >
+    <section id="contact" class="container-x py-24 md:py-36 border-t border-white/5">
       <div class="text-center max-w-2xl mx-auto">
-        <p class="text-xs tracking-widest text-white/40 mb-4">CONTACT</p>
-        <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
+        <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">CONTACT</p>
+        <h2 class="serif text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
           준비된 결을 골라<br />당신의 브랜드로 입혀드립니다.
         </h2>
-        <p class="mt-6 text-white/60">
-          마음에 든 레퍼런스가 있다면 번호와 함께 알려주세요. 영업일 기준 1일 이내 회신드립니다.
+        <p class="mt-6" style="color: var(--text-dim)">
+          마음에 드신 레퍼런스의 번호와 함께 알려 주시면, 영업일 기준 1일 안에 회신드립니다.
         </p>
         <a
           href="mailto:hello@rf.studio"
-          class="inline-block mt-10 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition"
+          class="inline-block mt-10 px-9 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition"
           >hello@rf.studio</a
         >
+        <p class="mt-6 text-sm" style="color: var(--text-quiet)">또는 02 · 1234 · 5678</p>
       </div>
     </section>
 
-    <footer class="container-x py-10 border-t border-white/5 text-sm text-white/40 flex flex-wrap items-center justify-between gap-4">
+    <footer class="container-x py-10 border-t border-white/5 text-sm flex flex-wrap items-center justify-between gap-4" style="color: var(--text-quiet)">
       <span>© 2026 RF.studio. All rights reserved.</span>
       <span>Made with care in Seoul.</span>
     </footer>
