@@ -97,15 +97,22 @@
     if (Number.isNaN(target)) return;
     const decimals = parseInt(el.dataset.decimals || '0', 10);
     const duration = parseInt(el.dataset.duration || '1400', 10);
+    const isYear = el.dataset.format === 'year';
     const start = performance.now();
-    const formatter = new Intl.NumberFormat('ko-KR', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    });
+    const formatter = isYear
+      ? null
+      : new Intl.NumberFormat('ko-KR', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        });
     const tick = (now) => {
       const t = Math.min(1, (now - start) / duration);
       const v = target * easeOut(t);
-      el.textContent = formatter.format(decimals ? +v.toFixed(decimals) : Math.round(v));
+      if (isYear) {
+        el.textContent = String(Math.round(v));
+      } else {
+        el.textContent = formatter.format(decimals ? +v.toFixed(decimals) : Math.round(v));
+      }
       if (t < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
