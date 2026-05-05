@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Stackline — 흩어진 업무 데이터를 한 줄로</title>
     <meta name="description" content="Stackline은 슬랙·노션·시트에 흩어진 데이터를 한 줄의 업무 흐름으로 정리해주는 협업 자동화 도구입니다." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Stackline — 흩어진 업무 데이터를 한 줄로" />
+    <meta property="og:description" content="협업 자동화 도구 Stackline의 기능과 가격을 안내합니다." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%237c5cff'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,8 +74,24 @@
 
     <main id="top">
       <!-- HERO -->
-      <section class="container-x pt-20 md:pt-28 pb-24 md:pb-32 text-center">
-        <p class="eyebrow mb-6 reveal">FOR PRODUCT TEAMS · 2026</p>
+      <section class="container-x pt-20 md:pt-28 pb-24 md:pb-32 text-center relative overflow-hidden">
+        <!-- 시그니처 오너먼트: 도트 그리드 + 데이터 라인 -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-50" aria-hidden="true" style="z-index:0">
+          <defs>
+            <pattern id="dotgrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="rgba(124,92,255,0.18)" />
+            </pattern>
+            <linearGradient id="lineFade" x1="0" x2="1">
+              <stop offset="0" stop-color="#7c5cff" stop-opacity="0" />
+              <stop offset="0.5" stop-color="#7c5cff" stop-opacity="0.6" />
+              <stop offset="1" stop-color="#ff7ac6" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dotgrid)" />
+          <path d="M0,80 Q20%,40 50%,60 T100%,30" stroke="url(#lineFade)" stroke-width="1.2" fill="none" />
+        </svg>
+        <div class="relative" style="z-index:1">
+        <p class="eyebrow mb-6 reveal relative">FOR PRODUCT TEAMS · 2026</p>
         <h1 class="grad-text text-5xl md:text-7xl lg:text-[88px] font-bold leading-[1.05] tracking-tight max-w-4xl mx-auto reveal">
           흩어진 업무 데이터를<br />한 줄로 잇습니다.
         </h1>
@@ -88,6 +110,7 @@
         <div class="mt-6 flex flex-wrap justify-center gap-x-12 gap-y-4 opacity-60 text-sm">
           <span>TOSS</span><span>당근</span><span>NAVER</span><span>OO Lab</span><span>BANKSALAD</span><span>RIIID</span>
         </div>
+        </div><!-- /.relative content wrapper -->
       </section>
 
       <!-- PROBLEM -->
@@ -243,5 +266,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+      <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>

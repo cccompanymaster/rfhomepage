@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>루티드 필라테스 — 뿌리부터 단단해지는 코어</title>
     <meta name="description" content="루티드는 자세 교정 중심의 1:1 · 그룹 필라테스 스튜디오입니다. 일주일에 두 번, 흔들리지 않는 중심을 만듭니다." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="루티드 필라테스 — 뿌리부터 단단해지는 코어" />
+    <meta property="og:description" content="루티드 필라테스의 자세 분석과 프로그램을 안내합니다." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4a3a'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/common.css" />
@@ -74,9 +80,9 @@
               <a href="#programs" class="btn-ghost">프로그램 보기</a>
             </div>
             <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              <div><dt class="text-xs" style="color:var(--ink-soft)">개원</dt><dd class="serif text-2xl mt-1">2020</dd></div>
-              <div><dt class="text-xs" style="color:var(--ink-soft)">국제 자격 강사</dt><dd class="serif text-2xl mt-1">7<span class="text-sm">명</span></dd></div>
-              <div><dt class="text-xs" style="color:var(--ink-soft)">평균 출석률</dt><dd class="serif text-2xl mt-1">88%</dd></div>
+              <div><dt class="text-xs" style="color:var(--ink-soft)">개원</dt><dd class="serif text-2xl mt-1"><span data-count="2020">0</span></dd></div>
+              <div><dt class="text-xs" style="color:var(--ink-soft)">국제 자격 강사</dt><dd class="serif text-2xl mt-1"><span data-count="7">0</span><span class="text-sm">명</span></dd></div>
+              <div><dt class="text-xs" style="color:var(--ink-soft)">평균 출석률</dt><dd class="serif text-2xl mt-1"><span data-count="88">0</span>%</dd></div>
             </dl>
           </div>
           <div class="md:col-span-5 reveal">
@@ -235,5 +241,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+      <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>

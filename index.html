@@ -11,6 +11,12 @@
       name="description"
       content="업종별로 정성껏 만든 12개의 원페이지 홈페이지 컬렉션. 데스크톱·모바일 목업으로 라이브 페이지를 그대로 미리 보세요."
     />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RF.studio — 한 화면에 담은 열두 가지 결" />
+    <meta property="og:description" content="업종별로 정성껏 만든 12개의 원페이지 홈페이지 컬렉션." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%23ff7ac6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E" />
 
     <link
       rel="stylesheet"
@@ -85,6 +91,7 @@
   <body>
     <!-- ambient bg -->
     <div class="bg-blobs" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <!-- ====================== HEADER ====================== -->
     <header class="container-x py-6 flex items-center justify-between relative z-10">
@@ -137,23 +144,23 @@
           <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">SHOWROOM</p>
           <h2 class="text-2xl md:text-3xl font-bold tracking-tight">전체 레퍼런스</h2>
         </div>
-        <span class="text-sm number-tabular" style="color: var(--text-quiet)">12 / 12 references</span>
+        <span class="text-sm number-tabular" style="color: var(--text-quiet)" data-card-counter>12 / 12 references</span>
       </div>
 
-      <!-- 카테고리 칩 (시각적) -->
-      <div class="cat-chips">
-        <span class="cat-chip" data-active="true"><span class="dot"></span>전체 · 12</span>
-        <span class="cat-chip"><span class="dot"></span>의료 · 뷰티</span>
-        <span class="cat-chip"><span class="dot"></span>F&B · 숙박</span>
-        <span class="cat-chip"><span class="dot"></span>전문 서비스</span>
-        <span class="cat-chip"><span class="dot"></span>라이프스타일</span>
-        <span class="cat-chip"><span class="dot"></span>테크 · 교육</span>
-        <span class="cat-chip"><span class="dot"></span>산업</span>
+      <!-- 카테고리 칩 (클릭하면 필터링) -->
+      <div class="cat-chips" role="tablist" aria-label="레퍼런스 카테고리">
+        <button class="cat-chip" data-cat="all" data-active="true"><span class="dot"></span>전체 · 12</button>
+        <button class="cat-chip" data-cat="medical-beauty"><span class="dot"></span>의료 · 뷰티</button>
+        <button class="cat-chip" data-cat="fnb-stay"><span class="dot"></span>F&B · 숙박</button>
+        <button class="cat-chip" data-cat="professional"><span class="dot"></span>전문 서비스</button>
+        <button class="cat-chip" data-cat="lifestyle"><span class="dot"></span>라이프스타일</button>
+        <button class="cat-chip" data-cat="tech-edu"><span class="dot"></span>테크 · 교육</button>
+        <button class="cat-chip" data-cat="industry"><span class="dot"></span>산업</button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         <!-- 1. 치과 -->
-        <a class="ref-card" href="./templates/dental.html">
+        <a class="ref-card" href="./templates/dental.html" data-cat="medical-beauty">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Dental Clinic</span>
             <span class="ref-card-num">01 / 12</span>
@@ -182,7 +189,7 @@
         </a>
 
         <!-- 2. 법무법인 -->
-        <a class="ref-card" href="./templates/law.html">
+        <a class="ref-card" href="./templates/law.html" data-cat="professional">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Law Firm</span>
             <span class="ref-card-num">02 / 12</span>
@@ -211,7 +218,7 @@
         </a>
 
         <!-- 3. 카페 -->
-        <a class="ref-card" href="./templates/cafe.html">
+        <a class="ref-card" href="./templates/cafe.html" data-cat="fnb-stay">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Cafe & Bakery</span>
             <span class="ref-card-num">03 / 12</span>
@@ -240,7 +247,7 @@
         </a>
 
         <!-- 4. 파인다이닝 -->
-        <a class="ref-card" href="./templates/restaurant.html">
+        <a class="ref-card" href="./templates/restaurant.html" data-cat="fnb-stay">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Fine Dining</span>
             <span class="ref-card-num">04 / 12</span>
@@ -269,7 +276,7 @@
         </a>
 
         <!-- 5. 인테리어 -->
-        <a class="ref-card" href="./templates/interior.html">
+        <a class="ref-card" href="./templates/interior.html" data-cat="professional">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Interior Studio</span>
             <span class="ref-card-num">05 / 12</span>
@@ -298,7 +305,7 @@
         </a>
 
         <!-- 6. 필라테스 -->
-        <a class="ref-card" href="./templates/pilates.html">
+        <a class="ref-card" href="./templates/pilates.html" data-cat="lifestyle">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Pilates Studio</span>
             <span class="ref-card-num">06 / 12</span>
@@ -327,7 +334,7 @@
         </a>
 
         <!-- 7. 에스테틱 -->
-        <a class="ref-card" href="./templates/beauty.html">
+        <a class="ref-card" href="./templates/beauty.html" data-cat="medical-beauty">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Beauty & Skin</span>
             <span class="ref-card-num">07 / 12</span>
@@ -356,7 +363,7 @@
         </a>
 
         <!-- 8. SaaS -->
-        <a class="ref-card" href="./templates/saas.html">
+        <a class="ref-card" href="./templates/saas.html" data-cat="tech-edu">
           <div class="ref-card-meta">
             <span class="ref-card-industry">SaaS · Startup</span>
             <span class="ref-card-num">08 / 12</span>
@@ -385,7 +392,7 @@
         </a>
 
         <!-- 9. 풀빌라 -->
-        <a class="ref-card" href="./templates/pension.html">
+        <a class="ref-card" href="./templates/pension.html" data-cat="fnb-stay">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Pool Villa</span>
             <span class="ref-card-num">09 / 12</span>
@@ -414,7 +421,7 @@
         </a>
 
         <!-- 10. 스튜디오 -->
-        <a class="ref-card" href="./templates/studio.html">
+        <a class="ref-card" href="./templates/studio.html" data-cat="professional">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Photo · Film Studio</span>
             <span class="ref-card-num">10 / 12</span>
@@ -443,7 +450,7 @@
         </a>
 
         <!-- 11. 학원 -->
-        <a class="ref-card" href="./templates/academy.html">
+        <a class="ref-card" href="./templates/academy.html" data-cat="tech-edu">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Academy · Edu</span>
             <span class="ref-card-num">11 / 12</span>
@@ -472,7 +479,7 @@
         </a>
 
         <!-- 12. 제조 -->
-        <a class="ref-card" href="./templates/manufacture.html">
+        <a class="ref-card" href="./templates/manufacture.html" data-cat="industry">
           <div class="ref-card-meta">
             <span class="ref-card-industry">Manufacture · B2B</span>
             <span class="ref-card-num">12 / 12</span>

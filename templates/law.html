@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>정평 법무법인 — 바르게 듣고, 정확하게 답합니다</title>
     <meta name="description" content="정평 법무법인은 사건의 결을 끝까지 듣고, 가능한 답을 정확하게 드립니다. 형사·민사·기업·가사 — 분야별 전담 변호사가 함께합니다." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="정평 법무법인 — 바르게 듣고, 정확하게 답합니다" />
+    <meta property="og:description" content="정평 법무법인의 변호사·자문 분야·대표 사례를 안내합니다." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e1a2b'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -81,19 +87,19 @@
             <dl class="space-y-6">
               <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
                 <dt style="color: var(--ink-soft)">설립</dt>
-                <dd class="serif text-2xl">2009</dd>
+                <dd class="serif text-2xl"><span data-count="2009">0</span></dd>
               </div>
               <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
                 <dt style="color: var(--ink-soft)">소속 변호사</dt>
-                <dd class="serif text-2xl">14<span class="text-sm">명</span></dd>
+                <dd class="serif text-2xl"><span data-count="14">0</span><span class="text-sm">명</span></dd>
               </div>
               <div class="flex items-baseline justify-between border-b pb-4" style="border-color: var(--line)">
                 <dt style="color: var(--ink-soft)">자문 기업</dt>
-                <dd class="serif text-2xl">220<span class="text-sm">+</span></dd>
+                <dd class="serif text-2xl"><span data-count="220">0</span><span class="text-sm">+</span></dd>
               </div>
               <div class="flex items-baseline justify-between">
                 <dt style="color: var(--ink-soft)">누적 자문</dt>
-                <dd class="serif text-2xl">3,800<span class="text-sm">건</span></dd>
+                <dd class="serif text-2xl"><span data-count="3800">0</span><span class="text-sm">건</span></dd>
               </div>
             </dl>
           </div>
@@ -337,5 +343,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin: '0px 0px -10% 0px', threshold: .05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+    <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>

@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>한울정밀 — 미크론 단위에서 시작되는 신뢰</title>
     <meta name="description" content="한울정밀은 자동차·반도체 정밀부품 가공 전문 기업입니다. ±2㎛의 공차 안에서, 33년의 신뢰." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="한울정밀 — 미크론 단위에서 시작되는 신뢰" />
+    <meta property="og:description" content="자동차·반도체 정밀부품 가공 전문 한울정밀." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a2733'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,7 +68,20 @@
 
     <main id="top">
       <!-- HERO -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
+      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32 relative">
+        <!-- 시그니처 오너먼트: 기술 십자선 + 측정 마크 -->
+        <svg class="absolute top-6 right-6 md:top-10 md:right-10 pointer-events-none" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+          <g fill="none" stroke="#006fb5" stroke-width="1">
+            <circle cx="60" cy="60" r="40" stroke-opacity="0.25" />
+            <circle cx="60" cy="60" r="20" stroke-opacity="0.4" />
+            <line x1="60" y1="0" x2="60" y2="20" stroke-opacity="0.5" />
+            <line x1="60" y1="100" x2="60" y2="120" stroke-opacity="0.5" />
+            <line x1="0" y1="60" x2="20" y2="60" stroke-opacity="0.5" />
+            <line x1="100" y1="60" x2="120" y2="60" stroke-opacity="0.5" />
+            <circle cx="60" cy="60" r="2" fill="#006fb5" />
+          </g>
+          <text x="60" y="115" text-anchor="middle" font-size="9" fill="#006fb5" fill-opacity="0.6" font-family="IBM Plex Mono, monospace">±2㎛</text>
+        </svg>
         <div class="grid md:grid-cols-12 gap-12 items-center">
           <div class="md:col-span-7 reveal">
             <p class="eyebrow mb-6">PRECISION COMPONENTS · SINCE 1992</p>
@@ -79,10 +98,10 @@
             </div>
           </div>
           <div class="md:col-span-5 reveal grid grid-cols-2 gap-3">
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">설립</p><p class="serif text-3xl mt-2" style="color: var(--primary)">1992</p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">공차 정밀도</p><p class="serif text-3xl mt-2" style="color: var(--primary)">±2㎛</p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">생산 라인</p><p class="serif text-3xl mt-2" style="color: var(--primary)">42<span class="text-base">기</span></p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">납품 거래처</p><p class="serif text-3xl mt-2" style="color: var(--primary)">68<span class="text-base">사</span></p></div>
+            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">설립</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="1992">0</span></p></div>
+            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">공차 정밀도</p><p class="serif text-3xl mt-2" style="color: var(--primary)">±<span data-count="2">0</span>㎛</p></div>
+            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">생산 라인</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="42">0</span><span class="text-base">기</span></p></div>
+            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">납품 거래처</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="68">0</span><span class="text-base">사</span></p></div>
           </div>
         </div>
       </section>
@@ -254,5 +273,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+      <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>

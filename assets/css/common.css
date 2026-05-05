@@ -271,6 +271,30 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   background: var(--text-quiet);
 }
 .cat-chip[data-active='true'] span.dot { background: #0a0a0b; }
+.cat-chip[data-cat] { cursor: pointer; }
+.cat-chip[data-cat]:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.18); }
+
+/* 카드 필터 토글 */
+.ref-card.is-hidden {
+  display: none;
+}
+
+/* ============================================================
+   스크롤 진행 바
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #7c5cff, #ff7ac6);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 200;
+  transition: transform 0.1s linear;
+  pointer-events: none;
+}
 
 /* ============================================================
    배경 그라데이션 블롭 (쇼룸 분위기)

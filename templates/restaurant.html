@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>화월 — 계절을 담아낸 일곱 코스</title>
     <meta name="description" content="화월(花月)은 한 달의 계절을 한 끼에 담는 모던 한식 다이닝입니다. 일곱 가지 코스, 한정된 자리." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="화월 — 계절을 담아낸 일곱 코스" />
+    <meta property="og:description" content="한식 모던 다이닝 화월의 셰프와 코스를 안내합니다." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -63,6 +69,12 @@
         <div class="ph absolute inset-0"><div class="ph-mark">花月</div></div>
         <div class="container-x relative pt-32 md:pt-44 pb-32 md:pb-48">
           <div class="reveal">
+            <!-- 시그니처 오너먼트: 골드 라인 + 印 -->
+            <div class="flex items-center gap-4 mb-8" aria-hidden="true">
+              <span class="block w-12 h-px" style="background: var(--primary); opacity:.6"></span>
+              <svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="1" fill="none" stroke="#d4af37" stroke-width="1" /><text x="7" y="10" text-anchor="middle" font-size="8" fill="#d4af37" font-family="serif">月</text></svg>
+              <span class="block w-12 h-px" style="background: var(--primary); opacity:.6"></span>
+            </div>
             <p class="eyebrow mb-8">MODERN KOREAN DINING · SEOUL</p>
             <h1 class="serif text-5xl md:text-7xl lg:text-[88px] font-semibold leading-[1.1] tracking-tight max-w-4xl">
               계절을 담아낸<br />일곱 코스.
@@ -258,5 +270,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+      <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>

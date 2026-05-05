@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>메리트 입시컨설팅 — 길을 잘 아는 사람과 걷는 1년</title>
     <meta name="description" content="메리트는 1:1 입시 컨설팅으로 학생의 결을 끝까지 따라가는 학습 멘토링입니다. 진학과 함께, 한 사람의 1년을 책임집니다." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="메리트 입시컨설팅 — 길을 잘 아는 사람과 걷는 1년" />
+    <meta property="og:description" content="1:1 입시컨설팅 메리트의 합격 실적과 커리큘럼." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e3a5f'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,10 +83,10 @@
             </div>
           </div>
           <div class="md:col-span-5 reveal grid grid-cols-2 gap-3">
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 정시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)">71<span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 수시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)">94<span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">의·치·약·수의대</p><p class="serif text-3xl mt-2" style="color: var(--primary)">12<span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">SKY · KAIST</p><p class="serif text-3xl mt-2" style="color: var(--primary)">38<span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 정시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="71">0</span><span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 수시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="94">0</span><span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">의·치·약·수의대</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="12">0</span><span class="text-base">명</span></p></div>
+            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">SKY · KAIST</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="38">0</span><span class="text-base">명</span></p></div>
           </div>
         </div>
       </section>
@@ -245,5 +251,6 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+      <script src="../assets/js/showroom.js" defer></script>
   </body>
 </html>
