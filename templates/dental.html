@@ -555,5 +555,21 @@
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
     </script>
     <script src="../assets/js/showroom.js" defer></script>
+
+    <!-- 가로 하단 배너 -->
+    <div class="banner-bottom" data-banner-id="dental" role="region" aria-label="알림 배너">
+      <span class="pulse" aria-hidden="true"></span>
+      <span class="label"><span class="strong">오늘 진료 예약 가능</span></span>
+      <a class="cta" href="#book">진료 예약</a>
+      <button class="close" aria-label="배너 닫기">×</button>
+    </div>
+
+    <!-- 우측 세로 배너 -->
+    <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널 상담"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널 상담</span></a>
+      <a class="phone" href="tel:0212345678" target="_blank" rel="noopener" aria-label="02-1234-5678"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">02-1234-5678</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">인스타그램</span></a>
+    </div>
+
   </body>
 </html>

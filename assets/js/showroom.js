@@ -90,6 +90,29 @@
     updateBar();
   }
 
+  /* -------- 가로 하단 배너 닫기 -------- */
+  document.querySelectorAll('.banner-bottom .close').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const banner = btn.closest('.banner-bottom');
+      if (!banner) return;
+      banner.classList.add('is-hidden');
+      try {
+        sessionStorage.setItem(
+          'banner-dismissed-' + (banner.dataset.bannerId || 'default'),
+          '1'
+        );
+      } catch (e) {}
+    });
+  });
+  document.querySelectorAll('.banner-bottom').forEach((banner) => {
+    try {
+      const id = banner.dataset.bannerId || 'default';
+      if (sessionStorage.getItem('banner-dismissed-' + id) === '1') {
+        banner.classList.add('is-hidden');
+      }
+    } catch (e) {}
+  });
+
   /* -------- 숫자 카운트업 -------- */
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
   const animateCount = (el) => {
