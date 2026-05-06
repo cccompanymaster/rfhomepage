@@ -184,7 +184,7 @@
     <!-- 가로 하단 플로팅 상담 배너 -->
     <div class="banner-bottom" data-banner-id="noah-main" role="region" aria-label="상담 안내 배너">
       <span class="pulse" aria-hidden="true"></span>
-      <span class="label"><span class="strong">₩199,000 · 7일 오픈</span> · 이달 잔여 3건</span>
+      <span class="label"><span class="strong">₩199,000 · 7일 오픈</span> · 이달 잔여 <span class="count">3</span>건</span>
       <a class="cta" href="#consult">무료 상담 신청</a>
       <button class="close" aria-label="배너 닫기">×</button>
     </div>
@@ -218,7 +218,7 @@
         HOMEPAGE THAT MAKES MONEY · NOAH · 2026
       </p>
       <h1
-        class="grad-text serif text-5xl md:text-7xl lg:text-[112px] font-semibold leading-[1.02] tracking-tight max-w-5xl"
+        class="grad-text serif text-5xl md:text-7xl lg:text-[104px] font-semibold leading-[1.18] tracking-[-0.02em] max-w-5xl"
       >
         돈 벌어다주는<br />홈페이지,<br /><span class="grad-pink">199,000원</span>으로.
       </h1>
@@ -510,17 +510,13 @@
           </div>
         </div>
         <ul class="grid md:grid-cols-2 gap-x-10 gap-y-3 text-sm">
-          <li>✓ 12개 업종 결 중 선택</li>
           <li>✓ 한국어 전문 카피라이터 검수</li>
           <li>✓ 모바일·태블릿 반응형</li>
-          <li>✓ SEO 기본 설정 + Schema.org</li>
-          <li>✓ 예약·문의 폼 (구글 시트 연동)</li>
-          <li>✓ 카카오·네이버 지도 연동</li>
+          <li>✓ SEO 기본 설정</li>
           <li>✓ 1년 무료 호스팅</li>
           <li>✓ 도메인 연결 안내</li>
-          <li>✓ 1년 무제한 텍스트 수정</li>
-          <li>✓ 분기별 1회 디자인 점검</li>
-          <li>✓ Open Graph (카톡 공유 카드)</li>
+          <li>✓ 1년 무제한 텍스트 수정 <span style="color:var(--text-quiet)">(유료)</span></li>
+          <li>✓ 카카오톡 공유 미리보기 카드</li>
           <li>✓ 파비콘·로고 SVG 제공</li>
         </ul>
         <div class="mt-10 flex flex-wrap gap-3 justify-center">
@@ -737,6 +733,33 @@
     </footer>
 
     <script src="./assets/js/showroom.js" defer></script>
+    <script>
+      // ====================== IP 기반 배너 잔여 건수 ======================
+      // 같은 IP에서 접속할수록 1건씩 차감. 최소 1건까지만 내려감.
+      // 첫 방문: 3~5건 랜덤. 이후 방문마다 -1.
+      (async () => {
+        const el = document.querySelector('.banner-bottom .label .count');
+        if (!el) return;
+        let ipKey = 'noah-stock-fallback';
+        try {
+          const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+          const { ip } = await res.json();
+          // IP를 짧게 해시 (단순 base64 + 12자)
+          ipKey = 'noah-stock-' + btoa(ip).replace(/[^A-Za-z0-9]/g, '').slice(0, 12);
+        } catch (_) { /* offline/blocked: 폴백 키 사용 */ }
+
+        let count = parseInt(localStorage.getItem(ipKey), 10);
+        if (Number.isNaN(count)) {
+          // 첫 방문: 3~5 랜덤 (희소성 자연스럽게)
+          count = 3 + Math.floor(Math.random() * 3);
+        } else {
+          // 재방문: -1, 최소 1
+          count = Math.max(1, count - 1);
+        }
+        localStorage.setItem(ipKey, String(count));
+        el.textContent = count;
+      })();
+    </script>
     <script>
       // ====================== Google Apps Script 연동 ======================
       // 배포한 Apps Script Web App URL을 아래에 붙여넣으세요.
