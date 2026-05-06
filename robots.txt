@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cccompanymaster.github.io/rfhomepage/sitemap.xml
