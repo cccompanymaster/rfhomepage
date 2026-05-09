@@ -195,6 +195,117 @@
       .index-row .num { color: var(--text-quiet); font-feature-settings: 'tnum'; }
       .index-row .name { font-weight: 600; color: var(--text); }
       .index-row .cat  { font-size: 12px; color: var(--text-quiet); letter-spacing: 0.06em; text-transform: uppercase; }
+
+      /* 소개서 다운로드 모달 */
+      .modal-mask {
+        position: fixed; inset: 0; z-index: 200;
+        display: none;
+        align-items: center; justify-content: center;
+        padding: 16px;
+        animation: modalFade 0.25s ease;
+      }
+      .modal-mask.is-open { display: flex; }
+      .modal-mask::before {
+        content: ''; position: absolute; inset: 0;
+        background: rgba(8, 7, 13, 0.78);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .modal-card {
+        position: relative; z-index: 1;
+        background: #15151b;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 24px;
+        padding: 36px 32px 32px;
+        width: 100%;
+        max-width: 460px;
+        box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+        animation: modalIn 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        max-height: 92vh; overflow-y: auto;
+      }
+      @keyframes modalFade { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes modalIn {
+        from { transform: translateY(20px) scale(0.96); opacity: 0; }
+        to   { transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .modal-close {
+        position: absolute; top: 14px; right: 14px;
+        width: 36px; height: 36px;
+        background: transparent; border: 0; cursor: pointer;
+        color: rgba(255,255,255,0.5);
+        font-size: 20px;
+        border-radius: 999px;
+        transition: 0.2s;
+      }
+      .modal-close:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+      /* 블로그 팝업 (좌하단) */
+      .blog-pop {
+        position: fixed;
+        left: 16px; bottom: 16px;
+        z-index: 92;
+        max-width: 290px;
+        background: rgba(15, 15, 18, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 16px 16px 14px 16px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 24px 50px -16px rgba(0,0,0,0.5);
+        color: #fff;
+        font-size: 13px;
+        line-height: 1.5;
+        animation: blogPopIn 0.7s cubic-bezier(0.2,0.9,0.2,1) 2.4s both;
+      }
+      @keyframes blogPopIn {
+        from { transform: translateY(40px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+      }
+      .blog-pop.is-hidden { display: none; }
+      .blog-pop .badge {
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ff7ac6;
+        background: rgba(255, 122, 198, 0.1);
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .blog-pop .title {
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+      .blog-pop .body {
+        color: rgba(255,255,255,0.7);
+        margin-bottom: 12px;
+      }
+      .blog-pop .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #b8a9ff;
+        font-weight: 600;
+        font-size: 12px;
+        text-decoration: none;
+      }
+      .blog-pop .cta:hover { color: #fff; }
+      .blog-pop .close {
+        position: absolute;
+        top: 8px; right: 8px;
+        background: transparent;
+        border: 0; cursor: pointer;
+        color: rgba(255,255,255,0.4);
+        font-size: 16px;
+        width: 24px; height: 24px;
+        border-radius: 999px;
+      }
+      .blog-pop .close:hover { color: #fff; }
+      @media (max-width: 640px) {
+        .blog-pop { left: 12px; right: 12px; max-width: none; bottom: 88px; }
+      }
     </style>
   </head>
   <body>
@@ -228,8 +339,10 @@
 
     <!-- ====================== HEADER ====================== -->
     <header class="container-x py-6 flex items-center justify-between relative z-10">
-      <a href="#hero" class="font-bold text-xl tracking-tight flex items-center gap-2">
-        <span
+      <a
+        href="#hero"
+        class="font-bold text-xl tracking-tight flex items-center gap-2"
+        ><span
           class="w-7 h-7 rounded-md inline-block"
           style="background: linear-gradient(135deg, #7c5cff, #ff7ac6)"
         ></span>
@@ -242,11 +355,22 @@
         <a href="#price" class="hover:text-white transition">가격</a>
         <a href="#faq" class="hover:text-white transition">FAQ</a>
       </nav>
-      <a
-        href="#consult"
-        class="text-sm font-medium px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition"
-        >무료 상담</a
-      >
+      <div class="flex items-center gap-2">
+        <button
+          id="brochure-trigger"
+          type="button"
+          class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2.5 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/5 transition"
+          aria-label="NOAH 소개서 받기"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+          소개서 받기
+        </button>
+        <a
+          href="#consult"
+          class="text-sm font-medium px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 transition"
+          >무료 상담</a
+        >
+      </div>
     </header>
 
     <!-- ====================== HERO ====================== -->
@@ -775,7 +899,121 @@
       </div>
     </footer>
 
+    <!-- ====================== 소개서 다운로드 모달 ====================== -->
+    <div class="modal-mask" id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="brochure-title">
+      <div class="modal-card">
+        <button class="modal-close" type="button" id="brochure-close" aria-label="닫기">×</button>
+        <p class="text-xs tracking-[0.18em] mb-3" style="color: var(--text-quiet)">NOAH BROCHURE</p>
+        <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서를<br />이메일로 보내드릴게요.</h2>
+        <p class="mt-3 text-sm" style="color: var(--text-dim)">12개 업종 레퍼런스, 7일 제작 과정, 199,000원 패키지 안내까지 한 권에.</p>
+
+        <form id="brochure-form" class="mt-7 space-y-3" novalidate>
+          <input class="field-dark" name="name" required placeholder="성함 *" />
+          <input class="field-dark" name="email" type="email" required placeholder="이메일 (소개서가 전송됩니다) *" />
+          <input class="field-dark" name="phone" type="tel" placeholder="연락처 (선택)" />
+          <select class="field-dark" name="industry">
+            <option value="">관심 업종 (선택)</option>
+            <option>치과·병원</option>
+            <option>법무·세무·회계</option>
+            <option>카페·베이커리</option>
+            <option>레스토랑·다이닝</option>
+            <option>인테리어·건축</option>
+            <option>필라테스·요가·피트니스</option>
+            <option>에스테틱·뷰티</option>
+            <option>SaaS·스타트업</option>
+            <option>풀빌라·펜션·숙박</option>
+            <option>스튜디오·사진·영상</option>
+            <option>학원·교육</option>
+            <option>제조·B2B</option>
+            <option>기타</option>
+          </select>
+          <label class="flex items-start gap-2 text-xs cursor-pointer pt-1" style="color: var(--text-dim); line-height:1.5">
+            <input type="checkbox" name="agree" required style="margin-top:3px; flex-shrink:0;" />
+            <span><strong style="color: var(--text)">(필수)</strong> 개인정보 수집·이용에 동의합니다 (소개서 발송 목적)</span>
+          </label>
+          <div id="brochure-status" class="text-sm" role="status" aria-live="polite"></div>
+          <button type="submit" id="brochure-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium hover:bg-white/90 transition">
+            소개서 받기 →
+          </button>
+          <p class="text-xs text-center" style="color: var(--text-quiet)">* 영업일 기준 5분 내 메일 도착, 광고 메일 발송에는 사용하지 않습니다.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ====================== 블로그 디자인 팝업 ====================== -->
+    <div class="blog-pop" id="blog-pop" role="region" aria-label="블로그 디자인 안내">
+      <button class="close" type="button" aria-label="팝업 닫기" data-blog-close>×</button>
+      <span class="badge">+ NEW</span>
+      <p class="title">블로그 디자인이 궁금하시다구요?</p>
+      <p class="body">매거진처럼 정돈된 NOAH 블로그 레퍼런스를 따로 준비했어요.</p>
+      <a class="cta" href="./templates/blog.html">레퍼런스 보러가기 <span aria-hidden="true">→</span></a>
+    </div>
+
     <script src="./assets/js/showroom.js" defer></script>
+    <script>
+      // ====================== 소개서 모달 토글 ======================
+      const brochureModal = document.getElementById('brochure-modal');
+      const brochureTrigger = document.getElementById('brochure-trigger');
+      const brochureClose = document.getElementById('brochure-close');
+      const brochureForm = document.getElementById('brochure-form');
+      const brochureStatus = document.getElementById('brochure-status');
+      const brochureSubmit = document.getElementById('brochure-submit');
+
+      const openBrochure = () => { brochureModal?.classList.add('is-open'); document.body.style.overflow = 'hidden'; };
+      const closeBrochure = () => { brochureModal?.classList.remove('is-open'); document.body.style.overflow = ''; brochureStatus.textContent = ''; };
+      brochureTrigger?.addEventListener('click', openBrochure);
+      brochureClose?.addEventListener('click', closeBrochure);
+      brochureModal?.addEventListener('click', (e) => { if (e.target === brochureModal) closeBrochure(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBrochure(); });
+
+      // 소개서 폼 제출 (Apps Script로 전송 → type:brochure 분기)
+      brochureForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!brochureForm.checkValidity()) { brochureForm.reportValidity(); return; }
+
+        brochureSubmit.disabled = true;
+        brochureSubmit.textContent = '전송 중...';
+        brochureStatus.style.color = 'var(--text-dim)';
+        brochureStatus.textContent = '';
+
+        const fd = new FormData(brochureForm);
+        const payload = { type: 'brochure' };
+        fd.forEach((v, k) => { payload[k] = v; });
+        payload.timestamp = new Date().toISOString();
+        payload.referrer = document.referrer || '직접 접속';
+
+        try {
+          await fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+          });
+          brochureStatus.style.color = '#34d399';
+          brochureStatus.textContent = '✓ 입력하신 메일로 NOAH 소개서를 보내드렸습니다.';
+          brochureForm.reset();
+          setTimeout(closeBrochure, 2200);
+        } catch (err) {
+          brochureStatus.style.color = '#f87171';
+          brochureStatus.textContent = '⚠ 전송에 실패했습니다. 카카오톡으로 연락 주세요.';
+        } finally {
+          brochureSubmit.disabled = false;
+          brochureSubmit.textContent = '소개서 받기 →';
+        }
+      });
+
+      // ====================== 블로그 팝업 닫기 (세션 기억) ======================
+      const blogPop = document.getElementById('blog-pop');
+      try {
+        if (sessionStorage.getItem('blog-pop-dismissed') === '1') {
+          blogPop?.classList.add('is-hidden');
+        }
+      } catch (_) {}
+      document.querySelector('[data-blog-close]')?.addEventListener('click', () => {
+        blogPop?.classList.add('is-hidden');
+        try { sessionStorage.setItem('blog-pop-dismissed', '1'); } catch (_) {}
+      });
+    </script>
     <script>
       // ====================== IP 기반 배너 잔여 건수 ======================
       // 같은 IP에서 접속할수록 1건씩 차감. 최소 1건까지만 내려감.
