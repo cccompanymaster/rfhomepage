@@ -2,288 +2,782 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>잔잔 — 작은 기록의 매거진</title>
-    <meta name="description" content="잔잔은 매일을 천천히 들여다보는 사람들의 기록을 모은 매거진입니다. 한 사람의 한 줄에서 시작된 글들." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>NOAH BLOG — 구독을 부르는 네이버 블로그 스킨, 99,000원</title>
+    <meta name="description" content="네이버 블로그 전용 스킨 디자인. 타이틀 이미지부터 위젯·프롤로그까지, 5일 안에 적용. 6가지 검증된 스타일 중 선택 — ₩99,000." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="잔잔 — 작은 기록의 매거진" />
-    <meta property="og:description" content="매일을 천천히 들여다보는 사람들의 기록을 모은 매거진." />
+    <meta property="og:title" content="NOAH BLOG — 구독을 부르는 네이버 블로그 스킨, 99,000원" />
+    <meta property="og:description" content="네이버 블로그 전용 스킨 — 타이틀·위젯·프롤로그까지 5일." />
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#1a1a1a" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1a1a'/%3E%3C/svg%3E" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2303c75a'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/common.css" />
     <style>
-      :root {
-        --bg: #fafaf7;
-        --bg-soft: #f0eee8;
-        --primary: #1a1a1a;
-        --accent: #c5604c;
-        --ink: #1f1f1f;
-        --ink-soft: #6c6864;
-        --line: #e0ddd6;
+      body { background: var(--bg); color: var(--text); }
+      .serif { font-family: 'Noto Serif KR', serif; }
+      .grad-text {
+        background: linear-gradient(135deg, #fff 0%, #c5f4d8 50%, #03c75a 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); font-weight: 400; }
-      .serif { font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; letter-spacing: -0.015em; }
-      .magazine-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; letter-spacing: -0.02em; }
-      .container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-      @media (min-width: 768px) { .container-x { padding: 0 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .top {
-        position: sticky; top: 0; z-index: 50;
-        background: rgba(250,250,247,.92);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--line);
+      .grad-naver {
+        background: linear-gradient(135deg, #03c75a 0%, #7c5cff 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
       }
-      .eyebrow {
-        font-size: 11px; letter-spacing: 0.22em;
-        text-transform: uppercase; color: var(--accent);
-        font-weight: 600;
+      .number-tabular { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+      /* 네이버 블로그 스킨 미리보기 카드 */
+      .skin-preview {
+        position: relative;
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+        overflow: hidden;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
       }
-      .ph {
-        background: linear-gradient(135deg, #d6cfc1, #a89e8c 60%, #6f6557);
-        position: relative; overflow: hidden;
+      .skin-preview:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.18); }
+      .skin-preview .frame {
+        aspect-ratio: 16 / 10;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 18px;
+        box-shadow: 0 12px 30px -10px rgba(0,0,0,0.6);
       }
-      .ph-mark {
-        position: absolute; inset: 0;
-        display: grid; place-items: center;
-        font-family: 'Cormorant Garamond', serif;
-        color: rgba(255,255,255,.55);
-        font-size: clamp(48px,9vw,140px); font-weight: 500;
-        font-style: italic; letter-spacing: -0.02em;
+      .skin-preview .frame::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0;
+        height: 22px;
+        background: rgba(255,255,255,0.04);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
       }
-      .post-card {
-        display: block;
-        text-decoration: none; color: inherit;
-        transition: transform 0.4s ease;
+      .skin-preview .skin-meta {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 8px;
       }
-      .post-card:hover { transform: translateY(-3px); }
-      .post-card .ph { border-radius: 4px; }
-      .post-card h3 { transition: color 0.2s; }
-      .post-card:hover h3 { color: var(--accent); }
-      .meta {
-        font-size: 12px;
-        color: var(--ink-soft);
-        letter-spacing: 0.02em;
+      .skin-preview .skin-tag {
+        font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+        color: var(--text-quiet); font-weight: 600;
       }
-      .meta .dot { margin: 0 6px; opacity: 0.5; }
-      hr.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+      .skin-preview h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+      .skin-preview p { font-size: 13px; color: var(--text-dim); margin-top: 6px; line-height: 1.55; }
+
+      /* 6가지 스타일별 미리보기 (CSS 아트로 네이버 블로그 톤 시뮬레이션) */
+      /* 공통: 타이틀+위젯 형태 */
+      .blog-mock { width: 100%; height: 100%; padding: 28px 18px 18px; display: flex; flex-direction: column; gap: 8px; }
+      .blog-mock .title { height: 24px; border-radius: 4px; }
+      .blog-mock .meta-row { display: flex; gap: 6px; }
+      .blog-mock .meta-row .b { height: 8px; border-radius: 4px; opacity: 0.6; }
+      .blog-mock .body { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; flex: 1; }
+      .blog-mock .article { display: flex; flex-direction: column; gap: 6px; }
+      .blog-mock .a-card { display: grid; grid-template-columns: 40px 1fr; gap: 6px; padding: 6px; border-radius: 4px; }
+      .blog-mock .a-img { aspect-ratio: 1; border-radius: 3px; }
+      .blog-mock .a-text { display: flex; flex-direction: column; gap: 3px; padding-top: 2px; }
+      .blog-mock .a-t { height: 6px; border-radius: 3px; }
+      .blog-mock .a-m { height: 4px; border-radius: 3px; opacity: 0.5; width: 60%; }
+      .blog-mock .sidebar { display: flex; flex-direction: column; gap: 6px; }
+      .blog-mock .widget { padding: 5px; border-radius: 3px; }
+      .blog-mock .widget-h { height: 6px; border-radius: 2px; opacity: 0.7; margin-bottom: 4px; }
+      .blog-mock .widget-l { height: 4px; border-radius: 2px; opacity: 0.4; }
+      .blog-mock .widget-l + .widget-l { margin-top: 3px; }
+
+      /* 1. 매거진 (라이프스타일·핑크 톤) */
+      .skin-magazine .frame { background: linear-gradient(135deg, #fde4e8, #f3c2bf); }
+      .skin-magazine .title { background: rgba(155,58,78,0.4); width: 50%; }
+      .skin-magazine .a-card { background: rgba(255,255,255,0.5); }
+      .skin-magazine .a-img { background: rgba(155,58,78,0.3); }
+      .skin-magazine .a-t, .skin-magazine .meta-row .b { background: rgba(155,58,78,0.5); }
+      .skin-magazine .widget { background: rgba(255,255,255,0.4); }
+      .skin-magazine .widget-h, .skin-magazine .widget-l { background: rgba(155,58,78,0.4); }
+
+      /* 2. 미니멀 (화이트·블랙) */
+      .skin-minimal .frame { background: #fafaf9; }
+      .skin-minimal .title { background: #1f2426; width: 40%; }
+      .skin-minimal .a-card { background: #fff; border: 1px solid #e5e7eb; }
+      .skin-minimal .a-img { background: #d1d5db; }
+      .skin-minimal .a-t, .skin-minimal .meta-row .b { background: #1f2426; }
+      .skin-minimal .widget { background: #f3f4f6; }
+      .skin-minimal .widget-h, .skin-minimal .widget-l { background: #6b7280; }
+
+      /* 3. 에세이 (베이지·명조 톤) */
+      .skin-essay .frame { background: linear-gradient(135deg, #f5e6d3, #ddc8a3); }
+      .skin-essay .title { background: rgba(90,62,31,0.5); width: 45%; height: 28px; }
+      .skin-essay .a-card { background: rgba(255,255,255,0.5); }
+      .skin-essay .a-img { background: rgba(90,62,31,0.3); }
+      .skin-essay .a-t, .skin-essay .meta-row .b { background: rgba(90,62,31,0.5); }
+      .skin-essay .widget { background: rgba(255,255,255,0.4); }
+      .skin-essay .widget-h, .skin-essay .widget-l { background: rgba(90,62,31,0.4); }
+
+      /* 4. 비즈니스 (네이비·시리어스) */
+      .skin-business .frame { background: linear-gradient(135deg, #d6e4f0, #b8cee8); }
+      .skin-business .title { background: #1e3a5f; width: 55%; }
+      .skin-business .a-card { background: #fff; }
+      .skin-business .a-img { background: #1e3a5f; }
+      .skin-business .a-t, .skin-business .meta-row .b { background: #1e3a5f; }
+      .skin-business .widget { background: rgba(255,255,255,0.6); }
+      .skin-business .widget-h, .skin-business .widget-l { background: #1e3a5f; }
+
+      /* 5. 푸드 (오렌지·따뜻) */
+      .skin-food .frame { background: linear-gradient(135deg, #fff3e0, #ffd9a8); }
+      .skin-food .title { background: #d4691f; width: 50%; }
+      .skin-food .a-card { background: #fff; }
+      .skin-food .a-img { background: #d4691f; }
+      .skin-food .a-t, .skin-food .meta-row .b { background: #8b4513; }
+      .skin-food .widget { background: rgba(255,255,255,0.5); }
+      .skin-food .widget-h, .skin-food .widget-l { background: #8b4513; }
+
+      /* 6. 키즈/육아 (파스텔 민트) */
+      .skin-kids .frame { background: linear-gradient(135deg, #d6f0e6, #c4dcc8); }
+      .skin-kids .title { background: rgba(45,74,58,0.5); width: 45%; }
+      .skin-kids .a-card { background: rgba(255,255,255,0.6); }
+      .skin-kids .a-img { background: rgba(45,74,58,0.3); }
+      .skin-kids .a-t, .skin-kids .meta-row .b { background: rgba(45,74,58,0.5); }
+      .skin-kids .widget { background: rgba(255,255,255,0.5); }
+      .skin-kids .widget-h, .skin-kids .widget-l { background: rgba(45,74,58,0.4); }
+
+      .feat {
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 28px;
+      }
+      .stat-block { padding: 24px 0; border-top: 1px solid var(--line); }
+      .price-card {
+        background: linear-gradient(180deg, rgba(3,199,90,0.08), transparent 60%);
+        border: 1px solid rgba(3,199,90,0.4);
+        border-radius: 24px;
+        padding: 40px 36px;
+      }
+      details.faq {
+        border-top: 1px solid var(--line);
+        padding: 22px 0;
+      }
+      details.faq summary {
+        cursor: pointer; font-weight: 600; font-size: 17px;
+        list-style: none; display: flex;
+        justify-content: space-between; align-items: center;
+      }
+      details.faq summary::-webkit-details-marker { display: none; }
+      details.faq summary::after {
+        content: '+'; font-size: 22px; color: var(--text-quiet);
+        transition: transform 0.3s ease;
+      }
+      details.faq[open] summary::after { transform: rotate(45deg); }
+      details.faq p { margin-top: 14px; color: var(--text-dim); line-height: 1.7; }
+
+      .field-dark {
+        width: 100%; padding: 14px 16px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        color: var(--text); font-size: 15px;
+        font-family: inherit;
+      }
+      .field-dark::placeholder { color: var(--text-quiet); }
+      .field-dark:focus {
+        outline: none; border-color: #03c75a;
+        box-shadow: 0 0 0 3px rgba(3,199,90,0.18);
+      }
+      select.field-dark {
+        -webkit-appearance: none; appearance: none;
+        padding-right: 44px;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%2303c75a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        background-repeat: no-repeat; background-position: right 16px center;
+        cursor: pointer;
+      }
+      select.field-dark option { background: #15151b; color: #f5f5f7; padding: 10px; }
+      select.field-dark option[value=""] { color: rgba(245,245,247,0.5); }
+
+      .index-row {
+        display: grid; grid-template-columns: 40px 1fr auto;
+        gap: 16px; padding: 14px 0;
+        border-top: 1px solid var(--line);
+        align-items: baseline; color: var(--text-dim); font-size: 14px;
+      }
+      .index-row .num { color: var(--text-quiet); font-feature-settings: 'tnum'; }
+      .index-row .name { font-weight: 600; color: var(--text); }
     </style>
   </head>
   <body>
-    <a href="../index.html" class="fab-back" aria-label="NOAH로 돌아가기"><span class="arrow">←</span> NOAH</a>
+    <a href="#hero" class="skip-link">본문으로 건너뛰기</a>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
 
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="magazine-title text-2xl" style="color: var(--primary)">잔잔 <span style="color: var(--ink-soft); font-weight:400; font-size: 14px; font-style: italic;">— Janjan</span></a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
-          <a href="#latest" class="hover:text-[color:var(--primary)]">최근 글</a>
-          <a href="#categories" class="hover:text-[color:var(--primary)]">카테고리</a>
-          <a href="#authors" class="hover:text-[color:var(--primary)]">필자</a>
-          <a href="#newsletter" class="hover:text-[color:var(--primary)]">뉴스레터</a>
-        </nav>
-        <a href="#newsletter" class="text-sm font-medium px-4 py-2 rounded-full" style="background: var(--primary); color: var(--bg)">구독</a>
-      </div>
+    <!-- 가로 하단 플로팅 배너 -->
+    <div class="banner-bottom" data-banner-id="noah-blog" role="region" aria-label="블로그 스킨 안내">
+      <span class="pulse" aria-hidden="true"></span>
+      <span class="label"><span class="strong">₩99,000 · 5일 적용</span> · 이달 잔여 <span class="count">3</span>건</span>
+      <a class="cta" href="#consult">무료 상담</a>
+      <button class="close" aria-label="배너 닫기">×</button>
+    </div>
+
+    <!-- 우측 세로 플로팅 채널 배너 -->
+    <div class="banner-side" role="region" aria-label="빠른 연락 채널">
+      <a class="kakao" href="https://pf.kakao.com/_ENCKX" target="_blank" rel="noopener" aria-label="카카오톡 채널 상담">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg>
+        <span class="tip">카카오톡 1:1 상담</span>
+      </a>
+      <a class="phone" href="tel:01066586482" aria-label="전화 상담">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="tip">010 · 6658 · 6482</span>
+      </a>
+      <a class="mail" href="mailto:noahmaster@gmail.com" aria-label="이메일 문의">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="tip">noahmaster@gmail.com</span>
+      </a>
+    </div>
+
+    <!-- ====================== HEADER ====================== -->
+    <header class="container-x py-6 flex items-center justify-between relative z-10">
+      <a href="#hero" class="font-bold text-xl tracking-tight flex items-center gap-2">
+        <span class="w-7 h-7 rounded-md inline-block" style="background: linear-gradient(135deg, #03c75a, #7c5cff)"></span>
+        NOAH <span style="color: var(--text-quiet); font-weight: 500; font-size: 13px; letter-spacing: 0.12em;">/ BLOG</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-dim)">
+        <a href="#why" class="hover:text-white transition">왜 NOAH</a>
+        <a href="#showroom" class="hover:text-white transition">6가지 스킨</a>
+        <a href="#process" class="hover:text-white transition">제작 과정</a>
+        <a href="#price" class="hover:text-white transition">가격</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+        <a href="../index.html" class="hover:text-white transition" style="color: var(--text-quiet)">← 홈페이지 제작</a>
+      </nav>
+      <a href="#consult" class="text-sm font-medium px-5 py-2.5 rounded-full" style="background: #03c75a; color: #fff">무료 상담</a>
     </header>
 
-    <main id="top">
-      <!-- ============== HERO FEATURED ============== -->
-      <section class="container-x pt-12 md:pt-20 pb-20 md:pb-24">
-        <p class="eyebrow mb-4 reveal">VOL. 12 · 2026 MAY · COVER STORY</p>
-        <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-end">
-          <div class="md:col-span-7 reveal">
-            <h1 class="magazine-title text-4xl md:text-6xl lg:text-[78px] leading-[1.05] tracking-tight">
-              매일이 너무 빠르다고<br />느낄 때, 잠시 잔잔.
-            </h1>
-            <p class="mt-8 text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              빠르게 흘러가는 일상을 한 줄씩 멈춰 세우는 사람들의 기록.
-              잔잔은 한 달에 한 번, 천천히 산 사람들의 글을 모아 보내드립니다.
-            </p>
-            <div class="meta mt-6 flex flex-wrap items-center">
-              <span>편집장 한지윤</span>
-              <span class="dot">·</span>
-              <span>2026년 5월 1일</span>
-              <span class="dot">·</span>
-              <span>읽는 시간 7분</span>
+    <!-- ====================== HERO ====================== -->
+    <section id="hero" class="container-x pt-16 md:pt-28 pb-24 md:pb-36 relative">
+      <p class="text-xs md:text-sm font-medium mb-8 tracking-[0.22em]" style="color: var(--text-quiet)">
+        NAVER BLOG SKIN DESIGN · NOAH · 2026
+      </p>
+      <h1 class="grad-text serif text-5xl md:text-7xl lg:text-[100px] font-semibold leading-[1.08] tracking-[-0.02em] max-w-5xl">
+        구독을 부르는<br />네이버 블로그 스킨,<br /><span class="grad-naver">99,000원</span>으로.
+      </h1>
+      <div class="mt-12 grid md:grid-cols-12 gap-8 items-end">
+        <p class="md:col-span-7 text-base md:text-xl leading-relaxed" style="color: var(--text-dim)">
+          타이틀 이미지부터 위젯·프롤로그까지 한 번에.<br />
+          네이버 블로그에 5분 안에 적용되는 <strong style="color:#fff">완성형 스킨 패키지</strong>.
+        </p>
+        <div class="md:col-span-5 flex flex-wrap gap-3 md:justify-end">
+          <a href="#consult" class="inline-flex items-center gap-2 px-7 py-4 rounded-full font-medium transition" style="background: #03c75a; color: #fff">
+            무료 상담 신청 <span aria-hidden="true">→</span>
+          </a>
+          <a href="#showroom" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/20 hover:border-white/50 text-white font-medium transition">
+            6가지 스킨 보기
+          </a>
+        </div>
+      </div>
+
+      <dl class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
+        <div class="stat-block">
+          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">제작 단가</dt>
+          <dd class="serif text-4xl md:text-5xl number-tabular grad-naver">₩99,000</dd>
+        </div>
+        <div class="stat-block">
+          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">평균 작업</dt>
+          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="5">0</span><span class="text-xl">일</span></dd>
+        </div>
+        <div class="stat-block">
+          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">검증된 스킨</dt>
+          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="6">0</span><span class="text-xl">종</span></dd>
+        </div>
+        <div class="stat-block">
+          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">고객 만족도</dt>
+          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="97">0</span>%</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ====================== WHY ====================== -->
+    <section id="why" class="container-x py-24 md:py-36 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-12 mb-16">
+        <div class="md:col-span-5">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">왜 NOAH BLOG인가</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight">
+            네이버 블로그를<br />처음 꾸미는 분들의<br />가장 흔한 막막함.
+          </h2>
+        </div>
+        <div class="md:col-span-7 self-end space-y-4 leading-relaxed text-base md:text-lg" style="color: var(--text-dim)">
+          <p>· 기본 스킨 그대로 두자니 너무 휑하고, 직접 만들자니 어디서 시작할지 모르겠다.</p>
+          <p>· 타이틀 이미지 하나 만드는 데 포토샵 켜고 한나절.</p>
+          <p>· 위젯 4종(카테고리·검색·방문자·공감) 통일된 디자인이 어렵다.</p>
+          <p>· 모바일에서 잘리지 않는 비율도 맞춰야 한다.</p>
+          <p style="color: var(--text)">NOAH는 이 모든 걸 패키지로 묶어 드립니다.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="feat">
+          <p class="text-xs tracking-[0.18em] mb-4" style="color: #03c75a">01 · 네이버 전용</p>
+          <h3 class="text-xl font-semibold mb-3">PC·모바일 비율 정확</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-dim)">
+            네이버 블로그 PC 타이틀(966×600)과 모바일 커버가 잘리지 않도록 안전 영역까지 계산해 제작합니다.
+          </p>
+        </article>
+        <article class="feat">
+          <p class="text-xs tracking-[0.18em] mb-4" style="color: #03c75a">02 · 위젯 4종 일괄</p>
+          <h3 class="text-xl font-semibold mb-3">통일된 톤의 투명 위젯</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-dim)">
+            카테고리·검색·방문자·공감 4종 위젯을 같은 톤·폰트로 만들어 드립니다.
+            업로드 후 바로 적용되는 PNG 파일로 제공.
+          </p>
+        </article>
+        <article class="feat">
+          <p class="text-xs tracking-[0.18em] mb-4" style="color: #03c75a">03 · 적용 가이드 PDF</p>
+          <h3 class="text-xl font-semibold mb-3">5분 적용, 평생 사용</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-dim)">
+            이미지 5장 + 어디에 어떻게 업로드하는지 캡처와 함께 정리한 PDF를 함께 드립니다.
+            한 번 적용 후 평생 그대로 사용 가능.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====================== SHOWROOM (6 SKINS) ====================== -->
+    <section id="showroom" class="container-x pt-24 md:pt-32 pb-24 border-t border-white/5">
+      <div class="mb-12">
+        <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">6 SIGNATURE SKINS</p>
+        <h2 class="serif text-3xl md:text-5xl font-bold tracking-tight leading-[1.18]">
+          블로그 톤에 맞춰<br />고를 수 있는 6가지.
+        </h2>
+        <p class="mt-6 max-w-2xl" style="color: var(--text-dim)">
+          각 스킨마다 타이틀 이미지·위젯 4종·프롤로그 시안·프로필 이미지가 한 세트로 제공됩니다.
+          마음에 드는 스킨을 고르시면 컬러·로고만 사장님 블로그로 바꿔 드립니다.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- 01 매거진 -->
+        <article class="skin-preview skin-magazine">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title"></div>
+              <div class="meta-row"><span class="b" style="width:20%"></span><span class="b" style="width:30%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:80%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:70%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="md:col-span-5 reveal">
-            <div class="ph aspect-[4/5]"><div class="ph-mark">JANJAN</div></div>
+          <div class="skin-meta"><span class="skin-tag">01 / 매거진</span><span class="skin-tag" style="color:#9b3a4e">LIFESTYLE</span></div>
+          <h3>오월의 다정 톤</h3>
+          <p>라이프스타일·요리·여행 블로그에 잘 어울리는 따뜻한 핑크·크림 톤. 큰 사진과 함께 하루를 기록하는 스타일.</p>
+        </article>
+
+        <!-- 02 미니멀 -->
+        <article class="skin-preview skin-minimal">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title"></div>
+              <div class="meta-row"><span class="b" style="width:25%"></span><span class="b" style="width:15%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:85%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="skin-meta"><span class="skin-tag">02 / 미니멀</span><span class="skin-tag" style="color:#1f2426">EDITORIAL</span></div>
+          <h3>여백 스튜디오 톤</h3>
+          <p>화이트 + 차콜 그레이의 정돈된 톤. 글의 무게감을 살리는 디자인 — 에세이·전문 분야 블로그에 권합니다.</p>
+        </article>
+
+        <!-- 03 에세이 -->
+        <article class="skin-preview skin-essay">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title" style="height:30px"></div>
+              <div class="meta-row"><span class="b" style="width:30%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:75%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="skin-meta"><span class="skin-tag">03 / 에세이</span><span class="skin-tag" style="color:#5a3e1f">SOFT</span></div>
+          <h3>한 줄 한 줄, 명조</h3>
+          <p>베이지·우드 톤에 명조체 위주. 글이 곧 콘텐츠인 블로그 — 일기·서평·문학·인터뷰에.</p>
+        </article>
+
+        <!-- 04 비즈니스 -->
+        <article class="skin-preview skin-business">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title"></div>
+              <div class="meta-row"><span class="b" style="width:20%"></span><span class="b" style="width:25%"></span><span class="b" style="width:15%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:80%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="skin-meta"><span class="skin-tag">04 / 비즈니스</span><span class="skin-tag" style="color:#1e3a5f">CORPORATE</span></div>
+          <h3>네이비 + 골드</h3>
+          <p>법무·세무·회계·부동산·컨설팅 — 신뢰감을 우선하는 전문직 블로그에 어울리는 정돈된 디자인.</p>
+        </article>
+
+        <!-- 05 푸드 -->
+        <article class="skin-preview skin-food">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title"></div>
+              <div class="meta-row"><span class="b" style="width:25%"></span><span class="b" style="width:20%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:70%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="skin-meta"><span class="skin-tag">05 / 푸드</span><span class="skin-tag" style="color:#d4691f">WARM</span></div>
+          <h3>오븐의 따뜻함</h3>
+          <p>오렌지·아이보리·우드 톤. 레시피·맛집·홈베이킹·카페 운영 블로그에 가장 자주 추천드립니다.</p>
+        </article>
+
+        <!-- 06 키즈/육아 -->
+        <article class="skin-preview skin-kids">
+          <div class="frame">
+            <div class="blog-mock">
+              <div class="title"></div>
+              <div class="meta-row"><span class="b" style="width:20%"></span><span class="b" style="width:30%"></span></div>
+              <div class="body">
+                <div class="article">
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-t" style="width:75%"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                  <div class="a-card"><div class="a-img"></div><div class="a-text"><div class="a-t"></div><div class="a-m"></div></div></div>
+                </div>
+                <div class="sidebar">
+                  <div class="widget"><div class="widget-h"></div><div class="widget-l"></div><div class="widget-l"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="skin-meta"><span class="skin-tag">06 / 키즈·육아</span><span class="skin-tag" style="color:#2d4a3a">SOFT</span></div>
+          <h3>파스텔 민트</h3>
+          <p>육아·홈스쿨·아이 일상을 기록하는 분들에게. 부드러운 민트·크림 톤 + 둥근 글자.</p>
+        </article>
+      </div>
+
+      <p class="mt-10 text-center text-sm" style="color: var(--text-quiet)">
+        🔍 위는 6가지 시그니처 톤의 미리보기입니다. 실제 적용 시 사장님 블로그 컬러·로고로 맞춰 드립니다.
+      </p>
+    </section>
+
+    <!-- ====================== PROCESS ====================== -->
+    <section id="process" class="container-x py-24 md:py-36 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-12 mb-16">
+        <div class="md:col-span-5">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">PROCESS · 5 DAYS</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight">
+            상담부터 적용까지<br />단 5일.
+          </h2>
         </div>
-      </section>
+        <p class="md:col-span-7 self-end leading-relaxed" style="color: var(--text-dim)">
+          미리 만든 6가지 스킨에서 시작하므로 협업 회의가 짧고, 시안 → 수정 → 적용까지 빠르게 진행됩니다.
+        </p>
+      </div>
+      <ol class="grid md:grid-cols-5 gap-3">
+        <li class="feat"><p class="text-xs" style="color:#03c75a">DAY 1</p><h3 class="font-semibold mt-2">컨셉 미팅</h3><p class="text-sm mt-2" style="color:var(--text-dim)">블로그 톤·컬러·타깃 30분 상담</p></li>
+        <li class="feat"><p class="text-xs" style="color:#03c75a">DAY 2</p><h3 class="font-semibold mt-2">시안 1차</h3><p class="text-sm mt-2" style="color:var(--text-dim)">선택한 스킨에 브랜드 적용</p></li>
+        <li class="feat"><p class="text-xs" style="color:#03c75a">DAY 3 — 4</p><h3 class="font-semibold mt-2">수정 1회</h3><p class="text-sm mt-2" style="color:var(--text-dim)">컬러·문구·디테일 조정</p></li>
+        <li class="feat"><p class="text-xs" style="color:#03c75a">DAY 5</p><h3 class="font-semibold mt-2">최종 + 가이드</h3><p class="text-sm mt-2" style="color:var(--text-dim)">PNG 5장 + 적용 PDF 발송</p></li>
+        <li class="feat"><p class="text-xs" style="color:#03c75a">5분 안에</p><h3 class="font-semibold mt-2">블로그 적용 ✓</h3><p class="text-sm mt-2" style="color:var(--text-dim)">PDF 따라 직접 업로드</p></li>
+      </ol>
+    </section>
 
-      <hr class="rule" />
+    <!-- ====================== PRICING ====================== -->
+    <section id="price" class="container-x py-24 md:py-36 border-t border-white/5">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">PRICING</p>
+        <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight">
+          한 번 결제, 평생 쓰는 블로그 스킨.
+        </h2>
+      </div>
 
-      <!-- ============== LATEST POSTS ============== -->
-      <section id="latest" class="container-x py-20 md:py-28">
-        <div class="flex items-end justify-between mb-12 reveal">
+      <div class="price-card max-w-3xl mx-auto">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-8 pb-8 border-b" style="border-color: var(--line)">
           <div>
-            <p class="eyebrow mb-3">LATEST</p>
-            <h2 class="magazine-title text-3xl md:text-5xl">이번 달의 글들.</h2>
+            <p class="text-xs tracking-[0.18em] mb-2" style="color: #03c75a">NOAH 네이버 블로그 스킨</p>
+            <h3 class="text-2xl font-bold">단일 패키지</h3>
+            <p class="text-sm mt-2" style="color: var(--text-dim)">6가지 스킨 중 선택 + 브랜드 커스텀</p>
           </div>
-          <a href="#" class="text-sm font-medium hover:underline" style="color: var(--accent)">전체 보기 →</a>
+          <div class="text-right">
+            <p class="serif text-5xl md:text-6xl font-semibold grad-naver" style="font-feature-settings: 'tnum';">₩99,000</p>
+            <p class="text-sm" style="color: var(--text-dim)">1회 결제 (부가세 별도)</p>
+          </div>
         </div>
-
-        <div class="grid md:grid-cols-3 gap-8 md:gap-10">
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">01</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">에세이</span><span class="dot">·</span>5월 12일</p>
-            <h3 class="magazine-title text-2xl leading-snug">아무도 부르지 않는 이름을 부른다는 일</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">화초에게 이름을 붙여 부르기 시작한 봄의 어느 날, 알게 된 작은 위로에 대하여.</p>
-            <p class="meta mt-4">정한나 · 6분</p>
-          </a>
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">02</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">인터뷰</span><span class="dot">·</span>5월 9일</p>
-            <h3 class="magazine-title text-2xl leading-snug">서점을 14년째 지킨다는 것 — 윤서영 대표 인터뷰</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">동네에서 가장 작은 서점을 14년째 운영하는 사람이 매일 아침 가장 먼저 하는 일.</p>
-            <p class="meta mt-4">편집부 · 11분</p>
-          </a>
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">03</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">기록</span><span class="dot">·</span>5월 6일</p>
-            <h3 class="magazine-title text-2xl leading-snug">방의 모서리, 빛이 머무는 자리</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">하루 중 가장 좋아하는 빛이 닿는 자리를 찾는 일에서 시작된, 작은 공간 일기.</p>
-            <p class="meta mt-4">박도연 · 4분</p>
-          </a>
+        <ul class="grid md:grid-cols-2 gap-x-10 gap-y-3 text-sm">
+          <li>✓ 타이틀 이미지 (PC + 모바일)</li>
+          <li>✓ 프롤로그 페이지 시안</li>
+          <li>✓ 위젯 4종 (카테고리·검색·방문자·공감)</li>
+          <li>✓ 프로필 이미지 1종</li>
+          <li>✓ 시안 1회 + 수정 1회</li>
+          <li>✓ 적용 가이드 PDF (캡처 포함)</li>
+          <li>✓ 1개월 미세 수정 무제한 <span style="color:var(--text-quiet)">(무료)</span></li>
+          <li>✓ 모바일 자동 대응 (네이버 시스템)</li>
+        </ul>
+        <div class="mt-10 flex flex-wrap gap-3 justify-center">
+          <a href="#consult" class="inline-flex items-center gap-2 px-7 py-4 rounded-full font-medium transition" style="background: #03c75a; color: #fff">무료 상담 신청 →</a>
+          <a href="#showroom" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/20 hover:border-white/50 text-white font-medium transition">스킨 다시 보기</a>
         </div>
+      </div>
 
-        <div class="grid md:grid-cols-3 gap-8 md:gap-10 mt-16 pt-16 border-t" style="border-color: var(--line)">
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">04</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">레터</span><span class="dot">·</span>5월 3일</p>
-            <h3 class="magazine-title text-2xl leading-snug">늦봄, 도시락을 싸는 토요일</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">햇볕이 가장 단정한 5월의 토요일에만 만드는 도시락 레시피와 그 시간에 대해.</p>
-            <p class="meta mt-4">한지윤 · 8분</p>
-          </a>
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">05</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">기록</span><span class="dot">·</span>4월 28일</p>
-            <h3 class="magazine-title text-2xl leading-snug">한 줄 일기 1년의 변화</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">하루 한 줄만 쓰기로 한 1년이 한 사람의 호흡에 어떻게 스며들었는지에 대한 기록.</p>
-            <p class="meta mt-4">정한나 · 5분</p>
-          </a>
-          <a class="post-card reveal" href="#">
-            <div class="ph aspect-[4/3] mb-5"><div class="ph-mark">06</div></div>
-            <p class="meta mb-2"><span style="color:var(--accent); font-weight:600">에세이</span><span class="dot">·</span>4월 24일</p>
-            <h3 class="magazine-title text-2xl leading-snug">멀리 가지 않아도 여행이 되는</h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft)">매일 다니는 골목을 처음 보는 사람의 시선으로 다시 걷기 시작한 작은 실험.</p>
-            <p class="meta mt-4">박도연 · 7분</p>
-          </a>
+      <p class="mt-10 max-w-2xl mx-auto text-center text-sm" style="color: var(--text-quiet)">
+        티스토리·워드프레스 등 다른 플랫폼은 별도 견적입니다.<br />
+        시안 추가 수정은 회당 ₩20,000 (1회 무료 후).
+      </p>
+    </section>
+
+    <!-- ====================== JOURNEY ====================== -->
+    <section id="journey" class="container-x py-24 md:py-32 border-t border-white/5">
+      <div class="max-w-5xl">
+        <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">아직 망설이고 계신다면</p>
+        <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight max-w-3xl">
+          블로그 디자인 한 번 바꾸는 일, 사장님 마음의 무게를 압니다.
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t" style="border-color: var(--line)">
+          <div>
+            <p class="text-xs font-semibold mb-3" style="color: var(--text-quiet); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
+            <p class="text-base md:text-lg leading-relaxed">기본 스킨 그대로 둔 블로그는 검색 결과에서 클릭률이 평균 38% 낮습니다. 좋은 글을 써도 '안 다듬어진 인상'에 손해를 봅니다.</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold mb-3" style="color: #03c75a; letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
+            <p class="text-base md:text-lg leading-relaxed">5일 뒤, 검색에서 들어온 사람이 '구독' 버튼을 누르고 가는 정돈된 블로그가 일하기 시작합니다.</p>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <hr class="rule" />
-
-      <!-- ============== CATEGORIES ============== -->
-      <section id="categories" class="container-x py-20 md:py-28">
-        <p class="eyebrow mb-3 reveal">CATEGORIES</p>
-        <h2 class="magazine-title text-3xl md:text-5xl mb-12 reveal">결을 따라 읽어 보기.</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-px reveal" style="background: var(--line)">
-          <a href="#" class="block p-8 hover:bg-white transition" style="background: var(--bg-soft)">
-            <p class="magazine-title text-3xl mb-2" style="color: var(--accent)">42</p>
-            <p class="font-semibold">에세이</p>
-            <p class="meta mt-1">매일을 들여다보는 글</p>
-          </a>
-          <a href="#" class="block p-8 hover:bg-white transition" style="background: var(--bg-soft)">
-            <p class="magazine-title text-3xl mb-2" style="color: var(--accent)">18</p>
-            <p class="font-semibold">인터뷰</p>
-            <p class="meta mt-1">한 사람의 1년</p>
-          </a>
-          <a href="#" class="block p-8 hover:bg-white transition" style="background: var(--bg-soft)">
-            <p class="magazine-title text-3xl mb-2" style="color: var(--accent)">36</p>
-            <p class="font-semibold">기록</p>
-            <p class="meta mt-1">사진과 짧은 문장</p>
-          </a>
-          <a href="#" class="block p-8 hover:bg-white transition" style="background: var(--bg-soft)">
-            <p class="magazine-title text-3xl mb-2" style="color: var(--accent)">12</p>
-            <p class="font-semibold">레터</p>
-            <p class="meta mt-1">독자에게 보내는 편지</p>
-          </a>
-        </div>
-      </section>
-
-      <hr class="rule" />
-
-      <!-- ============== AUTHORS ============== -->
-      <section id="authors" class="container-x py-20 md:py-28">
-        <p class="eyebrow mb-3 reveal">AUTHORS</p>
-        <h2 class="magazine-title text-3xl md:text-5xl mb-12 reveal">잔잔에 글을 보내는 사람들.</h2>
-        <div class="grid md:grid-cols-4 gap-8">
-          <article class="reveal">
-            <div class="ph aspect-square rounded-full mb-4 max-w-[140px]"><div class="ph-mark" style="font-size:32px">한</div></div>
-            <h3 class="magazine-title text-xl">한지윤</h3>
-            <p class="meta mt-1">편집장 · 12편</p>
-            <p class="text-sm mt-2 leading-relaxed" style="color: var(--ink-soft)">하루의 가장 단정한 시간을 글로 옮깁니다.</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-square rounded-full mb-4 max-w-[140px]"><div class="ph-mark" style="font-size:32px">정</div></div>
-            <h3 class="magazine-title text-xl">정한나</h3>
-            <p class="meta mt-1">에세이스트 · 18편</p>
-            <p class="text-sm mt-2 leading-relaxed" style="color: var(--ink-soft)">화초·고양이·창가의 빛에 대해 자주 씁니다.</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-square rounded-full mb-4 max-w-[140px]"><div class="ph-mark" style="font-size:32px">박</div></div>
-            <h3 class="magazine-title text-xl">박도연</h3>
-            <p class="meta mt-1">기록자 · 9편</p>
-            <p class="text-sm mt-2 leading-relaxed" style="color: var(--ink-soft)">필름 카메라와 한 줄 일기로 하루를 남깁니다.</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-square rounded-full mb-4 max-w-[140px]"><div class="ph-mark" style="font-size:32px">윤</div></div>
-            <h3 class="magazine-title text-xl">윤서영</h3>
-            <p class="meta mt-1">객원 인터뷰어 · 6편</p>
-            <p class="text-sm mt-2 leading-relaxed" style="color: var(--ink-soft)">14년째 작은 서점을 운영하며 사람을 만납니다.</p>
-          </article>
-        </div>
-      </section>
-
-      <hr class="rule" />
-
-      <!-- ============== NEWSLETTER ============== -->
-      <section id="newsletter" class="py-24 md:py-32" style="background: var(--primary); color: var(--bg)">
-        <div class="container-x text-center max-w-2xl mx-auto reveal">
-          <p class="eyebrow mb-4" style="color: #d4a797">NEWSLETTER</p>
-          <h2 class="magazine-title text-3xl md:text-5xl leading-tight">한 달에 한 번,<br />받아보는 잔잔함.</h2>
-          <p class="mt-6 leading-relaxed" style="color: rgba(250,250,247,.7)">
-            매월 1일 아침, 그달의 가장 잔잔한 글 4편을 골라 보내드립니다.
-            언제든 한 번의 클릭으로 구독을 취소하실 수 있습니다.
+    <!-- ====================== CONSULTATION FORM ====================== -->
+    <section id="consult" class="container-x py-24 md:py-36 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-5">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">상담 신청</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight">
+            먼저 한 통의<br />이야기로 시작합니다.
+          </h2>
+          <p class="mt-8 leading-relaxed" style="color: var(--text-dim)">
+            현재 운영 중인 블로그 URL을 함께 남겨 주시면, 가장 어울리는 스킨과 컬러를 미리 제안드립니다.
           </p>
-          <form class="mt-10 flex flex-wrap gap-2 justify-center" onsubmit="event.preventDefault(); alert('구독해 주셔서 감사합니다.');">
-            <input type="email" required placeholder="이메일 주소" class="px-5 py-3 rounded-full flex-1 max-w-sm" style="background: rgba(250,250,247,.08); border: 1px solid rgba(250,250,247,.2); color: var(--bg);" />
-            <button class="px-6 py-3 rounded-full font-medium" style="background: var(--bg); color: var(--primary)">구독하기 →</button>
-          </form>
-          <p class="mt-4 text-xs" style="color: rgba(250,250,247,.5)">현재 2,418명이 매달 잔잔을 받아 보고 있습니다.</p>
+          <dl class="mt-10 space-y-4">
+            <div class="border-t pt-4 flex justify-between" style="border-color: var(--line)"><dt style="color:var(--text-quiet)">대표전화</dt><dd><a href="tel:01066586482" class="hover:underline">010 · 6658 · 6482</a></dd></div>
+            <div class="border-t pt-4 flex justify-between" style="border-color: var(--line)"><dt style="color:var(--text-quiet)">이메일</dt><dd><a href="mailto:noahmaster@gmail.com" class="hover:underline">noahmaster@gmail.com</a></dd></div>
+            <div class="border-t pt-4 flex justify-between" style="border-color: var(--line)"><dt style="color:var(--text-quiet)">상담 시간</dt><dd>평일 10:00 — 19:00</dd></div>
+          </dl>
         </div>
-      </section>
-    </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 잔잔 매거진 · 사업자등록번호 000-00-00000</span>
-        <a href="../index.html" class="hover:underline" style="color: var(--primary)">← NOAH로 돌아가기</a>
+        <form id="consult-form" class="md:col-span-7" novalidate>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">성함 <span style="color:#03c75a">*</span></label>
+              <input class="field-dark" name="name" required placeholder="홍길동" />
+            </div>
+            <div>
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">연락처 <span style="color:#03c75a">*</span></label>
+              <input class="field-dark" name="phone" required type="tel" placeholder="010-0000-0000" />
+            </div>
+            <div>
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">이메일</label>
+              <input class="field-dark" name="email" type="email" placeholder="example@example.com" />
+            </div>
+            <div>
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">희망 스킨</label>
+              <select class="field-dark" name="reference">
+                <option value="">아직 정하지 않았어요</option>
+                <option>01 매거진 (오월의 다정 톤)</option>
+                <option>02 미니멀 (여백 스튜디오 톤)</option>
+                <option>03 에세이 (한 줄 한 줄)</option>
+                <option>04 비즈니스 (네이비 + 골드)</option>
+                <option>05 푸드 (오븐의 따뜻함)</option>
+                <option>06 키즈·육아 (파스텔 민트)</option>
+                <option>전혀 다른 스타일을 원해요</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">현재 블로그 URL <span style="color:var(--text-quiet)">(선택)</span></label>
+              <input class="field-dark" name="industry" type="url" placeholder="https://blog.naver.com/your-id" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm mb-2" style="color: var(--text-dim)">간단한 문의 내용 (선택)</label>
+              <textarea class="field-dark" name="message" rows="5" placeholder="원하시는 분위기·컬러·운영 중인 블로그 톤 등을 자유롭게 적어 주세요.
+
+예시
+· 핑크보다 따뜻한 베이지 톤이 좋아요
+· 평소 ◯◯◯ 블로그처럼 글이 잘 보이는 디자인이면 좋겠어요"></textarea>
+            </div>
+          </div>
+
+          <label class="flex items-start gap-2 mt-6 text-xs cursor-pointer" style="color: var(--text-dim); line-height:1.5">
+            <input type="checkbox" name="agree" required style="margin-top:3px; flex-shrink:0;" />
+            <span><strong style="color: var(--text)">(필수)</strong> 개인정보 수집·이용에 동의합니다. 자세한 사항은 <a href="#" style="text-decoration:underline; color: var(--text)">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+          </label>
+
+          <div id="form-status" class="mt-4 text-sm" role="status" aria-live="polite"></div>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button type="submit" class="inline-flex items-center gap-2 px-7 py-4 rounded-full font-medium transition" id="submit-btn" style="background: #03c75a; color: #fff">
+              상담 신청 보내기 →
+            </button>
+            <a href="https://pf.kakao.com/_ENCKX" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/20 hover:border-white/50 text-white font-medium transition">
+              카카오톡 1:1 상담
+            </a>
+          </div>
+          <p class="mt-4 text-xs" style="color: var(--text-quiet)">
+            * 영업일 기준 1일 안에 회신드립니다.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================== FAQ ====================== -->
+    <section id="faq" class="container-x py-24 md:py-32 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-4">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">FAQ</p>
+          <h2 class="serif text-3xl md:text-4xl font-semibold leading-[1.18] tracking-tight">
+            가장 많이 묻는<br />질문들.
+          </h2>
+        </div>
+        <div class="md:col-span-8">
+          <details class="faq" open>
+            <summary>네이버 블로그 외에 다른 플랫폼도 가능한가요?</summary>
+            <p>현재 NOAH BLOG는 <strong>네이버 블로그 전용</strong>입니다. 티스토리·워드프레스·고스트 등은 별도 견적으로 진행됩니다 (하단 NOAH 홈페이지 제작과 함께 문의 가능).</p>
+          </details>
+          <details class="faq">
+            <summary>적용은 직접 해야 하나요?</summary>
+            <p>네, 사장님께서 직접 5분 안에 적용 가능하도록 <strong>이미지 5장 + 적용 가이드 PDF</strong>를 제공해 드립니다. PDF에는 어디를 클릭해서 어떻게 업로드하는지 캡처가 모두 들어 있어요. 적용 도중 막히시면 카카오톡으로 도와드립니다.</p>
+          </details>
+          <details class="faq">
+            <summary>기존 글에 영향이 가나요?</summary>
+            <p>전혀 없습니다. 스킨은 디자인(타이틀·위젯 이미지)만 바꾸는 것이라, 작성하신 글·댓글·방문자 통계 모두 그대로 보존됩니다.</p>
+          </details>
+          <details class="faq">
+            <summary>모바일도 같이 적용되나요?</summary>
+            <p>네이버 블로그는 <strong>모바일이 자동 대응</strong>됩니다. NOAH는 PC 타이틀(966×600)과 모바일 커버 두 가지 비율로 모두 제작해 드리므로, 한 번 업로드 시 PC·모바일 모두 깔끔하게 보입니다.</p>
+          </details>
+          <details class="faq">
+            <summary>시안 추가 수정이 필요하면요?</summary>
+            <p>패키지에 <strong>시안 1회 + 수정 1회 무료</strong>가 포함됩니다. 추가 수정은 회당 ₩20,000으로 가능합니다 (대규모 컬러·구조 변경은 별도 협의).</p>
+          </details>
+          <details class="faq">
+            <summary>광고 위치(애드포스트)도 고려하시나요?</summary>
+            <p>네, 네이버 애드포스트가 노출되는 위치를 피해 위젯·타이틀을 디자인합니다. 광고 수익에 영향이 가지 않도록 안전 영역까지 계산해 제작합니다.</p>
+          </details>
+          <details class="faq">
+            <summary>홈페이지도 함께 만들 수 있나요?</summary>
+            <p>네! NOAH는 ₩199,000에 <a href="../index.html" style="color: #03c75a; text-decoration: underline;">12개 업종 원페이지 홈페이지</a>도 제작합니다. 블로그 + 홈페이지 동시 진행 시 ₩30,000 할인됩니다.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container-x py-10 border-t border-white/5 text-sm flex flex-wrap items-center justify-between gap-4" style="color: var(--text-quiet)">
+      <div>
+        <p class="font-semibold" style="color: var(--text)">NOAH BLOG · 노아홈페이지</p>
+        <p class="mt-2">사업자등록번호 000-00-00000 · 통신판매업 신고 제0000-00000호</p>
+        <p>대표 OOO · 서울특별시 OO구 OO로 OO길 OO</p>
+      </div>
+      <div class="text-right">
+        <p>© 2026 NOAH. All rights reserved.</p>
+        <p class="mt-2">noahmaster@gmail.com · 010 · 6658 · 6482</p>
       </div>
     </footer>
 
-    <!-- 가로 하단 배너 (NOAH 제작 의뢰 유도) -->
-    <div class="banner-bottom" data-banner-id="blog-noah" role="region" aria-label="NOAH 안내">
-      <span class="pulse" aria-hidden="true"></span>
-      <span class="label"><span class="strong">이런 매거진/블로그도 만들고 싶다면</span></span>
-      <a class="cta" href="../index.html#consult">NOAH 무료 상담</a>
-      <button class="close" aria-label="닫기">×</button>
-    </div>
-
-    <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    </script>
     <script src="../assets/js/showroom.js" defer></script>
+    <script>
+      // IP 기반 배너 잔여 카운트
+      (async () => {
+        const el = document.querySelector('.banner-bottom .label .count');
+        if (!el) return;
+        let ipKey = 'noah-blog-stock-fallback';
+        try {
+          const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+          const { ip } = await res.json();
+          ipKey = 'noah-blog-stock-' + btoa(ip).replace(/[^A-Za-z0-9]/g, '').slice(0, 12);
+        } catch (_) {}
+        let count = parseInt(localStorage.getItem(ipKey), 10);
+        if (Number.isNaN(count)) count = 3 + Math.floor(Math.random() * 3);
+        else count = Math.max(1, count - 1);
+        localStorage.setItem(ipKey, String(count));
+        el.textContent = count;
+      })();
+    </script>
+    <script>
+      // Apps Script 폼 제출 (NOAH 메인과 동일 GAS_URL 공유)
+      const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exec';
+      const form = document.getElementById('consult-form');
+      const status = document.getElementById('form-status');
+      const submitBtn = document.getElementById('submit-btn');
+
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        submitBtn.disabled = true;
+        submitBtn.textContent = '전송 중...';
+        status.style.color = 'var(--text-dim)';
+        status.textContent = '';
+
+        const fd = new FormData(form);
+        const payload = { type: 'consult-blog' };
+        fd.forEach((v, k) => { payload[k] = v; });
+        payload.timestamp = new Date().toISOString();
+        payload.referrer = document.referrer || '직접 접속';
+
+        try {
+          await fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+          });
+          status.style.color = '#34d399';
+          status.textContent = '✓ 상담 신청이 접수되었습니다. 영업일 기준 1일 안에 회신드리겠습니다.';
+          form.reset();
+        } catch (err) {
+          status.style.color = '#f87171';
+          status.textContent = '⚠ 전송에 실패했습니다. 카카오톡 또는 전화로 연락 주세요.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '상담 신청 보내기 →';
+        }
+      });
+    </script>
   </body>
 </html>
