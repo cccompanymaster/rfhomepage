@@ -1,0 +1,7 @@
+# Cloudflare Pages — 리다이렉트 / SPA 폴백
+# 형식: <원본>  <목적지>  <상태코드>
+
+# 404는 자동으로 404.html을 사용하므로 별도 라우트 불필요
+
+# (선택) 향후 도메인 통합 시:
+# https://www.noah.kr/*  https://noah.kr/:splat  301!
