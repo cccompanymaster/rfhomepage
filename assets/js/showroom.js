@@ -203,13 +203,30 @@
   }
   // prefers-reduced-motion 사용자에겐 첫 단어만 정적으로 표시
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.typer').forEach((el) => {
+  const typerEls = document.querySelectorAll('.typer');
+  if (typerEls.length) {
     if (reduceMotion) {
-      const first = (el.dataset.words || '').split('|')[0] || '';
-      el.textContent = first;
-      el.classList.add('typer-static');
+      typerEls.forEach((el) => {
+        const first = (el.dataset.words || '').split('|')[0] || '';
+        el.textContent = first;
+        el.classList.add('typer-static');
+      });
+    } else if ('IntersectionObserver' in window) {
+      // 뷰포트에 들어왔을 때만 타이핑 시작 (스크롤 위치의 카피도 살아남)
+      const tio = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              new Typer(e.target);
+              tio.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      typerEls.forEach((el) => tio.observe(el));
     } else {
-      new Typer(el);
+      typerEls.forEach((el) => new Typer(el));
     }
-  });
+  }
 })();
