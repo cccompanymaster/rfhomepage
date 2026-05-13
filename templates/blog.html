@@ -269,6 +269,58 @@
       .port-business .port-thumb .pt-sub { color: #c9d6e8; opacity: 0.85; }
       .port-food     .port-thumb { background: linear-gradient(135deg, #fff3e0, #ffd9a8); color: #8b4513; }
       .port-kids     .port-thumb { background: linear-gradient(135deg, #d6f0e6, #c4dcc8); color: #2d4a3a; }
+
+      /* 비교 테이블 */
+      .compare-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+      }
+      .compare-table th, .compare-table td {
+        padding: 16px 18px;
+        text-align: center;
+        border-bottom: 1px solid var(--line);
+      }
+      .compare-table thead th {
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        color: var(--text-quiet);
+        font-weight: 600;
+        background: rgba(255,255,255,0.02);
+        padding: 18px 18px;
+      }
+      .compare-table tbody th {
+        text-align: left;
+        font-weight: 500;
+        color: var(--text-dim);
+        background: rgba(255,255,255,0.02);
+        position: sticky; left: 0;
+      }
+      .compare-table .col-noah {
+        background: linear-gradient(180deg, rgba(3,199,90,0.10), rgba(3,199,90,0.04));
+        color: #fff;
+        font-weight: 600;
+      }
+      .compare-table thead th.col-noah {
+        background: linear-gradient(180deg, rgba(3,199,90,0.18), rgba(3,199,90,0.08));
+        color: #03c75a;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .compare-table .mark-no { color: #6b7280; opacity: 0.5; }
+      .compare-table .mark-mid { color: #fbbf24; }
+      .compare-table .mark-ok { color: #34d399; }
+      .compare-table .mark-best { color: #03c75a; font-weight: 700; }
+      .compare-table .price { font-family: var(--font-sans); font-feature-settings: 'tnum'; font-weight: 600; }
+      .compare-table tbody tr:last-child th,
+      .compare-table tbody tr:last-child td { border-bottom: 0; }
+
+      /* 모바일 — 카드 형태로 reflow */
+      @media (max-width: 768px) {
+        .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .compare-table { min-width: 600px; }
+      }
     </style>
   </head>
   <body>
@@ -908,6 +960,103 @@
         <li class="feat"><p class="text-xs" style="color:#03c75a">DAY 5</p><h3 class="font-semibold mt-2">최종 + 가이드</h3><p class="text-sm mt-2" style="color:var(--text-dim)">PNG 5장 + 적용 PDF 발송</p></li>
         <li class="feat"><p class="text-xs" style="color:#03c75a">5분 안에</p><h3 class="font-semibold mt-2">블로그 적용 ✓</h3><p class="text-sm mt-2" style="color:var(--text-dim)">PDF 따라 직접 업로드</p></li>
       </ol>
+    </section>
+
+    <!-- ====================== COMPARE TABLE ====================== -->
+    <section id="compare-table" class="container-x py-24 md:py-36 border-t border-white/5">
+      <div class="grid md:grid-cols-12 gap-12 mb-14">
+        <div class="md:col-span-5">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">COMPARE</p>
+          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.18] tracking-tight">
+            왜 NOAH인지,<br />표 한 장으로 정리.
+          </h2>
+        </div>
+        <p class="md:col-span-7 self-end leading-relaxed" style="color: var(--text-dim)">
+          직접 만들거나, 디자이너에게 외주를 맡기는 경우와 비교했습니다.
+          가격·시간·완성도·사후 케어 8가지 항목으로 정리.
+        </p>
+      </div>
+
+      <div class="compare-wrap rounded-2xl overflow-hidden" style="border: 1px solid var(--line);">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width: 28%;"></th>
+              <th style="width: 24%;">DIY <span style="font-weight:400; color:var(--text-quiet)">(직접 제작)</span></th>
+              <th style="width: 24%;">외주 디자이너</th>
+              <th class="col-noah" style="width: 24%;">NOAH BLOG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>비용</th>
+              <td><span class="price" style="color:var(--text-dim)">무료</span></td>
+              <td><span class="price">₩300,000<span style="font-weight:400; color:var(--text-quiet)"> ~ 500,000</span></span></td>
+              <td class="col-noah"><span class="price grad-naver">₩99,000</span></td>
+            </tr>
+            <tr>
+              <th>작업 기간</th>
+              <td><span class="mark-no">평균 1–2주</span><br /><span style="font-size:11px; color:var(--text-quiet)">(반복 시도)</span></td>
+              <td><span class="mark-mid">2–3주</span></td>
+              <td class="col-noah"><span class="mark-best">5일</span></td>
+            </tr>
+            <tr>
+              <th>PC·모바일 정확 비율</th>
+              <td><span class="mark-no">×</span><br /><span style="font-size:11px; color:var(--text-quiet)">자주 잘림</span></td>
+              <td><span class="mark-ok">○</span></td>
+              <td class="col-noah"><span class="mark-best">◎</span><br /><span style="font-size:11px;">안전 영역 계산</span></td>
+            </tr>
+            <tr>
+              <th>위젯 4종 통일</th>
+              <td><span class="mark-no">×</span></td>
+              <td><span class="mark-mid">△</span><br /><span style="font-size:11px; color:var(--text-quiet)">옵션 추가</span></td>
+              <td class="col-noah"><span class="mark-best">◎</span><br /><span style="font-size:11px;">기본 포함</span></td>
+            </tr>
+            <tr>
+              <th>적용 가이드</th>
+              <td><span class="mark-no">×</span><br /><span style="font-size:11px; color:var(--text-quiet)">스스로 검색</span></td>
+              <td><span class="mark-mid">△</span><br /><span style="font-size:11px; color:var(--text-quiet)">설명만</span></td>
+              <td class="col-noah"><span class="mark-best">◎</span><br /><span style="font-size:11px;">캡처 PDF</span></td>
+            </tr>
+            <tr>
+              <th>광고 위치 최적화</th>
+              <td><span class="mark-no">×</span></td>
+              <td><span class="mark-no">×</span><br /><span style="font-size:11px; color:var(--text-quiet)">대부분 미고려</span></td>
+              <td class="col-noah"><span class="mark-best">◎</span><br /><span style="font-size:11px;">애드포스트 안전</span></td>
+            </tr>
+            <tr>
+              <th>수정 가능 횟수</th>
+              <td><span class="mark-mid">무제한</span><br /><span style="font-size:11px; color:var(--text-quiet)">본인 작업</span></td>
+              <td><span class="mark-mid">2–3회</span><br /><span style="font-size:11px; color:var(--text-quiet)">추가 비용</span></td>
+              <td class="col-noah"><span class="mark-best">시안 1 + 수정 1</span><br /><span style="font-size:11px;">+ 1개월 미세 수정 무료</span></td>
+            </tr>
+            <tr>
+              <th>사후 케어</th>
+              <td><span class="mark-no">×</span></td>
+              <td><span class="mark-no">×</span><br /><span style="font-size:11px; color:var(--text-quiet)">납품 후 종료</span></td>
+              <td class="col-noah"><span class="mark-best">◎</span><br /><span style="font-size:11px;">카톡 1:1 즉시 응답</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-4">
+        <div class="feat" style="text-align:center;">
+          <p class="text-xs tracking-[0.18em] mb-2" style="color: #03c75a">VS DIY</p>
+          <p class="font-semibold">일주일이 절약됩니다</p>
+          <p class="text-sm mt-2" style="color: var(--text-dim)">포토샵 켰다 끄는 시간 = 본업 시간</p>
+        </div>
+        <div class="feat" style="text-align:center;">
+          <p class="text-xs tracking-[0.18em] mb-2" style="color: #03c75a">VS 외주</p>
+          <p class="font-semibold">3분의 1 비용으로 더 빠르게</p>
+          <p class="text-sm mt-2" style="color: var(--text-dim)">검증된 6가지에서 시작 — 협업 회의 단축</p>
+        </div>
+        <div class="feat" style="text-align:center;">
+          <p class="text-xs tracking-[0.18em] mb-2" style="color: #03c75a">NOAH만</p>
+          <p class="font-semibold">광고·가이드·사후까지</p>
+          <p class="text-sm mt-2" style="color: var(--text-dim)">애드포스트 안전, 적용 PDF, 카톡 즉답</p>
+        </div>
+      </div>
     </section>
 
     <!-- ====================== PRICING ====================== -->
