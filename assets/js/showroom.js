@@ -155,4 +155,61 @@
     );
     counters.forEach((c) => cio.observe(c));
   }
+
+  /* -------- 타이핑 효과 (rotating typewriter) -------- */
+  // <span class="typer" data-words="A|B|C" data-type-speed="80" data-pause="1800"></span>
+  class Typer {
+    constructor(el) {
+      this.el = el;
+      this.words = (el.dataset.words || '').split('|').filter(Boolean);
+      if (this.words.length === 0) return;
+      this.typeSpeed = parseInt(el.dataset.typeSpeed, 10) || 90;
+      this.deleteSpeed = parseInt(el.dataset.deleteSpeed, 10) || 40;
+      this.pauseAfterType = parseInt(el.dataset.pause, 10) || 1800;
+      this.pauseAfterDelete = 280;
+      this.idx = 0;
+      this.charIdx = 0;
+      this.deleting = false;
+      // 가장 긴 단어 기준으로 min-width 잡아 레이아웃 흔들림 최소화
+      const longest = this.words.reduce((a, b) => (a.length > b.length ? a : b));
+      // 빈 텍스트 시작 + 첫 단어부터 타이핑
+      this.el.textContent = '';
+      // 시작 약간 지연 (페이지 로드 호흡)
+      setTimeout(() => this.tick(), 600);
+    }
+    tick() {
+      const word = this.words[this.idx];
+      if (this.deleting) {
+        this.charIdx--;
+        this.el.textContent = word.substring(0, this.charIdx);
+        if (this.charIdx === 0) {
+          this.deleting = false;
+          this.idx = (this.idx + 1) % this.words.length;
+          setTimeout(() => this.tick(), this.pauseAfterDelete);
+          return;
+        }
+        setTimeout(() => this.tick(), this.deleteSpeed);
+      } else {
+        this.charIdx++;
+        this.el.textContent = word.substring(0, this.charIdx);
+        if (this.charIdx === word.length) {
+          this.deleting = true;
+          setTimeout(() => this.tick(), this.pauseAfterType);
+          return;
+        }
+        setTimeout(() => this.tick(), this.typeSpeed);
+      }
+    }
+  }
+  // prefers-reduced-motion 사용자에겐 첫 단어만 정적으로 표시
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.typer').forEach((el) => {
+    if (reduceMotion) {
+      const first = (el.dataset.words || '').split('|')[0] || '';
+      el.textContent = first;
+      el.classList.add('typer-static');
+    } else {
+      new Typer(el);
+    }
+  });
 })();
