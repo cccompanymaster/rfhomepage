@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  배포 후 실제 도메인으로 일괄 치환 필요.
+  예: https://noah.pages.dev → https://noah.kr (커스텀 도메인 연결 후)
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/dental.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/law.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/cafe.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/restaurant.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/interior.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/pilates.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/beauty.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/saas.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/pension.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/studio.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/academy.html</loc><priority>0.8</priority></url>
-  <url><loc>https://cccompanymaster.github.io/rfhomepage/templates/manufacture.html</loc><priority>0.8</priority></url>
+  <url>
+    <loc>https://noah.pages.dev/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://noah.pages.dev/templates/dental.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/law.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/cafe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/restaurant.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/interior.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/pilates.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/beauty.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/saas.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/pension.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/studio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/academy.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/manufacture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noah.pages.dev/templates/blog.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>

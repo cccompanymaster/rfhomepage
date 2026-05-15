@@ -1,7 +1,35 @@
-# Cloudflare Pages — 리다이렉트 / SPA 폴백
+# Cloudflare Pages — 리다이렉트 규칙
 # 형식: <원본>  <목적지>  <상태코드>
+# 위에서 아래로 순서대로 매칭. 첫 매치만 적용됨.
 
-# 404는 자동으로 404.html을 사용하므로 별도 라우트 불필요
+# ────────────────────────────────────────────
+# 짧은 URL → 정식 경로 (마케팅·QR 코드용)
+# ────────────────────────────────────────────
+/brochure                 /assets/brochure/NOAH-brochure.pdf   302
+/소개서                    /assets/brochure/NOAH-brochure.pdf   302
+/kakao                    https://pf.kakao.com/_xxxxxxx        302
+/blog                     /templates/blog.html                 301
 
-# (선택) 향후 도메인 통합 시:
-# https://www.noah.kr/*  https://noah.kr/:splat  301!
+# ────────────────────────────────────────────
+# 12개 업종 단축 경로 → 템플릿 페이지
+# /dental == /templates/dental.html
+# ────────────────────────────────────────────
+/dental                   /templates/dental.html               301
+/law                      /templates/law.html                  301
+/cafe                     /templates/cafe.html                 301
+/restaurant               /templates/restaurant.html           301
+/interior                 /templates/interior.html             301
+/pilates                  /templates/pilates.html              301
+/beauty                   /templates/beauty.html               301
+/saas                     /templates/saas.html                 301
+/pension                  /templates/pension.html              301
+/studio                   /templates/studio.html               301
+/academy                  /templates/academy.html              301
+/manufacture              /templates/manufacture.html          301
+
+# ────────────────────────────────────────────
+# (선택) www → apex 통합 — 커스텀 도메인 연결 후
+# ────────────────────────────────────────────
+# https://www.noah.kr/*    https://noah.kr/:splat               301!
+
+# 404는 자동으로 404.html을 사용하므로 별도 규칙 불필요

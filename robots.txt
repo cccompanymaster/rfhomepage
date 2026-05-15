@@ -1,3 +1,10 @@
+# NOAH — 검색엔진 크롤러 안내
+# 배포 후 실제 도메인으로 sitemap URL 갱신 필요.
+
 User-agent: *
 Allow: /
-Sitemap: https://cccompanymaster.github.io/rfhomepage/sitemap.xml
+Disallow: /assets/brochure/
+
+# 명백히 차단해야 할 경로 (현재는 없음)
+
+Sitemap: https://noah.pages.dev/sitemap.xml

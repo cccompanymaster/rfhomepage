@@ -14,12 +14,26 @@
       name="description"
       content="12개 업종 레퍼런스로 검증된 디자인을 그대로. 7일 안에 오픈하는 NOAH 홈페이지 — 199,000원에 모바일·SEO·1년 무제한 수정 모두 포함."
     />
+    <meta name="keywords" content="홈페이지 제작, 소상공인 홈페이지, 병원 홈페이지, 카페 홈페이지, 반응형 홈페이지, 7일 제작, 199000원, NOAH, 노아홈페이지" />
+    <meta name="author" content="NOAH" />
+    <link rel="canonical" href="https://noah.pages.dev/" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NOAH · 노아홈페이지" />
     <meta property="og:title" content="NOAH — 돈 벌어다주는 홈페이지, 199,000원으로" />
     <meta property="og:description" content="12개 업종 레퍼런스로 검증된 디자인을 그대로 — 7일 오픈, 199,000원." />
+    <meta property="og:url" content="https://noah.pages.dev/" />
+    <meta property="og:image" content="https://noah.pages.dev/assets/images/cafe/hero.jpg" />
+    <meta property="og:image:alt" content="NOAH — 12개 업종 레퍼런스 기반 홈페이지" />
     <meta property="og:locale" content="ko_KR" />
+
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NOAH — 돈 벌어다주는 홈페이지, 199,000원으로" />
+    <meta name="twitter:description" content="12개 업종 레퍼런스로 검증된 디자인을 그대로 — 7일 오픈, 199,000원." />
+    <meta name="twitter:image" content="https://noah.pages.dev/assets/images/cafe/hero.jpg" />
+
     <meta name="theme-color" content="#0a0a0b" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%23ff7ac6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E" />
     <script type="application/ld+json">
 {
@@ -227,6 +241,33 @@
       @keyframes modalIn {
         from { transform: translateY(20px) scale(0.96); opacity: 0; }
         to   { transform: translateY(0) scale(1); opacity: 1; }
+      }
+
+      /* 소개서 받기 버튼 — 펄스 링 (시선 유도) */
+      #brochure-trigger { position: relative; isolation: isolate; }
+      #brochure-trigger::before,
+      #brochure-trigger::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        border: 1px solid rgba(124, 92, 255, 0.55);
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0;
+        animation: brochurePulse 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+      }
+      #brochure-trigger::after { animation-delay: 1.3s; }
+      #brochure-trigger:hover::before,
+      #brochure-trigger:hover::after { animation-play-state: paused; opacity: 0; }
+      @keyframes brochurePulse {
+        0%   { transform: scale(1);    opacity: 0.7; }
+        70%  { transform: scale(1.35); opacity: 0; }
+        100% { transform: scale(1.35); opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #brochure-trigger::before,
+        #brochure-trigger::after { animation: none; display: none; }
       }
       .modal-close {
         position: absolute; top: 14px; right: 14px;
