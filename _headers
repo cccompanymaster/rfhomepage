@@ -1,30 +1,67 @@
 # Cloudflare Pages — 헤더 설정
 # 정적 자산 캐시 + 보안 헤더
+#
+# 참조:
+#   - https://developers.cloudflare.com/pages/configuration/headers/
+#   - https://owasp.org/www-project-secure-headers/
 
-# 모든 페이지: 보안 기본
+# ════════════════════════════════════════════════════════════
+# 전 페이지 공통 — 보안 기본
+# ════════════════════════════════════════════════════════════
 /*
+  # MIME 스니핑 차단
   X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# 이미지: 1년 캐시 (immutable)
+  # iframe 임베드는 동일 출처만
+  X-Frame-Options: SAMEORIGIN
+
+  # XSS 필터 (구형 브라우저용, 최신은 CSP가 대체)
+  X-XSS-Protection: 1; mode=block
+
+  # 외부 링크 클릭 시 레퍼러 최소화
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # 사용 안 하는 브라우저 권한 명시적으로 차단
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()
+
+  # HTTPS 강제 (1년) — 한 번 방문 후엔 HTTP 요청 자체가 막힘
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # 외부 창과 격리 (Spectre 공격 완화)
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+  # 리소스 임베드 정책
+  Cross-Origin-Resource-Policy: same-site
+
+  # 콘텐츠 보안 정책 (CSP) — 외부 스크립트/스타일 화이트리스트
+  # NOAH가 사용하는 CDN: Tailwind, Pretendard, Google Fonts, Apps Script
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; frame-ancestors 'self'; upgrade-insecure-requests
+
+# ════════════════════════════════════════════════════════════
+# 정적 자산 — 1년 immutable 캐시
+# ════════════════════════════════════════════════════════════
 /assets/images/*
   Cache-Control: public, max-age=31536000, immutable
 
-# CSS / JS: 1년 캐시
 /assets/css/*
   Cache-Control: public, max-age=31536000, immutable
+
 /assets/js/*
   Cache-Control: public, max-age=31536000, immutable
 
-# 소개서 PDF: 짧은 캐시 (수정 시 즉시 반영되도록) + 다운로드 권장
+# ════════════════════════════════════════════════════════════
+# 소개서 PDF — 짧은 캐시 + 다운로드 강제
+# ════════════════════════════════════════════════════════════
 /assets/brochure/*.pdf
   Cache-Control: public, max-age=3600
   Content-Disposition: attachment; filename="NOAH_brochure.pdf"
+  X-Content-Type-Options: nosniff
 
-# HTML: 캐시 없음 (NOAH 변경 즉시 반영)
+# ════════════════════════════════════════════════════════════
+# HTML — 캐시 끔 (콘텐츠 변경 즉시 반영)
+# ════════════════════════════════════════════════════════════
 /*.html
   Cache-Control: no-cache, no-store, must-revalidate
+
 /
   Cache-Control: no-cache, no-store, must-revalidate
