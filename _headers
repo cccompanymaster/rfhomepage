@@ -18,6 +18,11 @@
 /assets/js/*
   Cache-Control: public, max-age=31536000, immutable
 
+# 소개서 PDF: 짧은 캐시 (수정 시 즉시 반영되도록) + 다운로드 권장
+/assets/brochure/*.pdf
+  Cache-Control: public, max-age=3600
+  Content-Disposition: attachment; filename="NOAH_brochure.pdf"
+
 # HTML: 캐시 없음 (NOAH 변경 즉시 반영)
 /*.html
   Cache-Control: no-cache, no-store, must-revalidate

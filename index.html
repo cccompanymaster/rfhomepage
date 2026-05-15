@@ -904,12 +904,12 @@
       <div class="modal-card">
         <button class="modal-close" type="button" id="brochure-close" aria-label="닫기">×</button>
         <p class="text-xs tracking-[0.18em] mb-3" style="color: var(--text-quiet)">NOAH BROCHURE</p>
-        <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서를<br />이메일로 보내드릴게요.</h2>
-        <p class="mt-3 text-sm" style="color: var(--text-dim)">12개 업종 레퍼런스, 7일 제작 과정, 199,000원 패키지 안내까지 한 권에.</p>
+        <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서,<br />지금 바로 받아보세요.</h2>
+        <p class="mt-3 text-sm" style="color: var(--text-dim)">제출 즉시 PDF 다운로드가 시작되고, 입력하신 이메일로도 한 번 더 보내드립니다. 12개 업종 레퍼런스 · 7일 제작 과정 · 199,000원 패키지가 한 권에.</p>
 
         <form id="brochure-form" class="mt-7 space-y-3" novalidate>
           <input class="field-dark" name="name" required placeholder="성함 *" />
-          <input class="field-dark" name="email" type="email" required placeholder="이메일 (소개서가 전송됩니다) *" />
+          <input class="field-dark" name="email" type="email" required placeholder="이메일 (보관용으로도 보내드립니다) *" />
           <input class="field-dark" name="phone" type="tel" placeholder="연락처 (선택)" />
           <select class="field-dark" name="industry">
             <option value="">관심 업종 (선택)</option>
@@ -966,7 +966,19 @@
       brochureModal?.addEventListener('click', (e) => { if (e.target === brochureModal) closeBrochure(); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBrochure(); });
 
-      // 소개서 폼 제출 (Apps Script로 전송 → type:brochure 분기)
+      // 소개서 폼 제출 (Apps Script로 전송 + PDF 즉시 다운로드)
+      const BROCHURE_URL = './assets/brochure/NOAH-brochure.pdf';
+      const BROCHURE_FILENAME = 'NOAH_소개서.pdf';
+      const triggerBrochureDownload = () => {
+        const a = document.createElement('a');
+        a.href = BROCHURE_URL;
+        a.download = BROCHURE_FILENAME;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      };
+
       brochureForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!brochureForm.checkValidity()) { brochureForm.reportValidity(); return; }
@@ -982,6 +994,10 @@
         payload.timestamp = new Date().toISOString();
         payload.referrer = document.referrer || '직접 접속';
 
+        // 1) PDF 즉시 다운로드 (Apps Script 응답을 기다리지 않음)
+        triggerBrochureDownload();
+
+        // 2) 백그라운드로 Apps Script에 신청 기록 (실패해도 다운로드는 이미 시작됨)
         try {
           await fetch(GAS_URL, {
             method: 'POST',
@@ -990,12 +1006,14 @@
             body: JSON.stringify(payload),
           });
           brochureStatus.style.color = '#34d399';
-          brochureStatus.textContent = '✓ 입력하신 메일로 NOAH 소개서를 보내드렸습니다.';
+          brochureStatus.textContent = '✓ 소개서 다운로드를 시작했어요. 입력하신 메일로도 한 번 더 보내드릴게요.';
           brochureForm.reset();
-          setTimeout(closeBrochure, 2200);
+          setTimeout(closeBrochure, 2600);
         } catch (err) {
-          brochureStatus.style.color = '#f87171';
-          brochureStatus.textContent = '⚠ 전송에 실패했습니다. 카카오톡으로 연락 주세요.';
+          brochureStatus.style.color = '#fbbf24';
+          brochureStatus.textContent = '✓ 다운로드는 시작했어요. (이메일 전송은 잠시 후 자동 처리됩니다)';
+          brochureForm.reset();
+          setTimeout(closeBrochure, 2600);
         } finally {
           brochureSubmit.disabled = false;
           brochureSubmit.textContent = '소개서 받기 →';
