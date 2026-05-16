@@ -7,4 +7,4 @@ Disallow: /assets/brochure/
 
 # 명백히 차단해야 할 경로 (현재는 없음)
 
-Sitemap: https://noah.pages.dev/sitemap.xml
+Sitemap: https://www.noahhomepage.co.kr/sitemap.xml
