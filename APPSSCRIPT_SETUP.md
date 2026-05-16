@@ -81,6 +81,7 @@ function handleConsult(data) {
     data.referrer  || '',
   ]);
 
+  // 운영자 알림
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     subject: `[NOAH] 새 상담 신청 — ${data.name}`,
@@ -97,44 +98,68 @@ function handleConsult(data) {
       </div>
     `,
   });
+
+  // 상담 신청자에게 자동 응답 + 소개서 자동 발송
+  // (사이트에서 sendBrochure: true 플래그를 함께 보내고 이메일이 있을 때만)
+  if (data.sendBrochure && data.email) {
+    handleBrochure({
+      timestamp: data.timestamp,
+      name:      data.name,
+      email:     data.email,
+      phone:     data.phone,
+      industry:  data.industry,
+      referrer:  '상담 신청 폼에서 자동 발송',
+      _fromConsult: true, // handleBrochure 안에서 메시지 톤을 살짝 다르게 쓰기 위함
+    });
+  }
 }
 
 // -------------------- 소개서 신청 처리 (PDF 첨부 없음) --------------------
 function handleBrochure(data) {
-  // 1) 시트에 리드 기록
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BROCHURE_SHEET);
-  if (!sheet) throw new Error('Sheet not found: ' + BROCHURE_SHEET);
+  const fromConsult = !!data._fromConsult;
 
-  sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    data.name      || '',
-    data.email     || '',
-    data.phone     || '',
-    data.industry  || '',
-    data.referrer  || '',
-  ]);
+  // 1) 시트에 리드 기록 (상담 폼에서 자동 호출된 경우는 이미 상담 시트에 기록되었으므로 생략)
+  if (!fromConsult) {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BROCHURE_SHEET);
+    if (!sheet) throw new Error('Sheet not found: ' + BROCHURE_SHEET);
 
-  // 2) (선택) 신청자에게 확인 메일 — 다운로드 링크 안내
+    sheet.appendRow([
+      data.timestamp || new Date().toISOString(),
+      data.name      || '',
+      data.email     || '',
+      data.phone     || '',
+      data.industry  || '',
+      data.referrer  || '',
+    ]);
+  }
+
+  // 2) 신청자에게 소개서 안내 메일
   if (SEND_USER_EMAIL && data.email) {
+    const subject = fromConsult
+      ? '[NOAH] 상담 신청이 접수되었습니다 — 소개서 함께 보내드려요'
+      : '[NOAH] 소개서 다운로드 안내';
+    const leadLine = fromConsult
+      ? `방금 보내주신 상담 신청은 잘 접수되었습니다. 영업일 기준 1일 안에 회신드릴게요.<br/>회신 전에 천천히 살펴보실 수 있도록 소개서를 함께 보내드립니다.`
+      : `방금 신청하신 NOAH 소개서는 사이트에서 자동 다운로드가 시작되었을 거예요.<br/>혹시 다운로드가 안 되셨다면 아래 링크에서 다시 받으실 수 있습니다.`;
+
     MailApp.sendEmail({
       to: data.email,
-      subject: '[NOAH] 소개서 다운로드 안내',
+      subject: subject,
       htmlBody: `
         <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif; max-width:560px; padding:24px; color:#222;">
           <h2 style="background:linear-gradient(135deg,#7c5cff,#ff7ac6); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:28px; margin:0 0 16px;">NOAH 소개서</h2>
           <p style="font-size:15px;">${data.name}님 안녕하세요,</p>
-          <p style="font-size:15px;">방금 신청하신 NOAH 소개서는 사이트에서 자동 다운로드가 시작되었을 거예요.<br/>
-          혹시 다운로드가 안 되셨다면 아래 링크에서 다시 받으실 수 있습니다.</p>
+          <p style="font-size:15px;">${leadLine}</p>
 
           <p style="margin:24px 0;">
             <a href="${SITE_URL}/assets/brochure/NOAH-brochure.pdf"
                style="display:inline-block; padding:14px 28px; background:#0a0a0b; color:#fff; border-radius:9999px; text-decoration:none; font-weight:500;">
-              📄 소개서 다시 다운로드
+              📄 소개서 다운로드
             </a>
           </p>
 
-          <p style="font-size:15px;">12개 업종 레퍼런스, 7일 제작 과정, ₩199,000 패키지 안내가 한 권에 담겨 있습니다.<br/>
-          궁금하신 점이 있으시면 이 메일에 그대로 답장 주세요.</p>
+          <p style="font-size:15px;">12개 업종 레퍼런스, 7일 제작 과정, ₩199,000 패키지 안내와 옵션 가격까지 한 권에 담겨 있습니다.<br/>
+          궁금하신 점은 이 메일에 그대로 답장 주시거나, 카카오톡 1:1 상담으로 편하게 연락 주세요.</p>
 
           <hr style="border:0; border-top:1px solid #eee; margin:24px 0;" />
           <p style="font-size:13px; color:#666;">
@@ -149,12 +174,14 @@ function handleBrochure(data) {
     });
   }
 
-  // 3) 운영자 알림
-  MailApp.sendEmail({
-    to: NOTIFY_EMAIL,
-    subject: `[NOAH] 새 소개서 다운로드 — ${data.name}`,
-    body: `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || '미기입'}\n업종: ${data.industry || '미기입'}\n유입: ${data.referrer || '직접'}\n시간: ${data.timestamp}\n\n→ 사용자는 사이트에서 PDF를 직접 다운로드했습니다.`,
-  });
+  // 3) 운영자 알림 (상담에서 자동 호출되면 이미 상담 알림이 갔으므로 생략)
+  if (!fromConsult) {
+    MailApp.sendEmail({
+      to: NOTIFY_EMAIL,
+      subject: `[NOAH] 새 소개서 다운로드 — ${data.name}`,
+      body: `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || '미기입'}\n업종: ${data.industry || '미기입'}\n유입: ${data.referrer || '직접'}\n시간: ${data.timestamp}\n\n→ 사용자는 사이트에서 PDF를 직접 다운로드했습니다.`,
+    });
+  }
 }
 
 // -------------------- 테스트 함수 --------------------
@@ -217,16 +244,22 @@ const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exe
 
 ## 6단계 — 테스트
 
-배포된 사이트에서:
+### A. 헤더 「소개서 받기」 버튼 (단순 다운로드 흐름)
 
-1. 우상단 **"소개서 받기"** 버튼 클릭
+1. 배포된 사이트 우상단 **"소개서 받기"** 버튼 클릭
 2. 본인 이메일 입력 후 제출
 3. **즉시** 브라우저에서 PDF 다운로드 시작 ✓
 4. 1~5분 안에 `[NOAH] 소개서 다운로드 안내` 메일 수신 ✓ (백업 링크 포함)
 5. 시트 `NOAH 소개서` 탭에 행 추가 확인 ✓
 6. 운영자 알림 메일 수신 확인 ✓
 
-상담 신청 폼도 동일하게 테스트 (시트 `NOAH 상담` 탭 + 운영자 알림).
+### B. 하단 「상담 신청 보내기」 (상담 + 소개서 자동 발송 결합)
+
+1. `#consult` 섹션에서 이름·연락처·이메일·업종 입력 후 **상담 신청 보내기** 클릭
+2. **즉시** 브라우저에서 PDF 다운로드 시작 ✓
+3. 1~5분 안에 `[NOAH] 상담 신청이 접수되었습니다 — 소개서 함께 보내드려요` 메일 수신 ✓
+4. 시트 `NOAH 상담` 탭에 행 추가 확인 ✓ (소개서 탭에는 중복 기록 안 됨)
+5. 운영자 알림 `[NOAH] 새 상담 신청` 메일 1통 수신 ✓ (소개서 알림은 중복 발송 안 됨)
 
 ---
 
