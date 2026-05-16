@@ -1063,7 +1063,7 @@
       // 소개서 폼 제출 (Apps Script로 전송 + PDF 즉시 다운로드)
       const BROCHURE_URL = './assets/brochure/NOAH-brochure.pdf';
       const BROCHURE_FILENAME = 'NOAH_소개서.pdf';
-      const triggerBrochureDownload = () => {
+      const triggerBrochureDownload = (source = 'unknown') => {
         const a = document.createElement('a');
         a.href = BROCHURE_URL;
         a.download = BROCHURE_FILENAME;
@@ -1071,6 +1071,13 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
+        if (typeof gtag === 'function') {
+          gtag('event', 'brochure_download', {
+            event_category: 'engagement',
+            event_label: source,
+            file_name: BROCHURE_FILENAME,
+          });
+        }
       };
 
       brochureForm?.addEventListener('submit', async (e) => {
@@ -1089,7 +1096,15 @@
         payload.referrer = document.referrer || '직접 접속';
 
         // 1) PDF 즉시 다운로드 (Apps Script 응답을 기다리지 않음)
-        triggerBrochureDownload();
+        triggerBrochureDownload('brochure_modal');
+
+        // GA4: 소개서 모달 제출 이벤트
+        if (typeof gtag === 'function') {
+          gtag('event', 'brochure_submit', {
+            event_category: 'lead',
+            event_label: 'brochure_modal',
+          });
+        }
 
         // 2) 백그라운드로 Apps Script에 신청 기록 (실패해도 다운로드는 이미 시작됨)
         try {
@@ -1194,7 +1209,16 @@
           });
 
           // 2) PDF 즉시 다운로드 (사용자가 메일을 기다리지 않도록)
-          if (typeof triggerBrochureDownload === 'function') triggerBrochureDownload();
+          if (typeof triggerBrochureDownload === 'function') triggerBrochureDownload('consult_form');
+
+          // GA4: 상담 신청 제출 이벤트 (전환)
+          if (typeof gtag === 'function') {
+            gtag('event', 'consult_submit', {
+              event_category: 'lead',
+              event_label: 'consult_form',
+              value: 1,
+            });
+          }
 
           status.style.color = '#34d399';
           status.textContent = '✓ 상담 신청이 접수되었습니다. 소개서 PDF는 방금 다운로드되었고, 입력하신 이메일로도 한 번 더 보내드릴게요. 영업일 1일 안에 회신드립니다.';
