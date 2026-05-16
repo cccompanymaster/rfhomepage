@@ -39,11 +39,24 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "NOAH",
-  "alternateName": "노아홈페이지",
+  "name": "노아홈페이지",
+  "alternateName": ["NOAH", "씨씨컴퍼니", "CC Company"],
+  "legalName": "씨씨컴퍼니",
+  "url": "https://www.noahhomepage.co.kr",
+  "logo": "https://www.noahhomepage.co.kr/assets/images/cafe/hero.jpg",
   "description": "12개 업종 레퍼런스 기반 홈페이지 제작 — 199,000원, 7일 오픈",
+  "founder": { "@type": "Person", "name": "채희준" },
+  "foundingDate": "2020-06-05",
+  "taxID": "275-05-01613",
   "email": "noahmaster@gmail.com",
   "telephone": "+82-10-6658-6482",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "인천타워대로 301, A동 16층 33호 (송도센텀하이브)",
+    "addressLocality": "연수구",
+    "addressRegion": "인천광역시",
+    "addressCountry": "KR"
+  },
   "areaServed": "KR",
   "offers": {
     "@type": "Offer",
@@ -928,15 +941,20 @@
       </div>
     </section>
 
-    <footer class="container-x py-10 border-t border-white/5 text-sm flex flex-wrap items-center justify-between gap-4" style="color: var(--text-quiet)">
-      <div>
-        <p class="font-semibold" style="color: var(--text)">NOAH · 노아홈페이지</p>
-        <p class="mt-2">사업자등록번호 000-00-00000 · 통신판매업 신고 제0000-00000호</p>
-        <p>대표 OOO · 서울특별시 OO구 OO로 OO길 OO</p>
-      </div>
-      <div class="text-right">
-        <p>© 2026 NOAH. All rights reserved.</p>
-        <p class="mt-2">noahmaster@gmail.com · 010 · 6658 · 6482</p>
+    <footer class="container-x py-10 border-t border-white/5 text-sm" style="color: var(--text-quiet)">
+      <div class="flex flex-wrap items-start justify-between gap-6">
+        <div class="leading-relaxed">
+          <p class="font-semibold" style="color: var(--text)">NOAH · 노아홈페이지</p>
+          <p class="mt-3">상호: 씨씨컴퍼니(CC Company) · 대표: 채희준</p>
+          <p>사업자등록번호: 275-05-01613 · <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2750501613" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">사업자정보확인</a></p>
+          <p>주소: 인천광역시 연수구 인천타워대로 301, A동 16층 33호 (송도동, 송도센텀하이브)</p>
+          <p class="mt-3 text-xs" style="color: rgba(245,245,247,.32)">호스팅 서비스 제공자: Cloudflare, Inc.</p>
+        </div>
+        <div class="text-right leading-relaxed">
+          <p>© 2026 노아홈페이지. All rights reserved.</p>
+          <p class="mt-2">noahmaster@gmail.com</p>
+          <p>010-6658-6482</p>
+        </div>
       </div>
     </footer>
 
