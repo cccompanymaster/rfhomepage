@@ -1,0 +1,10 @@
+name = "rfhomepage"
+compatibility_date = "2024-11-01"
+
+# 이 프로젝트는 정적 HTML 사이트입니다.
+# Workers Static Assets로 배포 — 빌드 단계 없이 파일을 그대로 업로드.
+# https://developers.cloudflare.com/workers/static-assets/
+
+[assets]
+directory = "."
+not_found_handling = "404-page"

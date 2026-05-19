@@ -1,0 +1,27 @@
+# 정적 자산 업로드에서 제외할 파일들
+# https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets
+
+.git/
+.github/
+.gitignore
+.assetsignore
+wrangler.toml
+wrangler.jsonc
+
+# 문서 / 설정
+*.md
+APPSSCRIPT_SETUP.md
+CLOUDFLARE_DEPLOY.md
+IMAGE_PROMPTS.md
+IMAGE_REQUESTS.md
+
+# 개발자 도구 / IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 임시 파일
+*.log
+*.tmp
+node_modules/
