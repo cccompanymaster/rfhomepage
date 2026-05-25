@@ -11,9 +11,12 @@
 /blog                     /templates/blog.html                 301
 
 # 고객사 사전 정보 시트 (계약 고객 전달용)
-/intake                   /intake.html                         301
-/start                    /intake.html                         301
-/사전정보                  /intake.html                         301
+# ※ /intake → /intake.html 규칙 금지!
+#   Workers가 intake.html을 이미 /intake 로 서빙하므로(.html→무확장 자동 전환),
+#   여기서 /intake → /intake.html 로 보내면 서로 되돌려 무한루프(ERR_TOO_MANY_REDIRECTS) 발생.
+#   짧은 별칭만 무확장 경로(/intake)로 연결한다.
+/start                    /intake                              301
+/사전정보                  /intake                              301
 
 # ────────────────────────────────────────────
 # 12개 업종 단축 경로 → 템플릿 페이지
