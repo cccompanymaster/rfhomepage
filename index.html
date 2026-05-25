@@ -384,6 +384,76 @@
       @media (max-width: 640px) {
         .blog-pop { left: 12px; right: 12px; max-width: none; bottom: 88px; }
       }
+
+      /* 상단 이벤트 선정자 유도 배너 */
+      .event-banner-wrap {
+        position: relative;
+        z-index: 90;
+        width: 100%;
+      }
+      .event-banner-wrap.is-hidden { display: none; }
+      .event-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 11px 48px;
+        text-align: center;
+        background: linear-gradient(100deg, #7c5cff 0%, #b86bff 45%, #ff7ac6 100%);
+        background-size: 200% 100%;
+        animation: eventShimmer 6s linear infinite;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        cursor: pointer;
+        border: 0;
+        width: 100%;
+      }
+      @keyframes eventShimmer {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+      }
+      .event-banner:hover .event-banner__cta { background: rgba(255,255,255,0.28); }
+      .event-banner__emoji { font-size: 16px; }
+      .event-banner__text { color: #fff; }
+      .event-banner__text b { font-weight: 800; }
+      .event-banner__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.35);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+      }
+      .event-banner__close {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: 0;
+        color: rgba(255,255,255,0.8);
+        font-size: 18px;
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        line-height: 1;
+      }
+      .event-banner__close:hover { background: rgba(255,255,255,0.18); color: #fff; }
+      .event-banner.is-hidden { display: none; }
+      @media (max-width: 640px) {
+        .event-banner { flex-direction: column; gap: 7px; padding: 12px 40px; font-size: 13px; }
+      }
     </style>
   </head>
   <body>
@@ -391,6 +461,16 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <!-- 상단 이벤트 선정자 유도 배너 → 사전 정보 작성 페이지 -->
+    <div class="event-banner-wrap" id="event-banner">
+      <a class="event-banner" href="/intake" data-banner-id="noah-intake">
+        <span class="event-banner__emoji" aria-hidden="true">🎉</span>
+        <span class="event-banner__text"><b>홈페이지 제작 이벤트 선정자</b>분들은 여기를 눌러 정보를 작성해주세요!</span>
+        <span class="event-banner__cta">정보 작성하러 가기 →</span>
+      </a>
+      <button class="event-banner__close" id="event-banner-close" aria-label="이벤트 배너 닫기">×</button>
+    </div>
 
     <a href="#hero" class="skip-link">본문으로 건너뛰기</a>
     <div class="bg-blobs" aria-hidden="true"></div>
@@ -1142,6 +1222,24 @@
       document.querySelector('[data-blog-close]')?.addEventListener('click', () => {
         blogPop?.classList.add('is-hidden');
         try { sessionStorage.setItem('blog-pop-dismissed', '1'); } catch (_) {}
+      });
+
+      // ====================== 이벤트 선정자 배너 닫기 (세션 기억) ======================
+      const eventBanner = document.getElementById('event-banner');
+      try {
+        if (sessionStorage.getItem('event-banner-dismissed') === '1') {
+          eventBanner?.classList.add('is-hidden');
+        }
+      } catch (_) {}
+      document.getElementById('event-banner-close')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        eventBanner?.classList.add('is-hidden');
+        try { sessionStorage.setItem('event-banner-dismissed', '1'); } catch (_) {}
+      });
+      eventBanner?.querySelector('a')?.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'intake_banner_click', { event_category: 'navigation', event_label: 'event_winner_banner' });
+        }
       });
     </script>
     <script>
