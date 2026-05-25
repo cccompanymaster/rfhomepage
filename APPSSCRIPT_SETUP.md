@@ -4,7 +4,7 @@ NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 
 1. **상담 신청 폼** (하단 `#consult`) → 구글 시트의 `NOAH 상담` 탭에 저장 + 운영자 알림 메일
 2. **소개서 다운로드 폼** (헤더 모달) → `NOAH 소개서` 탭에 저장 + (선택) 신청자에게 확인 메일
-3. **사전 정보 시트** (`/intake.html`, 계약 고객 전달용) → 전체 항목을 운영자에게 메일로 발송 + (선택) 고객 확인 메일 (`type: 'intake'`)
+3. **사전 정보 시트** (`/intake.html`, 계약 고객 전달용) → `NOAH 사전정보` 탭에 한 줄 기록 + 전체 항목을 운영자에게 메일 발송 + (선택) 고객 확인 메일 (`type: 'intake'`)
 
 > **PDF는 더 이상 메일에 첨부하지 않습니다.**
 > 소개서 PDF는 사이트 리포지토리(`/assets/brochure/NOAH-brochure.pdf`)에 호스팅되며, 폼 제출 즉시 사용자 브라우저에서 다운로드가 시작됩니다. Apps Script는 **리드(lead) 기록과 백업 이메일 발송**만 담당합니다.
@@ -29,6 +29,10 @@ NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 |---|---|---|---|---|---|
 | timestamp | name | email | phone | industry | referrer |
 
+### 탭 3: `NOAH 사전정보`
+
+> **만들 필요 없습니다.** 첫 사전정보 시트가 제출되면 `handleIntake`가 탭을 자동 생성하고 헤더(timestamp · 회신이메일 · 상호 · A~H 전 항목 · referrer)까지 깔아줍니다.
+
 ---
 
 ## 2단계 — Apps Script 코드 붙여넣기 (기본 모드)
@@ -44,6 +48,7 @@ NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 
 const CONSULT_SHEET   = 'NOAH 상담';            // 상담 신청 탭 이름
 const BROCHURE_SHEET  = 'NOAH 소개서';          // 소개서 신청 탭 이름
+const INTAKE_SHEET    = 'NOAH 사전정보';        // 사전 정보 시트 탭 이름
 const NOTIFY_EMAIL    = 'noahmaster@gmail.com'; // 운영자 알림 메일
 const SITE_URL        = 'https://noah.pages.dev'; // 배포된 사이트 URL (확인 메일 본문에 사용)
 const SEND_USER_EMAIL = true;                    // 신청자에게 확인 메일을 보낼지 여부 (false면 시트 기록만)
@@ -234,6 +239,23 @@ function handleIntake(data) {
   const storeName = data['A_상호_한글'] || '(상호 미기입)';
   const clientEmail = data.respondent_email || data['B_이메일'] || data.email || '';
 
+  // 0) 시트에 한 줄 기록 (모든 항목을 정해진 순서로)
+  // 컬럼 순서 = ORDER 배열. 탭이 없으면 자동 생성하고 헤더를 깝니다.
+  const ORDER = [];
+  for (const [, fields] of groups) for (const [key] of fields) ORDER.push(key);
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(INTAKE_SHEET);
+  if (!sheet) {
+    sheet = ss.insertSheet(INTAKE_SHEET);
+    sheet.appendRow(['timestamp', '회신이메일', '상호', ...ORDER, 'referrer']);
+  }
+  sheet.appendRow([
+    data.timestamp || new Date().toISOString(),
+    clientEmail, storeName,
+    ...ORDER.map((k) => data[k] || ''),
+    data.referrer || '',
+  ]);
+
   // 운영자용 HTML 메일 본문 구성
   let body = `<div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;line-height:1.7;max-width:640px;color:#222;">`;
   body += `<h2 style="margin:0 0 4px;">📋 새 사전 정보 시트 — ${storeName}</h2>`;
@@ -381,11 +403,10 @@ const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exe
 
 1. `testIntake` 함수의 `YOUR_EMAIL@gmail.com`을 본인 이메일로 바꾸고 ▶ 실행 → 전체 항목이 표로 정리된 메일 수신 확인 ✓
 2. 실제 페이지(`https://<도메인>/intake.html` 또는 단축 `/intake`)에서 폼 작성 후 제출
-3. 운영자에게 `[NOAH] 사전 정보 시트 — {상호}` 메일 수신 ✓ (섹션 A~H 중 작성된 항목만 표시)
-4. 고객에게 `[NOAH] 사전 정보 시트가 접수되었습니다` 확인 메일 수신 ✓
-5. 운영자가 메일에서 **답장**하면 고객 이메일로 바로 회신됨 (replyTo 설정)
-
-> 사전 정보 시트는 항목이 많아 **시트 저장 대신 메일 발송**만 합니다. 필요하면 별도 탭에 기록하는 코드를 추가할 수 있어요.
+3. `NOAH 사전정보` 탭이 자동 생성되고 한 줄 기록됨 ✓ (헤더 포함)
+4. 운영자에게 `[NOAH] 사전 정보 시트 — {상호}` 메일 수신 ✓ (섹션 A~H 중 작성된 항목만 표시)
+5. 고객에게 `[NOAH] 사전 정보 시트가 접수되었습니다` 확인 메일 수신 ✓
+6. 운영자가 메일에서 **답장**하면 고객 이메일로 바로 회신됨 (replyTo 설정)
 
 ---
 
