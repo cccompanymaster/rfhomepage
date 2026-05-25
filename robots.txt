@@ -4,7 +4,10 @@
 User-agent: *
 Allow: /
 Disallow: /assets/brochure/
+Disallow: /intake.html
+Disallow: /intake
+Disallow: /start
 
-# 명백히 차단해야 할 경로 (현재는 없음)
+# 고객사 전달용 사전 정보 시트는 색인 제외
 
 Sitemap: https://www.noahhomepage.co.kr/sitemap.xml

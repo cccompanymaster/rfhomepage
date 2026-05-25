@@ -1,9 +1,10 @@
 # 상담 신청 + 소개서 자동 발송 — 셋업 가이드
 
-NOAH 메인의 두 가지 폼을 **하나의 Apps Script로** 처리합니다.
+NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 
 1. **상담 신청 폼** (하단 `#consult`) → 구글 시트의 `NOAH 상담` 탭에 저장 + 운영자 알림 메일
 2. **소개서 다운로드 폼** (헤더 모달) → `NOAH 소개서` 탭에 저장 + (선택) 신청자에게 확인 메일
+3. **사전 정보 시트** (`/intake.html`, 계약 고객 전달용) → 전체 항목을 운영자에게 메일로 발송 + (선택) 고객 확인 메일 (`type: 'intake'`)
 
 > **PDF는 더 이상 메일에 첨부하지 않습니다.**
 > 소개서 PDF는 사이트 리포지토리(`/assets/brochure/NOAH-brochure.pdf`)에 호스팅되며, 폼 제출 즉시 사용자 브라우저에서 다운로드가 시작됩니다. Apps Script는 **리드(lead) 기록과 백업 이메일 발송**만 담당합니다.
@@ -53,6 +54,8 @@ function doPost(e) {
 
     if (data.type === 'brochure') {
       handleBrochure(data);
+    } else if (data.type === 'intake') {
+      handleIntake(data);
     } else {
       handleConsult(data);
     }
@@ -184,7 +187,117 @@ function handleBrochure(data) {
   }
 }
 
+// -------------------- 사전 정보 시트(intake) 처리 --------------------
+// intake.html 폼 제출 → 운영자에게 전체 항목 메일 발송 + (선택) 고객 확인 메일
+// 항목이 많아 시트 컬럼 고정이 어려우므로, 들어온 모든 필드를 그대로 메일에 담습니다.
+function handleIntake(data) {
+  // 섹션별 라벨 매핑 (없는 키는 자동으로 건너뜀)
+  const groups = [
+    ['A · 사장님과 가게', [
+      ['A_상호_한글', '상호(한글)'], ['A_상호_영문', '상호(영문)'],
+      ['A_도메인', '도메인'], ['A_도메인_주소', '도메인 주소'],
+      ['A_업종설명', '업종 한 줄'], ['A_주소', '사업장 주소'],
+      ['A_사업자번호', '사업자등록번호'], ['A_통신판매업', '통신판매업'],
+      ['A_대표자', '대표자'],
+    ]],
+    ['B · 연락드릴 길', [
+      ['B_전화', '대표 전화'], ['B_이메일', '추가 이메일'],
+      ['B_영업시간', '영업시간'], ['B_카카오', '카카오 채널'],
+      ['B_블로그', '네이버 블로그'], ['B_인스타', '인스타그램'],
+      ['B_톡톡', '네이버 톡톡'], ['B_기타채널', '기타 채널'],
+    ]],
+    ['C · 디자인 선택', [
+      ['C_1순위', '1순위'], ['C_2순위', '2순위'],
+      ['C_이유', '마음에 든 이유'], ['C_다른점', '내 가게와 다른 점'],
+    ]],
+    ['D · 사장님 브랜드', [
+      ['D_톤', '브랜드 톤'], ['D_메인컬러', '메인 컬러'], ['D_보조컬러', '보조 컬러'],
+      ['D_로고', '로고'], ['D_파비콘', '파비콘'], ['D_슬로건', '슬로건'], ['D_금지표현', '금지 표현'],
+    ]],
+    ['E · 페이지 이야기', [
+      ['E_소개', '가게 소개'], ['E_서비스', '핵심 서비스/메뉴'], ['E_가격정책', '가격 표기'],
+      ['E_숫자', '자랑할 숫자'], ['E_FAQ', '자주 받는 질문'], ['E_후기', '고객 후기'],
+      ['E_사진', '사진 자료'], ['E_영상', '영상 자료'], ['E_레퍼런스', '레퍼런스 사이트'],
+    ]],
+    ['F · 추가 옵션', [
+      ['F_디자인', '디자인·콘텐츠'], ['F_기능', '기능'], ['F_운영', '운영·마케팅'],
+    ]],
+    ['G · 오픈 후 운영', [
+      ['G_업데이트주체', '업데이트 주체'], ['G_빈도', '빈도'], ['G_자주바꿀것', '자주 바꿀 것'],
+      ['G_검색등록', '검색엔진 등록'], ['G_GA4', 'GA4'], ['G_인계', '인계 방식'],
+    ]],
+    ['H · 첨부(보유 자료 체크)', [
+      ['H_자료', '보유 자료'],
+    ]],
+  ];
+
+  const storeName = data['A_상호_한글'] || '(상호 미기입)';
+  const clientEmail = data.respondent_email || data['B_이메일'] || data.email || '';
+
+  // 운영자용 HTML 메일 본문 구성
+  let body = `<div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;line-height:1.7;max-width:640px;color:#222;">`;
+  body += `<h2 style="margin:0 0 4px;">📋 새 사전 정보 시트 — ${storeName}</h2>`;
+  body += `<p style="color:#888;font-size:13px;margin:0 0 20px;">회신 이메일: ${clientEmail || '미기입'} · 접수: ${data.timestamp || new Date().toISOString()} · 유입: ${data.referrer || '직접'}</p>`;
+
+  for (const [sectionTitle, fields] of groups) {
+    const rows = fields
+      .filter(([key]) => data[key] && String(data[key]).trim() !== '')
+      .map(([key, label]) =>
+        `<tr><td style="padding:6px 12px 6px 0;color:#666;vertical-align:top;white-space:nowrap;">${label}</td>` +
+        `<td style="padding:6px 0;color:#111;">${String(data[key]).replace(/\n/g, '<br/>')}</td></tr>`
+      );
+    if (rows.length === 0) continue;
+    body += `<h3 style="margin:18px 0 6px;padding-bottom:6px;border-bottom:1px solid #eee;font-size:15px;">${sectionTitle}</h3>`;
+    body += `<table style="border-collapse:collapse;font-size:14px;width:100%;">${rows.join('')}</table>`;
+  }
+  body += `</div>`;
+
+  // 1) 운영자 알림 (전체 항목)
+  MailApp.sendEmail({
+    to: NOTIFY_EMAIL,
+    subject: `[NOAH] 사전 정보 시트 — ${storeName}`,
+    htmlBody: body,
+    replyTo: clientEmail || NOTIFY_EMAIL,
+  });
+
+  // 2) 고객 확인 메일 (선택)
+  if (SEND_USER_EMAIL && clientEmail) {
+    MailApp.sendEmail({
+      to: clientEmail,
+      subject: '[NOAH] 사전 정보 시트가 접수되었습니다',
+      htmlBody: `
+        <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;max-width:560px;padding:24px;color:#222;line-height:1.7;">
+          <h2 style="background:linear-gradient(135deg,#7c5cff,#ff7ac6);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:26px;margin:0 0 16px;">NOAH</h2>
+          <p style="font-size:15px;">${storeName} 사장님, 사전 정보 시트가 잘 접수되었습니다.</p>
+          <p style="font-size:15px;">영업일 기준 1일 안에 검토 회신을 드린 뒤, Day 1 상담 일정을 잡아드릴게요.<br/>
+          추가로 보내주실 파일(로고·사진·사업자등록증 등)은 이 메일에 그대로 답장해 첨부해주시면 됩니다.</p>
+          <hr style="border:0;border-top:1px solid #eee;margin:24px 0;" />
+          <p style="font-size:13px;color:#666;">
+            <strong style="color:#222;">NOAH · 노아홈페이지</strong><br/>
+            010-6658-6482 · cccompanymaster@gmail.com<br/>
+            <a href="${SITE_URL}" style="color:#7c5cff;">${SITE_URL}</a>
+          </p>
+        </div>
+      `,
+      name: 'NOAH',
+    });
+  }
+}
+
 // -------------------- 테스트 함수 --------------------
+function testIntake() {
+  handleIntake({
+    type: 'intake',
+    respondent_email: 'YOUR_EMAIL@gmail.com', // ← 본인 이메일로 변경
+    A_상호_한글: '테스트 상호', A_업종설명: '강남 1층 치과', A_주소: '서울시 강남구 ...',
+    A_도메인: '신규 구매 필요',
+    B_전화: '010-0000-0000', B_이메일: 'test@example.com', B_영업시간: '평일 10-19시',
+    C_1순위: '01 DENTAL — 라온치과의원', C_이유: '여백이 좋아서',
+    D_톤: '정중함, 단정함', E_소개: '동네에서 가장 친절한 치과입니다.',
+    F_운영: '유지보수 월간 플랜 (30,000원 / 월)',
+    timestamp: new Date().toISOString(), referrer: '테스트',
+  });
+}
 function testConsult() {
   handleConsult({
     timestamp: new Date().toISOString(),
@@ -232,13 +345,16 @@ function testBrochure() {
 
 ## 5단계 — 홈페이지에 URL 붙여넣기
 
-`index.html`에서 다음 줄 찾기:
+**두 파일** 모두에서 다음 줄을 찾아 교체합니다:
+
+- `index.html` (상담 + 소개서 폼)
+- `intake.html` (사전 정보 시트)
 
 ```javascript
 const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exec';
 ```
 
-위에서 복사한 URL로 교체.
+위에서 복사한 URL로 교체. (두 파일이 같은 배포 URL을 공유합니다.)
 
 ---
 
@@ -260,6 +376,16 @@ const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exe
 3. 1~5분 안에 `[NOAH] 상담 신청이 접수되었습니다 — 소개서 함께 보내드려요` 메일 수신 ✓
 4. 시트 `NOAH 상담` 탭에 행 추가 확인 ✓ (소개서 탭에는 중복 기록 안 됨)
 5. 운영자 알림 `[NOAH] 새 상담 신청` 메일 1통 수신 ✓ (소개서 알림은 중복 발송 안 됨)
+
+### C. 사전 정보 시트 (`/intake.html`)
+
+1. `testIntake` 함수의 `YOUR_EMAIL@gmail.com`을 본인 이메일로 바꾸고 ▶ 실행 → 전체 항목이 표로 정리된 메일 수신 확인 ✓
+2. 실제 페이지(`https://<도메인>/intake.html` 또는 단축 `/intake`)에서 폼 작성 후 제출
+3. 운영자에게 `[NOAH] 사전 정보 시트 — {상호}` 메일 수신 ✓ (섹션 A~H 중 작성된 항목만 표시)
+4. 고객에게 `[NOAH] 사전 정보 시트가 접수되었습니다` 확인 메일 수신 ✓
+5. 운영자가 메일에서 **답장**하면 고객 이메일로 바로 회신됨 (replyTo 설정)
+
+> 사전 정보 시트는 항목이 많아 **시트 저장 대신 메일 발송**만 합니다. 필요하면 별도 탭에 기록하는 코드를 추가할 수 있어요.
 
 ---
 
