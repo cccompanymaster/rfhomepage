@@ -10,4 +10,4 @@ Disallow: /start
 
 # 고객사 전달용 사전 정보 시트는 색인 제외
 
-Sitemap: https://www.noahhomepage.co.kr/sitemap.xml
+Sitemap: https://noahhomepage.co.kr/sitemap.xml

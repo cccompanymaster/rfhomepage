@@ -50,7 +50,7 @@ const CONSULT_SHEET   = 'NOAH 상담';            // 상담 신청 탭 이름
 const BROCHURE_SHEET  = 'NOAH 소개서';          // 소개서 신청 탭 이름
 const INTAKE_SHEET    = 'NOAH 사전정보';        // 사전 정보 시트 탭 이름
 const NOTIFY_EMAIL    = 'noahmaster@gmail.com'; // 운영자 알림 메일
-const SITE_URL        = 'https://noah.pages.dev'; // 배포된 사이트 URL (확인 메일 본문에 사용)
+const SITE_URL        = 'https://noahhomepage.co.kr'; // 배포된 사이트 URL (확인 메일 본문에 사용)
 const SEND_USER_EMAIL = true;                    // 신청자에게 확인 메일을 보낼지 여부 (false면 시트 기록만)
 
 function doPost(e) {
@@ -339,7 +339,7 @@ function testBrochure() {
 
 3. 코드 상단의 두 상수를 본인 값으로 수정:
    - `NOTIFY_EMAIL` — 운영자 알림을 받을 메일
-   - `SITE_URL` — Cloudflare Pages 배포 URL (예: `https://noah.pages.dev`)
+   - `SITE_URL` — Cloudflare Pages 배포 URL (예: `https://noahhomepage.co.kr`)
 4. **저장 (Ctrl+S)**, 프로젝트 이름은 `NOAH 통합 폼`
 
 ---

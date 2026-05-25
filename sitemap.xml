@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   배포 후 실제 도메인으로 일괄 치환 필요.
-  예: https://www.noahhomepage.co.kr → https://noah.kr (커스텀 도메인 연결 후)
+  예: https://noahhomepage.co.kr → https://noah.kr (커스텀 도메인 연결 후)
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.noahhomepage.co.kr/</loc>
+    <loc>https://noahhomepage.co.kr/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/dental.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/law.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/cafe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/restaurant.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/interior.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/pilates.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/beauty.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/saas.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/pension.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/studio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/academy.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/manufacture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.noahhomepage.co.kr/templates/blog.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/dental.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/law.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/cafe.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/restaurant.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/interior.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/pilates.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/beauty.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/saas.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/pension.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/studio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/academy.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/manufacture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://noahhomepage.co.kr/templates/blog.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>
