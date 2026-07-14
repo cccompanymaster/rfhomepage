@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <!-- End Google Analytics -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>본연 클리닉 — 본래의 얼굴에서 시작합니다 · 성형외과 피부과</title>
+    <meta name="description" content="본연 성형외과·피부과. 과하지 않게, 본래의 조화에서 시작하는 설계. 안전 시스템 · 전문의 협진 · 애프터케어까지." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="본연 클리닉 — 본래의 얼굴에서 시작합니다" />
+    <meta property="og:description" content="프리미엄 메디컬 럭셔리 레퍼런스. 안전 시스템 · 진료 분야 · 의료진 · 상담 예약." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141312'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c8b49a' stroke-width='1.5'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <style>
+      :root {
+        --bg: #faf9f6;         /* ivory */
+        --bg-2: #f2efe9;
+        --ink: #141312;        /* near black */
+        --ink-2: #6d675e;      /* warm gray */
+        --gold: #c8b49a;       /* muted champagne */
+        --line: #e6e1d7;
+        --dark: #131211;
+        --cream-on-dark: #efeae1;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--ink); }
+      .serif { font-family: 'Noto Serif KR', serif; letter-spacing: -0.03em; }
+      .latin { font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; }
+      .container-x { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+      @media (min-width: 1024px) { .container-x { padding: 0 48px; } }
+      .eyebrow { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+      /* ── 유틸리티 바 ── */
+      .util-bar { background: var(--dark); color: rgba(239,234,225,.75); font-size: 12px; }
+      .util-bar a:hover { color: #fff; }
+
+      /* ── 헤더 + 메가메뉴 ── */
+      .site-head { position: sticky; top: 0; z-index: 70; background: rgba(250,249,246,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); transition: box-shadow .25s ease; }
+      .site-head.scrolled { box-shadow: 0 8px 30px -18px rgba(20,19,18,.25); }
+      .gnb-item { position: relative; }
+      .gnb-item > button { padding: 26px 18px; font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; border-bottom: 2px solid transparent; transition: border-color .2s ease; background: none; }
+      .gnb-item:hover > button, .gnb-item.open > button { border-bottom-color: var(--gold); color: var(--ink); }
+      .mega { position: absolute; left: 50%; transform: translateX(-50%) translateY(8px); top: 100%; min-width: 480px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(20,19,18,.3); opacity: 0; visibility: hidden; transition: opacity .22s ease, transform .22s ease, visibility .22s; padding: 28px 32px; display: grid; grid-template-columns: repeat(var(--cols,2), 1fr); gap: 6px 36px; }
+      .gnb-item:hover .mega, .gnb-item:focus-within .mega { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+      .mega .col-title { font-size: 11px; letter-spacing: .2em; color: var(--gold); font-weight: 700; margin: 8px 0 6px; text-transform: uppercase; grid-column: 1 / -1; }
+      .mega a { display: block; padding: 7px 0; font-size: 14px; color: var(--ink-2); transition: color .15s ease, padding-left .15s ease; border-left: 0 solid var(--gold); white-space: nowrap; }
+      .mega a:hover { color: var(--ink); padding-left: 6px; }
+
+      /* ── 모바일 드로어 ── */
+      .drawer { position: fixed; inset: 0; z-index: 90; background: var(--bg); transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.8,.2,1); overflow-y: auto; }
+      .drawer.open { transform: translateX(0); }
+      .drawer details { border-bottom: 1px solid var(--line); }
+      .drawer summary { list-style: none; padding: 18px 4px; font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; cursor: pointer; }
+      .drawer summary::-webkit-details-marker { display: none; }
+      .drawer summary::after { content: '+'; color: var(--gold); font-size: 20px; }
+      .drawer details[open] summary::after { content: '−'; }
+      .drawer .sub a { display: block; padding: 10px 4px 10px 16px; font-size: 15px; color: var(--ink-2); }
+
+      /* ── 히어로 슬라이더 ── */
+      .hero { position: relative; height: min(88svh, 820px); overflow: hidden; background: var(--dark); }
+      .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; display: grid; align-items: center; }
+      .hero-slide.active { opacity: 1; z-index: 1; }
+      .hero-art { position: absolute; inset: 0; }
+      .hero-copy { position: relative; z-index: 2; color: var(--cream-on-dark); }
+      .hero-copy .t { font-size: clamp(34px, 5.4vw, 72px); line-height: 1.22; font-weight: 600; }
+      .hero-nav { position: absolute; z-index: 5; bottom: 40px; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; }
+      .hero-dots { display: flex; gap: 8px; }
+      .hero-dots button { width: 26px; height: 3px; background: rgba(239,234,225,.3); transition: background .2s; }
+      .hero-dots button[aria-current="true"] { background: var(--gold); }
+      .hero-arrow { width: 46px; height: 46px; border: 1px solid rgba(239,234,225,.3); color: var(--cream-on-dark); display: grid; place-items: center; font-size: 18px; transition: border-color .2s, background .2s; background: none; }
+      .hero-arrow:hover { border-color: var(--gold); background: rgba(200,180,154,.12); }
+      .hero-counter { font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: .2em; color: rgba(239,234,225,.6); }
+
+      /* ── 카드/섹션 공통 ── */
+      .thin-card { border: 1px solid var(--line); background: #fff; transition: transform .3s ease, box-shadow .3s ease; }
+      .thin-card:hover { transform: translateY(-4px); box-shadow: 0 24px 44px -28px rgba(20,19,18,.28); }
+      .art { position: relative; overflow: hidden; background: linear-gradient(140deg, #dcd5c8, #efeae1 55%, #f6f3ec); }
+      .art.dark { background: linear-gradient(140deg, #26231f, #131211 60%); }
+      .art .mark { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(20,19,18,.28); font-size: clamp(20px, 3vw, 34px); letter-spacing: .08em; }
+      .art.dark .mark { color: rgba(239,234,225,.3); }
+      .art .replace-note { position: absolute; bottom: 10px; right: 12px; font-size: 10px; letter-spacing: .12em; color: rgba(20,19,18,.35); }
+      .art.dark .replace-note { color: rgba(239,234,225,.35); }
+
+      /* 가로 스크롤 레일 */
+      .rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(320px, 78vw); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; scrollbar-width: thin; }
+      .rail > * { scroll-snap-align: start; }
+
+      /* ── 탭 ── */
+      .tab-row { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+      .tab-row::-webkit-scrollbar { display: none; }
+      .tab-btn { padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--ink-2); white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; transition: color .2s, border-color .2s; }
+      .tab-btn[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+
+      /* 필터 칩 */
+      .chip { padding: 8px 18px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--ink-2); background: #fff; transition: all .2s; white-space: nowrap; }
+      .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+      /* 전후 프레임 */
+      .ba-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; cursor: zoom-in; }
+      .ba-pair .cell { aspect-ratio: 3/4; position: relative; }
+      .ba-pair .lbl { position: absolute; top: 8px; left: 10px; font-size: 10px; letter-spacing: .2em; color: rgba(20,19,18,.45); font-weight: 700; }
+
+      /* 버튼 */
+      .btn-ink { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 34px; background: var(--ink); color: #fff; font-weight: 600; font-size: 15px; transition: background .2s; }
+      .btn-ink:hover { background: #000; }
+      .btn-hairline { display: inline-flex; align-items: center; gap: 8px; padding: 15px 28px; border: 1px solid var(--ink); color: var(--ink); font-weight: 600; font-size: 14px; transition: background .2s, color .2s; }
+      .btn-hairline:hover { background: var(--ink); color: #fff; }
+
+      /* 폼 */
+      .f-field { width: 100%; padding: 15px 16px; border: 1px solid var(--line); background: #fff; font-size: 15px; }
+      .f-field:focus { outline: none; border-color: var(--ink); }
+      .f-field[aria-invalid="true"] { border-color: #b3261e; }
+      .f-err { font-size: 12px; color: #b3261e; margin-top: 5px; display: none; }
+      .f-err.show { display: block; }
+
+      /* 모달 */
+      .modal { position: fixed; inset: 0; z-index: 100; background: rgba(20,19,18,.6); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 20px; }
+      .modal.open { display: flex; animation: mFade .25s ease; }
+      @keyframes mFade { from { opacity: 0 } to { opacity: 1 } }
+      .modal-box { background: var(--bg); max-width: 560px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 36px; position: relative; }
+      .modal-x { position: absolute; top: 14px; right: 16px; font-size: 22px; color: var(--ink-2); background: none; }
+
+      /* 토스트 */
+      .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 120; background: var(--ink); color: #fff; padding: 14px 26px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; max-width: calc(100vw - 40px); text-align: center; }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* 우측 고정 CTA (PC) */
+      .side-cta { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; border: 1px solid var(--line); border-right: 0; background: #fff; transition: transform .3s ease; }
+      .side-cta.folded { transform: translateY(-50%) translateX(calc(100% - 28px)); }
+      .side-cta a, .side-cta button.item { width: 84px; padding: 14px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); border-bottom: 1px solid var(--line); background: none; transition: color .2s, background .2s; }
+      .side-cta a:hover { color: var(--ink); background: var(--bg-2); }
+      .side-cta .fold { position: absolute; left: 0; top: 0; bottom: 0; width: 28px; background: var(--ink); color: #fff; font-size: 11px; writing-mode: vertical-rl; display: none; }
+      .side-cta.folded .fold { display: block; }
+      .side-cta .fold-in { width: 100%; padding: 8px 0; font-size: 11px; color: var(--ink-2); background: var(--bg-2); }
+      @media (max-width: 1023px) { .side-cta { display: none; } }
+
+      /* 모바일 하단 고정 CTA */
+      .m-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--line); background: #fff; }
+      .m-cta a { padding: 15px 4px; text-align: center; font-size: 13px; font-weight: 700; }
+      .m-cta .kakao { background: #fee500; color: #191919; }
+      .m-cta .cost { background: #fff; color: var(--ink); }
+      .m-cta .book { background: var(--ink); color: #fff; }
+      @media (min-width: 1024px) { .m-cta { display: none; } }
+
+      details.faq { border-bottom: 1px solid var(--line); }
+      details.faq summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; gap: 14px; font-weight: 600; font-size: 15.5px; }
+      details.faq summary::-webkit-details-marker { display: none; }
+      details.faq summary::after { content: '+'; color: var(--gold); font-size: 20px; flex-shrink: 0; }
+      details.faq[open] summary::after { content: '−'; }
+      details.faq .a { padding: 0 4px 22px; color: var(--ink-2); font-size: 14.5px; line-height: 1.8; }
+
+      .empty-state { padding: 60px 20px; text-align: center; color: var(--ink-2); font-size: 14px; border: 1px dashed var(--line); }
+      .skeleton { background: linear-gradient(90deg, var(--bg-2) 25%, #faf9f6 50%, var(--bg-2) 75%); background-size: 200% 100%; animation: sk 1.2s infinite; }
+      @keyframes sk { to { background-position: -200% 0; } }
+    </style>
+    <meta name="theme-color" content="#141312" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "본연 성형외과의원",
+  "medicalSpecialty": ["PlasticSurgery", "Dermatology"],
+  "address": { "@type": "PostalAddress", "addressLocality": "강남구", "addressRegion": "서울특별시", "addressCountry": "KR" },
+  "telephone": "+82-2-000-0000"
+}
+    </script>
+  </head>
+  <body style="padding-bottom: 52px;">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a href="../index.html" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+
+    <!-- 상단 유틸리티 -->
+    <div class="util-bar hidden md:block">
+      <div class="container-x flex items-center justify-between h-9">
+        <p>서울 강남구 ○○대로 000 본연타워 · 평일 10:00–19:00 / 토 10:00–16:00</p>
+        <div class="flex items-center gap-5">
+          <a href="#location">진료시간·오시는길</a>
+          <a href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener">카카오톡 상담</a>
+          <button onclick="openModal('login-modal')" class="hover:text-white">로그인</button>
+          <div class="relative">
+            <select id="lang" aria-label="언어 선택" class="bg-transparent text-xs" style="color:rgba(239,234,225,.75)">
+              <option value="ko" style="color:#141312">KO</option><option value="en" style="color:#141312">EN</option>
+              <option value="zh" style="color:#141312">中文</option><option value="ja" style="color:#141312">日本語</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="site-head" id="site-head">
+      <div class="container-x flex items-center justify-between">
+        <a href="#top" class="latin text-2xl font-semibold tracking-widest py-5" aria-label="본연 클리닉 홈">BON:YEON<span class="text-xs align-top ml-1" style="color:var(--gold)">●</span></a>
+        <nav class="hidden lg:flex items-center" id="gnb" aria-label="주 메뉴"></nav>
+        <div class="flex items-center gap-3">
+          <a href="#consult" class="hidden lg:inline-flex btn-hairline" style="padding:10px 20px; font-size:13px">온라인 예약</a>
+          <button class="lg:hidden p-2" aria-label="전체 메뉴 열기" onclick="document.getElementById('drawer').classList.add('open'); document.body.style.overflow='hidden'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 모바일 드로어 -->
+    <div class="drawer lg:hidden" id="drawer" role="dialog" aria-modal="true" aria-label="전체 메뉴">
+      <div class="container-x py-5 flex items-center justify-between">
+        <span class="latin text-xl font-semibold tracking-widest">BON:YEON</span>
+        <button class="p-2 text-2xl" aria-label="메뉴 닫기" onclick="document.getElementById('drawer').classList.remove('open'); document.body.style.overflow=''">×</button>
+      </div>
+      <div class="container-x pb-24" id="drawer-menu"></div>
+      <div class="container-x pb-10 flex gap-3">
+        <a href="#consult" class="btn-ink flex-1" onclick="closeDrawer()">온라인 예약</a>
+        <button class="btn-hairline flex-1 justify-center" onclick="closeDrawer(); openModal('login-modal')">로그인</button>
+      </div>
+    </div>
+
+    <main id="top">
+      <!-- ═══ 히어로 슬라이더 ═══ -->
+      <section class="hero" id="hero" aria-roledescription="carousel" aria-label="메인 배너">
+        <div id="hero-slides"></div>
+        <div class="hero-nav container-x">
+          <span class="hero-counter" id="hero-counter">01 / 10</span>
+          <div class="hero-dots" id="hero-dots" role="tablist" aria-label="슬라이드 선택"></div>
+          <div class="flex gap-2">
+            <button class="hero-arrow" id="hero-prev" aria-label="이전 슬라이드">←</button>
+            <button class="hero-arrow" id="hero-next" aria-label="다음 슬라이드">→</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 병원 강점 ═══ -->
+      <section class="py-20 md:py-28" id="about">
+        <div class="container-x">
+          <div class="flex items-end justify-between mb-10 reveal">
+            <div>
+              <p class="eyebrow">Why Bon:yeon</p>
+              <h2 class="serif text-3xl md:text-4xl font-semibold mt-3">과하지 않게,<br class="md:hidden" /> 본래의 조화에서 시작합니다</h2>
+            </div>
+            <p class="hidden md:block text-sm max-w-xs" style="color:var(--ink-2)">건물 전체를 병원으로 설계한 이유 — 상담부터 회복까지, 같은 기준의 안전.</p>
+          </div>
+          <div class="rail reveal" id="strength-rail"></div>
+        </div>
+      </section>
+
+      <!-- ═══ 안전 시스템 + 전후 주의사항 탭 ═══ -->
+      <section class="py-20 md:py-28" id="safety" style="background: var(--dark); color: var(--cream-on-dark)">
+        <div class="container-x">
+          <div class="grid lg:grid-cols-2 gap-14">
+            <div class="reveal">
+              <p class="eyebrow">Safety First</p>
+              <h2 class="serif text-3xl md:text-4xl font-semibold mt-3 leading-snug">안전은 시스템으로<br />약속합니다</h2>
+              <ul class="mt-10 space-y-7">
+                <li class="flex gap-5"><span class="latin text-xl" style="color:var(--gold)">01</span><div><h4 class="font-semibold">수술 전 검진센터</h4><p class="text-sm mt-1.5 leading-7" style="color:rgba(239,234,225,.6)">혈액·심전도·영상 검사를 원내에서 먼저. 수술이 어려운 상태라면, 수술하지 않는 것이 저희의 결론입니다.</p></div></li>
+                <li class="flex gap-5"><span class="latin text-xl" style="color:var(--gold)">02</span><div><h4 class="font-semibold">마취과 전문의 상주</h4><p class="text-sm mt-1.5 leading-7" style="color:rgba(239,234,225,.6)">전신마취 수술은 마취과 전문의가 시작부터 회복까지 전 과정을 지킵니다. 1인 1수술방 원칙.</p></div></li>
+                <li class="flex gap-5"><span class="latin text-xl" style="color:var(--gold)">03</span><div><h4 class="font-semibold">응급 대응 체계</h4><p class="text-sm mt-1.5 leading-7" style="color:rgba(239,234,225,.6)">제세동기·응급키트 각 층 배치, 인근 대학병원 전원 체계. 쓰일 일이 없도록, 그러나 언제나 준비되어 있도록.</p></div></li>
+                <li class="flex gap-5"><span class="latin text-xl" style="color:var(--gold)">04</span><div><h4 class="font-semibold">애프터케어 프로그램</h4><p class="text-sm mt-1.5 leading-7" style="color:rgba(239,234,225,.6)">수술 후 회복 관리와 정기 경과 확인까지 하나의 과정으로 설계합니다.</p></div></li>
+              </ul>
+            </div>
+            <div class="reveal">
+              <h3 class="font-semibold text-lg mb-5">수술 전·후 주의사항</h3>
+              <div class="tab-row" id="care-tabs" role="tablist" style="border-color: rgba(239,234,225,.15)"></div>
+              <div id="care-panel" class="pt-6 text-sm leading-8" style="color:rgba(239,234,225,.7)"></div>
+              <p class="mt-6 text-xs" style="color:rgba(239,234,225,.4)">※ 일반 안내이며, 개인 상태에 따라 다릅니다. 반드시 담당 의료진의 안내를 따라주세요.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 진료 분야 탭 ═══ -->
+      <section class="py-20 md:py-28" id="fields">
+        <div class="container-x">
+          <div class="text-center mb-10 reveal">
+            <p class="eyebrow">Programs</p>
+            <h2 class="serif text-3xl md:text-4xl font-semibold mt-3">진료 분야</h2>
+          </div>
+          <div class="tab-row justify-center reveal" id="field-tabs" role="tablist" aria-label="진료 분야 선택"></div>
+          <div class="grid lg:grid-cols-2 gap-10 items-center pt-12 reveal" id="field-panel"></div>
+        </div>
+      </section>
+
+      <!-- ═══ 셀피 후기 ═══ -->
+      <section class="py-20 md:py-28" id="selfie" style="background: var(--bg-2)">
+        <div class="container-x">
+          <div class="flex items-end justify-between mb-8 reveal">
+            <div><p class="eyebrow">Real Selfie</p><h2 class="serif text-3xl md:text-4xl font-semibold mt-3">셀피 후기</h2></div>
+            <div class="hidden md:flex gap-2">
+              <button class="hero-arrow" style="color:var(--ink); border-color:var(--line)" onclick="railScroll('selfie-rail',-1)" aria-label="이전 후기">←</button>
+              <button class="hero-arrow" style="color:var(--ink); border-color:var(--line)" onclick="railScroll('selfie-rail',1)" aria-label="다음 후기">→</button>
+            </div>
+          </div>
+          <div class="flex gap-2 overflow-x-auto pb-5 reveal" id="selfie-chips" role="group" aria-label="후기 카테고리"></div>
+          <div class="rail reveal" id="selfie-rail"></div>
+          <p class="mt-6 text-xs" style="color:var(--ink-2)">※ 시안용 예시 문구입니다. 실제 운영 시 초상권·개인정보 동의가 확인된 후기만 게시하며, 치료 효과는 개인에 따라 차이가 있을 수 있습니다.</p>
+        </div>
+      </section>
+
+      <!-- ═══ 전후사진 ═══ -->
+      <section class="py-20 md:py-28" id="beforeafter">
+        <div class="container-x">
+          <div class="text-center mb-8 reveal">
+            <p class="eyebrow">Before &amp; After</p>
+            <h2 class="serif text-3xl md:text-4xl font-semibold mt-3">전후사진</h2>
+            <p class="mt-4 text-sm" style="color:var(--ink-2)">아래는 레이아웃 시안입니다 — 실제 운영 시 심의·동의 절차를 거친 승인 자료로 교체됩니다.</p>
+          </div>
+          <div class="flex gap-2 overflow-x-auto pb-6 justify-start md:justify-center reveal" id="ba-chips" role="group" aria-label="전후사진 카테고리"></div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal" id="ba-grid"></div>
+          <p class="mt-8 text-[11px] leading-5 text-center" style="color:var(--ink-2)">
+            의료법 제56조에 따라 치료 전후 사진은 개별 상담 시에만 확인하실 수 있는 항목이 있을 수 있습니다.<br />
+            부작용이 있을 수 있으므로 의사와 상담 후 결정하시기 바랍니다. 효과는 개인에 따라 차이가 있습니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══ 이벤트 ═══ -->
+      <section class="py-20 md:py-28" id="events" style="background: var(--bg-2)">
+        <div class="container-x">
+          <div class="text-center mb-8 reveal">
+            <p class="eyebrow">Event</p>
+            <h2 class="serif text-3xl md:text-4xl font-semibold mt-3">진행 중인 이벤트</h2>
+          </div>
+          <div class="flex gap-2 overflow-x-auto pb-6 justify-start md:justify-center reveal" id="ev-chips" role="group" aria-label="이벤트 카테고리"></div>
+          <div class="grid md:grid-cols-3 gap-5 reveal" id="ev-grid"></div>
+          <div class="text-center mt-10"><button class="btn-hairline" id="ev-more">이벤트 더보기</button></div>
+          <p class="mt-6 text-xs text-center" style="color:var(--ink-2)">※ 가격·기간은 CMS(운영 데이터)에서 관리됩니다. 시안에는 노출하지 않습니다.</p>
+        </div>
+      </section>
+
+      <!-- ═══ 영상 ═══ -->
+      <section class="py-20 md:py-28" id="tv">
+        <div class="container-x">
+          <div class="flex items-end justify-between mb-10 reveal">
+            <div><p class="eyebrow">Bon:yeon TV</p><h2 class="serif text-3xl md:text-4xl font-semibold mt-3">영상으로 만나기</h2></div>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="text-sm underline underline-offset-4" style="color:var(--ink-2)">채널 바로가기 ↗</a>
+          </div>
+          <div class="grid md:grid-cols-4 gap-5 reveal" id="video-grid"></div>
+        </div>
+      </section>
+
+      <!-- ═══ 의료진 ═══ -->
+      <section class="py-20 md:py-28" id="doctors" style="background: var(--dark); color: var(--cream-on-dark)">
+        <div class="container-x">
+          <div class="text-center mb-12 reveal">
+            <p class="eyebrow">Doctors</p>
+            <h2 class="serif text-3xl md:text-4xl font-semibold mt-3">의료진</h2>
+            <p class="mt-4 text-sm" style="color:rgba(239,234,225,.55)">전 수술, 해당 분야 전문의가 상담부터 집도·경과까지 직접 책임집니다.</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6 reveal" id="doc-grid"></div>
+        </div>
+      </section>
+
+      <!-- ═══ 오시는길 ═══ -->
+      <section class="py-20 md:py-28" id="location">
+        <div class="container-x grid lg:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="eyebrow">Location</p>
+            <h2 class="serif text-3xl font-semibold mt-3">진료시간 · 오시는길</h2>
+            <div class="mt-8 space-y-2 text-[15px]" style="color:var(--ink-2)">
+              <p><strong style="color:var(--ink)">평일</strong> 10:00 – 19:00 (점심 13:00–14:00)</p>
+              <p><strong style="color:var(--ink)">토요일</strong> 10:00 – 16:00 (점심 없이 진료)</p>
+              <p><strong style="color:var(--ink)">일·공휴일</strong> 휴진</p>
+              <p class="pt-3"><strong style="color:var(--ink)">주소</strong> 서울 강남구 ○○대로 000 본연타워 3–8F</p>
+              <p><strong style="color:var(--ink)">대표번호</strong> <a href="tel:0200000000" class="underline underline-offset-4">02-000-0000</a></p>
+            </div>
+            <div class="tab-row mt-8" id="way-tabs" role="tablist" aria-label="교통편 선택"></div>
+            <div id="way-panel" class="pt-5 text-sm leading-7" style="color:var(--ink-2)"></div>
+          </div>
+          <div class="art reveal" style="aspect-ratio: 4/3">
+            <span class="mark">MAP — 지도 영역</span>
+            <span class="replace-note">카카오맵/네이버지도 embed 교체</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FAQ ═══ -->
+      <section class="py-20 md:py-28" id="faq" style="background: var(--bg-2)">
+        <div class="container-x" style="max-width: 820px">
+          <div class="text-center mb-10 reveal"><p class="eyebrow">FAQ</p><h2 class="serif text-3xl font-semibold mt-3">자주 묻는 질문</h2></div>
+          <div class="reveal">
+            <details class="faq"><summary>상담만 받아도 되나요?</summary><div class="a">네. 상담과 검진 결과 설명까지가 하나의 진료입니다. 당일 결정을 권하지 않으며, 충분히 비교하고 돌아오셔도 좋습니다.</div></details>
+            <details class="faq"><summary>수술은 누가 하나요?</summary><div class="a">상담한 전문의가 직접 집도합니다. 수술 동의서에 집도의를 명시하고, 경과 확인도 같은 의료진이 봅니다.</div></details>
+            <details class="faq"><summary>부작용이 걱정됩니다.</summary><div class="a">모든 수술·시술에는 부작용 가능성이 있습니다. 상담 시 기대 효과와 함께 발생 가능한 부작용·회복 기간을 서면으로 안내드리며, 충분히 이해되신 후에만 진행합니다.</div></details>
+            <details class="faq"><summary>비용은 어디서 확인하나요?</summary><div class="a">항목별 비급여 수가는 원내 게시 및 상담 시 안내됩니다. 정확한 비용은 검진·상담 후 개인 상태에 따라 산정됩니다.</div></details>
+            <details class="faq"><summary>주차가 가능한가요?</summary><div class="a">본연타워 지하 주차장을 이용하실 수 있으며, 진료 고객에게 주차권을 드립니다.</div></details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 빠른 상담 폼 ═══ -->
+      <section class="py-20 md:py-28" id="consult" style="background: var(--dark); color: var(--cream-on-dark)">
+        <div class="container-x grid lg:grid-cols-2 gap-14 items-start">
+          <div class="reveal">
+            <p class="eyebrow">Consultation</p>
+            <h2 class="serif text-3xl md:text-5xl font-semibold mt-4 leading-snug">궁금한 것부터,<br />편하게 물어보세요.</h2>
+            <p class="mt-7 text-[15px] leading-8" style="color:rgba(239,234,225,.6)">
+              남기신 연락처로 상담 간호사가 먼저 연락드립니다.<br />
+              전화가 부담스러우시면 카카오톡 상담을 선택하세요.
+            </p>
+            <div class="mt-8 flex gap-3">
+              <a href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener" class="btn-hairline" style="border-color:rgba(239,234,225,.4); color:var(--cream-on-dark)">카카오톡 1:1 상담</a>
+              <a href="tel:0200000000" class="btn-hairline" style="border-color:rgba(239,234,225,.4); color:var(--cream-on-dark)">전화 상담</a>
+            </div>
+          </div>
+          <form class="reveal space-y-4" id="quick-consult" novalidate>
+            <div>
+              <input class="f-field" name="name" placeholder="성함 *" aria-label="성함" />
+              <p class="f-err" data-for="name">성함을 입력해주세요.</p>
+            </div>
+            <div>
+              <input class="f-field" name="phone" type="tel" placeholder="연락처 * (예: 010-1234-5678)" aria-label="연락처" />
+              <p class="f-err" data-for="phone">올바른 연락처를 입력해주세요.</p>
+            </div>
+            <div>
+              <select class="f-field" name="part" aria-label="상담 부위">
+                <option value="">상담 부위 선택 *</option>
+                <option>가슴</option><option>윤곽</option><option>양악</option><option>눈</option><option>코</option>
+                <option>지방흡입</option><option>리프팅/주름</option><option>피부과</option><option>모발이식</option><option>기타</option>
+              </select>
+              <p class="f-err" data-for="part">상담 부위를 선택해주세요.</p>
+            </div>
+            <fieldset class="flex gap-6 text-sm" style="color:rgba(239,234,225,.75)">
+              <legend class="sr-only">상담 방식</legend>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="channel" value="전화 상담" checked /> 전화 상담</label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="channel" value="카카오 상담" /> 카카오 상담</label>
+            </fieldset>
+            <div>
+              <label class="flex items-start gap-2 text-xs cursor-pointer" style="color:rgba(239,234,225,.5); line-height:1.6">
+                <input type="checkbox" name="agree" style="margin-top:3px" />
+                (필수) 개인정보 수집·이용에 동의합니다. 상담 목적 외 사용하지 않으며 목적 달성 후 파기합니다.
+              </label>
+              <p class="f-err" data-for="agree">개인정보 동의가 필요합니다.</p>
+            </div>
+            <button type="submit" class="btn-ink w-full" style="background:var(--gold); color:#141312" id="consult-btn">상담 신청하기</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-12" style="background:#0d0c0b; color:rgba(239,234,225,.5)">
+      <div class="container-x">
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs mb-8">
+          <a href="#about" class="hover:text-white">병원소개</a><a href="#" class="hover:text-white">이용약관</a>
+          <a href="#" class="hover:text-white font-bold" style="color:rgba(239,234,225,.8)">개인정보처리방침</a>
+          <a href="#" class="hover:text-white">비급여수가</a><a href="#location" class="hover:text-white">오시는길</a>
+          <span class="opacity-40">|</span>
+          <a href="#" class="hover:text-white">YouTube</a><a href="#" class="hover:text-white">Instagram</a><a href="#" class="hover:text-white">네이버 블로그</a>
+        </div>
+        <p class="text-[11px] leading-6">
+          본연 성형외과의원 · 대표자: ○○○ · 사업자등록번호: 000-00-00000 · 서울 강남구 ○○대로 000 본연타워<br />
+          대표전화 02-000-0000 · 의료기관 개설신고: 제0000호<br /><br />
+          <strong style="color:rgba(239,234,225,.7)">의료광고 심의 관련 고지</strong> — 본 페이지는 NOAH 레퍼런스 디자인 시안으로, 실제 의료기관이 아닙니다.
+          실제 운영 시 모든 치료 사진·후기·문구는 의료광고 사전심의 및 초상권·개인정보 동의 절차를 거쳐 게시해야 합니다.
+          모든 수술·시술은 부작용이 발생할 수 있으므로 의사와 충분히 상담하시기 바랍니다.
+        </p>
+      </div>
+    </footer>
+
+    <!-- 우측 고정 CTA (PC) -->
+    <aside class="side-cta" id="side-cta" aria-label="빠른 메뉴">
+      <button class="fold" onclick="document.getElementById('side-cta').classList.remove('folded')">빠른메뉴 열기</button>
+      <a href="#events">🎁<span>이벤트</span></a>
+      <a href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener">💬<span>카카오 상담</span></a>
+      <a href="#consult">💰<span>비용 상담</span></a>
+      <a href="#consult">📅<span>온라인 예약</span></a>
+      <button class="fold-in item" onclick="document.getElementById('side-cta').classList.add('folded')">접기 ›</button>
+    </aside>
+
+    <!-- 모바일 하단 고정 CTA -->
+    <nav class="m-cta" aria-label="모바일 빠른 메뉴">
+      <a class="kakao" href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener">카카오 상담</a>
+      <a class="cost" href="#consult">비용 상담</a>
+      <a class="book" href="#consult">온라인 예약</a>
+    </nav>
+
+    <!-- 로그인 모달 -->
+    <div class="modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <div class="modal-box">
+        <button class="modal-x" aria-label="닫기" onclick="closeModal('login-modal')">×</button>
+        <div class="flex gap-6 border-b mb-6" style="border-color:var(--line)">
+          <button class="tab-btn" aria-selected="true" data-auth="login" onclick="authTab('login')">로그인</button>
+          <button class="tab-btn" aria-selected="false" data-auth="join" onclick="authTab('join')">회원가입</button>
+        </div>
+        <div id="auth-login">
+          <div class="space-y-3">
+            <input class="f-field" placeholder="아이디 또는 이메일" aria-label="아이디" />
+            <input class="f-field" type="password" placeholder="비밀번호" aria-label="비밀번호" />
+          </div>
+          <button class="btn-ink w-full mt-4" onclick="toast('시안 모드 — 실제 로그인은 운영 서버 연결 후 작동합니다')">로그인</button>
+          <div class="flex justify-between text-xs mt-3" style="color:var(--ink-2)">
+            <button class="underline" onclick="toast('비밀번호 재설정 메일 발송 — 시안 데모')">비밀번호 찾기</button>
+            <button class="underline" onclick="authTab('join')">아직 회원이 아니신가요?</button>
+          </div>
+          <div class="mt-6 pt-5 border-t space-y-2" style="border-color:var(--line)">
+            <button class="w-full py-3 text-sm font-bold" style="background:#fee500; color:#191919" onclick="toast('카카오 로그인 — 시안 데모')">카카오로 계속하기</button>
+            <button class="w-full py-3 text-sm font-bold text-white" style="background:#03c75a" onclick="toast('네이버 로그인 — 시안 데모')">네이버로 계속하기</button>
+          </div>
+        </div>
+        <div id="auth-join" class="hidden">
+          <div class="space-y-3">
+            <div class="flex gap-2"><input class="f-field" placeholder="아이디" aria-label="아이디" id="join-id" /><button class="btn-hairline whitespace-nowrap" style="padding:0 16px" onclick="toast(document.getElementById('join-id').value ? '사용 가능한 아이디입니다' : '아이디를 입력해주세요')">중복확인</button></div>
+            <input class="f-field" type="email" placeholder="이메일" aria-label="이메일" />
+            <input class="f-field" type="password" placeholder="비밀번호 (8자 이상)" aria-label="비밀번호" />
+          </div>
+          <label class="flex items-start gap-2 text-xs mt-4 cursor-pointer" style="color:var(--ink-2)"><input type="checkbox" style="margin-top:2px" /> (필수) 이용약관 및 개인정보처리방침에 동의합니다.</label>
+          <button class="btn-ink w-full mt-4" onclick="toast('시안 모드 — 회원가입은 운영 서버 연결 후 작동합니다')">가입하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 전후사진 확대 모달 -->
+    <div class="modal" id="ba-modal" role="dialog" aria-modal="true" aria-label="전후사진 확대">
+      <div class="modal-box" style="max-width: 760px">
+        <button class="modal-x" aria-label="닫기" onclick="closeModal('ba-modal')">×</button>
+        <div id="ba-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- 의료진 프로필 모달 -->
+    <div class="modal" id="doc-modal" role="dialog" aria-modal="true" aria-label="의료진 프로필">
+      <div class="modal-box">
+        <button class="modal-x" aria-label="닫기" onclick="closeModal('doc-modal')">×</button>
+        <div id="doc-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- 영상 모달 -->
+    <div class="modal" id="video-modal" role="dialog" aria-modal="true" aria-label="영상 재생">
+      <div class="modal-box" style="max-width: 860px; padding: 20px">
+        <button class="modal-x" aria-label="닫기" onclick="closeModal('video-modal')" style="color:#fff; z-index:2">×</button>
+        <div id="video-modal-body" class="art dark" style="aspect-ratio:16/9"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+    /* ═══════════════════════════════════════════════
+       데이터 (CMS 대응 구조 — 운영 시 이 배열만 교체)
+       ═══════════════════════════════════════════════ */
+    const MENU = [
+      { label: '병원소개', cols: 1, items: [
+        ['본연의 특별함', '#about'], ['의료진 소개', '#doctors'], ['진료시간·오시는길', '#location'], ['병원 둘러보기', '#about'],
+      ]},
+      { label: '안전시스템', cols: 1, items: [
+        ['검진센터', '#safety'], ['안전수술시스템', '#safety'], ['애프터케어', '#safety'], ['수술 전·후 주의사항', '#safety'],
+      ]},
+      { label: '가슴·체형', cols: 2, items: [
+        ['가슴성형', '#fields@breast'], ['가슴확대·축소', '#fields@breast'], ['가슴재수술', '#fields@breast'], ['유방검진·맘모톰', '#fields@breast'],
+        ['지방흡입', '#fields@body'], ['부위별 지방흡입', '#fields@body'], ['복부거상술', '#fields@body'], ['지방이식', '#fields@body'],
+      ]},
+      { label: '안면', cols: 3, items: [
+        ['안면윤곽 3종', '#fields@contour'], ['브이라인·광대', '#fields@contour'], ['사각턱·턱끝', '#fields@contour'],
+        ['양악수술', '#fields@contour'], ['돌출입수술', '#fields@contour'], ['윤곽 재수술', '#fields@contour'],
+        ['쌍꺼풀·눈매교정', '#fields@eye'], ['트임·눈밑지방', '#fields@eye'], ['중년 눈성형', '#fields@eye'],
+        ['코성형', '#fields@nose'], ['기능코·재수술', '#fields@nose'], ['남자 성형', '#fields@man'],
+      ]},
+      { label: '피부·안티에이징', cols: 2, items: [
+        ['리프팅 (2030·4050)', '#fields@lift'], ['실리프팅·미니거상', '#fields@lift'], ['안면거상', '#fields@lift'],
+        ['피부과 프로그램', '#fields@derma'], ['스킨부스터·브라이트닝', '#fields@derma'], ['모발이식·줄기세포', '#fields@derma'],
+      ]},
+      { label: '커뮤니티', cols: 1, items: [
+        ['전후사진', '#beforeafter'], ['셀피 후기', '#selfie'], ['이벤트', '#events'], ['본연TV', '#tv'], ['온라인 상담·예약', '#consult'],
+      ]},
+    ];
+
+    const HERO_SLIDES = [
+      { eyebrow: 'BON:YEON PLASTIC SURGERY', title: '본래의 얼굴에서<br/>시작합니다', sub: '과하지 않게 — 조화를 설계하는 성형', cta: ['상담 예약', '#consult'], dark: true, mark: 'Hero · Face 21:9' },
+      { eyebrow: 'SAFETY FIRST', title: '안전은 시스템으로<br/>약속합니다', sub: '검진센터 · 마취과 전문의 상주 · 1인 1수술방', cta: ['안전 시스템 보기', '#safety'], dark: true, mark: 'Hero · Building' },
+      { eyebrow: 'EYE', title: '자연스러움이<br/>가장 어려운 디자인', sub: '눈매의 비율에서 출발하는 눈성형', cta: ['눈성형 보기', '#fields@eye'], dark: false, mark: 'Hero · Eye' },
+      { eyebrow: 'NOSE', title: '얼굴형에 맞는<br/>단 하나의 코 라인', sub: '3D 분석 기반 맞춤 설계', cta: ['코성형 보기', '#fields@nose'], dark: true, mark: 'Hero · Profile' },
+      { eyebrow: 'FACIAL CONTOUR', title: '윤곽은 밀리미터의<br/>설득입니다', sub: '3D CT 분석 · 전문의 협진', cta: ['윤곽·양악 보기', '#fields@contour'], dark: false, mark: 'Hero · Contour' },
+      { eyebrow: 'BREAST', title: '실루엣은 자연에서<br/>배웁니다', sub: '체형 비율 기반 가슴성형', cta: ['가슴성형 보기', '#fields@breast'], dark: true, mark: 'Hero · Silhouette' },
+      { eyebrow: 'ANTI-AGING', title: '시간을 지우지 않고,<br/>결을 정돈합니다', sub: '연령대별 리프팅 프로그램', cta: ['리프팅 보기', '#fields@lift'], dark: false, mark: 'Hero · Ageless' },
+      { eyebrow: 'MEN', title: '남자의 인상은<br/>선에서 완성됩니다', sub: '남자 눈·코·윤곽 전담 프로그램', cta: ['남자성형 보기', '#fields@man'], dark: true, mark: 'Hero · Men' },
+      { eyebrow: 'DERMATOLOGY', title: '피부는 매일의<br/>바탕입니다', sub: '진단 기반 피부과 프로그램', cta: ['피부과 보기', '#fields@derma'], dark: false, mark: 'Hero · Skin' },
+      { eyebrow: 'AFTER CARE', title: '수술 다음 날부터가<br/>진짜 시작', sub: '회복 관리 · 정기 경과 확인', cta: ['애프터케어 보기', '#safety'], dark: true, mark: 'Hero · Care' },
+    ];
+
+    const STRENGTHS = [
+      ['스마트 메디컬 빌딩', '상담·검진·수술·회복을 한 건물에서. 이동 동선까지 프라이버시를 설계했습니다.', 'Building'],
+      ['원내 검진센터', '수술 전 필수 검사를 원내에서 당일 진행합니다.', 'Check-up'],
+      ['안전수술시스템', '마취과 전문의 상주, 1인 1수술방, 응급 대응 체계.', 'Safety'],
+      ['애프터케어', '회복 관리 프로그램과 정기 경과 확인.', 'After care'],
+      ['분야별 전문의', '상담한 의사가 집도합니다. 동의서에 집도의를 명시합니다.', 'Doctors'],
+      ['프라이빗 시설', '1인 상담실·회복실 — 마주치지 않는 동선.', 'Private'],
+    ];
+
+    const CARE_TABS = {
+      '가슴': '수술 전 2주 금연·금주를 권장합니다. 아스피린 등 혈액응고 관련 약물은 반드시 사전에 알려주세요. 수술 후 압박복 착용 기간과 팔 움직임 범위는 담당의 안내를 따릅니다.',
+      '윤곽': '수술 전 CT 촬영 결과에 따라 계획이 확정됩니다. 수술 후 일정 기간 유동식 식사가 필요하며, 붓기 관리 프로그램이 함께 진행됩니다.',
+      '양악': '교정과 협진 일정이 함께 계획됩니다. 수술 전 구강 위생 관리가 중요하며, 수술 후 식이 단계별 안내를 따라주세요.',
+      '눈': '수술 전 렌즈 대신 안경을 착용해 주세요. 수술 후 냉찜질·온찜질 시점은 안내에 따라 구분합니다.',
+      '코': '수술 전 코감기·비염 증상이 있다면 미리 알려주세요. 수술 후 일정 기간 안경 착용과 코 풀기를 피해야 합니다.',
+      '지방흡입': '수술 부위에 따라 압박복 착용 기간이 다릅니다. 가벼운 걷기는 회복에 도움이 되며 무리한 운동은 안내된 시점 이후에 시작합니다.',
+      '지방이식': '이식 부위 생착 기간 동안 압박·마찰을 피해주세요. 흡연은 생착률에 영향을 줄 수 있습니다.',
+      '리프팅': '시술 종류에 따라 회복 기간이 다릅니다. 시술 후 일정 기간 사우나·격한 운동을 피해주세요.',
+    };
+
+    const FIELDS = {
+      breast: { name: '가슴', title: '실루엣은 비율에서 시작합니다', copy: '가슴확대·축소, 출산 후 가슴성형, 교정과 재수술까지 — 체형 전체의 비율을 먼저 보고 크기를 결정합니다. 유방검진·맘모톰 등 여성 검진과 함께 설계합니다.', items: ['가슴확대 · 축소', '출산 후 가슴성형', '가슴교정 · 보형물 제거', '가슴재수술', '유방검진 · 맘모톰'] },
+      eye: { name: '눈', title: '자연스러움이 가장 어려운 디자인', copy: '쌍꺼풀(콤비매몰·자연유착·절개), 눈매교정, 트임, 눈밑지방재배치, 그리고 상·하안검과 눈썹거상까지 — 연령과 눈매 비율에 맞춰 설계합니다.', items: ['쌍꺼풀 3가지 방식', '눈매교정 · 트임', '눈밑지방재배치', '중년 눈성형 (상·하안검)', '눈 재수술'] },
+      nose: { name: '코', title: '얼굴형에 맞는 단 하나의 라인', copy: '숨쉬기 편한 기능코 성형부터 무보형물 코끝, 3D 맞춤 설계, 콧볼축소, 재수술까지 — 정면과 측면 프로필을 함께 봅니다.', items: ['기능코 성형', '무보형물 코끝성형', '3D 맞춤 코성형', '콧볼축소', '코 재수술'] },
+      contour: { name: '윤곽·양악', title: '윤곽은 밀리미터의 설득입니다', copy: '3D CT 분석으로 골격을 먼저 이해하고, 윤곽 3종·브이라인·광대·사각턱·턱끝, 그리고 양악·돌출입까지 — 전문의 협진으로 진행합니다.', items: ['윤곽 3종 · 브이라인', '광대축소 · 사각턱 · 턱끝', '양악수술 · 돌출입', '유형별 양악 · 삼악', '윤곽 · 양악 재수술'] },
+      body: { name: '체형', title: '라인은 빼는 것이 아니라 다듬는 것', copy: '부위별 지방흡입, 복부거상, 얼굴 지방흡입과 지방이식까지 — 체성분 분석을 기반으로 다듬을 곳과 남길 곳을 구분합니다.', items: ['부위별 지방흡입', '복부거상술', '얼굴 지방흡입', '지방이식'] },
+      lift: { name: '동안', title: '시간을 지우지 않고 결을 정돈합니다', copy: '2030 리프팅부터 4050, 실리프팅·미니거상·안면거상까지 — 연령대와 피부 상태에 따라 단계적으로 접근합니다.', items: ['2030 · 4050 리프팅', '3중 페이스핏', '실리프팅', '미니거상 · 안면거상'] },
+      man: { name: '남자', title: '남자의 인상은 선에서 완성됩니다', copy: '남자 눈·코 성형, 모델라인 윤곽, 여성형유방까지 — 남성 얼굴의 각과 비율을 기준으로 자연스러운 인상을 설계합니다.', items: ['TOP 코성형', '남자 눈성형', '모델라인 윤곽', '여성형유방'] },
+      derma: { name: '피부', title: '피부는 매일의 바탕입니다', copy: '울쎄라·써마지·리쥬란과 스킨부스터, 브라이트닝, 여드름·모공·흉터, 그리고 모발이식과 줄기세포 프로그램까지 — 진단 장비 기반으로 처방합니다.', items: ['리프팅 레이저 (울쎄라·써마지)', '스킨부스터 · 리쥬란', '브라이트닝 · 여드름/모공', '모발이식 · 두피 진단', '줄기세포 웰에이징'] },
+    };
+
+    const SELFIES = [
+      { cat: '눈', text: '수술한 티가 안 나서 회사에서 아무도 몰랐어요. 그게 제일 마음에 듭니다.', who: '20대 · 눈성형' },
+      { cat: '코', text: '측면 사진을 찍는 게 더 이상 무섭지 않아요.', who: '30대 · 코성형' },
+      { cat: '윤곽/양악', text: '상담 때 안 해도 되는 부위를 먼저 말해주셔서 신뢰가 갔습니다.', who: '20대 · 윤곽' },
+      { cat: '가슴', text: '체형에 맞는 사이즈를 권해주셔서 자연스러워요. 회복 관리도 꼼꼼했습니다.', who: '30대 · 가슴성형' },
+      { cat: '동안', text: '어머니 리프팅 상담부터 경과까지 같은 원장님이 봐주셔서 안심됐어요.', who: '50대 · 리프팅' },
+      { cat: '남자', text: '남자 상담 동선이 분리되어 있어 편했습니다. 결과도 과하지 않아요.', who: '30대 · 남자 코' },
+      { cat: '피부', text: '피부 진단 결과를 그래프로 보여주고 필요한 것만 권해주셨어요.', who: '20대 · 스킨부스터' },
+      { cat: '체형', text: '수치보다 라인을 보고 설계한다는 말이 결과로 이해됐습니다.', who: '30대 · 지방흡입' },
+    ];
+
+    const BA_ITEMS = [
+      { cat: '눈' }, { cat: '코' }, { cat: '윤곽/양악' }, { cat: '가슴' },
+      { cat: '체형' }, { cat: '동안' }, { cat: '남자' }, { cat: '피부' },
+    ];
+
+    const EVENTS = [
+      { cat: 'Best', title: '첫 방문 정밀 피부진단', desc: '진단 장비 기반 피부 분석 + 맞춤 상담' },
+      { cat: '눈', title: '자연유착 쌍꺼풀 상담전', desc: '눈매 비율 분석과 함께하는 디자인 상담' },
+      { cat: '코', title: '3D 맞춤 코성형 플랜', desc: '측면 프로필 시뮬레이션 상담' },
+      { cat: '안면윤곽', title: '윤곽 3종 정밀 CT 플랜', desc: '3D CT 분석 포함 상담 프로그램' },
+      { cat: '동안/리프팅', title: '4050 리프팅 시그니처', desc: '연령 맞춤 리프팅 설계 상담' },
+      { cat: '스킨&쁘띠', title: '스킨부스터 첫 케어', desc: '피부 진단 후 맞춤 부스터 프로그램' },
+      { cat: '가슴', title: '가슴성형 검진 패키지', desc: '유방검진과 함께하는 안전 상담' },
+      { cat: '남자', title: '맨즈 라인 컨설팅', desc: '남자 눈·코·윤곽 통합 상담' },
+      { cat: '지방흡입/체형', title: '바디라인 체성분 플랜', desc: '체성분 분석 기반 부위 설계' },
+      { cat: '모발이식', title: '두피 진단 데이', desc: '모발 밀도 측정 + 이식 상담' },
+      { cat: '줄기세포', title: '웰에이징 프로그램', desc: '줄기세포 시술 프로세스 안내' },
+      { cat: 'Best', title: '애프터케어 멤버십', desc: '수술 고객 회복 관리 프로그램' },
+    ];
+
+    const VIDEOS = [
+      { type: '인터뷰', title: '대표원장이 말하는 "본연"의 기준', dur: '12:04' },
+      { type: '병원투어', title: '검진센터부터 회복실까지 — 풀 투어', dur: '8:31' },
+      { type: 'Q&A', title: '눈성형, 가장 많이 받는 질문 7', dur: '9:18' },
+      { type: 'Shorts', title: '수술 전 검진, 왜 꼭 하나요?', dur: '0:58' },
+    ];
+
+    const DOCTORS = [
+      { name: '김본연', role: '대표원장 · 성형외과 전문의', field: '윤곽 · 양악', bio: ['성형외과 전문의', '○○대학교 의과대학 졸업', '前 ○○대학병원 성형외과 임상교수', '대한성형외과학회 정회원', '악안면성형재건외과학회 정회원'] },
+      { name: '이서진', role: '원장 · 성형외과 전문의', field: '눈 · 코', bio: ['성형외과 전문의', '○○대학교 의과대학 졸업', '눈성형연구회 정회원', '코성형연구회 정회원'] },
+      { name: '박하늘', role: '원장 · 피부과 전문의', field: '피부 · 레이저', bio: ['피부과 전문의', '○○대학교 의과대학 졸업', '대한피부과학회 정회원', '레이저의학회 정회원'] },
+    ];
+
+    const WAYS = {
+      '지하철': '2호선 ○○역 3번 출구 도보 2분. 지하 통로가 본연타워와 연결되어 있습니다.',
+      '버스': '간선 000·000번, 지선 0000번 — "○○사거리" 정류장 하차 후 도보 1분.',
+      '자가용': '본연타워 지하주차장 이용 (진료 고객 주차권 제공). 내비게이션에 "본연타워"를 검색하세요.',
+    };
+
+    /* ═══════ 유틸 ═══════ */
+    const $ = (s, p=document) => p.querySelector(s);
+    const $$ = (s, p=document) => [...p.querySelectorAll(s)];
+    const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2600); }
+    function openModal(id) { $('#'+id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal(id) { $('#'+id).classList.remove('open'); document.body.style.overflow = ''; if (id==='video-modal') $('#video-modal-body').innerHTML=''; }
+    $$('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.modal.open').forEach(m => closeModal(m.id)); });
+    function closeDrawer() { $('#drawer').classList.remove('open'); document.body.style.overflow = ''; }
+    function railScroll(id, dir) { const r = $('#'+id); r.scrollBy({ left: dir * (r.firstElementChild?.offsetWidth + 18 || 340), behavior: 'smooth' }); }
+
+    /* ═══════ GNB (메가메뉴 + 드로어) ═══════ */
+    function goLink(href) {
+      // '#fields@eye' → 탭 활성 후 스크롤
+      const [anchor, tab] = href.split('@');
+      if (tab) activateField(tab);
+      document.querySelector(anchor)?.scrollIntoView({ behavior: 'smooth' });
+    }
+    $('#gnb').innerHTML = MENU.map((g, gi) => `
+      <div class="gnb-item">
+        <button aria-haspopup="true">${esc(g.label)}</button>
+        <div class="mega" style="--cols:${g.cols}">
+          ${g.items.map(([label, href]) => `<a href="${href.split('@')[0]}" data-link="${href}">${esc(label)}</a>`).join('')}
+        </div>
+      </div>`).join('');
+    $('#drawer-menu').innerHTML = MENU.map(g => `
+      <details><summary>${esc(g.label)}</summary><div class="sub pb-3">
+        ${g.items.map(([label, href]) => `<a href="${href.split('@')[0]}" data-link="${href}">${esc(label)}</a>`).join('')}
+      </div></details>`).join('');
+    $$('[data-link]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); closeDrawer(); goLink(a.dataset.link); }));
+
+    /* ═══════ 히어로 슬라이더 ═══════ */
+    const slidesEl = $('#hero-slides'), dotsEl = $('#hero-dots');
+    slidesEl.innerHTML = HERO_SLIDES.map((s, i) => `
+      <div class="hero-slide${i===0?' active':''}" role="group" aria-roledescription="slide" aria-label="${i+1} / ${HERO_SLIDES.length}">
+        <div class="hero-art art ${s.dark?'dark':''}"><span class="mark">${esc(s.mark)}</span><span class="replace-note">IMAGE_PROMPTS_CLINIC.md 참조 교체</span></div>
+        <div class="hero-copy container-x" style="${s.dark?'':'color:#141312'}">
+          <p class="eyebrow">${esc(s.eyebrow)}</p>
+          <h2 class="serif t mt-5">${s.title}</h2>
+          <p class="mt-5 text-base md:text-lg" style="opacity:.72">${esc(s.sub)}</p>
+          <a href="${s.cta[1].split('@')[0]}" data-link="${s.cta[1]}" class="btn-ink mt-8" style="${s.dark?'background:var(--gold); color:#141312':''}">${esc(s.cta[0])} →</a>
+        </div>
+      </div>`).join('');
+    dotsEl.innerHTML = HERO_SLIDES.map((_, i) => `<button role="tab" aria-label="${i+1}번 슬라이드" aria-current="${i===0}"></button>`).join('');
+    $$('#hero-slides [data-link]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goLink(a.dataset.link); }));
+
+    let heroIdx = 0, heroTimer;
+    function heroGo(n) {
+      const slides = $$('.hero-slide');
+      slides[heroIdx].classList.remove('active');
+      $$('#hero-dots button')[heroIdx].setAttribute('aria-current', 'false');
+      heroIdx = (n + slides.length) % slides.length;
+      slides[heroIdx].classList.add('active');
+      $$('#hero-dots button')[heroIdx].setAttribute('aria-current', 'true');
+      $('#hero-counter').textContent = String(heroIdx+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+    }
+    function heroPlay() { clearInterval(heroTimer); heroTimer = setInterval(() => heroGo(heroIdx+1), 4600); }
+    $('#hero-prev').onclick = () => { heroGo(heroIdx-1); heroPlay(); };
+    $('#hero-next').onclick = () => { heroGo(heroIdx+1); heroPlay(); };
+    $$('#hero-dots button').forEach((d, i) => d.onclick = () => { heroGo(i); heroPlay(); });
+    const heroEl = $('#hero');
+    heroEl.addEventListener('mouseenter', () => clearInterval(heroTimer));
+    heroEl.addEventListener('mouseleave', heroPlay);
+    let tx0 = null;
+    heroEl.addEventListener('touchstart', e => tx0 = e.touches[0].clientX, { passive: true });
+    heroEl.addEventListener('touchend', e => {
+      if (tx0 === null) return;
+      const dx = e.changedTouches[0].clientX - tx0;
+      if (Math.abs(dx) > 46) { heroGo(heroIdx + (dx < 0 ? 1 : -1)); heroPlay(); }
+      tx0 = null;
+    }, { passive: true });
+    heroPlay();
+
+    /* ═══════ 강점 레일 ═══════ */
+    $('#strength-rail').innerHTML = STRENGTHS.map(([t, d, mark]) => `
+      <article class="thin-card">
+        <div class="art" style="aspect-ratio:16/10"><span class="mark">${esc(mark)}</span></div>
+        <div class="p-6"><h3 class="font-semibold text-lg">${esc(t)}</h3><p class="mt-2 text-sm leading-7" style="color:var(--ink-2)">${esc(d)}</p></div>
+      </article>`).join('');
+
+    /* ═══════ 전·후 주의사항 탭 ═══════ */
+    const careKeys = Object.keys(CARE_TABS);
+    $('#care-tabs').innerHTML = careKeys.map((k, i) => `<button class="tab-btn" role="tab" aria-selected="${i===0}" style="color:${i===0?'var(--cream-on-dark)':'rgba(239,234,225,.5)'}; border-bottom-color:${i===0?'var(--gold)':'transparent'}" data-care="${esc(k)}">${esc(k)}</button>`).join('');
+    function setCare(k) {
+      $('#care-panel').textContent = CARE_TABS[k];
+      $$('#care-tabs .tab-btn').forEach(b => {
+        const on = b.dataset.care === k;
+        b.setAttribute('aria-selected', on);
+        b.style.color = on ? 'var(--cream-on-dark)' : 'rgba(239,234,225,.5)';
+        b.style.borderBottomColor = on ? 'var(--gold)' : 'transparent';
+      });
+    }
+    $$('#care-tabs .tab-btn').forEach(b => b.onclick = () => setCare(b.dataset.care));
+    setCare(careKeys[0]);
+
+    /* ═══════ 진료 분야 탭 ═══════ */
+    $('#field-tabs').innerHTML = Object.entries(FIELDS).map(([key, f], i) => `<button class="tab-btn" role="tab" aria-selected="${i===0}" data-field="${key}">${esc(f.name)}</button>`).join('');
+    function activateField(key) {
+      const f = FIELDS[key]; if (!f) return;
+      $$('#field-tabs .tab-btn').forEach(b => b.setAttribute('aria-selected', b.dataset.field === key));
+      $('#field-panel').innerHTML = `
+        <div class="art" style="aspect-ratio:4/3"><span class="mark">${esc(f.name)} — cat image</span><span class="replace-note">cat-${key}.jpg 교체</span></div>
+        <div>
+          <h3 class="serif text-2xl md:text-3xl font-semibold">${esc(f.title)}</h3>
+          <p class="mt-5 text-[15px] leading-8" style="color:var(--ink-2)">${esc(f.copy)}</p>
+          <ul class="mt-6 space-y-2.5">${f.items.map(x => `<li class="flex items-center gap-3 text-[15px]"><span style="color:var(--gold)">—</span>${esc(x)}</li>`).join('')}</ul>
+          <div class="mt-8 flex gap-3 flex-wrap">
+            <a href="#consult" class="btn-ink">이 분야 상담하기</a>
+            <a href="#beforeafter" class="btn-hairline" onclick="setBa('${esc(f.name).replace('윤곽·양악','윤곽/양악')}')">전후사진 보기</a>
+          </div>
+        </div>`;
+    }
+    $$('#field-tabs .tab-btn').forEach(b => b.onclick = () => activateField(b.dataset.field));
+    activateField('breast');
+
+    /* ═══════ 셀피 후기 ═══════ */
+    const selfieCats = ['전체', ...new Set(SELFIES.map(s => s.cat))];
+    $('#selfie-chips').innerHTML = selfieCats.map((c, i) => `<button class="chip" aria-pressed="${i===0}" data-sc="${esc(c)}">${esc(c)}</button>`).join('');
+    function renderSelfies(cat) {
+      const list = SELFIES.filter(s => cat === '전체' || s.cat === cat);
+      $('#selfie-rail').innerHTML = list.length ? list.map(s => `
+        <article class="thin-card">
+          <div class="art" style="aspect-ratio:4/5"><span class="mark">Selfie</span><span class="replace-note">동의 확인 후기만 게시</span></div>
+          <div class="p-5"><p class="text-sm leading-7">"${esc(s.text)}"</p><p class="mt-3 text-xs" style="color:var(--ink-2)">${esc(s.who)} · 개인차 있음</p></div>
+        </article>`).join('')
+        : `<div class="empty-state" style="grid-auto-columns:100%">아직 이 카테고리의 후기가 없습니다.</div>`;
+    }
+    $$('#selfie-chips .chip').forEach(c => c.onclick = () => { $$('#selfie-chips .chip').forEach(x => x.setAttribute('aria-pressed', x===c)); renderSelfies(c.dataset.sc); });
+    renderSelfies('전체');
+
+    /* ═══════ 전후사진 ═══════ */
+    const baCats = ['전체', ...new Set(BA_ITEMS.map(b => b.cat))];
+    $('#ba-chips').innerHTML = baCats.map((c, i) => `<button class="chip" aria-pressed="${i===0}" data-bc="${esc(c)}">${esc(c)}</button>`).join('');
+    function renderBa(cat) {
+      const list = BA_ITEMS.filter(b => cat === '전체' || b.cat === cat);
+      $('#ba-grid').innerHTML = list.length ? list.map(b => `
+        <button class="thin-card text-left" onclick="openBa('${esc(b.cat)}')" aria-label="${esc(b.cat)} 전후사진 크게 보기">
+          <div class="ba-pair">
+            <div class="cell art"><span class="lbl">BEFORE</span><span class="mark" style="font-size:13px">승인 자료</span></div>
+            <div class="cell art"><span class="lbl">AFTER</span><span class="mark" style="font-size:13px">교체 영역</span></div>
+          </div>
+          <p class="p-4 text-sm font-semibold">${esc(b.cat)}</p>
+        </button>`).join('')
+        : `<div class="empty-state md:col-span-4">해당 카테고리의 승인된 자료가 아직 없습니다.</div>`;
+    }
+    function setBa(cat) {
+      const btn = $$('#ba-chips .chip').find(c => c.dataset.bc === cat) || $$('#ba-chips .chip')[0];
+      $$('#ba-chips .chip').forEach(x => x.setAttribute('aria-pressed', x === btn));
+      renderBa(btn.dataset.bc);
+    }
+    function openBa(cat) {
+      $('#ba-modal-body').innerHTML = `
+        <h3 class="serif text-xl font-semibold mb-4">${esc(cat)} — 전후사진</h3>
+        <div class="ba-pair" style="cursor:default">
+          <div class="cell art"><span class="lbl">BEFORE</span><span class="mark" style="font-size:14px">동일 조명·각도 기준</span></div>
+          <div class="cell art"><span class="lbl">AFTER</span><span class="mark" style="font-size:14px">승인 자료 교체</span></div>
+        </div>
+        <p class="mt-4 text-xs leading-6" style="color:var(--ink-2)">치료 효과는 개인에 따라 차이가 있으며, 부작용이 발생할 수 있습니다. 게시 자료는 초상권·개인정보 동의 및 의료광고 심의 절차를 거칩니다.</p>`;
+      openModal('ba-modal');
+    }
+    $$('#ba-chips .chip').forEach(c => c.onclick = () => { $$('#ba-chips .chip').forEach(x => x.setAttribute('aria-pressed', x===c)); renderBa(c.dataset.bc); });
+    renderBa('전체');
+
+    /* ═══════ 이벤트 (필터 + 더보기 + 로딩) ═══════ */
+    const evCats = ['All', 'Best', ...new Set(EVENTS.map(e => e.cat).filter(c => c !== 'Best'))];
+    let evCat = 'All', evShown = 6;
+    $('#ev-chips').innerHTML = evCats.map((c, i) => `<button class="chip" aria-pressed="${i===0}" data-ec="${esc(c)}">${esc(c)}</button>`).join('');
+    function renderEvents() {
+      const list = EVENTS.filter(e => evCat === 'All' || e.cat === evCat);
+      const vis = list.slice(0, evShown);
+      $('#ev-grid').innerHTML = vis.length ? vis.map(e => `
+        <a href="#consult" class="thin-card block">
+          <div class="art dark" style="aspect-ratio:16/9"><span class="mark" style="font-size:15px">EVENT — ${esc(e.cat)}</span></div>
+          <div class="p-5"><span class="text-[11px] font-bold tracking-widest" style="color:var(--gold)">${esc(e.cat).toUpperCase()}</span>
+          <h3 class="font-semibold mt-1.5">${esc(e.title)}</h3><p class="text-sm mt-1.5" style="color:var(--ink-2)">${esc(e.desc)}</p>
+          <p class="text-xs mt-3 underline underline-offset-4">자세히 보기 · 상담 신청 →</p></div>
+        </a>`).join('')
+        : `<div class="empty-state md:col-span-3">진행 중인 이벤트가 없습니다.</div>`;
+      $('#ev-more').style.display = list.length > evShown ? '' : 'none';
+    }
+    $$('#ev-chips .chip').forEach(c => c.onclick = () => { $$('#ev-chips .chip').forEach(x => x.setAttribute('aria-pressed', x===c)); evCat = c.dataset.ec; evShown = 6; renderEvents(); });
+    $('#ev-more').onclick = () => {
+      const g = $('#ev-grid');
+      g.insertAdjacentHTML('beforeend', '<div class="skeleton md:col-span-3" style="height:80px"></div>');
+      setTimeout(() => { evShown += 6; renderEvents(); }, 500); // 로딩 상태 시연
+    };
+    renderEvents();
+
+    /* ═══════ 영상 ═══════ */
+    $('#video-grid').innerHTML = VIDEOS.map((v, i) => `
+      <button class="thin-card text-left" onclick="openVideo(${i})" aria-label="${esc(v.title)} 재생">
+        <div class="art dark" style="aspect-ratio:${v.type==='Shorts'?'9/16':'16/9'}">
+          <span class="mark" style="font-size:13px">${esc(v.type)}</span>
+          <span style="position:absolute; inset:0; display:grid; place-items:center"><span style="width:52px;height:52px;border:1px solid rgba(239,234,225,.5);border-radius:50%;display:grid;place-items:center;color:var(--cream-on-dark)">▶</span></span>
+        </div>
+        <div class="p-4"><p class="text-[11px] font-bold" style="color:var(--gold)">${esc(v.type)} · ${esc(v.dur)}</p><h3 class="text-sm font-semibold mt-1 leading-6">${esc(v.title)}</h3></div>
+      </button>`).join('');
+    function openVideo(i) {
+      const v = VIDEOS[i];
+      $('#video-modal-body').innerHTML = `<span class="mark" style="font-size:15px">${esc(v.title)}<br/><small style="opacity:.6">운영 시 YouTube embed URL 교체</small></span>`;
+      openModal('video-modal');
+    }
+
+    /* ═══════ 의료진 ═══════ */
+    $('#doc-grid').innerHTML = DOCTORS.map((d, i) => `
+      <button class="thin-card text-left" style="background:rgba(239,234,225,.04); border-color:rgba(239,234,225,.14)" onclick="openDoc(${i})" aria-label="${esc(d.name)} 프로필 보기">
+        <div class="art dark" style="aspect-ratio:3/4"><span class="mark">Portrait — dr-0${i+1}</span><span class="replace-note">동일 조명 포트레이트</span></div>
+        <div class="p-6">
+          <p class="text-[11px] font-bold tracking-widest" style="color:var(--gold)">${esc(d.field)}</p>
+          <h3 class="serif text-xl font-semibold mt-2" style="color:var(--cream-on-dark)">${esc(d.name)}</h3>
+          <p class="text-sm mt-1" style="color:rgba(239,234,225,.55)">${esc(d.role)}</p>
+          <p class="text-xs mt-4 underline underline-offset-4" style="color:rgba(239,234,225,.55)">약력 보기 →</p>
+        </div>
+      </button>`).join('');
+    function openDoc(i) {
+      const d = DOCTORS[i];
+      $('#doc-modal-body').innerHTML = `
+        <p class="eyebrow">${esc(d.field)}</p>
+        <h3 class="serif text-2xl font-semibold mt-2">${esc(d.name)} <span class="text-sm font-normal" style="color:var(--ink-2)">${esc(d.role)}</span></h3>
+        <ul class="mt-6 space-y-2 text-sm" style="color:var(--ink-2)">${d.bio.map(b => `<li class="flex gap-3"><span style="color:var(--gold)">—</span>${esc(b)}</li>`).join('')}</ul>
+        <a href="#consult" class="btn-ink w-full mt-8" onclick="closeModal('doc-modal')">이 의료진에게 상담 신청</a>`;
+      openModal('doc-modal');
+    }
+
+    /* ═══════ 오시는길 탭 ═══════ */
+    $('#way-tabs').innerHTML = Object.keys(WAYS).map((k, i) => `<button class="tab-btn" role="tab" aria-selected="${i===0}" data-way="${esc(k)}">${esc(k)}</button>`).join('');
+    function setWay(k) { $('#way-panel').textContent = WAYS[k]; $$('#way-tabs .tab-btn').forEach(b => b.setAttribute('aria-selected', b.dataset.way === k)); }
+    $$('#way-tabs .tab-btn').forEach(b => b.onclick = () => setWay(b.dataset.way));
+    setWay('지하철');
+
+    /* ═══════ 빠른 상담 폼 (검증 + mock API + 토스트) ═══════ */
+    const CONSULT_API = ''; // 운영 시 Apps Script 등 엔드포인트 입력 → 자동 전환
+    $('#quick-consult').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const val = (n) => (f[n]?.value || '').trim();
+      let ok = true;
+      const mark = (n, bad) => {
+        const field = f[n], err = $(`.f-err[data-for="${n}"]`, f);
+        if (field?.setAttribute) field.setAttribute('aria-invalid', bad);
+        err?.classList.toggle('show', bad);
+        if (bad) ok = false;
+      };
+      mark('name', !val('name'));
+      mark('phone', !/^[\d\-+ ]{9,14}$/.test(val('phone')));
+      mark('part', !val('part'));
+      mark('agree', !f.agree.checked);
+      if (!ok) { toast('입력 내용을 확인해주세요.'); return; }
+
+      const btn = $('#consult-btn');
+      btn.disabled = true; btn.textContent = '접수 중…';
+      try {
+        const payload = { type: 'clinic-consult', name: val('name'), phone: val('phone'), part: val('part'), channel: f.channel.value, timestamp: new Date().toISOString() };
+        if (CONSULT_API) {
+          await fetch(CONSULT_API, { method: 'POST', mode: 'no-cors', headers: {'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+        } else {
+          await new Promise(r => setTimeout(r, 700)); // mock API
+        }
+        if (typeof gtag === 'function') gtag('event', 'clinic_consult_submit', { event_category: 'lead' });
+        toast('✓ 상담 신청이 접수되었습니다. 순차적으로 연락드릴게요.');
+        f.reset();
+      } catch (_) {
+        toast('⚠ 일시적 오류입니다. 전화(02-000-0000)로 문의해주세요.');
+      } finally {
+        btn.disabled = false; btn.textContent = '상담 신청하기';
+      }
+    });
+
+    /* ═══════ 로그인 모달 탭 ═══════ */
+    function authTab(k) {
+      $('#auth-login').classList.toggle('hidden', k !== 'login');
+      $('#auth-join').classList.toggle('hidden', k !== 'join');
+      $$('[data-auth]').forEach(b => b.setAttribute('aria-selected', b.dataset.auth === k));
+    }
+
+    /* ═══════ 공통: 리빌 + 헤더 그림자 + 언어 ═══════ */
+    const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: .12 });
+    $$('.reveal').forEach(el => io.observe(el));
+    addEventListener('scroll', () => $('#site-head').classList.toggle('scrolled', scrollY > 10), { passive: true });
+    $('#lang')?.addEventListener('change', e => toast(`다국어(${e.target.value.toUpperCase()}) — 운영 시 번역 페이지 연결`));
+    </script>
+  </body>
+</html>

@@ -35,6 +35,7 @@
 /academy                  /templates/academy.html              301
 /manufacture              /templates/manufacture.html          301
 /insurance                /templates/insurance.html            301
+/clinic                   /templates/clinic.html               301
 
 # ────────────────────────────────────────────
 # (선택) www → apex 통합 — 커스텀 도메인 연결 후
