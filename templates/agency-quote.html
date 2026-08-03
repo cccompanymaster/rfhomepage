@@ -19,10 +19,10 @@
     <!-- End Google Analytics -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>웹·커머스·솔루션 제작 스튜디오</title>
+    <title>위즈웍스 WIZWORKS — 웹·커머스·솔루션 제작 스튜디오</title>
     <meta name="description" content="기획, 디자인, 개발을 하나의 흐름으로 연결해 고객이 이해하고 행동하는 서비스를 구축합니다. 단계형 예상 견적 시스템 제공." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="웹·커머스·솔루션 제작 스튜디오" />
+    <meta property="og:title" content="위즈웍스 WIZWORKS — 웹·커머스·솔루션 제작 스튜디오" />
     <meta property="og:description" content="홈페이지부터 커머스, 맞춤형 디지털 솔루션까지." />
     <meta property="og:locale" content="ko_KR" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234058FF'/%3E%3Ccircle cx='12' cy='16' r='5' fill='%23fff'/%3E%3Ccircle cx='21' cy='16' r='5' fill='%2315C9B7'/%3E%3C/svg%3E" />
@@ -95,7 +95,9 @@
       .frame-b .bar i{width:8px;height:8px;border-radius:50%;background:#d4d8e0;display:block;}
       .frame-m{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface);width:64%;margin:0 auto;}
       .frame-m .notch{height:16px;background:#eef0f4;}
-      .ph-art{aspect-ratio:16/10;display:grid;place-items:center;font-family:Manrope;font-weight:700;font-size:13px;color:#fff;letter-spacing:.1em;}
+      .ph-art{aspect-ratio:16/10;display:grid;place-items:center;font-family:Manrope;font-weight:700;font-size:13px;color:#fff;letter-spacing:.1em;position:relative;overflow:hidden;}
+      .ph-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+      .ph-art .lbl{position:relative;z-index:1;background:rgba(16,21,34,.62);padding:5px 12px;border-radius:8px;backdrop-filter:blur(4px);}
 
       /* 통계 */
       .stat-v{font-family:Manrope;font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;}
@@ -348,11 +350,11 @@
     <script>
     /* ═══ siteConfig — 업체명 공란 원칙 ═══ */
     const siteConfig = {
-      companyName: "",           // 비우면 텍스트 로고·JSON-LD 미생성
-      logoText: "",
-      phone: "",                 // 비우면 전화 버튼 숨김
-      email: "",
-      address: "",
+      companyName: "위즈웍스",
+      logoText: "WIZWORKS",
+      phone: "070-8842-1199",
+      email: "hello@wizworks.kr",
+      address: "서울특별시 성동구 성수이로 00, 5층",
       businessNumber: "",
       representative: "",
       kakaoUrl: "",
@@ -381,19 +383,19 @@
 
     /* ═══ 서비스 탭 ═══ */
     const SVC = {
-      '기업 홈페이지':{who:'브랜드 신뢰가 필요한 기업·기관',scope:'기획 · 반응형 디자인 · 콘텐츠 구축 · 관리자',out:'메인 + 서브페이지, 문의 시스템, 검색 기본 세팅',c:'#4058FF'},
-      '쇼핑몰·브랜드몰':{who:'온라인 판매를 시작·확장하려는 브랜드',scope:'상품 구조 설계 · 결제 연동 · 주문/회원 관리자',out:'커머스 사이트, 상품·주문 관리 시스템',c:'#15C9B7'},
-      '랜딩페이지':{who:'캠페인·광고 전환이 목표인 팀',scope:'전환 시나리오 설계 · 단일 페이지 제작 · 폼 연동',out:'목적형 랜딩, 전환 추적 세팅',c:'#7a5cff'},
-      '맞춤형 플랫폼':{who:'업무 시스템·예약·중개 서비스가 필요한 기업',scope:'요구 분석 · DB 설계 · 프론트+백엔드 개발',out:'웹 기반 플랫폼, 운영 관리자',c:'#101522'},
-      '모바일 웹·앱':{who:'모바일 중심 서비스를 준비하는 팀',scope:'모바일 UX 설계 · 웹앱/하이브리드 개발',out:'모바일 최적화 서비스',c:'#2b8cff'},
-      '유지보수':{who:'운영 중인 사이트의 관리가 필요한 기업',scope:'정기 점검 · 콘텐츠 수정 · 기능 개선',out:'월간 리포트, 개선 로그',c:'#5a6172'},
+      '기업 홈페이지':{who:'브랜드 신뢰가 필요한 기업·기관',scope:'기획 · 반응형 디자인 · 콘텐츠 구축 · 관리자',out:'메인 + 서브페이지, 문의 시스템, 검색 기본 세팅',c:'#4058FF',img:'manufacture/03-meeting.jpg'},
+      '쇼핑몰·브랜드몰':{who:'온라인 판매를 시작·확장하려는 브랜드',scope:'상품 구조 설계 · 결제 연동 · 주문/회원 관리자',out:'커머스 사이트, 상품·주문 관리 시스템',c:'#15C9B7',img:'cafe/04-pastry.jpg'},
+      '랜딩페이지':{who:'캠페인·광고 전환이 목표인 팀',scope:'전환 시나리오 설계 · 단일 페이지 제작 · 폼 연동',out:'목적형 랜딩, 전환 추적 세팅',c:'#7a5cff',img:'academy/02-student.jpg'},
+      '맞춤형 플랫폼':{who:'업무 시스템·예약·중개 서비스가 필요한 기업',scope:'요구 분석 · DB 설계 · 프론트+백엔드 개발',out:'웹 기반 플랫폼, 운영 관리자',c:'#101522',img:'saas/01-dashboard.jpg'},
+      '모바일 웹·앱':{who:'모바일 중심 서비스를 준비하는 팀',scope:'모바일 UX 설계 · 웹앱/하이브리드 개발',out:'모바일 최적화 서비스',c:'#2b8cff',img:'studio/04-review.jpg'},
+      '유지보수':{who:'운영 중인 사이트의 관리가 필요한 기업',scope:'정기 점검 · 콘텐츠 수정 · 기능 개선',out:'월간 리포트, 개선 로그',c:'#5a6172',img:'interior/04-samples.jpg'},
     };
     $('#svc-tabs').innerHTML=Object.keys(SVC).map((k,i)=>`<button class="svc-tab" role="tab" aria-selected="${i===0}" data-k="${esc(k)}">${esc(k)}</button>`).join('');
     function setSvc(k){
       const s=SVC[k];
       $$('#svc-tabs .svc-tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
       $('#svc-panel').innerHTML=`
-        <div class="frame-b"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art" style="background:linear-gradient(135deg,${s.c},#101522)">${esc(k)} — SAMPLE</div></div>
+        <div class="frame-b"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art"><img src="../assets/images/${s.img}" alt="${esc(k)} 샘플" loading="lazy" /><span class="lbl">${esc(k)}</span></div></div>
         <div>
           <h3 class="text-2xl font-extrabold">${esc(k)}</h3>
           <dl class="mt-6 space-y-4 text-[15px]">
@@ -416,6 +418,7 @@
       feats:['반응형 웹','관리자 시스템','예약/문의 폼','다국어','결제 연동','검색 최적화'].slice(0,3+(i%3)),
       result:'런칭 후 운영 가이드 인계 완료 (샘플 데이터)',
       hue:[220,168,262,205,152,235][i%6],
+      img:['manufacture/01-monitor.jpg','dental/01-consult.jpg','academy/04-teaching.jpg','cafe/01-counter-latte.jpg','saas/01-dashboard.jpg','law/03-handshake.jpg','interior/01-meeting.jpg','studio/01-photographer.jpg'][i],
     }));
     const pfCats=['All',...INDUSTRIES];
     $('#pf-chips').innerHTML=pfCats.map((c,i)=>`<button class="chipf" aria-pressed="${i===0}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
@@ -424,8 +427,8 @@
       $('#pf-grid').innerHTML=list.length?list.map((p,i)=>`
         <button class="card p-5 text-left" onclick="openPf(${PROJECTS.indexOf(p)})" aria-label="${esc(p.name)} 상세 보기">
           ${p.mobile
-            ? `<div class="frame-m"><div class="notch"></div><div class="ph-art" style="aspect-ratio:9/14;background:linear-gradient(150deg,hsl(${p.hue},70%,55%),#101522)">${esc(p.name)}</div></div>`
-            : `<div class="frame-b"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art" style="background:linear-gradient(150deg,hsl(${p.hue},70%,55%),#101522)">${esc(p.name)}</div></div>`}
+            ? `<div class="frame-m"><div class="notch"></div><div class="ph-art" style="aspect-ratio:9/14"><img src="../assets/images/${p.img}" alt="${esc(p.name)}" loading="lazy" /><span class="lbl">${esc(p.name)}</span></div></div>`
+            : `<div class="frame-b"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art"><img src="../assets/images/${p.img}" alt="${esc(p.name)}" loading="lazy" /><span class="lbl">${esc(p.name)}</span></div></div>`}
           <div class="mt-4 flex items-center justify-between"><h3 class="font-bold">${esc(p.name)}</h3><span class="text-xs font-bold px-2.5 py-1 rounded-full" style="background:rgba(64,88,255,.08);color:var(--primary)">${esc(p.ind)}</span></div>
         </button>`).join('')
         :`<p class="sm:col-span-2 lg:col-span-3 text-center py-16" style="color:var(--muted)">해당 분야 사례를 준비 중입니다.</p>`;
@@ -435,7 +438,7 @@
     function openPf(i){
       const p=PROJECTS[i];
       $('#est-body').innerHTML=`
-        <div class="frame-b mb-5"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art" style="background:linear-gradient(150deg,hsl(${p.hue},70%,55%),#101522)">${esc(p.name)}</div></div>
+        <div class="frame-b mb-5"><div class="bar"><i></i><i></i><i></i></div><div class="ph-art"><img src="../assets/images/${p.img}" alt="${esc(p.name)}" loading="lazy" /><span class="lbl">${esc(p.name)}</span></div></div>
         <h3 class="font-extrabold text-xl">${esc(p.name)} <span class="text-sm font-bold ml-1" style="color:var(--primary)">${esc(p.ind)}</span></h3>
         <dl class="mt-4 space-y-2 text-sm" style="color:var(--muted)">
           <div class="flex gap-3"><dt class="font-bold w-16" style="color:var(--text)">역할</dt><dd>${esc(p.role)}</dd></div>

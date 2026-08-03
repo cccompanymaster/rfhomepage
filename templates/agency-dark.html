@@ -19,10 +19,10 @@
     <!-- End Google Analytics -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Creative Digital Studio</title>
+    <title>논픽셀 NONPIXEL — Creative Digital Studio</title>
     <meta name="description" content="브랜드가 가진 생각을 발견하고, 화면과 기술을 통해 오래 사용할 수 있는 경험으로 만듭니다. 웹 디자인 · 브랜딩 · 디지털 제작 스튜디오." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Creative Digital Studio" />
+    <meta property="og:title" content="논픽셀 NONPIXEL — Creative Digital Studio" />
     <meta property="og:description" content="BUILD BEYOND — 다크 에디토리얼 포트폴리오 템플릿." />
     <meta property="og:locale" content="ko_KR" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0C0F'/%3E%3Crect x='7' y='9' width='11' height='11' fill='%23FF623D'/%3E%3Crect x='15' y='15' width='9' height='9' fill='%23C9FF4A'/%3E%3C/svg%3E" />
@@ -94,6 +94,9 @@
       /* 추상 아트 플레이스홀더 */
       .p-art{position:relative;overflow:hidden;background:var(--elev);}
       .p-art svg{position:absolute;inset:0;width:100%;height:100%;}
+      .p-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(30%) contrast(1.05);}
+      .p-art::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(11,12,15,.6));pointer-events:none;}
+      .p-art .tag{z-index:1;}
       .p-art .tag{position:absolute;left:14px;bottom:12px;font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;color:var(--muted);}
       .work-card{display:block;text-align:left;background:var(--surface);border:1px solid var(--border);transition:border-color .3s;}
       .work-card:hover{border-color:rgba(255,255,255,.3);}
@@ -233,7 +236,7 @@
         <div class="container-x">
           <button class="work-card w-full reveal" onclick="openWork(0)" aria-label="Project 01 상세 보기">
             <div class="p-art" style="aspect-ratio:16/7">
-              <svg viewBox="0 0 800 350" aria-hidden="true"><rect width="800" height="350" fill="#1C1F25"/><circle cx="620" cy="110" r="150" fill="none" stroke="#FF623D" stroke-width="1.2"/><rect x="80" y="90" width="200" height="140" fill="none" stroke="#C9FF4A" stroke-width="1"/><path d="M0,300 C200,220 420,330 800,240" fill="none" stroke="rgba(242,240,233,.25)"/></svg>
+              <img src="../assets/images/manufacture/04-cmm.jpg" alt="Project 01 — Manufacturing" loading="lazy" />
               <span class="tag">FEATURED — PROJECT 01</span>
             </div>
             <div class="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -335,7 +338,9 @@
     <script>
     /* ═══ siteConfig — 업체명 공란 ═══ */
     const siteConfig = {
-      companyName: "", logoText: "", phone: "", email: "", address: "",
+      companyName: "논픽셀", logoText: "NONPIXEL",
+      phone: "070-4411-0616", email: "studio@nonpixel.kr",
+      address: "서울특별시 마포구 와우산로 00, 3F",
       businessNumber: "", representative: "", contactEndpoint: "", socialLinks: []
     };
     const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
@@ -364,7 +369,9 @@
       scope:['반응형 웹 구축','커머스 + 관리자','브랜드 아이덴티티 + 사이트'][i%3],
       ind:['Manufacturing','Retail','Culture','Technology','Healthcare','Education'][i%6],
       hueA:['#FF623D','#C9FF4A'][i%2], hueB:['#C9FF4A','#FF623D'][i%2],
+      img:['manufacture/04-cmm.jpg','studio/01-photographer.jpg','interior/02-site.jpg','law/02-late-work.jpg','cafe/03-empty-seat.jpg','pension/04-view.jpg','beauty/02-relaxed.jpg','restaurant/02-dish.jpg','dental/04-room-active.jpg'][i],
     }));
+    function artImg(w){ return `<img src="../assets/images/${w.img}" alt="${esc(w.name)} — ${esc(w.ind)}" loading="lazy" />`; }
     function artSvg(w){ return `<svg viewBox="0 0 400 400" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="400" fill="#1C1F25"/><circle cx="${120+(w.name.charCodeAt(9)%160)}" cy="${100+(w.name.charCodeAt(9)%120)}" r="${60+(w.name.charCodeAt(9)%50)}" fill="none" stroke="${w.hueA}" stroke-width="1.2"/><rect x="${40+(w.name.charCodeAt(9)%80)}" y="${220-(w.name.charCodeAt(9)%60)}" width="150" height="90" fill="none" stroke="${w.hueB}" stroke-width="1"/><path d="M0,${330-(w.name.charCodeAt(9)%80)} C130,260 260,360 400,280" fill="none" stroke="rgba(242,240,233,.22)"/></svg>`; }
 
     const wkCats=['All',...CATS];
@@ -373,7 +380,7 @@
       const list=WORKS.slice(1).filter(w=>cat==='All'||w.cat===cat);
       $('#wk-grid').innerHTML=list.length?list.map(w=>`
         <button class="work-card" onclick="openWork(${WORKS.indexOf(w)})" aria-label="${esc(w.name)} 상세 보기">
-          <div class="p-art" style="aspect-ratio:${w.ratio}">${artSvg(w)}<span class="tag">${esc(w.cat).toUpperCase()}</span></div>
+          <div class="p-art" style="aspect-ratio:${w.ratio}">${artImg(w)}<span class="tag">${esc(w.cat).toUpperCase()}</span></div>
           <div class="p-5 flex items-center justify-between"><h3 class="disp font-bold">${esc(w.name)}</h3><span class="text-xs disp" style="color:var(--muted)">${w.year}</span></div>
         </button>`).join('')
         :`<p class="sm:col-span-2 lg:col-span-3 text-center py-16" style="color:var(--muted)">해당 카테고리 작업을 준비 중입니다.</p>`;
@@ -385,7 +392,7 @@
     function openWork(i){
       const w=WORKS[i]; lastFocus=document.activeElement;
       $('#wk-modal-body').innerHTML=`
-        <div class="p-art mb-5" style="aspect-ratio:16/9">${artSvg(w)}</div>
+        <div class="p-art mb-5" style="aspect-ratio:16/9">${artImg(w)}</div>
         <h3 class="disp text-2xl font-bold">${esc(w.name)}</h3>
         <dl class="mt-4 space-y-2 text-sm" style="color:var(--muted)">
           <div class="flex gap-4"><dt class="disp w-20" style="color:var(--accent)">TYPE</dt><dd>${esc(w.cat)} · ${esc(w.ind)}</dd></div>
@@ -417,11 +424,11 @@
         </button>
         <div class="svc-desc" id="svcd-${i}" role="region">${esc(d)}</div>
       </div>`).join('');
-    const PREV_COLORS=[['#FF623D','#C9FF4A'],['#C9FF4A','#FF623D'],['#FF623D','#F2F0E9'],['#C9FF4A','#F2F0E9'],['#FF623D','#C9FF4A'],['#C9FF4A','#FF623D']];
+    const PREV_IMGS=['law/04-bookshelf.jpg','cafe/04-pastry.jpg','interior/04-samples.jpg','saas/01-dashboard.jpg','academy/02-student.jpg','manufacture/02-calipers.jpg'];
     $$('#svc-list .svc-line').forEach(b=>{
       const i=+b.dataset.i;
-      const show=()=>{ const [a,c]=PREV_COLORS[i];
-        $('#svc-preview').innerHTML=`<svg viewBox="0 0 320 400" aria-hidden="true"><rect width="320" height="400" fill="#1C1F25"/><circle cx="${90+i*24}" cy="${120+i*18}" r="${70+i*8}" fill="none" stroke="${a}" stroke-width="1.2"/><rect x="${40+i*10}" y="${250-i*12}" width="${140+i*14}" height="70" fill="none" stroke="${c}"/></svg><span class="tag">${SVCS[i][0].toUpperCase()}</span>`; };
+      const show=()=>{
+        $('#svc-preview').innerHTML=`<img src="../assets/images/${PREV_IMGS[i]}" alt="${SVCS[i][0]} 미리보기" loading="lazy" /><span class="tag">${SVCS[i][0].toUpperCase()}</span>`; };
       b.addEventListener('mouseenter',show); b.addEventListener('focus',show);
       b.addEventListener('click',()=>{ // 모바일 아코디언 (데스크톱에서도 열람 가능)
         const d=$('#svcd-'+i); const open=d.classList.toggle('open');

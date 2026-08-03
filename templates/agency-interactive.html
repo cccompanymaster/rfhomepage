@@ -19,10 +19,10 @@
     <!-- End Google Analytics -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Digital Product &amp; AI Development Studio</title>
+    <title>플럭스랩 FLUXLAB — Digital Product &amp; AI Studio</title>
     <meta name="description" content="기업 홈페이지·쇼핑몰·앱·플랫폼·AI 연동까지 — 목적에 맞는 구조로 설계하는 디지털 프로덕트 스튜디오." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Digital Product &amp; AI Development Studio" />
+    <meta property="og:title" content="플럭스랩 FLUXLAB — Digital Product &amp; AI Studio" />
     <meta property="og:description" content="브랜드 사이트부터 비즈니스 시스템까지, 목적에 맞는 구조로." />
     <meta property="og:locale" content="ko_KR" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F4F3EE'/%3E%3Cpath d='M8 22 L16 10 L24 22' fill='none' stroke='%23315CFF' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
@@ -66,7 +66,9 @@
       .story{position:relative;border-radius:28px;overflow:hidden;background:var(--dark);color:#fff;min-height:min(72svh,620px);}
       .panel{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,5vw,64px);}
       .panel.on{opacity:1;z-index:1;}
-      .panel .art{position:absolute;inset:0;z-index:-1;}
+      .panel .art{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+      .panel .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+      .panel .art .shade{position:absolute;inset:0;}
       .story-nav{display:flex;align-items:center;gap:14px;}
       .story-num{font-family:Poppins;font-size:13px;letter-spacing:.2em;color:rgba(255,255,255,.6);}
       .story-bar{width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden;}
@@ -95,6 +97,9 @@
       .pj-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(21,23,20,.3);}
       .pj-card:hover .p-art{transform:scale(1.04);}
       .p-art{aspect-ratio:16/10;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1);display:grid;place-items:center;font-family:Poppins;font-weight:700;color:#fff;letter-spacing:.08em;}
+      .p-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+      .p-art::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,19,15,.12),rgba(16,19,15,.55));}
+      .p-art .pl{position:relative;z-index:1;}
 
       /* 카테고리 섹션 */
       .cat-sec{padding:88px 0;}
@@ -169,21 +174,21 @@
         <div class="container-x">
           <div class="story reveal" id="story" tabindex="0" aria-roledescription="carousel" aria-label="스토리 패널 (좌우 화살표로 전환)">
             <div class="panel on" role="group" aria-label="1 / 3">
-              <div class="art" style="background:radial-gradient(ellipse at 75% 25%,rgba(49,92,255,.55),transparent 55%),linear-gradient(150deg,#1a2040,#10130F)"></div>
+              <div class="art"><img src="../assets/images/manufacture/01-monitor.jpg" alt="" /><span class="shade" style="background:radial-gradient(ellipse at 75% 25%,rgba(49,92,255,.5),transparent 55%),linear-gradient(150deg,rgba(26,32,64,.6),rgba(16,19,15,.88))"></span></div>
               <p class="en text-xs tracking-[.25em]" style="color:var(--accent)">SYSTEM / AUTOMATION</p>
               <h1 class="h-hero mt-4">복잡한 업무를<br />하나의 디지털 흐름으로</h1>
               <p class="mt-4 text-sm md:text-base max-w-md" style="color:rgba(255,255,255,.65)">흩어진 도구와 수작업을 정리해 하나의 시스템으로 연결합니다.</p>
               <div class="mt-6 flex gap-3 flex-wrap"><a href="#cat-f" class="btn-cta" style="background:var(--accent);color:var(--dark)">스토리 보기</a><button class="btn-ghost" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="openDrawer()">제작 문의</button></div>
             </div>
             <div class="panel" role="group" aria-label="2 / 3">
-              <div class="art" style="background:radial-gradient(ellipse at 25% 70%,rgba(215,255,71,.3),transparent 55%),linear-gradient(150deg,#232a1a,#10130F)"></div>
+              <div class="art"><img src="../assets/images/cafe/01-counter-latte.jpg" alt="" /><span class="shade" style="background:radial-gradient(ellipse at 25% 70%,rgba(215,255,71,.28),transparent 55%),linear-gradient(150deg,rgba(35,42,26,.55),rgba(16,19,15,.88))"></span></div>
               <p class="en text-xs tracking-[.25em]" style="color:var(--accent)">WEB / COMMERCE</p>
               <h2 class="h-hero mt-4">브랜드의 목적을 담은<br />웹과 커머스 경험</h2>
               <p class="mt-4 text-sm md:text-base max-w-md" style="color:rgba(255,255,255,.65)">보여주는 사이트가 아니라, 목적을 이루는 사이트를 만듭니다.</p>
               <div class="mt-6 flex gap-3 flex-wrap"><a href="#cat-a" class="btn-cta" style="background:var(--accent);color:var(--dark)">스토리 보기</a><button class="btn-ghost" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="openDrawer()">제작 문의</button></div>
             </div>
             <div class="panel" role="group" aria-label="3 / 3">
-              <div class="art" style="background:radial-gradient(ellipse at 60% 30%,rgba(49,92,255,.4),transparent 50%),radial-gradient(ellipse at 30% 80%,rgba(215,255,71,.22),transparent 50%),#10130F"></div>
+              <div class="art"><img src="../assets/images/saas/01-dashboard.jpg" alt="" /><span class="shade" style="background:radial-gradient(ellipse at 60% 30%,rgba(49,92,255,.38),transparent 50%),radial-gradient(ellipse at 30% 80%,rgba(215,255,71,.2),transparent 50%),linear-gradient(180deg,rgba(16,19,15,.45),rgba(16,19,15,.9))"></span></div>
               <p class="en text-xs tracking-[.25em]" style="color:var(--accent)">AI / INTEGRATION</p>
               <h2 class="h-hero mt-4">필요한 곳에 정확히 연결하는<br />AI와 자동화</h2>
               <p class="mt-4 text-sm md:text-base max-w-md" style="color:rgba(255,255,255,.65)">업무 프로세스와 데이터를 잇는 연동 영역을 함께 설계합니다.</p>
@@ -308,7 +313,9 @@
     <script>
     /* ═══ siteConfig — 업체명 공란 ═══ */
     const siteConfig = {
-      companyName: "", logoText: "", phone: "", email: "", address: "",
+      companyName: "플럭스랩", logoText: "FLUXLAB",
+      phone: "070-7717-3050", email: "make@fluxlab.kr",
+      address: "서울특별시 강남구 테헤란로 000, 12층",
       businessNumber: "", representative: "", contactEndpoint: "",
       privacyPolicyUrl: "", termsUrl: ""
     };
@@ -358,14 +365,14 @@
     /* ═══ 가로 갤러리 ═══ */
     const HP=[
       {intro:true},
-      ...Array.from({length:5},(_,i)=>({name:`Project 0${i+1}`,type:['Responsive Web','Commerce','Platform &amp; AI','Brand &amp; Design','Mobile App'][i],year:2024+(i%3),role:['기획·디자인·개발','디자인·퍼블리싱','풀스택'][i%3],g:[['#315CFF','#10130F'],['#D7FF47','#284a10'],['#10130F','#315CFF'],['#73766F','#10130F'],['#315CFF','#D7FF47']][i]})),
+      ...Array.from({length:5},(_,i)=>({name:`Project 0${i+1}`,type:['Responsive Web','Commerce','Platform &amp; AI','Brand &amp; Design','Mobile App'][i],year:2024+(i%3),role:['기획·디자인·개발','디자인·퍼블리싱','풀스택'][i%3],g:[['#315CFF','#10130F'],['#D7FF47','#284a10'],['#10130F','#315CFF'],['#73766F','#10130F'],['#315CFF','#D7FF47']][i],img:['manufacture/03-meeting.jpg','cafe/04-pastry.jpg','saas/01-dashboard.jpg','interior/04-samples.jpg','studio/04-review.jpg'][i]})),
       {all:true},
     ];
     $('#hrail').innerHTML=HP.map(p=>{
       if(p.intro)return `<div class="pj-card p-8 flex flex-col justify-center" style="background:var(--dark);color:#fff"><p class="en text-xs tracking-[.25em]" style="color:var(--accent)">SELECTED WORK</p><h3 class="en text-2xl font-bold mt-4 leading-snug">목적에 맞는 구조가<br/>결과를 만듭니다.</h3><p class="text-sm mt-4" style="color:rgba(255,255,255,.6)">옆으로 넘기며 살펴보세요 →</p></div>`;
       if(p.all)return `<a href="#cats" class="pj-card p-8 flex flex-col items-center justify-center text-center" style="border-style:dashed"><p class="en text-xl font-bold">All Works</p><p class="text-sm mt-2" style="color:var(--muted)">분야별 사례 전체 보기 ↓</p></a>`;
       return `<div class="pj-card">
-        <div class="p-art" style="background:linear-gradient(140deg,${p.g[0]},${p.g[1]})">${p.name.toUpperCase()}</div>
+        <div class="p-art"><img src="../assets/images/${p.img}" alt="${p.name}" loading="lazy" /><span class="pl">${p.name.toUpperCase()}</span></div>
         <div class="p-5"><div class="flex items-center justify-between"><h3 class="en font-bold">${p.name}</h3><span class="en text-xs" style="color:var(--muted)">${p.year}</span></div>
         <p class="text-xs mt-1.5" style="color:var(--muted)">${p.type} · ${p.role}</p></div>
       </div>`;
@@ -390,6 +397,14 @@
       {id:'cat-e',en:'Landing & Campaign',ko:'명확한 목표와 전환 행동에 집중한 목적형 페이지',bg:'#F4F3EE'},
       {id:'cat-f',en:'Platform & AI',ko:'업무 프로세스와 데이터를 연결하는 맞춤형 시스템',bg:'#E9EDF6'},
     ];
+    const CAT_IMGS={
+      'cat-a':['manufacture/03-meeting.jpg','law/01-pen-paper.jpg','academy/01-consult.jpg'],
+      'cat-b':['cafe/04-pastry.jpg','restaurant/02-dish.jpg','cafe/01-counter-latte.jpg'],
+      'cat-c':['studio/04-review.jpg','beauty/04-prep.jpg','pilates/02-focus.jpg'],
+      'cat-d':['interior/04-samples.jpg','studio/01-photographer.jpg','cafe/02-handover.jpg'],
+      'cat-e':['beauty/01-treatment.jpg','pension/04-view.jpg','academy/02-student.jpg'],
+      'cat-f':['saas/01-dashboard.jpg','manufacture/01-monitor.jpg','manufacture/04-cmm.jpg'],
+    };
     $('#cats').innerHTML=CATS.map((c,ci)=>`
       <section class="cat-sec" id="${c.id}" style="background:${c.bg}">
         <div class="container-x grid lg:grid-cols-[380px_1fr] gap-12">
@@ -402,7 +417,7 @@
           <div class="grid sm:grid-cols-3 gap-4 reveal">
             ${[1,2,3].map(n=>`
               <div class="mini-card">
-                <div class="p-art" style="aspect-ratio:4/5;background:linear-gradient(150deg,hsl(${(ci*47+n*30)%360},40%,${28+n*6}%),#10130F);font-size:12px">PROJECT 0${n}</div>
+                <div class="p-art" style="aspect-ratio:4/5;font-size:12px"><img src="../assets/images/${CAT_IMGS[c.id][n-1]}" alt="${c.en} Project 0${n}" loading="lazy" /><span class="pl">PROJECT 0${n}</span></div>
                 <div class="p-4"><p class="en text-sm font-bold">Project 0${n}</p><p class="text-[11px] mt-1" style="color:var(--muted)">${c.en} · ${2024+(n%3)} · 기획+디자인+개발</p></div>
               </div>`).join('')}
           </div>
