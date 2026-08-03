@@ -75,7 +75,8 @@
       .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(16,21,34,.25);}
 
       /* 견적 미리보기 카드 */
-      .est-preview{background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 30px 60px -30px rgba(64,88,255,.35);}
+      .est-preview{background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 30px 60px -30px rgba(64,88,255,.35);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;}
+      .est-preview:hover{transform:translateY(-4px);box-shadow:0 40px 70px -30px rgba(64,88,255,.5);}
       .est-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-size:13.5px;font-weight:600;}
       .est-row .dot{width:16px;height:16px;border-radius:6px;border:1.5px solid var(--border);flex-shrink:0;}
       .est-row.on{border-color:var(--primary);background:rgba(64,88,255,.05);}

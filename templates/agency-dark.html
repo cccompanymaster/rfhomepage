@@ -104,6 +104,7 @@
       .marq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);white-space:nowrap;}
       .marq-track{display:inline-flex;gap:0;animation:marq 26s linear infinite;}
       @keyframes marq{to{transform:translateX(-50%);}}
+      .marq:hover .marq-track{animation-play-state:paused;}
       .marq .w{font-family:'Space Grotesk';font-size:clamp(40px,7vw,88px);font-weight:700;padding:14px 28px;}
       .marq .o{color:transparent;-webkit-text-stroke:1px var(--muted);}
 
@@ -113,6 +114,8 @@
       .svc-line .no{font-family:'Space Grotesk';color:var(--muted);font-size:15px;}
       .svc-line .nm{font-family:'Space Grotesk';font-size:clamp(24px,4.4vw,52px);font-weight:700;transition:color .2s;}
       .svc-line:hover .nm,.svc-line:focus-visible .nm,.svc-line[aria-expanded="true"] .nm{color:var(--accent);}
+      .svc-line .disp:last-child{transition:transform .25s;}
+      .svc-line:hover .disp:last-child{transform:rotate(45deg);color:var(--accent2);}
       .svc-desc{overflow:hidden;max-height:0;transition:max-height .4s ease;color:var(--muted);font-size:14.5px;line-height:1.8;}
       .svc-desc.open{max-height:200px;padding-bottom:20px;}
 

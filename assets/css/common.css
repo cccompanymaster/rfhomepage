@@ -30,6 +30,18 @@ body {
 }
 img { max-width: 100%; height: auto; }
 
+/* ── 전역 품질 레이어 ── */
+::selection { background: var(--accent-deep, #FF623D); color: #fff; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ============================================================
    목업 — 데스크톱 (브라우저 윈도우 스타일)
    ============================================================ */
