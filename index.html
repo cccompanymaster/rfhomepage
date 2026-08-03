@@ -133,7 +133,15 @@
         background-clip: text;
         color: transparent;
       }
-      .number-tabular { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+      .number-tabular { font-variant-numeric: tabular-nums; letter-spacing: 0; }
+      /* 통계 숫자 — 컨테이너에 맞춰 축소 (잘림 방지) */
+      .stat-block { min-width: 0; }
+      .stat-v { font-size: clamp(26px, 4.6vw, 44px); line-height: 1.15; white-space: nowrap; }
+      .stat-v-price { font-size: clamp(22px, 4vw, 37px); }
+      @media (max-width: 767px) {
+        .stat-v { font-size: clamp(24px, 7vw, 34px); }
+        .stat-v-price { font-size: clamp(20px, 6.6vw, 30px); }
+      }
 
       /* placeholder gradients per industry */
       .ph-dental    { --ph-from:#d6f0e6; --ph-to:#f0fbf6; color:#0f5d4a; }
@@ -187,6 +195,9 @@
       }
       .price-amount {
         font-feature-settings: 'tnum';
+        font-size: clamp(38px, 9.5vw, 58px);
+        line-height: 1.1;
+        white-space: nowrap;
       }
 
       /* faq */
@@ -565,7 +576,7 @@
         HOMEPAGE THAT MAKES MONEY · NOAH · 2026
       </p>
       <h1
-        class="grad-text serif text-5xl md:text-7xl lg:text-[104px] font-semibold leading-[1.18] tracking-[-0.02em] max-w-5xl"
+        class="grad-text serif font-semibold leading-[1.18] tracking-[-0.02em] max-w-5xl" style="font-size: clamp(36px, 8.6vw, 104px)"
       >
         <span class="typer" data-words="돈 벌어다주는|손님을 부르는|검색에 강한|매출이 오르는" data-type-speed="90" data-delete-speed="45" data-pause="1800">돈 벌어다주는</span><br />홈페이지,<br /><span class="grad-pink">199,000원</span>으로.
       </h1>
@@ -588,19 +599,19 @@
       <dl class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
         <div class="stat-block">
           <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">제작 단가</dt>
-          <dd class="serif text-4xl md:text-5xl number-tabular grad-pink">₩199,000</dd>
+          <dd class="serif stat-v stat-v-price number-tabular grad-pink">₩199,000</dd>
         </div>
         <div class="stat-block">
           <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">평균 작업</dt>
-          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="7">0</span><span class="text-xl">일</span></dd>
+          <dd class="serif stat-v number-tabular"><span data-count="7">0</span><span class="text-xl">일</span></dd>
         </div>
         <div class="stat-block">
           <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">검증된 디자인</dt>
-          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="12">0</span><span class="text-xl">업종</span></dd>
+          <dd class="serif stat-v number-tabular"><span data-count="17">0</span><span class="text-xl">종</span></dd>
         </div>
         <div class="stat-block">
           <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">고객 만족도</dt>
-          <dd class="serif text-4xl md:text-5xl number-tabular"><span data-count="96">0</span>%</dd>
+          <dd class="serif stat-v number-tabular"><span data-count="96">0</span>%</dd>
         </div>
       </dl>
     </section>
@@ -662,7 +673,7 @@
             아래 17개 사이트는 모두 NOAH가 만든 실제 작동 페이지입니다. 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드만 옮겨드립니다.
           </p>
         </div>
-        <span class="text-sm number-tabular" style="color: var(--text-quiet)" data-card-counter>12 / 12 references</span>
+        <span class="text-sm number-tabular" style="color: var(--text-quiet)" data-card-counter>17 / 17 references</span>
       </div>
 
       <!-- 카테고리 칩 -->
@@ -907,7 +918,7 @@
             <p class="text-sm mt-2" style="color: var(--text-dim)">17개 디자인 중 선택 + 브랜드 커스텀</p>
           </div>
           <div class="text-right">
-            <p class="serif text-5xl md:text-6xl font-semibold price-amount grad-pink">₩199,000</p>
+            <p class="serif font-semibold price-amount grad-pink">₩199,000</p>
             <p class="text-sm" style="color: var(--text-dim)">1회 결제 (부가세 별도)</p>
           </div>
         </div>

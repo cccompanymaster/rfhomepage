@@ -23,7 +23,12 @@
 }
 
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip; /* 모바일 가로 스크롤 방지 — clip은 sticky를 깨지 않음 */
+}
+img { max-width: 100%; height: auto; }
 
 /* ============================================================
    목업 — 데스크톱 (브라우저 윈도우 스타일)
