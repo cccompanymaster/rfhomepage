@@ -39,6 +39,9 @@
 /agency                   /templates/agency-quote.html         301
 /editorial                /templates/agency-dark.html          301
 /interactive              /templates/agency-interactive.html   301
+/options                  /options.html                        301
+/buy                      /checkout.html                       301
+/결제                      /checkout.html                       301
 
 # ────────────────────────────────────────────
 # (선택) www → apex 통합 — 커스텀 도메인 연결 후

@@ -7,6 +7,8 @@ Disallow: /assets/brochure/
 Disallow: /intake.html
 Disallow: /intake
 Disallow: /start
+Disallow: /checkout.html
+Disallow: /buy
 
 # 고객사 전달용 사전 정보 시트는 색인 제외
 
