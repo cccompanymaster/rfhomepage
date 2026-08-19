@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>홈페이지 필수 페이지 구성, 5페이지면 충분하다 · NOAH 칼럼</title>
+    <meta name="description" content="소상공인 홈페이지에 꼭 필요한 페이지 구성을 정리했습니다. 메인, 소개, 서비스, 문의, 정책 페이지까지 각 페이지에 담을 내용과 우선순위를 안내합니다." />
+    <meta name="keywords" content="홈페이지 필수 페이지 구성, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/essential-pages" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="홈페이지 필수 페이지 구성, 5페이지면 충분하다" />
+    <meta property="og:description" content="소상공인 홈페이지에 꼭 필요한 페이지 구성을 정리했습니다. 메인, 소개, 서비스, 문의, 정책 페이지까지 각 페이지에 담을 내용과 우선순위를 안내합니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/essential-pages" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 필수 페이지 구성, 5페이지면 충분하다", "description": "소상공인 홈페이지에 꼭 필요한 페이지 구성을 정리했습니다. 메인, 소개, 서비스, 문의, 정책 페이지까지 각 페이지에 담을 내용과 우선순위를 안내합니다.", "datePublished": "2026-07-16", "dateModified": "2026-07-16", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/essential-pages"}, "keywords": "홈페이지 필수 페이지 구성"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 필수 페이지 구성, 5페이지면 충분하다", "item": "https://noahhomepage.co.kr/columns/essential-pages"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>제작 가이드</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 가이드</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">홈페이지 필수 페이지 구성, 5페이지면 충분하다</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">소상공인 홈페이지에 꼭 필요한 페이지 구성을 정리했습니다. 메인, 소개, 서비스, 문의, 정책 페이지까지 각 페이지에 담을 내용과 우선순위를 안내합니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-07-16">2026.07.16</time>
+        <span>·</span><span>약 5분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>홈페이지를 만들기로 했는데 어떤 페이지를 몇 개나 넣어야 할지 감이 안 오시나요? 페이지가 많다고 좋은 홈페이지가 되는 건 아닙니다. 소상공인 홈페이지는 다섯 페이지 안팎이면 핵심 역할을 충분히 해냅니다. 이 글에서 필수 페이지와 각각에 담을 내용을 정리합니다.</p><h2>메인 페이지, 3초 안에 답하기</h2><p>방문자는 메인 화면을 몇 초 훑고 머물지 떠날지 결정합니다. 그래서 첫 화면에는 '무엇을 하는 곳인지', '어디에 있는지', '어떻게 연락하는지'가 바로 보여야 합니다.</p><p>멋진 문구보다 명확한 문구가 낫습니다. 전화 버튼이나 문의 버튼을 화면 상단과 하단에 배치해 어느 지점에서든 연락할 수 있게 하세요.</p><h2>회사 소개 페이지</h2><p>소개 페이지는 신뢰를 쌓는 자리입니다. 연혁이나 경력, 대표 인사말, 매장·사무실 사진이 들어갑니다. 거창할 필요 없이 '왜 이 일을 하는지, 무엇을 잘하는지'를 솔직하게 쓰는 것이 오히려 설득력이 있습니다.</p><p>얼굴이 보이는 사진은 신뢰에 큰 역할을 합니다. 가능하다면 대표나 팀 사진을 넣어보세요.</p><h2>서비스·제품 페이지</h2><p>제공하는 서비스나 제품을 항목별로 정리합니다. 각 항목에 사진 한 장, 설명 서너 줄, 가능하다면 가격대나 소요 기간까지 적으면 문의 전환에 도움이 됩니다.</p><p>시공·시술처럼 결과물이 있는 업종이라면 전후 사진이나 사례 모음이 강력한 페이지가 됩니다.</p><h2>문의 페이지</h2><p>전화번호, 이메일, 영업시간, 오시는 길(지도)을 모아두는 페이지입니다. 간단한 문의 양식을 두면 영업시간 외에도 문의를 받을 수 있습니다.</p><p>양식 항목은 이름, 연락처, 문의 내용 정도로 최소화하세요. 입력칸이 많을수록 작성을 포기하는 사람이 늘어납니다.</p><h2>빠뜨리기 쉬운 정책 페이지</h2><p>개인정보처리방침은 문의 양식으로 개인정보를 수집한다면 갖춰야 하는 페이지입니다. 사업자 정보(상호, 대표자, 사업자등록번호 등)도 푸터나 별도 페이지에 표기합니다. 자세한 내용은 관련 법규와 업종 상황에 따라 다르니 별도로 확인이 필요합니다.</p><h2>정리</h2><p>첫째, 메인·소개·서비스·문의·정책 다섯 페이지면 소상공인 홈페이지의 기본이 완성됩니다. 둘째, 메인 화면은 3초 안에 업종과 연락 방법이 보이게 구성하세요. 셋째, 문의 양식은 짧을수록 좋습니다. NOAH의 레퍼런스들도 이 다섯 페이지 구조를 기본 뼈대로 삼고 업종별로 변형한 것입니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#페이지 구성</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#사이트 구조</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지 기획</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/business-info-law">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">사업자 홈페이지 표기 의무, 꼭 넣어야 할 정보</p>
+        </a>
+        <a href="/columns/privacy-policy">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">개인정보처리방침 작성법, 소규모 홈페이지 기준</p>
+        </a>
+        <a href="/columns/terms-of-service">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 이용약관 작성, 필요한 경우와 구성</p>
+        </a>
+        <a href="/columns/blog-ranking">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">블로그 상위노출 전략, 어뷰징 없이 오래가는 방법</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

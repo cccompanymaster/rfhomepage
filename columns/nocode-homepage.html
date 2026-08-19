@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>노코드 홈페이지 제작, 가능성과 한계를 아는 선택 · NOAH 칼럼</title>
+    <meta name="description" content="코딩 없이 홈페이지를 만드는 노코드 제작의 개념, 대표 도구 유형, 장점과 한계를 정리했습니다. 직접 제작과 외주 사이에서 현명하게 선택하는 기준을 안내합니다." />
+    <meta name="keywords" content="노코드 홈페이지 제작, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/nocode-homepage" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="노코드 홈페이지 제작, 가능성과 한계를 아는 선택" />
+    <meta property="og:description" content="코딩 없이 홈페이지를 만드는 노코드 제작의 개념, 대표 도구 유형, 장점과 한계를 정리했습니다. 직접 제작과 외주 사이에서 현명하게 선택하는 기준을 안내합니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/nocode-homepage" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "노코드 홈페이지 제작, 가능성과 한계를 아는 선택", "description": "코딩 없이 홈페이지를 만드는 노코드 제작의 개념, 대표 도구 유형, 장점과 한계를 정리했습니다. 직접 제작과 외주 사이에서 현명하게 선택하는 기준을 안내합니다.", "datePublished": "2026-04-19", "dateModified": "2026-04-19", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/nocode-homepage"}, "keywords": "노코드 홈페이지 제작"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "노코드 홈페이지 제작, 가능성과 한계를 아는 선택", "item": "https://noahhomepage.co.kr/columns/nocode-homepage"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>제작 방식 비교</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 방식 비교</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">노코드 홈페이지 제작, 가능성과 한계를 아는 선택</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">코딩 없이 홈페이지를 만드는 노코드 제작의 개념, 대표 도구 유형, 장점과 한계를 정리했습니다. 직접 제작과 외주 사이에서 현명하게 선택하는 기준을 안내합니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-04-19">2026.04.19</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>노코드(no-code)는 코드를 작성하지 않고 화면 조작만으로 홈페이지나 서비스를 만드는 방식을 말합니다. 아임웹·윅스 같은 홈페이지 빌더, 카페24 같은 쇼핑몰 플랫폼, 노션 기반 사이트 도구까지 폭넓게 노코드에 포함됩니다. 이제는 “만들 수 있느냐”보다 “내 상황에 맞느냐”가 질문이 되었습니다.</p><h2>노코드 도구의 유형</h2><ul><li><strong>올인원 빌더</strong> — 아임웹(국내), 윅스(해외)처럼 호스팅과 에디터가 묶인 형태</li><li><strong>쇼핑몰 특화</strong> — 카페24처럼 판매 기능 중심의 플랫폼</li><li><strong>문서 기반</strong> — 노션 등 문서를 사이트로 바꿔주는 가벼운 방식</li><li><strong>반(半)노코드</strong> — 워드프레스처럼 설치는 필요하지만 테마·플러그인으로 코딩 없이 운영하는 형태</li></ul><h2>노코드 vs 외주 제작 비교</h2><table><thead><tr><th>항목</th><th>노코드 직접 제작</th><th>외주 제작</th></tr></thead><tbody><tr><td>비용</td><td>도구 구독료 중심 (플랜별 상이)</td><td>제작비 지불, 범위에 따라 다양</td></tr><tr><td>시간</td><td>내 시간이 직접 투입됨</td><td>내 시간 절약, 소통 시간은 필요</td></tr><tr><td>품질</td><td>본인 숙련도에 따라 편차</td><td>전문가 품질, 업체별 편차</td></tr><tr><td>수정</td><td>언제든 직접 수정 가능</td><td>계약 조건에 따라 다름</td></tr><tr><td>소유권</td><td>임대형 도구는 플랫폼 종속 가능</td><td>계약에 따라 소스 이전 여부 상이</td></tr></tbody></table><h2>노코드의 장점</h2><p>초기 비용이 낮고, 오늘 시작해서 이번 주에 열 수 있을 만큼 빠르며, 수정을 스스로 즉시 할 수 있다는 점이 가장 큽니다. 사업 초기에 아이디어를 검증하는 용도로도 부담이 적습니다.</p><h2>미리 알아야 할 한계</h2><p>도구가 쉬워도 기획, 문구 작성, 사진 준비, 디자인 감각은 도구가 대신해 주지 않습니다. 생각보다 시간이 많이 들어 본업에 지장이 생기는 경우도 있습니다. 또 임대형 도구는 구독을 멈추면 사이트도 멈추고, 다른 플랫폼으로의 이전이 어려운 종속성이 있습니다. 세부 기능이 필요해질수록 상위 플랜이나 추가 앱 비용이 붙을 수 있으니 요금은 각 서비스 공식 페이지에서 확인하세요.</p><h2>선택 기준 세 가지</h2><ol><li><strong>시간</strong> — 주말을 몇 번 투자할 수 있는가?</li><li><strong>요구 수준</strong> — 템플릿 수준으로 충분한가, 맞춤 기능이 필요한가?</li><li><strong>운영 계획</strong> — 콘텐츠를 직접 자주 고칠 것인가, 맡길 것인가?</li></ol><h2>정리</h2><ul><li>노코드는 낮은 초기 비용과 빠른 시작이 강점인 현실적인 선택지입니다.</li><li>기획·콘텐츠·시간은 여전히 내 몫이며, 임대형 종속성도 고려해야 합니다.</li><li>시간·요구 수준·운영 계획, 세 가지로 직접 제작과 외주를 판단하세요.</li></ul><p>시간이 부담이라면 중간 지점도 있습니다. NOAH는 템플릿 기반 199,000원 패키지로 7일 안에 오픈하되, 소스와 계정 소유권을 고객에게 이전하고 1년간 텍스트 수정을 무제한 지원합니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#노코드</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지빌더</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#직접제작</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/freelancer-vs-agency">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작, 프리랜서와 에이전시 어디에 맡길까</p>
+        </a>
+        <a href="/columns/avoid-scam">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 사기 예방, 계약 전 확인할 위험 신호</p>
+        </a>
+        <a href="/columns/ownership-transfer">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 소유권 이전, 도메인부터 소스코드까지 정리</p>
+        </a>
+        <a href="/columns/incheon-homepage">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">지역별 제작</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>메인페이지 구성 요소, 순서에는 이유가 있습니다 · NOAH 칼럼</title>
+    <meta name="description" content="첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다." />
+    <meta name="keywords" content="메인페이지 구성 요소, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/main-page-structure" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="메인페이지 구성 요소, 순서에는 이유가 있습니다" />
+    <meta property="og:description" content="첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/main-page-structure" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "description": "첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다.", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/main-page-structure"}, "keywords": "메인페이지 구성 요소"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "item": "https://noahhomepage.co.kr/columns/main-page-structure"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>디자인·기획</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">디자인·기획</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">메인페이지 구성 요소, 순서에는 이유가 있습니다</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-03-10">2026.03.10</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>메인페이지는 가게의 입구입니다. 방문자는 이 한 페이지에서 여기가 어떤 곳인지, 믿을 만한지, 다음에 뭘 하면 되는지를 판단합니다. 잘 되는 사이트들의 메인 구성이 서로 비슷한 이유는 유행이 아니라, 방문자의 판단 순서를 따르기 때문입니다.</p><h2>첫 화면: 3초 안에 무엇을 하는 곳인지</h2><p>스크롤하기 전에 보이는 첫 화면에는 세 가지가 있어야 합니다. 무엇을 하는 곳인지 말해주는 <strong>한 줄 문장</strong>, 업의 분위기를 보여주는 <strong>대표 이미지</strong>, 그리고 전화나 예약으로 이어지는 <strong>행동 버튼</strong>입니다. 멋진 슬로건보다 명확한 설명이 먼저입니다. 강남역 5분, 20년 경력의 치과처럼 누가·어디서·무엇을 하는지가 바로 읽혀야 합니다.</p><h2>강점: 왜 여기여야 하는지</h2><p>첫 화면 다음에는 다른 곳이 아니라 여기를 선택할 이유를 줍니다. 경력, 장비, 원산지, 시공 방식, 가격 정책 등 우리 가게가 실제로 가진 강점을 2~4개로 추려 짧은 제목과 한두 문장으로 보여주세요. 열 가지를 나열하면 하나도 기억되지 않습니다. 증명할 수 없는 최고, 최저가 같은 표현보다 구체적인 사실이 힘이 셉니다.</p><h2>사회적 증거: 남들이 믿는다는 신호</h2><p>강점은 우리 주장이고, 후기는 남의 증언입니다. 고객 후기, 시공·시술 전후 사진, 누적 이용 건수, 자격이나 인증 같은 요소가 여기에 해당합니다. 실제 손님의 말투가 살아 있는 후기 두세 개가, 지어낸 듯한 칭찬 열 개보다 낫습니다. 후기가 아직 없다면 작업 과정 사진처럼 실체를 보여주는 것으로 시작해도 됩니다.</p><h2>CTA: 다음 행동을 한 가지로</h2><p>메인의 끝에는 방문자가 할 다음 행동을 명확히 제시합니다. 전화, 예약, 카카오톡 문의, 오시는 길 중 우리 사업에서 가장 중요한 것 하나를 크게, 나머지는 보조로 두세요. 선택지가 많으면 오히려 아무것도 누르지 않습니다. 모바일에서는 전화 버튼이 화면에 늘 보이도록 고정하는 것도 좋은 방법입니다.</p><h2>순서의 원리는 방문자의 질문 순서</h2><p>결국 메인페이지의 순서는 방문자가 속으로 묻는 질문의 순서입니다. 여기가 어디지(첫 화면), 괜찮은 곳인가(강점), 진짜인가(후기), 그래서 어떻게 하지(CTA). 이 흐름만 지키면 디자인이 소박해도 제 역할을 하고, 흐름이 없으면 화려해도 문의로 이어지지 않습니다.</p><h2>정리</h2><p>첫째, 첫 화면은 한 줄 설명·대표 이미지·행동 버튼 세 가지로 3초 안에 승부합니다. 둘째, 강점은 2~4개로 추리고 후기로 뒷받침하세요. 셋째, 마지막에는 다음 행동을 한 가지로 명확히 제시해야 합니다. NOAH의 199,000원 패키지는 이 구성 원리를 기본 골격으로 담아 7일 안에 오픈하며, 17개 업종 레퍼런스에서 실제 구성을 직접 확인할 수 있습니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#메인페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#웹디자인</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#구성</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/copywriting">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 카피라이팅, 기능 자랑 대신 고객의 언어로 쓰는 법</p>
+        </a>
+        <a href="/columns/brand-color">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지</p>
+        </a>
+        <a href="/columns/logo-design">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">로고 제작 3가지 방법, 직접·무료 툴·의뢰 비교</p>
+        </a>
+        <a href="/columns/manufacturing-homepage">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">업종별 제작</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">제조업 홈페이지 제작, 바이어가 찾는 것부터 배치하라</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

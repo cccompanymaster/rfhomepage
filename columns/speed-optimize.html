@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지 · NOAH 칼럼</title>
+    <meta name="description" content="홈페이지가 느린 원인은 대부분 이미지와 스크립트에 있습니다. WebP 변환, 지연 로딩, 호스팅 점검까지 사장님이 이해할 수 있는 언어로 속도 개선 방법을 정리했습니다." />
+    <meta name="keywords" content="홈페이지 속도 개선, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/speed-optimize" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지" />
+    <meta property="og:description" content="홈페이지가 느린 원인은 대부분 이미지와 스크립트에 있습니다. WebP 변환, 지연 로딩, 호스팅 점검까지 사장님이 이해할 수 있는 언어로 속도 개선 방법을 정리했습니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/speed-optimize" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지", "description": "홈페이지가 느린 원인은 대부분 이미지와 스크립트에 있습니다. WebP 변환, 지연 로딩, 호스팅 점검까지 사장님이 이해할 수 있는 언어로 속도 개선 방법을 정리했습니다.", "datePublished": "2026-03-28", "dateModified": "2026-03-28", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/speed-optimize"}, "keywords": "홈페이지 속도 개선"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지", "item": "https://noahhomepage.co.kr/columns/speed-optimize"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>운영·유지보수</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">홈페이지가 느린 원인은 대부분 이미지와 스크립트에 있습니다. WebP 변환, 지연 로딩, 호스팅 점검까지 사장님이 이해할 수 있는 언어로 속도 개선 방법을 정리했습니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-03-28">2026.03.28</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>홈페이지가 느리면 방문자는 기다려주지 않습니다. 화면이 뜨기 전에 뒤로 가기를 누르는 경우가 많고, 검색엔진도 느린 사이트를 좋게 평가하지 않습니다. 다행히 속도 문제의 원인은 대부분 몇 가지로 좁혀지고, 그중 상당수는 어렵지 않게 손볼 수 있습니다.</p><h2>먼저 현재 속도를 측정해 보세요</h2><p>감으로 판단하기 전에 무료 측정 도구를 써보는 것이 좋습니다. 구글의 PageSpeed Insights에 주소만 입력하면 모바일과 PC 각각의 상태와 개선 항목을 알려줍니다. 점수 자체에 일희일비하기보다는, 어떤 항목이 문제로 지적되는지를 보는 것이 핵심입니다. 대부분의 사이트에서 이미지와 스크립트가 상위에 지적됩니다.</p><h2>이미지가 속도를 잡아먹는 가장 큰 범인입니다</h2><p>스마트폰으로 찍은 사진을 원본 그대로 올리면 한 장에 수 MB가 되기도 합니다. 두 가지만 기억하세요. 첫째, <strong>화면에 보이는 크기에 맞게 리사이즈</strong>합니다. 폭 800px로 보일 이미지를 4000px 원본으로 올릴 이유가 없습니다. 둘째, <strong>WebP 같은 최신 포맷으로 변환</strong>합니다. 같은 화질에서 JPG보다 용량이 크게 줄어드는 경우가 많고, 무료 변환 도구도 많습니다.</p><h2>지연 로딩으로 첫 화면을 가볍게</h2><p>지연 로딩(lazy loading)은 화면에 아직 보이지 않는 아래쪽 이미지를 나중에 불러오는 방식입니다. 방문자가 처음 마주하는 화면이 훨씬 빨리 뜨게 됩니다. 최근 제작된 사이트라면 이미지 태그에 <code>loading=lazy</code> 속성을 넣는 것만으로 적용되는 경우가 많으니, 제작사에 적용 여부를 물어보세요.</p><h2>불필요한 스크립트와 호스팅도 점검</h2><p>채팅 위젯, 분석 도구, 애니메이션 효과 등 외부 스크립트가 쌓이면 그만큼 느려집니다. 실제로 쓰지 않는 위젯은 과감히 정리하세요. 또 사이트 자체는 가벼운데도 느리다면 호스팅 서버의 성능이나 위치가 원인일 수 있습니다. 오래된 저가 호스팅을 쓰고 있다면 업그레이드나 이전을 검토할 만합니다. 브라우저 캐시 설정처럼 서버 쪽에서 할 수 있는 조치는 제작사나 호스팅 업체에 문의하면 됩니다.</p><h2>정리</h2><p>첫째, PageSpeed Insights 같은 무료 도구로 무엇이 문제인지 먼저 확인하세요. 둘째, 이미지 리사이즈와 WebP 변환, 지연 로딩만으로도 체감 속도가 크게 달라집니다. 셋째, 쓰지 않는 스크립트 정리와 호스팅 점검까지 하면 기본기는 끝납니다. NOAH는 199,000원 패키지로 제작 단계부터 이미지 최적화와 반응형을 기본 적용해, 처음부터 가벼운 홈페이지로 시작하도록 돕고 있습니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#속도개선</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#이미지최적화</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#운영</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/backup-guide">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 백업 방법, 종류와 주기를 한 번에 정리</p>
+        </a>
+        <a href="/columns/security-check">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 보안 점검, 사장님이 직접 확인하는 기본기</p>
+        </a>
+        <a href="/columns/mobile-optimize">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">모바일 최적화 체크리스트, 375px에서 꼭 확인할 것들</p>
+        </a>
+        <a href="/columns/nocode-homepage">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">노코드 홈페이지 제작, 가능성과 한계를 아는 선택</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

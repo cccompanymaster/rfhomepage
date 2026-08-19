@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>robots.txt 설정 방법과 흔한 실수 피하기 · NOAH 칼럼</title>
+    <meta name="description" content="robots.txt의 역할과 기본 작성 규칙, 네이버·구글 검색로봇을 위한 설정 예시, 그리고 사이트 전체가 검색에서 사라지는 치명적 실수까지. 설정 전 꼭 읽어야 할 가이드입니다." />
+    <meta name="keywords" content="robots.txt 설정, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/robots-txt" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="robots.txt 설정 방법과 흔한 실수 피하기" />
+    <meta property="og:description" content="robots.txt의 역할과 기본 작성 규칙, 네이버·구글 검색로봇을 위한 설정 예시, 그리고 사이트 전체가 검색에서 사라지는 치명적 실수까지. 설정 전 꼭 읽어야 할 가이드입니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/robots-txt" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "robots.txt 설정 방법과 흔한 실수 피하기", "description": "robots.txt의 역할과 기본 작성 규칙, 네이버·구글 검색로봇을 위한 설정 예시, 그리고 사이트 전체가 검색에서 사라지는 치명적 실수까지. 설정 전 꼭 읽어야 할 가이드입니다.", "datePublished": "2026-05-17", "dateModified": "2026-05-17", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/robots-txt"}, "keywords": "robots.txt 설정"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "robots.txt 설정 방법과 흔한 실수 피하기", "item": "https://noahhomepage.co.kr/columns/robots-txt"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>SEO·검색노출</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">robots.txt 설정 방법과 흔한 실수 피하기</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">robots.txt의 역할과 기본 작성 규칙, 네이버·구글 검색로봇을 위한 설정 예시, 그리고 사이트 전체가 검색에서 사라지는 치명적 실수까지. 설정 전 꼭 읽어야 할 가이드입니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-05-17">2026.05.17</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>robots.txt는 검색로봇에게 "이 폴더는 수집해도 좋고, 저 폴더는 수집하지 말라"고 알려주는 텍스트 파일입니다. 사이트 최상위 주소(예: <code>내주소/robots.txt</code>)에 두며, 검색로봇은 사이트를 수집하기 전에 이 파일을 먼저 확인합니다. 한 줄 실수로 사이트 전체가 검색에서 빠질 수 있는 파일이라, 원리를 알고 만지는 것이 중요합니다.</p><h2>기본 문법 이해하기</h2><p>핵심 지시어는 세 가지입니다. <code>User-agent</code>는 규칙을 적용할 로봇(*는 전체), <code>Disallow</code>는 수집 제외 경로, <code>Allow</code>는 예외적으로 허용할 경로입니다. 참고로 네이버 검색로봇의 이름은 Yeti, 구글은 Googlebot입니다.</p><h2>상황별 설정 절차</h2><ol><li><strong>현재 상태 확인</strong>: 브라우저에서 <code>내주소/robots.txt</code> 를 열어봅니다. 파일이 없으면 전체 수집 허용과 같게 동작하는 것이 일반적입니다.</li><li><strong>전체 허용으로 시작</strong>: 일반 홈페이지라면 다음이면 충분합니다.<blockquote>User-agent: *<br>Allow: /<br>Sitemap: https://내주소/sitemap.xml</blockquote></li><li><strong>숨길 경로가 있다면 추가</strong>: 관리자 페이지 등은 <code>Disallow: /admin/</code> 처럼 경로 단위로 제외합니다.</li><li><strong>서버에 업로드</strong>: 반드시 사이트 최상위에 두어야 하며, 하위 폴더에 두면 인식되지 않습니다.</li><li><strong>검증</strong>: 구글 서치콘솔과 네이버 서치어드바이저의 robots.txt 관련 확인 기능으로 의도대로 동작하는지 점검합니다.</li></ol><h2>절대 하면 안 되는 실수</h2><ul><li><strong>Disallow: /</strong> — 슬래시 하나가 "사이트 전체 수집 금지"라는 뜻입니다. 개발 중 임시로 넣었다가 오픈 후 지우지 않는 사고가 정말 많습니다.</li><li>robots.txt로 <strong>비밀 정보를 보호하려는 것</strong> — 이 파일은 누구나 볼 수 있고, 접근 자체를 막는 기능이 아닙니다. 보안은 로그인·권한 설정으로 해야 합니다.</li><li>검색 결과에서 특정 페이지를 빼고 싶을 때 robots.txt만 쓰는 것 — 이미 색인된 페이지 제거는 메타 robots(noindex)나 각 검색엔진의 제거 도구를 함께 써야 확실합니다.</li></ul><h2>robots.txt와 SEO의 관계</h2><p>robots.txt는 순위를 올리는 도구가 아니라 수집 범위를 정리하는 도구입니다. 불필요한 페이지(내부 검색결과, 장바구니 등) 수집을 막아 검색엔진이 중요한 페이지에 집중하게 하는 것이 실질적 효과입니다. Sitemap 줄을 넣어 사이트맵 위치를 알려주는 것도 잊지 마세요.</p><h2>정리</h2><p>첫째, 일반 홈페이지는 전체 허용과 Sitemap 한 줄이면 기본 설정으로 충분합니다. 둘째, Disallow: / 한 줄이 사이트 전체를 검색에서 지울 수 있으니 오픈 시 반드시 점검하세요. 셋째, 보안 목적이 아니라 수집 정리 목적의 파일임을 기억하세요. NOAH 패키지는 robots.txt를 포함한 SEO 기본 설정을 갖춘 상태로 사이트를 오픈해 드립니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#robots</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#크롤링</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#기술SEO</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/keyword-research">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">SEO 키워드 선정 방법, 작은 사이트가 이기는 법</p>
+        </a>
+        <a href="/columns/blog-ranking">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">블로그 상위노출 전략, 어뷰징 없이 오래가는 방법</p>
+        </a>
+        <a href="/columns/local-seo">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">지역 검색 최적화, 동네 손님이 나를 찾게 하는 법</p>
+        </a>
+        <a href="/columns/gwangju-homepage">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">지역별 제작</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">광주 홈페이지 제작, 문화 도시와 부품 산업이 공존하는 시장</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

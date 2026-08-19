@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>사이트맵 제출 방법, 네이버·구글에 한 번에 알리기 · NOAH 칼럼</title>
+    <meta name="description" content="사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다." />
+    <meta name="keywords" content="사이트맵 제출 방법, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/sitemap-submit" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="사이트맵 제출 방법, 네이버·구글에 한 번에 알리기" />
+    <meta property="og:description" content="사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/sitemap-submit" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "description": "사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다.", "datePublished": "2026-05-19", "dateModified": "2026-05-19", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/sitemap-submit"}, "keywords": "사이트맵 제출 방법"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "item": "https://noahhomepage.co.kr/columns/sitemap-submit"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>SEO·검색노출</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">사이트맵 제출 방법, 네이버·구글에 한 번에 알리기</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-05-19">2026.05.19</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>사이트맵(sitemap.xml)은 내 홈페이지에 어떤 페이지들이 있는지 검색엔진에 알려주는 목록 파일입니다. 검색로봇이 링크를 따라다니며 페이지를 발견하기도 하지만, 사이트맵이 있으면 새 페이지나 깊숙한 페이지도 빠뜨리지 않고 수집하도록 도울 수 있습니다. 특히 페이지가 많거나 새로 연 사이트라면 제출해 두는 것이 좋습니다.</p><h2>사이트맵 만드는 방법</h2><ol><li><strong>제작 도구·플랫폼 기능 확인</strong>: 워드프레스(SEO 플러그인), 아임웹·카페24 등 대부분의 플랫폼은 사이트맵을 자동 생성합니다. 보통 <code>내주소/sitemap.xml</code> 로 접속해 보면 존재 여부를 알 수 있습니다.</li><li><strong>자동 생성이 없다면</strong>: 온라인 사이트맵 생성 서비스에 주소를 넣어 XML 파일을 만들고, 서버 최상위 폴더에 업로드합니다.</li><li><strong>직접 작성</strong>: 페이지가 몇 개 안 되면 &lt;urlset&gt; 안에 페이지별 &lt;url&gt;&lt;loc&gt;주소&lt;/loc&gt;&lt;/url&gt; 항목을 나열한 XML 파일을 만들어도 됩니다.</li></ol><h2>구글 서치콘솔에 제출하기</h2><ol><li>서치콘솔에 로그인해 내 사이트 속성을 선택합니다.</li><li>사이트맵 메뉴를 찾아 들어갑니다.</li><li>입력란에 <code>sitemap.xml</code> 경로를 입력하고 제출합니다.</li><li>상태가 "성공"으로 표시되는지, 발견된 URL 수가 실제 페이지 수와 비슷한지 확인합니다.</li></ol><h2>네이버 서치어드바이저에 제출하기</h2><ol><li>서치어드바이저 웹마스터 도구에서 내 사이트를 선택합니다.</li><li>사이트맵 제출 메뉴를 찾아 sitemap.xml 주소를 입력하고 제출합니다.</li><li>블로그형 콘텐츠가 있다면 RSS 제출 메뉴에 RSS 주소도 함께 제출하면 좋습니다.</li></ol><p>두 서비스 모두 메뉴 위치가 개편되곤 하므로, "사이트맵"이라는 이름의 메뉴를 현재 화면에서 찾는 방식으로 접근하세요.</p><h2>제출 후 확인과 관리</h2><p>제출 직후 모든 페이지가 색인되는 것은 아니며, 처리에 며칠 이상 걸릴 수 있습니다. 오류가 표시되면 사이트맵 주소 오타, 접속 불가(서버 문제), XML 형식 오류가 흔한 원인입니다. 페이지를 추가·삭제했을 때 자동 생성 사이트맵은 스스로 갱신되지만, 수동 작성 파일은 직접 업데이트해야 합니다. robots.txt 파일에 <code>Sitemap: https://내주소/sitemap.xml</code> 한 줄을 넣어 두면 검색로봇이 사이트맵을 더 쉽게 찾습니다.</p><h2>정리</h2><p>첫째, 사이트맵은 검색엔진에 전달하는 페이지 목록이며 플랫폼 자동 생성 여부부터 확인하세요. 둘째, 구글 서치콘솔과 네이버 서치어드바이저 양쪽에 제출해야 합니다. 셋째, 제출 후 오류 여부와 색인 현황을 확인하고 페이지 변경 시 갱신하세요. NOAH 제작 패키지에는 사이트맵 생성이 기본 포함되어 있어 제출만 하면 되는 상태로 사이트가 나갑니다.</p>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#사이트맵</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#sitemap</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색등록</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/meta-tags">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">메타태그 작성법, 검색결과 첫인상을 바꾸는 기술</p>
+        </a>
+        <a href="/columns/keyword-research">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">SEO 키워드 선정 방법, 작은 사이트가 이기는 법</p>
+        </a>
+        <a href="/columns/blog-ranking">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">블로그 상위노출 전략, 어뷰징 없이 오래가는 방법</p>
+        </a>
+        <a href="/columns/conversion-rate">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">전환율 높이는 홈페이지, 전환 정의부터 CTA와 신뢰 요소까지</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

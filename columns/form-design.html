@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다 · NOAH 칼럼</title>
+    <meta name="description" content="상담 폼의 필드 수와 전환의 관계부터 필수·선택 구분, 개인정보 동의, 오류 메시지, 제출 완료 안내까지 문의가 들어오는 폼을 만드는 설계 원칙을 정리했습니다." />
+    <meta name="keywords" content="상담 폼 설계, 홈페이지 제작, NOAH" />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/form-design" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다" />
+    <meta property="og:description" content="상담 폼의 필드 수와 전환의 관계부터 필수·선택 구분, 개인정보 동의, 오류 메시지, 제출 완료 안내까지 문의가 들어오는 폼을 만드는 설계 원칙을 정리했습니다." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/form-design" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C0F" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <style>
+      body { background: var(--bg); color: var(--text); }
+      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .col-head { border-bottom: 1px solid var(--line); }
+      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
+      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
+      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
+      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:disabled { opacity: .35; cursor: not-allowed; }
+
+      /* 본문 타이포 */
+      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose p { margin: 0 0 18px; }
+      .prose strong { color: var(--text); font-weight: 700; }
+      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
+      .prose li { margin-bottom: 9px; }
+      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
+      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
+      .prose ol { list-style: decimal; }
+      .prose ol li { padding-left: 4px; }
+      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
+      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
+      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+    </style>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다", "description": "상담 폼의 필드 수와 전환의 관계부터 필수·선택 구분, 개인정보 동의, 오류 메시지, 제출 완료 안내까지 문의가 들어오는 폼을 만드는 설계 원칙을 정리했습니다.", "datePublished": "2026-02-24", "dateModified": "2026-02-24", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/form-design"}, "keywords": "상담 폼 설계"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다", "item": "https://noahhomepage.co.kr/columns/form-design"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-white">홈</a> ·
+        <a href="/columns/" class="hover:text-white">칼럼</a> ·
+        <span>디자인·기획</span>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">디자인·기획</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">상담 폼의 필드 수와 전환의 관계부터 필수·선택 구분, 개인정보 동의, 오류 메시지, 제출 완료 안내까지 문의가 들어오는 폼을 만드는 설계 원칙을 정리했습니다.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-02-24">2026.02.24</time>
+        <span>·</span><span>약 6분</span>
+        <span>·</span><span>NOAH 편집팀</span>
+      </div>
+
+      <article class="prose mt-10">
+<p>홈페이지의 최종 목적지는 대부분 상담 폼입니다. 그런데 많은 폼이 “회사가 알고 싶은 것”을 전부 물어보는 신청서처럼 만들어져 있습니다. 방문자 입장에서 폼은 채우는 수고이고, 수고가 커질수록 그냥 떠나는 사람이 늘어납니다. 폼 설계의 기본 원칙은 단순합니다. 지금 꼭 필요한 것만 묻는 것입니다.</p><h2>필드 수가 문의 수를 좌우합니다</h2><p>첫 상담에서 정말 필요한 정보가 무엇인지 생각해 보세요. 이름, 연락처, 문의 내용이면 통화는 시작할 수 있습니다. 주소, 예산, 알게 된 경로 같은 항목은 상담하면서 물어도 됩니다.</p><blockquote><p><strong>나쁜 예:</strong> 이름, 연락처, 이메일, 주소, 회사명, 예산, 희망 일정, 알게 된 경로, 상세 내용 — 9개 항목 전부 필수</p><p><strong>좋은 예:</strong> 이름, 연락처, 문의 내용 3개만 필수. 나머지는 상담에서 확인</p></blockquote><h2>필수와 선택을 분명히 나누세요</h2><ul><li>필수 항목에는 표시를 붙이고, 선택 항목은 “(선택)”이라고 명시하세요. 무엇이 필수인지 모르면 방문자는 전부 채워야 한다고 느낍니다.</li><li>연락처는 전화와 이메일 중 하나만 받으세요. 둘 다 필수로 하면 이탈이 생깁니다.</li><li>문의 유형이 갈린다면 긴 주관식보다 선택지(견적 문의/방문 예약/기타)를 주는 것이 답하기 쉽습니다.</li></ul><h2>개인정보 동의는 생략할 수 없습니다</h2><p>이름과 연락처를 받는 순간 개인정보를 수집하는 것이므로, 수집·이용 목적, 항목, 보유 기간을 밝히고 동의를 받아야 합니다. 동의 문구는 폼 바로 아래에 짧게 요약하고, 전문은 링크로 연결하는 방식이 일반적입니다. 마케팅 수신 동의는 상담 동의와 분리해 선택으로 두어야 합니다.</p><h2>오류 메시지가 이탈을 막습니다</h2><p>제출 버튼을 눌렀는데 “입력 오류”라고만 뜨면 방문자는 무엇을 고쳐야 할지 모릅니다.</p><blockquote><p><strong>나쁜 예:</strong> “입력값이 올바르지 않습니다.”</p><p><strong>좋은 예:</strong> “연락처는 숫자만 입력해 주세요. 예: 01012345678” — 문제가 된 칸 바로 옆에 표시</p></blockquote><p>어떤 칸이, 왜, 어떻게 고치면 되는지 그 자리에서 알려 주는 것이 원칙입니다.</p><h2>제출 후 안내까지가 폼 설계입니다</h2><p>제출 직후 화면이 그대로면 방문자는 접수가 됐는지 불안해하고, 같은 문의를 두 번 보내기도 합니다. “접수되었습니다. 영업일 기준 하루 안에 연락드리겠습니다”처럼 접수 확인과 예상 응답 시간을 보여 주세요. 접수 확인 메일이 자동 발송되면 신뢰는 더 올라갑니다.</p><h2>정리</h2><ul><li>첫 폼은 이름·연락처·문의 내용 정도로 가볍게 만들고, 나머지는 상담에서 확인하세요.</li><li>필수·선택 구분, 개인정보 동의, 친절한 오류 메시지는 폼의 기본기입니다.</li><li>제출 완료 안내와 자동 회신까지 갖추면 문의 경험이 완성됩니다. NOAH에서는 5만원 옵션으로 문의 폼과 자동 메일 회신 기능을 함께 설치해 드립니다.</li></ul>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#상담폼</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#문의폼</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#전환설계</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          17개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
+          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/conversion-rate">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">전환율 높이는 홈페이지, 전환 정의부터 CTA와 신뢰 요소까지</p>
+        </a>
+        <a href="/columns/design-trend">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 디자인 트렌드, 따라가기 전에 따져볼 것</p>
+        </a>
+        <a href="/columns/find-reference">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 레퍼런스 찾는 법과 참고의 선 지키기</p>
+        </a>
+        <a href="/columns/homepage-cost">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">비용·견적</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 비용, 왜 업체마다 10배씩 차이 날까? 가격 구조 총정리</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-white">홈</a>
+        <a href="/columns/" class="hover:text-white">칼럼</a>
+        <a href="/options" class="hover:text-white">옵션 안내</a>
+        <a href="/#consult" class="hover:text-white">상담 신청</a>
+      </div>
+      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>
