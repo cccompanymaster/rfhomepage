@@ -16,44 +16,8 @@
     });
   });
 
-  /* -------- iframe lazy-load -------- */
-  const lazy = document.querySelectorAll('iframe[data-src]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.src = e.target.dataset.src;
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { rootMargin: '200px 0px' }
-    );
-    lazy.forEach((f) => io.observe(f));
-  } else {
-    lazy.forEach((f) => (f.src = f.dataset.src));
-  }
-
-  /* -------- iframe 자동 스케일 -------- */
-  const fit = (frame, designW) => {
-    const wrap = frame.parentElement;
-    if (!wrap) return;
-    const w = wrap.clientWidth;
-    if (!w) return;
-    const scale = w / designW;
-    frame.style.transform = `scale(${scale})`;
-    const designH = parseFloat(frame.style.height) || frame.offsetHeight;
-    wrap.style.height = designH * scale + 'px';
-  };
-  const refit = () => {
-    document.querySelectorAll('.preview-desktop').forEach((f) => fit(f, 1440));
-    document.querySelectorAll('.preview-mobile').forEach((f) => fit(f, 390));
-  };
-  window.addEventListener('load', refit);
-  window.addEventListener('resize', refit);
-  setTimeout(refit, 100);
-  setTimeout(refit, 600);
+  /* iframe 라이브 프리뷰 → 정적 스크린샷(assets/images/previews)으로 대체됨.
+     재생성: tools/capture_previews.md 참고 */
 
   /* -------- 카테고리 필터 -------- */
   const chips = document.querySelectorAll('.cat-chip[data-cat]');

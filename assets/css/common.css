@@ -129,15 +129,18 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ============================================================
-   iframe 프리뷰
+   프리뷰 이미지 (정적 스크린샷)
    ============================================================ */
-.preview-frame {
-  border: 0;
-  background: #fff;
-  pointer-events: none;
+.preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  z-index: 1;
 }
-.preview-desktop { width: 1440px; height: 900px; transform-origin: top left; }
-.preview-mobile  { width: 390px;  height: 844px; transform-origin: top left; }
 
 .preview-placeholder {
   width: 100%;
