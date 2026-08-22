@@ -39,6 +39,7 @@
 /agency                   /templates/agency-quote.html         301
 /editorial                /templates/agency-dark.html          301
 /interactive              /templates/agency-interactive.html   301
+/fintech                  /templates/fintech.html              301
 # ※ /options 는 규칙 불필요 — Workers가 options.html을 /options 로 자동 서빙
 #   (.html 목적지로 보내면 자동 리다이렉트와 핑퐁 → 무한루프. intake 때와 동일)
 /buy                      /checkout                            301

@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>온플로우 ONFLOW — 복잡한 정산을 가장 간단하게</title>
+    <meta name="description" content="흩어진 매출·정산·세금계산서를 한 화면으로. 사업자를 위한 자금 흐름 관리, 온플로우." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="온플로우 ONFLOW — 복잡한 정산을 가장 간단하게" />
+    <meta property="og:description" content="흩어진 매출·정산·세금계산서를 한 화면으로." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234B2AFF'/%3E%3Cpath d='M9 20c3-8 11-8 14 0' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f6f7f9;
+        --bg-deep: #0d1b2a;
+        --ink: #0d1b2a;      /* 진한 남색 */
+        --ink-2: #4e5968;
+        --ink-3: #8b95a1;
+        --brand: #4b2aff;    /* 일렉트릭 인디고 */
+        --brand-2: #7a5cff;
+        --brand-soft: #efebff;
+        --line: #e5e8eb;
+        --mint: #00c2a8;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--ink); overflow-x:clip; word-break:keep-all; -webkit-font-smoothing:antialiased; }
+      .wrap { max-width:1240px; margin:0 auto; padding:0 20px; }
+      @media (min-width:768px){ .wrap{ padding:0 40px; } }
+
+      /* 타이포 — 굵고 짧게 */
+      .t-hero { font-size:clamp(34px,6.6vw,76px); line-height:1.2; font-weight:800; letter-spacing:-0.045em; }
+      .t-sec  { font-size:clamp(28px,4.6vw,54px); line-height:1.28; font-weight:800; letter-spacing:-0.04em; }
+      .t-sub  { font-size:clamp(15px,1.7vw,19px); line-height:1.75; color:var(--ink-2); font-weight:500; }
+      .num    { font-size:clamp(40px,7vw,84px); line-height:1; font-weight:800; letter-spacing:-0.05em; font-variant-numeric:tabular-nums; }
+
+      a:focus-visible, button:focus-visible { outline:2px solid var(--brand); outline-offset:3px; border-radius:6px; }
+
+      /* 스크롤 등장 */
+      .up { opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+      .up.in { opacity:1; transform:none; }
+      .up.d1{transition-delay:.1s}.up.d2{transition-delay:.2s}.up.d3{transition-delay:.3s}.up.d4{transition-delay:.4s}
+
+      /* 헤더 */
+      .hd { position:fixed; top:0; left:0; right:0; z-index:80; height:64px; transition:background .3s, box-shadow .3s, backdrop-filter .3s; }
+      .hd.solid { background:rgba(255,255,255,.86); backdrop-filter:saturate(180%) blur(16px); box-shadow:0 1px 0 var(--line); }
+      @media(min-width:768px){ .hd{ height:72px; } }
+      .hd .nv { font-size:15px; font-weight:600; color:var(--ink-2); transition:color .2s; }
+      .hd .nv:hover { color:var(--ink); }
+      .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; border-radius:14px; transition:transform .18s cubic-bezier(.16,1,.3,1), background .18s, box-shadow .18s; }
+      .btn:active { transform:scale(.97); }
+      .btn-p { background:var(--brand); color:#fff; padding:16px 30px; font-size:16px; box-shadow:0 8px 24px -10px rgba(75,42,255,.6); }
+      .btn-p:hover { background:#3d1ff0; box-shadow:0 14px 32px -10px rgba(75,42,255,.7); }
+      .btn-s { background:var(--bg-soft); color:var(--ink); padding:16px 28px; font-size:16px; }
+      .btn-s:hover { background:#eceef1; }
+      .btn-sm { padding:10px 18px; font-size:14px; border-radius:12px; }
+      .btn-ghost-w { background:rgba(255,255,255,.14); color:#fff; padding:16px 30px; font-size:16px; backdrop-filter:blur(6px); }
+      .btn-ghost-w:hover { background:rgba(255,255,255,.24); }
+
+      /* 좌측 섹션 인디케이터 */
+      .rail { position:fixed; left:26px; top:50%; transform:translateY(-50%); z-index:60; display:none; flex-direction:column; gap:2px; }
+      @media(min-width:1180px){ .rail{ display:flex; } }
+      .rail button { display:flex; align-items:center; gap:11px; padding:7px 0; background:none; }
+      .rail .dot { width:7px; height:7px; border-radius:50%; background:var(--line); transition:all .3s cubic-bezier(.16,1,.3,1); flex-shrink:0; }
+      .rail .lb { font-size:12px; font-weight:600; color:transparent; white-space:nowrap; transition:color .3s; }
+      .rail button:hover .lb { color:var(--ink-3); }
+      .rail button[aria-current="true"] .dot { background:var(--brand); transform:scale(1.5); box-shadow:0 0 0 5px rgba(75,42,255,.14); }
+      .rail button[aria-current="true"] .lb { color:var(--ink); }
+      .rail.on-dark .dot { background:rgba(255,255,255,.28); }
+      .rail.on-dark button[aria-current="true"] .dot { background:#fff; box-shadow:0 0 0 5px rgba(255,255,255,.18); }
+      .rail.on-dark button[aria-current="true"] .lb { color:#fff; }
+      .rail.on-dark button:hover .lb { color:rgba(255,255,255,.6); }
+
+      /* 대형 미디어 */
+      .media { border-radius:clamp(24px,3.4vw,44px); overflow:hidden; position:relative; }
+
+      /* 히어로 */
+      .hero { min-height:100svh; display:flex; align-items:center; position:relative; overflow:hidden;
+        background:linear-gradient(165deg,#f3f0ff 0%,#f7f8fa 42%,#eef4ff 100%); }
+      .hero-orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.5; animation:drift 18s ease-in-out infinite alternate; }
+      @keyframes drift { to { transform:translate(50px,-40px) scale(1.1); } }
+      .hero-visual { animation:heroZoom 22s ease-in-out infinite alternate; }
+      @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.055) translateY(-10px)} }
+      .scroll-cue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:9px; }
+      .scroll-cue span { font-size:11px; letter-spacing:.22em; color:var(--ink-3); font-weight:600; }
+      .scroll-cue i { width:1px; height:38px; background:linear-gradient(180deg,var(--brand),transparent); animation:cue 1.9s ease-in-out infinite; transform-origin:top; }
+      @keyframes cue { 0%{transform:scaleY(0)} 45%{transform:scaleY(1)} 46%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+      /* 폰 목업 */
+      .phone { width:min(300px,72vw); aspect-ratio:9/19.2; background:#0d1b2a; border-radius:44px; padding:9px; position:relative;
+        box-shadow:0 40px 80px -30px rgba(13,27,42,.42), 0 0 0 1px rgba(13,27,42,.07); }
+      .phone::before { content:''; position:absolute; top:16px; left:50%; transform:translateX(-50%); width:76px; height:22px; background:#0d1b2a; border-radius:99px; z-index:5; }
+      .phone-scr { width:100%; height:100%; background:#fff; border-radius:36px; overflow:hidden; position:relative; }
+      .scr { position:absolute; inset:0; padding:44px 16px 16px; opacity:0; transform:translateY(14px) scale(.98); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
+      .scr.on { opacity:1; transform:none; }
+
+      /* 앱 UI 조각 */
+      .ui-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+      .ui-t { font-size:15px; font-weight:800; letter-spacing:-0.03em; }
+      .ui-card { background:var(--bg-soft); border-radius:15px; padding:13px; margin-bottom:9px; }
+      .ui-card.brand { background:var(--brand); color:#fff; }
+      .ui-lb { font-size:10.5px; color:var(--ink-3); font-weight:600; }
+      .ui-card.brand .ui-lb { color:rgba(255,255,255,.72); }
+      .ui-v { font-size:19px; font-weight:800; letter-spacing:-0.04em; margin-top:3px; font-variant-numeric:tabular-nums; }
+      .ui-row { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--line); }
+      .ui-row:last-child { border-bottom:0; }
+      .ui-ic { width:29px; height:29px; border-radius:9px; background:var(--brand-soft); display:grid; place-items:center; font-size:13px; flex-shrink:0; }
+      .ui-nm { font-size:12px; font-weight:700; }
+      .ui-sb { font-size:10px; color:var(--ink-3); margin-top:1px; }
+      .ui-am { margin-left:auto; font-size:12px; font-weight:800; font-variant-numeric:tabular-nums; }
+      .ui-bar { height:5px; border-radius:99px; background:var(--line); overflow:hidden; margin-top:7px; }
+      .ui-bar i { display:block; height:100%; background:var(--brand); border-radius:99px; }
+      .ui-chip { display:inline-block; font-size:9.5px; font-weight:700; padding:3px 8px; border-radius:99px; background:rgba(0,194,168,.14); color:#00806f; }
+
+      /* 기능 sticky */
+      .feat-media { position:sticky; top:calc(50svh - 300px); display:flex; justify-content:center; }
+      .feat-block { min-height:76svh; display:flex; flex-direction:column; justify-content:center; }
+      @media(max-width:1023px){
+        .feat-media { position:static; margin-bottom:34px; top:auto; }
+        .feat-block { min-height:auto; padding:36px 0; }
+      }
+      .feat-block h3 { font-size:clamp(23px,3.2vw,38px); font-weight:800; letter-spacing:-0.04em; line-height:1.32; }
+      .feat-idx { font-size:12px; font-weight:800; letter-spacing:.18em; color:var(--brand); }
+
+      /* 과정 카드 */
+      .step { background:#fff; border:1px solid var(--line); border-radius:26px; padding:30px 26px; transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s; }
+      .step:hover { transform:translateY(-6px); box-shadow:0 26px 50px -26px rgba(13,27,42,.24); }
+      .step-n { width:38px; height:38px; border-radius:12px; background:var(--brand-soft); color:var(--brand); display:grid; place-items:center; font-weight:800; font-size:15px; }
+
+      /* 브라우저 목업 */
+      .browser { border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff; box-shadow:0 20px 44px -26px rgba(13,27,42,.28); }
+      .browser-bar { height:30px; background:var(--bg-soft); display:flex; align-items:center; gap:5px; padding:0 12px; border-bottom:1px solid var(--line); }
+      .browser-bar i { width:8px; height:8px; border-radius:50%; background:#d5dae0; display:block; }
+
+      /* 신뢰 */
+      .logo-cell { height:64px; display:grid; place-items:center; border:1px solid var(--line); border-radius:14px; font-weight:800; color:var(--ink-3); font-size:14px; letter-spacing:-0.02em; background:#fff; transition:color .25s, border-color .25s; }
+      .logo-cell:hover { color:var(--ink); border-color:#d3d8de; }
+      .quote { background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; }
+      .sec-badge { display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--ink-2); background:var(--bg-soft); padding:9px 15px; border-radius:99px; }
+
+      /* 마지막 CTA — 배경 전환 */
+      .final { background:var(--bg); transition:background 1.1s cubic-bezier(.16,1,.3,1); position:relative; overflow:hidden; }
+      .final.lit { background:var(--brand); }
+      .final .fx { color:var(--ink); transition:color 1.1s; }
+      .final.lit .fx { color:#fff; }
+      .final .fx-2 { color:var(--ink-2); transition:color 1.1s; }
+      .final.lit .fx-2 { color:rgba(255,255,255,.78); }
+
+      .kv { border-top:1px solid var(--line); padding-top:22px; }
+
+      /* 접근성 — 동작 줄이기 */
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior:auto; }
+        .up { opacity:1; transform:none; transition:none; }
+        .hero-visual, .hero-orb, .scroll-cue i { animation:none !important; }
+        .scr { transition:none; }
+        .final { transition:none; }
+        *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+      }
+    </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"온플로우 ONFLOW","applicationCategory":"FinanceApplication","operatingSystem":"iOS, Android, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+    </script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <a href="../index.html" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+
+    <!-- 좌측 섹션 인디케이터 -->
+    <nav class="rail" id="rail" aria-label="섹션 바로가기">
+      <button data-go="hero" aria-current="true"><span class="dot"></span><span class="lb">시작</span></button>
+      <button data-go="problem"><span class="dot"></span><span class="lb">문제</span></button>
+      <button data-go="features"><span class="dot"></span><span class="lb">기능</span></button>
+      <button data-go="process"><span class="dot"></span><span class="lb">시작 방법</span></button>
+      <button data-go="trust"><span class="dot"></span><span class="lb">신뢰</span></button>
+      <button data-go="cta"><span class="dot"></span><span class="lb">문의</span></button>
+    </nav>
+
+    <!-- ═══ 헤더 ═══ -->
+    <header class="hd" id="hd">
+      <div class="wrap h-full flex items-center justify-between">
+        <a href="#hero" class="flex items-center gap-2.5" aria-label="온플로우 홈">
+          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--brand)"/><path d="M9 20c3-8 11-8 14 0" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+          <span class="font-extrabold text-[19px] tracking-tight">온플로우</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8" aria-label="주 메뉴">
+          <a class="nv" href="#features">서비스</a>
+          <a class="nv" href="#process">시작하기</a>
+          <a class="nv" href="#trust">회사소개</a>
+          <a class="nv" href="#cta">문의</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <label class="sr-only" for="lang">언어 선택</label>
+          <select id="lang" class="hidden sm:block text-sm font-semibold bg-transparent cursor-pointer" style="color:var(--ink-2)">
+            <option value="ko">KO</option><option value="en">EN</option><option value="ja">JA</option>
+          </select>
+          <a href="#cta" class="btn btn-p btn-sm">무료로 시작</a>
+          <button class="md:hidden p-2" aria-label="메뉴 열기" onclick="document.getElementById('mm').classList.add('open');document.body.style.overflow='hidden'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mm" class="fixed inset-0 z-[90] bg-white hidden [&.open]:flex flex-col p-6" role="dialog" aria-modal="true" aria-label="전체 메뉴">
+      <div class="flex justify-end"><button class="p-2 text-3xl" aria-label="메뉴 닫기" onclick="closeMM()">×</button></div>
+      <a href="#features" class="py-5 text-2xl font-extrabold border-b" style="border-color:var(--line)" onclick="closeMM()">서비스</a>
+      <a href="#process" class="py-5 text-2xl font-extrabold border-b" style="border-color:var(--line)" onclick="closeMM()">시작하기</a>
+      <a href="#trust" class="py-5 text-2xl font-extrabold border-b" style="border-color:var(--line)" onclick="closeMM()">회사소개</a>
+      <a href="#cta" class="py-5 text-2xl font-extrabold border-b" style="border-color:var(--line)" onclick="closeMM()">문의</a>
+      <a href="#cta" class="btn btn-p mt-8" onclick="closeMM()">무료로 시작하기</a>
+    </div>
+
+    <main>
+      <!-- ═══ 1. 히어로 ═══ -->
+      <section class="hero" id="hero">
+        <div class="hero-orb" style="width:520px;height:520px;background:#4b2aff;top:-160px;left:-140px" aria-hidden="true"></div>
+        <div class="hero-orb" style="width:440px;height:440px;background:#00c2a8;bottom:-180px;right:-120px;animation-delay:4s" aria-hidden="true"></div>
+
+        <div class="wrap relative w-full grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center pt-24 pb-28">
+          <div>
+            <p class="up sec-badge">🏦 사업자를 위한 자금 흐름 관리</p>
+            <h1 class="t-hero up d1 mt-6">복잡한 정산을<br />가장 <span style="color:var(--brand)">간단하게</span></h1>
+            <p class="t-sub up d2 mt-7 max-w-md">
+              흩어진 매출·정산·세금계산서를 한 화면에서 봅니다.<br />
+              장부를 맞추는 시간 대신, 사업에 쓰세요.
+            </p>
+            <div class="up d3 mt-9 flex flex-wrap gap-3">
+              <a href="#cta" class="btn btn-p">무료로 시작하기</a>
+              <a href="#features" class="btn btn-s">기능 둘러보기</a>
+            </div>
+            <p class="up d4 mt-6 text-[13px]" style="color:var(--ink-3)">설치 없이 웹에서 바로 · 카드 등록 불필요</p>
+          </div>
+
+          <div class="hero-visual flex justify-center lg:justify-end">
+            <div class="phone">
+              <div class="phone-scr">
+                <div class="scr on" style="opacity:1;transform:none">
+                  <div class="ui-top"><span class="ui-t">이번 달 정산</span><span class="ui-chip">실시간</span></div>
+                  <div class="ui-card brand">
+                    <p class="ui-lb">입금 예정</p>
+                    <p class="ui-v">₩ 42,860,000</p>
+                    <div class="ui-bar" style="background:rgba(255,255,255,.24)"><i style="width:72%;background:#fff"></i></div>
+                    <p class="ui-lb mt-2">7개 채널 중 5곳 정산 완료</p>
+                  </div>
+                  <div class="ui-card">
+                    <div class="ui-row"><span class="ui-ic">🛒</span><span><span class="ui-nm">스마트스토어</span><span class="ui-sb">8월 16일 입금</span></span><span class="ui-am">18,240,000</span></div>
+                    <div class="ui-row"><span class="ui-ic">💳</span><span><span class="ui-nm">카드 매출</span><span class="ui-sb">8월 17일 입금</span></span><span class="ui-am">12,905,000</span></div>
+                    <div class="ui-row"><span class="ui-ic">📦</span><span><span class="ui-nm">오픈마켓</span><span class="ui-sb">정산 대기</span></span><span class="ui-am">7,120,000</span></div>
+                    <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">세금계산서</span><span class="ui-sb">자동 발행 12건</span></span><span class="ui-am">4,595,000</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-cue" aria-hidden="true"><span>SCROLL</span><i></i></div>
+      </section>
+
+      <!-- ═══ 2. 핵심 문제 ═══ -->
+      <section id="problem" class="py-24 md:py-36" style="background:var(--bg-soft)">
+        <div class="wrap">
+          <h2 class="t-sec up max-w-3xl">사업은 커지는데,<br />정산은 왜 더 복잡해질까요.</h2>
+          <p class="t-sub up d1 mt-6 max-w-lg">채널이 늘수록 확인할 곳도 늘어납니다. 대부분의 사장님이 여기서 시간을 씁니다.</p>
+
+          <div class="grid md:grid-cols-3 gap-6 md:gap-10 mt-16">
+            <div class="up d1">
+              <p class="num" style="color:var(--brand)"><span data-count="7">0</span>곳</p>
+              <p class="kv mt-6 font-extrabold text-lg">흩어진 매출처</p>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">스토어·오픈마켓·카드사·현장 결제까지. 한 달 매출을 알려면 일곱 군데를 켜야 합니다.</p>
+            </div>
+            <div class="up d2">
+              <p class="num" style="color:var(--brand)"><span data-count="14">0</span>시간</p>
+              <p class="kv mt-6 font-extrabold text-lg">월말 정산에 쓰는 시간</p>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">엑셀로 옮기고, 수수료 빼고, 입금과 대조하고. 매달 반복되는 이틀입니다.</p>
+            </div>
+            <div class="up d3">
+              <p class="num" style="color:var(--brand)"><span data-count="3">0</span>일</p>
+              <p class="kv mt-6 font-extrabold text-lg">뒤늦게 아는 자금 상황</p>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">정산이 끝나야 잔고가 보입니다. 결정은 그보다 며칠 앞서 해야 하는데도요.</p>
+            </div>
+          </div>
+          <p class="mt-12 text-xs up" style="color:var(--ink-3)">※ 본 페이지는 NOAH 레퍼런스 디자인 시안이며, 위 수치는 예시입니다.</p>
+        </div>
+      </section>
+
+      <!-- ═══ 3. 대표 기능 (sticky 미디어 + 콘텐츠 전환) ═══ -->
+      <section id="features" class="py-24 md:py-32">
+        <div class="wrap">
+          <div class="up max-w-2xl mb-4 md:mb-16">
+            <p class="feat-idx">FEATURES</p>
+            <h2 class="t-sec mt-4">한 화면에서<br />끝내도록 만들었습니다.</h2>
+          </div>
+
+          <div class="grid lg:grid-cols-[.92fr_1.08fr] gap-10 lg:gap-20">
+            <!-- 고정 미디어 -->
+            <div class="feat-media">
+              <div class="phone">
+                <div class="phone-scr" id="phone-scr">
+                  <!-- 화면 1: 통합 대시보드 -->
+                  <div class="scr on" data-scr="0">
+                    <div class="ui-top"><span class="ui-t">전체 매출</span><span class="ui-chip">오늘 09:12</span></div>
+                    <div class="ui-card brand">
+                      <p class="ui-lb">8월 누적</p>
+                      <p class="ui-v">₩ 128,400,000</p>
+                      <div class="ui-bar" style="background:rgba(255,255,255,.24)"><i style="width:64%;background:#fff"></i></div>
+                      <p class="ui-lb mt-2">전월 동기 대비 +12%</p>
+                    </div>
+                    <div class="ui-card">
+                      <p class="ui-lb mb-2">채널별</p>
+                      <div class="ui-row"><span class="ui-ic">🛒</span><span class="ui-nm">스마트스토어</span><span class="ui-am">52%</span></div>
+                      <div class="ui-row"><span class="ui-ic">📦</span><span class="ui-nm">오픈마켓</span><span class="ui-am">28%</span></div>
+                      <div class="ui-row"><span class="ui-ic">🏪</span><span class="ui-nm">매장 결제</span><span class="ui-am">20%</span></div>
+                    </div>
+                  </div>
+                  <!-- 화면 2: 정산 캘린더 -->
+                  <div class="scr" data-scr="1">
+                    <div class="ui-top"><span class="ui-t">입금 캘린더</span><span class="ui-chip">8월</span></div>
+                    <div class="ui-card">
+                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 16일 (금)</span><span class="ui-sb">스마트스토어</span></span><span class="ui-am" style="color:var(--mint)">+18,240,000</span></div>
+                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 17일 (토)</span><span class="ui-sb">카드 매출</span></span><span class="ui-am" style="color:var(--mint)">+12,905,000</span></div>
+                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 20일 (화)</span><span class="ui-sb">임대료 자동이체</span></span><span class="ui-am" style="color:#e5484d">−3,400,000</span></div>
+                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 25일 (일)</span><span class="ui-sb">오픈마켓</span></span><span class="ui-am" style="color:var(--mint)">+7,120,000</span></div>
+                    </div>
+                    <div class="ui-card brand">
+                      <p class="ui-lb">이번 주 예상 잔고</p>
+                      <p class="ui-v">₩ 34,865,000</p>
+                    </div>
+                  </div>
+                  <!-- 화면 3: 세금계산서 -->
+                  <div class="scr" data-scr="2">
+                    <div class="ui-top"><span class="ui-t">세금계산서</span><span class="ui-chip">자동</span></div>
+                    <div class="ui-card">
+                      <p class="ui-lb">이번 달 발행</p>
+                      <p class="ui-v">42건 <span style="font-size:12px;color:var(--ink-3);font-weight:600">/ 42건 완료</span></p>
+                      <div class="ui-bar"><i style="width:100%"></i></div>
+                    </div>
+                    <div class="ui-card">
+                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">(주)대성유통</span><span class="ui-sb">8/14 발행 완료</span></span><span class="ui-am">2,480,000</span></div>
+                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">한빛상사</span><span class="ui-sb">8/13 발행 완료</span></span><span class="ui-am">1,150,000</span></div>
+                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">우리물산</span><span class="ui-sb">8/12 발행 완료</span></span><span class="ui-am">965,000</span></div>
+                    </div>
+                    <p class="text-[10px] text-center mt-3" style="color:var(--ink-3)">국세청 전송까지 자동으로 처리됩니다</p>
+                  </div>
+                  <!-- 화면 4: 리포트 -->
+                  <div class="scr" data-scr="3">
+                    <div class="ui-top"><span class="ui-t">월간 리포트</span><span class="ui-chip">PDF</span></div>
+                    <div class="ui-card">
+                      <p class="ui-lb">순이익률</p>
+                      <p class="ui-v">18.4%</p>
+                      <div class="ui-bar"><i style="width:18.4%"></i></div>
+                    </div>
+                    <div class="ui-card">
+                      <p class="ui-lb mb-2">비용 상위</p>
+                      <div class="ui-row"><span class="ui-ic">📢</span><span class="ui-nm">광고비</span><span class="ui-am">31%</span></div>
+                      <div class="ui-row"><span class="ui-ic">🚚</span><span class="ui-nm">물류비</span><span class="ui-am">24%</span></div>
+                      <div class="ui-row"><span class="ui-ic">🏢</span><span class="ui-nm">임대료</span><span class="ui-am">17%</span></div>
+                    </div>
+                    <div class="ui-card" style="background:var(--brand-soft)">
+                      <p class="ui-lb" style="color:var(--brand)">💡 이번 달 제안</p>
+                      <p class="text-[11px] font-semibold mt-1.5 leading-5">광고비 비중이 3개월 연속 상승했습니다. 채널별 효율을 확인해 보세요.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 스크롤 콘텐츠 -->
+            <div id="feat-list">
+              <div class="feat-block" data-feat="0">
+                <p class="feat-idx">01</p>
+                <h3 class="mt-3">모든 매출을<br />하나의 화면으로</h3>
+                <p class="t-sub mt-5 max-w-sm">스토어·오픈마켓·카드사를 한 번 연결해 두면, 매일 아침 합쳐진 숫자로 시작합니다.</p>
+                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">연동 채널 보기 →</a>
+              </div>
+              <div class="feat-block" data-feat="1">
+                <p class="feat-idx">02</p>
+                <h3 class="mt-3">언제 얼마가<br />들어오는지 미리</h3>
+                <p class="t-sub mt-5 max-w-sm">채널별 정산 주기를 계산해 입금일을 달력에 표시합니다. 지출까지 함께 보여 자금 계획이 서집니다.</p>
+                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">캘린더 살펴보기 →</a>
+              </div>
+              <div class="feat-block" data-feat="2">
+                <p class="feat-idx">03</p>
+                <h3 class="mt-3">세금계산서는<br />직접 챙기지 않아도</h3>
+                <p class="t-sub mt-5 max-w-sm">거래처와 금액이 확정되면 발행부터 전송까지 이어서 처리합니다. 누락 건은 따로 알려드립니다.</p>
+                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">발행 흐름 보기 →</a>
+              </div>
+              <div class="feat-block" data-feat="3">
+                <p class="feat-idx">04</p>
+                <h3 class="mt-3">세무사에게 보낼<br />자료가 이미 준비된 채로</h3>
+                <p class="t-sub mt-5 max-w-sm">월말이면 매출·비용·순이익이 정리된 리포트가 만들어집니다. 그대로 내려받아 전달하세요.</p>
+                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">리포트 예시 보기 →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 4. 사용 과정 ═══ -->
+      <section id="process" class="py-24 md:py-32" style="background:var(--bg-soft)">
+        <div class="wrap">
+          <div class="up text-center max-w-2xl mx-auto mb-16">
+            <p class="feat-idx">HOW IT WORKS</p>
+            <h2 class="t-sec mt-4">3단계면<br />오늘부터 씁니다</h2>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="step up d1">
+              <div class="step-n">1</div>
+              <h3 class="mt-5 text-xl font-extrabold tracking-tight">사업자 인증</h3>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">사업자등록번호로 1분이면 끝납니다. 별도 서류는 필요하지 않습니다.</p>
+              <div class="browser mt-6">
+                <div class="browser-bar"><i></i><i></i><i></i></div>
+                <div class="p-4">
+                  <p class="text-[11px] font-bold" style="color:var(--ink-3)">사업자등록번호</p>
+                  <div class="mt-1.5 h-9 rounded-lg flex items-center px-3 text-[13px] font-bold" style="background:var(--bg-soft)">000-00-00000</div>
+                  <div class="mt-2.5 h-8 rounded-lg grid place-items-center text-[12px] font-bold text-white" style="background:var(--brand)">인증하기</div>
+                </div>
+              </div>
+            </div>
+            <div class="step up d2">
+              <div class="step-n">2</div>
+              <h3 class="mt-5 text-xl font-extrabold tracking-tight">판매 채널 연결</h3>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">쓰고 계신 스토어와 카드사를 고르기만 하면 과거 내역까지 불러옵니다.</p>
+              <div class="browser mt-6">
+                <div class="browser-bar"><i></i><i></i><i></i></div>
+                <div class="p-4 space-y-2">
+                  <div class="flex items-center gap-2 text-[12px] font-bold"><span class="ui-ic" style="width:24px;height:24px;font-size:11px">🛒</span>스마트스토어<span class="ml-auto" style="color:var(--mint)">✓ 연결됨</span></div>
+                  <div class="flex items-center gap-2 text-[12px] font-bold"><span class="ui-ic" style="width:24px;height:24px;font-size:11px">💳</span>카드 매출<span class="ml-auto" style="color:var(--mint)">✓ 연결됨</span></div>
+                  <div class="flex items-center gap-2 text-[12px] font-bold" style="color:var(--ink-3)"><span class="ui-ic" style="width:24px;height:24px;font-size:11px">📦</span>오픈마켓<span class="ml-auto">연결하기</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="step up d3">
+              <div class="step-n">3</div>
+              <h3 class="mt-5 text-xl font-extrabold tracking-tight">아침마다 확인</h3>
+              <p class="mt-2.5 text-[15px] leading-7" style="color:var(--ink-2)">이후로는 열어보기만 하면 됩니다. 중요한 변화는 알림으로 먼저 알려드립니다.</p>
+              <div class="browser mt-6">
+                <div class="browser-bar"><i></i><i></i><i></i></div>
+                <div class="p-4">
+                  <p class="text-[11px] font-bold" style="color:var(--ink-3)">오늘의 요약</p>
+                  <p class="text-lg font-extrabold mt-1 tracking-tight">₩ 4,280,000</p>
+                  <div class="ui-bar mt-2"><i style="width:82%"></i></div>
+                  <p class="text-[11px] mt-2" style="color:var(--ink-3)">어제보다 +8% · 정산 대기 2건</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 5. 신뢰 요소 ═══ -->
+      <section id="trust" class="py-24 md:py-32">
+        <div class="wrap">
+          <div class="up text-center max-w-2xl mx-auto">
+            <p class="feat-idx">TRUST</p>
+            <h2 class="t-sec mt-4">돈을 다루는 만큼,<br />안전이 먼저입니다</h2>
+          </div>
+
+          <!-- 지표 -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 text-center up d1">
+            <div><p class="num" style="font-size:clamp(32px,4.6vw,52px)"><span data-count="12800">0</span>+</p><p class="mt-3 text-sm font-semibold" style="color:var(--ink-2)">이용 사업장</p></div>
+            <div><p class="num" style="font-size:clamp(32px,4.6vw,52px)"><span data-count="98">0</span>%</p><p class="mt-3 text-sm font-semibold" style="color:var(--ink-2)">자동 분류 정확도</p></div>
+            <div><p class="num" style="font-size:clamp(32px,4.6vw,52px)"><span data-count="24">0</span>시간</p><p class="mt-3 text-sm font-semibold" style="color:var(--ink-2)">문의 응답 기준</p></div>
+            <div><p class="num" style="font-size:clamp(32px,4.6vw,52px)"><span data-count="9">0</span>곳</p><p class="mt-3 text-sm font-semibold" style="color:var(--ink-2)">연동 채널</p></div>
+          </div>
+          <p class="mt-6 text-xs text-center up" style="color:var(--ink-3)">※ 시안용 예시 수치입니다. 실제 운영 시 검증된 값으로 교체하세요.</p>
+
+          <!-- 고객사 -->
+          <div class="mt-20 up d1">
+            <p class="text-center text-sm font-semibold mb-6" style="color:var(--ink-3)">이런 곳에서 쓰고 있습니다</p>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
+              <div class="logo-cell">유통 A사</div><div class="logo-cell">푸드 B사</div><div class="logo-cell">뷰티 C사</div>
+              <div class="logo-cell">패션 D사</div><div class="logo-cell">리빙 E사</div><div class="logo-cell">헬스 F사</div>
+            </div>
+            <p class="mt-4 text-center text-[11px]" style="color:var(--ink-3)">실제 운영 시 사용 동의를 받은 고객사 로고로 교체하세요.</p>
+          </div>
+
+          <!-- 후기 + 보안 -->
+          <div class="grid md:grid-cols-2 gap-6 mt-14">
+            <div class="quote up d1">
+              <p class="text-[17px] leading-8 font-semibold">"채널이 늘어날 때마다 엑셀 탭이 늘었는데, 이제는 아침에 한 번 열어보는 걸로 끝납니다. 월말에 세무사님께 보낼 자료도 그대로 나와요."</p>
+              <div class="flex items-center gap-3 mt-6">
+                <div class="w-10 h-10 rounded-full" style="background:var(--brand-soft)"></div>
+                <div><p class="text-sm font-bold">온라인 유통업 · 대표</p><p class="text-xs" style="color:var(--ink-3)">시안용 예시 후기</p></div>
+              </div>
+            </div>
+            <div class="quote up d2">
+              <p class="font-extrabold text-lg tracking-tight">보안 · 인증</p>
+              <ul class="mt-5 space-y-3.5">
+                <li class="flex gap-3 text-[15px]"><span style="color:var(--brand)">✓</span><span><b>전송 구간 암호화</b><br /><span class="text-[13.5px]" style="color:var(--ink-2)">모든 통신은 HTTPS로 보호됩니다.</span></span></li>
+                <li class="flex gap-3 text-[15px]"><span style="color:var(--brand)">✓</span><span><b>조회 전용 연동</b><br /><span class="text-[13.5px]" style="color:var(--ink-2)">출금 권한 없이 매출 조회만 가져옵니다.</span></span></li>
+                <li class="flex gap-3 text-[15px]"><span style="color:var(--brand)">✓</span><span><b>접근 기록 관리</b><br /><span class="text-[13.5px]" style="color:var(--ink-2)">계정별 접근 이력을 남기고 확인할 수 있습니다.</span></span></li>
+              </ul>
+              <p class="mt-5 text-[11px]" style="color:var(--ink-3)">※ 인증 취득 현황은 실제 보유한 항목으로만 표기하세요.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 6. 마지막 CTA ═══ -->
+      <section id="cta" class="final py-28 md:py-40" data-final>
+        <div class="wrap text-center">
+          <h2 class="t-sec fx up">장부 맞추는 시간,<br />이번 달부터 돌려받으세요.</h2>
+          <p class="t-sub fx-2 up d1 mt-6">가입 후 채널 연결까지 5분이면 충분합니다.</p>
+          <div class="up d2 mt-10 flex gap-3 justify-center flex-wrap">
+            <a href="#" class="btn" id="cta-main" style="background:var(--brand);color:#fff;padding:18px 36px;font-size:17px" onclick="event.preventDefault();toast('시안 모드 — 실제 가입은 운영 서버 연결 후 작동합니다')">무료로 시작하기</a>
+            <a href="#" class="btn btn-s" id="cta-sub" style="padding:18px 32px;font-size:17px" onclick="event.preventDefault();toast('시안 모드 — 도입 문의 폼이 연결됩니다')">도입 문의하기</a>
+          </div>
+          <p class="up d3 mt-7 text-[13px] fx-2">카드 등록 없이 체험 · 언제든 해지</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-16" style="background:var(--bg-deep); color:rgba(255,255,255,.62)">
+      <div class="wrap">
+        <div class="flex flex-wrap gap-10 justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-5">
+              <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#fff"/><path d="M9 20c3-8 11-8 14 0" stroke="var(--brand)" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+              <span class="font-extrabold text-white text-lg">온플로우</span>
+            </div>
+            <p class="text-[13px] leading-7">
+              온플로우 주식회사 · 대표: ○○○<br />
+              사업자등록번호: 000-00-00000<br />
+              서울특별시 강남구 ○○로 00, 0층
+            </p>
+          </div>
+          <div class="flex gap-14 text-[13px]">
+            <div>
+              <p class="font-bold text-white mb-3.5">서비스</p>
+              <div class="space-y-2.5">
+                <a href="#features" class="block hover:text-white">기능</a>
+                <a href="#process" class="block hover:text-white">시작하기</a>
+                <a href="#cta" class="block hover:text-white">요금 문의</a>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold text-white mb-3.5">회사</p>
+              <div class="space-y-2.5">
+                <a href="#trust" class="block hover:text-white">회사소개</a>
+                <a href="#" class="block hover:text-white">이용약관</a>
+                <a href="#" class="block hover:text-white font-semibold" style="color:rgba(255,255,255,.85)">개인정보처리방침</a>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold text-white mb-3.5">채널</p>
+              <div class="space-y-2.5">
+                <a href="#" class="block hover:text-white">블로그</a>
+                <a href="#" class="block hover:text-white">Instagram</a>
+                <a href="#" class="block hover:text-white">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-12 pt-7 text-[11px] leading-6" style="border-top:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.38)">
+          © 2026 온플로우. 본 페이지는 NOAH 레퍼런스 디자인 시안으로, 실재하지 않는 서비스입니다.
+          화면·수치·후기·고객사는 모두 예시이며, 실제 운영 시 검증된 자료로 교체해야 합니다.
+        </p>
+      </div>
+    </footer>
+
+    <div id="toast" role="status" aria-live="polite" class="fixed left-1/2 bottom-8 z-[120] px-6 py-3.5 rounded-xl text-sm font-semibold text-white opacity-0 pointer-events-none transition-opacity duration-300 max-w-[calc(100vw-40px)] text-center" style="background:var(--ink); transform:translateX(-50%)"></div>
+
+    <script>
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => [...document.querySelectorAll(s)];
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function closeMM(){ $('#mm').classList.remove('open'); document.body.style.overflow=''; }
+      function toast(m){ const t=$('#toast'); t.textContent=m; t.style.opacity='1'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.opacity='0',2800); }
+      document.addEventListener('keydown', e => { if(e.key==='Escape') closeMM(); });
+
+      /* 스크롤 등장 */
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+      $$('.up').forEach(el => io.observe(el));
+
+      /* 숫자 카운트업 */
+      const cio = new IntersectionObserver(es => es.forEach(e => {
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        const target = +e.target.dataset.count;
+        if (reduce) { e.target.textContent = target.toLocaleString('ko-KR'); return; }
+        const t0 = performance.now(), dur = 1400;
+        const tick = now => {
+          const p = Math.min((now - t0) / dur, 1);
+          e.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString('ko-KR');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }), { threshold: .6 });
+      $$('[data-count]').forEach(el => cio.observe(el));
+
+      /* 헤더 배경 */
+      addEventListener('scroll', () => $('#hd').classList.toggle('solid', scrollY > 20), { passive: true });
+
+      /* 기능 — sticky 미디어 화면 전환 */
+      const screens = $$('#phone-scr .scr');
+      const fio = new IntersectionObserver(es => es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const i = +e.target.dataset.feat;
+        screens.forEach((s, si) => s.classList.toggle('on', si === i));
+      }), { threshold: .5, rootMargin: '-20% 0px -20% 0px' });
+      $$('.feat-block').forEach(el => fio.observe(el));
+
+      /* 좌측 인디케이터 */
+      const rail = $('#rail');
+      const railBtns = $$('#rail button');
+      const secs = railBtns.map(b => document.getElementById(b.dataset.go));
+      railBtns.forEach(b => b.onclick = () => document.getElementById(b.dataset.go)
+        ?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }));
+
+      let ticking = false;
+      function updateRail() {
+        const mid = scrollY + innerHeight * 0.4;
+        let active = 0;
+        secs.forEach((s, i) => { if (s && s.offsetTop <= mid) active = i; });
+        railBtns.forEach((b, i) => b.setAttribute('aria-current', i === active));
+        // 마지막 CTA가 브랜드 색으로 바뀌면 인디케이터도 밝게
+        const finalSec = $('[data-final]');
+        rail.classList.toggle('on-dark', finalSec.classList.contains('lit')
+          && scrollY + innerHeight * 0.5 > finalSec.offsetTop);
+        ticking = false;
+      }
+      addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(updateRail); }
+      }, { passive: true });
+      updateRail();
+
+      /* 마지막 CTA 배경 전환 */
+      const finalIO = new IntersectionObserver(es => es.forEach(e => {
+        e.target.classList.toggle('lit', e.isIntersecting);
+        const b = $('#cta-main'), s = $('#cta-sub');
+        if (e.isIntersecting) {
+          b.style.background = '#fff'; b.style.color = 'var(--brand)';
+          s.style.background = 'rgba(255,255,255,.16)'; s.style.color = '#fff';
+        } else {
+          b.style.background = 'var(--brand)'; b.style.color = '#fff';
+          s.style.background = 'var(--bg-soft)'; s.style.color = 'var(--ink)';
+        }
+        updateRail();
+      }), { threshold: .45 });
+      finalIO.observe($('[data-final]'));
+
+      $('#lang').addEventListener('change', e => toast(`언어(${e.target.value.toUpperCase()}) — 운영 시 번역 페이지 연결`));
+    </script>
+  </body>
+</html>
