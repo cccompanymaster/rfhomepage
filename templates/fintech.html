@@ -110,8 +110,6 @@
         box-shadow:0 40px 80px -30px rgba(13,27,42,.42), 0 0 0 1px rgba(13,27,42,.07); }
       .phone::before { content:''; position:absolute; top:16px; left:50%; transform:translateX(-50%); width:76px; height:22px; background:#0d1b2a; border-radius:99px; z-index:5; }
       .phone-scr { width:100%; height:100%; background:#fff; border-radius:36px; overflow:hidden; position:relative; }
-      .scr { position:absolute; inset:0; padding:44px 16px 16px; opacity:0; transform:translateY(14px) scale(.98); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
-      .scr.on { opacity:1; transform:none; }
 
       /* 앱 UI 조각 */
       .ui-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
@@ -131,15 +129,52 @@
       .ui-bar i { display:block; height:100%; background:var(--brand); border-radius:99px; }
       .ui-chip { display:inline-block; font-size:9.5px; font-weight:700; padding:3px 8px; border-radius:99px; background:rgba(0,194,168,.14); color:#00806f; }
 
-      /* 기능 sticky */
-      .feat-media { position:sticky; top:calc(50svh - 300px); display:flex; justify-content:center; }
-      .feat-block { min-height:76svh; display:flex; flex-direction:column; justify-content:center; }
-      @media(max-width:1023px){
-        .feat-media { position:static; margin-bottom:34px; top:auto; }
-        .feat-block { min-height:auto; padding:36px 0; }
-      }
-      .feat-block h3 { font-size:clamp(23px,3.2vw,38px); font-weight:800; letter-spacing:-0.04em; line-height:1.32; }
       .feat-idx { font-size:12px; font-weight:800; letter-spacing:.18em; color:var(--brand); }
+
+      /* ══ 씬 전환 스테이지 (화면 고정 + 스크롤 컷) ══ */
+      .scene-track { position:relative; height:460svh; }
+      @media(max-width:1023px){ .scene-track { height:420svh; } }
+      .scene-stage { position:sticky; top:0; height:100svh; overflow:hidden;
+        display:flex; align-items:center; transition:background 1s cubic-bezier(.16,1,.3,1); }
+      .scene-stage[data-scene="0"] { background:linear-gradient(160deg,#f4f2ff,#fafaff); }
+      .scene-stage[data-scene="1"] { background:linear-gradient(160deg,#effbf8,#f7fdfc); }
+      .scene-stage[data-scene="2"] { background:linear-gradient(160deg,#f7f8fa,#fdfdfe); }
+      .scene-stage[data-scene="3"] { background:linear-gradient(160deg,#f3f0ff,#f8f6ff); }
+
+      .scene-inner { width:100%; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:40px; }
+      @media(max-width:1023px){
+        .scene-inner { grid-template-columns:1fr; gap:20px; justify-items:center; text-align:center; }
+      }
+
+      /* 복사 영역 — 겹쳐 두고 크로스페이드 */
+      .scene-copy-wrap { position:relative; min-height:290px; }
+      @media(max-width:1023px){ .scene-copy-wrap { min-height:200px; width:100%; } }
+      .scene-copy { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
+        opacity:0; transform:translateY(26px); pointer-events:none;
+        transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1); }
+      .scene-copy.on { opacity:1; transform:none; pointer-events:auto; }
+      .scene-copy h3 { font-size:clamp(24px,3.4vw,42px); font-weight:800; letter-spacing:-0.045em; line-height:1.28; margin-top:12px; }
+
+      /* 폰 — 프레임 고정, 화면만 컷 전환 */
+      .scene-phone-slot { display:flex; justify-content:center; }
+      .scene-phone-slot .phone { width:min(292px,66vw); }
+      @media(max-width:1023px){ .scene-phone-slot .phone { width:min(230px,52vw); } }
+      .scr { position:absolute; inset:0; padding:44px 16px 16px; opacity:0; visibility:hidden;
+        transform:translateY(22px) scale(.965); filter:blur(5px);
+        transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1),
+                   filter .5s ease, visibility .55s; }
+      .scr.on { opacity:1; visibility:visible; transform:none; filter:none; }
+
+      /* 씬 인디케이터 */
+      .scene-hud { position:absolute; left:0; right:0; bottom:26px; display:flex; align-items:center;
+        justify-content:center; gap:14px; }
+      .scene-hud .cnt { font-size:12px; font-weight:800; letter-spacing:.16em; color:var(--ink-3);
+        font-variant-numeric:tabular-nums; }
+      .scene-hud .steps { display:flex; gap:7px; }
+      .scene-hud .steps button { width:30px; height:4px; border-radius:99px; background:var(--line);
+        transition:background .35s, width .35s cubic-bezier(.16,1,.3,1); }
+      .scene-hud .steps button[aria-current="true"] { background:var(--brand); width:52px; }
+      @media(max-width:1023px){ .scene-hud { bottom:16px; } }
 
       /* 과정 카드 */
       .step { background:#fff; border:1px solid var(--line); border-radius:26px; padding:30px 26px; transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s; }
@@ -304,112 +339,130 @@
         </div>
       </section>
 
-      <!-- ═══ 3. 대표 기능 (sticky 미디어 + 콘텐츠 전환) ═══ -->
-      <section id="features" class="py-24 md:py-32">
-        <div class="wrap">
-          <div class="up max-w-2xl mb-4 md:mb-16">
+      <!-- ═══ 3. 대표 기능 — 화면 고정 + 스크롤 컷 전환 ═══ -->
+      <section id="features">
+        <div class="wrap pt-24 md:pt-32 pb-10">
+          <div class="up max-w-2xl">
             <p class="feat-idx">FEATURES</p>
             <h2 class="t-sec mt-4">한 화면에서<br />끝내도록 만들었습니다.</h2>
+            <p class="t-sub mt-6">스크롤을 내리면 네 개의 장면이 이어집니다.</p>
           </div>
+        </div>
 
-          <div class="grid lg:grid-cols-[.92fr_1.08fr] gap-10 lg:gap-20">
-            <!-- 고정 미디어 -->
-            <div class="feat-media">
-              <div class="phone">
-                <div class="phone-scr" id="phone-scr">
-                  <!-- 화면 1: 통합 대시보드 -->
-                  <div class="scr on" data-scr="0">
-                    <div class="ui-top"><span class="ui-t">전체 매출</span><span class="ui-chip">오늘 09:12</span></div>
-                    <div class="ui-card brand">
-                      <p class="ui-lb">8월 누적</p>
-                      <p class="ui-v">₩ 128,400,000</p>
-                      <div class="ui-bar" style="background:rgba(255,255,255,.24)"><i style="width:64%;background:#fff"></i></div>
-                      <p class="ui-lb mt-2">전월 동기 대비 +12%</p>
-                    </div>
-                    <div class="ui-card">
-                      <p class="ui-lb mb-2">채널별</p>
-                      <div class="ui-row"><span class="ui-ic">🛒</span><span class="ui-nm">스마트스토어</span><span class="ui-am">52%</span></div>
-                      <div class="ui-row"><span class="ui-ic">📦</span><span class="ui-nm">오픈마켓</span><span class="ui-am">28%</span></div>
-                      <div class="ui-row"><span class="ui-ic">🏪</span><span class="ui-nm">매장 결제</span><span class="ui-am">20%</span></div>
-                    </div>
+        <div class="scene-track" id="scene-track">
+          <div class="scene-stage" id="scene-stage" data-scene="0">
+            <div class="wrap w-full">
+              <div class="scene-inner">
+                <!-- 좌: 카피 (겹쳐서 크로스페이드) -->
+                <div class="scene-copy-wrap">
+                  <div class="scene-copy on" data-copy="0">
+                    <p class="feat-idx">SCENE 01 · 통합 대시보드</p>
+                    <h3>모든 매출을<br />하나의 화면으로</h3>
+                    <p class="t-sub mt-5 max-w-sm lg:max-w-md">스토어·오픈마켓·카드사를 한 번 연결해 두면, 매일 아침 합쳐진 숫자로 시작합니다.</p>
+                    <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px] self-start" style="color:var(--brand)">연동 채널 보기 →</a>
                   </div>
-                  <!-- 화면 2: 정산 캘린더 -->
-                  <div class="scr" data-scr="1">
-                    <div class="ui-top"><span class="ui-t">입금 캘린더</span><span class="ui-chip">8월</span></div>
-                    <div class="ui-card">
-                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 16일 (금)</span><span class="ui-sb">스마트스토어</span></span><span class="ui-am" style="color:var(--mint)">+18,240,000</span></div>
-                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 17일 (토)</span><span class="ui-sb">카드 매출</span></span><span class="ui-am" style="color:var(--mint)">+12,905,000</span></div>
-                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 20일 (화)</span><span class="ui-sb">임대료 자동이체</span></span><span class="ui-am" style="color:#e5484d">−3,400,000</span></div>
-                      <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 25일 (일)</span><span class="ui-sb">오픈마켓</span></span><span class="ui-am" style="color:var(--mint)">+7,120,000</span></div>
-                    </div>
-                    <div class="ui-card brand">
-                      <p class="ui-lb">이번 주 예상 잔고</p>
-                      <p class="ui-v">₩ 34,865,000</p>
-                    </div>
+                  <div class="scene-copy" data-copy="1">
+                    <p class="feat-idx">SCENE 02 · 입금 캘린더</p>
+                    <h3>언제 얼마가<br />들어오는지 미리</h3>
+                    <p class="t-sub mt-5 max-w-sm lg:max-w-md">채널별 정산 주기를 계산해 입금일을 달력에 표시합니다. 지출까지 함께 보여 자금 계획이 서집니다.</p>
+                    <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px] self-start" style="color:var(--brand)">캘린더 살펴보기 →</a>
                   </div>
-                  <!-- 화면 3: 세금계산서 -->
-                  <div class="scr" data-scr="2">
-                    <div class="ui-top"><span class="ui-t">세금계산서</span><span class="ui-chip">자동</span></div>
-                    <div class="ui-card">
-                      <p class="ui-lb">이번 달 발행</p>
-                      <p class="ui-v">42건 <span style="font-size:12px;color:var(--ink-3);font-weight:600">/ 42건 완료</span></p>
-                      <div class="ui-bar"><i style="width:100%"></i></div>
-                    </div>
-                    <div class="ui-card">
-                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">(주)대성유통</span><span class="ui-sb">8/14 발행 완료</span></span><span class="ui-am">2,480,000</span></div>
-                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">한빛상사</span><span class="ui-sb">8/13 발행 완료</span></span><span class="ui-am">1,150,000</span></div>
-                      <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">우리물산</span><span class="ui-sb">8/12 발행 완료</span></span><span class="ui-am">965,000</span></div>
-                    </div>
-                    <p class="text-[10px] text-center mt-3" style="color:var(--ink-3)">국세청 전송까지 자동으로 처리됩니다</p>
+                  <div class="scene-copy" data-copy="2">
+                    <p class="feat-idx">SCENE 03 · 세금계산서</p>
+                    <h3>세금계산서는<br />직접 챙기지 않아도</h3>
+                    <p class="t-sub mt-5 max-w-sm lg:max-w-md">거래처와 금액이 확정되면 발행부터 전송까지 이어서 처리합니다. 누락 건은 따로 알려드립니다.</p>
+                    <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px] self-start" style="color:var(--brand)">발행 흐름 보기 →</a>
                   </div>
-                  <!-- 화면 4: 리포트 -->
-                  <div class="scr" data-scr="3">
-                    <div class="ui-top"><span class="ui-t">월간 리포트</span><span class="ui-chip">PDF</span></div>
-                    <div class="ui-card">
-                      <p class="ui-lb">순이익률</p>
-                      <p class="ui-v">18.4%</p>
-                      <div class="ui-bar"><i style="width:18.4%"></i></div>
-                    </div>
-                    <div class="ui-card">
-                      <p class="ui-lb mb-2">비용 상위</p>
-                      <div class="ui-row"><span class="ui-ic">📢</span><span class="ui-nm">광고비</span><span class="ui-am">31%</span></div>
-                      <div class="ui-row"><span class="ui-ic">🚚</span><span class="ui-nm">물류비</span><span class="ui-am">24%</span></div>
-                      <div class="ui-row"><span class="ui-ic">🏢</span><span class="ui-nm">임대료</span><span class="ui-am">17%</span></div>
-                    </div>
-                    <div class="ui-card" style="background:var(--brand-soft)">
-                      <p class="ui-lb" style="color:var(--brand)">💡 이번 달 제안</p>
-                      <p class="text-[11px] font-semibold mt-1.5 leading-5">광고비 비중이 3개월 연속 상승했습니다. 채널별 효율을 확인해 보세요.</p>
+                  <div class="scene-copy" data-copy="3">
+                    <p class="feat-idx">SCENE 04 · 월간 리포트</p>
+                    <h3>세무사에게 보낼<br />자료가 이미 준비된 채로</h3>
+                    <p class="t-sub mt-5 max-w-sm lg:max-w-md">월말이면 매출·비용·순이익이 정리된 리포트가 만들어집니다. 그대로 내려받아 전달하세요.</p>
+                    <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px] self-start" style="color:var(--brand)">리포트 예시 보기 →</a>
+                  </div>
+                </div>
+
+                <!-- 우: 폰 프레임은 고정, 화면만 컷 전환 -->
+                <div class="scene-phone-slot">
+                  <div class="phone">
+                    <div class="phone-scr" id="phone-scr">
+                      <!-- 화면 1: 통합 대시보드 -->
+                      <div class="scr on" data-scr="0">
+                        <div class="ui-top"><span class="ui-t">전체 매출</span><span class="ui-chip">오늘 09:12</span></div>
+                        <div class="ui-card brand">
+                          <p class="ui-lb">8월 누적</p>
+                          <p class="ui-v">₩ 128,400,000</p>
+                          <div class="ui-bar" style="background:rgba(255,255,255,.24)"><i style="width:64%;background:#fff"></i></div>
+                          <p class="ui-lb mt-2">전월 동기 대비 +12%</p>
+                        </div>
+                        <div class="ui-card">
+                          <p class="ui-lb mb-2">채널별</p>
+                          <div class="ui-row"><span class="ui-ic">🛒</span><span class="ui-nm">스마트스토어</span><span class="ui-am">52%</span></div>
+                          <div class="ui-row"><span class="ui-ic">📦</span><span class="ui-nm">오픈마켓</span><span class="ui-am">28%</span></div>
+                          <div class="ui-row"><span class="ui-ic">🏪</span><span class="ui-nm">매장 결제</span><span class="ui-am">20%</span></div>
+                        </div>
+                      </div>
+                      <!-- 화면 2: 정산 캘린더 -->
+                      <div class="scr" data-scr="1">
+                        <div class="ui-top"><span class="ui-t">입금 캘린더</span><span class="ui-chip">8월</span></div>
+                        <div class="ui-card">
+                          <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 16일 (금)</span><span class="ui-sb">스마트스토어</span></span><span class="ui-am" style="color:var(--mint)">+18,240,000</span></div>
+                          <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 17일 (토)</span><span class="ui-sb">카드 매출</span></span><span class="ui-am" style="color:var(--mint)">+12,905,000</span></div>
+                          <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 20일 (화)</span><span class="ui-sb">임대료 자동이체</span></span><span class="ui-am" style="color:#e5484d">−3,400,000</span></div>
+                          <div class="ui-row"><span class="ui-ic">📅</span><span><span class="ui-nm">8월 25일 (일)</span><span class="ui-sb">오픈마켓</span></span><span class="ui-am" style="color:var(--mint)">+7,120,000</span></div>
+                        </div>
+                        <div class="ui-card brand">
+                          <p class="ui-lb">이번 주 예상 잔고</p>
+                          <p class="ui-v">₩ 34,865,000</p>
+                        </div>
+                      </div>
+                      <!-- 화면 3: 세금계산서 -->
+                      <div class="scr" data-scr="2">
+                        <div class="ui-top"><span class="ui-t">세금계산서</span><span class="ui-chip">자동</span></div>
+                        <div class="ui-card">
+                          <p class="ui-lb">이번 달 발행</p>
+                          <p class="ui-v">42건 <span style="font-size:12px;color:var(--ink-3);font-weight:600">/ 42건 완료</span></p>
+                          <div class="ui-bar"><i style="width:100%"></i></div>
+                        </div>
+                        <div class="ui-card">
+                          <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">(주)대성유통</span><span class="ui-sb">8/14 발행 완료</span></span><span class="ui-am">2,480,000</span></div>
+                          <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">한빛상사</span><span class="ui-sb">8/13 발행 완료</span></span><span class="ui-am">1,150,000</span></div>
+                          <div class="ui-row"><span class="ui-ic">🧾</span><span><span class="ui-nm">우리물산</span><span class="ui-sb">8/12 발행 완료</span></span><span class="ui-am">965,000</span></div>
+                        </div>
+                        <p class="text-[10px] text-center mt-3" style="color:var(--ink-3)">국세청 전송까지 자동으로 처리됩니다</p>
+                      </div>
+                      <!-- 화면 4: 리포트 -->
+                      <div class="scr" data-scr="3">
+                        <div class="ui-top"><span class="ui-t">월간 리포트</span><span class="ui-chip">PDF</span></div>
+                        <div class="ui-card">
+                          <p class="ui-lb">순이익률</p>
+                          <p class="ui-v">18.4%</p>
+                          <div class="ui-bar"><i style="width:18.4%"></i></div>
+                        </div>
+                        <div class="ui-card">
+                          <p class="ui-lb mb-2">비용 상위</p>
+                          <div class="ui-row"><span class="ui-ic">📢</span><span class="ui-nm">광고비</span><span class="ui-am">31%</span></div>
+                          <div class="ui-row"><span class="ui-ic">🚚</span><span class="ui-nm">물류비</span><span class="ui-am">24%</span></div>
+                          <div class="ui-row"><span class="ui-ic">🏢</span><span class="ui-nm">임대료</span><span class="ui-am">17%</span></div>
+                        </div>
+                        <div class="ui-card" style="background:var(--brand-soft)">
+                          <p class="ui-lb" style="color:var(--brand)">💡 이번 달 제안</p>
+                          <p class="text-[11px] font-semibold mt-1.5 leading-5">광고비 비중이 3개월 연속 상승했습니다. 채널별 효율을 확인해 보세요.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- 스크롤 콘텐츠 -->
-            <div id="feat-list">
-              <div class="feat-block" data-feat="0">
-                <p class="feat-idx">01</p>
-                <h3 class="mt-3">모든 매출을<br />하나의 화면으로</h3>
-                <p class="t-sub mt-5 max-w-sm">스토어·오픈마켓·카드사를 한 번 연결해 두면, 매일 아침 합쳐진 숫자로 시작합니다.</p>
-                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">연동 채널 보기 →</a>
-              </div>
-              <div class="feat-block" data-feat="1">
-                <p class="feat-idx">02</p>
-                <h3 class="mt-3">언제 얼마가<br />들어오는지 미리</h3>
-                <p class="t-sub mt-5 max-w-sm">채널별 정산 주기를 계산해 입금일을 달력에 표시합니다. 지출까지 함께 보여 자금 계획이 서집니다.</p>
-                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">캘린더 살펴보기 →</a>
-              </div>
-              <div class="feat-block" data-feat="2">
-                <p class="feat-idx">03</p>
-                <h3 class="mt-3">세금계산서는<br />직접 챙기지 않아도</h3>
-                <p class="t-sub mt-5 max-w-sm">거래처와 금액이 확정되면 발행부터 전송까지 이어서 처리합니다. 누락 건은 따로 알려드립니다.</p>
-                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">발행 흐름 보기 →</a>
-              </div>
-              <div class="feat-block" data-feat="3">
-                <p class="feat-idx">04</p>
-                <h3 class="mt-3">세무사에게 보낼<br />자료가 이미 준비된 채로</h3>
-                <p class="t-sub mt-5 max-w-sm">월말이면 매출·비용·순이익이 정리된 리포트가 만들어집니다. 그대로 내려받아 전달하세요.</p>
-                <a href="#cta" class="mt-7 inline-flex items-center gap-1.5 font-bold text-[15px]" style="color:var(--brand)">리포트 예시 보기 →</a>
+            <!-- 씬 인디케이터 -->
+            <div class="scene-hud">
+              <span class="cnt" id="scene-cnt">01 / 04</span>
+              <div class="steps" id="scene-steps" role="group" aria-label="장면 선택">
+                <button data-s="0" aria-current="true" aria-label="1번 장면"></button>
+                <button data-s="1" aria-current="false" aria-label="2번 장면"></button>
+                <button data-s="2" aria-current="false" aria-label="3번 장면"></button>
+                <button data-s="3" aria-current="false" aria-label="4번 장면"></button>
               </div>
             </div>
           </div>
@@ -616,14 +669,39 @@
       /* 헤더 배경 */
       addEventListener('scroll', () => $('#hd').classList.toggle('solid', scrollY > 20), { passive: true });
 
-      /* 기능 — sticky 미디어 화면 전환 */
+      /* ══ 기능 — 화면 고정 + 스크롤 컷 전환 ══ */
+      const track   = $('#scene-track');
+      const stage   = $('#scene-stage');
       const screens = $$('#phone-scr .scr');
-      const fio = new IntersectionObserver(es => es.forEach(e => {
-        if (!e.isIntersecting) return;
-        const i = +e.target.dataset.feat;
-        screens.forEach((s, si) => s.classList.toggle('on', si === i));
-      }), { threshold: .5, rootMargin: '-20% 0px -20% 0px' });
-      $$('.feat-block').forEach(el => fio.observe(el));
+      const copies  = $$('.scene-copy');
+      const steps   = $$('#scene-steps button');
+      const TOTAL   = screens.length;
+      let sceneNow  = -1;
+
+      function setScene(i) {
+        if (i === sceneNow) return;
+        sceneNow = i;
+        screens.forEach((el, n) => el.classList.toggle('on', n === i));
+        copies.forEach((el, n)  => el.classList.toggle('on', n === i));
+        steps.forEach((el, n)   => el.setAttribute('aria-current', n === i));
+        stage.dataset.scene = i;
+        $('#scene-cnt').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+      }
+
+      function sceneProgress() {
+        const r = track.getBoundingClientRect();
+        const usable = track.offsetHeight - innerHeight;
+        if (usable <= 0) return 0;
+        return Math.min(0.9999, Math.max(0, -r.top / usable));
+      }
+
+      // 인디케이터 클릭 → 해당 장면 구간으로 이동
+      steps.forEach(b => b.onclick = () => {
+        const i = +b.dataset.s;
+        const usable = track.offsetHeight - innerHeight;
+        const y = track.offsetTop + usable * ((i + 0.5) / TOTAL);
+        scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      });
 
       /* 좌측 인디케이터 */
       const rail = $('#rail');
@@ -634,6 +712,7 @@
 
       let ticking = false;
       function updateRail() {
+        setScene(Math.floor(sceneProgress() * TOTAL));
         const mid = scrollY + innerHeight * 0.4;
         let active = 0;
         secs.forEach((s, i) => { if (s && s.offsetTop <= mid) active = i; });
