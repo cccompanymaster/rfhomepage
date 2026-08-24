@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 제작 견적 받는 법을 단계별로 정리했습니다. 견적 요청 전에 준비할 3가지, 견적서에서 반드시 확인할 항목, 업체 간 견적을 공정하게 비교하는 요령까지 담았습니다." />
-    <meta name="keywords" content="홈페이지 제작 견적 받는 법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/homepage-quote" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/homepage-cost" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/cheap-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법" />
     <meta property="og:description" content="홈페이지 제작 견적 받는 법을 단계별로 정리했습니다. 견적 요청 전에 준비할 3가지, 견적서에서 반드시 확인할 항목, 업체 간 견적을 공정하게 비교하는 요령까지 담았습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/homepage-quote" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/homepage-quote.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-08-17" />
+    <meta property="article:section" content="비용·견적" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법" />
+    <meta name="twitter:description" content="홈페이지 제작 견적 받는 법을 단계별로 정리했습니다. 견적 요청 전에 준비할 3가지, 견적서에서 반드시 확인할 항목, 업체 간 견적을 공정하게 비교하는 요령까지 담았습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/homepage-quote.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법", "description": "홈페이지 제작 견적 받는 법을 단계별로 정리했습니다. 견적 요청 전에 준비할 3가지, 견적서에서 반드시 확인할 항목, 업체 간 견적을 공정하게 비교하는 요령까지 담았습니다.", "datePublished": "2026-08-17", "dateModified": "2026-08-17", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/homepage-quote"}, "keywords": "홈페이지 제작 견적 받는 법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법", "item": "https://noahhomepage.co.kr/columns/homepage-quote"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법", "description": "홈페이지 제작 견적 받는 법을 단계별로 정리했습니다. 견적 요청 전에 준비할 3가지, 견적서에서 반드시 확인할 항목, 업체 간 견적을 공정하게 비교하는 요령까지 담았습니다.", "datePublished": "2026-08-17", "dateModified": "2026-08-17", "inLanguage": "ko-KR", "wordCount": 1350, "articleSection": "비용·견적", "keywords": "홈페이지 제작 견적 받는 법, 견적, 업체선정, 체크리스트", "image": "https://noahhomepage.co.kr/assets/images/og/homepage-quote.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/homepage-quote"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 제작 견적 받는 법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "비용·견적", "item": "https://noahhomepage.co.kr/columns/topic/cost"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 제작 견적 받는 법 — 물어볼 것, 준비할 것, 비교하는 법", "item": "https://noahhomepage.co.kr/columns/homepage-quote"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>비용·견적</span>
+        <a href="/columns/topic/cost" class="hover:text-white">비용·견적</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">비용·견적</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#견적-요청-전에-준비할-3가지">견적 요청 전에 준비할 3가지</a></li>
+          <li><a href="#견적-요청-메일에-꼭-넣을-내용">견적 요청 메일에 꼭 넣을 내용</a></li>
+          <li><a href="#견적서에서-반드시-확인할-항목">견적서에서 반드시 확인할 항목</a></li>
+          <li><a href="#여러-견적을-공정하게-비교하는-법">여러 견적을 공정하게 비교하는 법</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>'홈페이지 견적 문의드립니다'라고만 보내면 업체도 두루뭉술한 답을 줄 수밖에 없습니다. 그렇게 받은 견적은 서로 기준이 달라 비교도 안 됩니다. 견적을 잘 받는 것은 결국 질문을 잘 준비하는 일입니다.</p><h2>견적 요청 전에 준비할 3가지</h2><p>첫째, <strong>홈페이지의 목적</strong>을 한 문장으로 정리하세요. '가게 위치와 메뉴를 알리고 전화 문의를 받고 싶다'처럼 구체적일수록 견적이 정확해집니다. 둘째, <strong>필요한 페이지 목록</strong>을 적어보세요. 메인, 소개, 서비스, 오시는 길, 문의 정도면 충분합니다.</p><p>셋째, <strong>참고 사이트 2~3개</strong>를 골라두세요. 같은 업종이 아니어도 됩니다. '이런 느낌, 이런 구성'이라는 기준이 있으면 업체와의 대화가 절반은 줄어듭니다.</p><h2>견적 요청 메일에 꼭 넣을 내용</h2><p>준비한 내용을 바탕으로 요청서를 보냅니다. 아래 항목이 들어가면 대부분의 업체가 하루 이틀 안에 구체적인 답을 줄 수 있습니다.</p><ul><li>업종과 홈페이지 목적</li><li>원하는 페이지 구성(개수 포함)</li><li>필요한 기능(문의폼, 예약, 지도 등)</li><li>참고 사이트 링크</li><li>희망 일정과 대략적인 예산 범위</li></ul><p>예산을 밝히기 꺼려질 수 있지만, 범위라도 알려주면 업체가 그 안에서 가능한 구성을 제안해 주기 때문에 오히려 유리합니다.</p><h2>견적서에서 반드시 확인할 항목</h2><p>받은 견적서에서는 금액보다 <strong>포함 범위</strong>를 먼저 보세요. 반응형(모바일 대응)이 포함인지, 도메인과 호스팅은 누가 부담하는지, 오픈 후 수정은 몇 회까지 무상인지가 핵심입니다. 이 세 가지가 빠진 견적서는 나중에 추가 비용이 붙을 여지가 큽니다.</p><p><strong>납기와 시안 횟수</strong>도 확인하세요. 시안을 몇 번 보여주는지, 수정 요청은 몇 회까지인지가 명시돼 있어야 진행 중 갈등이 없습니다. 결과물의 소유권과 저작권 귀속, 계약 해지 조건도 문서로 남기는 것이 안전합니다.</p><h2>여러 견적을 공정하게 비교하는 법</h2><p>업체마다 견적 항목 이름이 달라서 표를 만들어 나란히 놓고 보는 것이 좋습니다. 세로축에 '제작비, 페이지 수, 반응형 포함 여부, 호스팅 1년 비용, 수정 정책, 납기'를 적고 업체별로 채워보세요. 총액과 조건이 한눈에 비교됩니다.</p><p>가장 싼 곳과 가장 비싼 곳을 걸러내고 중간 구간에서 소통이 잘 되는 곳을 고르는 것도 흔히 쓰는 방법입니다. 견적 단계에서 답이 느리거나 질문을 귀찮아하는 업체는 제작 중에도 비슷한 경험을 하게 될 확률이 높습니다.</p><h2>정리</h2><ul><li>목적 한 문장, 페이지 목록, 참고 사이트를 준비하면 견적 정확도가 크게 올라갑니다.</li><li>견적서는 금액보다 포함 범위(반응형·호스팅·수정 정책)를 먼저 확인하세요.</li><li>여러 견적은 같은 항목 기준으로 표를 만들어 총액으로 비교하세요.</li></ul><p>정찰제 상품이라면 이 과정이 단순해집니다. NOAH처럼 기본 패키지 가격(199,000원, 부가세 별도)과 옵션 단가가 공개된 곳은 견적 협상 없이 필요한 것만 골라 계산하면 되기 때문입니다.</p>
+<p>'홈페이지 견적 문의드립니다'라고만 보내면 업체도 두루뭉술한 답을 줄 수밖에 없습니다. 그렇게 받은 견적은 서로 기준이 달라 비교도 안 됩니다. 견적을 잘 받는 것은 결국 질문을 잘 준비하는 일입니다.</p><h2 id="견적-요청-전에-준비할-3가지">견적 요청 전에 준비할 3가지</h2><p>첫째, <strong>홈페이지의 목적</strong>을 한 문장으로 정리하세요. '가게 위치와 메뉴를 알리고 전화 문의를 받고 싶다'처럼 구체적일수록 견적이 정확해집니다. 둘째, <strong>필요한 페이지 목록</strong>을 적어보세요. 메인, 소개, 서비스, 오시는 길, 문의 정도면 충분합니다.</p><p>셋째, <strong>참고 사이트 2~3개</strong>를 골라두세요. 같은 업종이 아니어도 됩니다. '이런 느낌, 이런 구성'이라는 기준이 있으면 업체와의 대화가 절반은 줄어듭니다.</p><h2 id="견적-요청-메일에-꼭-넣을-내용">견적 요청 메일에 꼭 넣을 내용</h2><p>준비한 내용을 바탕으로 요청서를 보냅니다. 아래 항목이 들어가면 대부분의 업체가 하루 이틀 안에 구체적인 답을 줄 수 있습니다.</p><ul><li>업종과 홈페이지 목적</li><li>원하는 페이지 구성(개수 포함)</li><li>필요한 기능(문의폼, 예약, 지도 등)</li><li>참고 사이트 링크</li><li>희망 일정과 대략적인 예산 범위</li></ul><p>예산을 밝히기 꺼려질 수 있지만, 범위라도 알려주면 업체가 그 안에서 가능한 구성을 제안해 주기 때문에 오히려 유리합니다.</p><h2 id="견적서에서-반드시-확인할-항목">견적서에서 반드시 확인할 항목</h2><p>받은 견적서에서는 금액보다 <strong>포함 범위</strong>를 먼저 보세요. 반응형(모바일 대응)이 포함인지, <a href="/columns/domain-register">도메인</a>과 <a href="/columns/web-hosting">호스팅</a>은 누가 부담하는지, 오픈 후 수정은 몇 회까지 무상인지가 핵심입니다. 이 세 가지가 빠진 견적서는 나중에 추가 비용이 붙을 여지가 큽니다.</p><p><strong>납기와 시안 횟수</strong>도 확인하세요. 시안을 몇 번 보여주는지, 수정 요청은 몇 회까지인지가 명시돼 있어야 진행 중 갈등이 없습니다. 결과물의 <a href="/columns/ownership-transfer">소유권</a>과 저작권 귀속, 계약 해지 조건도 문서로 남기는 것이 안전합니다.</p><h2 id="여러-견적을-공정하게-비교하는-법">여러 견적을 공정하게 비교하는 법</h2><p>업체마다 견적 항목 이름이 달라서 표를 만들어 나란히 놓고 보는 것이 좋습니다. 세로축에 '제작비, 페이지 수, 반응형 포함 여부, 호스팅 1년 비용, 수정 정책, 납기'를 적고 업체별로 채워보세요. 총액과 조건이 한눈에 비교됩니다.</p><p>가장 싼 곳과 가장 비싼 곳을 걸러내고 중간 구간에서 소통이 잘 되는 곳을 고르는 것도 흔히 쓰는 방법입니다. 견적 단계에서 답이 느리거나 질문을 귀찮아하는 업체는 제작 중에도 비슷한 경험을 하게 될 확률이 높습니다.</p><h2 id="정리">정리</h2><ul><li>목적 한 문장, 페이지 목록, 참고 사이트를 준비하면 견적 정확도가 크게 올라갑니다.</li><li>견적서는 금액보다 포함 범위(반응형·호스팅·수정 정책)를 먼저 확인하세요.</li><li>여러 견적은 같은 항목 기준으로 표를 만들어 총액으로 비교하세요.</li></ul><p>정찰제 상품이라면 이 과정이 단순해집니다. NOAH처럼 기본 패키지 가격(199,000원, 부가세 별도)과 옵션 단가가 공개된 곳은 견적 협상 없이 필요한 것만 골라 계산하면 되기 때문입니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#견적</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#업체선정</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#체크리스트</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/homepage-cost" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 비용, 왜 업체마다 10배씩 차이 날까? 가격 구조 총정리</p>
+        </a>
+        <a href="/columns/cheap-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">저렴한 홈페이지 제작, 어디까지 괜찮고 어디부터 위험할까</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/cost" class="hub-pill">비용·견적 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

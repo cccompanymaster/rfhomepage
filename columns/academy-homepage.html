@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점 · NOAH 칼럼</title>
     <meta name="description" content="학원 홈페이지 제작 시 교습비 게시 의무, 합격·성적 광고 표현의 주의점, 상담 예약 흐름 설계까지 학원 운영자가 알아야 할 내용을 정리했습니다." />
-    <meta name="keywords" content="학원 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/academy-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/construction-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/pilates-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점" />
     <meta property="og:description" content="학원 홈페이지 제작 시 교습비 게시 의무, 합격·성적 광고 표현의 주의점, 상담 예약 흐름 설계까지 학원 운영자가 알아야 할 내용을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/academy-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/academy-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-06-12" />
+    <meta property="article:section" content="업종별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점" />
+    <meta name="twitter:description" content="학원 홈페이지 제작 시 교습비 게시 의무, 합격·성적 광고 표현의 주의점, 상담 예약 흐름 설계까지 학원 운영자가 알아야 할 내용을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/academy-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점", "description": "학원 홈페이지 제작 시 교습비 게시 의무, 합격·성적 광고 표현의 주의점, 상담 예약 흐름 설계까지 학원 운영자가 알아야 할 내용을 정리했습니다.", "datePublished": "2026-06-12", "dateModified": "2026-06-12", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/academy-homepage"}, "keywords": "학원 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점", "item": "https://noahhomepage.co.kr/columns/academy-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점", "description": "학원 홈페이지 제작 시 교습비 게시 의무, 합격·성적 광고 표현의 주의점, 상담 예약 흐름 설계까지 학원 운영자가 알아야 할 내용을 정리했습니다.", "datePublished": "2026-06-12", "dateModified": "2026-06-12", "inLanguage": "ko-KR", "wordCount": 1249, "articleSection": "업종별 제작", "keywords": "학원 홈페이지 제작, 학원, 교습비, 상담예약", "image": "https://noahhomepage.co.kr/assets/images/og/academy-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/academy-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "학원 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "업종별 제작", "item": "https://noahhomepage.co.kr/columns/topic/industry"}, {"@type": "ListItem", "position": 4, "name": "학원 홈페이지 제작, 교습비 게시와 광고 표현 주의점", "item": "https://noahhomepage.co.kr/columns/academy-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>업종별 제작</span>
+        <a href="/columns/topic/industry" class="hover:text-white">업종별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">업종별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#교습비-정보는-숨기지-말-것">교습비 정보는 숨기지 말 것</a></li>
+          <li><a href="#합격성적-광고는-표현을-아껴라">합격·성적 광고는 표현을 아껴라</a></li>
+          <li><a href="#학부모가-찾는-정보-순서대로-배치">학부모가 찾는 정보 순서대로 배치</a></li>
+          <li><a href="#상담-예약-흐름이-전환의-핵심">상담 예약 흐름이 전환의 핵심</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>학원 홈페이지는 학부모가 전화 상담 전에 거치는 검증 단계입니다. 커리큘럼과 강사진을 보여주는 것도 중요하지만, 학원은 교습비 게시나 광고 표현에 관한 규제가 있는 업종이라 만들 때 조심할 부분이 따로 있습니다. 학원 원장님 입장에서 필요한 내용만 추렸습니다.</p><h2>교습비 정보는 숨기지 말 것</h2><p>학원은 학원법(학원의 설립·운영 및 과외교습에 관한 법률) 체계에 따라 교습비 등을 게시·공개하도록 하는 규제가 있는 업종입니다. 구체적인 게시 방식과 범위는 지역 교육청 기준에 따라 다를 수 있으므로, 홈페이지에 어디까지 표기할지는 관할 교육청에 확인하는 것이 정확합니다.</p><p>규제를 떠나서도, 교습비를 아예 숨긴 학원보다 반별 수강료를 공개한 학원이 학부모 입장에서 상담 문턱이 낮습니다. 최소한 '교육청 등록 교습비 기준'이라는 안내와 함께 대표 과정 수강료를 안내하는 것을 권합니다.</p><h2>합격·성적 광고는 표현을 아껴라</h2><p>'○○대 몇 명 합격', '전원 성적 향상' 같은 문구는 학원 광고에서 과장·허위 광고로 문제되기 쉬운 영역입니다. 실제 사실이라도 증빙할 수 없는 방식으로 쓰면 위험하고, 재원생 실적과 단기 특강 수강생 실적을 섞어 표기하는 것도 오해를 부릅니다.</p><p>원칙은 단순합니다. 증빙 가능한 사실만, 조건을 명확히 붙여서 쓰는 것입니다. 확신이 없는 표현은 빼고, 커리큘럼과 관리 방식 설명으로 승부하는 편이 안전합니다.</p><h2>학부모가 찾는 정보 순서대로 배치</h2><p>학부모의 탐색 순서는 대체로 정해져 있습니다. 대상 학년과 과목, 반 구성과 정원, 강사진, 시간표, 수강료, 위치 순입니다. 이 순서대로 메뉴를 짜면 이탈이 줄어듭니다.</p><ul><li>강사 소개는 경력을 사실대로, 사진과 함께</li><li>시간표는 이미지보다 표로 넣어야 모바일에서 읽기 편함</li><li>차량 운행, 자습실 등 관리 요소도 별도로 안내</li></ul><h2>상담 예약 흐름이 전환의 핵심</h2><p>학원 문의는 '방문 상담 예약'으로 이어져야 등록이 됩니다. 이름, 학년, 과목, 희망 상담 시간대만 받는 간단한 예약 폼을 두고, 접수되면 학원에서 확인 연락을 주는 흐름이 무난합니다. 상담 가능 시간을 미리 안내해두면 부재중 전화로 놓치는 문의가 줄어듭니다.</p><h2>정리</h2><p>첫째, 교습비 게시는 규제가 있는 영역이므로 관할 교육청 기준을 확인해 공개합니다. 둘째, 합격·성적 표현은 증빙 가능한 사실만 조건과 함께 씁니다. 셋째, 메뉴는 학부모의 탐색 순서대로 배치하고 상담 예약 폼으로 마무리합니다. NOAH는 학원 업종 레퍼런스를 포함해 199,000원(부가세 별도), 7일 오픈으로 제작하며 예약 캘린더 옵션(5만원)으로 상담 예약까지 연결할 수 있습니다.</p>
+<p>학원 홈페이지는 학부모가 전화 상담 전에 거치는 검증 단계입니다. 커리큘럼과 강<a href="/columns/photo-prepare">사진</a>을 보여주는 것도 중요하지만, 학원은 교습비 게시나 광고 표현에 관한 규제가 있는 업종이라 만들 때 조심할 부분이 따로 있습니다. 학원 원장님 입장에서 필요한 내용만 추렸습니다.</p><h2 id="교습비-정보는-숨기지-말-것">교습비 정보는 숨기지 말 것</h2><p>학원은 학원법(학원의 설립·운영 및 과외교습에 관한 법률) 체계에 따라 교습비 등을 게시·공개하도록 하는 규제가 있는 업종입니다. 구체적인 게시 방식과 범위는 지역 교육청 기준에 따라 다를 수 있으므로, 홈페이지에 어디까지 표기할지는 관할 교육청에 확인하는 것이 정확합니다.</p><p>규제를 떠나서도, 교습비를 아예 숨긴 학원보다 반별 수강료를 공개한 학원이 학부모 입장에서 상담 문턱이 낮습니다. 최소한 '교육청 등록 교습비 기준'이라는 안내와 함께 대표 과정 수강료를 안내하는 것을 권합니다.</p><h2 id="합격성적-광고는-표현을-아껴라">합격·성적 광고는 표현을 아껴라</h2><p>'○○대 몇 명 합격', '전원 성적 향상' 같은 문구는 학원 광고에서 과장·허위 광고로 문제되기 쉬운 영역입니다. 실제 사실이라도 증빙할 수 없는 방식으로 쓰면 위험하고, 재원생 실적과 단기 특강 수강생 실적을 섞어 표기하는 것도 오해를 부릅니다.</p><p>원칙은 단순합니다. 증빙 가능한 사실만, 조건을 명확히 붙여서 쓰는 것입니다. 확신이 없는 표현은 빼고, 커리큘럼과 관리 방식 설명으로 승부하는 편이 안전합니다.</p><h2 id="학부모가-찾는-정보-순서대로-배치">학부모가 찾는 정보 순서대로 배치</h2><p>학부모의 탐색 순서는 대체로 정해져 있습니다. 대상 학년과 과목, 반 구성과 정원, 강사진, 시간표, 수강료, 위치 순입니다. 이 순서대로 메뉴를 짜면 이탈이 줄어듭니다.</p><ul><li>강사 소개는 경력을 사실대로, 사진과 함께</li><li>시간표는 이미지보다 표로 넣어야 모바일에서 읽기 편함</li><li>차량 운행, 자습실 등 관리 요소도 별도로 안내</li></ul><h2 id="상담-예약-흐름이-전환의-핵심">상담 예약 흐름이 전환의 핵심</h2><p>학원 문의는 '방문 상담 예약'으로 이어져야 등록이 됩니다. 이름, 학년, 과목, 희망 상담 시간대만 받는 간단한 예약 폼을 두고, 접수되면 학원에서 확인 연락을 주는 흐름이 무난합니다. 상담 가능 시간을 미리 안내해두면 부재중 전화로 놓치는 문의가 줄어듭니다.</p><h2 id="정리">정리</h2><p>첫째, 교습비 게시는 규제가 있는 영역이므로 관할 교육청 기준을 확인해 공개합니다. 둘째, 합격·성적 표현은 증빙 가능한 사실만 조건과 함께 씁니다. 셋째, 메뉴는 학부모의 탐색 순서대로 배치하고 상담 예약 폼으로 마무리합니다. NOAH는 학원 업종 레퍼런스를 포함해 199,000원(부가세 별도), 7일 오픈으로 제작하며 예약 캘린더 옵션(5만원)으로 상담 예약까지 연결할 수 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#학원</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#교습비</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#상담예약</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/construction-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">건설회사 홈페이지 제작, 실적과 면허로 말하라</p>
+        </a>
+        <a href="/columns/pilates-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">필라테스 홈페이지 제작, 체험 예약까지 이어지는 설계</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/industry" class="hub-pill">업종별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SSL 인증서 설치, 자물쇠 표시 만드는 법 · NOAH 칼럼</title>
     <meta name="description" content="SSL 인증서가 왜 필요한지, 무료와 유료의 차이, 설치 방법과 설치 후 확인 사항까지 초보자 눈높이로 설명합니다. https 적용을 위한 기본 가이드입니다." />
-    <meta name="keywords" content="SSL 인증서 설치, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/ssl-setup" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/web-hosting" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/essential-pages" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="SSL 인증서 설치, 자물쇠 표시 만드는 법" />
     <meta property="og:description" content="SSL 인증서가 왜 필요한지, 무료와 유료의 차이, 설치 방법과 설치 후 확인 사항까지 초보자 눈높이로 설명합니다. https 적용을 위한 기본 가이드입니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/ssl-setup" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/ssl-setup.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-07-18" />
+    <meta property="article:section" content="제작 가이드" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SSL 인증서 설치, 자물쇠 표시 만드는 법" />
+    <meta name="twitter:description" content="SSL 인증서가 왜 필요한지, 무료와 유료의 차이, 설치 방법과 설치 후 확인 사항까지 초보자 눈높이로 설명합니다. https 적용을 위한 기본 가이드입니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/ssl-setup.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SSL 인증서 설치, 자물쇠 표시 만드는 법", "description": "SSL 인증서가 왜 필요한지, 무료와 유료의 차이, 설치 방법과 설치 후 확인 사항까지 초보자 눈높이로 설명합니다. https 적용을 위한 기본 가이드입니다.", "datePublished": "2026-07-18", "dateModified": "2026-07-18", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ssl-setup"}, "keywords": "SSL 인증서 설치"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SSL 인증서 설치, 자물쇠 표시 만드는 법", "item": "https://noahhomepage.co.kr/columns/ssl-setup"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SSL 인증서 설치, 자물쇠 표시 만드는 법", "description": "SSL 인증서가 왜 필요한지, 무료와 유료의 차이, 설치 방법과 설치 후 확인 사항까지 초보자 눈높이로 설명합니다. https 적용을 위한 기본 가이드입니다.", "datePublished": "2026-07-18", "dateModified": "2026-07-18", "inLanguage": "ko-KR", "wordCount": 1236, "articleSection": "제작 가이드", "keywords": "SSL 인증서 설치, SSL, https, 보안, 홈페이지 운영", "image": "https://noahhomepage.co.kr/assets/images/og/ssl-setup.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ssl-setup"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "SSL 인증서 설치"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 가이드", "item": "https://noahhomepage.co.kr/columns/topic/guide"}, {"@type": "ListItem", "position": 4, "name": "SSL 인증서 설치, 자물쇠 표시 만드는 법", "item": "https://noahhomepage.co.kr/columns/ssl-setup"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 가이드</span>
+        <a href="/columns/topic/guide" class="hover:text-white">제작 가이드</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 가이드</p>
@@ -112,8 +140,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#SSL-인증서란-무엇인가">SSL 인증서란 무엇인가</a></li>
+          <li><a href="#없으면-어떤-일이-생기나">없으면 어떤 일이 생기나</a></li>
+          <li><a href="#무료와-유료의-차이">무료와 유료의 차이</a></li>
+          <li><a href="#설치는-어떻게-하나">설치는 어떻게 하나</a></li>
+          <li><a href="#설치-후-확인할-것">설치 후 확인할 것</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>내 홈페이지에 접속했더니 '주의 요함'이나 '안전하지 않음'이라는 문구가 떠서 놀라셨나요? 십중팔구 SSL 인증서가 없거나 만료된 경우입니다. 이 글에서 SSL이 무엇이고 왜 필요한지, 어떻게 설치하는지를 차근차근 설명합니다.</p><h2>SSL 인증서란 무엇인가</h2><p>SSL 인증서는 방문자와 홈페이지 사이에 오가는 정보를 암호화해 주는 장치입니다. 설치하면 주소가 http에서 https로 바뀌고 브라우저 주소창에 자물쇠 표시가 나타납니다.</p><p>문의 양식으로 이름과 연락처를 받는 홈페이지라면 사실상 필수입니다. 암호화가 없으면 전송 중인 정보가 노출될 위험이 있기 때문입니다.</p><h2>없으면 어떤 일이 생기나</h2><p>크롬 같은 주요 브라우저는 SSL이 없는 사이트에 경고 문구를 표시합니다. 고객 입장에서는 '이 사이트 이상한가?' 하는 인상을 받고 이탈하기 쉽습니다.</p><p>검색엔진도 https 여부를 사이트 평가 요소 중 하나로 참고한다고 밝혀 왔습니다. 노출 순위를 결정짓는 전부는 아니지만, 갖춰서 손해 볼 일은 없습니다.</p><h2>무료와 유료의 차이</h2><p>Let's Encrypt 같은 무료 인증서는 암호화 수준 자체는 일반적인 용도에 충분하며, 90일마다 자동 갱신하는 방식으로 운영됩니다. 요즘 호스팅 업체 대부분이 무료 인증서 자동 적용을 지원합니다.</p><p>유료 인증서는 발급 시 기업 실재성 검증을 거치는 상품 등이 있고 보증 조건이 붙기도 합니다. 소개형 홈페이지라면 무료로 시작해도 무리가 없는 경우가 많습니다.</p><h2>설치는 어떻게 하나</h2><ol><li>호스팅 관리 페이지에서 SSL 메뉴를 찾는다</li><li>무료 인증서 발급 또는 보유 인증서 설치를 선택한다</li><li>적용 후 https 주소로 접속해 자물쇠 표시를 확인한다</li><li>http 접속 시 https로 자동 이동(리디렉션)되는지 확인한다</li></ol><p>클라우드플레어 같은 서비스를 이용해 적용하는 방법도 있습니다. 호스팅마다 화면이 달라, 어렵다면 호스팅 고객센터나 제작사에 요청하는 것이 빠릅니다.</p><h2>설치 후 확인할 것</h2><p>설치했는데도 자물쇠가 안 뜨는 경우가 있습니다. 페이지 안의 이미지가 http 주소로 불려오는 '혼합 콘텐츠'가 흔한 원인입니다. 또 인증서에는 유효기간이 있으므로 자동 갱신이 설정돼 있는지 확인해 두세요.</p><h2>정리</h2><p>첫째, SSL은 https와 자물쇠 표시를 만드는 암호화 장치로, 문의 양식이 있다면 필수입니다. 둘째, 무료 인증서로도 일반 홈페이지에는 충분한 경우가 많습니다. 셋째, 설치 후엔 리디렉션과 자동 갱신을 꼭 확인하세요. NOAH 패키지에도 도메인 연결과 함께 SSL 적용 안내가 포함되어 있으니 혼자 막힌다면 이런 도움을 받는 것도 방법입니다.</p>
+<p>내 홈페이지에 접속했더니 '주의 요함'이나 '안전하지 않음'이라는 문구가 떠서 놀라셨나요? 십중팔구 SSL 인증서가 없거나 만료된 경우입니다. 이 글에서 SSL이 무엇이고 왜 필요한지, 어떻게 설치하는지를 차근차근 설명합니다.</p><h2 id="SSL-인증서란-무엇인가">SSL 인증서란 무엇인가</h2><p>SSL 인증서는 방문자와 홈페이지 사이에 오가는 정보를 암호화해 주는 장치입니다. 설치하면 주소가 http에서 https로 바뀌고 브라우저 주소창에 자물쇠 표시가 나타납니다.</p><p>문의 양식으로 이름과 연락처를 받는 홈페이지라면 사실상 필수입니다. 암호화가 없으면 전송 중인 정보가 노출될 위험이 있기 때문입니다.</p><h2 id="없으면-어떤-일이-생기나">없으면 어떤 일이 생기나</h2><p>크롬 같은 주요 브라우저는 SSL이 없는 사이트에 경고 문구를 표시합니다. 고객 입장에서는 '이 사이트 이상한가?' 하는 인상을 받고 이탈하기 쉽습니다.</p><p>검색엔진도 https 여부를 사이트 평가 요소 중 하나로 참고한다고 밝혀 왔습니다. 노출 순위를 결정짓는 전부는 아니지만, 갖춰서 손해 볼 일은 없습니다.</p><h2 id="무료와-유료의-차이">무료와 유료의 차이</h2><p>Let's Encrypt 같은 무료 인증서는 암호화 수준 자체는 일반적인 용도에 충분하며, 90일마다 자동 갱신하는 방식으로 운영됩니다. 요즘 <a href="/columns/web-hosting">호스팅</a> 업체 대부분이 무료 인증서 자동 적용을 지원합니다.</p><p>유료 인증서는 발급 시 기업 실재성 검증을 거치는 상품 등이 있고 보증 조건이 붙기도 합니다. 소개형 홈페이지라면 무료로 시작해도 무리가 없는 경우가 많습니다.</p><h2 id="설치는-어떻게-하나">설치는 어떻게 하나</h2><ol><li>호스팅 관리 페이지에서 SSL 메뉴를 찾는다</li><li>무료 인증서 발급 또는 보유 인증서 설치를 선택한다</li><li>적용 후 https 주소로 접속해 자물쇠 표시를 확인한다</li><li>http 접속 시 https로 자동 이동(리디렉션)되는지 확인한다</li></ol><p>클라우드플레어 같은 서비스를 이용해 적용하는 방법도 있습니다. 호스팅마다 화면이 달라, 어렵다면 호스팅 고객센터나 제작사에 요청하는 것이 빠릅니다.</p><h2 id="설치-후-확인할-것">설치 후 확인할 것</h2><p>설치했는데도 자물쇠가 안 뜨는 경우가 있습니다. 페이지 안의 이미지가 http 주소로 불려오는 '혼합 <a href="/columns/content-strategy">콘텐츠</a>'가 흔한 원인입니다. 또 인증서에는 유효기간이 있으므로 자동 갱신이 설정돼 있는지 확인해 두세요.</p><h2 id="정리">정리</h2><p>첫째, SSL은 https와 자물쇠 표시를 만드는 암호화 장치로, 문의 양식이 있다면 필수입니다. 둘째, 무료 인증서로도 일반 홈페이지에는 충분한 경우가 많습니다. 셋째, 설치 후엔 리디렉션과 자동 갱신을 꼭 확인하세요. NOAH 패키지에도 <a href="/columns/domain-register">도메인</a> 연결과 함께 SSL 적용 안내가 포함되어 있으니 혼자 막힌다면 이런 도움을 받는 것도 방법입니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#SSL</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#https</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#보안</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지 운영</span></div>
@@ -129,6 +169,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/web-hosting" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">웹호스팅 선택 기준, 초보 사장님용 가이드</p>
+        </a>
+        <a href="/columns/essential-pages" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 필수 페이지 구성, 5페이지면 충분하다</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +204,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/guide" class="hub-pill">제작 가이드 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

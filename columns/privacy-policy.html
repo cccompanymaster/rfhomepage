@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>개인정보처리방침 작성법, 소규모 홈페이지 기준 · NOAH 칼럼</title>
     <meta name="description" content="문의 양식이 있는 홈페이지라면 필요한 개인정보처리방침의 기본 구성과 작성 요령을 안내합니다. 수집 항목, 목적, 보유 기간 등 핵심 요소를 정리했습니다." />
-    <meta name="keywords" content="개인정보처리방침 작성법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/privacy-policy" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/business-info-law" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/terms-of-service" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="개인정보처리방침 작성법, 소규모 홈페이지 기준" />
     <meta property="og:description" content="문의 양식이 있는 홈페이지라면 필요한 개인정보처리방침의 기본 구성과 작성 요령을 안내합니다. 수집 항목, 목적, 보유 기간 등 핵심 요소를 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/privacy-policy" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/privacy-policy.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-07-12" />
+    <meta property="article:section" content="제작 가이드" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="개인정보처리방침 작성법, 소규모 홈페이지 기준" />
+    <meta name="twitter:description" content="문의 양식이 있는 홈페이지라면 필요한 개인정보처리방침의 기본 구성과 작성 요령을 안내합니다. 수집 항목, 목적, 보유 기간 등 핵심 요소를 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/privacy-policy.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "개인정보처리방침 작성법, 소규모 홈페이지 기준", "description": "문의 양식이 있는 홈페이지라면 필요한 개인정보처리방침의 기본 구성과 작성 요령을 안내합니다. 수집 항목, 목적, 보유 기간 등 핵심 요소를 정리했습니다.", "datePublished": "2026-07-12", "dateModified": "2026-07-12", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/privacy-policy"}, "keywords": "개인정보처리방침 작성법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "개인정보처리방침 작성법, 소규모 홈페이지 기준", "item": "https://noahhomepage.co.kr/columns/privacy-policy"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "개인정보처리방침 작성법, 소규모 홈페이지 기준", "description": "문의 양식이 있는 홈페이지라면 필요한 개인정보처리방침의 기본 구성과 작성 요령을 안내합니다. 수집 항목, 목적, 보유 기간 등 핵심 요소를 정리했습니다.", "datePublished": "2026-07-12", "dateModified": "2026-07-12", "inLanguage": "ko-KR", "wordCount": 1134, "articleSection": "제작 가이드", "keywords": "개인정보처리방침 작성법, 개인정보처리방침, 개인정보보호, 홈페이지 운영", "image": "https://noahhomepage.co.kr/assets/images/og/privacy-policy.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/privacy-policy"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "개인정보처리방침 작성법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 가이드", "item": "https://noahhomepage.co.kr/columns/topic/guide"}, {"@type": "ListItem", "position": 4, "name": "개인정보처리방침 작성법, 소규모 홈페이지 기준", "item": "https://noahhomepage.co.kr/columns/privacy-policy"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 가이드</span>
+        <a href="/columns/topic/guide" class="hover:text-white">제작 가이드</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 가이드</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#왜-필요한가">왜 필요한가</a></li>
+          <li><a href="#기본적으로-담는-내용">기본적으로 담는 내용</a></li>
+          <li><a href="#작성-요령-사실대로-최소한으로">작성 요령, 사실대로 최소한으로</a></li>
+          <li><a href="#어디서-시작하면-좋은가">어디서 시작하면 좋은가</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지에 문의 양식을 넣으려는데 '개인정보처리방침이 필요하다'는 말을 들으셨나요? 이름과 연락처를 받는 순간 개인정보를 수집하는 것이기 때문입니다. 이 글은 소규모 홈페이지 기준으로 개인정보처리방침에 무엇을 담는지 정리한 글입니다. 법률 자문이 아니며, 수집하는 정보의 종류와 업종에 따라 요구 사항이 달라지므로 개인정보보호위원회 등 공식 안내를 함께 확인하시길 권합니다.</p><h2>왜 필요한가</h2><p>개인정보 보호 관련 법령은 개인정보를 처리하는 자에게 처리방침을 수립하고 공개하도록 요구합니다. 홈페이지 문의 양식, 예약 접수, 뉴스레터 구독처럼 이름·연락처·이메일을 받는 기능이 있다면 해당될 가능성이 높습니다.</p><p>방문 통계 도구(쿠키)를 쓰는 경우에도 관련 내용을 안내하는 것이 일반적입니다.</p><h2>기본적으로 담는 내용</h2><p>처리방침에 통상 포함되는 항목은 다음과 같습니다.</p><ul><li>수집하는 개인정보 항목 (예: 이름, 연락처, 이메일)</li><li>수집·이용 목적 (예: 문의 응대, 예약 확인)</li><li>보유 및 이용 기간, 파기 절차</li><li>제3자 제공 또는 처리 위탁 여부 (해당 시)</li><li>정보주체의 권리와 행사 방법</li><li>개인정보 보호책임자 및 연락처</li></ul><h2>작성 요령, 사실대로 최소한으로</h2><p>가장 중요한 원칙은 실제로 하는 것만 적는 것입니다. 다른 사이트 방침을 그대로 복사하면 우리가 수집하지도 않는 항목이 들어가거나, 반대로 실제 수집하는 항목이 빠지는 문제가 생깁니다.</p><p>수집 항목 자체를 최소화하는 것도 중요합니다. 문의 응대에 이름과 연락처면 충분하다면 생년월일이나 주소까지 받을 이유가 없습니다. 항목이 적을수록 관리 부담도 줄어듭니다.</p><h2>어디서 시작하면 좋은가</h2><p>개인정보보호위원회와 개인정보보호 포털에서 처리방침 작성 안내와 서식 자료를 제공합니다. 공식 자료를 바탕으로 우리 사이트 상황에 맞게 항목을 채우는 방식이 안전합니다.</p><p>작성한 방침은 홈페이지 하단 등 찾기 쉬운 위치에 링크로 상시 공개하고, 수집 항목이나 위탁 업체가 바뀌면 내용도 함께 갱신해야 합니다.</p><h2>정리</h2><p>첫째, 문의 양식 등으로 개인정보를 받는 홈페이지라면 처리방침 공개가 일반적으로 요구됩니다. 둘째, 수집 항목·목적·보유 기간·책임자 정보가 핵심 구성입니다. 셋째, 남의 방침을 복사하지 말고 실제 운영대로, 공식 안내 자료를 참고해 작성하세요. NOAH에서 제작할 때도 문의 양식을 넣는 경우 방침 페이지 자리를 함께 잡아드리고 있습니다.</p>
+<p>홈페이지에 문의 양식을 넣으려는데 '개인정보처리방침이 필요하다'는 말을 들으셨나요? 이름과 연락처를 받는 순간 개인정보를 수집하는 것이기 때문입니다. 이 글은 소규모 홈페이지 기준으로 개인정보처리방침에 무엇을 담는지 정리한 글입니다. 법률 자문이 아니며, 수집하는 정보의 종류와 업종에 따라 요구 사항이 달라지므로 개인정보보호위원회 등 공식 안내를 함께 확인하시길 권합니다.</p><h2 id="왜-필요한가">왜 필요한가</h2><p>개인정보 보호 관련 법령은 개인정보를 처리하는 자에게 처리방침을 수립하고 공개하도록 요구합니다. 홈페이지 문의 양식, 예약 접수, 뉴스레터 구독처럼 이름·연락처·이메일을 받는 기능이 있다면 해당될 가능성이 높습니다.</p><p>방문 통계 도구(쿠키)를 쓰는 경우에도 관련 내용을 안내하는 것이 일반적입니다.</p><h2 id="기본적으로-담는-내용">기본적으로 담는 내용</h2><p>처리방침에 통상 포함되는 항목은 다음과 같습니다.</p><ul><li>수집하는 개인정보 항목 (예: 이름, 연락처, 이메일)</li><li>수집·이용 목적 (예: 문의 응대, 예약 확인)</li><li>보유 및 이용 기간, 파기 절차</li><li>제3자 제공 또는 처리 위탁 여부 (해당 시)</li><li>정보주체의 권리와 행사 방법</li><li>개인정보 보호책임자 및 연락처</li></ul><h2 id="작성-요령-사실대로-최소한으로">작성 요령, 사실대로 최소한으로</h2><p>가장 중요한 원칙은 실제로 하는 것만 적는 것입니다. 다른 사이트 방침을 그대로 복사하면 우리가 수집하지도 않는 항목이 들어가거나, 반대로 실제 수집하는 항목이 빠지는 문제가 생깁니다.</p><p>수집 항목 자체를 최소화하는 것도 중요합니다. 문의 응대에 이름과 연락처면 충분하다면 생년월일이나 주소까지 받을 이유가 없습니다. 항목이 적을수록 관리 부담도 줄어듭니다.</p><h2 id="어디서-시작하면-좋은가">어디서 시작하면 좋은가</h2><p>개인정보보호위원회와 개인정보보호 포털에서 처리방침 작성 안내와 서식 자료를 제공합니다. 공식 자료를 바탕으로 우리 사이트 상황에 맞게 항목을 채우는 방식이 안전합니다.</p><p>작성한 방침은 홈페이지 하단 등 찾기 쉬운 위치에 링크로 상시 공개하고, 수집 항목이나 위탁 업체가 바뀌면 내용도 함께 갱신해야 합니다.</p><h2 id="정리">정리</h2><p>첫째, 문의 양식 등으로 개인정보를 받는 홈페이지라면 처리방침 공개가 일반적으로 요구됩니다. 둘째, 수집 항목·목적·보유 기간·책임자 정보가 핵심 구성입니다. 셋째, 남의 방침을 복사하지 말고 실제 운영대로, 공식 안내 자료를 참고해 작성하세요. NOAH에서 제작할 때도 문의 양식을 넣는 경우 방침 페이지 자리를 함께 잡아드리고 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#개인정보처리방침</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#개인정보보호</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지 운영</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/business-info-law" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">사업자 홈페이지 표기 의무, 꼭 넣어야 할 정보</p>
+        </a>
+        <a href="/columns/terms-of-service" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 이용약관 작성, 필요한 경우와 구성</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/guide" class="hub-pill">제작 가이드 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

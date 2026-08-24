@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>메타태그 작성법, 검색결과 첫인상을 바꾸는 기술 · NOAH 칼럼</title>
     <meta name="description" content="title과 description부터 오픈그래프(카카오톡 미리보기)까지, 홈페이지 메타태그 작성법을 예시와 함께 정리했습니다. 클릭률을 좌우하는 문구 작성 요령도 담았습니다." />
-    <meta name="keywords" content="메타태그 작성법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/meta-tags" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/robots-txt" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/keyword-research" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="메타태그 작성법, 검색결과 첫인상을 바꾸는 기술" />
     <meta property="og:description" content="title과 description부터 오픈그래프(카카오톡 미리보기)까지, 홈페이지 메타태그 작성법을 예시와 함께 정리했습니다. 클릭률을 좌우하는 문구 작성 요령도 담았습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/meta-tags" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/meta-tags.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-05-15" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="메타태그 작성법, 검색결과 첫인상을 바꾸는 기술" />
+    <meta name="twitter:description" content="title과 description부터 오픈그래프(카카오톡 미리보기)까지, 홈페이지 메타태그 작성법을 예시와 함께 정리했습니다. 클릭률을 좌우하는 문구 작성 요령도 담았습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/meta-tags.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "메타태그 작성법, 검색결과 첫인상을 바꾸는 기술", "description": "title과 description부터 오픈그래프(카카오톡 미리보기)까지, 홈페이지 메타태그 작성법을 예시와 함께 정리했습니다. 클릭률을 좌우하는 문구 작성 요령도 담았습니다.", "datePublished": "2026-05-15", "dateModified": "2026-05-15", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/meta-tags"}, "keywords": "메타태그 작성법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "메타태그 작성법, 검색결과 첫인상을 바꾸는 기술", "item": "https://noahhomepage.co.kr/columns/meta-tags"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "메타태그 작성법, 검색결과 첫인상을 바꾸는 기술", "description": "title과 description부터 오픈그래프(카카오톡 미리보기)까지, 홈페이지 메타태그 작성법을 예시와 함께 정리했습니다. 클릭률을 좌우하는 문구 작성 요령도 담았습니다.", "datePublished": "2026-05-15", "dateModified": "2026-05-15", "inLanguage": "ko-KR", "wordCount": 1439, "articleSection": "SEO·검색노출", "keywords": "메타태그 작성법, 메타태그, 오픈그래프, 클릭률", "image": "https://noahhomepage.co.kr/assets/images/og/meta-tags.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/meta-tags"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "메타태그 작성법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "메타태그 작성법, 검색결과 첫인상을 바꾸는 기술", "item": "https://noahhomepage.co.kr/columns/meta-tags"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +140,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#가장-중요한-두-가지-title과-description">가장 중요한 두 가지: title과 description</a></li>
+          <li><a href="#작성-예시">작성 예시</a></li>
+          <li><a href="#오픈그래프-카카오톡-미리보기-카드">오픈그래프: 카카오톡 미리보기 카드</a></li>
+          <li><a href="#페이지마다-다르게-쓰는-것이-원칙">페이지마다 다르게 쓰는 것이 원칙</a></li>
+          <li><a href="#기타-알아둘-태그">기타 알아둘 태그</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>메타태그는 페이지의 정보를 검색엔진과 SNS에 알려주는 태그로, HTML의 &lt;head&gt; 영역에 들어갑니다. 방문자 눈에는 직접 보이지 않지만, 검색결과에 표시되는 제목과 설명문, 카카오톡에 링크를 보냈을 때 뜨는 미리보기 카드가 모두 메타태그로 결정됩니다. 즉 메타태그는 <strong>내 사이트의 첫인상</strong>을 만드는 문구 작업입니다.</p><h2>가장 중요한 두 가지: title과 description</h2><p><strong>title</strong>은 검색결과의 제목 줄입니다. 페이지 주제를 담되, 고객이 검색할 표현을 앞쪽에 배치하고 상호명은 뒤에 붙이는 구성이 무난합니다. 예: "강남 왁싱샵 예약 안내 | ○○뷰티". 길이는 대략 30자 안팎에서 핵심이 드러나게 쓰세요. <strong>description</strong>은 제목 아래 설명문으로, 80~120자 정도로 페이지 내용과 방문할 이유를 요약합니다. 검색엔진이 항상 이 문구를 그대로 쓰는 것은 아니지만, 잘 쓴 설명문은 클릭률에 영향을 줍니다.</p><h2>작성 예시</h2><blockquote>&lt;title&gt;수원 인테리어 시공 사례 | ○○디자인&lt;/title&gt;<br>&lt;meta name="description" content="수원 아파트·상가 인테리어 시공 사례를 사진과 함께 소개합니다. 평형별 예상 비용과 상담 방법 안내."&gt;</blockquote><h2>오픈그래프: 카카오톡 미리보기 카드</h2><p>og 태그는 링크 공유 시 보이는 카드(제목·설명·이미지)를 지정합니다. <code>og:title</code>, <code>og:description</code>, <code>og:image</code> 세 가지가 핵심이며, 특히 og:image가 없으면 카드가 밋밋해져 클릭을 놓칩니다. 이미지는 가로형(예: 1200×630px 내외)을 권장합니다. 카카오톡은 미리보기를 한동안 저장(캐시)하므로, 이미지를 바꿨는데 예전 것이 보인다면 카카오 공유 디버거로 캐시를 갱신할 수 있습니다.</p><h2>페이지마다 다르게 쓰는 것이 원칙</h2><p>모든 페이지에 같은 title/description을 복사해 넣는 것은 흔하지만 아까운 실수입니다. 회사소개, 서비스, 오시는길 페이지는 각각 다른 검색어로 유입될 수 있으므로 페이지별로 맞춤 작성하세요. 반대로 keywords 메타태그는 현재 주요 검색엔진에서 순위 요소로 쓰이지 않으므로 거기에 키워드를 잔뜩 나열하는 데 시간 쓸 필요는 없습니다.</p><h2>기타 알아둘 태그</h2><ul><li><code>&lt;meta name="robots" content="noindex"&gt;</code> — 이 페이지를 검색에서 제외. 개발용 페이지에만 쓰고, 실수로 전체 적용되지 않게 주의.</li><li><code>&lt;meta name="viewport" ...&gt;</code> — 모바일 화면 대응의 기본 태그로 사실상 필수.</li></ul><h2>정리</h2><p>첫째, title과 description은 페이지마다 고객의 검색어를 반영해 다르게 작성하세요. 둘째, og 태그(특히 og:image)를 챙기면 카카오톡 공유 시 클릭률이 달라집니다. 셋째, noindex 오적용 같은 사고만 피하면 메타태그는 어렵지 않습니다. NOAH 패키지에는 메타태그와 카카오 미리보기 카드 세팅이 기본 포함되어 있습니다.</p>
+<p>메타태그는 페이지의 정보를 검색엔진과 SNS에 알려주는 태그로, HTML의 &lt;head&gt; 영역에 들어갑니다. 방문자 눈에는 직접 보이지 않지만, 검색결과에 표시되는 제목과 설명문, 카카오톡에 링크를 보냈을 때 뜨는 미리보기 카드가 모두 메타태그로 결정됩니다. 즉 메타태그는 <strong>내 사이트의 첫인상</strong>을 만드는 문구 작업입니다.</p><h2 id="가장-중요한-두-가지-title과-description">가장 중요한 두 가지: title과 description</h2><p><strong>title</strong>은 검색결과의 제목 줄입니다. 페이지 주제를 담되, 고객이 검색할 표현을 앞쪽에 배치하고 상호명은 뒤에 붙이는 구성이 무난합니다. 예: "강남 왁싱샵 예약 안내 | ○○뷰티". 길이는 대략 30자 안팎에서 핵심이 드러나게 쓰세요. <strong>description</strong>은 제목 아래 설명문으로, 80~120자 정도로 페이지 내용과 방문할 이유를 요약합니다. 검색엔진이 항상 이 문구를 그대로 쓰는 것은 아니지만, 잘 쓴 설명문은 클릭률에 영향을 줍니다.</p><h2 id="작성-예시">작성 예시</h2><blockquote>&lt;title&gt;수원 인테리어 시공 사례 | ○○디자인&lt;/title&gt;<br>&lt;meta name="description" content="수원 아파트·상가 인테리어 시공 사례를 사진과 함께 소개합니다. 평형별 예상 비용과 상담 방법 안내."&gt;</blockquote><h2 id="오픈그래프-카카오톡-미리보기-카드">오픈그래프: 카카오톡 미리보기 카드</h2><p>og 태그는 링크 공유 시 보이는 카드(제목·설명·이미지)를 지정합니다. <code>og:title</code>, <code>og:description</code>, <code>og:image</code> 세 가지가 핵심이며, 특히 og:image가 없으면 카드가 밋밋해져 클릭을 놓칩니다. 이미지는 가로형(예: 1200×630px 내외)을 권장합니다. 카카오톡은 미리보기를 한동안 저장(캐시)하므로, 이미지를 바꿨는데 예전 것이 보인다면 카카오 공유 디버거로 캐시를 갱신할 수 있습니다.</p><h2 id="페이지마다-다르게-쓰는-것이-원칙">페이지마다 다르게 쓰는 것이 원칙</h2><p>모든 페이지에 같은 title/description을 복사해 넣는 것은 흔하지만 아까운 실수입니다. 회사소개, 서비스, 오시는길 페이지는 각각 다른 검색어로 유입될 수 있으므로 페이지별로 맞춤 작성하세요. 반대로 keywords 메타태그는 현재 주요 검색엔진에서 순위 요소로 쓰이지 않으므로 거기에 키워드를 잔뜩 나열하는 데 시간 쓸 필요는 없습니다.</p><h2 id="기타-알아둘-태그">기타 알아둘 태그</h2><ul><li><code>&lt;meta name="robots" content="noindex"&gt;</code> — 이 페이지를 검색에서 제외. 개발용 페이지에만 쓰고, 실수로 전체 적용되지 않게 주의.</li><li><code>&lt;meta name="viewport" ...&gt;</code> — 모바일 화면 대응의 기본 태그로 사실상 필수.</li></ul><h2 id="정리">정리</h2><p>첫째, title과 description은 페이지마다 고객의 검색어를 반영해 다르게 작성하세요. 둘째, og 태그(특히 og:image)를 챙기면 카카오톡 공유 시 클릭률이 달라집니다. 셋째, noindex 오적용 같은 사고만 피하면 메타태그는 어렵지 않습니다. NOAH 패키지에는 메타태그와 카카오 미리보기 카드 세팅이 기본 포함되어 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#메타태그</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#오픈그래프</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#클릭률</span></div>
@@ -129,6 +169,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/robots-txt" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">robots.txt 설정 방법과 흔한 실수 피하기</p>
+        </a>
+        <a href="/columns/keyword-research" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">SEO 키워드 선정 방법, 작은 사이트가 이기는 법</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +204,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

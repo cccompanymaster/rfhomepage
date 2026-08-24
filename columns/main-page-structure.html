@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>메인페이지 구성 요소, 순서에는 이유가 있습니다 · NOAH 칼럼</title>
     <meta name="description" content="첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다." />
-    <meta name="keywords" content="메인페이지 구성 요소, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/main-page-structure" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/find-reference" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/copywriting" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="메인페이지 구성 요소, 순서에는 이유가 있습니다" />
     <meta property="og:description" content="첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/main-page-structure" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/main-page-structure.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-03-10" />
+    <meta property="article:section" content="디자인·기획" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="메인페이지 구성 요소, 순서에는 이유가 있습니다" />
+    <meta name="twitter:description" content="첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/main-page-structure.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "description": "첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다.", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/main-page-structure"}, "keywords": "메인페이지 구성 요소"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "item": "https://noahhomepage.co.kr/columns/main-page-structure"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "description": "첫 화면, 강점, 후기, 문의 버튼까지. 잘 되는 홈페이지 메인페이지의 구성 요소와 배치 순서의 원리를 소상공인 눈높이에서 설명합니다.", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "inLanguage": "ko-KR", "wordCount": 1282, "articleSection": "디자인·기획", "keywords": "메인페이지 구성 요소, 메인페이지, 웹디자인, 구성", "image": "https://noahhomepage.co.kr/assets/images/og/main-page-structure.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/main-page-structure"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "메인페이지 구성 요소"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "디자인·기획", "item": "https://noahhomepage.co.kr/columns/topic/design"}, {"@type": "ListItem", "position": 4, "name": "메인페이지 구성 요소, 순서에는 이유가 있습니다", "item": "https://noahhomepage.co.kr/columns/main-page-structure"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>디자인·기획</span>
+        <a href="/columns/topic/design" class="hover:text-white">디자인·기획</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">디자인·기획</p>
@@ -112,8 +140,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#첫-화면-3초-안에-무엇을-하는-곳인지">첫 화면: 3초 안에 무엇을 하는 곳인지</a></li>
+          <li><a href="#강점-왜-여기여야-하는지">강점: 왜 여기여야 하는지</a></li>
+          <li><a href="#사회적-증거-남들이-믿는다는-신호">사회적 증거: 남들이 믿는다는 신호</a></li>
+          <li><a href="#CTA-다음-행동을-한-가지로">CTA: 다음 행동을 한 가지로</a></li>
+          <li><a href="#순서의-원리는-방문자의-질문-순서">순서의 원리는 방문자의 질문 순서</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>메인페이지는 가게의 입구입니다. 방문자는 이 한 페이지에서 여기가 어떤 곳인지, 믿을 만한지, 다음에 뭘 하면 되는지를 판단합니다. 잘 되는 사이트들의 메인 구성이 서로 비슷한 이유는 유행이 아니라, 방문자의 판단 순서를 따르기 때문입니다.</p><h2>첫 화면: 3초 안에 무엇을 하는 곳인지</h2><p>스크롤하기 전에 보이는 첫 화면에는 세 가지가 있어야 합니다. 무엇을 하는 곳인지 말해주는 <strong>한 줄 문장</strong>, 업의 분위기를 보여주는 <strong>대표 이미지</strong>, 그리고 전화나 예약으로 이어지는 <strong>행동 버튼</strong>입니다. 멋진 슬로건보다 명확한 설명이 먼저입니다. 강남역 5분, 20년 경력의 치과처럼 누가·어디서·무엇을 하는지가 바로 읽혀야 합니다.</p><h2>강점: 왜 여기여야 하는지</h2><p>첫 화면 다음에는 다른 곳이 아니라 여기를 선택할 이유를 줍니다. 경력, 장비, 원산지, 시공 방식, 가격 정책 등 우리 가게가 실제로 가진 강점을 2~4개로 추려 짧은 제목과 한두 문장으로 보여주세요. 열 가지를 나열하면 하나도 기억되지 않습니다. 증명할 수 없는 최고, 최저가 같은 표현보다 구체적인 사실이 힘이 셉니다.</p><h2>사회적 증거: 남들이 믿는다는 신호</h2><p>강점은 우리 주장이고, 후기는 남의 증언입니다. 고객 후기, 시공·시술 전후 사진, 누적 이용 건수, 자격이나 인증 같은 요소가 여기에 해당합니다. 실제 손님의 말투가 살아 있는 후기 두세 개가, 지어낸 듯한 칭찬 열 개보다 낫습니다. 후기가 아직 없다면 작업 과정 사진처럼 실체를 보여주는 것으로 시작해도 됩니다.</p><h2>CTA: 다음 행동을 한 가지로</h2><p>메인의 끝에는 방문자가 할 다음 행동을 명확히 제시합니다. 전화, 예약, 카카오톡 문의, 오시는 길 중 우리 사업에서 가장 중요한 것 하나를 크게, 나머지는 보조로 두세요. 선택지가 많으면 오히려 아무것도 누르지 않습니다. 모바일에서는 전화 버튼이 화면에 늘 보이도록 고정하는 것도 좋은 방법입니다.</p><h2>순서의 원리는 방문자의 질문 순서</h2><p>결국 메인페이지의 순서는 방문자가 속으로 묻는 질문의 순서입니다. 여기가 어디지(첫 화면), 괜찮은 곳인가(강점), 진짜인가(후기), 그래서 어떻게 하지(CTA). 이 흐름만 지키면 디자인이 소박해도 제 역할을 하고, 흐름이 없으면 화려해도 문의로 이어지지 않습니다.</p><h2>정리</h2><p>첫째, 첫 화면은 한 줄 설명·대표 이미지·행동 버튼 세 가지로 3초 안에 승부합니다. 둘째, 강점은 2~4개로 추리고 후기로 뒷받침하세요. 셋째, 마지막에는 다음 행동을 한 가지로 명확히 제시해야 합니다. NOAH의 199,000원 패키지는 이 구성 원리를 기본 골격으로 담아 7일 안에 오픈하며, 18개 업종 레퍼런스에서 실제 구성을 직접 확인할 수 있습니다.</p>
+<p>메인페이지는 가게의 입구입니다. 방문자는 이 한 페이지에서 여기가 어떤 곳인지, 믿을 만한지, 다음에 뭘 하면 되는지를 판단합니다. 잘 되는 사이트들의 메인 구성이 서로 비슷한 이유는 유행이 아니라, 방문자의 판단 순서를 따르기 때문입니다.</p><h2 id="첫-화면-3초-안에-무엇을-하는-곳인지">첫 화면: 3초 안에 무엇을 하는 곳인지</h2><p>스크롤하기 전에 보이는 첫 화면에는 세 가지가 있어야 합니다. 무엇을 하는 곳인지 말해주는 <strong>한 줄 문장</strong>, 업의 분위기를 보여주는 <strong>대표 이미지</strong>, 그리고 전화나 예약으로 이어지는 <strong>행동 버튼</strong>입니다. 멋진 슬로건보다 명확한 설명이 먼저입니다. 강남역 5분, 20년 경력의 <a href="/columns/dental-homepage">치과</a>처럼 누가·어디서·무엇을 하는지가 바로 읽혀야 합니다.</p><h2 id="강점-왜-여기여야-하는지">강점: 왜 여기여야 하는지</h2><p>첫 화면 다음에는 다른 곳이 아니라 여기를 선택할 이유를 줍니다. 경력, 장비, 원산지, 시공 방식, 가격 정책 등 우리 가게가 실제로 가진 강점을 2~4개로 추려 짧은 제목과 한두 문장으로 보여주세요. 열 가지를 나열하면 하나도 기억되지 않습니다. 증명할 수 없는 최고, 최저가 같은 표현보다 구체적인 사실이 힘이 셉니다.</p><h2 id="사회적-증거-남들이-믿는다는-신호">사회적 증거: 남들이 믿는다는 신호</h2><p>강점은 우리 주장이고, 후기는 남의 증언입니다. 고객 후기, 시공·시술 전후 <a href="/columns/photo-prepare">사진</a>, 누적 이용 건수, 자격이나 인증 같은 요소가 여기에 해당합니다. 실제 손님의 말투가 살아 있는 후기 두세 개가, 지어낸 듯한 칭찬 열 개보다 낫습니다. 후기가 아직 없다면 작업 과정 사진처럼 실체를 보여주는 것으로 시작해도 됩니다.</p><h2 id="CTA-다음-행동을-한-가지로">CTA: 다음 행동을 한 가지로</h2><p>메인의 끝에는 방문자가 할 다음 행동을 명확히 제시합니다. 전화, 예약, 카카오톡 문의, 오시는 길 중 우리 사업에서 가장 중요한 것 하나를 크게, 나머지는 보조로 두세요. 선택지가 많으면 오히려 아무것도 누르지 않습니다. 모바일에서는 전화 버튼이 화면에 늘 보이도록 고정하는 것도 좋은 방법입니다.</p><h2 id="순서의-원리는-방문자의-질문-순서">순서의 원리는 방문자의 질문 순서</h2><p>결국 메인페이지의 순서는 방문자가 속으로 묻는 질문의 순서입니다. 여기가 어디지(첫 화면), 괜찮은 곳인가(강점), 진짜인가(후기), 그래서 어떻게 하지(CTA). 이 흐름만 지키면 디자인이 소박해도 제 역할을 하고, 흐름이 없으면 화려해도 문의로 이어지지 않습니다.</p><h2 id="정리">정리</h2><p>첫째, 첫 화면은 한 줄 설명·대표 이미지·행동 버튼 세 가지로 3초 안에 승부합니다. 둘째, 강점은 2~4개로 추리고 후기로 뒷받침하세요. 셋째, 마지막에는 다음 행동을 한 가지로 명확히 제시해야 합니다. NOAH의 199,000원 패키지는 이 구성 원리를 기본 골격으로 담아 7일 안에 오픈하며, 18개 업종 레퍼런스에서 실제 구성을 직접 확인할 수 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#메인페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#웹디자인</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#구성</span></div>
@@ -129,6 +169,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/find-reference" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 레퍼런스 찾는 법과 참고의 선 지키기</p>
+        </a>
+        <a href="/columns/copywriting" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 카피라이팅, 기능 자랑 대신 고객의 언어로 쓰는 법</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +204,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/design" class="hub-pill">디자인·기획 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

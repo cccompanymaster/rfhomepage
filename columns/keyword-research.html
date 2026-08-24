@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SEO 키워드 선정 방법, 작은 사이트가 이기는 법 · NOAH 칼럼</title>
     <meta name="description" content="검색량만 보고 키워드를 고르면 실패합니다. 고객의 언어 수집, 세부 키워드 공략, 검색 의도 구분, 무료 도구 활용까지 작은 사이트를 위한 키워드 선정 방법을 정리했습니다." />
-    <meta name="keywords" content="SEO 키워드 선정 방법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/keyword-research" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/meta-tags" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/blog-ranking" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="SEO 키워드 선정 방법, 작은 사이트가 이기는 법" />
     <meta property="og:description" content="검색량만 보고 키워드를 고르면 실패합니다. 고객의 언어 수집, 세부 키워드 공략, 검색 의도 구분, 무료 도구 활용까지 작은 사이트를 위한 키워드 선정 방법을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/keyword-research" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/keyword-research.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-05-13" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SEO 키워드 선정 방법, 작은 사이트가 이기는 법" />
+    <meta name="twitter:description" content="검색량만 보고 키워드를 고르면 실패합니다. 고객의 언어 수집, 세부 키워드 공략, 검색 의도 구분, 무료 도구 활용까지 작은 사이트를 위한 키워드 선정 방법을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/keyword-research.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SEO 키워드 선정 방법, 작은 사이트가 이기는 법", "description": "검색량만 보고 키워드를 고르면 실패합니다. 고객의 언어 수집, 세부 키워드 공략, 검색 의도 구분, 무료 도구 활용까지 작은 사이트를 위한 키워드 선정 방법을 정리했습니다.", "datePublished": "2026-05-13", "dateModified": "2026-05-13", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/keyword-research"}, "keywords": "SEO 키워드 선정 방법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO 키워드 선정 방법, 작은 사이트가 이기는 법", "item": "https://noahhomepage.co.kr/columns/keyword-research"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SEO 키워드 선정 방법, 작은 사이트가 이기는 법", "description": "검색량만 보고 키워드를 고르면 실패합니다. 고객의 언어 수집, 세부 키워드 공략, 검색 의도 구분, 무료 도구 활용까지 작은 사이트를 위한 키워드 선정 방법을 정리했습니다.", "datePublished": "2026-05-13", "dateModified": "2026-05-13", "inLanguage": "ko-KR", "wordCount": 1277, "articleSection": "SEO·검색노출", "keywords": "SEO 키워드 선정 방법, 키워드선정, 롱테일, 콘텐츠전략", "image": "https://noahhomepage.co.kr/assets/images/og/keyword-research.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/keyword-research"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "SEO 키워드 선정 방법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "SEO 키워드 선정 방법, 작은 사이트가 이기는 법", "item": "https://noahhomepage.co.kr/columns/keyword-research"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +140,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#1단계-고객의-언어-모으기">1단계: 고객의 언어 모으기</a></li>
+          <li><a href="#2단계-검색량과-경쟁도-확인">2단계: 검색량과 경쟁도 확인</a></li>
+          <li><a href="#3단계-세부롱테일-키워드부터-공략">3단계: 세부(롱테일) 키워드부터 공략</a></li>
+          <li><a href="#4단계-검색-의도로-분류하기">4단계: 검색 의도로 분류하기</a></li>
+          <li><a href="#피해야-할-함정">피해야 할 함정</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>SEO에서 키워드 선정은 "어떤 손님을 우리 가게 앞으로 모실 것인가"를 정하는 일입니다. 아무리 좋은 글을 써도 아무도 검색하지 않는 키워드라면 유입이 없고, 반대로 검색량만 많은 키워드는 대형 사이트와 경쟁해야 해서 신생 홈페이지가 이기기 어렵습니다. 핵심은 <strong>내가 이길 수 있는 키워드</strong>를 찾는 것입니다.</p><h2>1단계: 고객의 언어 모으기</h2><p>키워드는 책상이 아니라 현장에서 나옵니다. 고객이 전화나 상담에서 실제로 쓰는 표현, 자주 묻는 질문을 그대로 적어 두세요. "도배 견적", "강아지 미용 예약", "부가세 신고 대행 비용"처럼 고객의 입말이 곧 검색어입니다. 여기에 네이버 검색창 자동완성과 연관 검색어를 보면 사람들이 실제로 어떻게 검색하는지 확장할 수 있습니다.</p><h2>2단계: 검색량과 경쟁도 확인</h2><p>모은 키워드는 도구로 검증합니다. <strong>네이버 검색광고의 키워드 도구</strong>(광고 집행 없이도 가입 후 조회 가능)에서 월간 조회수를 확인하고, 구글은 서치콘솔에 쌓이는 실제 유입 검색어와 구글 자동완성을 참고합니다. 이때 해당 키워드를 직접 검색해 상위에 어떤 사이트가 있는지 보는 것이 중요합니다. 대형 포털 콘텐츠와 광고가 가득한 키워드라면 우선순위를 낮추세요.</p><h2>3단계: 세부(롱테일) 키워드부터 공략</h2><p>"인테리어"보다 "수원 30평 아파트 인테리어 비용"이 검색량은 적지만 경쟁이 약하고 계약 의사가 있는 방문자가 옵니다. 이런 세부 키워드를 여러 개 잡아 각각 한 페이지씩 만드는 것이 작은 사이트의 정석 전략입니다. 세부 키워드에서 성과가 쌓이면 더 큰 키워드에서도 서서히 힘이 붙습니다.</p><h2>4단계: 검색 의도로 분류하기</h2><p>같은 주제라도 의도가 다릅니다. <strong>정보형</strong>(방법, 비용, 후기)은 칼럼·가이드로, <strong>거래형</strong>(예약, 신청, 업체)은 서비스 페이지로 받는 것이 맞습니다. 키워드마다 "이 검색자는 무엇을 원하나"를 한 줄로 적고, 그 답이 되는 페이지를 매칭하세요. 하나의 페이지에 키워드 수십 개를 욱여넣는 방식은 어느 키워드에서도 좋은 평가를 받기 어렵습니다.</p><h2>피해야 할 함정</h2><p>본문에 키워드를 부자연스럽게 반복하는 키워드 스터핑은 가독성을 해치고 검색엔진 제재 위험도 있습니다. 또한 검색량 수치는 도구마다, 시기마다 달라지는 추정치이니 절대값보다 키워드 간 상대 비교 용도로 쓰세요.</p><h2>정리</h2><p>첫째, 고객이 실제 쓰는 말에서 키워드를 수집하고 도구로 검색량·경쟁도를 검증하세요. 둘째, 신생 사이트는 세부 키워드 한 개당 한 페이지 전략이 정석입니다. 셋째, 검색 의도에 맞는 페이지로 연결하고 키워드 반복은 피하세요. NOAH는 SEO 심화 세팅 옵션(5만원)에서 이런 키워드 구조 설계를 함께 도와드립니다.</p>
+<p>SEO에서 키워드 선정은 "어떤 손님을 우리 가게 앞으로 모실 것인가"를 정하는 일입니다. 아무리 좋은 글을 써도 아무도 검색하지 않는 키워드라면 유입이 없고, 반대로 검색량만 많은 키워드는 대형 사이트와 경쟁해야 해서 신생 홈페이지가 이기기 어렵습니다. 핵심은 <strong>내가 이길 수 있는 키워드</strong>를 찾는 것입니다.</p><h2 id="1단계-고객의-언어-모으기">1단계: 고객의 언어 모으기</h2><p>키워드는 책상이 아니라 현장에서 나옵니다. 고객이 전화나 상담에서 실제로 쓰는 표현, 자주 묻는 질문을 그대로 적어 두세요. "도배 <a href="/columns/homepage-quote">견적</a>", "강아지 미용 예약", "부가세 신고 대행 비용"처럼 고객의 입말이 곧 검색어입니다. 여기에 네이버 검색창 자동완성과 연관 검색어를 보면 사람들이 실제로 어떻게 검색하는지 확장할 수 있습니다.</p><h2 id="2단계-검색량과-경쟁도-확인">2단계: 검색량과 경쟁도 확인</h2><p>모은 키워드는 도구로 검증합니다. <strong>네이버 검색광고의 키워드 도구</strong>(광고 집행 없이도 가입 후 조회 가능)에서 월간 조회수를 확인하고, 구글은 <a href="/columns/search-console">서치콘솔</a>에 쌓이는 실제 유입 검색어와 구글 자동완성을 참고합니다. 이때 해당 키워드를 직접 검색해 상위에 어떤 사이트가 있는지 보는 것이 중요합니다. 대형 포털 <a href="/columns/content-strategy">콘텐츠</a>와 광고가 가득한 키워드라면 우선순위를 낮추세요.</p><h2 id="3단계-세부롱테일-키워드부터-공략">3단계: 세부(롱테일) 키워드부터 공략</h2><p>"<a href="/columns/interior-homepage">인테리어</a>"보다 "수원 30평 아파트 인테리어 비용"이 검색량은 적지만 경쟁이 약하고 계약 의사가 있는 방문자가 옵니다. 이런 세부 키워드를 여러 개 잡아 각각 한 페이지씩 만드는 것이 작은 사이트의 정석 전략입니다. 세부 키워드에서 성과가 쌓이면 더 큰 키워드에서도 서서히 힘이 붙습니다.</p><h2 id="4단계-검색-의도로-분류하기">4단계: 검색 의도로 분류하기</h2><p>같은 주제라도 의도가 다릅니다. <strong>정보형</strong>(방법, 비용, 후기)은 칼럼·가이드로, <strong>거래형</strong>(예약, 신청, 업체)은 서비스 페이지로 받는 것이 맞습니다. 키워드마다 "이 검색자는 무엇을 원하나"를 한 줄로 적고, 그 답이 되는 페이지를 매칭하세요. 하나의 페이지에 키워드 수십 개를 욱여넣는 방식은 어느 키워드에서도 좋은 평가를 받기 어렵습니다.</p><h2 id="피해야-할-함정">피해야 할 함정</h2><p>본문에 키워드를 부자연스럽게 반복하는 키워드 스터핑은 가독성을 해치고 검색엔진 제재 위험도 있습니다. 또한 검색량 수치는 도구마다, 시기마다 달라지는 추정치이니 절대값보다 키워드 간 상대 비교 용도로 쓰세요.</p><h2 id="정리">정리</h2><p>첫째, 고객이 실제 쓰는 말에서 키워드를 수집하고 도구로 검색량·경쟁도를 검증하세요. 둘째, 신생 사이트는 세부 키워드 한 개당 한 페이지 전략이 정석입니다. 셋째, 검색 의도에 맞는 페이지로 연결하고 키워드 반복은 피하세요. NOAH는 SEO 심화 세팅 옵션(5만원)에서 이런 키워드 구조 설계를 함께 도와드립니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#키워드선정</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#롱테일</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#콘텐츠전략</span></div>
@@ -129,6 +169,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/meta-tags" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">메타태그 작성법, 검색결과 첫인상을 바꾸는 기술</p>
+        </a>
+        <a href="/columns/blog-ranking" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">블로그 상위노출 전략, 어뷰징 없이 오래가는 방법</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +204,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

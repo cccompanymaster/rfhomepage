@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>사이트맵 제출 방법, 네이버·구글에 한 번에 알리기 · NOAH 칼럼</title>
     <meta name="description" content="사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다." />
-    <meta name="keywords" content="사이트맵 제출 방법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/sitemap-submit" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/naver-advisor" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/robots-txt" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="사이트맵 제출 방법, 네이버·구글에 한 번에 알리기" />
     <meta property="og:description" content="사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/sitemap-submit" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/sitemap-submit.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-05-19" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="사이트맵 제출 방법, 네이버·구글에 한 번에 알리기" />
+    <meta name="twitter:description" content="사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/sitemap-submit.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "description": "사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다.", "datePublished": "2026-05-19", "dateModified": "2026-05-19", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/sitemap-submit"}, "keywords": "사이트맵 제출 방법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "item": "https://noahhomepage.co.kr/columns/sitemap-submit"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "description": "사이트맵(sitemap.xml)이 무엇인지부터 만드는 방법, 네이버 서치어드바이저와 구글 서치콘솔에 제출하는 절차, 제출 후 확인 포인트까지 순서대로 정리한 실무 가이드입니다.", "datePublished": "2026-05-19", "dateModified": "2026-05-19", "inLanguage": "ko-KR", "wordCount": 1289, "articleSection": "SEO·검색노출", "keywords": "사이트맵 제출 방법, 사이트맵, sitemap, 검색등록", "image": "https://noahhomepage.co.kr/assets/images/og/sitemap-submit.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/sitemap-submit"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "사이트맵 제출 방법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "사이트맵 제출 방법, 네이버·구글에 한 번에 알리기", "item": "https://noahhomepage.co.kr/columns/sitemap-submit"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#사이트맵-만드는-방법">사이트맵 만드는 방법</a></li>
+          <li><a href="#구글-서치콘솔에-제출하기">구글 서치콘솔에 제출하기</a></li>
+          <li><a href="#네이버-서치어드바이저에-제출하기">네이버 서치어드바이저에 제출하기</a></li>
+          <li><a href="#제출-후-확인과-관리">제출 후 확인과 관리</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>사이트맵(sitemap.xml)은 내 홈페이지에 어떤 페이지들이 있는지 검색엔진에 알려주는 목록 파일입니다. 검색로봇이 링크를 따라다니며 페이지를 발견하기도 하지만, 사이트맵이 있으면 새 페이지나 깊숙한 페이지도 빠뜨리지 않고 수집하도록 도울 수 있습니다. 특히 페이지가 많거나 새로 연 사이트라면 제출해 두는 것이 좋습니다.</p><h2>사이트맵 만드는 방법</h2><ol><li><strong>제작 도구·플랫폼 기능 확인</strong>: 워드프레스(SEO 플러그인), 아임웹·카페24 등 대부분의 플랫폼은 사이트맵을 자동 생성합니다. 보통 <code>내주소/sitemap.xml</code> 로 접속해 보면 존재 여부를 알 수 있습니다.</li><li><strong>자동 생성이 없다면</strong>: 온라인 사이트맵 생성 서비스에 주소를 넣어 XML 파일을 만들고, 서버 최상위 폴더에 업로드합니다.</li><li><strong>직접 작성</strong>: 페이지가 몇 개 안 되면 &lt;urlset&gt; 안에 페이지별 &lt;url&gt;&lt;loc&gt;주소&lt;/loc&gt;&lt;/url&gt; 항목을 나열한 XML 파일을 만들어도 됩니다.</li></ol><h2>구글 서치콘솔에 제출하기</h2><ol><li>서치콘솔에 로그인해 내 사이트 속성을 선택합니다.</li><li>사이트맵 메뉴를 찾아 들어갑니다.</li><li>입력란에 <code>sitemap.xml</code> 경로를 입력하고 제출합니다.</li><li>상태가 "성공"으로 표시되는지, 발견된 URL 수가 실제 페이지 수와 비슷한지 확인합니다.</li></ol><h2>네이버 서치어드바이저에 제출하기</h2><ol><li>서치어드바이저 웹마스터 도구에서 내 사이트를 선택합니다.</li><li>사이트맵 제출 메뉴를 찾아 sitemap.xml 주소를 입력하고 제출합니다.</li><li>블로그형 콘텐츠가 있다면 RSS 제출 메뉴에 RSS 주소도 함께 제출하면 좋습니다.</li></ol><p>두 서비스 모두 메뉴 위치가 개편되곤 하므로, "사이트맵"이라는 이름의 메뉴를 현재 화면에서 찾는 방식으로 접근하세요.</p><h2>제출 후 확인과 관리</h2><p>제출 직후 모든 페이지가 색인되는 것은 아니며, 처리에 며칠 이상 걸릴 수 있습니다. 오류가 표시되면 사이트맵 주소 오타, 접속 불가(서버 문제), XML 형식 오류가 흔한 원인입니다. 페이지를 추가·삭제했을 때 자동 생성 사이트맵은 스스로 갱신되지만, 수동 작성 파일은 직접 업데이트해야 합니다. robots.txt 파일에 <code>Sitemap: https://내주소/sitemap.xml</code> 한 줄을 넣어 두면 검색로봇이 사이트맵을 더 쉽게 찾습니다.</p><h2>정리</h2><p>첫째, 사이트맵은 검색엔진에 전달하는 페이지 목록이며 플랫폼 자동 생성 여부부터 확인하세요. 둘째, 구글 서치콘솔과 네이버 서치어드바이저 양쪽에 제출해야 합니다. 셋째, 제출 후 오류 여부와 색인 현황을 확인하고 페이지 변경 시 갱신하세요. NOAH 제작 패키지에는 사이트맵 생성이 기본 포함되어 있어 제출만 하면 되는 상태로 사이트가 나갑니다.</p>
+<p>사이트맵(sitemap.xml)은 내 홈페이지에 어떤 페이지들이 있는지 검색엔진에 알려주는 목록 파일입니다. 검색로봇이 링크를 따라다니며 페이지를 발견하기도 하지만, 사이트맵이 있으면 새 페이지나 깊숙한 페이지도 빠뜨리지 않고 수집하도록 도울 수 있습니다. 특히 페이지가 많거나 새로 연 사이트라면 제출해 두는 것이 좋습니다.</p><h2 id="사이트맵-만드는-방법">사이트맵 만드는 방법</h2><ol><li><strong>제작 도구·플랫폼 기능 확인</strong>: <a href="/columns/wordpress-vs-imweb">워드프레스</a>(SEO 플러그인), <a href="/columns/imweb-review">아임웹</a>·<a href="/columns/cafe24-guide"><a href="/columns/cafe-homepage">카페</a>24</a> 등 대부분의 플랫폼은 사이트맵을 자동 생성합니다. 보통 <code>내주소/sitemap.xml</code> 로 접속해 보면 존재 여부를 알 수 있습니다.</li><li><strong>자동 생성이 없다면</strong>: 온라인 사이트맵 생성 서비스에 주소를 넣어 XML 파일을 만들고, 서버 최상위 폴더에 업로드합니다.</li><li><strong>직접 작성</strong>: 페이지가 몇 개 안 되면 &lt;urlset&gt; 안에 페이지별 &lt;url&gt;&lt;loc&gt;주소&lt;/loc&gt;&lt;/url&gt; 항목을 나열한 XML 파일을 만들어도 됩니다.</li></ol><h2 id="구글-서치콘솔에-제출하기">구글 서치콘솔에 제출하기</h2><ol><li><a href="/columns/search-console">서치콘솔</a>에 로그인해 내 사이트 속성을 선택합니다.</li><li>사이트맵 메뉴를 찾아 들어갑니다.</li><li>입력란에 <code>sitemap.xml</code> 경로를 입력하고 제출합니다.</li><li>상태가 "성공"으로 표시되는지, 발견된 URL 수가 실제 페이지 수와 비슷한지 확인합니다.</li></ol><h2 id="네이버-서치어드바이저에-제출하기">네이버 서치어드바이저에 제출하기</h2><ol><li>서치어드바이저 웹마스터 도구에서 내 사이트를 선택합니다.</li><li>사이트맵 제출 메뉴를 찾아 sitemap.xml 주소를 입력하고 제출합니다.</li><li>블로그형 콘텐츠가 있다면 RSS 제출 메뉴에 RSS 주소도 함께 제출하면 좋습니다.</li></ol><p>두 서비스 모두 메뉴 위치가 개편되곤 하므로, "사이트맵"이라는 이름의 메뉴를 현재 화면에서 찾는 방식으로 접근하세요.</p><h2 id="제출-후-확인과-관리">제출 후 확인과 관리</h2><p>제출 직후 모든 페이지가 색인되는 것은 아니며, 처리에 며칠 이상 걸릴 수 있습니다. 오류가 표시되면 사이트맵 주소 오타, 접속 불가(서버 문제), XML 형식 오류가 흔한 원인입니다. 페이지를 추가·삭제했을 때 자동 생성 사이트맵은 스스로 갱신되지만, 수동 작성 파일은 직접 업데이트해야 합니다. robots.txt 파일에 <code>Sitemap: https://내주소/sitemap.xml</code> 한 줄을 넣어 두면 검색로봇이 사이트맵을 더 쉽게 찾습니다.</p><h2 id="정리">정리</h2><p>첫째, 사이트맵은 검색엔진에 전달하는 페이지 목록이며 플랫폼 자동 생성 여부부터 확인하세요. 둘째, 구글 서치콘솔과 네이버 서치어드바이저 양쪽에 제출해야 합니다. 셋째, 제출 후 오류 여부와 색인 현황을 확인하고 페이지 변경 시 갱신하세요. NOAH 제작 패키지에는 사이트맵 생성이 기본 포함되어 있어 제출만 하면 되는 상태로 사이트가 나갑니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#사이트맵</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#sitemap</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색등록</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/naver-advisor" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">네이버 서치어드바이저 사용법 총정리</p>
+        </a>
+        <a href="/columns/robots-txt" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">robots.txt 설정 방법과 흔한 실수 피하기</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

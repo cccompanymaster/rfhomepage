@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차 · NOAH 칼럼</title>
     <meta name="description" content="네이버에서 내 홈페이지가 검색되게 하는 등록 절차를 단계별로 안내합니다. 서치어드바이저 소유확인부터 사이트맵 제출, 수집 확인까지 사장님이 직접 따라할 수 있습니다." />
-    <meta name="keywords" content="네이버 검색 등록 방법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/naver-register" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/seo-basics" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/search-console" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차" />
     <meta property="og:description" content="네이버에서 내 홈페이지가 검색되게 하는 등록 절차를 단계별로 안내합니다. 서치어드바이저 소유확인부터 사이트맵 제출, 수집 확인까지 사장님이 직접 따라할 수 있습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/naver-register" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/naver-register.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-05-25" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차" />
+    <meta name="twitter:description" content="네이버에서 내 홈페이지가 검색되게 하는 등록 절차를 단계별로 안내합니다. 서치어드바이저 소유확인부터 사이트맵 제출, 수집 확인까지 사장님이 직접 따라할 수 있습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/naver-register.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차", "description": "네이버에서 내 홈페이지가 검색되게 하는 등록 절차를 단계별로 안내합니다. 서치어드바이저 소유확인부터 사이트맵 제출, 수집 확인까지 사장님이 직접 따라할 수 있습니다.", "datePublished": "2026-05-25", "dateModified": "2026-05-25", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/naver-register"}, "keywords": "네이버 검색 등록 방법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차", "item": "https://noahhomepage.co.kr/columns/naver-register"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차", "description": "네이버에서 내 홈페이지가 검색되게 하는 등록 절차를 단계별로 안내합니다. 서치어드바이저 소유확인부터 사이트맵 제출, 수집 확인까지 사장님이 직접 따라할 수 있습니다.", "datePublished": "2026-05-25", "dateModified": "2026-05-25", "inLanguage": "ko-KR", "wordCount": 1261, "articleSection": "SEO·검색노출", "keywords": "네이버 검색 등록 방법, 네이버등록, 서치어드바이저, 검색노출", "image": "https://noahhomepage.co.kr/assets/images/og/naver-register.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/naver-register"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "네이버 검색 등록 방법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차", "item": "https://noahhomepage.co.kr/columns/naver-register"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#등록-전-준비물">등록 전 준비물</a></li>
+          <li><a href="#네이버-검색-등록-절차">네이버 검색 등록 절차</a></li>
+          <li><a href="#등록-후-언제-검색에-나오나">등록 후 언제 검색에 나오나</a></li>
+          <li><a href="#함께-챙기면-좋은-것">함께 챙기면 좋은 것</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지를 새로 열면 "네이버에 검색하면 나오나요?"가 첫 질문이 됩니다. 네이버는 자동으로 모든 사이트를 수집하기도 하지만, 신규 사이트는 직접 등록해야 훨씬 빨리, 그리고 안정적으로 검색에 반영됩니다. 현재 네이버의 공식 등록 창구는 <strong>네이버 서치어드바이저</strong>입니다. 과거의 별도 사이트 등록 페이지는 서치어드바이저로 통합되었습니다.</p><h2>등록 전 준비물</h2><p>네이버 아이디, 그리고 내 홈페이지의 정확한 주소(https 포함)가 필요합니다. 홈페이지 파일을 수정하거나 HTML 태그를 넣을 수 있는 권한도 필요한데, 제작 업체가 관리 중이라면 소유확인용 코드 설치를 요청하면 됩니다.</p><h2>네이버 검색 등록 절차</h2><ol><li>네이버 서치어드바이저(searchadvisor.naver.com)에 접속해 네이버 아이디로 로그인합니다.</li><li>웹마스터 도구에서 사이트 추가 메뉴를 찾아 홈페이지 주소를 입력합니다. www 유무, http/https가 다르면 다른 사이트로 취급되니 실제 사용하는 대표 주소로 등록하세요.</li><li><strong>소유확인</strong>을 진행합니다. HTML 파일을 서버에 올리는 방식과 메타태그를 홈페이지 &lt;head&gt;에 넣는 방식 중 하나를 선택합니다.</li><li>소유확인이 끝나면 <strong>사이트맵(sitemap.xml)과 RSS</strong>가 있다면 제출합니다. 네이버가 페이지를 빠짐없이 수집하는 데 도움이 됩니다.</li><li>수집이 잘 되는지 확인하고, 특정 페이지를 빨리 반영시키고 싶다면 웹 페이지 수집 요청 기능을 이용합니다.</li></ol><p>메뉴 이름과 버튼 위치는 네이버가 수시로 개편하므로, 위 순서(사이트 추가 → 소유확인 → 사이트맵 제출)를 기준으로 현재 화면에서 해당 기능을 찾는 것이 좋습니다.</p><h2>등록 후 언제 검색에 나오나</h2><p>등록 즉시 노출되는 것은 아닙니다. 수집과 색인에는 며칠에서 몇 주까지 걸릴 수 있고, 어떤 검색어에서 어느 순위로 보일지는 네이버 알고리즘이 결정합니다. 기간이나 순위를 보장한다는 업체가 있다면 걸러야 합니다. 사이트 이름으로 검색했을 때 나오는 것이 첫 단계이고, 업종 키워드 노출은 콘텐츠를 쌓으며 만들어 가는 영역입니다.</p><h2>함께 챙기면 좋은 것</h2><p>오프라인 매장이 있다면 <strong>네이버 스마트플레이스</strong>에 업체 정보를 등록하세요. 지도와 플레이스 영역에 노출되어 홈페이지 등록과는 별개의 효과가 있습니다.</p><h2>정리</h2><p>첫째, 네이버 검색 등록은 서치어드바이저에서 사이트 추가와 소유확인으로 시작합니다. 둘째, 사이트맵을 제출해 수집을 돕고, 반영에는 시간이 걸린다는 점을 감안하세요. 셋째, 매장이 있다면 스마트플레이스도 함께 등록하세요. 직접 하기 번거롭다면 NOAH의 네이버·구글 사이트 등록 대행(옵션 5만원)을 이용할 수도 있습니다.</p>
+<p>홈페이지를 새로 열면 "네이버에 검색하면 나오나요?"가 첫 질문이 됩니다. 네이버는 자동으로 모든 사이트를 수집하기도 하지만, 신규 사이트는 직접 등록해야 훨씬 빨리, 그리고 안정적으로 검색에 반영됩니다. 현재 네이버의 공식 등록 창구는 <strong>네이버 <a href="/columns/naver-advisor">서치어드바이저</a></strong>입니다. 과거의 별도 사이트 등록 페이지는 서치어드바이저로 통합되었습니다.</p><h2 id="등록-전-준비물">등록 전 준비물</h2><p>네이버 아이디, 그리고 내 홈페이지의 정확한 주소(https 포함)가 필요합니다. 홈페이지 파일을 수정하거나 HTML 태그를 넣을 수 있는 권한도 필요한데, 제작 업체가 관리 중이라면 소유확인용 코드 설치를 요청하면 됩니다.</p><h2 id="네이버-검색-등록-절차">네이버 검색 등록 절차</h2><ol><li>네이버 서치어드바이저(searchadvisor.naver.com)에 접속해 네이버 아이디로 로그인합니다.</li><li>웹마스터 도구에서 사이트 추가 메뉴를 찾아 홈페이지 주소를 입력합니다. www 유무, http/https가 다르면 다른 사이트로 취급되니 실제 사용하는 대표 주소로 등록하세요.</li><li><strong>소유확인</strong>을 진행합니다. HTML 파일을 서버에 올리는 방식과 <a href="/columns/meta-tags">메타태그</a>를 홈페이지 &lt;head&gt;에 넣는 방식 중 하나를 선택합니다.</li><li>소유확인이 끝나면 <strong><a href="/columns/sitemap-submit">사이트맵</a>(sitemap.xml)과 RSS</strong>가 있다면 제출합니다. 네이버가 페이지를 빠짐없이 수집하는 데 도움이 됩니다.</li><li>수집이 잘 되는지 확인하고, 특정 페이지를 빨리 반영시키고 싶다면 웹 페이지 수집 요청 기능을 이용합니다.</li></ol><p>메뉴 이름과 버튼 위치는 네이버가 수시로 개편하므로, 위 순서(사이트 추가 → 소유확인 → 사이트맵 제출)를 기준으로 현재 화면에서 해당 기능을 찾는 것이 좋습니다.</p><h2 id="등록-후-언제-검색에-나오나">등록 후 언제 검색에 나오나</h2><p>등록 즉시 노출되는 것은 아닙니다. 수집과 색인에는 며칠에서 몇 주까지 걸릴 수 있고, 어떤 검색어에서 어느 순위로 보일지는 네이버 알고리즘이 결정합니다. 기간이나 순위를 보장한다는 업체가 있다면 걸러야 합니다. 사이트 이름으로 검색했을 때 나오는 것이 첫 단계이고, 업종 키워드 노출은 <a href="/columns/content-strategy">콘텐츠</a>를 쌓으며 만들어 가는 영역입니다.</p><h2 id="함께-챙기면-좋은-것">함께 챙기면 좋은 것</h2><p>오프라인 매장이 있다면 <strong>네이버 스마트플레이스</strong>에 업체 정보를 등록하세요. 지도와 플레이스 영역에 노출되어 홈페이지 등록과는 별개의 효과가 있습니다.</p><h2 id="정리">정리</h2><p>첫째, 네이버 검색 등록은 서치어드바이저에서 사이트 추가와 소유확인으로 시작합니다. 둘째, 사이트맵을 제출해 수집을 돕고, 반영에는 시간이 걸린다는 점을 감안하세요. 셋째, 매장이 있다면 스마트플레이스도 함께 등록하세요. 직접 하기 번거롭다면 NOAH의 네이버·구글 사이트 등록 대행(옵션 5만원)을 이용할 수도 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#네이버등록</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#서치어드바이저</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색노출</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/seo-basics" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리</p>
+        </a>
+        <a href="/columns/search-console" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">구글 서치콘솔 등록 방법과 첫 설정 가이드</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

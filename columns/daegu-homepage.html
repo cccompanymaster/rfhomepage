@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성 · NOAH 칼럼</title>
     <meta name="description" content="섬유·패션 제조 기반과 의료 인프라로 알려진 대구에서는 B2B 제조업 홈페이지의 요건이 특히 중요합니다. 바이어가 확인하는 정보, 의료기관의 신뢰 구성, 지역 검색 기본기까지 대구 관점에서 정리했습니다." />
-    <meta name="keywords" content="대구 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/daegu-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/busan-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/incheon-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성" />
     <meta property="og:description" content="섬유·패션 제조 기반과 의료 인프라로 알려진 대구에서는 B2B 제조업 홈페이지의 요건이 특히 중요합니다. 바이어가 확인하는 정보, 의료기관의 신뢰 구성, 지역 검색 기본기까지 대구 관점에서 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/daegu-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/daegu-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-14" />
+    <meta property="article:section" content="지역별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성" />
+    <meta name="twitter:description" content="섬유·패션 제조 기반과 의료 인프라로 알려진 대구에서는 B2B 제조업 홈페이지의 요건이 특히 중요합니다. 바이어가 확인하는 정보, 의료기관의 신뢰 구성, 지역 검색 기본기까지 대구 관점에서 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/daegu-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성", "description": "섬유·패션 제조 기반과 의료 인프라로 알려진 대구에서는 B2B 제조업 홈페이지의 요건이 특히 중요합니다. 바이어가 확인하는 정보, 의료기관의 신뢰 구성, 지역 검색 기본기까지 대구 관점에서 정리했습니다.", "datePublished": "2026-02-14", "dateModified": "2026-02-14", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/daegu-homepage"}, "keywords": "대구 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성", "item": "https://noahhomepage.co.kr/columns/daegu-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성", "description": "섬유·패션 제조 기반과 의료 인프라로 알려진 대구에서는 B2B 제조업 홈페이지의 요건이 특히 중요합니다. 바이어가 확인하는 정보, 의료기관의 신뢰 구성, 지역 검색 기본기까지 대구 관점에서 정리했습니다.", "datePublished": "2026-02-14", "dateModified": "2026-02-14", "inLanguage": "ko-KR", "wordCount": 1174, "articleSection": "지역별 제작", "keywords": "대구 홈페이지 제작, 대구, 제조업 홈페이지, B2B, 병원 홈페이지", "image": "https://noahhomepage.co.kr/assets/images/og/daegu-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/daegu-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "대구 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "지역별 제작", "item": "https://noahhomepage.co.kr/columns/topic/local"}, {"@type": "ListItem", "position": 4, "name": "대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성", "item": "https://noahhomepage.co.kr/columns/daegu-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>지역별 제작</span>
+        <a href="/columns/topic/local" class="hover:text-white">지역별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">지역별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#섬유패션-제조업-홈페이지가-곧-회사-소개서">섬유·패션 제조업, 홈페이지가 곧 회사 소개서</a></li>
+          <li><a href="#의료기관은-정확함이-디자인보다-먼저">의료기관은 정확함이 디자인보다 먼저</a></li>
+          <li><a href="#지역-검색은-대구보다-한-단계-좁게">지역 검색은 &#x27;대구&#x27;보다 한 단계 좁게</a></li>
+          <li><a href="#제작-후-운영까지-생각하기">제작 후 운영까지 생각하기</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>대구는 오랫동안 섬유 산업의 도시로 불려 왔고, 지금도 원단·의류 관련 제조와 유통 기반이 남아 있는 지역입니다. 여기에 대형 병원과 의료기관이 모여 있어 의료 도시라는 성격도 함께 갖고 있습니다. 이 두 축은 홈페이지에 요구하는 것이 서로 다릅니다. 제조업은 바이어를, 의료는 환자를 설득해야 하기 때문입니다.</p><h2>섬유·패션 제조업, 홈페이지가 곧 회사 소개서</h2><p>원단이나 의류 관련 B2B 거래에서 상대 회사가 가장 먼저 하는 일은 검색입니다. 홈페이지가 없거나 십 년 전 모습 그대로라면 견적 요청 자체가 오지 않을 수 있습니다. 제조 B2B 홈페이지에는 다음이 갖춰져야 합니다.</p><ul><li>취급 품목과 소재·가공 범위를 구체적으로 정리한 제품 페이지</li><li>보유 설비와 생산 능력, 납기에 대한 안내</li><li>소량 주문 가능 여부, 샘플 절차 등 거래 조건</li><li>견적 문의로 바로 이어지는 폼과 담당자 연락처</li></ul><p>사진은 공장과 제품을 실제로 찍은 것이 스톡 이미지보다 훨씬 힘이 셉니다.</p><h2>의료기관은 정확함이 디자인보다 먼저</h2><p>대구의 병의원 홈페이지는 진료 과목, 의료진 경력, 진료 시간, 위치처럼 환자가 확인하고 싶은 정보를 정확하게 담는 것이 우선입니다. 치료 효과를 보장하는 표현은 의료법상 문제가 될 수 있으므로 피하고, 사실 위주로 서술하는 편이 안전합니다. 외국인 환자를 받는 의료기관이라면 진료 안내 페이지의 영문 버전을 고려할 수 있습니다.</p><h2>지역 검색은 '대구'보다 한 단계 좁게</h2><p>실제 검색은 '대구 정형외과'보다 '수성구 정형외과', '동성로 네일샵'처럼 구·동·상권 단위로 일어나는 경우가 많습니다. 홈페이지 제목과 본문에 실제 소재지를 자연스럽게 넣고, 네이버 플레이스의 주소·전화번호·영업시간을 홈페이지와 똑같이 맞춰 두는 것이 지역 검색 대응의 출발점입니다.</p><h2>제작 후 운영까지 생각하기</h2><p>제조업이든 병원이든, 홈페이지는 열어 두는 것보다 최신으로 유지하는 것이 어렵습니다. 품목이 바뀌고 진료 시간이 바뀔 때 바로 고칠 수 있는 구조인지, 수정할 때마다 비용이 드는지는 계약 전에 반드시 확인해야 할 부분입니다.</p><h2>정리</h2><ul><li>대구의 제조 B2B 홈페이지는 품목·설비·거래 조건을 구체적으로 담아 회사 소개서 역할을 해야 합니다.</li><li>의료기관은 과장 없는 정확한 정보가 우선이고, 지역 검색은 구·동 단위로 대응하는 것이 효과적입니다.</li><li>NOAH는 전국 비대면 제작으로 대구에서도 동일하게 진행되며, 1년 무제한 텍스트 수정으로 정보 갱신 부담을 줄였습니다.</li></ul>
+<p>대구는 오랫동안 섬유 산업의 도시로 불려 왔고, 지금도 원단·의류 관련 제조와 유통 기반이 남아 있는 지역입니다. 여기에 대형 병원과 의료기관이 모여 있어 의료 도시라는 성격도 함께 갖고 있습니다. 이 두 축은 홈페이지에 요구하는 것이 서로 다릅니다. <a href="/columns/manufacturing-homepage">제조업</a>은 바이어를, 의료는 환자를 설득해야 하기 때문입니다.</p><h2 id="섬유패션-제조업-홈페이지가-곧-회사-소개서">섬유·패션 제조업, 홈페이지가 곧 회사 소개서</h2><p>원단이나 의류 관련 B2B 거래에서 상대 회사가 가장 먼저 하는 일은 검색입니다. 홈페이지가 없거나 십 년 전 모습 그대로라면 <a href="/columns/homepage-quote">견적</a> 요청 자체가 오지 않을 수 있습니다. 제조 B2B 홈페이지에는 다음이 갖춰져야 합니다.</p><ul><li>취급 품목과 소재·가공 범위를 구체적으로 정리한 제품 페이지</li><li>보유 설비와 생산 능력, 납기에 대한 안내</li><li>소량 주문 가능 여부, 샘플 절차 등 거래 조건</li><li>견적 문의로 바로 이어지는 폼과 담당자 연락처</li></ul><p><a href="/columns/photo-prepare">사진</a>은 공장과 제품을 실제로 찍은 것이 스톡 이미지보다 훨씬 힘이 셉니다.</p><h2 id="의료기관은-정확함이-디자인보다-먼저">의료기관은 정확함이 디자인보다 먼저</h2><p>대구의 병의원 홈페이지는 진료 과목, 의료진 경력, 진료 시간, 위치처럼 환자가 확인하고 싶은 정보를 정확하게 담는 것이 우선입니다. 치료 효과를 보장하는 표현은 의료법상 문제가 될 수 있으므로 피하고, 사실 위주로 서술하는 편이 안전합니다. 외국인 환자를 받는 의료기관이라면 진료 안내 페이지의 영문 버전을 고려할 수 있습니다.</p><h2 id="지역-검색은-대구보다-한-단계-좁게">지역 검색은 '대구'보다 한 단계 좁게</h2><p>실제 검색은 '대구 정형외과'보다 '수성구 정형외과', '동성로 네일샵'처럼 구·동·상권 단위로 일어나는 경우가 많습니다. 홈페이지 제목과 본문에 실제 소재지를 자연스럽게 넣고, <a href="/columns/naver-place">네이버 플레이스</a>의 주소·전화번호·영업시간을 홈페이지와 똑같이 맞춰 두는 것이 <a href="/columns/local-seo">지역 검색</a> 대응의 출발점입니다.</p><h2 id="제작-후-운영까지-생각하기">제작 후 운영까지 생각하기</h2><p>제조업이든 병원이든, 홈페이지는 열어 두는 것보다 최신으로 유지하는 것이 어렵습니다. 품목이 바뀌고 진료 시간이 바뀔 때 바로 고칠 수 있는 구조인지, 수정할 때마다 비용이 드는지는 계약 전에 반드시 확인해야 할 부분입니다.</p><h2 id="정리">정리</h2><ul><li>대구의 제조 B2B 홈페이지는 품목·설비·거래 조건을 구체적으로 담아 회사 소개서 역할을 해야 합니다.</li><li>의료기관은 과장 없는 정확한 정보가 우선이고, 지역 검색은 구·동 단위로 대응하는 것이 효과적입니다.</li><li>NOAH는 전국 비대면 제작으로 대구에서도 동일하게 진행되며, 1년 무제한 텍스트 수정으로 정보 갱신 부담을 줄였습니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#대구</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#제조업 홈페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#B2B</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#병원 홈페이지</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/busan-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계</p>
+        </a>
+        <a href="/columns/incheon-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/local" class="hub-pill">지역별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다 · NOAH 칼럼</title>
     <meta name="description" content="한글 웹폰트 선택 기준을 정리했습니다. 본문 가독성, 폰트 개수 제한, 상업적 사용 라이선스 확인 방법, 무료 폰트를 고르는 실전 기준까지 다룹니다." />
-    <meta name="keywords" content="홈페이지 폰트 선택, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/font-choice" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/ai-image" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/form-design" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다" />
     <meta property="og:description" content="한글 웹폰트 선택 기준을 정리했습니다. 본문 가독성, 폰트 개수 제한, 상업적 사용 라이선스 확인 방법, 무료 폰트를 고르는 실전 기준까지 다룹니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/font-choice" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/font-choice.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-26" />
+    <meta property="article:section" content="디자인·기획" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다" />
+    <meta name="twitter:description" content="한글 웹폰트 선택 기준을 정리했습니다. 본문 가독성, 폰트 개수 제한, 상업적 사용 라이선스 확인 방법, 무료 폰트를 고르는 실전 기준까지 다룹니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/font-choice.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다", "description": "한글 웹폰트 선택 기준을 정리했습니다. 본문 가독성, 폰트 개수 제한, 상업적 사용 라이선스 확인 방법, 무료 폰트를 고르는 실전 기준까지 다룹니다.", "datePublished": "2026-02-26", "dateModified": "2026-02-26", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/font-choice"}, "keywords": "홈페이지 폰트 선택"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다", "item": "https://noahhomepage.co.kr/columns/font-choice"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다", "description": "한글 웹폰트 선택 기준을 정리했습니다. 본문 가독성, 폰트 개수 제한, 상업적 사용 라이선스 확인 방법, 무료 폰트를 고르는 실전 기준까지 다룹니다.", "datePublished": "2026-02-26", "dateModified": "2026-02-26", "inLanguage": "ko-KR", "wordCount": 1288, "articleSection": "디자인·기획", "keywords": "홈페이지 폰트 선택, 웹폰트, 한글폰트, 가독성", "image": "https://noahhomepage.co.kr/assets/images/og/font-choice.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/font-choice"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 폰트 선택"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "디자인·기획", "item": "https://noahhomepage.co.kr/columns/topic/design"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다", "item": "https://noahhomepage.co.kr/columns/font-choice"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>디자인·기획</span>
+        <a href="/columns/topic/design" class="hover:text-white">디자인·기획</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">디자인·기획</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#본문은-무조건-가독성이-우선입니다">본문은 무조건 가독성이 우선입니다</a></li>
+          <li><a href="#폰트는-두-종류면-충분합니다">폰트는 두 종류면 충분합니다</a></li>
+          <li><a href="#무료-폰트-라이선스-확인이-먼저입니다">무료 폰트, 라이선스 확인이 먼저입니다</a></li>
+          <li><a href="#고르기-어려울-때의-실전-기준">고르기 어려울 때의 실전 기준</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>폰트는 홈페이지의 목소리입니다. 같은 문장도 어떤 폰트로 쓰였는지에 따라 단정하게도, 가볍게도 들립니다. 그런데 폰트 선택에서 정작 중요한 것은 “예쁜가”보다 앞선 두 가지, 즉 “잘 읽히는가”와 “상업적으로 써도 되는가”입니다.</p><h2>본문은 무조건 가독성이 우선입니다</h2><p>제목은 개성 있는 폰트를 써도 되지만, 본문은 오래 읽어도 피로하지 않은 폰트가 정답입니다.</p><ul><li>본문에는 굵기가 고르고 글자 형태가 단순한 고딕 계열이 무난합니다. 손글씨체나 장식이 많은 폰트는 두세 줄만 넘어가도 읽기 힘들어집니다.</li><li>모바일 기준 본문 크기는 16px 안팎, 줄 간격은 글자 크기의 1.5~1.7배 정도가 편안합니다.</li><li>여러 굵기(Regular, Bold 등)를 제공하는 폰트를 고르면 제목과 본문을 폰트 하나로 해결할 수 있습니다.</li></ul><h2>폰트는 두 종류면 충분합니다</h2><p>제목용 하나, 본문용 하나. 이 조합이면 대부분의 홈페이지는 충분합니다. 폰트가 세 종류를 넘어가면 통일감이 깨지고, 웹폰트 파일이 늘어나 로딩 속도도 느려집니다. 한글 폰트는 글자 수가 많아 파일이 무거운 편이므로, 웹폰트 제공 형식(우선 WOFF2)을 지원하는지 확인하고 필요한 굵기만 불러오는 것이 좋습니다.</p><h2>무료 폰트, 라이선스 확인이 먼저입니다</h2><p>“무료 폰트”라는 말만 믿고 쓰면 안 됩니다. 무료라도 허용 범위는 폰트마다 다릅니다.</p><ul><li>개인 사용은 무료지만 상업적 사용은 유료인 폰트가 있습니다.</li><li>웹사이트 사용은 되지만 로고·BI 제작에는 제한이 있는 경우도 있습니다.</li><li>임베딩(웹폰트로 서버에 올리는 것) 자체를 별도 조건으로 두는 폰트도 있습니다.</li></ul><p>중요한 것은, 폰트의 라이선스 조건은 바뀔 수 있으므로 <strong>사용 시점에 공식 배포처의 라이선스 문서를 직접 확인</strong>하는 것입니다. 블로그에 정리된 목록은 참고만 하고, 최종 판단은 배포처 원문으로 하세요. 정부·지자체나 기업이 공개한 무료 한글 폰트가 많으니 선택지는 충분합니다.</p><h2>고르기 어려울 때의 실전 기준</h2><ol><li>후보 폰트로 실제 홈페이지 문장을 넣어 모바일 화면에서 비교해 보세요. 샘플 문구와 실제 문장은 인상이 다릅니다.</li><li>숫자와 영문이 섞였을 때 어색하지 않은지 확인하세요. 전화번호, 가격 표기에서 티가 납니다.</li><li>업종 분위기와 맞추세요. 법률·의료는 단정한 고딕, 카페·공방은 부드러운 라운드 계열처럼 방향만 정해도 후보가 좁혀집니다.</li></ol><h2>정리</h2><ul><li>본문은 가독성 좋은 고딕 계열로, 폰트는 제목·본문 두 종류까지만 쓰는 것이 안전합니다.</li><li>무료 폰트도 상업적 사용·웹 임베딩 허용 여부를 공식 배포처에서 직접 확인해야 합니다.</li><li>실제 문장을 모바일 화면에 넣어 보고 결정하세요. NOAH 패키지는 업종과 브랜드 톤에 맞는 폰트 조합을 적용해 제작해 드립니다.</li></ul>
+<p>폰트는 홈페이지의 목소리입니다. 같은 문장도 어떤 폰트로 쓰였는지에 따라 단정하게도, 가볍게도 들립니다. 그런데 폰트 선택에서 정작 중요한 것은 “예쁜가”보다 앞선 두 가지, 즉 “잘 읽히는가”와 “상업적으로 써도 되는가”입니다.</p><h2 id="본문은-무조건-가독성이-우선입니다">본문은 무조건 가독성이 우선입니다</h2><p>제목은 개성 있는 폰트를 써도 되지만, 본문은 오래 읽어도 피로하지 않은 폰트가 정답입니다.</p><ul><li>본문에는 굵기가 고르고 글자 형태가 단순한 고딕 계열이 무난합니다. 손글씨체나 장식이 많은 폰트는 두세 줄만 넘어가도 읽기 힘들어집니다.</li><li>모바일 기준 본문 크기는 16px 안팎, 줄 간격은 글자 크기의 1.5~1.7배 정도가 편안합니다.</li><li>여러 굵기(Regular, Bold 등)를 제공하는 폰트를 고르면 제목과 본문을 폰트 하나로 해결할 수 있습니다.</li></ul><h2 id="폰트는-두-종류면-충분합니다">폰트는 두 종류면 충분합니다</h2><p>제목용 하나, 본문용 하나. 이 조합이면 대부분의 홈페이지는 충분합니다. 폰트가 세 종류를 넘어가면 통일감이 깨지고, 웹폰트 파일이 늘어나 로딩 <a href="/columns/speed-optimize">속도</a>도 느려집니다. 한글 폰트는 글자 수가 많아 파일이 무거운 편이므로, 웹폰트 제공 형식(우선 WOFF2)을 지원하는지 확인하고 필요한 굵기만 불러오는 것이 좋습니다.</p><h2 id="무료-폰트-라이선스-확인이-먼저입니다">무료 폰트, 라이선스 확인이 먼저입니다</h2><p>“무료 폰트”라는 말만 믿고 쓰면 안 됩니다. 무료라도 허용 범위는 폰트마다 다릅니다.</p><ul><li>개인 사용은 무료지만 상업적 사용은 유료인 폰트가 있습니다.</li><li>웹사이트 사용은 되지만 <a href="/columns/logo-design">로고</a>·BI 제작에는 제한이 있는 경우도 있습니다.</li><li>임베딩(웹폰트로 서버에 올리는 것) 자체를 별도 조건으로 두는 폰트도 있습니다.</li></ul><p>중요한 것은, 폰트의 라이선스 조건은 바뀔 수 있으므로 <strong>사용 시점에 공식 배포처의 라이선스 문서를 직접 확인</strong>하는 것입니다. 블로그에 정리된 목록은 참고만 하고, 최종 판단은 배포처 원문으로 하세요. 정부·지자체나 기업이 공개한 무료 한글 폰트가 많으니 선택지는 충분합니다.</p><h2 id="고르기-어려울-때의-실전-기준">고르기 어려울 때의 실전 기준</h2><ol><li>후보 폰트로 실제 홈페이지 문장을 넣어 모바일 화면에서 비교해 보세요. 샘플 문구와 실제 문장은 인상이 다릅니다.</li><li>숫자와 영문이 섞였을 때 어색하지 않은지 확인하세요. 전화번호, 가격 표기에서 티가 납니다.</li><li>업종 분위기와 맞추세요. 법률·의료는 단정한 고딕, <a href="/columns/cafe-homepage">카페</a>·공방은 부드러운 라운드 계열처럼 방향만 정해도 후보가 좁혀집니다.</li></ol><h2 id="정리">정리</h2><ul><li>본문은 가독성 좋은 고딕 계열로, 폰트는 제목·본문 두 종류까지만 쓰는 것이 안전합니다.</li><li>무료 폰트도 상업적 사용·웹 임베딩 허용 여부를 공식 배포처에서 직접 확인해야 합니다.</li><li>실제 문장을 모바일 화면에 넣어 보고 결정하세요. NOAH 패키지는 업종과 브랜드 톤에 맞는 폰트 조합을 적용해 제작해 드립니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#웹폰트</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#한글폰트</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#가독성</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/ai-image" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">AI 이미지, 홈페이지에 어디까지 써도 될까</p>
+        </a>
+        <a href="/columns/form-design" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">상담 폼 설계, 질문을 줄일수록 문의가 늘어납니다</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/design" class="hub-pill">디자인·기획 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지 · NOAH 칼럼</title>
     <meta name="description" content="국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다." />
-    <meta name="keywords" content="인천 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/incheon-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/daegu-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/daejeon-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지" />
     <meta property="og:description" content="국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/incheon-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/incheon-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-12" />
+    <meta property="article:section" content="지역별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지" />
+    <meta name="twitter:description" content="국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/incheon-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지", "description": "국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다.", "datePublished": "2026-02-12", "dateModified": "2026-02-12", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/incheon-homepage"}, "keywords": "인천 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지", "item": "https://noahhomepage.co.kr/columns/incheon-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지", "description": "국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다.", "datePublished": "2026-02-12", "dateModified": "2026-02-12", "inLanguage": "ko-KR", "wordCount": 1122, "articleSection": "지역별 제작", "keywords": "인천 홈페이지 제작, 인천, B2B 홈페이지, 영문 홈페이지, 물류·무역", "image": "https://noahhomepage.co.kr/assets/images/og/incheon-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/incheon-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "인천 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "지역별 제작", "item": "https://noahhomepage.co.kr/columns/topic/local"}, {"@type": "ListItem", "position": 4, "name": "인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지", "item": "https://noahhomepage.co.kr/columns/incheon-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>지역별 제작</span>
+        <a href="/columns/topic/local" class="hover:text-white">지역별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">지역별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#바이어는-만나기-전에-검색합니다">바이어는 만나기 전에 검색합니다</a></li>
+          <li><a href="#영문-페이지-이것만은-갖추세요">영문 페이지, 이것만은 갖추세요</a></li>
+          <li><a href="#산업단지-B2B-홈페이지의-기본기">산업단지 B2B 홈페이지의 기본기</a></li>
+          <li><a href="#소비-업종이라면-생활권-검색-대응">소비 업종이라면 생활권 검색 대응</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>인천은 국제공항과 항만을 함께 갖춘 드문 도시입니다. 그만큼 물류, 무역, 제조 분야의 기업이 많고, 남동공단을 비롯한 산업단지에는 부품·가공·설비 업체들이 모여 있습니다. 이런 환경에서는 홈페이지의 첫 번째 독자가 일반 소비자가 아니라 <strong>거래처와 바이어</strong>인 경우가 많습니다.</p><h2>바이어는 만나기 전에 검색합니다</h2><p>전시회에서 명함을 주고받은 해외 바이어가 다음에 하는 일은 회사 이름 검색입니다. 이때 홈페이지가 없거나 한국어뿐이라면 검토 대상에서 조용히 빠질 수 있습니다. 거래 규모를 논하기 전에, 실재하는 회사인지, 무엇을 만들 수 있는지 확인시켜 주는 것이 홈페이지의 역할입니다.</p><h2>영문 페이지, 이것만은 갖추세요</h2><p>영문 홈페이지라고 해서 한국어 사이트 전체를 번역할 필요는 없습니다. 바이어가 확인하는 것은 대체로 정해져 있습니다.</p><ol><li>회사 개요: 설립 연도, 주력 분야, 소재지</li><li>제품·서비스: 사양과 적용 분야를 구체적으로</li><li>설비·인증: 보유 장비, 품질 인증, 수출 경험 유무</li><li>연락처: 이메일과 문의 폼, 담당자 표기</li></ol><p>번역 품질도 중요합니다. 기계 번역 티가 나는 문장은 회사의 꼼꼼함에 대한 인상까지 깎을 수 있으므로, 핵심 페이지만이라도 사람이 다듬는 것이 좋습니다.</p><h2>산업단지 B2B 홈페이지의 기본기</h2><p>국내 거래처를 상대하는 경우에도 원리는 같습니다. 가공 범위, 대응 가능한 수량, 납기, 견적 절차가 명확하면 전화 문의의 절반이 줄어들고, 들어오는 문의의 질은 올라갑니다. 실제 공장과 설비 사진, 도면·샘플 접수 방법 안내는 신뢰를 만드는 요소입니다.</p><h2>소비 업종이라면 생활권 검색 대응</h2><p>인천의 병원, 학원, 음식점 같은 소비 업종은 접근이 다릅니다. 송도, 부평, 구월동처럼 생활권 단위 지역명으로 검색되기 때문에, 홈페이지와 네이버 플레이스에 소재지 정보를 일치시키고 모바일에서 전화·길찾기가 한 번에 되도록 만드는 것이 우선입니다. 신도시 지역은 새로 유입되는 주민이 많아 검색 의존도가 높다는 점도 기억할 만합니다.</p><h2>정리</h2><ul><li>인천의 B2B 기업 홈페이지는 바이어가 확인하는 회사 개요·제품·설비·연락처를 갖추는 것이 핵심입니다.</li><li>영문 페이지는 전체 번역보다 핵심 4가지를 정확하게 준비하는 것이 실속 있습니다.</li><li>NOAH는 지역과 무관하게 화상·유선 미팅으로 제작을 진행하며, 199,000원(부가세 별도)에 7일 안에 오픈합니다.</li></ul>
+<p>인천은 국제공항과 항만을 함께 갖춘 드문 도시입니다. 그만큼 물류, 무역, 제조 분야의 기업이 많고, 남동공단을 비롯한 산업단지에는 부품·가공·설비 업체들이 모여 있습니다. 이런 환경에서는 홈페이지의 첫 번째 독자가 일반 소비자가 아니라 <strong>거래처와 바이어</strong>인 경우가 많습니다.</p><h2 id="바이어는-만나기-전에-검색합니다">바이어는 만나기 전에 검색합니다</h2><p>전시회에서 명함을 주고받은 해외 바이어가 다음에 하는 일은 회사 이름 검색입니다. 이때 홈페이지가 없거나 한국어뿐이라면 검토 대상에서 조용히 빠질 수 있습니다. 거래 규모를 논하기 전에, 실재하는 회사인지, 무엇을 만들 수 있는지 확인시켜 주는 것이 홈페이지의 역할입니다.</p><h2 id="영문-페이지-이것만은-갖추세요">영문 페이지, 이것만은 갖추세요</h2><p>영문 홈페이지라고 해서 한국어 사이트 전체를 번역할 필요는 없습니다. 바이어가 확인하는 것은 대체로 정해져 있습니다.</p><ol><li>회사 개요: 설립 연도, 주력 분야, 소재지</li><li>제품·서비스: 사양과 적용 분야를 구체적으로</li><li>설비·인증: 보유 장비, 품질 인증, 수출 경험 유무</li><li>연락처: 이메일과 <a href="/columns/form-design">문의 폼</a>, 담당자 표기</li></ol><p>번역 품질도 중요합니다. 기계 번역 티가 나는 문장은 회사의 꼼꼼함에 대한 인상까지 깎을 수 있으므로, 핵심 페이지만이라도 사람이 다듬는 것이 좋습니다.</p><h2 id="산업단지-B2B-홈페이지의-기본기">산업단지 B2B 홈페이지의 기본기</h2><p>국내 거래처를 상대하는 경우에도 원리는 같습니다. 가공 범위, 대응 가능한 수량, 납기, <a href="/columns/homepage-quote">견적</a> 절차가 명확하면 전화 문의의 절반이 줄어들고, 들어오는 문의의 질은 올라갑니다. 실제 공장과 설비 <a href="/columns/photo-prepare">사진</a>, 도면·샘플 접수 방법 안내는 신뢰를 만드는 요소입니다.</p><h2 id="소비-업종이라면-생활권-검색-대응">소비 업종이라면 생활권 검색 대응</h2><p>인천의 병원, 학원, <a href="/columns/restaurant-homepage">음식점</a> 같은 소비 업종은 접근이 다릅니다. 송도, 부평, 구월동처럼 생활권 단위 지역명으로 검색되기 때문에, 홈페이지와 <a href="/columns/naver-place">네이버 플레이스</a>에 소재지 정보를 일치시키고 모바일에서 전화·길찾기가 한 번에 되도록 만드는 것이 우선입니다. 신도시 지역은 새로 유입되는 주민이 많아 검색 의존도가 높다는 점도 기억할 만합니다.</p><h2 id="정리">정리</h2><ul><li>인천의 B2B 기업 홈페이지는 바이어가 확인하는 회사 개요·제품·설비·연락처를 갖추는 것이 핵심입니다.</li><li>영문 페이지는 전체 번역보다 핵심 4가지를 정확하게 준비하는 것이 실속 있습니다.</li><li>NOAH는 지역과 무관하게 화상·유선 미팅으로 제작을 진행하며, 199,000원(부가세 별도)에 7일 안에 오픈합니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#인천</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#B2B 홈페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#영문 홈페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#물류·무역</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/daegu-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성</p>
+        </a>
+        <a href="/columns/daejeon-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/local" class="hub-pill">지역별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

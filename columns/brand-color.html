@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 색은 취향이 아니라 전략입니다. 업종별 컬러 관습, 명도 대비와 가독성, 접근성, 색 개수를 제한하는 요령까지 브랜드 컬러 선정 기준을 정리했습니다." />
-    <meta name="keywords" content="브랜드 컬러 선정, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/brand-color" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/copywriting" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/logo-design" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지" />
     <meta property="og:description" content="홈페이지 색은 취향이 아니라 전략입니다. 업종별 컬러 관습, 명도 대비와 가독성, 접근성, 색 개수를 제한하는 요령까지 브랜드 컬러 선정 기준을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/brand-color" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/brand-color.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-03-06" />
+    <meta property="article:section" content="디자인·기획" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지" />
+    <meta name="twitter:description" content="홈페이지 색은 취향이 아니라 전략입니다. 업종별 컬러 관습, 명도 대비와 가독성, 접근성, 색 개수를 제한하는 요령까지 브랜드 컬러 선정 기준을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/brand-color.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지", "description": "홈페이지 색은 취향이 아니라 전략입니다. 업종별 컬러 관습, 명도 대비와 가독성, 접근성, 색 개수를 제한하는 요령까지 브랜드 컬러 선정 기준을 정리했습니다.", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/brand-color"}, "keywords": "브랜드 컬러 선정"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지", "item": "https://noahhomepage.co.kr/columns/brand-color"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지", "description": "홈페이지 색은 취향이 아니라 전략입니다. 업종별 컬러 관습, 명도 대비와 가독성, 접근성, 색 개수를 제한하는 요령까지 브랜드 컬러 선정 기준을 정리했습니다.", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "inLanguage": "ko-KR", "wordCount": 1293, "articleSection": "디자인·기획", "keywords": "브랜드 컬러 선정, 브랜드컬러, 색상선택, 디자인기초", "image": "https://noahhomepage.co.kr/assets/images/og/brand-color.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/brand-color"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "브랜드 컬러 선정"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "디자인·기획", "item": "https://noahhomepage.co.kr/columns/topic/design"}, {"@type": "ListItem", "position": 4, "name": "브랜드 컬러 선정 가이드, 업종 관습부터 가독성까지", "item": "https://noahhomepage.co.kr/columns/brand-color"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>디자인·기획</span>
+        <a href="/columns/topic/design" class="hover:text-white">디자인·기획</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">디자인·기획</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#업종마다-통하는-색의-관습이-있습니다">업종마다 통하는 색의 관습이 있습니다</a></li>
+          <li><a href="#색은-세-개면-충분합니다">색은 세 개면 충분합니다</a></li>
+          <li><a href="#예쁜-색보다-읽히는-색이-먼저입니다">예쁜 색보다 읽히는 색이 먼저입니다</a></li>
+          <li><a href="#결정이-어려울-때-쓰는-현실적인-방법">결정이 어려울 때 쓰는 현실적인 방법</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지를 만들 때 의외로 오래 고민하게 되는 것이 색입니다. 좋아하는 색을 고르자니 촌스러워 보일까 걱정되고, 남들 따라 하자니 개성이 없어 보입니다. 브랜드 컬러는 취향 문제가 아니라 “우리 업종에서 신뢰를 주면서, 글자가 잘 읽히는가”라는 기준의 문제입니다. 순서대로 정리해 보겠습니다.</p><h2>업종마다 통하는 색의 관습이 있습니다</h2><p>색에는 오랫동안 쌓인 연상이 있습니다. 반드시 따를 필요는 없지만, 알고 벗어나는 것과 모르고 벗어나는 것은 다릅니다.</p><ul><li><strong>파란색 계열:</strong> 신뢰·전문성. 병원, 법률, 금융, IT에서 널리 쓰입니다.</li><li><strong>초록색 계열:</strong> 자연·건강·안정. 식품, 친환경, 힐링 업종과 어울립니다.</li><li><strong>주황·빨강 계열:</strong> 활력·식욕·긴급함. 음식점, 프로모션 중심 업종에 자주 보입니다.</li><li><strong>검정·회색+포인트 1색:</strong> 고급스러움. 뷰티, 인테리어, 포트폴리오형 홈페이지에 유리합니다.</li></ul><h2>색은 세 개면 충분합니다</h2><p>색을 많이 쓸수록 화려해지는 게 아니라 산만해집니다. 실무에서는 이런 배분이 안전합니다.</p><ol><li><strong>주조색(약 60%):</strong> 배경과 넓은 면. 대개 흰색이나 아주 옅은 색.</li><li><strong>보조색(약 30%):</strong> 브랜드를 대표하는 색. 제목, 섹션 배경 등에 사용.</li><li><strong>강조색(약 10%):</strong> 버튼, 링크처럼 눌러야 하는 곳에만. 강조색을 아껴 쓸수록 버튼이 눈에 띕니다.</li></ol><h2>예쁜 색보다 읽히는 색이 먼저입니다</h2><p>배경과 글자의 명도 차이가 작으면, 아무리 세련된 조합이라도 읽기 힘든 홈페이지가 됩니다. 옅은 회색 배경에 흰 글자, 노란 배경에 흰 글자 같은 조합이 대표적인 실패 사례입니다.</p><ul><li>본문 글자는 배경과 명도 대비를 충분히 확보하세요. 웹 접근성 기준(WCAG)은 일반 본문에 4.5:1 이상의 대비를 권장합니다.</li><li>무료 대비 검사 도구에 배경색과 글자색 코드를 넣으면 통과 여부를 바로 확인할 수 있습니다.</li><li>색만으로 정보를 구분하지 마세요. 색약이 있는 방문자를 위해 밑줄, 아이콘, 굵기를 함께 사용하는 것이 좋습니다.</li></ul><h2>결정이 어려울 때 쓰는 현실적인 방법</h2><p>간판, 명함, 로고에 이미 쓰고 있는 색이 있다면 그 색을 기준으로 삼는 것이 가장 빠릅니다. 온라인과 오프라인의 색이 일치해야 고객이 같은 가게로 인식합니다. 기준색 하나를 정한 뒤, 배색 사이트에서 어울리는 보조·강조색을 추천받아 후보 두세 개를 실제 화면에 얹어 보고 고르세요.</p><h2>정리</h2><ul><li>브랜드 컬러는 업종의 연상과 신뢰를 고려해 고르되, 주조·보조·강조 세 가지로 제한하세요.</li><li>명도 대비와 접근성을 확인해 “읽히는 색”인지 먼저 검증해야 합니다.</li><li>이미 쓰는 간판·명함 색을 기준으로 삼으면 결정이 빨라집니다. NOAH 패키지는 브랜드 컬러 적용까지 포함해 제작해 드리니, 색 고민은 기준색 하나만 정해 오셔도 충분합니다.</li></ul>
+<p>홈페이지를 만들 때 의외로 오래 고민하게 되는 것이 색입니다. 좋아하는 색을 고르자니 촌스러워 보일까 걱정되고, 남들 따라 하자니 개성이 없어 보입니다. 브랜드 컬러는 취향 문제가 아니라 “우리 업종에서 신뢰를 주면서, 글자가 잘 읽히는가”라는 기준의 문제입니다. 순서대로 정리해 보겠습니다.</p><h2 id="업종마다-통하는-색의-관습이-있습니다">업종마다 통하는 색의 관습이 있습니다</h2><p>색에는 오랫동안 쌓인 연상이 있습니다. 반드시 따를 필요는 없지만, 알고 벗어나는 것과 모르고 벗어나는 것은 다릅니다.</p><ul><li><strong>파란색 계열:</strong> 신뢰·전문성. 병원, 법률, 금융, IT에서 널리 쓰입니다.</li><li><strong>초록색 계열:</strong> 자연·건강·안정. 식품, 친환경, 힐링 업종과 어울립니다.</li><li><strong>주황·빨강 계열:</strong> 활력·식욕·긴급함. <a href="/columns/restaurant-homepage">음식점</a>, 프로모션 중심 업종에 자주 보입니다.</li><li><strong>검정·회색+포인트 1색:</strong> 고급스러움. 뷰티, <a href="/columns/interior-homepage">인테리어</a>, 포트폴리오형 홈페이지에 유리합니다.</li></ul><h2 id="색은-세-개면-충분합니다">색은 세 개면 충분합니다</h2><p>색을 많이 쓸수록 화려해지는 게 아니라 산만해집니다. 실무에서는 이런 배분이 안전합니다.</p><ol><li><strong>주조색(약 60%):</strong> 배경과 넓은 면. 대개 흰색이나 아주 옅은 색.</li><li><strong>보조색(약 30%):</strong> 브랜드를 대표하는 색. 제목, 섹션 배경 등에 사용.</li><li><strong>강조색(약 10%):</strong> 버튼, 링크처럼 눌러야 하는 곳에만. 강조색을 아껴 쓸수록 버튼이 눈에 띕니다.</li></ol><h2 id="예쁜-색보다-읽히는-색이-먼저입니다">예쁜 색보다 읽히는 색이 먼저입니다</h2><p>배경과 글자의 명도 차이가 작으면, 아무리 세련된 조합이라도 읽기 힘든 홈페이지가 됩니다. 옅은 회색 배경에 흰 글자, 노란 배경에 흰 글자 같은 조합이 대표적인 실패 사례입니다.</p><ul><li>본문 글자는 배경과 명도 대비를 충분히 확보하세요. 웹 접근성 기준(WCAG)은 일반 본문에 4.5:1 이상의 대비를 권장합니다.</li><li>무료 대비 검사 도구에 배경색과 글자색 코드를 넣으면 통과 여부를 바로 확인할 수 있습니다.</li><li>색만으로 정보를 구분하지 마세요. 색약이 있는 방문자를 위해 밑줄, 아이콘, 굵기를 함께 사용하는 것이 좋습니다.</li></ul><h2 id="결정이-어려울-때-쓰는-현실적인-방법">결정이 어려울 때 쓰는 현실적인 방법</h2><p>간판, 명함, <a href="/columns/logo-design">로고</a>에 이미 쓰고 있는 색이 있다면 그 색을 기준으로 삼는 것이 가장 빠릅니다. 온라인과 오프라인의 색이 일치해야 고객이 같은 가게로 인식합니다. 기준색 하나를 정한 뒤, 배색 사이트에서 어울리는 보조·강조색을 추천받아 후보 두세 개를 실제 화면에 얹어 보고 고르세요.</p><h2 id="정리">정리</h2><ul><li>브랜드 컬러는 업종의 연상과 신뢰를 고려해 고르되, 주조·보조·강조 세 가지로 제한하세요.</li><li>명도 대비와 접근성을 확인해 “읽히는 색”인지 먼저 검증해야 합니다.</li><li>이미 쓰는 간판·명함 색을 기준으로 삼으면 결정이 빨라집니다. NOAH 패키지는 브랜드 컬러 적용까지 포함해 제작해 드리니, 색 고민은 기준색 하나만 정해 오셔도 충분합니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#브랜드컬러</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#색상선택</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#디자인기초</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/copywriting" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 카피라이팅, 기능 자랑 대신 고객의 언어로 쓰는 법</p>
+        </a>
+        <a href="/columns/logo-design" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">로고 제작 3가지 방법, 직접·무료 툴·의뢰 비교</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/design" class="hub-pill">디자인·기획 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

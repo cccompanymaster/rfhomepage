@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다 · NOAH 칼럼</title>
     <meta name="description" content="한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다." />
-    <meta name="keywords" content="한의원 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/oriental-clinic" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/hospital-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/plastic-surgery" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다" />
     <meta property="og:description" content="한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/oriental-clinic" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/oriental-clinic.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-07-02" />
+    <meta property="article:section" content="업종별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다" />
+    <meta name="twitter:description" content="한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/oriental-clinic.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다", "description": "한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다.", "datePublished": "2026-07-02", "dateModified": "2026-07-02", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/oriental-clinic"}, "keywords": "한의원 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다", "item": "https://noahhomepage.co.kr/columns/oriental-clinic"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다", "description": "한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다.", "datePublished": "2026-07-02", "dateModified": "2026-07-02", "inLanguage": "ko-KR", "wordCount": 1173, "articleSection": "업종별 제작", "keywords": "한의원 홈페이지 제작, 한의원, 의료광고, 한약, 홈페이지제작", "image": "https://noahhomepage.co.kr/assets/images/og/oriental-clinic.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/oriental-clinic"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "한의원 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "업종별 제작", "item": "https://noahhomepage.co.kr/columns/topic/industry"}, {"@type": "ListItem", "position": 4, "name": "한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다", "item": "https://noahhomepage.co.kr/columns/oriental-clinic"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>업종별 제작</span>
+        <a href="/columns/topic/industry" class="hover:text-white">업종별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">업종별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#효능-표현-단정하지-말고-안내하세요">효능 표현, 단정하지 말고 안내하세요</a></li>
+          <li><a href="#홈페이지도-의료광고-심의-대상이-될-수-있습니다">홈페이지도 의료광고 심의 대상이 될 수 있습니다</a></li>
+          <li><a href="#비급여-항목은-정확한-표가-신뢰입니다">비급여 항목은 정확한 표가 신뢰입니다</a></li>
+          <li><a href="#상담-유입은-증상-페이지에서-시작됩니다">상담 유입은 증상 페이지에서 시작됩니다</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>한의원 홈페이지에서 가장 어려운 것은 디자인이 아니라 문장입니다. 한약, 추나, 침 치료의 장점을 알리고 싶은데, 효능·효과를 단정하는 순간 과장광고 문제가 생길 수 있기 때문입니다. "어디까지 써도 되는가"가 한의원 홈페이지 제작의 절반입니다.</p><h2>효능 표현, 단정하지 말고 안내하세요</h2><p>"먹으면 낫는다", "몇 주 만에 몇 kg 감량" 같은 치료 효과 보장·단정 표현은 의료광고에서 금지되는 대표 유형입니다. 특히 다이어트 한약은 체중 감량 수치를 내세우고 싶은 유혹이 크지만, 그만큼 문제가 되기 쉬운 영역입니다.</p><p>대신 "어떤 증상에 어떤 치료를 하는지"를 과정 중심으로 설명하는 방식이 안전하고, 환자 입장에서도 이해가 쉽습니다. 이 글은 법률 자문이 아니므로, 문구의 허용 범위는 반드시 관할 심의위원회에 확인하시기 바랍니다.</p><h2>홈페이지도 의료광고 심의 대상이 될 수 있습니다</h2><p>인터넷 매체를 통한 의료광고는 게재 전 심의 대상이 되는 경우가 있습니다. 한의원은 대한한의사협회 쪽 심의 절차를 거치게 되므로, 어떤 콘텐츠가 심의 대상인지 제작 전에 확인해 두면 문구를 두 번 쓰는 일을 줄일 수 있습니다.</p><p>환자 치료 후기나 전후 비교 역시 경험담 광고·과장광고 이슈가 있을 수 있고, 게재하려면 환자의 초상권·개인정보 동의가 선행돼야 합니다.</p><h2>비급여 항목은 정확한 표가 신뢰입니다</h2><p>한약, 추나요법(급여 범위 외), 약침 등 비급여 항목은 비용 고지 의무의 대상입니다. 항목별 금액을 표로 정리해 올리면 규정도 지키고 상담 문턱도 낮아집니다.</p><p>"한약 한 재 얼마인가요?"라는 전화가 많다면, 그 답을 홈페이지가 대신하게 만드는 것이 제작의 핵심 목표입니다.</p><h2>상담 유입은 증상 페이지에서 시작됩니다</h2><p>한의원을 찾는 환자는 "교통사고 후유증", "소화불량", "수험생 보약"처럼 증상과 상황으로 검색합니다. 진료 과목 나열보다 증상·상황별 페이지를 만들고 각 페이지 끝에 전화·카카오 상담 버튼을 두는 구조가 유입에 유리합니다.</p><ul><li>증상별 페이지 + 치료 과정 설명</li><li>원장 약력은 사실 위주로 간결하게</li><li>모바일 하단에 전화·예약 고정 버튼</li></ul><h2>정리</h2><ul><li>한의원 홈페이지는 효능 단정 표현을 피하고 치료 과정 중심으로 쓰는 것이 안전합니다.</li><li>심의 대상 여부와 문구 허용 범위는 제작 전 관할 심의위원회에 확인하고, 비급여 비용은 표로 정확히 고지하세요.</li><li>NOAH는 한의원 성격에 맞는 차분한 톤의 홈페이지를 199,000원, 7일 안에 제작해 드립니다.</li></ul>
+<p>한의원 홈페이지에서 가장 어려운 것은 디자인이 아니라 문장입니다. 한약, 추나, 침 치료의 장점을 알리고 싶은데, 효능·효과를 단정하는 순간 과장광고 문제가 생길 수 있기 때문입니다. "어디까지 써도 되는가"가 한의원 홈페이지 제작의 절반입니다.</p><h2 id="효능-표현-단정하지-말고-안내하세요">효능 표현, 단정하지 말고 안내하세요</h2><p>"먹으면 낫는다", "몇 주 만에 몇 kg 감량" 같은 치료 효과 보장·단정 표현은 <a href="/columns/hospital-homepage">의료광고</a>에서 금지되는 대표 유형입니다. 특히 다이어트 한약은 체중 감량 수치를 내세우고 싶은 유혹이 크지만, 그만큼 문제가 되기 쉬운 영역입니다.</p><p>대신 "어떤 증상에 어떤 치료를 하는지"를 과정 중심으로 설명하는 방식이 안전하고, 환자 입장에서도 이해가 쉽습니다. 이 글은 법률 자문이 아니므로, 문구의 허용 범위는 반드시 관할 심의위원회에 확인하시기 바랍니다.</p><h2 id="홈페이지도-의료광고-심의-대상이-될-수-있습니다">홈페이지도 의료광고 심의 대상이 될 수 있습니다</h2><p>인터넷 매체를 통한 의료광고는 게재 전 심의 대상이 되는 경우가 있습니다. 한의원은 대한한의사협회 쪽 심의 절차를 거치게 되므로, 어떤 <a href="/columns/content-strategy">콘텐츠</a>가 심의 대상인지 제작 전에 확인해 두면 문구를 두 번 쓰는 일을 줄일 수 있습니다.</p><p>환자 치료 후기나 전후 비교 역시 경험담 광고·과장광고 이슈가 있을 수 있고, 게재하려면 환자의 초상권·개인정보 동의가 선행돼야 합니다.</p><h2 id="비급여-항목은-정확한-표가-신뢰입니다">비급여 항목은 정확한 표가 신뢰입니다</h2><p>한약, 추나요법(급여 범위 외), 약침 등 비급여 항목은 비용 고지 의무의 대상입니다. 항목별 금액을 표로 정리해 올리면 규정도 지키고 상담 문턱도 낮아집니다.</p><p>"한약 한 재 얼마인가요?"라는 전화가 많다면, 그 답을 홈페이지가 대신하게 만드는 것이 제작의 핵심 목표입니다.</p><h2 id="상담-유입은-증상-페이지에서-시작됩니다">상담 유입은 증상 페이지에서 시작됩니다</h2><p>한의원을 찾는 환자는 "교통사고 후유증", "소화불량", "수험생 보약"처럼 증상과 상황으로 검색합니다. 진료 과목 나열보다 증상·상황별 페이지를 만들고 각 페이지 끝에 전화·카카오 상담 버튼을 두는 구조가 유입에 유리합니다.</p><ul><li>증상별 페이지 + 치료 과정 설명</li><li>원장 약력은 사실 위주로 간결하게</li><li>모바일 하단에 전화·예약 고정 버튼</li></ul><h2 id="정리">정리</h2><ul><li>한의원 홈페이지는 효능 단정 표현을 피하고 치료 과정 중심으로 쓰는 것이 안전합니다.</li><li>심의 대상 여부와 문구 허용 범위는 제작 전 관할 심의위원회에 확인하고, 비급여 비용은 표로 정확히 고지하세요.</li><li>NOAH는 한의원 성격에 맞는 차분한 톤의 홈페이지를 199,000원, 7일 안에 제작해 드립니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#한의원</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#의료광고</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#한약</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지제작</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/hospital-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">병원 홈페이지 제작 전 체크리스트, 심의부터 예약 동선까지</p>
+        </a>
+        <a href="/columns/plastic-surgery" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">성형외과 홈페이지 제작, 전후사진 관리가 전부입니다</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/industry" class="hub-pill">업종별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

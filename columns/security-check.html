@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 보안 점검, 사장님이 직접 확인하는 기본기 · NOAH 칼럼</title>
     <meta name="description" content="SSL 인증서, 소프트웨어 업데이트, 비밀번호와 계정 관리, 관리자 접근 통제까지 홈페이지 보안의 기본 점검 항목을 정리했습니다. 전문 지식 없이도 분기별 루틴으로 확인할 수 있습니다." />
-    <meta name="keywords" content="홈페이지 보안 점검, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/security-check" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/backup-guide" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/speed-optimize" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 보안 점검, 사장님이 직접 확인하는 기본기" />
     <meta property="og:description" content="SSL 인증서, 소프트웨어 업데이트, 비밀번호와 계정 관리, 관리자 접근 통제까지 홈페이지 보안의 기본 점검 항목을 정리했습니다. 전문 지식 없이도 분기별 루틴으로 확인할 수 있습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/security-check" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/security-check.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-03-30" />
+    <meta property="article:section" content="운영·유지보수" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 보안 점검, 사장님이 직접 확인하는 기본기" />
+    <meta name="twitter:description" content="SSL 인증서, 소프트웨어 업데이트, 비밀번호와 계정 관리, 관리자 접근 통제까지 홈페이지 보안의 기본 점검 항목을 정리했습니다. 전문 지식 없이도 분기별 루틴으로 확인할 수 있습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/security-check.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 보안 점검, 사장님이 직접 확인하는 기본기", "description": "SSL 인증서, 소프트웨어 업데이트, 비밀번호와 계정 관리, 관리자 접근 통제까지 홈페이지 보안의 기본 점검 항목을 정리했습니다. 전문 지식 없이도 분기별 루틴으로 확인할 수 있습니다.", "datePublished": "2026-03-30", "dateModified": "2026-03-30", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/security-check"}, "keywords": "홈페이지 보안 점검"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 보안 점검, 사장님이 직접 확인하는 기본기", "item": "https://noahhomepage.co.kr/columns/security-check"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 보안 점검, 사장님이 직접 확인하는 기본기", "description": "SSL 인증서, 소프트웨어 업데이트, 비밀번호와 계정 관리, 관리자 접근 통제까지 홈페이지 보안의 기본 점검 항목을 정리했습니다. 전문 지식 없이도 분기별 루틴으로 확인할 수 있습니다.", "datePublished": "2026-03-30", "dateModified": "2026-03-30", "inLanguage": "ko-KR", "wordCount": 1125, "articleSection": "운영·유지보수", "keywords": "홈페이지 보안 점검, 보안, SSL, 점검", "image": "https://noahhomepage.co.kr/assets/images/og/security-check.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/security-check"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 보안 점검"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "운영·유지보수", "item": "https://noahhomepage.co.kr/columns/topic/ops"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 보안 점검, 사장님이 직접 확인하는 기본기", "item": "https://noahhomepage.co.kr/columns/security-check"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>운영·유지보수</span>
+        <a href="/columns/topic/ops" class="hover:text-white">운영·유지보수</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
@@ -112,8 +140,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#SSL-인증서-자물쇠부터-확인">SSL 인증서: 자물쇠부터 확인</a></li>
+          <li><a href="#소프트웨어-업데이트">소프트웨어 업데이트</a></li>
+          <li><a href="#비밀번호와-계정-관리">비밀번호와 계정 관리</a></li>
+          <li><a href="#관리자-접근-관리">관리자 접근 관리</a></li>
+          <li><a href="#분기별-점검-루틴">분기별 점검 루틴</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지 보안이라고 하면 전문 영역처럼 들리지만, 실제 사고의 상당수는 기본적인 관리 소홀에서 시작됩니다. 오래된 소프트웨어, 단순한 비밀번호, 방치된 계정 같은 것들입니다. 반대로 말하면 기본만 지켜도 위험이 크게 줄어든다는 뜻입니다. 전문 지식 없이 사장님이 직접 확인할 수 있는 항목을 정리했습니다.</p><h2>SSL 인증서: 자물쇠부터 확인</h2><p>브라우저 주소창에 자물쇠 표시가 있고 주소가 https로 시작하는지 확인하세요. SSL이 없으면 방문자 브라우저에 “안전하지 않음” 경고가 뜨고 검색 노출에도 불리합니다. 인증서는 유효기간이 있어 갱신을 놓치면 어느 날 갑자기 사이트 전체에 경고가 뜨므로, 갱신이 자동인지 수동인지, 관리 주체가 호스팅사인지 제작 업체인지 알아 두어야 합니다.</p><h2>소프트웨어 업데이트</h2><p>홈페이지 솔루션, 플러그인, 테마는 보안 취약점이 발견될 때마다 업데이트로 보완됩니다. 오래 방치된 구버전은 알려진 취약점이 공개되어 있는 상태라 자동화된 공격에 쉽게 노출됩니다. 쓰지 않는 플러그인은 비활성화가 아니라 삭제하는 것이 좋고, 업데이트 전 백업을 먼저 하고 적용하는 순서만 지키면 부담 없이 관리할 수 있습니다.</p><h2>비밀번호와 계정 관리</h2><ul><li>관리자 비밀번호는 다른 서비스와 다르게, 길고 복잡하게 설정</li><li>기본 아이디(admin 등)를 그대로 쓰지 않기</li><li>2단계 인증이 지원되면 반드시 켜기</li><li>퇴사자, 계약이 끝난 업체의 계정은 즉시 삭제하거나 비밀번호 변경</li><li>계정을 여럿이 공유하지 말고 사람별로 발급</li></ul><h2>관리자 접근 관리</h2><p>관리자 페이지 주소가 기본값 그대로면 자동화된 공격의 표적이 되기 쉽습니다. 가능하면 주소를 바꾸고, 접속 기록을 가끔 확인해 낯선 시간대나 낯선 위치의 접근이 없는지 살펴보세요. 관리 권한은 꼭 필요한 사람에게 필요한 만큼만 부여하는 것이 원칙입니다.</p><h2>분기별 점검 루틴</h2><ul><li>https 접속과 인증서 만료일 확인</li><li>솔루션·플러그인 업데이트 적용(백업 후)</li><li>관리자 계정 목록 정리와 접속 기록 확인</li><li>백업이 실제로 쌓이고 있는지, 복구 가능한지 확인</li></ul><h2>정리</h2><p>보안의 기본은 SSL, 업데이트, 비밀번호, 관리자 접근 네 가지 관리입니다.</p><p>분기에 한 번 점검 루틴만 돌려도 흔한 사고의 대부분은 예방할 수 있습니다.</p><p>NOAH 제작 사이트는 SSL을 기본 적용하며, 유지보수 옵션(월 3만원)에서 업데이트와 보안 기본 관리를 대신해 드립니다.</p>
+<p>홈페이지 보안이라고 하면 전문 영역처럼 들리지만, 실제 사고의 상당수는 기본적인 관리 소홀에서 시작됩니다. 오래된 소프트웨어, 단순한 비밀번호, 방치된 계정 같은 것들입니다. 반대로 말하면 기본만 지켜도 위험이 크게 줄어든다는 뜻입니다. 전문 지식 없이 사장님이 직접 확인할 수 있는 항목을 정리했습니다.</p><h2 id="SSL-인증서-자물쇠부터-확인">SSL 인증서: 자물쇠부터 확인</h2><p>브라우저 주소창에 자물쇠 표시가 있고 주소가 https로 시작하는지 확인하세요. <a href="/columns/ssl-setup">SSL</a>이 없으면 방문자 브라우저에 “안전하지 않음” 경고가 뜨고 검색 노출에도 불리합니다. 인증서는 유효기간이 있어 갱신을 놓치면 어느 날 갑자기 사이트 전체에 경고가 뜨므로, 갱신이 자동인지 수동인지, 관리 주체가 <a href="/columns/web-hosting">호스팅</a>사인지 제작 업체인지 알아 두어야 합니다.</p><h2 id="소프트웨어-업데이트">소프트웨어 업데이트</h2><p>홈페이지 솔루션, 플러그인, 테마는 보안 취약점이 발견될 때마다 업데이트로 보완됩니다. 오래 방치된 구버전은 알려진 취약점이 공개되어 있는 상태라 자동화된 공격에 쉽게 노출됩니다. 쓰지 않는 플러그인은 비활성화가 아니라 삭제하는 것이 좋고, 업데이트 전 <a href="/columns/backup-guide">백업</a>을 먼저 하고 적용하는 순서만 지키면 부담 없이 관리할 수 있습니다.</p><h2 id="비밀번호와-계정-관리">비밀번호와 계정 관리</h2><ul><li>관리자 비밀번호는 다른 서비스와 다르게, 길고 복잡하게 설정</li><li>기본 아이디(admin 등)를 그대로 쓰지 않기</li><li>2단계 인증이 지원되면 반드시 켜기</li><li>퇴사자, 계약이 끝난 업체의 계정은 즉시 삭제하거나 비밀번호 변경</li><li>계정을 여럿이 공유하지 말고 사람별로 발급</li></ul><h2 id="관리자-접근-관리">관리자 접근 관리</h2><p>관리자 페이지 주소가 기본값 그대로면 자동화된 공격의 표적이 되기 쉽습니다. 가능하면 주소를 바꾸고, 접속 기록을 가끔 확인해 낯선 시간대나 낯선 위치의 접근이 없는지 살펴보세요. 관리 권한은 꼭 필요한 사람에게 필요한 만큼만 부여하는 것이 원칙입니다.</p><h2 id="분기별-점검-루틴">분기별 점검 루틴</h2><ul><li>https 접속과 인증서 만료일 확인</li><li>솔루션·플러그인 업데이트 적용(백업 후)</li><li>관리자 계정 목록 정리와 접속 기록 확인</li><li>백업이 실제로 쌓이고 있는지, 복구 가능한지 확인</li></ul><h2 id="정리">정리</h2><p>보안의 기본은 SSL, 업데이트, 비밀번호, 관리자 접근 네 가지 관리입니다.</p><p>분기에 한 번 점검 루틴만 돌려도 흔한 사고의 대부분은 예방할 수 있습니다.</p><p>NOAH 제작 사이트는 SSL을 기본 적용하며, <a href="/columns/maintenance-scope">유지보수</a> 옵션(월 3만원)에서 업데이트와 보안 기본 관리를 대신해 드립니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#보안</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#SSL</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#점검</span></div>
@@ -129,6 +169,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/backup-guide" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 백업 방법, 종류와 주기를 한 번에 정리</p>
+        </a>
+        <a href="/columns/speed-optimize" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 속도 개선, 오늘 바로 할 수 있는 4가지</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +204,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/ops" class="hub-pill">운영·유지보수 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

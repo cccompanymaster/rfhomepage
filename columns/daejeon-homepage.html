@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법 · NOAH 칼럼</title>
     <meta name="description" content="연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다." />
-    <meta name="keywords" content="대전 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/daejeon-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/incheon-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/gwangju-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법" />
     <meta property="og:description" content="연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/daejeon-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/daejeon-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-10" />
+    <meta property="article:section" content="지역별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법" />
+    <meta name="twitter:description" content="연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/daejeon-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법", "description": "연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다.", "datePublished": "2026-02-10", "dateModified": "2026-02-10", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/daejeon-homepage"}, "keywords": "대전 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법", "item": "https://noahhomepage.co.kr/columns/daejeon-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법", "description": "연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다.", "datePublished": "2026-02-10", "dateModified": "2026-02-10", "inLanguage": "ko-KR", "wordCount": 1145, "articleSection": "지역별 제작", "keywords": "대전 홈페이지 제작, 대전, 기술기업 홈페이지, 연구소, B2B", "image": "https://noahhomepage.co.kr/assets/images/og/daejeon-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/daejeon-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "대전 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "지역별 제작", "item": "https://noahhomepage.co.kr/columns/topic/local"}, {"@type": "ListItem", "position": 4, "name": "대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법", "item": "https://noahhomepage.co.kr/columns/daejeon-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>지역별 제작</span>
+        <a href="/columns/topic/local" class="hover:text-white">지역별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">지역별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#기술기업의-방문자는-검증하러-옵니다">기술기업의 방문자는 검증하러 옵니다</a></li>
+          <li><a href="#기술-신뢰도를-만드는-페이지-구성">기술 신뢰도를 만드는 페이지 구성</a></li>
+          <li><a href="#연구단지-밖의-대전도-있습니다">연구단지 밖의 대전도 있습니다</a></li>
+          <li><a href="#영문-페이지가-필요한-경우">영문 페이지가 필요한 경우</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>대전은 대덕연구단지를 중심으로 정부출연 연구기관과 기술 기반 기업이 모여 있는 도시로 알려져 있습니다. 이런 환경에서 홈페이지를 찾는 곳은 연구소에서 나온 창업 기업, 기술 서비스 회사, 실험 장비·부품 업체처럼 '기술을 파는' 조직인 경우가 많습니다. 기술을 파는 회사의 홈페이지는 예쁘기보다 <strong>믿을 수 있어 보여야</strong> 합니다.</p><h2>기술기업의 방문자는 검증하러 옵니다</h2><p>기술 기업 홈페이지의 방문자는 충동적으로 결제하는 소비자가 아닙니다. 협력을 검토하는 기업 담당자, 과제 심사에 참고하려는 평가자, 입사를 고민하는 연구자입니다. 이들은 회사가 실제로 그 기술을 보유했는지 확인할 근거를 찾습니다. 홈페이지가 추상적인 구호만 반복하면 검증에 실패한 것과 같습니다.</p><h2>기술 신뢰도를 만드는 페이지 구성</h2><p>다음 요소들이 갖춰지면 홈페이지 자체가 기술 소개 자료가 됩니다.</p><ul><li><strong>기술 소개</strong>: 무엇을 해결하는 기술인지 비전문가도 이해할 수 있는 설명과, 전문가용 상세 사양의 이중 구성</li><li><strong>실적</strong>: 공개 가능한 범위의 수행 과제·납품·협력 이력</li><li><strong>인증·특허</strong>: 보유 특허, 인증, 시험 성적 관련 사항</li><li><strong>구성원</strong>: 핵심 인력의 전공·경력 소개</li></ul><p>어려운 기술일수록 첫 화면에서는 쉬운 한 문장으로 요약하고, 깊은 내용은 하위 페이지로 나누는 편이 좋습니다.</p><h2>연구단지 밖의 대전도 있습니다</h2><p>대전이 연구 도시만은 아닙니다. 둔산동 같은 중심 상권과 대학가를 중심으로 병원, 학원, 음식점 등 생활 업종도 두텁습니다. 이런 업종이라면 접근이 달라야 합니다. '둔산동 치과', '유성 맛집'처럼 생활권 지역명 검색에 대응하도록 홈페이지 본문에 소재지를 담고, 네이버 플레이스 정보와 어긋나지 않게 관리하며, 모바일에서 전화와 길찾기가 바로 되는지 확인하는 것이 우선순위입니다.</p><h2>영문 페이지가 필요한 경우</h2><p>해외 학회나 해외 협력이 있는 기술 기업이라면 회사 개요와 기술 요약만이라도 영문으로 준비해 두는 것이 좋습니다. 논문이나 발표 자료에 적힌 회사명을 검색했을 때 아무것도 나오지 않는 상황을 막는 것이 목적입니다.</p><h2>정리</h2><ul><li>대전의 기술 기업 홈페이지는 기술 설명, 실적, 인증, 인력 정보로 신뢰를 증명하는 구성이 핵심입니다.</li><li>생활 업종은 생활권 지역명 검색과 플레이스 정보 일치, 모바일 대응이 우선입니다.</li><li>NOAH는 전국 비대면으로 진행하며 18개 업종 레퍼런스를 바탕으로 기업·소상공인 모두에 맞는 구성을 제안합니다.</li></ul>
+<p>대전은 대덕연구단지를 중심으로 정부출연 연구기관과 기술 기반 기업이 모여 있는 도시로 알려져 있습니다. 이런 환경에서 홈페이지를 찾는 곳은 연구소에서 나온 창업 기업, 기술 서비스 회사, 실험 장비·부품 업체처럼 '기술을 파는' 조직인 경우가 많습니다. 기술을 파는 회사의 홈페이지는 예쁘기보다 <strong>믿을 수 있어 보여야</strong> 합니다.</p><h2 id="기술기업의-방문자는-검증하러-옵니다">기술기업의 방문자는 검증하러 옵니다</h2><p>기술 기업 홈페이지의 방문자는 충동적으로 결제하는 소비자가 아닙니다. 협력을 검토하는 기업 담당자, 과제 심사에 참고하려는 평가자, 입사를 고민하는 연구자입니다. 이들은 회사가 실제로 그 기술을 보유했는지 확인할 근거를 찾습니다. 홈페이지가 추상적인 구호만 반복하면 검증에 실패한 것과 같습니다.</p><h2 id="기술-신뢰도를-만드는-페이지-구성">기술 신뢰도를 만드는 페이지 구성</h2><p>다음 요소들이 갖춰지면 홈페이지 자체가 기술 소개 자료가 됩니다.</p><ul><li><strong>기술 소개</strong>: 무엇을 해결하는 기술인지 비전문가도 이해할 수 있는 설명과, 전문가용 상세 사양의 이중 구성</li><li><strong>실적</strong>: 공개 가능한 범위의 수행 과제·납품·협력 이력</li><li><strong>인증·특허</strong>: 보유 특허, 인증, 시험 성적 관련 사항</li><li><strong>구성원</strong>: 핵심 인력의 전공·경력 소개</li></ul><p>어려운 기술일수록 첫 화면에서는 쉬운 한 문장으로 요약하고, 깊은 내용은 하위 페이지로 나누는 편이 좋습니다.</p><h2 id="연구단지-밖의-대전도-있습니다">연구단지 밖의 대전도 있습니다</h2><p>대전이 연구 도시만은 아닙니다. 둔산동 같은 중심 상권과 대학가를 중심으로 병원, <a href="/columns/academy-homepage">학원</a>, <a href="/columns/restaurant-homepage">음식점</a> 등 생활 업종도 두텁습니다. 이런 업종이라면 접근이 달라야 합니다. '둔산동 <a href="/columns/dental-homepage">치과</a>', '유성 맛집'처럼 생활권 지역명 검색에 대응하도록 홈페이지 본문에 소재지를 담고, <a href="/columns/naver-place">네이버 플레이스</a> 정보와 어긋나지 않게 관리하며, 모바일에서 전화와 길찾기가 바로 되는지 확인하는 것이 우선순위입니다.</p><h2 id="영문-페이지가-필요한-경우">영문 페이지가 필요한 경우</h2><p>해외 학회나 해외 협력이 있는 기술 기업이라면 회사 개요와 기술 요약만이라도 영문으로 준비해 두는 것이 좋습니다. 논문이나 발표 자료에 적힌 회사명을 검색했을 때 아무것도 나오지 않는 상황을 막는 것이 목적입니다.</p><h2 id="정리">정리</h2><ul><li>대전의 기술 기업 홈페이지는 기술 설명, 실적, 인증, 인력 정보로 신뢰를 증명하는 구성이 핵심입니다.</li><li>생활 업종은 생활권 지역명 검색과 플레이스 정보 일치, 모바일 대응이 우선입니다.</li><li>NOAH는 전국 비대면으로 진행하며 18개 업종 레퍼런스를 바탕으로 기업·소상공인 모두에 맞는 구성을 제안합니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#대전</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#기술기업 홈페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#연구소</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#B2B</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/incheon-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">인천 홈페이지 제작, 공항·항만 도시의 B2B와 영문 페이지</p>
+        </a>
+        <a href="/columns/gwangju-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">광주 홈페이지 제작, 문화 도시와 부품 산업이 공존하는 시장</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/local" class="hub-pill">지역별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

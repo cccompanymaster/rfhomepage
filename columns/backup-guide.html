@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 백업 방법, 종류와 주기를 한 번에 정리 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 백업의 대상과 방법, 사이트 성격에 맞는 백업 주기를 정리했습니다. 호스팅 자동 백업만 믿으면 안 되는 이유와 복구까지 고려한 백업 관리 원칙을 함께 다룹니다." />
-    <meta name="keywords" content="홈페이지 백업 방법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/backup-guide" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/maintenance-scope" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/security-check" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 백업 방법, 종류와 주기를 한 번에 정리" />
     <meta property="og:description" content="홈페이지 백업의 대상과 방법, 사이트 성격에 맞는 백업 주기를 정리했습니다. 호스팅 자동 백업만 믿으면 안 되는 이유와 복구까지 고려한 백업 관리 원칙을 함께 다룹니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/backup-guide" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/backup-guide.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-04-01" />
+    <meta property="article:section" content="운영·유지보수" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 백업 방법, 종류와 주기를 한 번에 정리" />
+    <meta name="twitter:description" content="홈페이지 백업의 대상과 방법, 사이트 성격에 맞는 백업 주기를 정리했습니다. 호스팅 자동 백업만 믿으면 안 되는 이유와 복구까지 고려한 백업 관리 원칙을 함께 다룹니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/backup-guide.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 백업 방법, 종류와 주기를 한 번에 정리", "description": "홈페이지 백업의 대상과 방법, 사이트 성격에 맞는 백업 주기를 정리했습니다. 호스팅 자동 백업만 믿으면 안 되는 이유와 복구까지 고려한 백업 관리 원칙을 함께 다룹니다.", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/backup-guide"}, "keywords": "홈페이지 백업 방법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 백업 방법, 종류와 주기를 한 번에 정리", "item": "https://noahhomepage.co.kr/columns/backup-guide"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 백업 방법, 종류와 주기를 한 번에 정리", "description": "홈페이지 백업의 대상과 방법, 사이트 성격에 맞는 백업 주기를 정리했습니다. 호스팅 자동 백업만 믿으면 안 되는 이유와 복구까지 고려한 백업 관리 원칙을 함께 다룹니다.", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "ko-KR", "wordCount": 1159, "articleSection": "운영·유지보수", "keywords": "홈페이지 백업 방법, 백업, 운영, 데이터", "image": "https://noahhomepage.co.kr/assets/images/og/backup-guide.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/backup-guide"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 백업 방법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "운영·유지보수", "item": "https://noahhomepage.co.kr/columns/topic/ops"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 백업 방법, 종류와 주기를 한 번에 정리", "item": "https://noahhomepage.co.kr/columns/backup-guide"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>운영·유지보수</span>
+        <a href="/columns/topic/ops" class="hover:text-white">운영·유지보수</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#무엇을-백업해야-하나">무엇을 백업해야 하나</a></li>
+          <li><a href="#백업-방법의-종류">백업 방법의 종류</a></li>
+          <li><a href="#주기는-데이터가-변하는-속도에-맞춥니다">주기는 데이터가 변하는 속도에 맞춥니다</a></li>
+          <li><a href="#백업-관리의-기본-원칙">백업 관리의 기본 원칙</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지 백업은 사고가 나기 전까지는 존재감이 없다가, 사고가 난 뒤에는 유일한 희망이 됩니다. 해킹, 업데이트 실패, 실수로 인한 삭제, 호스팅 장애 어느 경우든 복구 수단은 결국 백업뿐입니다. 다행히 백업은 전문 지식이 크게 필요하지 않은 영역입니다. 어렵지 않게 시작할 수 있도록 대상과 방법, 주기를 정리했습니다.</p><h2>무엇을 백업해야 하나</h2><p>홈페이지 백업 대상은 크게 둘입니다. 첫째는 파일입니다. 소스코드, 이미지, 업로드된 자료가 여기 해당합니다. 둘째는 데이터베이스입니다. 게시글, 문의 내역, 회원 정보처럼 매일 변하는 데이터가 담겨 있습니다. 둘 중 하나만 백업하면 온전한 복구가 안 되므로 항상 세트로 관리해야 합니다. 도메인 설정과 계정 정보 같은 운영 정보도 문서로 따로 정리해 두면 복구가 빨라집니다.</p><h2>백업 방법의 종류</h2><ul><li><strong>호스팅 자동 백업</strong>: 호스팅사가 정기적으로 서버를 백업. 편리하지만 보관 기간이 짧은 경우가 많고, 호스팅사 자체 장애에는 같이 취약</li><li><strong>솔루션·플러그인 백업</strong>: 관리 화면에서 예약 백업 설정. 외부 클라우드 저장소 연동이 가능한 경우가 많아 실용적</li><li><strong>수동 백업</strong>: FTP로 파일을, 관리 도구로 데이터베이스를 직접 내려받는 방식. 번거롭지만 가장 확실</li></ul><p>호스팅 자동 백업만 믿는 것은 권하지 않습니다. 복수의 방법을 겹쳐 쓰는 것이 안전합니다.</p><h2>주기는 데이터가 변하는 속도에 맞춥니다</h2><p>게시판과 문의가 활발한 사이트는 데이터베이스를 매일, 파일은 주 단위로 백업하는 것이 일반적입니다. 내용 변경이 드문 소개형 홈페이지라면 월 1회 정기 백업과 큰 수정 직전의 수동 백업으로도 충분합니다. 원칙은 하나입니다. “잃어도 감당할 수 있는 기간만큼만 백업 간격을 둔다”입니다.</p><h2>백업 관리의 기본 원칙</h2><ul><li>백업본은 서버와 다른 곳(클라우드, 로컬 PC)에 최소 한 벌 더 보관</li><li>업데이트나 큰 수정 직전에는 반드시 수동 백업 한 번 추가</li><li>백업본으로 실제 복구가 되는지 가끔 확인 — 복구 안 되는 백업은 없는 것과 같음</li><li>회원 정보가 담긴 백업본은 개인정보이므로 접근 권한을 제한해 보관</li></ul><h2>정리</h2><p>백업은 파일과 데이터베이스를 세트로, 서버 밖에 한 벌 더 보관하는 것이 기본입니다.</p><p>주기는 사이트의 데이터 변경 속도에 맞추고, 큰 수정 전에는 꼭 수동 백업을 추가하세요.</p><p>NOAH 고객은 소스코드 전체를 이전받으므로 그 자체가 최초 백업본이 되며, 유지보수 옵션에는 정기 백업 관리가 포함됩니다.</p>
+<p>홈페이지 백업은 사고가 나기 전까지는 존재감이 없다가, 사고가 난 뒤에는 유일한 희망이 됩니다. 해킹, 업데이트 실패, 실수로 인한 삭제, <a href="/columns/web-hosting">호스팅</a> 장애 어느 경우든 복구 수단은 결국 백업뿐입니다. 다행히 백업은 전문 지식이 크게 필요하지 않은 영역입니다. 어렵지 않게 시작할 수 있도록 대상과 방법, 주기를 정리했습니다.</p><h2 id="무엇을-백업해야-하나">무엇을 백업해야 하나</h2><p>홈페이지 백업 대상은 크게 둘입니다. 첫째는 파일입니다. 소스코드, 이미지, 업로드된 자료가 여기 해당합니다. 둘째는 데이터베이스입니다. 게시글, 문의 내역, 회원 정보처럼 매일 변하는 데이터가 담겨 있습니다. 둘 중 하나만 백업하면 온전한 복구가 안 되므로 항상 세트로 관리해야 합니다. <a href="/columns/domain-register">도메인</a> 설정과 계정 정보 같은 운영 정보도 문서로 따로 정리해 두면 복구가 빨라집니다.</p><h2 id="백업-방법의-종류">백업 방법의 종류</h2><ul><li><strong>호스팅 자동 백업</strong>: 호스팅사가 정기적으로 서버를 백업. 편리하지만 보관 기간이 짧은 경우가 많고, 호스팅사 자체 장애에는 같이 취약</li><li><strong>솔루션·플러그인 백업</strong>: 관리 화면에서 예약 백업 설정. 외부 클라우드 저장소 연동이 가능한 경우가 많아 실용적</li><li><strong>수동 백업</strong>: FTP로 파일을, 관리 도구로 데이터베이스를 직접 내려받는 방식. 번거롭지만 가장 확실</li></ul><p>호스팅 자동 백업만 믿는 것은 권하지 않습니다. 복수의 방법을 겹쳐 쓰는 것이 안전합니다.</p><h2 id="주기는-데이터가-변하는-속도에-맞춥니다">주기는 데이터가 변하는 속도에 맞춥니다</h2><p>게시판과 문의가 활발한 사이트는 데이터베이스를 매일, 파일은 주 단위로 백업하는 것이 일반적입니다. 내용 변경이 드문 소개형 홈페이지라면 월 1회 정기 백업과 큰 수정 직전의 수동 백업으로도 충분합니다. 원칙은 하나입니다. “잃어도 감당할 수 있는 기간만큼만 백업 간격을 둔다”입니다.</p><h2 id="백업-관리의-기본-원칙">백업 관리의 기본 원칙</h2><ul><li>백업본은 서버와 다른 곳(클라우드, 로컬 PC)에 최소 한 벌 더 보관</li><li>업데이트나 큰 수정 직전에는 반드시 수동 백업 한 번 추가</li><li>백업본으로 실제 복구가 되는지 가끔 확인 — 복구 안 되는 백업은 없는 것과 같음</li><li>회원 정보가 담긴 백업본은 개인정보이므로 접근 권한을 제한해 보관</li></ul><h2 id="정리">정리</h2><p>백업은 파일과 데이터베이스를 세트로, 서버 밖에 한 벌 더 보관하는 것이 기본입니다.</p><p>주기는 사이트의 데이터 변경 <a href="/columns/speed-optimize">속도</a>에 맞추고, 큰 수정 전에는 꼭 수동 백업을 추가하세요.</p><p>NOAH 고객은 소스코드 전체를 이전받으므로 그 자체가 최초 백업본이 되며, <a href="/columns/maintenance-scope">유지보수</a> 옵션에는 정기 백업 관리가 포함됩니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#백업</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#운영</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#데이터</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/maintenance-scope" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 유지보수 범위, 어디까지가 유지보수일까</p>
+        </a>
+        <a href="/columns/security-check" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 보안 점검, 사장님이 직접 확인하는 기본기</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/ops" class="hub-pill">운영·유지보수 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

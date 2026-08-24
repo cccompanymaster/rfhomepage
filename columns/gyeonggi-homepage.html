@@ -19,17 +19,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법 · NOAH 칼럼</title>
     <meta name="description" content="경기도는 신도시, 공단, 관광지, 농촌이 공존하는 광역 시장이라 하나의 공식이 통하지 않습니다. 상권 유형별로 홈페이지 전략을 나눠 설명하고, 어느 도시든 통하는 지역 검색 기본기를 정리했습니다." />
-    <meta name="keywords" content="경기도 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/gyeonggi-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/jeju-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법" />
     <meta property="og:description" content="경기도는 신도시, 공단, 관광지, 농촌이 공존하는 광역 시장이라 하나의 공식이 통하지 않습니다. 상권 유형별로 홈페이지 전략을 나눠 설명하고, 어느 도시든 통하는 지역 검색 기본기를 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/gyeonggi-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/gyeonggi-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-02" />
+    <meta property="article:section" content="지역별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법" />
+    <meta name="twitter:description" content="경기도는 신도시, 공단, 관광지, 농촌이 공존하는 광역 시장이라 하나의 공식이 통하지 않습니다. 상권 유형별로 홈페이지 전략을 나눠 설명하고, 어느 도시든 통하는 지역 검색 기본기를 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/gyeonggi-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +66,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +99,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법", "description": "경기도는 신도시, 공단, 관광지, 농촌이 공존하는 광역 시장이라 하나의 공식이 통하지 않습니다. 상권 유형별로 홈페이지 전략을 나눠 설명하고, 어느 도시든 통하는 지역 검색 기본기를 정리했습니다.", "datePublished": "2026-02-02", "dateModified": "2026-02-02", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/gyeonggi-homepage"}, "keywords": "경기도 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법", "item": "https://noahhomepage.co.kr/columns/gyeonggi-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법", "description": "경기도는 신도시, 공단, 관광지, 농촌이 공존하는 광역 시장이라 하나의 공식이 통하지 않습니다. 상권 유형별로 홈페이지 전략을 나눠 설명하고, 어느 도시든 통하는 지역 검색 기본기를 정리했습니다.", "datePublished": "2026-02-02", "dateModified": "2026-02-02", "inLanguage": "ko-KR", "wordCount": 1125, "articleSection": "지역별 제작", "keywords": "경기도 홈페이지 제작, 경기도, 상권 유형, 지역 SEO, 홈페이지 전략", "image": "https://noahhomepage.co.kr/assets/images/og/gyeonggi-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/gyeonggi-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "경기도 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "지역별 제작", "item": "https://noahhomepage.co.kr/columns/topic/local"}, {"@type": "ListItem", "position": 4, "name": "경기도 홈페이지 제작, 도시마다 다른 상권에 맞추는 법", "item": "https://noahhomepage.co.kr/columns/gyeonggi-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +127,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>지역별 제작</span>
+        <a href="/columns/topic/local" class="hover:text-white">지역별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">지역별 제작</p>
@@ -112,8 +139,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#유형-1-신도시주거-상권">유형 1: 신도시·주거 상권</a></li>
+          <li><a href="#유형-2-공단제조업-지역">유형 2: 공단·제조업 지역</a></li>
+          <li><a href="#유형-3-관광근교-나들이-상권">유형 3: 관광·근교 나들이 상권</a></li>
+          <li><a href="#어느-도시든-통하는-공통-기본기">어느 도시든 통하는 공통 기본기</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>'경기도 홈페이지 제작'이라는 검색어는 사실 하나의 시장을 가리키지 않습니다. 경기도는 성남·고양 같은 대도시부터 신도시, 공업 도시, 관광지, 농촌 지역까지 성격이 전혀 다른 도시들이 묶인 광역 지자체이기 때문입니다. 그래서 경기도에서의 홈페이지 전략은 '어느 도인가'가 아니라 <strong>'어떤 상권인가'</strong>로 접근해야 합니다.</p><h2>유형 1: 신도시·주거 상권</h2><p>판교, 동탄, 다산처럼 새로 조성된 주거 지역은 이사 온 주민이 검색으로 병원·학원·미용실을 고르는 시장입니다. 단골이 아직 없으니 첫인상이 곧 매출입니다. 이런 상권에서는 동네 이름이 들어간 검색에 대응하는 지역 최적화, 네이버 플레이스와 홈페이지의 정보 일치, 그리고 상담·예약 신청이 쉬운 모바일 화면이 우선순위입니다.</p><h2>유형 2: 공단·제조업 지역</h2><p>안산, 시흥, 화성 등에는 산업단지와 제조업체가 밀집해 있습니다. 이 유형의 홈페이지는 소비자가 아니라 발주 담당자를 위한 것입니다. 가공 품목과 범위, 보유 설비, 납기와 견적 절차, 공장 위치와 연락처가 명확하면 역할을 다한 것입니다. 실제 설비와 작업 현장을 찍은 사진 몇 장이 어떤 홍보 문구보다 설득력이 있습니다. 지역 키워드보다 '업종+품목' 키워드로 검색되는 경우가 많다는 점도 소비 업종과 다릅니다.</p><h2>유형 3: 관광·근교 나들이 상권</h2><p>가평, 양평 같은 근교 지역의 펜션, 카페, 체험 농장은 수도권 전체가 상권입니다. 손님은 주말 나들이를 계획하며 검색하므로, 사진의 품질과 위치·주차 안내, 예약 또는 문의 연결이 핵심입니다. 계절별로 첫 화면을 바꿔 주면 재방문 검색에서도 유리합니다.</p><h2>어느 도시든 통하는 공통 기본기</h2><p>유형이 달라도 변하지 않는 것이 있습니다.</p><ul><li>검색되는 이름과 홈페이지·지도 서비스의 상호·주소·전화번호를 일치시킬 것</li><li>모바일 화면에서 전화·문의·길찾기가 한두 번의 터치로 가능할 것</li><li>영업시간·가격처럼 자주 바뀌는 정보를 쉽게 고칠 수 있는 구조일 것</li></ul><h2>정리</h2><ul><li>경기도는 단일 시장이 아니므로 신도시·공단·관광지 등 상권 유형에 맞춰 홈페이지 전략을 정해야 합니다.</li><li>어떤 유형이든 정보 일치, 모바일 문의 동선, 손쉬운 정보 수정이라는 기본기는 같습니다.</li><li>NOAH는 경기도 어느 도시든 화상·유선 비대면으로 진행하며, 18개 업종 레퍼런스와 199,000원(부가세 별도)·7일 오픈으로 시작 부담을 낮췄습니다.</li></ul>
+<p>'경기도 홈페이지 제작'이라는 검색어는 사실 하나의 시장을 가리키지 않습니다. 경기도는 성남·고양 같은 대도시부터 신도시, 공업 도시, 관광지, 농촌 지역까지 성격이 전혀 다른 도시들이 묶인 광역 지자체이기 때문입니다. 그래서 경기도에서의 홈페이지 전략은 '어느 도인가'가 아니라 <strong>'어떤 상권인가'</strong>로 접근해야 합니다.</p><h2 id="유형-1-신도시주거-상권">유형 1: 신도시·주거 상권</h2><p>판교, 동탄, 다산처럼 새로 조성된 주거 지역은 이사 온 주민이 검색으로 병원·<a href="/columns/academy-homepage">학원</a>·미용실을 고르는 시장입니다. 단골이 아직 없으니 첫인상이 곧 매출입니다. 이런 상권에서는 동네 이름이 들어간 검색에 대응하는 지역 최적화, <a href="/columns/naver-place">네이버 플레이스</a>와 홈페이지의 정보 일치, 그리고 상담·예약 신청이 쉬운 모바일 화면이 우선순위입니다.</p><h2 id="유형-2-공단제조업-지역">유형 2: 공단·제조업 지역</h2><p>안산, 시흥, 화성 등에는 산업단지와 <a href="/columns/manufacturing-homepage">제조업</a>체가 밀집해 있습니다. 이 유형의 홈페이지는 소비자가 아니라 발주 담당자를 위한 것입니다. 가공 품목과 범위, 보유 설비, 납기와 <a href="/columns/homepage-quote">견적</a> 절차, 공장 위치와 연락처가 명확하면 역할을 다한 것입니다. 실제 설비와 작업 현장을 찍은 <a href="/columns/photo-prepare">사진</a> 몇 장이 어떤 홍보 문구보다 설득력이 있습니다. 지역 키워드보다 '업종+품목' 키워드로 검색되는 경우가 많다는 점도 소비 업종과 다릅니다.</p><h2 id="유형-3-관광근교-나들이-상권">유형 3: 관광·근교 나들이 상권</h2><p>가평, 양평 같은 근교 지역의 펜션, 카페, 체험 농장은 수도권 전체가 상권입니다. 손님은 주말 나들이를 계획하며 검색하므로, 사진의 품질과 위치·주차 안내, 예약 또는 문의 연결이 핵심입니다. 계절별로 첫 화면을 바꿔 주면 재방문 검색에서도 유리합니다.</p><h2 id="어느-도시든-통하는-공통-기본기">어느 도시든 통하는 공통 기본기</h2><p>유형이 달라도 변하지 않는 것이 있습니다.</p><ul><li>검색되는 이름과 홈페이지·지도 서비스의 상호·주소·전화번호를 일치시킬 것</li><li>모바일 화면에서 전화·문의·길찾기가 한두 번의 터치로 가능할 것</li><li>영업시간·가격처럼 자주 바뀌는 정보를 쉽게 고칠 수 있는 구조일 것</li></ul><h2 id="정리">정리</h2><ul><li>경기도는 단일 시장이 아니므로 신도시·공단·관광지 등 상권 유형에 맞춰 홈페이지 전략을 정해야 합니다.</li><li>어떤 유형이든 정보 일치, 모바일 문의 동선, 손쉬운 정보 수정이라는 기본기는 같습니다.</li><li>NOAH는 경기도 어느 도시든 화상·유선 비대면으로 진행하며, 18개 업종 레퍼런스와 199,000원(부가세 별도)·7일 오픈으로 시작 부담을 낮췄습니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#경기도</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#상권 유형</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#지역 SEO</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지 전략</span></div>
@@ -129,6 +167,13 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/jeju-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">제주 홈페이지 제작, 예약과 계절성까지 담는 관광지 설계</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +198,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/local" class="hub-pill">지역별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

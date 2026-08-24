@@ -19,17 +19,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>검색 순위가 안 오르는 이유, 6가지 진단 체크리스트 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 검색 순위가 안 오르는 대표 원인을 진단 체크리스트로 정리했습니다. 색인 문제, 콘텐츠 부족, 중복, 속도, 경쟁 강도, 시간까지 순서대로 점검해 보세요." />
-    <meta name="keywords" content="검색 순위가 안 오르는 이유, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/ranking-problems" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/ga4-setup" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="검색 순위가 안 오르는 이유, 6가지 진단 체크리스트" />
     <meta property="og:description" content="홈페이지 검색 순위가 안 오르는 대표 원인을 진단 체크리스트로 정리했습니다. 색인 문제, 콘텐츠 부족, 중복, 속도, 경쟁 강도, 시간까지 순서대로 점검해 보세요." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/ranking-problems" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/ranking-problems.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-04-29" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="검색 순위가 안 오르는 이유, 6가지 진단 체크리스트" />
+    <meta name="twitter:description" content="홈페이지 검색 순위가 안 오르는 대표 원인을 진단 체크리스트로 정리했습니다. 색인 문제, 콘텐츠 부족, 중복, 속도, 경쟁 강도, 시간까지 순서대로 점검해 보세요." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/ranking-problems.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +66,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +99,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "검색 순위가 안 오르는 이유, 6가지 진단 체크리스트", "description": "홈페이지 검색 순위가 안 오르는 대표 원인을 진단 체크리스트로 정리했습니다. 색인 문제, 콘텐츠 부족, 중복, 속도, 경쟁 강도, 시간까지 순서대로 점검해 보세요.", "datePublished": "2026-04-29", "dateModified": "2026-04-29", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ranking-problems"}, "keywords": "검색 순위가 안 오르는 이유"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "검색 순위가 안 오르는 이유, 6가지 진단 체크리스트", "item": "https://noahhomepage.co.kr/columns/ranking-problems"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "검색 순위가 안 오르는 이유, 6가지 진단 체크리스트", "description": "홈페이지 검색 순위가 안 오르는 대표 원인을 진단 체크리스트로 정리했습니다. 색인 문제, 콘텐츠 부족, 중복, 속도, 경쟁 강도, 시간까지 순서대로 점검해 보세요.", "datePublished": "2026-04-29", "dateModified": "2026-04-29", "inLanguage": "ko-KR", "wordCount": 1235, "articleSection": "SEO·검색노출", "keywords": "검색 순위가 안 오르는 이유, 검색순위, SEO진단, 검색노출", "image": "https://noahhomepage.co.kr/assets/images/og/ranking-problems.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ranking-problems"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "검색 순위가 안 오르는 이유"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "검색 순위가 안 오르는 이유, 6가지 진단 체크리스트", "item": "https://noahhomepage.co.kr/columns/ranking-problems"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +127,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +139,20 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#1-애초에-색인이-안-되어-있다">1. 애초에 색인이 안 되어 있다</a></li>
+          <li><a href="#2-콘텐츠의-양과-깊이가-부족하다">2. 콘텐츠의 양과 깊이가 부족하다</a></li>
+          <li><a href="#3-중복-콘텐츠가-발목을-잡는다">3. 중복 콘텐츠가 발목을 잡는다</a></li>
+          <li><a href="#4-모바일과-속도에서-감점된다">4. 모바일과 속도에서 감점된다</a></li>
+          <li><a href="#5-경쟁-강도와-시간을-간과하고-있다">5. 경쟁 강도와 시간을 간과하고 있다</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지를 열고 글도 올렸는데 검색 순위가 좀처럼 오르지 않는다면, 감으로 이것저것 고치기 전에 원인을 순서대로 진단하는 것이 빠릅니다. 순위는 누구도 보장할 수 없지만, 안 오르는 이유는 대부분 아래 여섯 가지 안에서 발견됩니다.</p><h2>1. 애초에 색인이 안 되어 있다</h2><p>검색엔진이 페이지를 수집(색인)하지 못했다면 순위 이전에 노출 자체가 불가능합니다. 구글 서치 콘솔과 네이버 서치어드바이저에 사이트를 등록하고, 사이트맵을 제출한 뒤 색인 상태를 확인하세요. 개발 단계에서 걸어둔 수집 차단 설정(robots, noindex)이 남아 있는 경우도 의외로 많습니다.</p><h2>2. 콘텐츠의 양과 깊이가 부족하다</h2><p>페이지 몇 개, 짧은 소개 문구만으로는 검색엔진이 이 사이트가 어떤 주제에 전문성이 있는지 판단하기 어렵습니다. 고객이 실제로 검색하는 질문에 답하는 글을 꾸준히 쌓아야 합니다. 한 편을 쓰더라도 검색 의도에 충실한 제목과 충분한 본문이 필요합니다.</p><h2>3. 중복 콘텐츠가 발목을 잡는다</h2><p>다른 사이트 글을 그대로 옮겼거나, 내 사이트 안에서 비슷한 페이지가 여러 개 경쟁하고 있으면 평가가 분산됩니다. 제조사 설명문을 그대로 쓴 상품 페이지도 마찬가지입니다. 내 언어로 다시 쓰고, 비슷한 페이지는 합치거나 대표 페이지를 정해 주세요.</p><h2>4. 모바일과 속도에서 감점된다</h2><p>검색 유입의 상당수는 모바일입니다. 모바일에서 글자가 깨지거나, 이미지가 너무 커서 로딩이 느리면 사용자도 검색엔진도 좋게 보지 않습니다. 이미지 용량 최적화와 모바일 화면 점검은 비용 대비 효과가 큰 개선입니다.</p><h2>5. 경쟁 강도와 시간을 간과하고 있다</h2><p>“홈페이지 제작”처럼 큰 키워드는 대형 사이트들이 오래 쌓아온 영역입니다. 신규 사이트는 “지역명 + 업종”, “구체적 질문형” 같은 세부 키워드부터 공략해 작은 승리를 쌓는 편이 현실적입니다. 또 하나 놓치기 쉬운 것이 시간입니다. 새 사이트가 평가를 받기까지는 통상 수개월 단위의 시간이 걸립니다. 몇 주 만에 결과가 없다고 방향을 바꾸기보다, 위 원인들을 점검한 뒤 콘텐츠를 꾸준히 쌓으며 기다리는 인내가 필요합니다. 순위를 단기간에 보장한다는 제안은 오히려 경계하세요.</p><h2>정리</h2><ul><li>순서는 색인 확인 → 콘텐츠 보강 → 중복 제거 → 모바일·속도 개선입니다.</li><li>신규 사이트는 세부 키워드부터 공략하는 것이 현실적입니다.</li><li>SEO는 수개월 단위 게임이며, 보장성 제안은 경계해야 합니다.</li></ul><p>NOAH의 홈페이지 패키지에는 SEO 기본 설정이 포함되어 있어, 색인 등록 같은 출발선 문제를 처음부터 정리하고 시작할 수 있습니다.</p>
+<p>홈페이지를 열고 글도 올렸는데 검색 순위가 좀처럼 오르지 않는다면, 감으로 이것저것 고치기 전에 원인을 순서대로 진단하는 것이 빠릅니다. 순위는 누구도 보장할 수 없지만, 안 오르는 이유는 대부분 아래 여섯 가지 안에서 발견됩니다.</p><h2 id="1-애초에-색인이-안-되어-있다">1. 애초에 색인이 안 되어 있다</h2><p>검색엔진이 페이지를 수집(색인)하지 못했다면 순위 이전에 노출 자체가 불가능합니다. 구글 서치 콘솔과 네이버 <a href="/columns/naver-advisor">서치어드바이저</a>에 사이트를 등록하고, <a href="/columns/sitemap-submit">사이트맵</a>을 제출한 뒤 색인 상태를 확인하세요. 개발 단계에서 걸어둔 수집 차단 설정(robots, noindex)이 남아 있는 경우도 의외로 많습니다.</p><h2 id="2-콘텐츠의-양과-깊이가-부족하다">2. 콘텐츠의 양과 깊이가 부족하다</h2><p>페이지 몇 개, 짧은 소개 문구만으로는 검색엔진이 이 사이트가 어떤 주제에 전문성이 있는지 판단하기 어렵습니다. 고객이 실제로 검색하는 질문에 답하는 글을 꾸준히 쌓아야 합니다. 한 편을 쓰더라도 검색 의도에 충실한 제목과 충분한 본문이 필요합니다.</p><h2 id="3-중복-콘텐츠가-발목을-잡는다">3. 중복 콘텐츠가 발목을 잡는다</h2><p>다른 사이트 글을 그대로 옮겼거나, 내 사이트 안에서 비슷한 페이지가 여러 개 경쟁하고 있으면 평가가 분산됩니다. 제조사 설명문을 그대로 쓴 상품 페이지도 마찬가지입니다. 내 언어로 다시 쓰고, 비슷한 페이지는 합치거나 대표 페이지를 정해 주세요.</p><h2 id="4-모바일과-속도에서-감점된다">4. 모바일과 속도에서 감점된다</h2><p>검색 유입의 상당수는 모바일입니다. 모바일에서 글자가 깨지거나, 이미지가 너무 커서 로딩이 느리면 사용자도 검색엔진도 좋게 보지 않습니다. 이미지 용량 최적화와 모바일 화면 점검은 비용 대비 효과가 큰 개선입니다.</p><h2 id="5-경쟁-강도와-시간을-간과하고-있다">5. 경쟁 강도와 시간을 간과하고 있다</h2><p>“홈페이지 제작”처럼 큰 키워드는 대형 사이트들이 오래 쌓아온 영역입니다. 신규 사이트는 “지역명 + 업종”, “구체적 질문형” 같은 세부 키워드부터 공략해 작은 승리를 쌓는 편이 현실적입니다. 또 하나 놓치기 쉬운 것이 시간입니다. 새 사이트가 평가를 받기까지는 통상 수개월 단위의 시간이 걸립니다. 몇 주 만에 결과가 없다고 방향을 바꾸기보다, 위 원인들을 점검한 뒤 <a href="/columns/content-strategy">콘텐츠</a>를 꾸준히 쌓으며 기다리는 인내가 필요합니다. 순위를 단기간에 보장한다는 제안은 오히려 경계하세요.</p><h2 id="정리">정리</h2><ul><li>순서는 색인 확인 → 콘텐츠 보강 → 중복 제거 → 모바일·<a href="/columns/speed-optimize">속도</a> 개선입니다.</li><li>신규 사이트는 세부 키워드부터 공략하는 것이 현실적입니다.</li><li>SEO는 수개월 단위 게임이며, 보장성 제안은 경계해야 합니다.</li></ul><p>NOAH의 홈페이지 패키지에는 SEO 기본 설정이 포함되어 있어, 색인 등록 같은 출발선 문제를 처음부터 정리하고 시작할 수 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색순위</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#SEO진단</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색노출</span></div>
@@ -129,6 +168,13 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/ga4-setup" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">구글 애널리틱스(GA4) 설치, 개념부터 확인까지</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +199,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

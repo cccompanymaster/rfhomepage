@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계 · NOAH 칼럼</title>
     <meta name="description" content="관광과 해양·물류가 함께 움직이는 부산에서는 홈페이지가 맞이해야 할 손님의 폭이 넓습니다. 관광객 대상 다국어·모바일 대응부터 항만 연관 B2B 기업의 신뢰 구성까지 부산에 맞는 제작 기준을 담았습니다." />
-    <meta name="keywords" content="부산 홈페이지 제작, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/busan-homepage" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/seoul-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/daegu-homepage" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계" />
     <meta property="og:description" content="관광과 해양·물류가 함께 움직이는 부산에서는 홈페이지가 맞이해야 할 손님의 폭이 넓습니다. 관광객 대상 다국어·모바일 대응부터 항만 연관 B2B 기업의 신뢰 구성까지 부산에 맞는 제작 기준을 담았습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/busan-homepage" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/busan-homepage.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-02-16" />
+    <meta property="article:section" content="지역별 제작" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계" />
+    <meta name="twitter:description" content="관광과 해양·물류가 함께 움직이는 부산에서는 홈페이지가 맞이해야 할 손님의 폭이 넓습니다. 관광객 대상 다국어·모바일 대응부터 항만 연관 B2B 기업의 신뢰 구성까지 부산에 맞는 제작 기준을 담았습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/busan-homepage.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계", "description": "관광과 해양·물류가 함께 움직이는 부산에서는 홈페이지가 맞이해야 할 손님의 폭이 넓습니다. 관광객 대상 다국어·모바일 대응부터 항만 연관 B2B 기업의 신뢰 구성까지 부산에 맞는 제작 기준을 담았습니다.", "datePublished": "2026-02-16", "dateModified": "2026-02-16", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/busan-homepage"}, "keywords": "부산 홈페이지 제작"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계", "item": "https://noahhomepage.co.kr/columns/busan-homepage"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계", "description": "관광과 해양·물류가 함께 움직이는 부산에서는 홈페이지가 맞이해야 할 손님의 폭이 넓습니다. 관광객 대상 다국어·모바일 대응부터 항만 연관 B2B 기업의 신뢰 구성까지 부산에 맞는 제작 기준을 담았습니다.", "datePublished": "2026-02-16", "dateModified": "2026-02-16", "inLanguage": "ko-KR", "wordCount": 1165, "articleSection": "지역별 제작", "keywords": "부산 홈페이지 제작, 부산, 관광업 홈페이지, 다국어, 지역 SEO", "image": "https://noahhomepage.co.kr/assets/images/og/busan-homepage.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/busan-homepage"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "부산 홈페이지 제작"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "지역별 제작", "item": "https://noahhomepage.co.kr/columns/topic/local"}, {"@type": "ListItem", "position": 4, "name": "부산 홈페이지 제작, 관광객과 물류 바이어를 함께 잡는 설계", "item": "https://noahhomepage.co.kr/columns/busan-homepage"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>지역별 제작</span>
+        <a href="/columns/topic/local" class="hover:text-white">지역별 제작</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">지역별 제작</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#관광-도시의-손님은-검색부터-다릅니다">관광 도시의 손님은 검색부터 다릅니다</a></li>
+          <li><a href="#다국어-페이지-전부가-아니라-핵심만">다국어 페이지, 전부가 아니라 핵심만</a></li>
+          <li><a href="#해양물류-기업이라면-신뢰-정보가-먼저">해양·물류 기업이라면 신뢰 정보가 먼저</a></li>
+          <li><a href="#모바일-유입이-기본값입니다">모바일 유입이 기본값입니다</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>부산에서 홈페이지를 준비하는 사장님의 손님은 생각보다 멀리서 옵니다. 주말마다 전국에서 여행객이 내려오고, 해외 관광객도 꾸준히 찾는 도시이기 때문입니다. 여기에 항만을 중심으로 한 물류·무역 기업까지 더하면, 부산의 홈페이지는 '동네 손님용'과 '외지 손님용'을 동시에 감당해야 하는 경우가 많습니다.</p><h2>관광 도시의 손님은 검색부터 다릅니다</h2><p>해운대, 광안리, 자갈치 같은 지명은 전국 단위로 검색됩니다. 부산의 숙소, 식당, 카페, 체험 업소라면 지역 주민보다 여행 계획을 짜는 외지인이 홈페이지의 주 방문자일 수 있습니다. 이들은 처음 오는 사람이므로 <strong>위치 설명이 상세할수록 좋습니다.</strong> 지하철역에서 걸리는 시간, 주차 가능 여부, 지도 앱으로 바로 연결되는 길찾기 버튼은 선택이 아니라 필수입니다.</p><h2>다국어 페이지, 전부가 아니라 핵심만</h2><p>외국인 손님이 있는 업종이라면 다국어를 고민하게 됩니다. 이때 홈페이지 전체를 번역하려고 하면 비용과 관리 부담이 커집니다. 현실적인 방법은 메뉴·가격·위치·예약 방법처럼 <strong>구매 결정에 직접 필요한 페이지만</strong> 영어나 일본어로 준비하는 것입니다. 번역기는 문장을 만들어 주지만, 가격과 영업시간처럼 틀리면 안 되는 정보는 사람이 확인해야 합니다.</p><h2>해양·물류 기업이라면 신뢰 정보가 먼저</h2><p>부산은 항만을 낀 물류, 수산, 조선 기자재 등 산업 기반도 큰 도시입니다. 이런 B2B 업종의 홈페이지는 화려함보다 거래 상대가 확인하고 싶은 정보를 앞에 두어야 합니다. 취급 품목과 처리 가능 범위, 보유 설비, 인증·허가 사항, 담당자 연락처가 명확하면 그 자체로 영업 자료가 됩니다. 해외 거래처가 있다면 회사 소개 한 페이지만이라도 영문으로 두는 편이 좋습니다.</p><h2>모바일 유입이 기본값입니다</h2><p>여행지에서의 검색은 거의 전부 스마트폰에서 일어납니다. 걷다가 검색하고, 바로 전화하거나 길을 찾는 흐름입니다. 부산의 소비 업종 홈페이지는 모바일 화면 기준으로 먼저 설계하고, 전화·예약·길찾기 세 가지 버튼이 스크롤 없이 보이는지 점검하는 것이 좋습니다.</p><h2>정리</h2><ul><li>부산의 홈페이지는 외지 관광객과 지역 손님을 함께 고려해 위치 안내와 모바일 화면을 먼저 챙겨야 합니다.</li><li>다국어는 전체 번역보다 가격·위치·예약 등 핵심 페이지만 정확하게 준비하는 것이 현실적입니다.</li><li>NOAH는 부산을 포함한 전국 어디든 비대면으로 진행하며, 199,000원(부가세 별도)·7일 오픈으로 부담을 줄였습니다.</li></ul>
+<p>부산에서 홈페이지를 준비하는 사장님의 손님은 생각보다 멀리서 옵니다. 주말마다 전국에서 여행객이 내려오고, 해외 관광객도 꾸준히 찾는 도시이기 때문입니다. 여기에 항만을 중심으로 한 물류·무역 기업까지 더하면, 부산의 홈페이지는 '동네 손님용'과 '외지 손님용'을 동시에 감당해야 하는 경우가 많습니다.</p><h2 id="관광-도시의-손님은-검색부터-다릅니다">관광 도시의 손님은 검색부터 다릅니다</h2><p>해운대, 광안리, 자갈치 같은 지명은 전국 단위로 검색됩니다. 부산의 숙소, 식당, <a href="/columns/cafe-homepage">카페</a>, 체험 업소라면 지역 주민보다 여행 계획을 짜는 외지인이 홈페이지의 주 방문자일 수 있습니다. 이들은 처음 오는 사람이므로 <strong>위치 설명이 상세할수록 좋습니다.</strong> 지하철역에서 걸리는 시간, 주차 가능 여부, 지도 앱으로 바로 연결되는 길찾기 버튼은 선택이 아니라 필수입니다.</p><h2 id="다국어-페이지-전부가-아니라-핵심만">다국어 페이지, 전부가 아니라 핵심만</h2><p>외국인 손님이 있는 업종이라면 다국어를 고민하게 됩니다. 이때 홈페이지 전체를 번역하려고 하면 비용과 관리 부담이 커집니다. 현실적인 방법은 메뉴·가격·위치·예약 방법처럼 <strong>구매 결정에 직접 필요한 페이지만</strong> 영어나 일본어로 준비하는 것입니다. 번역기는 문장을 만들어 주지만, 가격과 영업시간처럼 틀리면 안 되는 정보는 사람이 확인해야 합니다.</p><h2 id="해양물류-기업이라면-신뢰-정보가-먼저">해양·물류 기업이라면 신뢰 정보가 먼저</h2><p>부산은 항만을 낀 물류, 수산, 조선 기자재 등 산업 기반도 큰 도시입니다. 이런 B2B 업종의 홈페이지는 화려함보다 거래 상대가 확인하고 싶은 정보를 앞에 두어야 합니다. 취급 품목과 처리 가능 범위, 보유 설비, 인증·허가 사항, 담당자 연락처가 명확하면 그 자체로 영업 자료가 됩니다. 해외 거래처가 있다면 회사 소개 한 페이지만이라도 영문으로 두는 편이 좋습니다.</p><h2 id="모바일-유입이-기본값입니다">모바일 유입이 기본값입니다</h2><p>여행지에서의 검색은 거의 전부 스마트폰에서 일어납니다. 걷다가 검색하고, 바로 전화하거나 길을 찾는 흐름입니다. 부산의 소비 업종 홈페이지는 모바일 화면 기준으로 먼저 설계하고, 전화·예약·길찾기 세 가지 버튼이 스크롤 없이 보이는지 점검하는 것이 좋습니다.</p><h2 id="정리">정리</h2><ul><li>부산의 홈페이지는 외지 관광객과 지역 손님을 함께 고려해 위치 안내와 모바일 화면을 먼저 챙겨야 합니다.</li><li>다국어는 전체 번역보다 가격·위치·예약 등 핵심 페이지만 정확하게 준비하는 것이 현실적입니다.</li><li>NOAH는 부산을 포함한 전국 어디든 비대면으로 진행하며, 199,000원(부가세 별도)·7일 오픈으로 부담을 줄였습니다.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#부산</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#관광업 홈페이지</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#다국어</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#지역 SEO</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/seoul-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">서울 홈페이지 제작, 자치구마다 전략이 달라야 하는 이유</p>
+        </a>
+        <a href="/columns/daegu-homepage" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">대구 홈페이지 제작, 섬유·패션과 의료 도시에 맞는 구성</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/local" class="hub-pill">지역별 제작 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

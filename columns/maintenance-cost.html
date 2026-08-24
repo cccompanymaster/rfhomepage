@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 유지보수 비용의 구성 항목을 풀어서 설명합니다. 월정액과 건별 청구의 차이, 유지보수 계약서에서 확인할 범위 조항, 비용을 아끼는 관리 요령까지 정리했습니다." />
-    <meta name="keywords" content="홈페이지 유지보수 비용, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/maintenance-cost" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/landing-cost" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/renewal-cost" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까" />
     <meta property="og:description" content="홈페이지 유지보수 비용의 구성 항목을 풀어서 설명합니다. 월정액과 건별 청구의 차이, 유지보수 계약서에서 확인할 범위 조항, 비용을 아끼는 관리 요령까지 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/maintenance-cost" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/maintenance-cost.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-08-07" />
+    <meta property="article:section" content="비용·견적" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까" />
+    <meta name="twitter:description" content="홈페이지 유지보수 비용의 구성 항목을 풀어서 설명합니다. 월정액과 건별 청구의 차이, 유지보수 계약서에서 확인할 범위 조항, 비용을 아끼는 관리 요령까지 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/maintenance-cost.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까", "description": "홈페이지 유지보수 비용의 구성 항목을 풀어서 설명합니다. 월정액과 건별 청구의 차이, 유지보수 계약서에서 확인할 범위 조항, 비용을 아끼는 관리 요령까지 정리했습니다.", "datePublished": "2026-08-07", "dateModified": "2026-08-07", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/maintenance-cost"}, "keywords": "홈페이지 유지보수 비용"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까", "item": "https://noahhomepage.co.kr/columns/maintenance-cost"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까", "description": "홈페이지 유지보수 비용의 구성 항목을 풀어서 설명합니다. 월정액과 건별 청구의 차이, 유지보수 계약서에서 확인할 범위 조항, 비용을 아끼는 관리 요령까지 정리했습니다.", "datePublished": "2026-08-07", "dateModified": "2026-08-07", "inLanguage": "ko-KR", "wordCount": 1355, "articleSection": "비용·견적", "keywords": "홈페이지 유지보수 비용, 유지보수, 월비용, 운영", "image": "https://noahhomepage.co.kr/assets/images/og/maintenance-cost.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/maintenance-cost"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 유지보수 비용"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "비용·견적", "item": "https://noahhomepage.co.kr/columns/topic/cost"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 유지보수 비용, 매달 뭘 해주고 얼마가 적당할까", "item": "https://noahhomepage.co.kr/columns/maintenance-cost"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>비용·견적</span>
+        <a href="/columns/topic/cost" class="hover:text-white">비용·견적</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">비용·견적</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#유지보수에-포함되는-일의-종류">유지보수에 포함되는 일의 종류</a></li>
+          <li><a href="#월정액과-건별-청구-뭐가-유리할까">월정액과 건별 청구, 뭐가 유리할까</a></li>
+          <li><a href="#계약서에서-확인할-조항">계약서에서 확인할 조항</a></li>
+          <li><a href="#유지보수-비용을-줄이는-요령">유지보수 비용을 줄이는 요령</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지를 만들고 나면 끝인 줄 알았는데, 업체에서 유지보수 계약 이야기를 꺼냅니다. 매달 돈을 내야 한다는데 정확히 뭘 해주는 건지, 안 하면 큰일 나는 건지 애매합니다. 유지보수라는 말 안에 여러 성격의 일이 섞여 있어서 그렇습니다.</p><h2>유지보수에 포함되는 일의 종류</h2><p>유지보수는 크게 세 갈래입니다. 첫째는 <strong>인프라 유지</strong>로, 호스팅 서버 관리, 도메인 갱신, 보안 인증서 관리처럼 사이트가 꺼지지 않게 하는 일입니다. 둘째는 <strong>콘텐츠 수정</strong>으로, 영업시간 변경, 가격 수정, 공지 등록 같은 내용 갱신입니다.</p><p>셋째는 <strong>기능 개선</strong>입니다. 페이지 추가, 새 기능 개발처럼 사실상 추가 제작에 가까운 일입니다. 견적을 볼 때 이 세 가지 중 어디까지가 계약 범위인지 구분하는 것이 출발점입니다. '유지보수 포함'이라는 말만 믿으면 나중에 셋째 영역에서 추가 비용 문제가 생깁니다.</p><h2>월정액과 건별 청구, 뭐가 유리할까</h2><p><strong>월정액</strong>은 매달 일정 금액을 내고 정해진 범위의 수정을 받는 방식입니다. 수정 요청이 잦은 사이트라면 예측 가능해서 편합니다. 일반적으로 소규모 사이트는 월 수만원대에서 형성되는 경우가 많습니다. <strong>건별 청구</strong>는 요청할 때마다 비용을 내는 방식으로, 수정이 1년에 몇 번 없는 사이트라면 이쪽이 쌀 수 있습니다.</p><p>판단 기준은 단순합니다. 지난 몇 달간 수정 요청이 얼마나 있었는지 세어 보고, 월정액 1년치와 건별 예상 비용을 비교하면 됩니다. 소개형 홈페이지는 내용 변경이 적어 건별로도 충분한 경우가 많고, 공지·이벤트가 잦은 업종은 월정액이 마음 편합니다.</p><h2>계약서에서 확인할 조항</h2><ul><li>월 수정 횟수 또는 작업 시간 한도</li><li>수정과 신규 제작의 경계(페이지 추가는 별도인지)</li><li>요청 후 처리 기한(며칠 안에 반영되는지)</li><li>호스팅·도메인 비용 포함 여부</li><li>계약 해지 시 데이터와 소유권 이전 절차</li></ul><p>특히 마지막 항목이 중요합니다. 유지보수 계약을 끊으면 사이트를 쓸 수 없는 구조인지, 다른 곳으로 옮길 수 있는지는 반드시 계약 전에 확인하세요.</p><h2>유지보수 비용을 줄이는 요령</h2><p>수정 요청을 모아서 한 번에 보내면 건별 비용과 커뮤니케이션 낭비가 줄어듭니다. 또 제작 단계에서 '자주 바뀔 내용'(가격표, 공지 등)을 직접 수정할 수 있는 구조로 요청해 두면 소소한 수정 때마다 업체를 부를 필요가 없어집니다.</p><p>제작 상품에 수정 지원이 포함된 경우도 있습니다. 예를 들어 NOAH는 기본 패키지에 1년 무제한 텍스트 수정이 포함되고, 그 이후 유지보수는 월 3만원 옵션으로 선택할 수 있습니다. 이렇게 포함 범위가 명시된 상품은 예산 계획이 쉽습니다.</p><h2>정리</h2><ul><li>유지보수는 인프라 유지·콘텐츠 수정·기능 개선으로 나뉘며, 계약 범위 구분이 핵심입니다.</li><li>수정 빈도를 기준으로 월정액과 건별 청구를 비교해 고르세요.</li><li>해지 시 소유권과 데이터 이전 조항은 계약 전에 반드시 확인하세요.</li></ul>
+<p>홈페이지를 만들고 나면 끝인 줄 알았는데, 업체에서 <a href="/columns/maintenance-scope">유지보수</a> 계약 이야기를 꺼냅니다. 매달 돈을 내야 한다는데 정확히 뭘 해주는 건지, 안 하면 큰일 나는 건지 애매합니다. 유지보수라는 말 안에 여러 성격의 일이 섞여 있어서 그렇습니다.</p><h2 id="유지보수에-포함되는-일의-종류">유지보수에 포함되는 일의 종류</h2><p>유지보수는 크게 세 갈래입니다. 첫째는 <strong>인프라 유지</strong>로, <a href="/columns/web-hosting">호스팅</a> 서버 관리, <a href="/columns/domain-register">도메인</a> 갱신, <a href="/columns/security-check">보안</a> 인증서 관리처럼 사이트가 꺼지지 않게 하는 일입니다. 둘째는 <strong><a href="/columns/content-strategy">콘텐츠</a> 수정</strong>으로, 영업시간 변경, 가격 수정, 공지 등록 같은 내용 갱신입니다.</p><p>셋째는 <strong>기능 개선</strong>입니다. 페이지 추가, 새 기능 개발처럼 사실상 추가 제작에 가까운 일입니다. 견적을 볼 때 이 세 가지 중 어디까지가 계약 범위인지 구분하는 것이 출발점입니다. '유지보수 포함'이라는 말만 믿으면 나중에 셋째 영역에서 추가 비용 문제가 생깁니다.</p><h2 id="월정액과-건별-청구-뭐가-유리할까">월정액과 건별 청구, 뭐가 유리할까</h2><p><strong>월정액</strong>은 매달 일정 금액을 내고 정해진 범위의 수정을 받는 방식입니다. 수정 요청이 잦은 사이트라면 예측 가능해서 편합니다. 일반적으로 소규모 사이트는 월 수만원대에서 형성되는 경우가 많습니다. <strong>건별 청구</strong>는 요청할 때마다 비용을 내는 방식으로, 수정이 1년에 몇 번 없는 사이트라면 이쪽이 쌀 수 있습니다.</p><p>판단 기준은 단순합니다. 지난 몇 달간 수정 요청이 얼마나 있었는지 세어 보고, 월정액 1년치와 건별 예상 비용을 비교하면 됩니다. 소개형 홈페이지는 내용 변경이 적어 건별로도 충분한 경우가 많고, 공지·이벤트가 잦은 업종은 월정액이 마음 편합니다.</p><h2 id="계약서에서-확인할-조항">계약서에서 확인할 조항</h2><ul><li>월 수정 횟수 또는 작업 시간 한도</li><li>수정과 신규 제작의 경계(페이지 추가는 별도인지)</li><li>요청 후 처리 기한(며칠 안에 반영되는지)</li><li>호스팅·도메인 비용 포함 여부</li><li>계약 해지 시 데이터와 소유권 이전 절차</li></ul><p>특히 마지막 항목이 중요합니다. 유지보수 계약을 끊으면 사이트를 쓸 수 없는 구조인지, 다른 곳으로 옮길 수 있는지는 반드시 계약 전에 확인하세요.</p><h2 id="유지보수-비용을-줄이는-요령">유지보수 비용을 줄이는 요령</h2><p>수정 요청을 모아서 한 번에 보내면 건별 비용과 커뮤니케이션 낭비가 줄어듭니다. 또 제작 단계에서 '자주 바뀔 내용'(가격표, 공지 등)을 직접 수정할 수 있는 구조로 요청해 두면 소소한 수정 때마다 업체를 부를 필요가 없어집니다.</p><p>제작 상품에 수정 지원이 포함된 경우도 있습니다. 예를 들어 NOAH는 기본 패키지에 1년 무제한 텍스트 수정이 포함되고, 그 이후 유지보수는 월 3만원 옵션으로 선택할 수 있습니다. 이렇게 포함 범위가 명시된 상품은 예산 계획이 쉽습니다.</p><h2 id="정리">정리</h2><ul><li>유지보수는 인프라 유지·콘텐츠 수정·기능 개선으로 나뉘며, 계약 범위 구분이 핵심입니다.</li><li>수정 빈도를 기준으로 월정액과 건별 청구를 비교해 고르세요.</li><li>해지 시 소유권과 데이터 이전 조항은 계약 전에 반드시 확인하세요.</li></ul>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#유지보수</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#월비용</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#운영</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/landing-cost" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">랜딩페이지 제작 비용, 한 장짜리인데 왜 가격이 제각각일까</p>
+        </a>
+        <a href="/columns/renewal-cost" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 리뉴얼 비용 — 새로 만들기와 고쳐 쓰기, 갈림길의 계산법</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/cost" class="hub-pill">비용·견적 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점 · NOAH 칼럼</title>
     <meta name="description" content="해외 대표 홈페이지 빌더 윅스의 특징과 일반적으로 언급되는 장단점을 중립적으로 정리했습니다. 국내 사업자가 선택 전 확인해야 할 포인트를 담았습니다." />
-    <meta name="keywords" content="윅스(Wix) 홈페이지 후기, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/wix-review" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/imweb-review" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/cafe24-guide" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점" />
     <meta property="og:description" content="해외 대표 홈페이지 빌더 윅스의 특징과 일반적으로 언급되는 장단점을 중립적으로 정리했습니다. 국내 사업자가 선택 전 확인해야 할 포인트를 담았습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/wix-review" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/wix-review.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-04-23" />
+    <meta property="article:section" content="제작 방식 비교" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점" />
+    <meta name="twitter:description" content="해외 대표 홈페이지 빌더 윅스의 특징과 일반적으로 언급되는 장단점을 중립적으로 정리했습니다. 국내 사업자가 선택 전 확인해야 할 포인트를 담았습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/wix-review.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점", "description": "해외 대표 홈페이지 빌더 윅스의 특징과 일반적으로 언급되는 장단점을 중립적으로 정리했습니다. 국내 사업자가 선택 전 확인해야 할 포인트를 담았습니다.", "datePublished": "2026-04-23", "dateModified": "2026-04-23", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/wix-review"}, "keywords": "윅스(Wix) 홈페이지 후기"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점", "item": "https://noahhomepage.co.kr/columns/wix-review"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점", "description": "해외 대표 홈페이지 빌더 윅스의 특징과 일반적으로 언급되는 장단점을 중립적으로 정리했습니다. 국내 사업자가 선택 전 확인해야 할 포인트를 담았습니다.", "datePublished": "2026-04-23", "dateModified": "2026-04-23", "inLanguage": "ko-KR", "wordCount": 1181, "articleSection": "제작 방식 비교", "keywords": "윅스(Wix) 홈페이지 후기, 윅스, Wix, 홈페이지빌더", "image": "https://noahhomepage.co.kr/assets/images/og/wix-review.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/wix-review"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "윅스(Wix) 홈페이지 후기"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 방식 비교", "item": "https://noahhomepage.co.kr/columns/topic/compare"}, {"@type": "ListItem", "position": 4, "name": "윅스(Wix) 홈페이지, 일반적으로 꼽히는 장단점", "item": "https://noahhomepage.co.kr/columns/wix-review"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 방식 비교</span>
+        <a href="/columns/topic/compare" class="hover:text-white">제작 방식 비교</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 방식 비교</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#윅스의-기본-성격">윅스의 기본 성격</a></li>
+          <li><a href="#일반적으로-장점으로-꼽히는-점">일반적으로 장점으로 꼽히는 점</a></li>
+          <li><a href="#국내-사업자가-확인할-한계">국내 사업자가 확인할 한계</a></li>
+          <li><a href="#이런-상황에-잘-맞습니다">이런 상황에 잘 맞습니다</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>윅스(Wix)는 전 세계적으로 이용자가 많은 해외 드래그앤드롭 홈페이지 빌더입니다. 국내에서도 포트폴리오나 소규모 브랜드 사이트 용도로 자주 검토되는데, 국내 서비스와는 환경이 달라 확인할 점이 있습니다. 이 글은 직접 사용 경험담이 아니라, 일반적으로 알려진 특징과 평가를 정리한 내용입니다.</p><h2>윅스의 기본 성격</h2><p>윅스는 화면에 요소를 끌어다 놓는 방식의 에디터로 자유로운 배치가 가능한 것이 특징입니다. 호스팅이 포함된 임대형 구조이고, 템플릿 종류가 많으며, 앱 마켓을 통해 기능을 추가하는 생태계를 갖추고 있습니다. 무료 플랜과 유료 플랜이 있으며 요금과 제공 기능은 플랜에 따라 다르므로 공식 페이지에서 최신 정보를 확인하는 것이 안전합니다.</p><h2>일반적으로 장점으로 꼽히는 점</h2><ul><li>디자인 자유도가 높은 드래그앤드롭 에디터</li><li>다양한 업종별 템플릿과 풍부한 디자인 요소</li><li>서버 관리가 필요 없는 올인원 구조</li><li>글로벌 서비스로서 다국어 사이트 구성에 유리하다는 평</li></ul><h2>국내 사업자가 확인할 한계</h2><ul><li><strong>국내 결제·연동 환경</strong> — 해외 서비스 특성상 국내 PG나 국내 특화 기능 연동은 국내 빌더 대비 확인이 더 필요할 수 있습니다.</li><li><strong>한국어 지원 범위</strong> — 인터페이스와 지원 문서의 한국어 지원 수준은 사용 전 직접 확인해 보는 것이 좋습니다.</li><li><strong>플랫폼 이전 제약</strong> — 임대형 빌더 공통으로, 나중에 다른 플랫폼으로 사이트를 그대로 옮기기는 어렵습니다.</li><li><strong>네이버 중심 검색 환경</strong> — 국내 고객 대상이라면 네이버 서치어드바이저 등록 등 국내 검색 대응을 별도로 챙겨야 합니다.</li></ul><h2>이런 상황에 잘 맞습니다</h2><p>디자인을 세밀하게 직접 만지고 싶은 분, 포트폴리오·스튜디오처럼 시각적 표현이 중요한 사이트, 해외 고객 비중이 있는 비즈니스에는 윅스의 자유도와 글로벌 생태계가 잘 맞는다는 평가가 많습니다. 반대로 국내 결제 중심의 쇼핑몰이나 네이버 검색 의존도가 높은 업종이라면 국내 빌더나 쇼핑몰 특화 서비스도 함께 비교해 보는 것이 좋습니다.</p><h2>정리</h2><ul><li>윅스는 자유도 높은 해외 드래그앤드롭 빌더로 디자인 중심 사이트에 강점이 있습니다.</li><li>국내 결제·검색 환경 대응은 선택 전에 직접 확인이 필요합니다.</li><li>요금·기능은 플랜별로 다르니 공식 페이지 최신 정보를 기준으로 판단하세요.</li></ul><p>비교가 어렵거나 직접 만들 시간이 없다면 NOAH에 문의해 보세요. 199,000원 패키지로 7일 안에 오픈하며, SEO 기본 설정과 GA·GTM 설치 지원이 포함되어 국내 검색 환경 대응까지 함께 정리해 드립니다.</p>
+<p>윅스(Wix)는 전 세계적으로 이용자가 많은 해외 드래그앤드롭 홈페이지 빌더입니다. 국내에서도 포트폴리오나 소규모 브랜드 사이트 용도로 자주 검토되는데, 국내 서비스와는 환경이 달라 확인할 점이 있습니다. 이 글은 직접 사용 경험담이 아니라, 일반적으로 알려진 특징과 평가를 정리한 내용입니다.</p><h2 id="윅스의-기본-성격">윅스의 기본 성격</h2><p>윅스는 화면에 요소를 끌어다 놓는 방식의 에디터로 자유로운 배치가 가능한 것이 특징입니다. <a href="/columns/web-hosting">호스팅</a>이 포함된 임대형 구조이고, <a href="/columns/template-homepage">템플릿</a> 종류가 많으며, 앱 마켓을 통해 기능을 추가하는 생태계를 갖추고 있습니다. 무료 플랜과 유료 플랜이 있으며 요금과 제공 기능은 플랜에 따라 다르므로 공식 페이지에서 최신 정보를 확인하는 것이 안전합니다.</p><h2 id="일반적으로-장점으로-꼽히는-점">일반적으로 장점으로 꼽히는 점</h2><ul><li>디자인 자유도가 높은 드래그앤드롭 에디터</li><li>다양한 업종별 템플릿과 풍부한 디자인 요소</li><li>서버 관리가 필요 없는 올인원 구조</li><li>글로벌 서비스로서 다국어 사이트 구성에 유리하다는 평</li></ul><h2 id="국내-사업자가-확인할-한계">국내 사업자가 확인할 한계</h2><ul><li><strong>국내 결제·연동 환경</strong> — 해외 서비스 특성상 국내 PG나 국내 특화 기능 연동은 국내 빌더 대비 확인이 더 필요할 수 있습니다.</li><li><strong>한국어 지원 범위</strong> — 인터페이스와 지원 문서의 한국어 지원 수준은 사용 전 직접 확인해 보는 것이 좋습니다.</li><li><strong>플랫폼 이전 제약</strong> — 임대형 빌더 공통으로, 나중에 다른 플랫폼으로 사이트를 그대로 옮기기는 어렵습니다.</li><li><strong>네이버 중심 검색 환경</strong> — 국내 고객 대상이라면 네이버 <a href="/columns/naver-advisor">서치어드바이저</a> 등록 등 국내 검색 대응을 별도로 챙겨야 합니다.</li></ul><h2 id="이런-상황에-잘-맞습니다">이런 상황에 잘 맞습니다</h2><p>디자인을 세밀하게 직접 만지고 싶은 분, 포트폴리오·스튜디오처럼 시각적 표현이 중요한 사이트, 해외 고객 비중이 있는 비즈니스에는 윅스의 자유도와 글로벌 생태계가 잘 맞는다는 평가가 많습니다. 반대로 국내 결제 중심의 쇼핑몰이나 네이버 검색 의존도가 높은 업종이라면 국내 빌더나 쇼핑몰 특화 서비스도 함께 비교해 보는 것이 좋습니다.</p><h2 id="정리">정리</h2><ul><li>윅스는 자유도 높은 해외 드래그앤드롭 빌더로 디자인 중심 사이트에 강점이 있습니다.</li><li>국내 결제·검색 환경 대응은 선택 전에 직접 확인이 필요합니다.</li><li>요금·기능은 플랜별로 다르니 공식 페이지 최신 정보를 기준으로 판단하세요.</li></ul><p>비교가 어렵거나 직접 만들 시간이 없다면 NOAH에 문의해 보세요. 199,000원 패키지로 7일 안에 오픈하며, SEO 기본 설정과 GA·GTM 설치 지원이 포함되어 국내 검색 환경 대응까지 함께 정리해 드립니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#윅스</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#Wix</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지빌더</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/imweb-review" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">아임웹 장단점 총정리, 계약 전에 확인할 것들</p>
+        </a>
+        <a href="/columns/cafe24-guide" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">카페24 쇼핑몰 시작하기, 오픈까지의 준비 순서</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/compare" class="hub-pill">제작 방식 비교 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

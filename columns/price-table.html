@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 제작 단가표 보는 법을 항목별로 풀었습니다. 페이지당 단가의 함정, 포함·불포함 표기 읽는 법, 서로 다른 단가표를 총액 기준으로 환산해 비교하는 요령을 정리했습니다." />
-    <meta name="keywords" content="홈페이지 제작 단가표 보는 법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/price-table" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/renewal-cost" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/gov-support" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령" />
     <meta property="og:description" content="홈페이지 제작 단가표 보는 법을 항목별로 풀었습니다. 페이지당 단가의 함정, 포함·불포함 표기 읽는 법, 서로 다른 단가표를 총액 기준으로 환산해 비교하는 요령을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/price-table" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/price-table.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-08-03" />
+    <meta property="article:section" content="비용·견적" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령" />
+    <meta name="twitter:description" content="홈페이지 제작 단가표 보는 법을 항목별로 풀었습니다. 페이지당 단가의 함정, 포함·불포함 표기 읽는 법, 서로 다른 단가표를 총액 기준으로 환산해 비교하는 요령을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/price-table.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령", "description": "홈페이지 제작 단가표 보는 법을 항목별로 풀었습니다. 페이지당 단가의 함정, 포함·불포함 표기 읽는 법, 서로 다른 단가표를 총액 기준으로 환산해 비교하는 요령을 정리했습니다.", "datePublished": "2026-08-03", "dateModified": "2026-08-03", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/price-table"}, "keywords": "홈페이지 제작 단가표 보는 법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령", "item": "https://noahhomepage.co.kr/columns/price-table"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령", "description": "홈페이지 제작 단가표 보는 법을 항목별로 풀었습니다. 페이지당 단가의 함정, 포함·불포함 표기 읽는 법, 서로 다른 단가표를 총액 기준으로 환산해 비교하는 요령을 정리했습니다.", "datePublished": "2026-08-03", "dateModified": "2026-08-03", "inLanguage": "ko-KR", "wordCount": 1447, "articleSection": "비용·견적", "keywords": "홈페이지 제작 단가표 보는 법, 단가표, 견적비교, 체크리스트", "image": "https://noahhomepage.co.kr/assets/images/og/price-table.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/price-table"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 제작 단가표 보는 법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "비용·견적", "item": "https://noahhomepage.co.kr/columns/topic/cost"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 제작 단가표 보는 법 — 항목별 함정과 총액 계산 요령", "item": "https://noahhomepage.co.kr/columns/price-table"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>비용·견적</span>
+        <a href="/columns/topic/cost" class="hover:text-white">비용·견적</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">비용·견적</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#단가표의-기본-구성-이해하기">단가표의 기본 구성 이해하기</a></li>
+          <li><a href="#페이지당-단가의-함정">페이지당 단가의 함정</a></li>
+          <li><a href="#포함불포함-표기를-읽는-법">포함·불포함 표기를 읽는 법</a></li>
+          <li><a href="#서로-다른-단가표를-비교하는-요령">서로 다른 단가표를 비교하는 요령</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>업체 홈페이지에 들어가면 단가표가 있습니다. 그런데 A업체는 '기본형 50만원', B업체는 '페이지당 10만원', C업체는 '상담 후 견적'이라고 적혀 있어 도무지 비교가 안 됩니다. 단가표는 읽는 법을 알면 업체의 가격 구조가 보이는 문서입니다.</p><h2>단가표의 기본 구성 이해하기</h2><p>대부분의 단가표는 <strong>기본 패키지 + 옵션</strong> 구조입니다. 기본 패키지에는 보통 메인 페이지와 몇 개의 서브페이지, 기본 기능이 묶여 있고, 그 밖의 것은 옵션으로 붙습니다. 그래서 단가표를 볼 때 첫 질문은 '기본에 뭐가 들어 있나'입니다.</p><p>같은 '기본형 50만원'이라도 페이지 3개짜리와 6개짜리는 전혀 다른 상품입니다. 기본 포함 페이지 수, 반응형 여부, 호스팅 포함 기간, 이 세 가지를 먼저 확인하면 단가표의 절반은 읽은 셈입니다.</p><h2>페이지당 단가의 함정</h2><p>'페이지당 O만원' 방식은 직관적이지만 함정이 있습니다. <strong>페이지의 기준이 업체마다 다르기 때문</strong>입니다. 어떤 곳은 화면 한 장을 1페이지로 세고, 어떤 곳은 긴 스크롤 페이지를 분량에 따라 여러 페이지로 계산합니다. 메인 페이지는 서브페이지보다 단가가 높게 잡히는 것이 일반적이라는 점도 알아두세요.</p><p>페이지당 단가로 견적을 받을 때는 '내가 원하는 구성이면 총 몇 페이지로 계산되나요?'라고 물어 총액을 확정하는 것이 안전합니다. 단가가 싼데 페이지를 잘게 세는 곳보다, 단가가 높아도 셈법이 명확한 곳이 결과적으로 저렴한 경우도 있습니다.</p><h2>포함·불포함 표기를 읽는 법</h2><p>단가표에서 가장 눈여겨볼 곳은 작은 글씨의 불포함 항목입니다. 자주 등장하는 별도 비용 항목은 다음과 같습니다.</p><ul><li>도메인 등록비와 연장비</li><li>호스팅 비용(포함이라면 몇 년까지인지)</li><li>원고 작성, 사진 촬영, 이미지 구입비</li><li>오픈 후 수정비(무상 횟수 초과 시)</li><li>부가세 별도 여부</li></ul><p>특히 부가세 별도 표기는 총액을 10% 바꾸는 항목이니 비교할 때 같은 기준으로 맞춰야 합니다.</p><h2>서로 다른 단가표를 비교하는 요령</h2><p>비교의 기준을 업체의 단가표가 아니라 <strong>내 요구사항</strong>으로 바꾸세요. 내가 원하는 페이지 구성과 기능을 먼저 적고, 각 업체 단가표로 그 구성을 만들면 얼마인지 계산하는 것입니다. 여기에 1년치 호스팅과 예상 수정비를 더한 '1년 총액'으로 줄을 세우면 공정한 비교가 됩니다.</p><p>상담 후 견적이라고만 적힌 업체는 나쁜 곳이 아니라 맞춤 작업 위주의 곳일 가능성이 큽니다. 다만 예산이 정해져 있다면, 가격이 공개된 업체부터 검토하는 편이 시간이 절약됩니다.</p><h2>정리</h2><ul><li>단가표는 기본 패키지의 포함 내역(페이지 수·반응형·호스팅)부터 확인하세요.</li><li>페이지당 단가는 페이지를 세는 기준을 확인하고 총액으로 환산해야 합니다.</li><li>내 요구사항 기준으로 각 업체 견적을 '1년 총액'으로 계산해 비교하세요.</li></ul><p>참고로 NOAH는 기본 199,000원(부가세 별도)에 서브페이지 5만원~, 문의폼 5만원 식으로 옵션 단가를 공개하고 있어 총액 계산이 어렵지 않은 구조입니다. 어떤 단가표든 마지막 질문은 하나입니다. '이 구성으로 1년에 총 얼마인가요?'</p>
+<p>업체 홈페이지에 들어가면 단가표가 있습니다. 그런데 A업체는 '기본형 50만원', B업체는 '페이지당 10만원', C업체는 '상담 후 <a href="/columns/homepage-quote">견적</a>'이라고 적혀 있어 도무지 비교가 안 됩니다. 단가표는 읽는 법을 알면 업체의 가격 구조가 보이는 문서입니다.</p><h2 id="단가표의-기본-구성-이해하기">단가표의 기본 구성 이해하기</h2><p>대부분의 단가표는 <strong>기본 패키지 + 옵션</strong> 구조입니다. 기본 패키지에는 보통 메인 페이지와 몇 개의 <a href="/columns/essential-pages">서브페이지</a>, 기본 기능이 묶여 있고, 그 밖의 것은 옵션으로 붙습니다. 그래서 단가표를 볼 때 첫 질문은 '기본에 뭐가 들어 있나'입니다.</p><p>같은 '기본형 50만원'이라도 페이지 3개짜리와 6개짜리는 전혀 다른 상품입니다. 기본 포함 페이지 수, 반응형 여부, <a href="/columns/web-hosting">호스팅</a> 포함 기간, 이 세 가지를 먼저 확인하면 단가표의 절반은 읽은 셈입니다.</p><h2 id="페이지당-단가의-함정">페이지당 단가의 함정</h2><p>'페이지당 O만원' 방식은 직관적이지만 함정이 있습니다. <strong>페이지의 기준이 업체마다 다르기 때문</strong>입니다. 어떤 곳은 화면 한 장을 1페이지로 세고, 어떤 곳은 긴 스크롤 페이지를 분량에 따라 여러 페이지로 계산합니다. 메인 페이지는 서브페이지보다 단가가 높게 잡히는 것이 일반적이라는 점도 알아두세요.</p><p>페이지당 단가로 견적을 받을 때는 '내가 원하는 구성이면 총 몇 페이지로 계산되나요?'라고 물어 총액을 확정하는 것이 안전합니다. 단가가 싼데 페이지를 잘게 세는 곳보다, 단가가 높아도 셈법이 명확한 곳이 결과적으로 저렴한 경우도 있습니다.</p><h2 id="포함불포함-표기를-읽는-법">포함·불포함 표기를 읽는 법</h2><p>단가표에서 가장 눈여겨볼 곳은 작은 글씨의 불포함 항목입니다. 자주 등장하는 별도 비용 항목은 다음과 같습니다.</p><ul><li><a href="/columns/domain-register">도메인</a> 등록비와 연장비</li><li>호스팅 비용(포함이라면 몇 년까지인지)</li><li>원고 작성, <a href="/columns/photo-prepare">사진</a> 촬영, 이미지 구입비</li><li>오픈 후 수정비(무상 횟수 초과 시)</li><li>부가세 별도 여부</li></ul><p>특히 부가세 별도 표기는 총액을 10% 바꾸는 항목이니 비교할 때 같은 기준으로 맞춰야 합니다.</p><h2 id="서로-다른-단가표를-비교하는-요령">서로 다른 단가표를 비교하는 요령</h2><p>비교의 기준을 업체의 단가표가 아니라 <strong>내 요구사항</strong>으로 바꾸세요. 내가 원하는 페이지 구성과 기능을 먼저 적고, 각 업체 단가표로 그 구성을 만들면 얼마인지 계산하는 것입니다. 여기에 1년치 호스팅과 예상 수정비를 더한 '1년 총액'으로 줄을 세우면 공정한 비교가 됩니다.</p><p>상담 후 견적이라고만 적힌 업체는 나쁜 곳이 아니라 맞춤 작업 위주의 곳일 가능성이 큽니다. 다만 예산이 정해져 있다면, 가격이 공개된 업체부터 검토하는 편이 시간이 절약됩니다.</p><h2 id="정리">정리</h2><ul><li>단가표는 기본 패키지의 포함 내역(페이지 수·반응형·호스팅)부터 확인하세요.</li><li>페이지당 단가는 페이지를 세는 기준을 확인하고 총액으로 환산해야 합니다.</li><li>내 요구사항 기준으로 각 업체 견적을 '1년 총액'으로 계산해 비교하세요.</li></ul><p>참고로 NOAH는 기본 199,000원(부가세 별도)에 서브페이지 5만원~, 문의폼 5만원 식으로 옵션 단가를 공개하고 있어 총액 계산이 어렵지 않은 구조입니다. 어떤 단가표든 마지막 질문은 하나입니다. '이 구성으로 1년에 총 얼마인가요?'</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#단가표</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#견적비교</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#체크리스트</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/renewal-cost" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 리뉴얼 비용 — 새로 만들기와 고쳐 쓰기, 갈림길의 계산법</p>
+        </a>
+        <a href="/columns/gov-support" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">소상공인 홈페이지 지원사업, 어디서 찾고 어떻게 신청할까</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/cost" class="hub-pill">비용·견적 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

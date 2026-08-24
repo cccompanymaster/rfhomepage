@@ -19,17 +19,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 SEO의 기본 개념부터 검색엔진 등록, 메타태그, 콘텐츠 작성 원칙까지. 전문 지식 없이도 사장님이 직접 점검할 수 있는 SEO 기초를 순서대로 정리했습니다." />
-    <meta name="keywords" content="홈페이지 SEO 기본, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/seo-basics" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/naver-register" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리" />
     <meta property="og:description" content="홈페이지 SEO의 기본 개념부터 검색엔진 등록, 메타태그, 콘텐츠 작성 원칙까지. 전문 지식 없이도 사장님이 직접 점검할 수 있는 SEO 기초를 순서대로 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/seo-basics" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/seo-basics.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-05-27" />
+    <meta property="article:section" content="SEO·검색노출" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리" />
+    <meta name="twitter:description" content="홈페이지 SEO의 기본 개념부터 검색엔진 등록, 메타태그, 콘텐츠 작성 원칙까지. 전문 지식 없이도 사장님이 직접 점검할 수 있는 SEO 기초를 순서대로 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/seo-basics.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +66,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +99,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리", "description": "홈페이지 SEO의 기본 개념부터 검색엔진 등록, 메타태그, 콘텐츠 작성 원칙까지. 전문 지식 없이도 사장님이 직접 점검할 수 있는 SEO 기초를 순서대로 정리했습니다.", "datePublished": "2026-05-27", "dateModified": "2026-05-27", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/seo-basics"}, "keywords": "홈페이지 SEO 기본"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리", "item": "https://noahhomepage.co.kr/columns/seo-basics"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리", "description": "홈페이지 SEO의 기본 개념부터 검색엔진 등록, 메타태그, 콘텐츠 작성 원칙까지. 전문 지식 없이도 사장님이 직접 점검할 수 있는 SEO 기초를 순서대로 정리했습니다.", "datePublished": "2026-05-27", "dateModified": "2026-05-27", "inLanguage": "ko-KR", "wordCount": 1237, "articleSection": "SEO·검색노출", "keywords": "홈페이지 SEO 기본, SEO기초, 검색노출, 홈페이지운영", "image": "https://noahhomepage.co.kr/assets/images/og/seo-basics.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/seo-basics"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 SEO 기본"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "SEO·검색노출", "item": "https://noahhomepage.co.kr/columns/topic/seo"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 SEO 기본, 사장님이 꼭 알아야 할 핵심 정리", "item": "https://noahhomepage.co.kr/columns/seo-basics"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +127,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>SEO·검색노출</span>
+        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -112,8 +139,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#SEO가-하는-일">SEO가 하는 일</a></li>
+          <li><a href="#가장-먼저-할-일-검색엔진에-사이트-알리기">가장 먼저 할 일: 검색엔진에 사이트 알리기</a></li>
+          <li><a href="#페이지-안에서-챙길-기본기">페이지 안에서 챙길 기본기</a></li>
+          <li><a href="#콘텐츠가-결국-핵심">콘텐츠가 결국 핵심</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지를 만들었는데 네이버나 구글에서 검색해도 나오지 않는다면, 대부분 SEO(검색엔진 최적화)가 되어 있지 않기 때문입니다. SEO는 광고비를 쓰는 것이 아니라, 검색엔진이 내 사이트를 잘 읽고 이해하도록 정리해 주는 작업입니다. 어렵게 들리지만 기본기는 사장님도 충분히 직접 챙길 수 있습니다.</p><h2>SEO가 하는 일</h2><p>검색엔진은 크롤러라는 프로그램으로 웹페이지를 수집하고, 내용을 분석해 색인(인덱스)에 저장한 뒤, 검색어와 관련성이 높은 순서로 보여줍니다. SEO는 이 세 단계, 즉 <strong>수집·색인·순위</strong> 각각에서 불이익을 받지 않도록 사이트를 정비하는 일입니다. 순위는 검색엔진이 결정하므로 누구도 특정 순위를 보장할 수 없습니다. "한 달 안에 1페이지 보장" 같은 말은 그 자체로 의심해야 합니다.</p><h2>가장 먼저 할 일: 검색엔진에 사이트 알리기</h2><p>사이트를 열었다고 검색엔진이 바로 알아주지는 않습니다. 네이버는 <strong>서치어드바이저</strong>, 구글은 <strong>서치콘솔</strong>에 사이트를 등록하고 사이트맵을 제출하는 것이 출발점입니다. 이 과정만 해도 "검색해도 안 나오는" 문제의 상당수가 해결됩니다.</p><h2>페이지 안에서 챙길 기본기</h2><ul><li><strong>제목(title)과 설명(description)</strong>: 페이지마다 다른 내용으로, 검색자가 찾는 표현을 넣어 작성합니다.</li><li><strong>제목 구조(h1, h2)</strong>: 페이지의 주제를 계층적으로 정리합니다. 디자인용으로 아무 데나 쓰지 않습니다.</li><li><strong>이미지 대체 텍스트(alt)</strong>: 이미지가 무엇인지 글로 설명합니다.</li><li><strong>모바일 화면과 속도</strong>: 스마트폰에서 잘 보이고 빠르게 열리는지 확인합니다.</li></ul><h2>콘텐츠가 결국 핵심</h2><p>기술 설정이 끝났다면 그다음은 콘텐츠입니다. 고객이 실제로 검색할 만한 질문(예: "미용실 예약 방법", "간판 제작 비용")에 답하는 페이지를 꾸준히 늘리는 것이 가장 확실한 SEO입니다. 한 페이지는 한 가지 주제에 집중하고, 제목에 그 주제의 검색어를 자연스럽게 담으세요. 같은 키워드를 억지로 반복하는 <em>키워드 스터핑</em>이나 링크 구매는 단기 효과조차 불확실하고, 적발되면 오히려 노출이 제한될 수 있으니 피하세요. SEO는 광고와 달리 효과가 서서히 쌓이는 대신, 한번 자리 잡으면 꺼지지 않는 자산이 됩니다.</p><h2>정리</h2><p>첫째, 네이버 서치어드바이저와 구글 서치콘솔에 사이트를 등록하고 사이트맵을 제출하세요. 둘째, 페이지마다 제목·설명·제목 구조를 제대로 작성하세요. 셋째, 고객의 질문에 답하는 콘텐츠를 꾸준히 쌓으세요. NOAH 제작 패키지에는 SEO 기본 설정과 사이트맵, 메타태그가 기본 포함되어 있어 이 출발점을 처음부터 갖추고 시작할 수 있습니다.</p>
+<p>홈페이지를 만들었는데 네이버나 구글에서 검색해도 나오지 않는다면, 대부분 SEO(검색엔진 최적화)가 되어 있지 않기 때문입니다. SEO는 광고비를 쓰는 것이 아니라, 검색엔진이 내 사이트를 잘 읽고 이해하도록 정리해 주는 작업입니다. 어렵게 들리지만 기본기는 사장님도 충분히 직접 챙길 수 있습니다.</p><h2 id="SEO가-하는-일">SEO가 하는 일</h2><p>검색엔진은 크롤러라는 프로그램으로 웹페이지를 수집하고, 내용을 분석해 색인(인덱스)에 저장한 뒤, 검색어와 관련성이 높은 순서로 보여줍니다. SEO는 이 세 단계, 즉 <strong>수집·색인·순위</strong> 각각에서 불이익을 받지 않도록 사이트를 정비하는 일입니다. 순위는 검색엔진이 결정하므로 누구도 특정 순위를 보장할 수 없습니다. "한 달 안에 1페이지 보장" 같은 말은 그 자체로 의심해야 합니다.</p><h2 id="가장-먼저-할-일-검색엔진에-사이트-알리기">가장 먼저 할 일: 검색엔진에 사이트 알리기</h2><p>사이트를 열었다고 검색엔진이 바로 알아주지는 않습니다. 네이버는 <strong><a href="/columns/naver-advisor">서치어드바이저</a></strong>, 구글은 <strong><a href="/columns/search-console">서치콘솔</a></strong>에 사이트를 등록하고 <a href="/columns/sitemap-submit">사이트맵</a>을 제출하는 것이 출발점입니다. 이 과정만 해도 "검색해도 안 나오는" 문제의 상당수가 해결됩니다.</p><h2 id="페이지-안에서-챙길-기본기">페이지 안에서 챙길 기본기</h2><ul><li><strong>제목(title)과 설명(description)</strong>: 페이지마다 다른 내용으로, 검색자가 찾는 표현을 넣어 작성합니다.</li><li><strong>제목 구조(h1, h2)</strong>: 페이지의 주제를 계층적으로 정리합니다. 디자인용으로 아무 데나 쓰지 않습니다.</li><li><strong>이미지 대체 텍스트(alt)</strong>: 이미지가 무엇인지 글로 설명합니다.</li><li><strong>모바일 화면과 <a href="/columns/speed-optimize">속도</a></strong>: 스마트폰에서 잘 보이고 빠르게 열리는지 확인합니다.</li></ul><h2 id="콘텐츠가-결국-핵심">콘텐츠가 결국 핵심</h2><p>기술 설정이 끝났다면 그다음은 콘텐츠입니다. 고객이 실제로 검색할 만한 질문(예: "미용실 예약 방법", "간판 <a href="/columns/homepage-cost">제작 비용</a>")에 답하는 페이지를 꾸준히 늘리는 것이 가장 확실한 SEO입니다. 한 페이지는 한 가지 주제에 집중하고, 제목에 그 주제의 검색어를 자연스럽게 담으세요. 같은 키워드를 억지로 반복하는 <em>키워드 스터핑</em>이나 링크 구매는 단기 효과조차 불확실하고, 적발되면 오히려 노출이 제한될 수 있으니 피하세요. SEO는 광고와 달리 효과가 서서히 쌓이는 대신, 한번 자리 잡으면 꺼지지 않는 자산이 됩니다.</p><h2 id="정리">정리</h2><p>첫째, 네이버 서치어드바이저와 구글 서치콘솔에 사이트를 등록하고 사이트맵을 제출하세요. 둘째, 페이지마다 제목·설명·제목 구조를 제대로 작성하세요. 셋째, 고객의 질문에 답하는 콘텐츠를 꾸준히 쌓으세요. NOAH 제작 패키지에는 SEO 기본 설정과 사이트맵, 메타태그가 기본 포함되어 있어 이 출발점을 처음부터 갖추고 시작할 수 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#SEO기초</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#검색노출</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지운영</span></div>
@@ -129,6 +167,13 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/naver-register" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">네이버 검색 등록 방법, 내 홈페이지 노출시키는 절차</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +198,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/seo" class="hub-pill">SEO·검색노출 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

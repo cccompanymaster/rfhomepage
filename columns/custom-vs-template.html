@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까 · NOAH 칼럼</title>
     <meta name="description" content="맞춤 제작과 템플릿 홈페이지의 차이를 비용, 기간, 디자인 자유도, 유지보수 관점에서 비교했습니다. 우열이 아닌 목적 기준으로 내 상황에 맞는 방식을 고르는 법을 정리합니다." />
-    <meta name="keywords" content="맞춤 제작과 템플릿 차이, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/custom-vs-template" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/template-homepage" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/choose-agency" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까" />
     <meta property="og:description" content="맞춤 제작과 템플릿 홈페이지의 차이를 비용, 기간, 디자인 자유도, 유지보수 관점에서 비교했습니다. 우열이 아닌 목적 기준으로 내 상황에 맞는 방식을 고르는 법을 정리합니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/custom-vs-template" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/custom-vs-template.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-04-15" />
+    <meta property="article:section" content="제작 방식 비교" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까" />
+    <meta name="twitter:description" content="맞춤 제작과 템플릿 홈페이지의 차이를 비용, 기간, 디자인 자유도, 유지보수 관점에서 비교했습니다. 우열이 아닌 목적 기준으로 내 상황에 맞는 방식을 고르는 법을 정리합니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/custom-vs-template.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까", "description": "맞춤 제작과 템플릿 홈페이지의 차이를 비용, 기간, 디자인 자유도, 유지보수 관점에서 비교했습니다. 우열이 아닌 목적 기준으로 내 상황에 맞는 방식을 고르는 법을 정리합니다.", "datePublished": "2026-04-15", "dateModified": "2026-04-15", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/custom-vs-template"}, "keywords": "맞춤 제작과 템플릿 차이"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까", "item": "https://noahhomepage.co.kr/columns/custom-vs-template"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까", "description": "맞춤 제작과 템플릿 홈페이지의 차이를 비용, 기간, 디자인 자유도, 유지보수 관점에서 비교했습니다. 우열이 아닌 목적 기준으로 내 상황에 맞는 방식을 고르는 법을 정리합니다.", "datePublished": "2026-04-15", "dateModified": "2026-04-15", "inLanguage": "ko-KR", "wordCount": 1118, "articleSection": "제작 방식 비교", "keywords": "맞춤 제작과 템플릿 차이, 맞춤제작, 템플릿, 비교", "image": "https://noahhomepage.co.kr/assets/images/og/custom-vs-template.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/custom-vs-template"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "맞춤 제작과 템플릿 차이"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 방식 비교", "item": "https://noahhomepage.co.kr/columns/topic/compare"}, {"@type": "ListItem", "position": 4, "name": "맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까", "item": "https://noahhomepage.co.kr/columns/custom-vs-template"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 방식 비교</span>
+        <a href="/columns/topic/compare" class="hover:text-white">제작 방식 비교</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 방식 비교</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#비용과-기간">비용과 기간</a></li>
+          <li><a href="#디자인과-기능의-자유도">디자인과 기능의 자유도</a></li>
+          <li><a href="#비교-표로-보는-차이">비교 표로 보는 차이</a></li>
+          <li><a href="#선택-기준">선택 기준</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지 제작을 알아보면 크게 두 갈래를 만납니다. 처음부터 설계해 만드는 맞춤 제작과, 완성된 틀에 콘텐츠를 얹는 템플릿 방식입니다. 어느 쪽이 우월한 게 아니라 목적에 따라 맞는 방식이 다릅니다. 저희처럼 템플릿 기반으로 일하는 곳도 맞춤 제작이 맞는 경우를 인정하는 것이 정직한 안내라고 생각합니다. 차이를 항목별로 비교해 보겠습니다.</p><h2>비용과 기간</h2><p>맞춤 제작은 기획, 디자인 시안, 개발, 검수 과정을 거치므로 보통 수백만 원 이상, 기간은 한 달에서 몇 달까지 걸립니다. 템플릿은 디자인 단계가 생략되어 수십만 원대, 며칠에서 1~2주면 오픈이 가능합니다. 다만 템플릿도 콘텐츠 정리가 늦어지거나 수정 요청이 많아지면 기간이 늘어나므로, 문구와 사진을 미리 준비하는 것이 어느 방식이든 일정 단축의 핵심입니다.</p><h2>디자인과 기능의 자유도</h2><p>맞춤 제작의 핵심 가치는 자유도입니다. 브랜드에 맞춘 독자적인 디자인, 예약·결제·회원 기능 같은 복잡한 요구를 그대로 구현할 수 있습니다. 템플릿은 정해진 구조 안에서 색상, 이미지, 문구를 바꾸는 수준이 기본이라 큰 구조 변경에는 한계가 있습니다. 이 한계는 템플릿 방식의 본질적인 특성이지 업체의 실력 문제가 아니므로, 요구사항이 틀을 벗어난다면 처음부터 맞춤 제작을 검토하는 것이 시간과 비용을 아끼는 길입니다.</p><h2>비교 표로 보는 차이</h2><table><thead><tr><th>항목</th><th>맞춤 제작</th><th>템플릿</th></tr></thead><tbody><tr><td>비용</td><td>수백만 원 이상</td><td>수십만 원대</td></tr><tr><td>기간</td><td>1개월 이상</td><td>수일~2주</td></tr><tr><td>디자인 자유도</td><td>높음</td><td>제한적</td></tr><tr><td>기능 확장</td><td>자유로움</td><td>틀 안에서 가능</td></tr><tr><td>결과 예측</td><td>시안 확인 전 어려움</td><td>계약 전 확인 가능</td></tr><tr><td>유지보수</td><td>제작사 의존도 높음</td><td>구조가 단순해 부담 적음</td></tr></tbody></table><h2>선택 기준</h2><p>기능 요구가 복잡하거나 브랜딩이 사업의 핵심 경쟁력이라면 맞춤 제작이 맞습니다. 반대로 소개형 홈페이지가 목적이고 예산과 시간이 한정되어 있다면 템플릿이 합리적입니다. 처음에 템플릿으로 시작해 사업이 커지면 맞춤 제작으로 이전하는 것도 흔한 경로입니다. 이때를 대비해 도메인을 고객 명의로 등록해 두면 이전이 훨씬 수월합니다.</p><h2>정리</h2><p>맞춤 제작은 자유도, 템플릿은 비용과 속도가 강점이며 우열의 문제가 아닙니다.</p><p>내 홈페이지의 목적과 기능 요구를 먼저 정리하면 선택은 어렵지 않습니다.</p><p>템플릿 기반인 NOAH는 199,000원에 7일 오픈을 제공하지만, 복잡한 기능이 필요한 분께는 맞춤 제작 검토를 권합니다.</p>
+<p>홈페이지 제작을 알아보면 크게 두 갈래를 만납니다. 처음부터 설계해 만드는 맞춤 제작과, 완성된 틀에 <a href="/columns/content-strategy">콘텐츠</a>를 얹는 <a href="/columns/template-homepage">템플릿</a> 방식입니다. 어느 쪽이 우월한 게 아니라 목적에 따라 맞는 방식이 다릅니다. 저희처럼 템플릿 기반으로 일하는 곳도 맞춤 제작이 맞는 경우를 인정하는 것이 정직한 안내라고 생각합니다. 차이를 항목별로 비교해 보겠습니다.</p><h2 id="비용과-기간">비용과 기간</h2><p>맞춤 제작은 기획, 디자인 시안, 개발, 검수 과정을 거치므로 보통 수백만 원 이상, 기간은 한 달에서 몇 달까지 걸립니다. 템플릿은 디자인 단계가 생략되어 수십만 원대, 며칠에서 1~2주면 오픈이 가능합니다. 다만 템플릿도 콘텐츠 정리가 늦어지거나 수정 요청이 많아지면 기간이 늘어나므로, 문구와 <a href="/columns/photo-prepare">사진</a>을 미리 준비하는 것이 어느 방식이든 일정 단축의 핵심입니다.</p><h2 id="디자인과-기능의-자유도">디자인과 기능의 자유도</h2><p>맞춤 제작의 핵심 가치는 자유도입니다. 브랜드에 맞춘 독자적인 디자인, 예약·결제·회원 기능 같은 복잡한 요구를 그대로 구현할 수 있습니다. 템플릿은 정해진 구조 안에서 색상, 이미지, 문구를 바꾸는 수준이 기본이라 큰 구조 변경에는 한계가 있습니다. 이 한계는 템플릿 방식의 본질적인 특성이지 업체의 실력 문제가 아니므로, 요구사항이 틀을 벗어난다면 처음부터 맞춤 제작을 검토하는 것이 시간과 비용을 아끼는 길입니다.</p><h2 id="비교-표로-보는-차이">비교 표로 보는 차이</h2><table><thead><tr><th>항목</th><th>맞춤 제작</th><th>템플릿</th></tr></thead><tbody><tr><td>비용</td><td>수백만 원 이상</td><td>수십만 원대</td></tr><tr><td>기간</td><td>1개월 이상</td><td>수일~2주</td></tr><tr><td>디자인 자유도</td><td>높음</td><td>제한적</td></tr><tr><td>기능 확장</td><td>자유로움</td><td>틀 안에서 가능</td></tr><tr><td>결과 예측</td><td>시안 확인 전 어려움</td><td>계약 전 확인 가능</td></tr><tr><td>유지보수</td><td>제작사 의존도 높음</td><td>구조가 단순해 부담 적음</td></tr></tbody></table><h2 id="선택-기준">선택 기준</h2><p>기능 요구가 복잡하거나 브랜딩이 사업의 핵심 경쟁력이라면 맞춤 제작이 맞습니다. 반대로 소개형 홈페이지가 목적이고 예산과 시간이 한정되어 있다면 템플릿이 합리적입니다. 처음에 템플릿으로 시작해 사업이 커지면 맞춤 제작으로 이전하는 것도 흔한 경로입니다. 이때를 대비해 <a href="/columns/domain-register">도메인</a>을 고객 명의로 등록해 두면 이전이 훨씬 수월합니다.</p><h2 id="정리">정리</h2><p>맞춤 제작은 자유도, 템플릿은 비용과 <a href="/columns/speed-optimize">속도</a>가 강점이며 우열의 문제가 아닙니다.</p><p>내 홈페이지의 목적과 기능 요구를 먼저 정리하면 선택은 어렵지 않습니다.</p><p>템플릿 기반인 NOAH는 199,000원에 7일 오픈을 제공하지만, 복잡한 기능이 필요한 분께는 맞춤 제작 검토를 권합니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#맞춤제작</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#템플릿</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#비교</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/template-homepage" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">템플릿 홈페이지 제작, 장점과 한계를 솔직하게 정리했습니다</p>
+        </a>
+        <a href="/columns/choose-agency" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 업체 선택 기준 5가지 체크리스트</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/compare" class="hub-pill">제작 방식 비교 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

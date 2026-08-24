@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 소유권 이전, 도메인부터 소스코드까지 정리 · NOAH 칼럼</title>
     <meta name="description" content="도메인, 호스팅, 소스코드, 관리 계정 네 가지 자산별 소유권 이전 방법을 정리했습니다. 왜 처음부터 고객 명의로 등록해야 하는지, 이전 시 놓치기 쉬운 항목은 무엇인지 설명합니다." />
-    <meta name="keywords" content="홈페이지 소유권 이전, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/ownership-transfer" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/avoid-scam" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/contract-check" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 소유권 이전, 도메인부터 소스코드까지 정리" />
     <meta property="og:description" content="도메인, 호스팅, 소스코드, 관리 계정 네 가지 자산별 소유권 이전 방법을 정리했습니다. 왜 처음부터 고객 명의로 등록해야 하는지, 이전 시 놓치기 쉬운 항목은 무엇인지 설명합니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/ownership-transfer" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/ownership-transfer.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-04-07" />
+    <meta property="article:section" content="제작 방식 비교" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 소유권 이전, 도메인부터 소스코드까지 정리" />
+    <meta name="twitter:description" content="도메인, 호스팅, 소스코드, 관리 계정 네 가지 자산별 소유권 이전 방법을 정리했습니다. 왜 처음부터 고객 명의로 등록해야 하는지, 이전 시 놓치기 쉬운 항목은 무엇인지 설명합니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/ownership-transfer.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 소유권 이전, 도메인부터 소스코드까지 정리", "description": "도메인, 호스팅, 소스코드, 관리 계정 네 가지 자산별 소유권 이전 방법을 정리했습니다. 왜 처음부터 고객 명의로 등록해야 하는지, 이전 시 놓치기 쉬운 항목은 무엇인지 설명합니다.", "datePublished": "2026-04-07", "dateModified": "2026-04-07", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ownership-transfer"}, "keywords": "홈페이지 소유권 이전"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 소유권 이전, 도메인부터 소스코드까지 정리", "item": "https://noahhomepage.co.kr/columns/ownership-transfer"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 소유권 이전, 도메인부터 소스코드까지 정리", "description": "도메인, 호스팅, 소스코드, 관리 계정 네 가지 자산별 소유권 이전 방법을 정리했습니다. 왜 처음부터 고객 명의로 등록해야 하는지, 이전 시 놓치기 쉬운 항목은 무엇인지 설명합니다.", "datePublished": "2026-04-07", "dateModified": "2026-04-07", "inLanguage": "ko-KR", "wordCount": 1177, "articleSection": "제작 방식 비교", "keywords": "홈페이지 소유권 이전, 소유권, 도메인, 이전", "image": "https://noahhomepage.co.kr/assets/images/og/ownership-transfer.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/ownership-transfer"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 소유권 이전"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 방식 비교", "item": "https://noahhomepage.co.kr/columns/topic/compare"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 소유권 이전, 도메인부터 소스코드까지 정리", "item": "https://noahhomepage.co.kr/columns/ownership-transfer"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 방식 비교</span>
+        <a href="/columns/topic/compare" class="hover:text-white">제작 방식 비교</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 방식 비교</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#도메인-가장-중요한-자산">도메인: 가장 중요한 자산</a></li>
+          <li><a href="#호스팅-이전이-아니라-이사에-가깝습니다">호스팅: 이전이 아니라 이사에 가깝습니다</a></li>
+          <li><a href="#소스코드-계약서에-명시가-필요합니다">소스코드: 계약서에 명시가 필요합니다</a></li>
+          <li><a href="#관리-계정-목록으로-챙기세요">관리 계정: 목록으로 챙기세요</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>홈페이지는 하나로 보이지만 실제로는 도메인, 호스팅, 소스코드, 관리 계정이라는 별도 자산의 묶음입니다. 각각 명의와 이전 방법이 다르기 때문에, 업체를 바꾸거나 직접 운영으로 전환할 때 하나라도 빠지면 문제가 생깁니다. 지금 당장 이전할 계획이 없더라도 내 홈페이지의 네 가지 자산이 각각 누구 명의인지 확인해 두는 것이 시작입니다.</p><h2>도메인: 가장 중요한 자산</h2><p>도메인은 홈페이지 주소이자 그동안 쌓인 검색 노출과 신뢰가 걸린 자산입니다. 등록기관 계정에서 소유자 정보를 확인하고, 업체 명의라면 등록기관 변경 또는 소유자 정보 변경 절차로 고객 명의로 옮겨야 합니다. 기관 간 이전에는 인증 코드가 필요하고 현재 명의자의 협조가 필수라, 관계가 좋을 때 미리 처리하는 것이 안전합니다. 만료일도 함께 확인해 이전 중에 만료되는 일이 없도록 하세요.</p><h2>호스팅: 이전이 아니라 이사에 가깝습니다</h2><p>호스팅은 명의를 옮기기보다 새 호스팅 계정을 고객 명의로 만들고 파일과 데이터베이스를 옮기는 방식이 일반적입니다. 이전 후 도메인 연결 설정(네임서버 또는 DNS)을 새 호스팅으로 바꾸면 됩니다. 기존 호스팅의 만료일을 확인해 서비스 공백이 생기지 않게 일정을 잡고, 이전 완료를 확인한 뒤에 기존 계약을 해지하는 순서를 지키세요.</p><h2>소스코드: 계약서에 명시가 필요합니다</h2><p>소스코드 인도는 당연한 것이 아니라 계약 사항입니다. 계약서에 명시가 없으면 업체가 인도 의무를 지지 않는 경우도 있습니다. 받을 때는 전체 파일과 데이터베이스 백업본을 함께 받고, 압축 파일이 실제로 열리는지 확인하세요. 업체의 자체 빌더나 임대형 솔루션 기반이라면 소스를 받아도 다른 환경에서 그대로 구동되지 않을 수 있으므로, 이 점은 계약 전에 물어보는 것이 좋습니다.</p><h2>관리 계정: 목록으로 챙기세요</h2><ul><li>홈페이지 관리자 계정과 비밀번호</li><li>호스팅 계정과 도메인 등록기관 계정</li><li>검색 등록 도구, 방문자 통계 도구 계정</li><li>연결된 이메일 계정, SSL 인증서 관리 권한</li></ul><p>인수 후에는 모든 계정의 비밀번호를 변경하는 것이 원칙입니다. 이전 담당자의 접근 권한이 남아 있으면 보안상 깔끔하지 않습니다.</p><h2>정리</h2><p>홈페이지 소유권은 도메인, 호스팅, 소스코드, 계정 네 가지를 각각 챙겨야 완성됩니다.</p><p>처음부터 고객 명의로 등록하면 이전 절차 자체가 필요 없어집니다.</p><p>NOAH는 제작 완료 시 소스코드와 계정을 전부 고객에게 이전하고 도메인은 고객 명의 등록을 권하는 방식으로 운영합니다.</p>
+<p>홈페이지는 하나로 보이지만 실제로는 <a href="/columns/domain-register">도메인</a>, <a href="/columns/web-hosting">호스팅</a>, 소스코드, 관리 계정이라는 별도 자산의 묶음입니다. 각각 명의와 이전 방법이 다르기 때문에, 업체를 바꾸거나 직접 운영으로 전환할 때 하나라도 빠지면 문제가 생깁니다. 지금 당장 이전할 계획이 없더라도 내 홈페이지의 네 가지 자산이 각각 누구 명의인지 확인해 두는 것이 시작입니다.</p><h2 id="도메인-가장-중요한-자산">도메인: 가장 중요한 자산</h2><p>도메인은 홈페이지 주소이자 그동안 쌓인 검색 노출과 신뢰가 걸린 자산입니다. 등록기관 계정에서 소유자 정보를 확인하고, 업체 명의라면 등록기관 변경 또는 소유자 정보 변경 절차로 고객 명의로 옮겨야 합니다. 기관 간 이전에는 인증 코드가 필요하고 현재 명의자의 협조가 필수라, 관계가 좋을 때 미리 처리하는 것이 안전합니다. 만료일도 함께 확인해 이전 중에 만료되는 일이 없도록 하세요.</p><h2 id="호스팅-이전이-아니라-이사에-가깝습니다">호스팅: 이전이 아니라 이사에 가깝습니다</h2><p>호스팅은 명의를 옮기기보다 새 호스팅 계정을 고객 명의로 만들고 파일과 데이터베이스를 옮기는 방식이 일반적입니다. 이전 후 도메인 연결 설정(네임서버 또는 DNS)을 새 호스팅으로 바꾸면 됩니다. 기존 호스팅의 만료일을 확인해 서비스 공백이 생기지 않게 일정을 잡고, 이전 완료를 확인한 뒤에 기존 계약을 해지하는 순서를 지키세요.</p><h2 id="소스코드-계약서에-명시가-필요합니다">소스코드: 계약서에 명시가 필요합니다</h2><p>소스코드 인도는 당연한 것이 아니라 계약 사항입니다. <a href="/columns/contract-check">계약서</a>에 명시가 없으면 업체가 인도 의무를 지지 않는 경우도 있습니다. 받을 때는 전체 파일과 데이터베이스 <a href="/columns/backup-guide">백업</a>본을 함께 받고, 압축 파일이 실제로 열리는지 확인하세요. 업체의 자체 빌더나 임대형 솔루션 기반이라면 소스를 받아도 다른 환경에서 그대로 구동되지 않을 수 있으므로, 이 점은 계약 전에 물어보는 것이 좋습니다.</p><h2 id="관리-계정-목록으로-챙기세요">관리 계정: 목록으로 챙기세요</h2><ul><li>홈페이지 관리자 계정과 비밀번호</li><li>호스팅 계정과 도메인 등록기관 계정</li><li>검색 등록 도구, 방문자 통계 도구 계정</li><li>연결된 이메일 계정, <a href="/columns/ssl-setup">SSL</a> 인증서 관리 권한</li></ul><p>인수 후에는 모든 계정의 비밀번호를 변경하는 것이 원칙입니다. 이전 담당자의 접근 권한이 남아 있으면 보안상 깔끔하지 않습니다.</p><h2 id="정리">정리</h2><p>홈페이지 소유권은 도메인, 호스팅, 소스코드, 계정 네 가지를 각각 챙겨야 완성됩니다.</p><p>처음부터 고객 명의로 등록하면 이전 절차 자체가 필요 없어집니다.</p><p>NOAH는 제작 완료 시 소스코드와 계정을 전부 고객에게 이전하고 도메인은 고객 명의 등록을 권하는 방식으로 운영합니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#소유권</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#도메인</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#이전</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/avoid-scam" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 사기 예방, 계약 전 확인할 위험 신호</p>
+        </a>
+        <a href="/columns/contract-check" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 계약서, 서명 전 확인할 7가지 항목</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/compare" class="hub-pill">제작 방식 비교 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

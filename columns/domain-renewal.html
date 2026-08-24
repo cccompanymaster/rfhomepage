@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>도메인 갱신 놓치면 생기는 일과 예방법 · NOAH 칼럼</title>
     <meta name="description" content="도메인이 만료되면 홈페이지와 이메일이 한꺼번에 멈출 수 있습니다. 자동갱신 설정, 소유 정보 관리 등 도메인을 잃지 않기 위한 관리 요령을 정리했습니다." />
-    <meta name="keywords" content="도메인 갱신과 만료, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/domain-renewal" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/renewal-timing" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/migration-guide" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="도메인 갱신 놓치면 생기는 일과 예방법" />
     <meta property="og:description" content="도메인이 만료되면 홈페이지와 이메일이 한꺼번에 멈출 수 있습니다. 자동갱신 설정, 소유 정보 관리 등 도메인을 잃지 않기 위한 관리 요령을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/domain-renewal" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/domain-renewal.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-03-18" />
+    <meta property="article:section" content="운영·유지보수" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="도메인 갱신 놓치면 생기는 일과 예방법" />
+    <meta name="twitter:description" content="도메인이 만료되면 홈페이지와 이메일이 한꺼번에 멈출 수 있습니다. 자동갱신 설정, 소유 정보 관리 등 도메인을 잃지 않기 위한 관리 요령을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/domain-renewal.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "도메인 갱신 놓치면 생기는 일과 예방법", "description": "도메인이 만료되면 홈페이지와 이메일이 한꺼번에 멈출 수 있습니다. 자동갱신 설정, 소유 정보 관리 등 도메인을 잃지 않기 위한 관리 요령을 정리했습니다.", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/domain-renewal"}, "keywords": "도메인 갱신과 만료"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "도메인 갱신 놓치면 생기는 일과 예방법", "item": "https://noahhomepage.co.kr/columns/domain-renewal"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "도메인 갱신 놓치면 생기는 일과 예방법", "description": "도메인이 만료되면 홈페이지와 이메일이 한꺼번에 멈출 수 있습니다. 자동갱신 설정, 소유 정보 관리 등 도메인을 잃지 않기 위한 관리 요령을 정리했습니다.", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "inLanguage": "ko-KR", "wordCount": 1189, "articleSection": "운영·유지보수", "keywords": "도메인 갱신과 만료, 도메인, 운영, 관리", "image": "https://noahhomepage.co.kr/assets/images/og/domain-renewal.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/domain-renewal"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "도메인 갱신과 만료"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "운영·유지보수", "item": "https://noahhomepage.co.kr/columns/topic/ops"}, {"@type": "ListItem", "position": 4, "name": "도메인 갱신 놓치면 생기는 일과 예방법", "item": "https://noahhomepage.co.kr/columns/domain-renewal"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>운영·유지보수</span>
+        <a href="/columns/topic/ops" class="hover:text-white">운영·유지보수</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#만료되면-무슨-일이-생기나">만료되면 무슨 일이 생기나</a></li>
+          <li><a href="#자동갱신이-기본-방어선입니다">자동갱신이 기본 방어선입니다</a></li>
+          <li><a href="#소유-정보가-진짜-내-것인지-확인하세요">소유 정보가 진짜 내 것인지 확인하세요</a></li>
+          <li><a href="#1년에-한-번-도메인-점검일을-만드세요">1년에 한 번, 도메인 점검일을 만드세요</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>도메인은 홈페이지의 주소이자 사업의 온라인 간판입니다. 그런데 도메인은 사는 것이 아니라 기간을 정해 빌리는 것에 가깝습니다. 갱신을 놓치면 멀쩡하던 홈페이지가 어느 날 열리지 않고, 최악의 경우 그 주소를 영영 잃을 수도 있습니다.</p><h2>만료되면 무슨 일이 생기나</h2><p>만료 시점이 지나면 홈페이지 접속이 끊기고, 그 도메인으로 쓰던 이메일도 함께 멈춥니다. 만료 후에는 보통 기존 소유자가 되찾을 수 있는 유예 절차가 있지만, <strong>유예기간의 길이와 조건, 추가 비용은 등록기관과 도메인 종류(TLD)마다 다릅니다.</strong> 단계가 넘어갈수록 복구 비용이 커지고, 최종적으로는 도메인이 일반에 다시 풀려 누구든 등록할 수 있게 됩니다. 정확한 정책은 반드시 본인이 이용 중인 등록기관에서 확인해 두세요.</p><h2>자동갱신이 기본 방어선입니다</h2><p>가장 확실한 예방책은 등록기관에서 자동갱신을 켜두는 것입니다. 다만 자동갱신도 결제가 실패하면 소용이 없습니다. 등록된 카드의 유효기간이 지나지 않았는지, 결제 실패 알림이 오는 이메일이 지금도 확인하는 주소인지 함께 점검하세요. 여유가 된다면 1년 단위보다 여러 해를 한 번에 등록해 갱신 횟수 자체를 줄이는 것도 방법입니다.</p><h2>소유 정보가 진짜 내 것인지 확인하세요</h2><p>의외로 흔한 문제가 도메인이 제작사나 전 직원 명의로 등록된 경우입니다. 이러면 갱신도, 이전도 내 마음대로 할 수 없습니다. 등록기관 계정에 직접 로그인해 소유자 정보와 연락처 이메일이 사업자 본인 것인지 확인하고, 아니라면 지금 정리해 두세요. 등록기관 계정의 아이디와 비밀번호는 사업 서류만큼 중요하게 보관해야 합니다.</p><h2>1년에 한 번, 도메인 점검일을 만드세요</h2><p>달력에 만료일보다 한두 달 앞선 날짜를 점검일로 적어두고, 그날 만료일, 자동갱신 상태, 결제수단, 소유자 정보 네 가지를 확인하세요. 10분이면 끝나는 일이지만, 이 10분이 주소를 잃고 겪을 몇 주의 혼란을 막아줍니다. 참고로 만료가 임박했다며 결제를 유도하는 사칭 메일도 있으니, 갱신은 늘 등록기관 사이트에 직접 로그인해서 진행하세요.</p><h2>정리</h2><p>첫째, 도메인 만료는 홈페이지와 이메일을 한꺼번에 멈추게 하며, 유예 정책은 등록기관마다 다르니 미리 확인해야 합니다. 둘째, 자동갱신과 결제수단, 알림 이메일을 함께 점검하세요. 셋째, 소유자 명의가 본인인지가 가장 중요합니다. NOAH는 제작 과정에서 도메인 연결을 함께 안내하며, 소유권은 사장님 명의로 유지하는 것을 원칙으로 안내해 드립니다.</p>
+<p><a href="/columns/domain-register">도메인</a>은 홈페이지의 주소이자 사업의 온라인 간판입니다. 그런데 도메인은 사는 것이 아니라 기간을 정해 빌리는 것에 가깝습니다. 갱신을 놓치면 멀쩡하던 홈페이지가 어느 날 열리지 않고, 최악의 경우 그 주소를 영영 잃을 수도 있습니다.</p><h2 id="만료되면-무슨-일이-생기나">만료되면 무슨 일이 생기나</h2><p>만료 시점이 지나면 홈페이지 접속이 끊기고, 그 도메인으로 쓰던 이메일도 함께 멈춥니다. 만료 후에는 보통 기존 소유자가 되찾을 수 있는 유예 절차가 있지만, <strong>유예기간의 길이와 조건, 추가 비용은 등록기관과 도메인 종류(TLD)마다 다릅니다.</strong> 단계가 넘어갈수록 복구 비용이 커지고, 최종적으로는 도메인이 일반에 다시 풀려 누구든 등록할 수 있게 됩니다. 정확한 정책은 반드시 본인이 이용 중인 등록기관에서 확인해 두세요.</p><h2 id="자동갱신이-기본-방어선입니다">자동갱신이 기본 방어선입니다</h2><p>가장 확실한 예방책은 등록기관에서 자동갱신을 켜두는 것입니다. 다만 자동갱신도 결제가 실패하면 소용이 없습니다. 등록된 카드의 유효기간이 지나지 않았는지, 결제 실패 알림이 오는 이메일이 지금도 확인하는 주소인지 함께 점검하세요. 여유가 된다면 1년 단위보다 여러 해를 한 번에 등록해 갱신 횟수 자체를 줄이는 것도 방법입니다.</p><h2 id="소유-정보가-진짜-내-것인지-확인하세요">소유 정보가 진짜 내 것인지 확인하세요</h2><p>의외로 흔한 문제가 도메인이 제작사나 전 직원 명의로 등록된 경우입니다. 이러면 갱신도, 이전도 내 마음대로 할 수 없습니다. 등록기관 계정에 직접 로그인해 소유자 정보와 연락처 이메일이 사업자 본인 것인지 확인하고, 아니라면 지금 정리해 두세요. 등록기관 계정의 아이디와 비밀번호는 사업 서류만큼 중요하게 보관해야 합니다.</p><h2 id="1년에-한-번-도메인-점검일을-만드세요">1년에 한 번, 도메인 점검일을 만드세요</h2><p>달력에 만료일보다 한두 달 앞선 날짜를 점검일로 적어두고, 그날 만료일, 자동갱신 상태, 결제수단, 소유자 정보 네 가지를 확인하세요. 10분이면 끝나는 일이지만, 이 10분이 주소를 잃고 겪을 몇 주의 혼란을 막아줍니다. 참고로 만료가 임박했다며 결제를 유도하는 사칭 메일도 있으니, 갱신은 늘 등록기관 사이트에 직접 로그인해서 진행하세요.</p><h2 id="정리">정리</h2><p>첫째, 도메인 만료는 홈페이지와 이메일을 한꺼번에 멈추게 하며, 유예 정책은 등록기관마다 다르니 미리 확인해야 합니다. 둘째, 자동갱신과 결제수단, 알림 이메일을 함께 점검하세요. 셋째, 소유자 명의가 본인인지가 가장 중요합니다. NOAH는 제작 과정에서 도메인 연결을 함께 안내하며, <a href="/columns/ownership-transfer">소유권</a>은 사장님 명의로 유지하는 것을 원칙으로 안내해 드립니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#도메인</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#운영</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#관리</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/renewal-timing" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 리뉴얼, 지금 해야 할까 참아야 할까</p>
+        </a>
+        <a href="/columns/migration-guide" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 이전, 순서만 지키면 어렵지 않습니다</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/ops" class="hub-pill">운영·유지보수 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

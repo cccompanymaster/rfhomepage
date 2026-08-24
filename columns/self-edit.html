@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 직접 수정, 어디까지 해도 될까 · NOAH 칼럼</title>
     <meta name="description" content="텍스트 교체는 직접, 구조 변경은 전문가에게. 홈페이지를 스스로 고칠 때의 현실적인 경계와 수정 전 반드시 해야 할 백업 습관을 사장님 눈높이로 정리했습니다." />
-    <meta name="keywords" content="홈페이지 직접 수정하는 법, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/self-edit" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/mobile-optimize" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/content-strategy" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 직접 수정, 어디까지 해도 될까" />
     <meta property="og:description" content="텍스트 교체는 직접, 구조 변경은 전문가에게. 홈페이지를 스스로 고칠 때의 현실적인 경계와 수정 전 반드시 해야 할 백업 습관을 사장님 눈높이로 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/self-edit" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/self-edit.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-03-24" />
+    <meta property="article:section" content="운영·유지보수" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 직접 수정, 어디까지 해도 될까" />
+    <meta name="twitter:description" content="텍스트 교체는 직접, 구조 변경은 전문가에게. 홈페이지를 스스로 고칠 때의 현실적인 경계와 수정 전 반드시 해야 할 백업 습관을 사장님 눈높이로 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/self-edit.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 직접 수정, 어디까지 해도 될까", "description": "텍스트 교체는 직접, 구조 변경은 전문가에게. 홈페이지를 스스로 고칠 때의 현실적인 경계와 수정 전 반드시 해야 할 백업 습관을 사장님 눈높이로 정리했습니다.", "datePublished": "2026-03-24", "dateModified": "2026-03-24", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/self-edit"}, "keywords": "홈페이지 직접 수정하는 법"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 직접 수정, 어디까지 해도 될까", "item": "https://noahhomepage.co.kr/columns/self-edit"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 직접 수정, 어디까지 해도 될까", "description": "텍스트 교체는 직접, 구조 변경은 전문가에게. 홈페이지를 스스로 고칠 때의 현실적인 경계와 수정 전 반드시 해야 할 백업 습관을 사장님 눈높이로 정리했습니다.", "datePublished": "2026-03-24", "dateModified": "2026-03-24", "inLanguage": "ko-KR", "wordCount": 1156, "articleSection": "운영·유지보수", "keywords": "홈페이지 직접 수정하는 법, 직접수정, 유지보수, 백업", "image": "https://noahhomepage.co.kr/assets/images/og/self-edit.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/self-edit"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 직접 수정하는 법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "운영·유지보수", "item": "https://noahhomepage.co.kr/columns/topic/ops"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 직접 수정, 어디까지 해도 될까", "item": "https://noahhomepage.co.kr/columns/self-edit"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>운영·유지보수</span>
+        <a href="/columns/topic/ops" class="hover:text-white">운영·유지보수</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#수정-전에-무조건-백업부터">수정 전에 무조건 백업부터</a></li>
+          <li><a href="#직접-해도-괜찮은-것들">직접 해도 괜찮은 것들</a></li>
+          <li><a href="#전문가에게-맡겨야-하는-것들">전문가에게 맡겨야 하는 것들</a></li>
+          <li><a href="#수정-권한과-계정-관리도-함께">수정 권한과 계정 관리도 함께</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>영업시간이 바뀌었는데 수정 요청을 하고 며칠을 기다리자니 답답하고, 직접 손대자니 사이트가 망가질까 겁이 납니다. 홈페이지 직접 수정은 할 수 있는 범위와 맡겨야 하는 범위를 구분하는 것이 절반입니다. 그 경계를 현실적으로 정리해 보겠습니다.</p><h2>수정 전에 무조건 백업부터</h2><p>어떤 수정이든 시작 전에 지금 상태를 저장해 두세요. 관리자 페이지에 백업 기능이 있다면 실행하고, 없다면 최소한 수정할 페이지의 글과 사진이라도 따로 복사해 둡니다. 백업이 있으면 실수해도 되돌릴 수 있지만, 없으면 작은 실수가 복구 비용으로 이어집니다. 이 한 단계가 직접 수정의 안전벨트입니다.</p><h2>직접 해도 괜찮은 것들</h2><p>관리자 화면에서 버튼과 입력창으로 끝나는 작업은 대체로 안전합니다. 영업시간, 가격, 전화번호 같은 <strong>텍스트 교체</strong>, 공지나 소식 글 올리기, 기존 이미지 자리에 새 이미지 바꿔 넣기 정도가 여기에 해당합니다. 요령은 하나입니다. 한 번에 한 가지만 바꾸고, 저장 후 PC와 모바일에서 결과를 바로 확인하는 것입니다. 여러 곳을 한꺼번에 고치면 문제가 생겼을 때 어디서 잘못됐는지 찾기 어렵고, 되돌리기도 그만큼 복잡해집니다.</p><h2>전문가에게 맡겨야 하는 것들</h2><p>코드나 설정을 건드리는 순간부터는 이야기가 다릅니다. HTML이나 CSS 수정, 메뉴 구조 변경, 플러그인이나 테마 업데이트, 도메인·호스팅 설정 변경은 화면 전체가 깨지거나 사이트가 접속 불가가 될 수 있는 영역입니다. 검색해서 나온 코드를 복사해 붙여 넣는 방식은 특히 위험합니다. 이런 작업은 처음부터 제작사나 전문가에게 맡기는 편이 결과적으로 싸게 먹힙니다.</p><h2>수정 권한과 계정 관리도 함께</h2><p>관리자 계정 정보를 어디에 두었는지, 수정 권한이 누구에게 있는지 정리해 두세요. 직원이나 외주 인력에게 계정을 공유할 때는 가능하면 별도 계정을 만들어 주고, 퇴사나 계약 종료 시 비밀번호를 바꾸는 것이 안전합니다. 계정 관리가 안 되면 나중에 내 홈페이지인데 손댈 수 없는 상황이 생깁니다.</p><h2>정리</h2><p>첫째, 어떤 수정이든 백업이 먼저입니다. 둘째, 텍스트와 이미지 교체까지는 직접, 코드와 구조 변경부터는 전문가 영역입니다. 셋째, 계정과 권한 관리까지 해야 진짜 내 홈페이지입니다. 참고로 NOAH 패키지에는 1년 무제한 텍스트 수정이 포함되어 있어, 사장님이 직접 관리자 화면과 씨름할 일 자체가 적습니다. 바뀐 내용만 알려주시면 됩니다.</p>
+<p>영업시간이 바뀌었는데 수정 요청을 하고 며칠을 기다리자니 답답하고, 직접 손대자니 사이트가 망가질까 겁이 납니다. 홈페이지 직접 수정은 할 수 있는 범위와 맡겨야 하는 범위를 구분하는 것이 절반입니다. 그 경계를 현실적으로 정리해 보겠습니다.</p><h2 id="수정-전에-무조건-백업부터">수정 전에 무조건 백업부터</h2><p>어떤 수정이든 시작 전에 지금 상태를 저장해 두세요. 관리자 페이지에 <a href="/columns/backup-guide">백업</a> 기능이 있다면 실행하고, 없다면 최소한 수정할 페이지의 글과 <a href="/columns/photo-prepare">사진</a>이라도 따로 복사해 둡니다. 백업이 있으면 실수해도 되돌릴 수 있지만, 없으면 작은 실수가 복구 비용으로 이어집니다. 이 한 단계가 직접 수정의 안전벨트입니다.</p><h2 id="직접-해도-괜찮은-것들">직접 해도 괜찮은 것들</h2><p>관리자 화면에서 버튼과 입력창으로 끝나는 작업은 대체로 안전합니다. 영업시간, 가격, 전화번호 같은 <strong>텍스트 교체</strong>, 공지나 소식 글 올리기, 기존 이미지 자리에 새 이미지 바꿔 넣기 정도가 여기에 해당합니다. 요령은 하나입니다. 한 번에 한 가지만 바꾸고, 저장 후 PC와 모바일에서 결과를 바로 확인하는 것입니다. 여러 곳을 한꺼번에 고치면 문제가 생겼을 때 어디서 잘못됐는지 찾기 어렵고, 되돌리기도 그만큼 복잡해집니다.</p><h2 id="전문가에게-맡겨야-하는-것들">전문가에게 맡겨야 하는 것들</h2><p>코드나 설정을 건드리는 순간부터는 이야기가 다릅니다. HTML이나 CSS 수정, 메뉴 구조 변경, 플러그인이나 테마 업데이트, <a href="/columns/domain-register">도메인</a>·<a href="/columns/web-hosting">호스팅</a> 설정 변경은 화면 전체가 깨지거나 사이트가 접속 불가가 될 수 있는 영역입니다. 검색해서 나온 코드를 복사해 붙여 넣는 방식은 특히 위험합니다. 이런 작업은 처음부터 제작사나 전문가에게 맡기는 편이 결과적으로 싸게 먹힙니다.</p><h2 id="수정-권한과-계정-관리도-함께">수정 권한과 계정 관리도 함께</h2><p>관리자 계정 정보를 어디에 두었는지, 수정 권한이 누구에게 있는지 정리해 두세요. 직원이나 외주 인력에게 계정을 공유할 때는 가능하면 별도 계정을 만들어 주고, 퇴사나 계약 종료 시 비밀번호를 바꾸는 것이 안전합니다. 계정 관리가 안 되면 나중에 내 홈페이지인데 손댈 수 없는 상황이 생깁니다.</p><h2 id="정리">정리</h2><p>첫째, 어떤 수정이든 백업이 먼저입니다. 둘째, 텍스트와 이미지 교체까지는 직접, 코드와 구조 변경부터는 전문가 영역입니다. 셋째, 계정과 권한 관리까지 해야 진짜 내 홈페이지입니다. 참고로 NOAH 패키지에는 1년 무제한 텍스트 수정이 포함되어 있어, 사장님이 직접 관리자 화면과 씨름할 일 자체가 적습니다. 바뀐 내용만 알려주시면 됩니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#직접수정</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#유지보수</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#백업</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/mobile-optimize" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">모바일 최적화 체크리스트, 375px에서 꼭 확인할 것들</p>
+        </a>
+        <a href="/columns/content-strategy" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 콘텐츠 업데이트, 무엇을 얼마나 자주 올릴까</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/ops" class="hub-pill">운영·유지보수 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>

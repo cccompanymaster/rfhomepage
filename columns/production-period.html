@@ -19,17 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>홈페이지 제작 기간, 방식별로 얼마나 걸릴까 · NOAH 칼럼</title>
     <meta name="description" content="홈페이지 제작 기간은 방식에 따라 며칠에서 두 달 이상까지 차이가 납니다. 방식별 소요 기간과 일정이 늘어지는 원인, 단축하는 요령을 정리했습니다." />
-    <meta name="keywords" content="홈페이지 제작 기간, 홈페이지 제작, NOAH" />
     <link rel="canonical" href="https://noahhomepage.co.kr/columns/production-period" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/production-steps" />
+    <link rel="next" href="https://noahhomepage.co.kr/columns/prepare-materials" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="홈페이지 제작 기간, 방식별로 얼마나 걸릴까" />
     <meta property="og:description" content="홈페이지 제작 기간은 방식에 따라 며칠에서 두 달 이상까지 차이가 납니다. 방식별 소요 기간과 일정이 늘어지는 원인, 단축하는 요령을 정리했습니다." />
     <meta property="og:url" content="https://noahhomepage.co.kr/columns/production-period" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/production-period.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-07-26" />
+    <meta property="article:section" content="제작 가이드" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="홈페이지 제작 기간, 방식별로 얼마나 걸릴까" />
+    <meta name="twitter:description" content="홈페이지 제작 기간은 방식에 따라 며칠에서 두 달 이상까지 차이가 납니다. 방식별 소요 기간과 일정이 늘어지는 원인, 단축하는 요령을 정리했습니다." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/production-period.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
@@ -55,13 +67,25 @@
       .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
+      /* 목차 */
+      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
+      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+      .toc ol { list-style: none; counter-reset: t; }
+      .toc li { counter-increment: t; margin-bottom: 9px; }
+      .toc li:last-child { margin-bottom: 0; }
+      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
+      .toc a:hover { color: var(--text); }
+
       /* 본문 타이포 */
       .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
+      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
@@ -76,9 +100,13 @@
       .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
       .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
+      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
+      .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 기간, 방식별로 얼마나 걸릴까", "description": "홈페이지 제작 기간은 방식에 따라 며칠에서 두 달 이상까지 차이가 납니다. 방식별 소요 기간과 일정이 늘어지는 원인, 단축하는 요령을 정리했습니다.", "datePublished": "2026-07-26", "dateModified": "2026-07-26", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/production-period"}, "keywords": "홈페이지 제작 기간"}</script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "홈페이지 제작 기간, 방식별로 얼마나 걸릴까", "item": "https://noahhomepage.co.kr/columns/production-period"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "홈페이지 제작 기간, 방식별로 얼마나 걸릴까", "description": "홈페이지 제작 기간은 방식에 따라 며칠에서 두 달 이상까지 차이가 납니다. 방식별 소요 기간과 일정이 늘어지는 원인, 단축하는 요령을 정리했습니다.", "datePublished": "2026-07-26", "dateModified": "2026-07-26", "inLanguage": "ko-KR", "wordCount": 1060, "articleSection": "제작 가이드", "keywords": "홈페이지 제작 기간, 제작 기간, 홈페이지 제작, 일정 관리", "image": "https://noahhomepage.co.kr/assets/images/og/production-period.png", "author": {"@type": "Organization", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/production-period"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "홈페이지 제작 기간"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 가이드", "item": "https://noahhomepage.co.kr/columns/topic/guide"}, {"@type": "ListItem", "position": 4, "name": "홈페이지 제작 기간, 방식별로 얼마나 걸릴까", "item": "https://noahhomepage.co.kr/columns/production-period"}]}</script>
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
@@ -100,7 +128,7 @@
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
         <a href="/" class="hover:text-white">홈</a> ·
         <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <span>제작 가이드</span>
+        <a href="/columns/topic/guide" class="hover:text-white">제작 가이드</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">제작 가이드</p>
@@ -112,8 +140,19 @@
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#방식별-대략적인-기간">방식별 대략적인 기간</a></li>
+          <li><a href="#기간을-늘리는-세-가지-원인">기간을 늘리는 세 가지 원인</a></li>
+          <li><a href="#기간을-줄이는-현실적인-방법">기간을 줄이는 현실적인 방법</a></li>
+          <li><a href="#빠른-것과-좋은-것-사이">빠른 것과 좋은 것 사이</a></li>
+          <li><a href="#정리">정리</a></li>
+        </ol>
+      </nav>
+
       <article class="prose mt-10">
-<p>거래처에 명함 대신 보여줄 홈페이지가 다음 달 행사 전까지 필요한데, 얼마나 걸리는지 감이 안 잡히시나요? 홈페이지 제작 기간은 방식과 준비 상태에 따라 며칠에서 두 달 이상까지 벌어집니다. 이 글에서 방식별 기간과 일정을 줄이는 요령을 짚어드립니다.</p><h2>방식별 대략적인 기간</h2><table><thead><tr><th>방식</th><th>대략적인 기간</th></tr></thead><tbody><tr><td>웹빌더 직접 제작</td><td>수일~수주 (본인 숙련도에 따라)</td></tr><tr><td>템플릿 반제작</td><td>약 1~2주</td></tr><tr><td>맞춤 외주 (5~10페이지)</td><td>약 4~8주</td></tr><tr><td>기능 많은 맞춤 제작</td><td>2개월 이상</td></tr></tbody></table><p>어디까지나 일반적인 범위이며, 페이지 수와 기능, 수정 횟수에 따라 달라집니다. 견적 단계에서 일정표를 요청해 확인하는 것이 가장 정확합니다.</p><h2>기간을 늘리는 세 가지 원인</h2><p>현장에서 일정이 밀리는 원인은 대체로 비슷합니다. 첫째는 자료 지연입니다. 원고와 사진이 늦게 도착하면 제작사가 손을 놓고 기다리게 됩니다. 둘째는 잦은 방향 변경입니다. 시안 확정 후 구조를 바꾸면 작업을 되돌려야 합니다.</p><p>셋째는 의사결정 지연입니다. 확인 요청에 대한 답이 며칠씩 걸리면 그만큼 일정이 뒤로 밀립니다. 결정권자가 처음부터 소통 창구를 맡는 것이 좋습니다.</p><h2>기간을 줄이는 현실적인 방법</h2><ul><li>계약 전에 원고·사진·로고를 미리 모아둔다</li><li>참고 사이트를 골라 원하는 방향을 처음부터 명확히 전달한다</li><li>수정 요청은 모아서 한 번에 전달한다</li><li>도메인은 미리 등록해 둔다 (연결 대기 시간 절약)</li></ul><p>특히 자료 준비는 사장님 손에 달린 부분이라, 여기서 아낀 시간이 곧 전체 기간 단축으로 이어집니다.</p><h2>빠른 것과 좋은 것 사이</h2><p>기간이 짧다고 무조건 나쁜 것도, 길다고 좋은 것도 아닙니다. 템플릿 기반은 이미 검증된 구조를 쓰기 때문에 짧은 기간에도 안정적인 품질이 나올 수 있습니다. 반대로 맞춤 제작은 기획 논의 자체에 시간이 필요합니다.</p><p>중요한 건 우리 홈페이지의 목적에 그 기간과 비용이 걸맞은가입니다.</p><h2>정리</h2><p>첫째, 제작 기간은 반제작 1~2주, 맞춤 외주 1~2개월이 일반적인 범위입니다. 둘째, 일정 지연의 주원인은 자료 지연·방향 변경·의사결정 지연입니다. 셋째, 자료를 미리 준비하면 기간을 가장 확실히 줄일 수 있습니다. 참고로 NOAH는 레퍼런스 선택형 프로세스로 7일 오픈을 기본 일정으로 안내하고 있습니다.</p>
+<p>거래처에 명함 대신 보여줄 홈페이지가 다음 달 행사 전까지 필요한데, 얼마나 걸리는지 감이 안 잡히시나요? 홈페이지 제작 기간은 방식과 준비 상태에 따라 며칠에서 두 달 이상까지 벌어집니다. 이 글에서 방식별 기간과 일정을 줄이는 요령을 짚어드립니다.</p><h2 id="방식별-대략적인-기간">방식별 대략적인 기간</h2><table><thead><tr><th>방식</th><th>대략적인 기간</th></tr></thead><tbody><tr><td>웹빌더 직접 제작</td><td>수일~수주 (본인 숙련도에 따라)</td></tr><tr><td>템플릿 반제작</td><td>약 1~2주</td></tr><tr><td>맞춤 외주 (5~10페이지)</td><td>약 4~8주</td></tr><tr><td>기능 많은 맞춤 제작</td><td>2개월 이상</td></tr></tbody></table><p>어디까지나 일반적인 범위이며, 페이지 수와 기능, 수정 횟수에 따라 달라집니다. <a href="/columns/homepage-quote">견적</a> 단계에서 일정표를 요청해 확인하는 것이 가장 정확합니다.</p><h2 id="기간을-늘리는-세-가지-원인">기간을 늘리는 세 가지 원인</h2><p>현장에서 일정이 밀리는 원인은 대체로 비슷합니다. 첫째는 자료 지연입니다. 원고와 <a href="/columns/photo-prepare">사진</a>이 늦게 도착하면 제작사가 손을 놓고 기다리게 됩니다. 둘째는 잦은 방향 변경입니다. 시안 확정 후 구조를 바꾸면 작업을 되돌려야 합니다.</p><p>셋째는 의사결정 지연입니다. 확인 요청에 대한 답이 며칠씩 걸리면 그만큼 일정이 뒤로 밀립니다. 결정권자가 처음부터 소통 창구를 맡는 것이 좋습니다.</p><h2 id="기간을-줄이는-현실적인-방법">기간을 줄이는 현실적인 방법</h2><ul><li>계약 전에 원고·사진·<a href="/columns/logo-design">로고</a>를 미리 모아둔다</li><li>참고 사이트를 골라 원하는 방향을 처음부터 명확히 전달한다</li><li>수정 요청은 모아서 한 번에 전달한다</li><li><a href="/columns/domain-register">도메인</a>은 미리 등록해 둔다 (연결 대기 시간 절약)</li></ul><p>특히 자료 준비는 사장님 손에 달린 부분이라, 여기서 아낀 시간이 곧 전체 기간 단축으로 이어집니다.</p><h2 id="빠른-것과-좋은-것-사이">빠른 것과 좋은 것 사이</h2><p>기간이 짧다고 무조건 나쁜 것도, 길다고 좋은 것도 아닙니다. <a href="/columns/template-homepage">템플릿</a> 기반은 이미 검증된 구조를 쓰기 때문에 짧은 기간에도 안정적인 품질이 나올 수 있습니다. 반대로 맞춤 제작은 기획 논의 자체에 시간이 필요합니다.</p><p>중요한 건 우리 홈페이지의 목적에 그 기간과 비용이 걸맞은가입니다.</p><h2 id="정리">정리</h2><p>첫째, 제작 기간은 반제작 1~2주, 맞춤 외주 1~2개월이 일반적인 범위입니다. 둘째, 일정 지연의 주원인은 자료 지연·방향 변경·의사결정 지연입니다. 셋째, 자료를 미리 준비하면 기간을 가장 확실히 줄일 수 있습니다. 참고로 NOAH는 레퍼런스 선택형 프로세스로 7일 오픈을 기본 일정으로 안내하고 있습니다.</p>
       </article>
 
       <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#제작 기간</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#홈페이지 제작</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#일정 관리</span></div>
@@ -129,6 +168,17 @@
           <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/production-steps" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 순서 6단계, 처음부터 오픈까지</p>
+        </a>
+        <a href="/columns/prepare-materials" rel="next" class="sm:text-right">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 준비물 체크리스트 10가지</p>
+        </a>
+      </nav>
 
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
@@ -153,18 +203,19 @@
       </section>
 
       <div class="mt-12 text-center">
-        <a href="/columns/" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">← 칼럼 전체 목록</a>
+        <a href="/columns/topic/guide" class="hub-pill">제작 가이드 글 전체 보기 →</a>
       </div>
     </main>
-    <footer class="container-x py-12 mt-16 text-center text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
       <div class="flex gap-5 justify-center flex-wrap mb-4">
         <a href="/" class="hover:text-white">홈</a>
         <a href="/columns/" class="hover:text-white">칼럼</a>
         <a href="/options" class="hover:text-white">옵션 안내</a>
         <a href="/#consult" class="hover:text-white">상담 신청</a>
       </div>
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
     </footer>
   </body>
 </html>
