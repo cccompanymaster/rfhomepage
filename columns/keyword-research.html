@@ -42,7 +42,7 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
-    <meta name="theme-color" content="#0B0C0F" />
+    <meta name="theme-color" content="#FFFFFF" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,19 +52,19 @@
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
       .col-head { border-bottom: 1px solid var(--line); }
       .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
-      .chip:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
-      .chip[aria-pressed="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .chip:hover { border-color: rgba(17,24,33,.24); color: var(--text); }
+      .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
-      .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.26); }
+      .card:hover { transform: translateY(-3px); border-color: rgba(17,24,33,.20); box-shadow: 0 14px 30px -18px rgba(17,24,33,.22); }
       .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
       .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
       .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
       .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
-      .f-search { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
-      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,98,61,.18); }
+      .f-search { width: 100%; padding: 14px 18px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,90,43,.16); }
       .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
-      .pager button:hover:not(:disabled) { border-color: rgba(255,255,255,.3); color: var(--text); }
-      .pager button[aria-current="true"] { background: var(--accent); color: #10130F; border-color: var(--accent); }
+      .pager button:hover:not(:disabled) { border-color: rgba(17,24,33,.24); color: var(--text); }
+      .pager button[aria-current="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
       /* 목차 */
@@ -84,7 +84,7 @@
       .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
-      .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201,255,74,.4); transition: text-decoration-color .2s; }
+      .prose a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,90,43,.42); transition: text-decoration-color .2s; }
       .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
       .prose li { margin-bottom: 9px; }
@@ -97,11 +97,11 @@
       .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
       .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
       .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
-      .cta-box { border: 1px solid rgba(201,255,74,.3); border-radius: 18px; background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01)); padding: 30px; }
+      .cta-box { border: 1px solid rgba(255,90,43,.28); border-radius: 18px; background: linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,0)); padding: 30px; }
       .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
-      .rel a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .rel a:hover { border-color: rgba(17,24,33,.20); background: var(--bg-soft); }
       .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
-      .pn a:hover { border-color: rgba(255,255,255,.28); background: var(--bg-soft); }
+      .pn a:hover { border-color: rgba(17,24,33,.20); background: var(--bg-soft); }
       .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
       .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
@@ -114,21 +114,22 @@
     <div class="bg-blobs" aria-hidden="true"></div>
     <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
       <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
-        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF5A2B,#FFB300);display:inline-block"></span>
         <span class="font-semibold" style="color: var(--text)">NOAH</span>
         <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
       </a>
       <div class="flex items-center gap-2 shrink-0">
+        <a href="/references" class="text-sm hidden sm:inline" style="color: var(--text-dim)">레퍼런스</a>
         <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
-        <a href="/#consult" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">무료 상담</a>
+        <a href="/contact" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:var(--on-accent)">무료 상담</a>
       </div>
     </header>
 
     <main class="container-x py-10" style="max-width: 760px">
       <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
-        <a href="/" class="hover:text-white">홈</a> ·
-        <a href="/columns/" class="hover:text-white">칼럼</a> ·
-        <a href="/columns/topic/seo" class="hover:text-white">SEO·검색노출</a>
+        <a href="/" class="hover:text-[color:var(--text)]">홈</a> ·
+        <a href="/columns/" class="hover:text-[color:var(--text)]">칼럼</a> ·
+        <a href="/columns/topic/seo" class="hover:text-[color:var(--text)]">SEO·검색노출</a>
       </nav>
 
       <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">SEO·검색노출</p>
@@ -165,8 +166,8 @@
           199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
         </p>
         <div class="flex gap-2.5 mt-6 flex-wrap">
-          <a href="/#showroom" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:#10130F">레퍼런스 보기</a>
-          <a href="/#consult" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+          <a href="/references" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:var(--on-accent)">레퍼런스 보기</a>
+          <a href="/contact" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
         </div>
       </section>
 
@@ -210,10 +211,11 @@
     <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
       
       <div class="flex gap-5 justify-center flex-wrap mb-4">
-        <a href="/" class="hover:text-white">홈</a>
-        <a href="/columns/" class="hover:text-white">칼럼</a>
-        <a href="/options" class="hover:text-white">옵션 안내</a>
-        <a href="/#consult" class="hover:text-white">상담 신청</a>
+        <a href="/" class="hover:text-[color:var(--text)]">홈</a>
+        <a href="/references" class="hover:text-[color:var(--text)]">레퍼런스</a>
+        <a href="/columns/" class="hover:text-[color:var(--text)]">칼럼</a>
+        <a href="/pricing" class="hover:text-[color:var(--text)]">가격</a>
+        <a href="/contact" class="hover:text-[color:var(--text)]">상담 신청</a>
       </div>
       <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
       <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>

@@ -9,17 +9,38 @@
     'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   --font-serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
 
-  /* 쇼룸 컬러 — 다크 에디토리얼 (오렌지 × 애시드 라임) */
-  --bg: #0B0C0F;
-  --bg-soft: #15171C;
-  --bg-elev: #1C1F25;
-  --line: rgba(255, 255, 255, 0.12);
-  --line-soft: rgba(255, 255, 255, 0.05);
-  --text: #F2F0E9;
-  --text-dim: rgba(242, 240, 233, 0.64);
-  --text-quiet: rgba(242, 240, 233, 0.38);
+  /* 컬러 — 라이트 에디토리얼 (웜 화이트 × 오렌지) */
+  --bg: #FFFFFF;
+  --bg-soft: #F7F8FA;
+  --bg-elev: #FFFFFF;
+  --line: rgba(17, 24, 33, 0.11);
+  --line-soft: rgba(17, 24, 33, 0.055);
+  --text: #111821;
+  --text-dim: #56606F;
+  --text-quiet: #8C94A2;
+  --accent: #FF5A2B;        /* CTA·강조 — 흰 배경 대비 확보 */
+  --accent-deep: #E8431A;   /* 텍스트용 진한 오렌지 */
+  --accent-soft: #FFF1EC;   /* 연한 오렌지 배경 */
+  --on-accent: #FFFFFF;     /* accent 위 글자색 */
+  --lime: #C9FF4A;          /* 다크 섹션 전용 포인트 */
+  --ink: #0E1116;           /* 다크 섹션 배경 */
+  --ink-soft: #191D25;
+}
+
+/* 다크 섹션 안에서는 토큰을 반전 — 라이트 사이트 안의 대비 구간 */
+.on-dark {
+  --bg: #0E1116;
+  --bg-soft: #191D25;
+  --bg-elev: #21262F;
+  --line: rgba(255, 255, 255, 0.13);
+  --line-soft: rgba(255, 255, 255, 0.06);
+  --text: #F4F5F7;
+  --text-dim: rgba(244, 245, 247, 0.66);
+  --text-quiet: rgba(244, 245, 247, 0.40);
   --accent: #C9FF4A;
-  --accent-deep: #FF623D;
+  --on-accent: #0E1116;
+  background: var(--bg);
+  color: var(--text);
 }
 
 html { scroll-behavior: smooth; }
@@ -56,8 +77,8 @@ img { max-width: 100%; height: auto; }
   padding: 28px 8px 8px;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.1) inset,
-    0 30px 60px -25px rgba(0, 0, 0, 0.7),
-    0 10px 20px -10px rgba(0, 0, 0, 0.4);
+    0 26px 50px -24px rgba(17, 24, 33, 0.34),
+    0 8px 18px -10px rgba(17, 24, 33, 0.18);
 }
 .mockup-desktop::before {
   content: '';
@@ -104,8 +125,8 @@ img { max-width: 100%; height: auto; }
   padding: 7px;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.12) inset,
-    0 25px 50px -20px rgba(0, 0, 0, 0.7),
-    0 8px 16px -8px rgba(0, 0, 0, 0.4);
+    0 22px 44px -20px rgba(17, 24, 33, 0.32),
+    0 6px 14px -8px rgba(17, 24, 33, 0.16);
 }
 .mockup-mobile::before {
   content: '';
@@ -160,10 +181,11 @@ img { max-width: 100%; height: auto; }
 .ref-card {
   position: relative;
   display: block;
-  background: var(--bg-soft);
+  background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 26px 26px 100px;
+  box-shadow: 0 1px 2px rgba(17, 24, 33, 0.04);
   text-decoration: none;
   color: inherit;
   transition:
@@ -180,8 +202,8 @@ img { max-width: 100%; height: auto; }
   inset: 0;
   background: radial-gradient(
     600px circle at var(--mx, 50%) var(--my, 0%),
-    rgba(255, 98, 61, 0.16),
-    transparent 40%
+    rgba(255, 90, 43, 0.10),
+    transparent 42%
   );
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -190,9 +212,8 @@ img { max-width: 100%; height: auto; }
 }
 .ref-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(255, 255, 255, 0.18);
-  background: var(--bg-elev);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  border-color: rgba(17, 24, 33, 0.18);
+  box-shadow: 0 26px 50px -26px rgba(17, 24, 33, 0.26);
 }
 .ref-card:hover::before { opacity: 1; }
 .ref-card > * { position: relative; z-index: 1; }
@@ -208,7 +229,7 @@ img { max-width: 100%; height: auto; }
   width: 22%;
   z-index: 2;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 16px 28px rgba(17, 24, 33, 0.24));
 }
 .ref-card:hover .mockup-mobile-wrap {
   transform: translateY(-10px) rotate(-2deg);
@@ -257,7 +278,7 @@ img { max-width: 100%; height: auto; }
   width: 14px;
   height: 14px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(17, 24, 33, 0.10);
 }
 
 /* ============================================================
@@ -283,7 +304,7 @@ img { max-width: 100%; height: auto; }
 }
 .cat-chip[data-active='true'] {
   background: var(--text);
-  color: #0a0a0b;
+  color: #fff;
   border-color: var(--text);
 }
 .cat-chip span.dot {
@@ -292,9 +313,9 @@ img { max-width: 100%; height: auto; }
   border-radius: 50%;
   background: var(--text-quiet);
 }
-.cat-chip[data-active='true'] span.dot { background: #0a0a0b; }
+.cat-chip[data-active='true'] span.dot { background: #fff; }
 .cat-chip[data-cat] { cursor: pointer; }
-.cat-chip[data-cat]:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.18); }
+.cat-chip[data-cat]:hover { color: var(--text); border-color: rgba(17, 24, 33, 0.22); }
 
 /* 카드 필터 토글 */
 .ref-card.is-hidden {
@@ -310,7 +331,7 @@ img { max-width: 100%; height: auto; }
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, #FF623D, #C9FF4A);
+  background: linear-gradient(90deg, #FF5A2B, #FFB300);
   transform-origin: 0 50%;
   transform: scaleX(0);
   z-index: 200;
@@ -335,22 +356,22 @@ img { max-width: 100%; height: auto; }
   width: 60vw;
   height: 60vw;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.18;
+  filter: blur(130px);
+  opacity: 0.10;
   animation: float-slow 30s ease-in-out infinite;
 }
 .bg-blobs::before {
-  background: radial-gradient(circle, #FF623D, transparent 60%);
-  top: -20vw;
-  left: -10vw;
-  opacity: 0.8;
+  background: radial-gradient(circle, #FF5A2B, transparent 62%);
+  top: -22vw;
+  left: -12vw;
+  opacity: 0.7;
 }
 .bg-blobs::after {
-  background: radial-gradient(circle, #C9FF4A, transparent 60%);
-  bottom: -25vw;
-  right: -10vw;
+  background: radial-gradient(circle, #FFB300, transparent 62%);
+  bottom: -26vw;
+  right: -12vw;
   animation-delay: -15s;
-  opacity: 0.55;
+  opacity: 0.5;
 }
 @keyframes float-slow {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -639,7 +660,7 @@ img { max-width: 100%; height: auto; }
   width: 0.06em;
   height: 0.92em;
   margin-left: 0.08em;
-  background: #C9FF4A;
+  background: var(--accent);
   vertical-align: -0.08em;
   animation: typer-caret 1s steps(2, start) infinite;
   border-radius: 1px;

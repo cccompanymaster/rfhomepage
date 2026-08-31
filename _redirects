@@ -51,3 +51,6 @@
 # https://www.noah.kr/*    https://noah.kr/:splat               301!
 
 # 404는 자동으로 404.html을 사용하므로 별도 규칙 불필요
+
+# ── 페이지 분리 (원페이지 → 멀티페이지) ──
+# references/process/pricing/contact 는 Workers가 .html을 확장자 없이 자동 서빙

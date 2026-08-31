@@ -23,7 +23,7 @@
     <meta name="description" content="NOAH 홈페이지 패키지(₩199,000)와 추가 옵션 상세 안내 — 서브페이지, 로고, 예약 캘린더, SEO, 유지보수까지. 모든 가격 부가세 별도." />
     <meta property="og:title" content="옵션 안내 · NOAH 노아홈페이지" />
     <meta property="og:description" content="필요한 것만 골라 더하는 NOAH 옵션 — 상세 설명과 단가." />
-    <meta name="theme-color" content="#0B0C0F" />
+    <meta name="theme-color" content="#FFFFFF" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -35,15 +35,15 @@
       body { background: var(--bg); color: var(--text); }
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
       .opt-card { border: 1px solid var(--line); border-radius: 18px; background: var(--bg-soft); padding: 26px; display: flex; flex-direction: column; transition: transform .25s, border-color .25s; }
-      .opt-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.24); }
+      .opt-card:hover { transform: translateY(-4px); border-color: rgba(17,24,33,.20); }
       .price { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
       .price small { font-size: 13px; color: var(--text-quiet); font-weight: 500; }
       .inc li { display: flex; gap: 8px; font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
       .inc li::before { content: '—'; color: var(--accent-deep); flex-shrink: 0; }
-      .buy-btn { margin-top: auto; display: inline-flex; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--accent); color: #10130F; font-weight: 800; font-size: 14px; transition: filter .2s, transform .2s; }
+      .buy-btn { margin-top: auto; display: inline-flex; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 14px; transition: filter .2s, transform .2s; }
       .buy-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
       .grp-title { font-size: 12px; letter-spacing: .24em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-      .badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; background: rgba(255,98,61,.16); color: #ffb39d; font-weight: 700; }
+      .badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
     </style>
   </head>
   <body>
@@ -59,7 +59,7 @@
         <span class="font-semibold" style="color: var(--text)">NOAH</span>
         <span style="color: var(--text-quiet)">· 옵션 안내</span>
       </a>
-      <a href="./checkout" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:#10130F">바로 구매하기 →</a>
+      <a href="./checkout" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:var(--on-accent)">바로 구매하기 →</a>
     </header>
 
     <main class="container-x py-12 max-w-5xl mx-auto">
@@ -73,10 +73,10 @@
       </div>
 
       <!-- 기본 패키지 -->
-      <section class="opt-card mb-12" style="border-color: rgba(201,255,74,.35); background: linear-gradient(160deg, rgba(201,255,74,.06), rgba(255,255,255,0.01))">
+      <section class="opt-card mb-12" style="border-color: rgba(255,90,43,.32); background: linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,0))">
         <div class="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <span class="badge" style="background:rgba(201,255,74,.16); color:var(--accent)">BASE PACKAGE</span>
+            <span class="badge" style="background:var(--accent-soft); color:var(--accent-deep)">BASE PACKAGE</span>
             <h2 class="disp text-2xl md:text-3xl mt-3">NOAH 홈페이지 패키지</h2>
             <p class="mt-2 text-sm leading-7" style="color: var(--text-dim)">18개 레퍼런스 중 선택한 디자인 위에 사장님 브랜드를 옮겨 7일 안에 오픈합니다.</p>
           </div>
