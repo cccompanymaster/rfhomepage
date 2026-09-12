@@ -52,9 +52,12 @@ def tag_balance(html):
 
 
 def numbers(s):
-    """의미 있는 수치만 (2자리 이상, 연도·비율·금액)"""
+    """의미 있는 수치만 — 천단위 구분 금액, 2자리 이상 숫자.
+       '1, 2, 3' 같은 나열의 한 자리 숫자는 서술문으로 풀릴 수 있으므로 제외."""
     plain = re.sub(r'<[^>]+>', '', s)
-    return set(re.findall(r'\d[\d,]{1,}', plain))
+    out = set(re.findall(r'\d{1,3}(?:,\d{3})+', plain))       # 1,000 / 199,000
+    out |= {n for n in re.findall(r'(?<![\d,])\d{2,}(?![\d,])', plain)}  # 18 / 2026
+    return out
 
 
 def check(orig_arts, new_pairs, tag):
