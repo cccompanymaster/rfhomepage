@@ -51,16 +51,16 @@
       body { background: var(--bg); color: var(--text); }
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
       .col-head { border-bottom: 1px solid var(--line); }
-      .chip { display:inline-flex; align-items:center; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
+      .chip { display:inline-flex; align-items:center; padding: 9px 17px; border-radius: 999px; border: 1px solid var(--line); font-size: 14.5px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
       .chip:hover { border-color: rgba(17,24,33,.24); color: var(--text); }
       .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
       .card:hover { transform: translateY(-3px); border-color: rgba(17,24,33,.20); box-shadow: 0 14px 30px -18px rgba(17,24,33,.22); }
-      .card .cat { font-size: 11px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-      .card h3 { font-size: 17px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
-      .card p { font-size: 13.5px; line-height: 1.7; color: var(--text-dim); }
-      .card .meta { font-size: 12px; color: var(--text-quiet); margin-top: 14px; }
-      .f-search { width: 100%; padding: 14px 18px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 15px; }
+      .card .cat { font-size: 12px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+      .card h3 { font-size: 19px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
+      .card p { font-size: 15px; line-height: 1.75; color: var(--text-dim); }
+      .card .meta { font-size: 13px; color: var(--text-quiet); margin-top: 14px; }
+      .f-search { width: 100%; padding: 16px 20px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 16.5px; }
       .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,90,43,.16); }
       .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
       .pager button:hover:not(:disabled) { border-color: rgba(17,24,33,.24); color: var(--text); }
@@ -73,27 +73,27 @@
       .toc ol { list-style: none; counter-reset: t; }
       .toc li { counter-increment: t; margin-bottom: 9px; }
       .toc li:last-child { margin-bottom: 0; }
-      .toc a { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
+      .toc a { font-size: 16px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
       .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
       .toc a:hover { color: var(--text); }
 
       /* 본문 타이포 */
-      .prose { font-size: 16px; line-height: 1.95; color: var(--text-dim); }
+      .prose { font-size: 17.5px; line-height: 1.95; color: var(--text-dim); }
       .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
       .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
+      .prose h3 { font-size: 20px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
       .prose p { margin: 0 0 18px; }
       .prose strong { color: var(--text); font-weight: 700; }
       .prose a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,90,43,.42); transition: text-decoration-color .2s; }
       .prose a:hover { text-decoration-color: var(--accent); }
       .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
-      .prose li { margin-bottom: 9px; }
+      .prose li { margin-bottom: 11px; }
       .prose ul li { list-style: none; position: relative; padding-left: 16px; }
       .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
       .prose ol { list-style: decimal; }
       .prose ol li { padding-left: 4px; }
       .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
-      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 14.5px; display: block; overflow-x: auto; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 16px; display: block; overflow-x: auto; }
       .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
       .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
       .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }

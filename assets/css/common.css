@@ -53,6 +53,10 @@ body {
 }
 img { max-width: 100%; height: auto; }
 
+/* ── 읽기 기본값 — 본문 가독성 상향 ── */
+body { font-size: 17px; line-height: 1.75; }
+@media (max-width: 640px) { body { font-size: 16px; } }
+
 /* ── 전역 품질 레이어 ── */
 ::selection { background: var(--accent-deep, #FF623D); color: #fff; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
@@ -242,30 +246,30 @@ img { max-width: 100%; height: auto; }
   margin-bottom: 16px;
 }
 .ref-card-industry {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--text-dim);
   text-transform: uppercase;
 }
 .ref-card-num {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-quiet);
   font-feature-settings: 'tnum';
   letter-spacing: 0.05em;
 }
 .ref-card-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 4px;
   line-height: 1.25;
 }
 .ref-card-tag {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-dim);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
 /* 카드 하단 색상 스와치 (브랜드 팔레트) */
@@ -294,10 +298,10 @@ img { max-width: 100%; height: auto; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 10px 17px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--text-dim);
   cursor: default;
   transition: 0.2s;
