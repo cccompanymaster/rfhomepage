@@ -52,6 +52,12 @@
       .item .nm { display: block; font-weight: 700; font-size: 15.5px; }
       .item .ds { display: block; font-size: 13.5px; color: var(--text-dim); line-height: 1.55; margin-top: 2px; }
       .item .pr { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--accent-deep); white-space: nowrap; font-size: 15.5px; padding-top: 1px; }
+      .item .qty { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; }
+      .item .qty[hidden] { display: none; }
+      .item .qb { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); font-weight: 700; font-size: 16px; line-height: 1; color: var(--text); }
+      .item .qb:hover { border-color: var(--accent); color: var(--accent-deep); }
+      .item .qn { min-width: 20px; text-align: center; font-weight: 700; font-size: 15px; }
+      .item .ql { font-size: 13px; color: var(--text-quiet); }
       .item.base { border-color: rgba(255,90,43,.4); background: var(--accent-soft); cursor: default; }
 
       /* 폼 */
@@ -200,6 +206,10 @@
                 <input class="f" id="b-bizno" name="bizno" inputmode="numeric" placeholder="000-00-00000" />
                 <p class="msg">사업자등록번호 10자리를 입력해 주세요.</p>
               </div>
+              <div class="fld" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+                <label for="b-site">웹사이트</label>
+                <input class="f" id="b-site" name="website" tabindex="-1" autocomplete="off" />
+              </div>
               <div class="fld md:col-span-2">
                 <label for="b-memo">요청 메모 <span class="font-normal">(선택)</span></label>
                 <textarea class="f" id="b-memo" name="memo" rows="2" placeholder="예: 17번 디자인 희망, 10월 초 오픈 목표"></textarea>
@@ -250,7 +260,7 @@
     <!-- 모바일 하단 결제바 -->
     <div class="mbar" id="mbar" aria-hidden="true">
       <div>
-        <div class="t">총 결제금액 <span id="mbar-count"></span></div>
+        <div class="t">총 결제금액 · VAT 포함 <span id="mbar-count"></span></div>
         <div class="a" id="mbar-total">₩218,900</div>
       </div>
       <button type="button" id="mbar-btn">결제하기</button>
@@ -283,10 +293,10 @@
       const BASE = { key: 'base', name: 'NOAH 홈페이지 패키지', price: 199000 };
       const GROUPS = { design: '디자인 · 콘텐츠', func: '기능', ops: '운영 · 마케팅' };
       const OPTIONS = [
-        { key: 'subpage',  g: 'design', name: '서브페이지 추가 (1p)',   price: 50000,  ds: '메뉴판·오시는 길·팀 소개 등 한 페이지 추가. 분량은 협의' },
+        { key: 'subpage',  g: 'design', name: '서브페이지 추가 (1p)',   price: 50000,  ds: '메뉴판·오시는 길·팀 소개 등 한 페이지 추가. 분량은 협의', qty: true },
         { key: 'logo',     g: 'design', name: '로고 제작 — 심플',        price: 30000,  ds: '워드마크 중심 심플 로고, SVG·PNG 원본 제공' },
         { key: 'card',     g: 'design', name: '명함 제작 (인쇄 별도)',   price: 50000,  ds: '홈페이지와 같은 톤의 명함 디자인 파일' },
-        { key: 'popup',    g: 'design', name: '팝업 디자인 (1건)',       price: 10000,  ds: '이벤트·공지 팝업 1건 디자인 + 적용' },
+        { key: 'popup',    g: 'design', name: '팝업 디자인 (1건)',       price: 10000,  ds: '이벤트·공지 팝업 1건 디자인 + 적용', qty: true },
         { key: 'aiimg',    g: 'design', name: 'AI 생성 이미지 10장+',    price: 50000,  ds: '사진이 부족할 때, 업종 분위기에 맞춘 이미지 10장 이상' },
         { key: 'form',     g: 'func',   name: '문의 폼 + 자동 메일',     price: 50000,  ds: '문의가 오면 사장님 메일로 즉시 전달' },
         { key: 'kakao',    g: 'func',   name: '카카오 채널 연동',        price: 20000,  ds: '카카오톡 채널 버튼·채팅 연결' },
@@ -301,6 +311,8 @@
       const $ = (s) => document.querySelector(s);
       const won = (n) => '₩' + n.toLocaleString('ko-KR');
       const selected = new Set();
+      const qty = new Map();           // 수량 옵션 (subpage·popup) — 미선택이면 없음
+      const q = (k) => qty.get(k) || 1;
       const STORE_KEY = 'noah_checkout_v2';
 
       /* ── 옵션 목록 렌더 (그룹별) ── */
@@ -309,9 +321,18 @@
         <div class="space-y-2">${OPTIONS.filter(o => o.g === g).map(o => `
           <label class="item" data-k="${o.key}">
             <input type="checkbox" aria-label="${o.name}" />
-            <span class="flex-1 min-w-0"><span class="nm">${o.name}</span><span class="ds">${o.ds}</span></span>
+            <span class="flex-1 min-w-0"><span class="nm">${o.name}</span><span class="ds">${o.ds}</span>${o.qty ? `<span class="qty" hidden><button type="button" class="qb" data-d="-1" aria-label="수량 줄이기">−</button><span class="qn num" aria-live="polite">1</span><button type="button" class="qb" data-d="1" aria-label="수량 늘리기">+</button><span class="ql">개</span></span>` : ''}</span>
             <span class="pr">+${won(o.price)}</span>
           </label>`).join('')}</div>`).join('');
+      /* 수량 스테퍼 — label 클릭 전파 차단 */
+      document.querySelectorAll('#opt-list .qb').forEach(b => b.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        const el = b.closest('.item'), k = el.dataset.k;
+        const n = Math.min(10, Math.max(1, q(k) + Number(b.dataset.d)));
+        qty.set(k, n); el.querySelector('.qn').textContent = n;
+        el.querySelector('.pr').textContent = '+' + won(OPTIONS.find(o => o.key === k).price * n);
+        renderSum(); persist();
+      }));
 
       document.querySelectorAll('#opt-list .item').forEach(el => {
         const k = el.dataset.k, cb = el.querySelector('input');
@@ -327,12 +348,14 @@
           }
           cb.checked ? selected.add(k) : selected.delete(k);
           el.classList.toggle('on', cb.checked);
+          const qbox = el.querySelector('.qty'); if (qbox) qbox.hidden = !cb.checked;
           renderSum(); persist();
         });
       });
 
       function renderSum() {
-        const items = [BASE, ...OPTIONS.filter(o => selected.has(o.key))];
+        const items = [BASE, ...OPTIONS.filter(o => selected.has(o.key)).map(o => o.qty && q(o.key) > 1
+          ? { ...o, name: `${o.name} ×${q(o.key)}`, price: o.price * q(o.key), unit: o.price, n: q(o.key) } : o)];
         const supply = items.reduce((a, b) => a + b.price, 0);
         const vat = Math.round(supply * 0.1);
         $('#sum-lines').innerHTML = items.map(i => `<div class="sum-row"><span class="k">${i.name}</span><span class="v num">${won(i.price)}</span></div>`).join('');
@@ -348,7 +371,7 @@
       function persist() {
         try {
           sessionStorage.setItem(STORE_KEY, JSON.stringify({
-            sel: [...selected],
+            sel: [...selected], qty: [...qty],
             name: $('#b-name').value, phone: $('#b-phone').value, email: $('#b-email').value,
             biz: $('#b-biz').value, memo: $('#b-memo').value, bizno: $('#b-bizno').value,
             receipt: document.querySelector('input[name=receipt]:checked')?.value || 'none',
@@ -361,6 +384,7 @@
           if (!d) return;
           ['name','phone','email','biz','memo','bizno'].forEach(k => { if (d[k]) $('#b-' + k).value = d[k]; });
           const r = document.querySelector(`input[name=receipt][value="${d.receipt}"]`); if (r) r.checked = true;
+          (d.qty || []).forEach(([k, n]) => { qty.set(k, n); const el = document.querySelector(`.item[data-k="${k}"]`); if (el) { el.querySelector('.qn').textContent = n; el.querySelector('.pr').textContent = '+' + won(OPTIONS.find(o => o.key === k).price * n); } });
           (d.sel || []).forEach(k => { const el = document.querySelector(`.item[data-k="${k}"] input`); if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); } });
         } catch (_) {}
       }
@@ -460,12 +484,15 @@
       $('#order-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!validate()) return;
+        if ($('#b-site').value) { showDone('<h3 id="done-title" class="disp text-xl">접수되었습니다</h3>'); return; }  // 봇 허니팟
         const o = buildOrder();
         const btn = $('#pay-btn');
         if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: o.total, currency: 'KRW', items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })) });
 
         /* 데모 모드 — 포트원 키 미설정: 주문만 접수하고 결제는 안내 */
         if (!PORTONE.storeId || !PORTONE.channelKey) {
+          const sig = JSON.stringify(o);
+          if (window.__sent && window.__sent.sig === sig) { showDone(window.__sent.html); return; }  // 같은 주문 두 번 접수 방지
           const orderId = 'NO-' + new Date().toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
           btn.disabled = true; btn.textContent = '주문 접수 중…';
           await postGAS({ type: 'order', status: 'pending_manual', orderId, ...o });
@@ -485,6 +512,7 @@
               <a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a>
             </div>
             <div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
+          window.__sent = { sig, html: $('#done-body').innerHTML };
           $('#copy-btn').addEventListener('click', async () => {
             try { await navigator.clipboard.writeText(txt); $('#copy-btn').textContent = '복사됨 ✓'; }
             catch (_) { $('#copy-btn').textContent = '길게 눌러 복사하세요'; }
