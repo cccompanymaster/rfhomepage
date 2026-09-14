@@ -25,3 +25,11 @@ Thumbs.db
 *.log
 *.tmp
 node_modules/
+
+# 원고·도구·작업 폴더 — 사이트에 서빙할 이유가 없음 (칼럼 원고 JSON 노출 방지)
+content/
+tools/
+scripts/
+_workspace/
+package.json
+package-lock.json

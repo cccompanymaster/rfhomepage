@@ -22,7 +22,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
 
   # 사용 안 하는 브라우저 권한 명시적으로 차단
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(self), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()
 
   # HTTPS 강제 (1년) — 한 번 방문 후엔 HTTP 요청 자체가 막힘
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
@@ -35,7 +35,9 @@
 
   # 콘텐츠 보안 정책 (CSP) — 외부 스크립트/스타일 화이트리스트
   # NOAH가 사용하는 CDN: Tailwind, Pretendard, Google Fonts, Apps Script
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; frame-ancestors 'self'; upgrade-insecure-requests
+  # ※ 포트원 채널(PG) 확정 후 해당 PG 도메인을 frame-src·form-action·connect-src 에 추가할 것
+  #    예) 토스페이먼츠 https://*.tosspayments.com / KG이니시스 https://*.inicis.com / NHN KCP https://*.kcp.co.kr
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdn.portone.io https://*.portone.io https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.portone.io https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.portone.io; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.portone.io; frame-ancestors 'self'; upgrade-insecure-requests
 
 # ════════════════════════════════════════════════════════════
 # 정적 자산 — 1년 immutable 캐시
