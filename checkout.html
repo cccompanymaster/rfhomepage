@@ -20,7 +20,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>결제하기 · NOAH 노아홈페이지</title>
+    <title>주문 · 결제 · NOAH 노아홈페이지</title>
+    <meta name="description" content="NOAH 홈페이지 패키지(₩199,000)와 필요한 옵션만 골라 결제합니다. 부가세 포함 총액을 미리 확인하고, 결제 후 영업일 1일 안에 착수 안내를 받습니다." />
+    <link rel="canonical" href="https://noahhomepage.co.kr/checkout" />
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
@@ -29,29 +31,91 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-    <link rel="stylesheet" href="./assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/common.css" />
     <style>
       body { background: var(--bg); color: var(--text); }
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
+      .num { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; font-variant-numeric: tabular-nums; }
+
       .panel { border: 1px solid var(--line); border-radius: 18px; background: var(--bg-soft); padding: 24px; }
-      .item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 12px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; transition: border-color .2s, background .2s; }
-      .item:hover { border-color: rgba(17,24,33,.20); }
+      .panel h2 { font-weight: 700; font-size: 17.5px; display: flex; align-items: center; gap: 10px; }
+      .step { width: 26px; height: 26px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; flex-shrink: 0; }
+
+      /* 옵션 항목 */
+      .grp { font-size: 12px; letter-spacing: .2em; color: var(--text-quiet); font-weight: 700; margin: 18px 0 8px; }
+      .grp:first-child { margin-top: 0; }
+      .item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 14px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; background: var(--bg); transition: border-color .2s, background .2s, box-shadow .2s; }
+      .item:hover { border-color: rgba(17,24,33,.24); }
+      .item:focus-within { box-shadow: 0 0 0 3px rgba(255,90,43,.16); }
       .item.on { border-color: var(--accent); background: var(--accent-soft); }
-      .item input { margin-top: 4px; width: 17px; height: 17px; accent-color: var(--accent-deep); flex-shrink: 0; }
-      .item .nm { font-weight: 700; font-size: 15.5px; }
-      .item .pr { font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent); white-space: nowrap; font-size: 15px; }
+      .item input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent-deep); flex-shrink: 0; }
+      .item .nm { display: block; font-weight: 700; font-size: 15.5px; }
+      .item .ds { display: block; font-size: 13.5px; color: var(--text-dim); line-height: 1.55; margin-top: 2px; }
+      .item .pr { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--accent-deep); white-space: nowrap; font-size: 15.5px; padding-top: 1px; }
       .item.base { border-color: rgba(255,90,43,.4); background: var(--accent-soft); cursor: default; }
-      .f { width: 100%; padding: 14px 16px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px; color: var(--text); font-size: 16.5px; }
+
+      /* 폼 */
+      .fld { display: block; }
+      .fld[hidden] { display: none; }
+      .fld label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; }
+      .fld label b { color: var(--accent-deep); font-weight: 700; }
+      .f { width: 100%; padding: 13px 15px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; color: var(--text); font-size: 16.5px; transition: border-color .15s, box-shadow .15s; }
+      .f::placeholder { color: var(--text-quiet); }
       .f:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,90,43,.16); }
-      .sum-row { display: flex; justify-content: space-between; font-size: 15px; padding: 6px 0; color: var(--text-dim); }
-      .sum-row.total { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; color: var(--text); font-weight: 800; font-size: 18.5px; }
-      .sum-row.total .v { font-family: 'Space Grotesk'; color: var(--accent); font-size: 22px; }
+      .fld.err .f { border-color: #D93025; }
+      .fld .msg { display: none; font-size: 13px; color: #D93025; margin-top: 6px; }
+      .fld.err .msg { display: block; }
+      .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+      .seg label { flex: 1 1 auto; text-align: center; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 14.5px; font-weight: 600; color: var(--text-dim); cursor: pointer; background: var(--bg); }
+      .seg input { position: absolute; opacity: 0; pointer-events: none; }
+      .seg input:checked + span { color: var(--accent-deep); }
+      .seg label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-deep); }
+
+      /* 동의 */
+      .agree { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-size: 14px; line-height: 1.6; color: var(--text-dim); cursor: pointer; }
+      .agree input { margin-top: 4px; width: 17px; height: 17px; accent-color: var(--accent-deep); flex-shrink: 0; }
+      .agree a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+      .agree.err { border-color: #D93025; }
+      .agree-all { font-weight: 700; color: var(--text); background: var(--bg-soft); }
+
+      /* 합계 */
+      .sum-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 6px 0; color: var(--text-dim); }
+      .sum-row .k { min-width: 0; }
+      .sum-row .v { white-space: nowrap; }
+      .sum-row.sub { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 12px; }
+      .sum-row.total { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; color: var(--text); font-weight: 800; font-size: 18px; align-items: baseline; }
+      .sum-row.total .v { font-family: 'Space Grotesk', sans-serif; color: var(--accent-deep); font-size: 26px; }
       .pay-btn { width: 100%; padding: 17px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 17.5px; transition: filter .2s, transform .2s; }
       .pay-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
       .pay-btn:disabled { opacity: .55; cursor: not-allowed; }
       .note { font-size: 13px; color: var(--text-quiet); line-height: 1.7; }
+      .trust { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--text-dim); margin-top: 14px; }
+      .trust span::before { content: '✓ '; color: var(--accent-deep); font-weight: 700; }
+      details.refund { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+      details.refund summary { cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--text-dim); list-style: none; display: flex; justify-content: space-between; }
+      details.refund summary::-webkit-details-marker { display: none; }
+      details.refund summary::after { content: '+'; color: var(--text-quiet); }
+      details.refund[open] summary::after { content: '−'; }
+      details.refund ul { margin-top: 8px; padding-left: 16px; font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+      /* 모바일 하단 결제바 */
+      .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .mbar .t { font-size: 12px; color: var(--text-quiet); line-height: 1.2; }
+      .mbar .a { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--accent-deep); }
+      .mbar button { padding: 13px 22px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 15.5px; white-space: nowrap; }
+      @media (min-width: 1024px) { .mbar { display: none; } }
+      @media (max-width: 1023px) { body { padding-bottom: 84px; } }
+
+      /* 결과 모달 */
       .modal-mask2 { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 20px; }
       .modal-mask2.open { display: flex; }
+      .modal-card { max-width: 480px; width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; text-align: center; max-height: 92svh; overflow: auto; }
+      .order-box { text-align: left; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 14px; line-height: 1.7; color: var(--text-dim); margin-top: 16px; white-space: pre-wrap; word-break: keep-all; }
+      .btn-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+      .btn-row a, .btn-row button { padding: 12px 18px; border-radius: 999px; font-weight: 700; font-size: 14.5px; border: 1px solid var(--line); color: var(--text); text-decoration: none; }
+      .btn-row .kakao { background: #fee500; color: #191919; border-color: #fee500; }
+      .btn-row .prime { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
     </style>
   </head>
   <body>
@@ -61,117 +125,193 @@
     <!-- End Google Tag Manager (noscript) -->
     <div class="bg-blobs" aria-hidden="true"></div>
 
-    <header class="container-x pt-8 pb-2 flex items-center justify-between">
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
       <a href="/" class="inline-flex items-center gap-2 text-sm" style="color: var(--text-dim)">
         <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF623D,#C9FF4A);display:inline-block"></span>
         <span class="font-semibold" style="color: var(--text)">NOAH</span>
-        <span style="color: var(--text-quiet)">· 결제하기</span>
+        <span style="color: var(--text-quiet)">· 주문 · 결제</span>
       </a>
-      <a href="./options" class="text-sm underline underline-offset-4" style="color: var(--text-dim)">옵션 상세 보기</a>
+      <nav class="flex items-center gap-4 text-sm" style="color: var(--text-dim)">
+        <a href="/pricing" class="hidden sm:inline underline underline-offset-4">가격</a>
+        <a href="/options" class="underline underline-offset-4">옵션 안내</a>
+      </nav>
     </header>
 
     <main class="container-x py-10 max-w-5xl mx-auto">
-      <h1 class="disp text-3xl md:text-4xl text-center mb-2">주문 · 결제</h1>
-      <p class="text-center text-sm mb-10" style="color: var(--text-dim)">기본 패키지에 필요한 옵션만 더하세요. 결제 후 영업일 1일 안에 착수 안내를 드립니다.</p>
+      <div class="text-center mb-10">
+        <p class="text-xs tracking-[0.24em] mb-3" style="color: var(--text-quiet)">CHECKOUT</p>
+        <h1 class="disp text-3xl md:text-4xl">주문 · 결제</h1>
+        <p class="mt-4 text-[15.5px] leading-7" style="color: var(--text-dim)">기본 패키지에 필요한 옵션만 더하세요.<br class="sm:hidden" /> 결제 후 영업일 1일 안에 착수 안내를 드립니다.</p>
+      </div>
 
-      <div class="grid lg:grid-cols-[1fr_360px] gap-6 items-start">
-        <!-- 좌: 상품 선택 -->
-        <div class="space-y-6">
+      <form id="order-form" novalidate class="grid lg:grid-cols-[1fr_380px] gap-6 items-start">
+        <!-- 좌: 상품 선택 + 주문자 -->
+        <div class="space-y-5">
           <section class="panel">
-            <h2 class="font-bold mb-4">기본 패키지</h2>
-            <label class="item base">
+            <h2><span class="step">1</span>기본 패키지</h2>
+            <label class="item base mt-4">
               <input type="checkbox" checked disabled aria-label="기본 패키지 (필수)" />
-              <span class="flex-1"><span class="nm">NOAH 홈페이지 패키지</span><br /><span class="text-xs" style="color:var(--text-dim)">18개 디자인 중 선택 · 7일 오픈 · 1년 호스팅·텍스트 수정 포함</span></span>
+              <span class="flex-1 min-w-0">
+                <span class="nm">NOAH 홈페이지 패키지</span>
+                <span class="ds">18개 디자인 중 선택 · 7일 오픈 · 1년 호스팅 · 1년 무제한 텍스트 수정 · 소스·계정 이전</span>
+              </span>
               <span class="pr">₩199,000</span>
             </label>
           </section>
 
           <section class="panel">
-            <h2 class="font-bold mb-1">옵션 추가 <span class="text-xs font-normal" style="color:var(--text-quiet)">(선택)</span></h2>
-            <p class="note mb-4">각 옵션의 자세한 설명은 <a href="./options" class="underline" style="color:var(--accent)">옵션 안내</a>에서 확인하세요.</p>
-            <div class="space-y-2.5" id="opt-list"></div>
+            <h2><span class="step">2</span>옵션 추가 <span class="text-xs font-normal" style="color:var(--text-quiet)">(선택)</span></h2>
+            <p class="note mt-2 mb-3">필요한 것만 고르세요. 자세한 설명은 <a href="/options" class="underline" style="color:var(--accent-deep)">옵션 안내</a>에 있습니다. 모든 단가는 부가세 별도입니다.</p>
+            <div id="opt-list"></div>
           </section>
 
           <section class="panel">
-            <h2 class="font-bold mb-4">주문자 정보</h2>
-            <div class="grid md:grid-cols-2 gap-3">
-              <div><input class="f" id="b-name" placeholder="성함 *" autocomplete="name" /></div>
-              <div><input class="f" id="b-phone" type="tel" placeholder="연락처 * (010-0000-0000)" autocomplete="tel" /></div>
-              <div class="md:col-span-2"><input class="f" id="b-email" type="email" placeholder="이메일 * (영수증·안내 발송)" autocomplete="email" /></div>
-              <div class="md:col-span-2"><input class="f" id="b-memo" placeholder="요청 메모 (선택) — 예: 17번 디자인 희망" /></div>
+            <h2><span class="step">3</span>주문자 정보</h2>
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="fld">
+                <label for="b-name">성함 <b>*</b></label>
+                <input class="f" id="b-name" name="name" placeholder="홍길동" autocomplete="name" required />
+                <p class="msg">성함을 입력해 주세요.</p>
+              </div>
+              <div class="fld">
+                <label for="b-phone">연락처 <b>*</b></label>
+                <input class="f" id="b-phone" name="phone" type="tel" inputmode="numeric" placeholder="010-0000-0000" autocomplete="tel" required />
+                <p class="msg">휴대폰 번호를 확인해 주세요.</p>
+              </div>
+              <div class="fld md:col-span-2">
+                <label for="b-email">이메일 <b>*</b> <span class="font-normal">— 영수증·착수 안내 발송</span></label>
+                <input class="f" id="b-email" name="email" type="email" inputmode="email" placeholder="name@example.com" autocomplete="email" required />
+                <p class="msg">이메일 주소를 확인해 주세요.</p>
+              </div>
+              <div class="fld md:col-span-2">
+                <label for="b-biz">상호 / 가게 이름 <span class="font-normal">(선택)</span></label>
+                <input class="f" id="b-biz" name="biz" placeholder="예: 오월의 다정" autocomplete="organization" />
+              </div>
+              <div class="fld md:col-span-2">
+                <label>영수증 <span class="font-normal">(선택)</span></label>
+                <div class="seg" role="radiogroup" aria-label="영수증 종류">
+                  <label><input type="radio" name="receipt" value="none" checked /><span>필요 없음</span></label>
+                  <label><input type="radio" name="receipt" value="cash" /><span>현금영수증</span></label>
+                  <label><input type="radio" name="receipt" value="tax" /><span>세금계산서</span></label>
+                </div>
+              </div>
+              <div class="fld md:col-span-2" id="bizno-wrap" hidden>
+                <label for="b-bizno">사업자등록번호 <b>*</b> <span class="font-normal">— 세금계산서 발행용</span></label>
+                <input class="f" id="b-bizno" name="bizno" inputmode="numeric" placeholder="000-00-00000" />
+                <p class="msg">사업자등록번호 10자리를 입력해 주세요.</p>
+              </div>
+              <div class="fld md:col-span-2">
+                <label for="b-memo">요청 메모 <span class="font-normal">(선택)</span></label>
+                <textarea class="f" id="b-memo" name="memo" rows="2" placeholder="예: 17번 디자인 희망, 10월 초 오픈 목표"></textarea>
+              </div>
             </div>
-            <label class="flex items-start gap-2 mt-4 text-xs cursor-pointer" style="color: var(--text-dim); line-height:1.6">
-              <input type="checkbox" id="b-agree" style="margin-top:3px; accent-color: var(--accent-deep)" />
-              (필수) 주문 내용을 확인했으며, 결제 및 개인정보 수집·이용(주문 처리 목적)에 동의합니다.
-            </label>
+          </section>
+
+          <section class="panel">
+            <h2><span class="step">4</span>동의</h2>
+            <div class="space-y-2 mt-4">
+              <label class="agree agree-all"><input type="checkbox" id="ag-all" /><span>아래 내용을 모두 확인했고 동의합니다</span></label>
+              <label class="agree" id="ag1-wrap"><input type="checkbox" id="ag-terms" class="ag" /><span><b style="color:var(--text)">(필수)</b> 주문 내용과 <a href="/terms" target="_blank" rel="noopener">이용약관 · 환불 규정</a>을 확인했으며 결제 진행에 동의합니다.</span></label>
+              <label class="agree" id="ag2-wrap"><input type="checkbox" id="ag-privacy" class="ag" /><span><b style="color:var(--text)">(필수)</b> 주문 처리를 위한 <a href="/privacy" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다. (이름·연락처·이메일·주문 내역, 5년 보관)</span></label>
+            </div>
+            <p class="msg text-sm mt-3" id="ag-msg" style="display:none; color:#D93025">필수 동의 항목에 체크해 주세요.</p>
           </section>
         </div>
 
         <!-- 우: 합계 + 결제 -->
         <aside class="panel lg:sticky lg:top-6">
-          <h2 class="font-bold mb-3">결제 금액</h2>
-          <div id="sum-lines"></div>
-          <div class="sum-row"><span>공급가액</span><span class="v" id="sum-supply">₩199,000</span></div>
-          <div class="sum-row"><span>부가세 (10%)</span><span class="v" id="sum-vat">₩19,900</span></div>
-          <div class="sum-row total"><span>총 결제금액</span><span class="v" id="sum-total">₩218,900</span></div>
-          <button class="pay-btn mt-5" id="pay-btn">결제하기</button>
-          <p class="note mt-4" id="pay-note">카드·간편결제 지원 (포트원). 결제 완료 후 착수 안내 메일이 발송됩니다.</p>
-          <p class="note mt-2">문의: 010-6658-6482 · cccompanymaster@gmail.com</p>
+          <h2>결제 금액</h2>
+          <div id="sum-lines" class="mt-3"></div>
+          <div class="sum-row sub"><span class="k">공급가액</span><span class="v num" id="sum-supply">₩199,000</span></div>
+          <div class="sum-row"><span class="k">부가세 (10%)</span><span class="v num" id="sum-vat">₩19,900</span></div>
+          <div class="sum-row total"><span class="k">총 결제금액</span><span class="v" id="sum-total">₩218,900</span></div>
+          <button type="submit" class="pay-btn mt-5" id="pay-btn">결제하기</button>
+          <p class="note mt-3" id="pay-note">카드 · 간편결제 (포트원 안전결제). 결제 정보는 저희 서버에 저장되지 않습니다.</p>
+          <div class="trust">
+            <span>착수 전 100% 환불</span>
+            <span>7일 안에 오픈</span>
+            <span>소스·계정 이전</span>
+          </div>
+          <details class="refund">
+            <summary>환불 규정 요약</summary>
+            <ul>
+              <li>결제 후 착수 전: 100% 환불</li>
+              <li>상담·디자인 선택 후, 시안 전달 전: 50% 환불</li>
+              <li>시안 전달 후: 환불 불가 (검수 수정으로 대응)</li>
+              <li>회사 사정으로 14일 이상 지연 시: 100% 환불</li>
+            </ul>
+            <p class="note mt-2"><a href="/terms#t6" target="_blank" rel="noopener" class="underline">전체 규정 보기</a></p>
+          </details>
+          <p class="note mt-4">문의 <a href="tel:01066586482" class="underline">010-6658-6482</a> · <a href="mailto:cccompanymaster@gmail.com" class="underline">cccompanymaster@gmail.com</a></p>
         </aside>
-      </div>
+      </form>
     </main>
 
+    <!-- 모바일 하단 결제바 -->
+    <div class="mbar" id="mbar" aria-hidden="true">
+      <div>
+        <div class="t">총 결제금액 <span id="mbar-count"></span></div>
+        <div class="a" id="mbar-total">₩218,900</div>
+      </div>
+      <button type="button" id="mbar-btn">결제하기</button>
+    </div>
+
     <!-- 결과 모달 -->
-    <div class="modal-mask2" id="done-modal" role="dialog" aria-modal="true">
-      <div class="panel" style="max-width:440px; width:100%; text-align:center; padding:36px">
+    <div class="modal-mask2" id="done-modal" role="dialog" aria-modal="true" aria-labelledby="done-title">
+      <div class="modal-card">
         <div id="done-body"></div>
-        <a href="/" class="pay-btn mt-6 inline-block" style="text-decoration:none; padding:14px 28px; width:auto">홈으로</a>
       </div>
     </div>
 
-    <footer class="container-x py-10 text-center text-xs" style="color: var(--text-quiet)">
-      <p>NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
-      <p class="mt-1">환불 규정: 착수 전 100% 환불 · 착수 후 진행 단계에 따라 협의. 자세한 내용은 상담 시 안내됩니다.</p>
+    <footer class="container-x py-10 text-center text-xs leading-relaxed" style="color: var(--text-quiet)">
+      <p>NOAH · 노아홈페이지 — 상호: 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1"><a href="/terms" class="underline">이용약관 · 환불 규정</a> · <a href="/privacy" class="underline">개인정보처리방침</a> · <a href="/contact" class="underline">상담 신청</a></p>
     </footer>
 
     <script>
       /* ══════════ 설정 ══════════ */
-      // 포트원 V2 콘솔 값 입력 시 실결제 활성화. 비어 있으면 데모 모드(결제창 미호출).
+      // 포트원 V2 콘솔 값 입력 시 실결제 활성화. 비어 있으면 데모 모드(결제창 미호출, 주문만 접수).
       const PORTONE = {
         storeId: '',      // 예: 'store-xxxxxxxx-xxxx-...'
         channelKey: '',   // 예: 'channel-key-xxxx...'
       };
-      // 결제 검증·주문 기록 백엔드 (노아폼백엔드 — handlePayment 확장 필요)
+      // 주문 기록·결제 검증 백엔드 (노아폼백엔드 — type:'order' / 'payment' 처리)
       const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec';
+      const KAKAO_URL = 'https://pf.kakao.com/_ENCKX/chat';
+      const TEL = '010-6658-6482';
 
       const BASE = { key: 'base', name: 'NOAH 홈페이지 패키지', price: 199000 };
+      const GROUPS = { design: '디자인 · 콘텐츠', func: '기능', ops: '운영 · 마케팅' };
       const OPTIONS = [
-        { key: 'subpage',  name: '서브페이지 추가 (1p)',   price: 50000, note: '분량 협의' },
-        { key: 'logo',     name: '로고 제작 — 심플',        price: 30000 },
-        { key: 'card',     name: '명함 제작 (인쇄 별도)',   price: 50000 },
-        { key: 'popup',    name: '팝업 디자인 (1건)',       price: 10000 },
-        { key: 'aiimg',    name: 'AI 생성 이미지 10장+',    price: 50000 },
-        { key: 'form',     name: '문의 폼 + 자동 메일',     price: 50000 },
-        { key: 'kakao',    name: '카카오 채널 연동',        price: 20000 },
-        { key: 'calendar', name: '예약 캘린더',             price: 50000 },
-        { key: 'seo',      name: 'SEO 심화 세팅',           price: 50000 },
-        { key: 'register', name: '네이버·구글 사이트 등록', price: 50000 },
-        { key: 'rush',     name: '긴급 제작 — 3일 내',      price: 50000 },
-        { key: 'maint_m',  name: '유지보수 월간 (1개월)',   price: 30000, group: 'maint' },
-        { key: 'maint_y',  name: '1년 무제한 수정 (12개월)',  price: 300000, group: 'maint' },
+        { key: 'subpage',  g: 'design', name: '서브페이지 추가 (1p)',   price: 50000,  ds: '메뉴판·오시는 길·팀 소개 등 한 페이지 추가. 분량은 협의' },
+        { key: 'logo',     g: 'design', name: '로고 제작 — 심플',        price: 30000,  ds: '워드마크 중심 심플 로고, SVG·PNG 원본 제공' },
+        { key: 'card',     g: 'design', name: '명함 제작 (인쇄 별도)',   price: 50000,  ds: '홈페이지와 같은 톤의 명함 디자인 파일' },
+        { key: 'popup',    g: 'design', name: '팝업 디자인 (1건)',       price: 10000,  ds: '이벤트·공지 팝업 1건 디자인 + 적용' },
+        { key: 'aiimg',    g: 'design', name: 'AI 생성 이미지 10장+',    price: 50000,  ds: '사진이 부족할 때, 업종 분위기에 맞춘 이미지 10장 이상' },
+        { key: 'form',     g: 'func',   name: '문의 폼 + 자동 메일',     price: 50000,  ds: '문의가 오면 사장님 메일로 즉시 전달' },
+        { key: 'kakao',    g: 'func',   name: '카카오 채널 연동',        price: 20000,  ds: '카카오톡 채널 버튼·채팅 연결' },
+        { key: 'calendar', g: 'func',   name: '예약 캘린더',             price: 50000,  ds: '날짜·시간 선택 예약 폼 + 알림' },
+        { key: 'seo',      g: 'ops',    name: 'SEO 심화 세팅',           price: 50000,  ds: '페이지별 키워드·메타·구조화 데이터 심화 작업' },
+        { key: 'register', g: 'ops',    name: '네이버·구글 사이트 등록', price: 50000,  ds: '서치어드바이저·서치콘솔 등록, 소유 확인, 사이트맵 제출' },
+        { key: 'rush',     g: 'ops',    name: '긴급 제작 — 3일 내',      price: 50000,  ds: '자료가 준비된 경우 최우선 진행. 사전 협의 필수' },
+        { key: 'maint_m',  g: 'ops',    name: '유지보수 월간 (1개월)',   price: 30000,  ds: '월 3건 수정 요청 + 정기 점검·백업', group: 'maint' },
+        { key: 'maint_y',  g: 'ops',    name: '1년 무제한 수정 (12개월)', price: 300000, ds: '12개월 횟수 제한 없음. 사진·배너·팝업·레이아웃까지', group: 'maint' },
       ];
 
       const $ = (s) => document.querySelector(s);
       const won = (n) => '₩' + n.toLocaleString('ko-KR');
       const selected = new Set();
+      const STORE_KEY = 'noah_checkout_v2';
 
-      /* 옵션 목록 렌더 */
-      $('#opt-list').innerHTML = OPTIONS.map(o => `
-        <label class="item" data-k="${o.key}">
-          <input type="checkbox" aria-label="${o.name}" />
-          <span class="flex-1"><span class="nm">${o.name}</span>${o.note ? `<br /><span class="text-xs" style="color:var(--text-quiet)">${o.note}</span>` : ''}</span>
-          <span class="pr">+${won(o.price)}</span>
-        </label>`).join('');
+      /* ── 옵션 목록 렌더 (그룹별) ── */
+      $('#opt-list').innerHTML = Object.entries(GROUPS).map(([g, label]) => `
+        <p class="grp">${label}</p>
+        <div class="space-y-2">${OPTIONS.filter(o => o.g === g).map(o => `
+          <label class="item" data-k="${o.key}">
+            <input type="checkbox" aria-label="${o.name}" />
+            <span class="flex-1 min-w-0"><span class="nm">${o.name}</span><span class="ds">${o.ds}</span></span>
+            <span class="pr">+${won(o.price)}</span>
+          </label>`).join('')}</div>`).join('');
 
       document.querySelectorAll('#opt-list .item').forEach(el => {
         const k = el.dataset.k, cb = el.querySelector('input');
@@ -187,7 +327,7 @@
           }
           cb.checked ? selected.add(k) : selected.delete(k);
           el.classList.toggle('on', cb.checked);
-          renderSum();
+          renderSum(); persist();
         });
       });
 
@@ -195,48 +335,161 @@
         const items = [BASE, ...OPTIONS.filter(o => selected.has(o.key))];
         const supply = items.reduce((a, b) => a + b.price, 0);
         const vat = Math.round(supply * 0.1);
-        $('#sum-lines').innerHTML = items.map(i => `<div class="sum-row"><span>${i.name}</span><span>${won(i.price)}</span></div>`).join('');
+        $('#sum-lines').innerHTML = items.map(i => `<div class="sum-row"><span class="k">${i.name}</span><span class="v num">${won(i.price)}</span></div>`).join('');
         $('#sum-supply').textContent = won(supply);
         $('#sum-vat').textContent = won(vat);
         $('#sum-total').textContent = won(supply + vat);
+        $('#mbar-total').textContent = won(supply + vat);
+        $('#mbar-count').textContent = selected.size ? `· 옵션 ${selected.size}개` : '';
         return { items, supply, vat, total: supply + vat };
       }
 
-      /* URL ?add= 딥링크 (옵션 페이지에서 진입) */
+      /* ── 입력 보존 (새로고침·뒤로가기 대비) ── */
+      function persist() {
+        try {
+          sessionStorage.setItem(STORE_KEY, JSON.stringify({
+            sel: [...selected],
+            name: $('#b-name').value, phone: $('#b-phone').value, email: $('#b-email').value,
+            biz: $('#b-biz').value, memo: $('#b-memo').value, bizno: $('#b-bizno').value,
+            receipt: document.querySelector('input[name=receipt]:checked')?.value || 'none',
+          }));
+        } catch (_) {}
+      }
+      function restore() {
+        try {
+          const d = JSON.parse(sessionStorage.getItem(STORE_KEY) || 'null');
+          if (!d) return;
+          ['name','phone','email','biz','memo','bizno'].forEach(k => { if (d[k]) $('#b-' + k).value = d[k]; });
+          const r = document.querySelector(`input[name=receipt][value="${d.receipt}"]`); if (r) r.checked = true;
+          (d.sel || []).forEach(k => { const el = document.querySelector(`.item[data-k="${k}"] input`); if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); } });
+        } catch (_) {}
+      }
+      restore();
+      document.querySelectorAll('#order-form input, #order-form textarea').forEach(el => el.addEventListener('input', persist));
+
+      /* ── 하단 결제바: 결제 카드가 화면에 보이면 숨김 ── */
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { $('#mbar').style.transform = e.isIntersecting ? 'translateY(110%)' : ''; }, { threshold: 0.2 }).observe($('#pay-btn'));
+        $('#mbar').style.transition = 'transform .25s ease';
+      }
+
+      /* ── URL ?add= 딥링크 (옵션·가격 페이지에서 진입) ── */
       new URLSearchParams(location.search).getAll('add').flatMap(v => v.split(',')).forEach(k => {
         const el = document.querySelector(`.item[data-k="${k}"] input`);
-        if (el) { el.checked = true; el.dispatchEvent(new Event('change')); }
+        if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); }
       });
       renderSum();
 
-      /* ══════════ 결제 ══════════ */
-      $('#pay-btn').addEventListener('click', async () => {
-        const name = $('#b-name').value.trim();
-        const phone = $('#b-phone').value.trim();
-        const email = $('#b-email').value.trim();
-        if (!name || !/^[\d\-+ ]{9,14}$/.test(phone) || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-          alert('성함·연락처·이메일을 확인해주세요.'); return;
+      /* ── 연락처 자동 하이픈 · 사업자번호 ── */
+      $('#b-phone').addEventListener('input', e => {
+        const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+        e.target.value = d.length > 7 ? `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}` : d.length > 3 ? `${d.slice(0,3)}-${d.slice(3)}` : d;
+      });
+      $('#b-bizno').addEventListener('input', e => {
+        const d = e.target.value.replace(/\D/g, '').slice(0, 10);
+        e.target.value = d.length > 5 ? `${d.slice(0,3)}-${d.slice(3,5)}-${d.slice(5)}` : d.length > 3 ? `${d.slice(0,3)}-${d.slice(3)}` : d;
+      });
+      document.querySelectorAll('input[name=receipt]').forEach(r => r.addEventListener('change', () => {
+        $('#bizno-wrap').hidden = r.value !== 'tax' || !r.checked;
+        if (!$('#bizno-wrap').hidden) $('#b-bizno').focus();
+        persist();
+      }));
+      if (document.querySelector('input[name=receipt]:checked')?.value === 'tax') $('#bizno-wrap').hidden = false;
+
+      /* ── 동의: 전체 선택 연동 ── */
+      const ags = [...document.querySelectorAll('.ag')];
+      $('#ag-all').addEventListener('change', e => { ags.forEach(a => { a.checked = e.target.checked; }); clearAgErr(); });
+      ags.forEach(a => a.addEventListener('change', () => { $('#ag-all').checked = ags.every(x => x.checked); clearAgErr(); }));
+      function clearAgErr() { $('#ag-msg').style.display = 'none'; $('#ag1-wrap').classList.remove('err'); $('#ag2-wrap').classList.remove('err'); }
+
+      /* ── 검증 ── */
+      function setErr(id, bad) { const w = $('#' + id).closest('.fld'); w.classList.toggle('err', bad); return bad; }
+      function validate() {
+        let firstBad = null;
+        const checks = [
+          ['b-name', !$('#b-name').value.trim()],
+          ['b-phone', !/^01[016789]-\d{3,4}-\d{4}$/.test($('#b-phone').value.trim())],
+          ['b-email', !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test($('#b-email').value.trim())],
+        ];
+        if (!$('#bizno-wrap').hidden) checks.push(['b-bizno', !/^\d{3}-\d{2}-\d{5}$/.test($('#b-bizno').value.trim())]);
+        checks.forEach(([id, bad]) => { if (setErr(id, bad) && !firstBad) firstBad = $('#' + id); });
+        const agBad = !ags.every(a => a.checked);
+        if (agBad) {
+          $('#ag-msg').style.display = 'block';
+          $('#ag1-wrap').classList.toggle('err', !$('#ag-terms').checked);
+          $('#ag2-wrap').classList.toggle('err', !$('#ag-privacy').checked);
+          if (!firstBad) firstBad = $('#ag-terms');
         }
-        if (!$('#b-agree').checked) { alert('결제 동의에 체크해주세요.'); return; }
+        if (firstBad) { firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' }); firstBad.focus({ preventScroll: true }); return false; }
+        return true;
+      }
+      ['b-name','b-phone','b-email','b-bizno'].forEach(id => $('#' + id).addEventListener('input', () => $('#' + id).closest('.fld').classList.remove('err')));
 
-        const { items, total } = renderSum();
-        const memoItems = items.map(i => i.name).join(' + ');
+      /* ── 주문 객체 ── */
+      function buildOrder() {
+        const { items, supply, vat, total } = renderSum();
+        const receipt = document.querySelector('input[name=receipt]:checked')?.value || 'none';
+        return {
+          items: items.map(i => ({ key: i.key, name: i.name, price: i.price })),
+          itemText: items.map(i => i.name).join(' + '),
+          supply, vat, total,
+          name: $('#b-name').value.trim(), phone: $('#b-phone').value.trim(), email: $('#b-email').value.trim(),
+          biz: $('#b-biz').value.trim(), memo: $('#b-memo').value.trim(),
+          receipt, bizno: receipt === 'tax' ? $('#b-bizno').value.trim() : '',
+        };
+      }
+      function orderText(o, id) {
+        const rc = { none: '필요 없음', cash: '현금영수증', tax: '세금계산서 (' + o.bizno + ')' }[o.receipt];
+        return [
+          `[NOAH 주문서]${id ? ' ' + id : ''}`,
+          `주문 내역: ${o.itemText}`,
+          `공급가액 ${won(o.supply)} + 부가세 ${won(o.vat)} = 총 ${won(o.total)}`,
+          `성함: ${o.name} / 연락처: ${o.phone} / 이메일: ${o.email}`,
+          o.biz ? `상호: ${o.biz}` : null,
+          `영수증: ${rc}`,
+          o.memo ? `메모: ${o.memo}` : null,
+        ].filter(Boolean).join('\n');
+      }
+      function postGAS(payload) {
+        return fetch(GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ ...payload, timestamp: new Date().toISOString(), referrer: document.referrer || '직접 접속', page: location.href }) }).catch(() => {});
+      }
+
+      /* ══════════ 결제 ══════════ */
+      $('#mbar-btn').addEventListener('click', () => $('#pay-btn').click());
+      $('#order-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+        const o = buildOrder();
         const btn = $('#pay-btn');
+        if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: o.total, currency: 'KRW', items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })) });
 
-        if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: total, currency: 'KRW' });
-
-        /* 데모 모드 — 포트원 키 미설정 */
+        /* 데모 모드 — 포트원 키 미설정: 주문만 접수하고 결제는 안내 */
         if (!PORTONE.storeId || !PORTONE.channelKey) {
-          showDone(false, `
-            <span style="font-size:40px">🛠</span>
-            <h3 class="disp text-xl mt-3">결제 연동 준비 중입니다</h3>
+          const orderId = 'NO-' + new Date().toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
+          btn.disabled = true; btn.textContent = '주문 접수 중…';
+          await postGAS({ type: 'order', status: 'pending_manual', orderId, ...o });
+          btn.disabled = false; btn.textContent = '결제하기';
+          const txt = orderText(o, orderId);
+          showDone(`
+            <span style="font-size:40px">📋</span>
+            <h3 id="done-title" class="disp text-xl mt-3">주문이 접수되었습니다</h3>
             <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
-              지금은 아래 방법으로 주문을 완료하실 수 있어요.<br /><br />
-              <b style="color:var(--text)">주문 내용</b>: ${memoItems}<br />
-              <b style="color:var(--text)">총액</b>: ${won(total)} (VAT 포함)<br /><br />
-              카카오톡 상담으로 위 내용을 보내주시거나,<br />010-6658-6482 로 연락 주세요.
+              온라인 카드결제는 준비 중입니다. 접수된 주문은 <b style="color:var(--text)">영업일 1일 안에</b> 연락드려
+              계좌이체 또는 카드결제 링크로 결제를 도와드립니다. 결제 전에는 비용이 발생하지 않습니다.
             </p>
-            <a href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener" class="inline-block mt-4 px-6 py-3 rounded-full font-bold text-sm" style="background:#fee500;color:#191919">카카오톡으로 주문 보내기</a>`);
+            <div class="order-box" id="order-text">${txt.replace(/</g,'&lt;')}</div>
+            <div class="btn-row">
+              <button type="button" id="copy-btn">주문서 복사</button>
+              <a class="kakao" href="${KAKAO_URL}" target="_blank" rel="noopener">카카오톡으로 보내기</a>
+              <a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a>
+            </div>
+            <div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
+          $('#copy-btn').addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(txt); $('#copy-btn').textContent = '복사됨 ✓'; }
+            catch (_) { $('#copy-btn').textContent = '길게 눌러 복사하세요'; }
+          });
+          try { sessionStorage.removeItem(STORE_KEY); } catch (_) {}
           return;
         }
 
@@ -244,51 +497,66 @@
         btn.disabled = true; btn.textContent = '결제창 여는 중…';
         const paymentId = 'noah_' + crypto.randomUUID();
         try {
+          sessionStorage.setItem(STORE_KEY + '_pending', JSON.stringify({ paymentId, o }));
           const res = await PortOne.requestPayment({
             storeId: PORTONE.storeId,
             channelKey: PORTONE.channelKey,
             paymentId,
             orderName: '맞춤 견적 결제',           // 백엔드 가변 카탈로그 항목 (5만~1,000만 검증)
-            totalAmount: total,
+            totalAmount: o.total,
             currency: 'CURRENCY_KRW',
             payMethod: 'CARD',
-            customer: { fullName: name, phoneNumber: phone, email },
-            customData: { items: memoItems },
+            customer: { fullName: o.name, phoneNumber: o.phone, email: o.email },
+            customData: { items: o.itemText, orderRef: paymentId },
+            redirectUrl: location.origin + '/checkout',   // 모바일(리다이렉트형 PG) 복귀 지점
           });
-          if (res.code) { // 사용자 취소/실패
-            showDone(false, `<span style="font-size:40px">⚠️</span><h3 class="disp text-xl mt-3">결제가 완료되지 않았습니다</h3><p class="text-sm mt-3" style="color:var(--text-dim)">${res.message || '결제가 취소되었습니다.'}</p>`);
-            return;
-          }
-          /* 서버 검증·주문 기록 (백엔드 handlePayment) */
-          fetch(GAS_URL, {
-            method: 'POST', mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-              type: 'payment', paymentId, orderName: '맞춤 견적 결제', expectedAmount: total,
-              customer: { name, phone, email, memo: memoItems + ($('#b-memo').value ? ' / ' + $('#b-memo').value : '') },
-            }),
-          }).catch(() => {});
-          if (typeof gtag === 'function') gtag('event', 'purchase', { value: total, currency: 'KRW', transaction_id: paymentId });
-          showDone(true, `
-            <span style="font-size:40px">🎉</span>
-            <h3 class="disp text-xl mt-3">결제가 완료되었습니다</h3>
-            <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
-              주문번호: <span style="font-family:'Space Grotesk'">${paymentId.slice(0, 18)}…</span><br />
-              ${memoItems}<br />총 ${won(total)} (VAT 포함)<br /><br />
-              영업일 1일 안에 착수 안내와 사전 정보 시트 링크를 보내드립니다.
-            </p>`);
+          if (res.code) { showFail(res.message || '결제가 취소되었습니다.'); return; }
+          await afterPayment(paymentId, o);
         } catch (err) {
-          showDone(false, `<span style="font-size:40px">⚠️</span><h3 class="disp text-xl mt-3">일시적인 오류입니다</h3><p class="text-sm mt-3" style="color:var(--text-dim)">잠시 후 다시 시도하시거나 010-6658-6482 로 연락 주세요.</p>`);
+          showFail('일시적인 오류입니다. 잠시 후 다시 시도하시거나 ' + TEL + ' 로 연락 주세요.');
         } finally {
           btn.disabled = false; btn.textContent = '결제하기';
         }
       });
 
-      function showDone(ok, html) {
+      /* 결제창 통과 후: 서버 검증 요청 + 접수 안내 (검증 결과는 메일로) */
+      async function afterPayment(paymentId, o) {
+        await postGAS({ type: 'payment', paymentId, orderName: '맞춤 견적 결제', expectedAmount: o.total, ...o,
+          customer: { name: o.name, phone: o.phone, email: o.email, memo: o.itemText + (o.memo ? ' / ' + o.memo : '') } });
+        if (typeof gtag === 'function') gtag('event', 'purchase', { value: o.total, currency: 'KRW', transaction_id: paymentId, items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })) });
+        try { sessionStorage.removeItem(STORE_KEY); sessionStorage.removeItem(STORE_KEY + '_pending'); } catch (_) {}
+        showDone(`
+          <span style="font-size:40px">🎉</span>
+          <h3 id="done-title" class="disp text-xl mt-3">결제가 접수되었습니다</h3>
+          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
+            주문번호 <span class="num">${paymentId.slice(0, 18)}…</span><br />
+            ${o.itemText}<br />총 ${won(o.total)} (VAT 포함)<br /><br />
+            결제 확인 메일이 <b style="color:var(--text)">${o.email}</b> 로 발송되며,<br />영업일 1일 안에 착수 안내와 사전 정보 시트 링크를 보내드립니다.
+          </p>
+          <div class="btn-row"><a class="prime" href="/">홈으로</a><a href="/process">제작 과정 보기</a></div>`);
+      }
+      function showFail(msg) {
+        showDone(`<span style="font-size:40px">⚠️</span><h3 id="done-title" class="disp text-xl mt-3">결제가 완료되지 않았습니다</h3>
+          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">${String(msg).replace(/</g,'&lt;')}</p>
+          <div class="btn-row"><button type="button" class="prime" onclick="document.getElementById('done-modal').classList.remove('open')">다시 시도</button><a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a></div>`);
+      }
+      function showDone(html) {
         $('#done-body').innerHTML = html;
         $('#done-modal').classList.add('open');
+        $('#done-modal').querySelector('a, button')?.focus();
       }
       document.addEventListener('keydown', e => { if (e.key === 'Escape') $('#done-modal').classList.remove('open'); });
+
+      /* 리다이렉트형 PG에서 복귀한 경우 (?paymentId=...&code=...) */
+      (async () => {
+        const q = new URLSearchParams(location.search);
+        if (!q.get('paymentId')) return;
+        history.replaceState(null, '', location.pathname);
+        let pend = null; try { pend = JSON.parse(sessionStorage.getItem(STORE_KEY + '_pending') || 'null'); } catch (_) {}
+        if (q.get('code')) { showFail(q.get('message') || '결제가 취소되었습니다.'); return; }
+        if (pend && pend.paymentId === q.get('paymentId')) await afterPayment(pend.paymentId, pend.o);
+        else showDone(`<span style="font-size:40px">🔎</span><h3 id="done-title" class="disp text-xl mt-3">결제 확인 중입니다</h3><p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">결제 결과를 확인해 이메일로 안내드립니다. 안내가 없으면 ${TEL} 로 연락 주세요.</p><div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
+      })();
     </script>
   </body>
 </html>

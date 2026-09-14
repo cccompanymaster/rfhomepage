@@ -517,6 +517,8 @@ def build_hub(cl, arts, all_cols):
     <meta property="og:title" content="{esc(meta['h'])} · NOAH 칼럼" />
     <meta property="og:description" content="{esc(meta['lead'])}" />
     <meta property="og:url" content="{SITE}/columns/topic/{cl}" />
+    <meta property="og:image" content="{SITE}/assets/images/og-cover.jpg" />
+    <meta name="twitter:image" content="{SITE}/assets/images/og-cover.jpg" />
     <meta property="og:locale" content="ko_KR" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
@@ -622,6 +624,8 @@ def build_index(cols):
     <meta property="og:title" content="홈페이지 제작 칼럼 100선 · NOAH" />
     <meta property="og:description" content="비용·업종별·SEO·운영까지, 홈페이지 제작의 모든 것." />
     <meta property="og:url" content="{SITE}/columns/" />
+    <meta property="og:image" content="{SITE}/assets/images/og-cover.jpg" />
+    <meta name="twitter:image" content="{SITE}/assets/images/og-cover.jpg" />
     <meta property="og:locale" content="ko_KR" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
