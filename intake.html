@@ -74,6 +74,12 @@
       }
       .req::after { content: ' *'; color: var(--accent); }
       .field-label { display:block; font-size: 14px; margin-bottom: 8px; color: var(--text); font-weight: 500; }
+      details.later { border: 1px dashed var(--line); border-radius: 12px; padding: 0 16px; margin: 4px 0 18px; }
+      details.later > summary { cursor: pointer; list-style: none; padding: 14px 0; font-size: 14px; color: var(--text-dim); display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+      details.later > summary::-webkit-details-marker { display: none; }
+      details.later > summary::after { content: '펼치기 +'; color: var(--accent-deep); font-weight: 600; flex-shrink: 0; font-size: 13px; }
+      details.later[open] > summary::after { content: '접기 −'; }
+      details.later[open] > summary { border-bottom: 1px solid var(--line); margin-bottom: 18px; }
       .field-help { font-size: 12.5px; color: var(--text-quiet); margin-top: 6px; line-height: 1.5; }
       .field-group { margin-bottom: 20px; }
       .check-row { display:flex; align-items:flex-start; gap:10px; padding: 10px 0; cursor:pointer; font-size: 14.5px; color: var(--text-dim); line-height:1.5; }
@@ -107,16 +113,16 @@
       <div class="text-center mb-10">
         <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">CLIENT INTAKE SHEET</p>
         <h1 class="serif text-4xl md:text-5xl leading-tight">
-          <span class="grad-text">사전 정보 시트</span>
+          <span class="grad-text">홈페이지 제작 정보 보내기</span>
         </h1>
         <p class="mt-6 text-base leading-relaxed" style="color: var(--text-dim)">
-          199,000원 · 7일 오픈 패키지를 위한 사전 정보 시트입니다.<br />
-          7일 안에 사장님 브랜드를 옮겨드리기 위해, 사전에 한 번만 받아두는 정보예요.<br />
-          미리 정리된 만큼 회의가 짧아지고, 오픈이 빨라집니다.
+          업체 기본 정보와 원하는 디자인을 알려주세요.<br />
+          사진·로고·소개글은 준비된 것부터 보내주시면 됩니다.<br />
+          모르는 부분은 '미정'으로 남겨주세요. 확인 후 부족한 내용만 추가로 여쭙겠습니다.
         </p>
         <div class="mt-7 inline-block text-left text-sm rounded-xl px-5 py-4" style="background: var(--accent-soft); border:1px solid rgba(255,90,43,0.22); color: var(--text-dim); line-height:1.7">
-          ※ 모든 항목을 작성하실 필요는 없습니다. 아직 정해지지 않은 부분은 비워두시거나 "미정"이라고 적어주세요.<br />
-          ※ Day 1 상담 전에는 <strong style="color:var(--text)">[A · 사장님과 가게]</strong>, <strong style="color:var(--text)">[B · 연락드릴 길]</strong>, <strong style="color:var(--text)">[C · 디자인 선택]</strong> 만 채워주셔도 충분합니다.
+          ※ 지금 꼭 필요한 건 <strong style="color:var(--text)">별표(*) 다섯 칸</strong>뿐입니다 — 상호, 업종, 대표 전화, 회신 이메일, 디자인.<br />
+          ※ 나머지는 접어 두었습니다. 준비된 게 있을 때만 펼쳐서 적어주세요. 제출 뒤에 다시 보내주셔도 됩니다.
         </div>
       </div>
 
@@ -136,7 +142,7 @@
             <span class="sec-badge">A</span>
             <div>
               <h2 class="text-lg font-semibold">사장님과 가게</h2>
-              <p class="field-help" style="margin-top:4px">간판에 쓰시는 이름과, 손님이 찾아오는 주소부터 여쭙습니다. (Day 1 상담 전 필수)</p>
+              <p class="field-help" style="margin-top:4px">간판에 쓰시는 이름과, 손님이 찾아오는 주소부터 여쭙습니다.</p>
             </div>
           </div>
 
@@ -164,9 +170,12 @@
               <input class="field-dark" name="A_업종설명" required placeholder="예: 강남역 6번 출구 1층 치과" />
             </div>
             <div class="field-group md:col-span-2">
-              <label class="field-label req">사업장 주소</label>
-              <input class="field-dark" name="A_주소" required placeholder="도로명 전체 주소 (간판 노출용)" />
+              <label class="field-label">사업장 주소</label>
+              <input class="field-dark" name="A_주소" placeholder="도로명 전체 주소. 미정이면 비워두세요" />
             </div>
+            <details class="later" style="grid-column:1 / -1">
+              <summary>사업자 정보 — 오픈 전까지만 알려주시면 됩니다 (푸터·약관 표기용)</summary>
+              <div class="grid md:grid-cols-2 gap-x-5">
             <div class="field-group">
               <label class="field-label">사업자등록번호</label>
               <input class="field-dark" name="A_사업자번호" placeholder="예: 123-45-67890" />
@@ -180,6 +189,8 @@
               <label class="field-label">대표자 성명</label>
               <input class="field-dark" name="A_대표자" placeholder="약관·개인정보처리방침에만 표기 (홈 전면 노출 X 가능)" />
             </div>
+              </div>
+            </details>
           </div>
         </section>
 
@@ -189,7 +200,7 @@
             <span class="sec-badge">B</span>
             <div>
               <h2 class="text-lg font-semibold">연락드릴 길</h2>
-              <p class="field-help" style="margin-top:4px">손님이 사장님을 찾아오는 길 — 오른쪽 부동 버튼에 그대로 들어갑니다. (Day 1 상담 전 필수)</p>
+              <p class="field-help" style="margin-top:4px">손님이 사장님을 찾아오는 길 — 오른쪽 부동 버튼에 그대로 들어갑니다.</p>
             </div>
           </div>
 
@@ -200,12 +211,12 @@
               <p class="field-help">tel: 링크로 연결됩니다</p>
             </div>
             <div class="field-group">
-              <label class="field-label req">추가 연락처 (이메일)</label>
-              <input class="field-dark" type="email" name="B_이메일" required placeholder="문의 폼 알림 받으실 주소" />
+              <label class="field-label">문의 알림 받을 이메일</label>
+              <input class="field-dark" type="email" name="B_이메일" placeholder="회신 이메일과 같으면 비워두세요" />
             </div>
             <div class="field-group md:col-span-2">
-              <label class="field-label req">영업 시간</label>
-              <input class="field-dark" name="B_영업시간" required placeholder="예: 평일 10:00 – 19:00 / 연중무휴" />
+              <label class="field-label">영업 시간</label>
+              <input class="field-dark" name="B_영업시간" placeholder="예: 평일 10:00 – 19:00 / 연중무휴 · 미정이면 비워두세요" />
             </div>
             <div class="field-group">
               <label class="field-label">카카오 채널</label>
@@ -236,7 +247,7 @@
             <span class="sec-badge">C</span>
             <div>
               <h2 class="text-lg font-semibold">18개 디자인 중에서</h2>
-              <p class="field-help" style="margin-top:4px">마음에 드는 디자인 1순위·2순위를 골라주세요. 그 위에 사장님 브랜드만 옮겨드립니다. (Day 1 상담 전 필수)</p>
+              <p class="field-help" style="margin-top:4px">마음에 드는 디자인 하나만 골라주세요. 고르기 어려우면 "추천받기"를 선택하시면 업종에 맞춰 골라 드립니다.</p>
             </div>
           </div>
 
@@ -244,6 +255,7 @@
             <label class="field-label req">1순위 디자인</label>
             <select class="field-dark" name="C_1순위" required>
               <option value="">선택해주세요</option>
+              <option>추천받기 — 업종에 맞는 디자인을 골라주세요</option>
               <option>01 DENTAL — 라온치과의원 · 치과가 처음인 마음으로</option>
               <option>02 LAW — 정평 법무법인 · 바르게 듣고, 정확하게</option>
               <option>03 CAFE — 오월의 다정 · 하루의 가장 다정한 한 잔</option>
@@ -264,6 +276,8 @@
               <option>18 FINTECH — 온플로우 · 토스형 스크롤 랜딩</option>
             </select>
           </div>
+          <details class="later">
+            <summary>2순위·마음에 든 이유·내 가게와 다른 점 — 있으면 적어주세요</summary>
           <div class="field-group">
             <label class="field-label">2순위 디자인</label>
             <select class="field-dark" name="C_2순위">
@@ -296,6 +310,7 @@
             <label class="field-label">내 가게와 다른 점</label>
             <textarea class="field-dark" name="C_다른점" rows="2" placeholder="내 업종과 디자인이 다를 때, 손보고 싶은 부분"></textarea>
           </div>
+          </details>
         </section>
 
         <!-- SECTION D -->
@@ -308,6 +323,8 @@
             </div>
           </div>
 
+          <details class="later">
+            <summary>로고·브랜드 색상이 있으면 보내주세요. 없으면 상담 후 정합니다</summary>
           <div class="field-group">
             <label class="field-label">브랜드 톤 <span style="color:var(--text-quiet)">(가까운 단어 1~3개)</span></label>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4">
@@ -354,6 +371,7 @@
               <input class="field-dark" name="D_금지표현" placeholder="예: '최고', '1위' 등 광고법 회피 단어" />
             </div>
           </div>
+          </details>
         </section>
 
         <!-- SECTION E -->
@@ -383,12 +401,14 @@
               <option>구간만 표기 (예: 5~10만원)</option>
             </select>
           </div>
+          <details class="later">
+            <summary>숫자·자주 받는 질문·후기·영상 — 실제로 가지고 계신 것만</summary>
           <div class="field-group">
             <label class="field-label">자랑하고 싶은 숫자</label>
             <textarea class="field-dark" name="E_숫자" rows="2" placeholder="예: 누적 1,200명, 운영 7년, 재방문율 78%"></textarea>
           </div>
           <div class="field-group">
-            <label class="field-label">자주 받는 질문 5~8개</label>
+            <label class="field-label">자주 받는 질문</label>
             <textarea class="field-dark" name="E_FAQ" rows="3" placeholder="실제로 손님이 자주 물으시는 것 — 답까지 있으면 더 좋음"></textarea>
           </div>
           <div class="grid md:grid-cols-2 gap-x-5">
@@ -416,6 +436,7 @@
             <label class="field-label">영상 자료</label>
             <input class="field-dark" name="E_영상" placeholder="있다면 YouTube/Vimeo 링크" />
           </div>
+          </details>
           <div class="field-group" style="margin-bottom:0">
             <label class="field-label">레퍼런스 사이트</label>
             <textarea class="field-dark" name="E_레퍼런스" rows="2" placeholder="디자인·톤 참고하고 싶은 사이트 1~3개"></textarea>
@@ -428,10 +449,12 @@
             <span class="sec-badge">F</span>
             <div>
               <h2 class="text-lg font-semibold">추가 옵션</h2>
-              <p class="field-help" style="margin-top:4px">기본 패키지로 충분한 분이 대부분입니다. 필요하실 때만 체크해주세요.</p>
+              <p class="field-help" style="margin-top:4px">필요한 기능이 있나요? 적어주시면 비용을 따로 안내드립니다. 기본 패키지로 충분한 분이 대부분입니다.</p>
             </div>
           </div>
 
+          <details class="later">
+            <summary>추가 옵션 — 필요할 때만 펼쳐서 체크</summary>
           <div class="field-group">
             <label class="field-label">디자인 · 콘텐츠 추가</label>
             <label class="check-row"><input type="checkbox" name="F_디자인" value="서브페이지 추가 (50,000원~ / 페이지)" /> 서브페이지 추가 (50,000원~ / 페이지)</label>
@@ -451,9 +474,10 @@
             <label class="check-row"><input type="checkbox" name="F_운영" value="SEO 심화 세팅 (50,000원)" /> SEO 심화 세팅 (50,000원)</label>
             <label class="check-row"><input type="checkbox" name="F_운영" value="네이버·구글 사이트 등록 (50,000원)" /> 네이버·구글 사이트 등록 (50,000원)</label>
             <label class="check-row"><input type="checkbox" name="F_운영" value="유지보수 월간 플랜 (30,000원 / 월)" /> 유지보수 월간 플랜 (30,000원 / 월)</label>
-            <label class="check-row"><input type="checkbox" name="F_운영" value="유지보수 연간 플랜 (150,000원 / 년)" /> 유지보수 연간 플랜 (150,000원 / 년)</label>
+            <label class="check-row"><input type="checkbox" name="F_운영" value="1년 무제한 수정 (300,000원 / 년)" /> 1년 무제한 수정 (300,000원 / 년)</label>
             <label class="check-row"><input type="checkbox" name="F_운영" value="긴급 작업 — 3일 내 (+50,000원)" /> 긴급 작업 — 3일 내 (+50,000원)</label>
           </div>
+          </details>
         </section>
 
         <!-- SECTION G -->
@@ -466,6 +490,8 @@
             </div>
           </div>
 
+          <details class="later">
+            <summary>오픈 준비 단계에서 정합니다 — 지금은 안 적어도 됩니다</summary>
           <div class="grid md:grid-cols-2 gap-x-5">
             <div class="field-group">
               <label class="field-label">콘텐츠 업데이트 주체</label>
@@ -518,6 +544,7 @@
               </select>
             </div>
           </div>
+          </details>
         </section>
 
         <!-- SECTION H -->
@@ -526,7 +553,7 @@
             <span class="sec-badge">H</span>
             <div>
               <h2 class="text-lg font-semibold">첨부 파일</h2>
-              <p class="field-help" style="margin-top:4px">보유하신 자료를 보내주세요. 미보유 자료는 NOAH가 안내드립니다.</p>
+              <p class="field-help" style="margin-top:4px">사용할 로고·사진이 있으면 보내주세요. 필요한 추가 자료는 따로 안내드립니다.</p>
             </div>
           </div>
           <div class="rounded-xl px-5 py-4 text-sm" style="background: rgba(255,255,255,0.03); border:1px solid var(--line); color: var(--text-dim); line-height:1.8">
