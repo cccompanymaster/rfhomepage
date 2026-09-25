@@ -21,12 +21,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>제작 과정과 자주 묻는 질문 · NOAH 노아홈페이지</title>
-    <meta name="description" content="상담부터 오픈까지 7일. 무엇을 준비하고 어떻게 진행되는지, 자주 묻는 질문과 함께 정리했습니다." />
+    <meta name="description" content="상담부터 오픈까지 7일, 날짜별로 무엇을 하는지 정리했습니다. 준비할 자료, 오픈 전후 수정 범위, 호스팅·도메인, 기본 페이지 수처럼 자주 묻는 질문에도 답합니다." />
     <link rel="canonical" href="https://noahhomepage.co.kr/process" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="제작 과정과 자주 묻는 질문 · NOAH 노아홈페이지" />
-    <meta property="og:description" content="상담부터 오픈까지 7일. 무엇을 준비하고 어떻게 진행되는지, 자주 묻는 질문과 함께 정리했습니다." />
+    <meta property="og:description" content="상담부터 오픈까지 7일, 날짜별로 무엇을 하는지 정리했습니다. 준비할 자료, 오픈 전후 수정 범위, 호스팅·도메인, 기본 페이지 수처럼 자주 묻는 질문에도 답합니다." />
     <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og-cover.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -35,13 +35,16 @@
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#FFFFFF" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=a9243851" />
     <style>
       /* ── 다크 에디토리얼 토큰 (레퍼런스 16 톤) — common.css 오버라이드 ── */
       body { background: var(--bg); color: var(--text); }
@@ -434,6 +437,46 @@
       .page-lead { max-width: 720px; }
       .page-lead h1 { font-size: clamp(30px, 5.2vw, 50px); line-height: 1.24; font-weight: 800; letter-spacing: -0.035em; }
     </style>
+      <!-- ld:site -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://noahhomepage.co.kr/process#webpage",
+          "url": "https://noahhomepage.co.kr/process",
+          "name": "제작 과정과 자주 묻는 질문 · NOAH 노아홈페이지",
+          "description": "상담부터 오픈까지 7일, 날짜별로 무엇을 하는지 정리했습니다. 준비할 자료, 오픈 전후 수정 범위, 호스팅·도메인, 기본 페이지 수처럼 자주 묻는 질문에도 답합니다.",
+          "inLanguage": "ko-KR",
+          "isPartOf": {
+            "@id": "https://noahhomepage.co.kr/#website"
+          },
+          "about": {
+            "@id": "https://noahhomepage.co.kr/#org"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://noahhomepage.co.kr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "제작 과정",
+              "item": "https://noahhomepage.co.kr/process"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <!-- /ld:site -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -493,9 +536,9 @@
       <div class="grid md:grid-cols-12 gap-12 mb-16">
         <div class="md:col-span-5">
           <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">PROCESS · 7 DAYS</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
+          <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
             상담부터 오픈까지<br />단 7일.
-          </h2>
+          </h1>
         </div>
         <p class="md:col-span-7 self-end leading-relaxed" style="color: var(--text-dim)">
           NOAH는 미리 만들어 둔 18개의 디자인을 사장님 브랜드로 옮기는 방식입니다. 백지에서 시작하지 않으니 협업 회의가 짧고 결정도 빠릅니다.
@@ -661,7 +704,7 @@
     </div>
     <script>function closeNav(){document.getElementById('mnav').classList.remove('open');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});</script>
-    <script src="./assets/js/showroom.js" defer></script>
+    <script src="./assets/js/showroom.js?v=67ca7251" defer></script>
     <script>
       // ====================== 소개서 모달 토글 ======================
       const brochureModal = document.getElementById('brochure-modal');

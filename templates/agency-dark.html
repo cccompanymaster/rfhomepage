@@ -30,11 +30,11 @@
     <meta property="og:description" content="BUILD BEYOND — 다크 에디토리얼 포트폴리오 템플릿." />
     <meta property="og:locale" content="ko_KR" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0C0F'/%3E%3Crect x='7' y='9' width='11' height='11' fill='%23FF623D'/%3E%3Crect x='15' y='15' width='9' height='9' fill='%23C9FF4A'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
+    <link rel="stylesheet" href="../assets/css/common.css?v=a9243851" />
     <style>
       :root{
         --bg:#0B0C0F; --surface:#15171C; --elev:#1C1F25; --text:#F2F0E9; --muted:#9B9DA4;
@@ -58,7 +58,7 @@
       .prog{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);z-index:95;}
 
       /* 라벨 + 방향선 */
-      .sec-label{display:flex;align-items:center;gap:14px;font-family:'Space Grotesk';font-size:12px;letter-spacing:.22em;color:var(--muted);}
+      .sec-label{display:flex;align-items:center;gap:14px;font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:12px;letter-spacing:.22em;color:var(--muted);}
       .sec-label::after{content:'';height:1px;flex:1;max-width:180px;background:var(--border);}
 
       /* 리빌 */
@@ -77,7 +77,7 @@
 
       /* 헤더 */
       .hd{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(11,12,15,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-      .nav-a{font-family:'Space Grotesk';font-size:13px;letter-spacing:.14em;color:var(--muted);transition:color .2s;padding:6px 2px;}
+      .nav-a{font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:13px;letter-spacing:.14em;color:var(--muted);transition:color .2s;padding:6px 2px;}
       .nav-a:hover{color:var(--text);}
       .btn-circle{width:52px;height:52px;border-radius:50%;background:var(--accent);color:#0B0C0F;display:grid;place-items:center;font-size:18px;transition:transform .25s;}
       .btn-circle:hover{transform:rotate(45deg);}
@@ -86,13 +86,13 @@
       .fmenu{position:fixed;inset:0;z-index:90;background:var(--bg);display:none;flex-direction:column;padding:28px;}
       .fmenu.open{display:flex;}
       .fmenu a{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-bottom:1px solid var(--border);}
-      .fmenu .no{font-family:'Space Grotesk';font-size:14px;color:var(--accent);}
-      .fmenu .lb{font-family:'Space Grotesk';font-size:clamp(34px,9vw,64px);font-weight:700;line-height:1;}
+      .fmenu .no{font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:14px;color:var(--accent);}
+      .fmenu .lb{font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:clamp(34px,9vw,64px);font-weight:700;line-height:1;}
 
       /* 버튼 */
-      .btn-a{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--accent);color:#0B0C0F;font-family:'Space Grotesk';font-weight:700;font-size:14px;letter-spacing:.1em;transition:background .2s;}
+      .btn-a{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--accent);color:#0B0C0F;font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;transition:background .2s;}
       .btn-a:hover{background:var(--accent2);}
-      .btn-l{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:1px solid var(--border);color:var(--text);font-family:'Space Grotesk';font-weight:700;font-size:14px;letter-spacing:.1em;transition:border-color .2s,color .2s;}
+      .btn-l{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:1px solid var(--border);color:var(--text);font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;transition:border-color .2s,color .2s;}
       .btn-l:hover{border-color:var(--accent2);color:var(--accent2);}
 
       /* 추상 아트 플레이스홀더 */
@@ -101,7 +101,7 @@
       .p-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(30%) contrast(1.05);}
       .p-art::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(11,12,15,.6));pointer-events:none;}
       .p-art .tag{z-index:1;}
-      .p-art .tag{position:absolute;left:14px;bottom:12px;font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;color:var(--muted);}
+      .p-art .tag{position:absolute;left:14px;bottom:12px;font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:11px;letter-spacing:.18em;color:var(--muted);}
       .work-card{display:block;text-align:left;background:var(--surface);border:1px solid var(--border);transition:border-color .3s;}
       .work-card:hover{border-color:rgba(255,255,255,.3);}
       .work-card .p-art{transition:transform .5s cubic-bezier(.2,.8,.2,1);}
@@ -112,21 +112,21 @@
       .marq-track{display:inline-flex;gap:0;animation:marq 26s linear infinite;}
       @keyframes marq{to{transform:translateX(-50%);}}
       .marq:hover .marq-track{animation-play-state:paused;}
-      .marq .w{font-family:'Space Grotesk';font-size:clamp(40px,7vw,88px);font-weight:700;padding:14px 28px;}
+      .marq .w{font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:clamp(40px,7vw,88px);font-weight:700;padding:14px 28px;}
       .marq .o{color:transparent;-webkit-text-stroke:1px var(--muted);}
 
       /* 서비스 리스트 */
       .svc-line{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:18px;padding:26px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding-left .25s;background:none;width:100%;text-align:left;}
       .svc-line:hover,.svc-line:focus-visible{padding-left:12px;}
-      .svc-line .no{font-family:'Space Grotesk';color:var(--muted);font-size:15px;}
-      .svc-line .nm{font-family:'Space Grotesk';font-size:clamp(24px,4.4vw,52px);font-weight:700;transition:color .2s;}
+      .svc-line .no{font-family:'Space Grotesk','Pretendard Variable',sans-serif;color:var(--muted);font-size:15px;}
+      .svc-line .nm{font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:clamp(24px,4.4vw,52px);font-weight:700;transition:color .2s;}
       .svc-line:hover .nm,.svc-line:focus-visible .nm,.svc-line[aria-expanded="true"] .nm{color:var(--accent);}
       .svc-line .disp:last-child{transition:transform .25s;}
       .svc-line:hover .disp:last-child{transform:rotate(45deg);color:var(--accent2);}
       .svc-desc{overflow:hidden;max-height:0;transition:max-height .4s ease;color:var(--muted);font-size:14.5px;line-height:1.8;}
       .svc-desc.open{max-height:200px;padding-bottom:20px;}
 
-      .chipd{padding:8px 18px;border:1px solid var(--border);font-family:'Space Grotesk';font-size:12px;letter-spacing:.12em;color:var(--muted);transition:all .2s;white-space:nowrap;background:none;}
+      .chipd{padding:8px 18px;border:1px solid var(--border);font-family:'Space Grotesk','Pretendard Variable',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--muted);transition:all .2s;white-space:nowrap;background:none;}
       .chipd[aria-pressed="true"]{background:var(--accent2);color:#0B0C0F;border-color:var(--accent2);}
 
       /* 모달 */
@@ -240,7 +240,7 @@
         <div class="container-x">
           <button class="work-card w-full reveal" onclick="openWork(0)" aria-label="Project 01 상세 보기">
             <div class="p-art" style="aspect-ratio:16/7">
-              <img src="../assets/images/manufacture/04-cmm.jpg" alt="Project 01 — Manufacturing" loading="lazy" />
+              <img src="../assets/images/manufacture/04-cmm.webp" alt="Project 01 — Manufacturing" loading="lazy" />
               <span class="tag">FEATURED — PROJECT 01</span>
             </div>
             <div class="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -373,7 +373,7 @@
       scope:['반응형 웹 구축','커머스 + 관리자','브랜드 아이덴티티 + 사이트'][i%3],
       ind:['Manufacturing','Retail','Culture','Technology','Healthcare','Education'][i%6],
       hueA:['#FF623D','#C9FF4A'][i%2], hueB:['#C9FF4A','#FF623D'][i%2],
-      img:['manufacture/04-cmm.jpg','studio/01-photographer.jpg','interior/02-site.jpg','law/02-late-work.jpg','cafe/03-empty-seat.jpg','pension/04-view.jpg','beauty/02-relaxed.jpg','restaurant/02-dish.jpg','dental/04-room-active.jpg'][i],
+      img:['manufacture/04-cmm.webp','studio/01-photographer.webp','interior/02-site.webp','law/02-late-work.webp','cafe/03-empty-seat.webp','pension/04-view.webp','beauty/02-relaxed.webp','restaurant/02-dish.webp','dental/04-room-active.webp'][i],
     }));
     function artImg(w){ return `<img src="../assets/images/${w.img}" alt="${esc(w.name)} — ${esc(w.ind)}" loading="lazy" />`; }
     function artSvg(w){ return `<svg viewBox="0 0 400 400" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="400" fill="#1C1F25"/><circle cx="${120+(w.name.charCodeAt(9)%160)}" cy="${100+(w.name.charCodeAt(9)%120)}" r="${60+(w.name.charCodeAt(9)%50)}" fill="none" stroke="${w.hueA}" stroke-width="1.2"/><rect x="${40+(w.name.charCodeAt(9)%80)}" y="${220-(w.name.charCodeAt(9)%60)}" width="150" height="90" fill="none" stroke="${w.hueB}" stroke-width="1"/><path d="M0,${330-(w.name.charCodeAt(9)%80)} C130,260 260,360 400,280" fill="none" stroke="rgba(242,240,233,.22)"/></svg>`; }
@@ -428,7 +428,7 @@
         </button>
         <div class="svc-desc" id="svcd-${i}" role="region">${esc(d)}</div>
       </div>`).join('');
-    const PREV_IMGS=['law/04-bookshelf.jpg','cafe/04-pastry.jpg','interior/04-samples.jpg','saas/01-dashboard.jpg','academy/02-student.jpg','manufacture/02-calipers.jpg'];
+    const PREV_IMGS=['law/04-bookshelf.webp','cafe/04-pastry.webp','interior/04-samples.webp','saas/01-dashboard.webp','academy/02-student.webp','manufacture/02-calipers.webp'];
     $$('#svc-list .svc-line').forEach(b=>{
       const i=+b.dataset.i;
       const show=()=>{

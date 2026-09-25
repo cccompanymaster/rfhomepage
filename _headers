@@ -37,7 +37,7 @@
   # NOAH가 사용하는 CDN: Tailwind, Pretendard, Google Fonts, Apps Script
   # ※ 포트원 채널(PG) 확정 후 해당 PG 도메인을 frame-src·form-action·connect-src 에 추가할 것
   #    예) 토스페이먼츠 https://*.tosspayments.com / KG이니시스 https://*.inicis.com / NHN KCP https://*.kcp.co.kr
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdn.portone.io https://*.portone.io https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.portone.io https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.portone.io; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.portone.io; frame-ancestors 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.portone.io https://*.portone.io https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.portone.io https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.portone.io; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.portone.io; frame-ancestors 'self'; upgrade-insecure-requests
 
 # ════════════════════════════════════════════════════════════
 # 정적 자산 — 1년 immutable 캐시
@@ -50,6 +50,14 @@
 
 /assets/js/*
   Cache-Control: public, max-age=31536000, immutable
+
+# 폰트 — 파일 내용이 바뀌지 않으므로 1년 캐시 (CSS는 ?v= 해시로 갱신)
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# IndexNow 키 파일 — 검색엔진이 수시로 확인
+/d1ebd682684f953fad9c2a85b7c238bf.txt
+  Cache-Control: public, max-age=3600
 
 # ════════════════════════════════════════════════════════════
 # 소개서 PDF — 짧은 캐시 + 다운로드 강제

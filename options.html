@@ -31,13 +31,16 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og-cover.jpg" />
     <meta name="theme-color" content="#FFFFFF" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
+    <link rel="stylesheet" href="./assets/css/common.css?v=a9243851" />
     <style>
       body { background: var(--bg); color: var(--text); }
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
@@ -52,6 +55,76 @@
       .grp-title { font-size: 13px; letter-spacing: .24em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
       .badge { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
     </style>
+      <!-- ld:site -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://noahhomepage.co.kr/options#webpage",
+          "url": "https://noahhomepage.co.kr/options",
+          "name": "옵션 안내 · NOAH 노아홈페이지",
+          "description": "NOAH 홈페이지 패키지(₩199,000)와 추가 옵션 상세 안내 — 서브페이지, 로고, 예약 캘린더, SEO, 유지보수까지. 모든 가격 부가세 별도.",
+          "inLanguage": "ko-KR",
+          "isPartOf": {
+            "@id": "https://noahhomepage.co.kr/#website"
+          },
+          "about": {
+            "@id": "https://noahhomepage.co.kr/#org"
+          },
+          "mainEntity": {
+            "@id": "https://noahhomepage.co.kr/#service"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://noahhomepage.co.kr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "옵션 안내",
+              "item": "https://noahhomepage.co.kr/options"
+            }
+          ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://noahhomepage.co.kr/#service",
+          "name": "NOAH 홈페이지 제작 패키지",
+          "serviceType": "홈페이지 제작",
+          "description": "18개 업종 디자인 중 하나를 골라 브랜드를 적용하고, 자료 확인 후 7일 안에 오픈합니다. 반응형, 검색 기본 설정, 1년 호스팅, 1년 텍스트 수정 포함.",
+          "provider": {
+            "@id": "https://noahhomepage.co.kr/#org"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "대한민국"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "199000",
+            "priceCurrency": "KRW",
+            "url": "https://noahhomepage.co.kr/pricing",
+            "availability": "https://schema.org/InStock",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "199000",
+              "priceCurrency": "KRW",
+              "valueAddedTaxIncluded": false
+            }
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- /ld:site -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -220,6 +293,7 @@
 
     <footer class="container-x py-10 text-center text-xs" style="color: var(--text-quiet)">
       <p>NOAH · 노아홈페이지 — 상호: 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1">주소: 인천광역시 연수구 인천타워대로 301, A동 16층 33호 (송도동, 송도센텀하이브)</p>
       <p class="mt-1">모든 가격은 부가세 별도이며, 옵션 범위는 상담 시 확정됩니다.</p>
     </footer>
   </body>

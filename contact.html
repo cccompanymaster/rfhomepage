@@ -21,12 +21,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>상담 신청 · NOAH 노아홈페이지</title>
-    <meta name="description" content="업종과 연락처만 남겨주시면 순차적으로 연락드립니다. 상담은 무료이며 부담 없이 문의하세요." />
+    <meta name="description" content="업종과 연락처, 희망 오픈일만 남겨주시면 영업일 1일 안에 연락드립니다. 상담은 무료이고 진행 여부는 그 자리에서 정하지 않으셔도 됩니다. 카카오톡·전화 상담도 가능합니다." />
     <link rel="canonical" href="https://noahhomepage.co.kr/contact" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="상담 신청 · NOAH 노아홈페이지" />
-    <meta property="og:description" content="업종과 연락처만 남겨주시면 순차적으로 연락드립니다. 상담은 무료이며 부담 없이 문의하세요." />
+    <meta property="og:description" content="업종과 연락처, 희망 오픈일만 남겨주시면 영업일 1일 안에 연락드립니다. 상담은 무료이고 진행 여부는 그 자리에서 정하지 않으셔도 됩니다. 카카오톡·전화 상담도 가능합니다." />
     <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og-cover.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -35,13 +35,16 @@
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#FFFFFF" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=a9243851" />
     <style>
       /* ── 다크 에디토리얼 토큰 (레퍼런스 16 톤) — common.css 오버라이드 ── */
       body { background: var(--bg); color: var(--text); }
@@ -434,6 +437,46 @@
       .page-lead { max-width: 720px; }
       .page-lead h1 { font-size: clamp(30px, 5.2vw, 50px); line-height: 1.24; font-weight: 800; letter-spacing: -0.035em; }
     </style>
+      <!-- ld:site -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "@id": "https://noahhomepage.co.kr/contact#webpage",
+          "url": "https://noahhomepage.co.kr/contact",
+          "name": "상담 신청 · NOAH 노아홈페이지",
+          "description": "업종과 연락처, 희망 오픈일만 남겨주시면 영업일 1일 안에 연락드립니다. 상담은 무료이고 진행 여부는 그 자리에서 정하지 않으셔도 됩니다. 카카오톡·전화 상담도 가능합니다.",
+          "inLanguage": "ko-KR",
+          "isPartOf": {
+            "@id": "https://noahhomepage.co.kr/#website"
+          },
+          "about": {
+            "@id": "https://noahhomepage.co.kr/#org"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://noahhomepage.co.kr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "상담 신청",
+              "item": "https://noahhomepage.co.kr/contact"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <!-- /ld:site -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -493,9 +536,9 @@
       <div class="grid md:grid-cols-12 gap-12">
         <div class="md:col-span-5">
           <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">상담 신청</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
+          <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
             먼저 한 통의<br />이야기로 시작합니다.
-          </h2>
+          </h1>
           <p class="mt-8 leading-relaxed" style="color: var(--text-dim)">
             영업일 기준 1일 안에 회신드립니다. 어떤 업종이든, 어떤 규모든 한 번 들려주세요. 상담은 무료이고 등록 여부는 그 자리에서 결정하지 않으셔도 됩니다.
           </p>
@@ -703,7 +746,7 @@
     </div>
     <script>function closeNav(){document.getElementById('mnav').classList.remove('open');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});</script>
-    <script src="./assets/js/showroom.js" defer></script>
+    <script src="./assets/js/showroom.js?v=67ca7251" defer></script>
     <script>
       // ====================== 소개서 모달 토글 ======================
       const brochureModal = document.getElementById('brochure-modal');

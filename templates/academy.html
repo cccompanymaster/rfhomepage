@@ -32,12 +32,12 @@
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e3a5f'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
+    <link rel="stylesheet" href="../assets/css/common.css?v=a9243851" />
     <style>
       :root {
         --bg: #fdfcf6;
@@ -225,25 +225,25 @@
         </div>
         <div class="grid md:grid-cols-4 gap-6">
           <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/01-consult.jpg');background-size:cover;background-position:center;"></div>
+            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/01-consult.webp');background-size:cover;background-position:center;"></div>
             <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">대표 컨설턴트</p>
             <h3 class="serif text-xl mt-1">강윤도</h3>
             <p class="mt-2 text-sm" style="color: var(--ink-soft)">서울대 경영 · 11년차</p>
           </article>
           <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/04-teaching.jpg');background-size:cover;background-position:center;"></div>
+            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/04-teaching.webp');background-size:cover;background-position:center;"></div>
             <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">국어 · 영어</p>
             <h3 class="serif text-xl mt-1">윤서영</h3>
             <p class="mt-2 text-sm" style="color: var(--ink-soft)">연세대 영문 · 8년차</p>
           </article>
           <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/03-parent.jpg');background-size:cover;background-position:center;"></div>
+            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/03-parent.webp');background-size:cover;background-position:center;"></div>
             <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">수학 · 과학</p>
             <h3 class="serif text-xl mt-1">장도현</h3>
             <p class="mt-2 text-sm" style="color: var(--ink-soft)">KAIST 화학 · 7년차</p>
           </article>
           <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/02-student.jpg');background-size:cover;background-position:center;"></div>
+            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/02-student.webp');background-size:cover;background-position:center;"></div>
             <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">의대 · 약대 전담</p>
             <h3 class="serif text-xl mt-1">오정인</h3>
             <p class="mt-2 text-sm" style="color: var(--ink-soft)">고려대 의예 · 6년차</p>
@@ -416,7 +416,7 @@
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
-      <script src="../assets/js/showroom.js" defer></script>
+      <script src="../assets/js/showroom.js?v=67ca7251" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="academy" role="region" aria-label="알림 배너">
