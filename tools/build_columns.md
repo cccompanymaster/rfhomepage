@@ -76,3 +76,21 @@ PRETENDARD_DIR=/tmp/pf/node_modules/pretendard/dist/public/static \
 - **순위를 약속하는 문구는 원고에 넣지 마세요.** 신뢰도에도, 검색엔진 평가에도 해롭습니다.
 - 지역 칼럼 10편은 지역명만 바꾼 복제글이 되지 않도록 각 지역 산업 특성을 축으로 씁니다. 현재 실측 유사도 8.5%로 안전 범위입니다.
 - 새 글을 추가하면 `content/keywords-100.json`에도 slug·cluster를 등록해야 순서와 허브 분류가 잡힙니다.
+
+---
+
+## 배포 전 순서 (2026-09-25부터)
+
+사이트는 이제 Tailwind CDN 대신 **미리 빌드한 CSS**를 씁니다. 무엇을 고쳤든 마지막에 `build_assets.py`를 꼭 돌리세요.
+
+```bash
+python3 tools/optimize_images.py --delete   # 사진을 새로 넣었을 때만
+python3 tools/build_columns.py              # 칼럼을 고쳤을 때만
+python3 tools/build_assets.py               # 항상 마지막 (node 필요)
+git add -A && git commit && git push
+# 배포가 끝난 뒤
+python3 tools/indexnow.py --since YYYY-MM-DD   # 바뀐 페이지를 네이버·빙에 알림
+```
+
+- `build_assets.py`를 빼먹으면: 새로 쓴 Tailwind 클래스가 적용되지 않고, 고친 CSS가 재방문자에게 안 갑니다.
+- 루트의 `d1ebd682684f953fad9c2a85b7c238bf.txt`는 IndexNow 키 파일입니다. 지우지 마세요.
