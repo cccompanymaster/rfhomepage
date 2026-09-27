@@ -33,24 +33,24 @@
 
 레퍼런스의 업체명은 모두 데모용 가상 업체이며, 실제 고객 사례가 아닙니다.
 
-- [라온치과의원](https://noahhomepage.co.kr/templates/dental.html): 치과
-- [정평 법무법인](https://noahhomepage.co.kr/templates/law.html): 법무법인·변호사
-- [오월의 다정](https://noahhomepage.co.kr/templates/cafe.html): 카페·베이커리
-- [화월](https://noahhomepage.co.kr/templates/restaurant.html): 한식 파인다이닝
-- [여백 스튜디오](https://noahhomepage.co.kr/templates/interior.html): 인테리어
-- [루티드 필라테스](https://noahhomepage.co.kr/templates/pilates.html): 필라테스
-- [단정 에스테틱](https://noahhomepage.co.kr/templates/beauty.html): 피부관리·에스테틱
-- [본연 클리닉](https://noahhomepage.co.kr/templates/clinic.html): 성형외과·피부과
-- [Stackline](https://noahhomepage.co.kr/templates/saas.html): SaaS·스타트업
-- [온플로우](https://noahhomepage.co.kr/templates/fintech.html): 핀테크 스크롤 랜딩
-- [산일호 풀빌라](https://noahhomepage.co.kr/templates/pension.html): 펜션·풀빌라
-- [무드그래프 스튜디오](https://noahhomepage.co.kr/templates/studio.html): 사진·영상 스튜디오
-- [메리트 입시컨설팅](https://noahhomepage.co.kr/templates/academy.html): 학원·교육
-- [한울정밀](https://noahhomepage.co.kr/templates/manufacture.html): 제조업·B2B
-- [온재무설계](https://noahhomepage.co.kr/templates/insurance.html): 보험·재무설계
-- [위즈웍스](https://noahhomepage.co.kr/templates/agency-quote.html): 에이전시 (견적형)
-- [논픽셀](https://noahhomepage.co.kr/templates/agency-dark.html): 스튜디오 포트폴리오 (다크)
-- [플럭스랩](https://noahhomepage.co.kr/templates/agency-interactive.html): 스튜디오 (인터랙티브)
+- [라온치과의원](https://noahhomepage.co.kr/templates/dental): 치과
+- [정평 법무법인](https://noahhomepage.co.kr/templates/law): 법무법인·변호사
+- [오월의 다정](https://noahhomepage.co.kr/templates/cafe): 카페·베이커리
+- [화월](https://noahhomepage.co.kr/templates/restaurant): 한식 파인다이닝
+- [여백 스튜디오](https://noahhomepage.co.kr/templates/interior): 인테리어
+- [루티드 필라테스](https://noahhomepage.co.kr/templates/pilates): 필라테스
+- [단정 에스테틱](https://noahhomepage.co.kr/templates/beauty): 피부관리·에스테틱
+- [본연 클리닉](https://noahhomepage.co.kr/templates/clinic): 성형외과·피부과
+- [Stackline](https://noahhomepage.co.kr/templates/saas): SaaS·스타트업
+- [온플로우](https://noahhomepage.co.kr/templates/fintech): 핀테크 스크롤 랜딩
+- [산일호 풀빌라](https://noahhomepage.co.kr/templates/pension): 펜션·풀빌라
+- [무드그래프 스튜디오](https://noahhomepage.co.kr/templates/studio): 사진·영상 스튜디오
+- [메리트 입시컨설팅](https://noahhomepage.co.kr/templates/academy): 학원·교육
+- [한울정밀](https://noahhomepage.co.kr/templates/manufacture): 제조업·B2B
+- [온재무설계](https://noahhomepage.co.kr/templates/insurance): 보험·재무설계
+- [위즈웍스](https://noahhomepage.co.kr/templates/agency-quote): 에이전시 (견적형)
+- [논픽셀](https://noahhomepage.co.kr/templates/agency-dark): 스튜디오 포트폴리오 (다크)
+- [플럭스랩](https://noahhomepage.co.kr/templates/agency-interactive): 스튜디오 (인터랙티브)
 
 ## 홈페이지 제작 칼럼 (100편)
 

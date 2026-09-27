@@ -35,3 +35,4 @@ package.json
 package-lock.json
 tailwind.config.js
 assets/css/tw.src.css
+.claude/

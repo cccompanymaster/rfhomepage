@@ -8,7 +8,7 @@
 /brochure                 /assets/brochure/NOAH-brochure.pdf   302
 /소개서                    /assets/brochure/NOAH-brochure.pdf   302
 /kakao                    https://pf.kakao.com/_ENCKX/chat   302
-/blog                     /templates/blog.html                 301
+/blog                     /templates/blog                 301
 
 # 고객사 사전 정보 시트 (계약 고객 전달용)
 # ※ /intake → /intake.html 규칙 금지!
@@ -20,26 +20,26 @@
 
 # ────────────────────────────────────────────
 # 12개 업종 단축 경로 → 템플릿 페이지
-# /dental == /templates/dental.html
+# /dental == /templates/dental
 # ────────────────────────────────────────────
-/dental                   /templates/dental.html               301
-/law                      /templates/law.html                  301
-/cafe                     /templates/cafe.html                 301
-/restaurant               /templates/restaurant.html           301
-/interior                 /templates/interior.html             301
-/pilates                  /templates/pilates.html              301
-/beauty                   /templates/beauty.html               301
-/saas                     /templates/saas.html                 301
-/pension                  /templates/pension.html              301
-/studio                   /templates/studio.html               301
-/academy                  /templates/academy.html              301
-/manufacture              /templates/manufacture.html          301
-/insurance                /templates/insurance.html            301
-/clinic                   /templates/clinic.html               301
-/agency                   /templates/agency-quote.html         301
-/editorial                /templates/agency-dark.html          301
-/interactive              /templates/agency-interactive.html   301
-/fintech                  /templates/fintech.html              301
+/dental                   /templates/dental               301
+/law                      /templates/law                  301
+/cafe                     /templates/cafe                 301
+/restaurant               /templates/restaurant           301
+/interior                 /templates/interior             301
+/pilates                  /templates/pilates              301
+/beauty                   /templates/beauty               301
+/saas                     /templates/saas                 301
+/pension                  /templates/pension              301
+/studio                   /templates/studio               301
+/academy                  /templates/academy              301
+/manufacture              /templates/manufacture          301
+/insurance                /templates/insurance            301
+/clinic                   /templates/clinic               301
+/agency                   /templates/agency-quote         301
+/editorial                /templates/agency-dark          301
+/interactive              /templates/agency-interactive   301
+/fintech                  /templates/fintech              301
 # ※ /options 는 규칙 불필요 — Workers가 options.html을 /options 로 자동 서빙
 #   (.html 목적지로 보내면 자동 리다이렉트와 핑퐁 → 무한루프. intake 때와 동일)
 /buy                      /checkout                            301

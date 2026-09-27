@@ -368,8 +368,8 @@ def build_article(art, all_cols, slugset, by_cluster):
         "articleSection": cat,
         "keywords": art['kw'] + ', ' + ', '.join(art.get('tags', [])),
         "image": f"{SITE}/assets/images/og/{art['slug']}.png",
-        "author": {"@type": "Organization", "name": BRAND, "url": SITE},
-        "publisher": {"@type": "Organization", "name": BRAND,
+        "author": {"@type": "Organization", "@id": f"{SITE}/#org", "name": BRAND, "url": SITE},
+        "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": BRAND,
                       "logo": {"@type": "ImageObject", "url": f"{SITE}/favicon.png"}},
         "mainEntityOfPage": {"@type": "WebPage", "@id": f"{SITE}/columns/{art['slug']}"},
         "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": f"{SITE}/columns/"},
@@ -622,7 +622,7 @@ def build_index(cols):
         "description": "홈페이지 제작 비용·업종별 제작·SEO·운영까지, 사장님이 실제로 궁금해하는 것들을 정리한 100편의 칼럼.",
         "url": f"{SITE}/columns/",
         "inLanguage": "ko-KR",
-        "publisher": {"@type": "Organization", "name": BRAND, "url": SITE},
+        "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": BRAND, "url": SITE},
     }
     ld_crumb = {
         "@context": "https://schema.org", "@type": "BreadcrumbList",
