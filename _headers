@@ -55,6 +55,10 @@
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# 검색엔진 소유 확인 파일 — 캐시 짧게 (재확인 시 최신값)
+/BingSiteAuth.xml
+  Cache-Control: public, max-age=3600
+
 # IndexNow 키 파일 — 검색엔진이 수시로 확인
 /d1ebd682684f953fad9c2a85b7c238bf.txt
   Cache-Control: public, max-age=3600
