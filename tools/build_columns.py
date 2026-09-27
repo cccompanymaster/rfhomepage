@@ -14,6 +14,7 @@ OG 이미지까지 재생성:  python3 tools/build_columns.py --og
   (OG는 Pretendard OTF 필요 — tools/build_columns.md 참고)
 """
 import json, glob, re, os, html, sys
+import subprocess
 from datetime import date, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -258,13 +259,31 @@ def link_keywords(body, self_slug, slugset, limit=5):
     return ''.join(out)
 
 
+def git_dates(path):
+    """원고 파일이 처음 커밋된 날(작성일)과 마지막으로 커밋된 날(수정일).
+       git이 없거나 아직 커밋 전이면 오늘 날짜."""
+    today = date.today().isoformat()
+    try:
+        rel = os.path.relpath(path, ROOT)
+        log = subprocess.run(['git', 'log', '--follow', '--format=%cs', '--', rel], cwd=ROOT,
+                             capture_output=True, text=True, timeout=10).stdout.split()
+        return (log[-1], log[0]) if log else (today, today)
+    except Exception:
+        return today, today
+
+
 def load_all():
+    """날짜 규칙 — 실제 날짜만 씁니다 (발행일을 앞당겨 꾸미지 않음).
+       글에 'published' / 'updated' (YYYY-MM-DD)가 있으면 그 값을,
+       없으면 원고 파일의 git 최초·최종 커밋일을 씁니다."""
     cols = {}
     for f in sorted(glob.glob(os.path.join(ROOT, 'content/columns/batch-*.json'))):
+        pub, upd = git_dates(f)
         for a in json.load(open(f, encoding='utf-8')):
+            a['date'] = a.get('published') or pub
+            a['updated'] = max(a.get('updated') or upd, a['date'])
             cols[a['slug']] = a
     order = json.load(open(os.path.join(ROOT, 'content/keywords-100.json'), encoding='utf-8'))['keywords']
-    base = date(2026, 8, 19)
     out = []
     for i, k in enumerate(order):
         a = cols.get(k['slug'])
@@ -272,7 +291,6 @@ def load_all():
             continue
         a['n'] = k['n']
         a['cluster'] = a.get('cluster') or k['cluster']
-        a['date'] = (base - timedelta(days=i * 2)).isoformat()
         out.append(a)
     return out
 
@@ -344,7 +362,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         "headline": art['title'][:110],
         "description": art['desc'],
         "datePublished": art['date'],
-        "dateModified": art['date'],
+        "dateModified": art['updated'],
         "inLanguage": "ko-KR",
         "wordCount": len(plain),
         "articleSection": cat,
@@ -394,6 +412,7 @@ def build_article(art, all_cols, slugset, by_cluster):
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="article:published_time" content="{art['date']}" />
+    <meta property="article:modified_time" content="{art['updated']}" />
     <meta property="article:section" content="{esc(cat)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{esc(art['title'])}" />
@@ -423,7 +442,7 @@ def build_article(art, all_cols, slugset, by_cluster):
       <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">{esc(art['title'])}</h1>
       <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">{esc(art['desc'])}</p>
       <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
-        <time datetime="{art['date']}">{art['date'].replace('-', '.')}</time>
+        <time datetime="{art['date']}">{art['date'].replace('-', '.')}</time>{f' <span>·</span><span>수정 <time datetime="{art["updated"]}">{art["updated"].replace("-", ".")}</time></span>' if art['updated'] != art['date'] else ''}
         <span>·</span><span>약 {art.get('readMin', 5)}분</span>
         <span>·</span><span>NOAH 편집팀</span>
       </div>
@@ -830,12 +849,12 @@ def update_sitemap(cols):
     p = os.path.join(ROOT, 'sitemap.xml')
     sm = open(p, encoding='utf-8').read()
     sm = re.sub(r'\s*<url><loc>https://noahhomepage\.co\.kr/columns[^<]*</loc>.*?</url>', '', sm)
-    today = cols[0]['date'] if cols else date.today().isoformat()
+    today = max((a['updated'] for a in cols), default=date.today().isoformat())
     add = [f'  <url><loc>{SITE}/columns/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>']
     for cl in CLUSTERS:
         add.append(f'  <url><loc>{SITE}/columns/topic/{cl}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>')
     for a in cols:
-        add.append(f'  <url><loc>{SITE}/columns/{a["slug"]}</loc><lastmod>{a["date"]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>')
+        add.append(f'  <url><loc>{SITE}/columns/{a["slug"]}</loc><lastmod>{a["updated"]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>')
     sm = sm.replace('</urlset>', '\n'.join(add) + '\n</urlset>')
     open(p, 'w', encoding='utf-8').write(sm)
     return sm.count('<url>')

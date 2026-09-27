@@ -1,0 +1,66 @@
+# NOAH 노아홈페이지
+
+> 노아홈페이지(NOAH)는 씨씨컴퍼니가 운영하는 소상공인·중소기업용 홈페이지 제작 서비스입니다. 업종별로 미리 만들어 둔 디자인 18종 중 하나를 고르면 그 위에 업체 브랜드(상호·로고·색·사진·문구)를 적용해, 자료 확인 후 7일 안에 오픈합니다. 기본 제작비는 199,000원(부가세 별도, 부가세 포함 218,900원)입니다.
+
+## 핵심 사실
+
+- 서비스: 업종별 디자인 18종 중 선택 → 브랜드 적용 → 오픈. 처음부터 새로 디자인하는 맞춤 제작이 아님
+- 기본 제작비: 199,000원, 부가세 별도, 1회 결제
+- 제작 기간: 자료가 모인 날부터 7일 (Day 1 상담·디자인 선택 → Day 2–3 콘텐츠·카피 → Day 4–5 디자인 적용 → Day 6 검수·수정 → Day 7 오픈)
+- 기본 포함: PC·태블릿·모바일 반응형, 한국어 카피 검수, 검색 기본 설정(메타·구조화 데이터), 카카오톡 공유 미리보기, 1년 호스팅, 도메인 연결·SSL 안내, 1년 무제한 텍스트 수정, 파비콘 제작·보유 로고 SVG 변환, 완료 후 소스 코드·계정 이전
+- 오픈 전 검수 단계 수정: 횟수 제한 없음
+- 별도 비용: 도메인 구매·갱신(연 15,000원부터), 추가 페이지·기능 옵션, 2년차 호스팅
+- 1년 무제한 수정 플랜: 300,000원/년 — 사진·배너·팝업·레이아웃까지 12개월 횟수 제한 없음
+- 유지보수 월간 플랜: 30,000원/월 — 월 3건 수정
+- 환불: 착수 전 100%, 상담·디자인 선택 후 시안 전달 전 50%, 시안 전달 후 불가, 회사 사정으로 14일 이상 지연 시 100%
+- 검색 순위나 매출은 보장하지 않음
+- 운영: 씨씨컴퍼니(CC Company), 대표 채희준, 사업자등록번호 275-05-01613
+- 주소: 인천광역시 연수구 인천타워대로 301, A동 16층 33호 (송도동, 송도센텀하이브)
+- 연락: 010-6658-6482 · cccompanymaster@gmail.com · 카카오톡 채널 https://pf.kakao.com/_ENCKX · 평일 10:00–19:00
+
+## 주요 페이지
+
+- [홈](https://noahhomepage.co.kr/): 서비스 소개, 제작 과정, 포함 항목 요약
+- [가격](https://noahhomepage.co.kr/pricing): 기본 패키지 포함·불포함 항목, 1년 무제한 수정 플랜
+- [옵션 안내](https://noahhomepage.co.kr/options): 서브페이지·로고·예약 캘린더·SEO 등 추가 옵션 설명과 현재 단가
+- [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process): 7일 일정, 수정 범위, 호스팅·도메인, 기본 페이지 수
+- [레퍼런스](https://noahhomepage.co.kr/references): 고를 수 있는 디자인 18종 (실제로 작동하는 데모 페이지)
+- [상담 신청](https://noahhomepage.co.kr/contact): 무료 상담, 영업일 1일 안에 회신
+- [이용약관·환불 규정](https://noahhomepage.co.kr/terms)
+- [개인정보처리방침](https://noahhomepage.co.kr/privacy)
+
+## 디자인 18종 (업종별 데모)
+
+레퍼런스의 업체명은 모두 데모용 가상 업체이며, 실제 고객 사례가 아닙니다.
+
+- [라온치과의원](https://noahhomepage.co.kr/templates/dental.html): 치과
+- [정평 법무법인](https://noahhomepage.co.kr/templates/law.html): 법무법인·변호사
+- [오월의 다정](https://noahhomepage.co.kr/templates/cafe.html): 카페·베이커리
+- [화월](https://noahhomepage.co.kr/templates/restaurant.html): 한식 파인다이닝
+- [여백 스튜디오](https://noahhomepage.co.kr/templates/interior.html): 인테리어
+- [루티드 필라테스](https://noahhomepage.co.kr/templates/pilates.html): 필라테스
+- [단정 에스테틱](https://noahhomepage.co.kr/templates/beauty.html): 피부관리·에스테틱
+- [본연 클리닉](https://noahhomepage.co.kr/templates/clinic.html): 성형외과·피부과
+- [Stackline](https://noahhomepage.co.kr/templates/saas.html): SaaS·스타트업
+- [온플로우](https://noahhomepage.co.kr/templates/fintech.html): 핀테크 스크롤 랜딩
+- [산일호 풀빌라](https://noahhomepage.co.kr/templates/pension.html): 펜션·풀빌라
+- [무드그래프 스튜디오](https://noahhomepage.co.kr/templates/studio.html): 사진·영상 스튜디오
+- [메리트 입시컨설팅](https://noahhomepage.co.kr/templates/academy.html): 학원·교육
+- [한울정밀](https://noahhomepage.co.kr/templates/manufacture.html): 제조업·B2B
+- [온재무설계](https://noahhomepage.co.kr/templates/insurance.html): 보험·재무설계
+- [위즈웍스](https://noahhomepage.co.kr/templates/agency-quote.html): 에이전시 (견적형)
+- [논픽셀](https://noahhomepage.co.kr/templates/agency-dark.html): 스튜디오 포트폴리오 (다크)
+- [플럭스랩](https://noahhomepage.co.kr/templates/agency-interactive.html): 스튜디오 (인터랙티브)
+
+## 홈페이지 제작 칼럼 (100편)
+
+- [칼럼 전체](https://noahhomepage.co.kr/columns/)
+- [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준
+- [제작 가이드](https://noahhomepage.co.kr/columns/topic/guide): 도메인·호스팅·필수 페이지·법적 표기
+- [업종별 제작](https://noahhomepage.co.kr/columns/topic/industry): 치과·카페·제조업 등 업종별 고려사항
+- [SEO·검색노출](https://noahhomepage.co.kr/columns/topic/seo): 네이버·구글 등록, 사이트맵, 지역 검색
+- [제작 방식 비교](https://noahhomepage.co.kr/columns/topic/compare): 템플릿·맞춤 제작·빌더·에이전시
+- [운영·유지보수](https://noahhomepage.co.kr/columns/topic/ops): 속도·보안·백업·콘텐츠 갱신
+- [디자인·기획](https://noahhomepage.co.kr/columns/topic/design): 카피·컬러·사진·문의 폼 설계
+- [지역별 제작](https://noahhomepage.co.kr/columns/topic/local): 지역별 홈페이지 제작과 지역 검색
+- [RSS](https://noahhomepage.co.kr/columns/feed.xml)

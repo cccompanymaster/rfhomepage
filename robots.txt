@@ -1,16 +1,49 @@
-# NOAH — 검색엔진 크롤러 안내
-# 배포 후 실제 도메인으로 sitemap URL 갱신 필요.
+# NOAH 노아홈페이지 — 크롤러 안내
+#
+# 검색엔진과 AI 검색·답변 서비스 모두 허용합니다.
+# 고객사 전달용 사전 정보 시트, 결제 페이지, 소개서 PDF만 색인에서 뺍니다.
+#
+# Content-Signal: 검색 노출·AI 답변 인용·AI 학습 모두 허용 (Cloudflare Content Signals 규격)
+#   학습만 막고 싶으면 두 곳의 ai-train=yes 를 ai-train=no 로 바꾸세요.
+#
+# ※ Cloudflare 대시보드의 "AI 크롤러 차단(AI Crawl Control / Block AI bots)"이 켜져 있으면
+#   이 파일과 상관없이 AI 크롤러가 막힙니다. 대시보드 설정도 같이 확인하세요.
 
-User-agent: *
+# ── AI 검색·답변 서비스 (답변에 인용되려면 읽을 수 있어야 함) ──
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Applebot
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: CCBot
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /assets/brochure/
-Disallow: /intake.html
 Disallow: /intake
+Disallow: /intake.html
 Disallow: /start
-Disallow: /checkout.html
 Disallow: /checkout
+Disallow: /checkout.html
 Disallow: /buy
 
-# 고객사 전달용 사전 정보 시트는 색인 제외
+# ── 그 외 모든 크롤러 (구글·네이버 Yeti·빙·다음 포함) ──
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+Disallow: /assets/brochure/
+Disallow: /intake
+Disallow: /intake.html
+Disallow: /start
+Disallow: /checkout
+Disallow: /checkout.html
+Disallow: /buy
 
 Sitemap: https://noahhomepage.co.kr/sitemap.xml

@@ -13,7 +13,9 @@ CSS 빌드 + 캐시 버전 붙이기.  페이지·칼럼을 고친 뒤 마지막
        cdn.tailwindcss.com 스크립트  →  /assets/css/tw.css
        jsdelivr Pretendard            →  /assets/fonts/pretendard/pretendard.css
        Google Fonts 쓰는 페이지에 preconnect 추가
-  3) CSS·JS 링크 뒤에 내용 해시(?v=abcd1234)를 붙입니다.
+  3) 화면의 자주 묻는 질문(<details class="faq">)으로 FAQPage 구조화 데이터를 다시 만듭니다.
+     FAQ 문구나 가격을 고쳐도 구조화 데이터가 화면과 어긋나지 않습니다.
+  4) CSS·JS 링크 뒤에 내용 해시(?v=abcd1234)를 붙입니다.
      _headers 가 /assets/* 를 1년 캐시하므로, 파일 내용이 바뀌면
      주소도 바뀌어야 재방문자에게 새 파일이 갑니다.
 
@@ -21,6 +23,8 @@ CSS 빌드 + 캐시 버전 붙이기.  페이지·칼럼을 고친 뒤 마지막
 """
 import glob
 import hashlib
+import html
+import json
 import os
 import re
 import shutil
@@ -51,6 +55,29 @@ def build_tailwind():
     return os.path.getsize(os.path.join(ROOT, 'assets/css/tw.css'))
 
 
+FAQ_ITEM = re.compile(r'<details class="faq"[^>]*>\s*<summary>(.*?)</summary>(.*?)</details>', re.S)
+FAQ_BLOCK = re.compile(r'\n    <!-- ld:faq -->.*?<!-- /ld:faq -->', re.S)
+
+
+def plain(h):
+    return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h))).strip()
+
+
+def sync_faq(s):
+    """화면 FAQ → FAQPage JSON-LD. FAQ가 2개 미만이면 블록을 지웁니다."""
+    s = FAQ_BLOCK.sub('', s)
+    items = [(plain(q), plain(a)) for q, a in FAQ_ITEM.findall(s)]
+    items = [(q, a) for q, a in items if q and a]
+    if len(items) < 2 or '</head>' not in s:
+        return s, 0
+    data = {'@context': 'https://schema.org', '@type': 'FAQPage',
+            'mainEntity': [{'@type': 'Question', 'name': q,
+                            'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}
+    blob = json.dumps(data, ensure_ascii=False, indent=2).replace('\n', '\n    ')
+    block = f'    <!-- ld:faq -->\n    <script type="application/ld+json">\n    {blob}\n    </script>\n    <!-- /ld:faq -->\n  </head>'
+    return s.replace('\n  </head>', '\n' + block, 1) if '\n  </head>' in s else s.replace('</head>', block, 1), len(items)
+
+
 def short_hash(rel):
     with open(os.path.join(ROOT, rel.lstrip('/')), 'rb') as f:
         return hashlib.sha1(f.read()).hexdigest()[:8]
@@ -60,11 +87,16 @@ def main():
     size = build_tailwind()
     hashes = {}
     touched = 0
+    faq = {}
     for g in PAGES:
         for f in sorted(glob.glob(os.path.join(ROOT, g))):
             s = orig = open(f, encoding='utf-8').read()
             s = TW_SCRIPT.sub('<link rel="stylesheet" href="/assets/css/tw.css" />', s)
             s = PRETENDARD_CDN.sub('<link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css" />', s)
+            if f.count(os.sep) == ROOT.count(os.sep) + 1:      # 루트 페이지만 (칼럼·템플릿 제외)
+                s, n = sync_faq(s)
+                if n:
+                    faq[os.path.basename(f)] = n
             if GFONTS in s and 'rel="preconnect" href="https://fonts.gstatic.com"' not in s:
                 s = s.replace(GFONTS, PRECONNECT + GFONTS, 1)
 
@@ -83,6 +115,8 @@ def main():
             if 'cdn.tailwindcss.com' in open(f, encoding='utf-8').read()]
     print(f'✓ tw.css {size / 1024:.0f}KB')
     print(f'✓ HTML {touched}개 갱신 · 버전 붙은 자산 {len(hashes)}개')
+    if faq:
+        print('✓ FAQ 구조화 데이터 ' + ', '.join(f'{k} {v}문항' for k, v in faq.items()))
     for k, v in sorted(hashes.items()):
         print(f'    {k}?v={v}')
     if left:

@@ -94,3 +94,14 @@ python3 tools/indexnow.py --since YYYY-MM-DD   # 바뀐 페이지를 네이버·
 
 - `build_assets.py`를 빼먹으면: 새로 쓴 Tailwind 클래스가 적용되지 않고, 고친 CSS가 재방문자에게 안 갑니다.
 - 루트의 `d1ebd682684f953fad9c2a85b7c238bf.txt`는 IndexNow 키 파일입니다. 지우지 마세요.
+
+## 칼럼 날짜 규칙
+
+발행일·수정일은 **실제 날짜만** 씁니다. 원고 JSON의 git 최초 커밋일이 발행일, 마지막 커밋일이 수정일이 됩니다.
+기존 배치 파일에 새 글을 추가할 때는 그 글에 `"published": "YYYY-MM-DD"`를 직접 적어주세요(안 적으면 배치 파일의 최초 커밋일이 붙습니다).
+
+## AI 검색용 파일
+
+- `llms.txt` — AI가 사이트를 요약해 읽는 파일. **가격·포함 항목·환불 규정·디자인 목록이 바뀌면 같이 고쳐야 합니다.**
+- `robots.txt` — AI 크롤러 허용 목록과 Content-Signal. 학습만 막으려면 `ai-train=no`.
+- FAQPage 구조화 데이터 — `build_assets.py`가 화면의 `<details class="faq">`에서 자동으로 만듭니다. 직접 고치지 마세요.

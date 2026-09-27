@@ -95,6 +95,15 @@
       .ph-agi       { --ph-from:#315CFF; --ph-to:#10130F; color:#D7FF47; }
       .ph-fin       { --ph-from:#4B2AFF; --ph-to:#7A5CFF; color:#fff; }
 
+      /* 한눈에 보기 */
+      .facts { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 40px 56px; padding-top: 48px; border-top: 1px solid var(--line); }
+      .fact-list { margin: 0; }
+      .fact-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+      .fact-row:first-child { border-top: 1px solid var(--line); }
+      .fact-row dt { font-weight: 700; font-size: 15.5px; color: var(--text); }
+      .fact-row dd { margin: 0; font-size: 15.5px; line-height: 1.7; color: var(--text-dim); }
+      @media (max-width: 1023px) { .facts { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+      @media (max-width: 560px) { .fact-row { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 14px 0; } }
       /* 칼럼 허브 링크 */
       .hub-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
       .hub-link { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); transition: border-color .2s, transform .2s; }
@@ -537,7 +546,18 @@
           },
           "sameAs": [
             "https://pf.kakao.com/_ENCKX"
-          ]
+          ],
+          "description": "소상공인·중소기업을 위한 홈페이지 제작 서비스. 업종별 디자인 18종 중 하나를 골라 브랜드를 적용하고, 자료 확인 후 7일 안에 오픈합니다. 기본 199,000원(부가세 별도).",
+          "knowsAbout": [
+            "홈페이지 제작",
+            "반응형 웹",
+            "검색엔진 최적화",
+            "소상공인 홈페이지"
+          ],
+          "areaServed": {
+            "@type": "Country",
+            "name": "대한민국"
+          }
         },
         {
           "@type": "WebSite",
@@ -917,6 +937,44 @@
           <a href="/checkout" class="px-8 py-4 rounded-full font-bold text-[16.5px]" style="border:1px solid rgba(17,24,33,.18); color:var(--text)">바로 구매하기</a>
         </div>
         <p class="mt-6 text-sm" style="color: var(--text-quiet)">상담은 30분이면 끝나고 결정은 그 뒤에 하셔도 됩니다.</p>
+      </div>
+    </section>
+
+    <!-- 6-1. 한눈에 보기 — 사람과 AI 검색 모두를 위한 사실 요약 -->
+    <section class="container-x pb-20 md:pb-28" id="facts" aria-labelledby="facts-title">
+      <div class="facts">
+        <div class="facts-head">
+          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">AT A GLANCE</p>
+          <h2 id="facts-title" class="serif" style="font-size: clamp(24px,3.4vw,34px); line-height:1.3">NOAH 한눈에 보기</h2>
+          <p class="mt-4 text-[15.5px] leading-7" style="color: var(--text-dim)">노아홈페이지(NOAH)는 소상공인·중소기업을 위한 199,000원, 7일 홈페이지 제작 서비스입니다.</p>
+          <a href="/process#faq" class="inline-block mt-5 text-sm font-semibold underline underline-offset-4" style="color: var(--text-dim)">자주 묻는 질문 더 보기 →</a>
+        </div>
+        <dl class="fact-list">
+        <div class="fact-row">
+          <dt>무엇인가요</dt>
+          <dd>업종별 디자인 18종 중 하나를 골라 업체 브랜드를 입혀 만드는 홈페이지 제작 서비스입니다. 처음부터 새로 그리는 맞춤 제작과는 다릅니다.</dd>
+        </div>
+        <div class="fact-row">
+          <dt>얼마인가요</dt>
+          <dd>기본 199,000원입니다. 부가세 포함 218,900원, 1회 결제입니다.</dd>
+        </div>
+        <div class="fact-row">
+          <dt>얼마나 걸리나요</dt>
+          <dd>자료가 모인 날부터 7일입니다. 자료가 늦어지면 도착한 날부터 다시 셉니다.</dd>
+        </div>
+        <div class="fact-row">
+          <dt>무엇이 들어 있나요</dt>
+          <dd>반응형 화면, 문구 검수, 검색 기본 설정, 1년 호스팅, 도메인 연결·SSL 안내, 1년 무제한 텍스트 수정, 완료 후 소스·계정 이전.</dd>
+        </div>
+        <div class="fact-row">
+          <dt>따로 드는 비용은</dt>
+          <dd>도메인(연 15,000원부터), 추가 페이지·기능 옵션, 2년차 호스팅. 사진·배너까지 자주 바꾸신다면 1년 무제한 수정 300,000원/년.</dd>
+        </div>
+        <div class="fact-row">
+          <dt>누가 운영하나요</dt>
+          <dd>씨씨컴퍼니(대표 채희준)가 운영합니다. 인천 송도, 평일 10:00–19:00, 010-6658-6482.</dd>
+        </div>
+        </dl>
       </div>
     </section>
 
