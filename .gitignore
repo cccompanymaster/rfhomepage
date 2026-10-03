@@ -1,3 +1,6 @@
 
 # 인간화 스킬 작업 디렉터리 — 중간 산출물, 배포 대상 아님
 _workspace/
+
+# 쇼케이스 원본 캡처(재생성 가능, 46MB) — tools/capture_showcase.mjs
+content/showcase/screens/

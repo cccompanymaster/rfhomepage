@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
-    <link rel="stylesheet" href="../assets/css/common.css?v=a9243851" />
+    <link rel="stylesheet" href="../assets/css/common.css?v=112435df" />
     <style>
       :root {
         --bg: #f7f3eb;
@@ -52,8 +52,8 @@
       html { scroll-behavior: smooth; }
       body { font-family: 'Gowun Dodum', 'Pretendard Variable', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
       .serif { font-family: 'Gowun Batang', 'Noto Serif KR', serif; letter-spacing: -0.025em; }
-      .container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-      @media (min-width: 768px) { .container-x { padding: 0 48px; } }
+      .container-x { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      @media (min-width: 768px) { .container-x { padding-left: 48px; padding-right: 48px; } }
       .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
       .reveal.in { opacity: 1; transform: translateY(0); }
       .ph { background: linear-gradient(160deg, #c4ccba 0%, #8a9d80 50%, #4a5a48 100%); position: relative; overflow: hidden; }
@@ -125,7 +125,7 @@
     <main id="top">
       <!-- HERO -->
       <section class="relative">
-        <div class="ph absolute inset-0" style="background-image:url('../assets/images/pension/04-view.webp');background-size:cover;background-position:center;opacity:0.55;"></div>
+        <div class="ph absolute inset-0" style="position:absolute;inset:0;background-image:url('../assets/images/pension/04-view.webp');background-size:cover;background-position:center;filter:brightness(0.62) saturate(0.9);"></div>
         <div class="container-x relative pt-28 md:pt-44 pb-32 md:pb-48 text-center" style="color: #fff">
           <p class="eyebrow mb-8 reveal" style="color:#dccfa6">강원도 인제 · 자작나무숲 자락</p>
           <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.2] tracking-[-0.025em] reveal">
