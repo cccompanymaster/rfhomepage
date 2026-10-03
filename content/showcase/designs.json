@@ -1,0 +1,131 @@
+{
+  "_comment": "홈 첫 화면 기기 목업 쇼케이스 (위: 모니터, 아래: 휴대폰). 순서·문구를 바꾼 뒤 python3 tools/build_showcase.py → python3 tools/build_assets.py. 화면 캡처는 node tools/capture_showcase.mjs",
+  "designs": [
+    {
+      "slug": "dental",
+      "nameKo": "라온치과의원",
+      "industryKo": "치과",
+      "tagKo": "치과가 처음인 마음으로, 끝까지 정성껏",
+      "accent": "#1d7a5f"
+    },
+    {
+      "slug": "cafe",
+      "nameKo": "오월의 다정",
+      "industryKo": "카페·베이커리",
+      "tagKo": "하루의 가장 다정한 한 잔",
+      "accent": "#a8743f"
+    },
+    {
+      "slug": "law",
+      "nameKo": "정평 법무법인",
+      "industryKo": "법무법인",
+      "tagKo": "바르게 듣고, 정확하게 답합니다",
+      "accent": "#3d5375"
+    },
+    {
+      "slug": "restaurant",
+      "nameKo": "화월",
+      "industryKo": "한식 다이닝",
+      "tagKo": "계절을 담아낸 일곱 코스",
+      "accent": "#c9a24a"
+    },
+    {
+      "slug": "pilates",
+      "nameKo": "루티드 필라테스",
+      "industryKo": "필라테스",
+      "tagKo": "뿌리부터 단단해지는 나의 코어",
+      "accent": "#4f7a5a"
+    },
+    {
+      "slug": "clinic",
+      "nameKo": "본연 클리닉",
+      "industryKo": "성형외과·피부과",
+      "tagKo": "본래의 얼굴에서 시작합니다",
+      "accent": "#b89a78"
+    },
+    {
+      "slug": "beauty",
+      "nameKo": "단정 에스테틱",
+      "industryKo": "피부관리",
+      "tagKo": "단정한 매일을 위한 피부 루틴",
+      "accent": "#c76b84"
+    },
+    {
+      "slug": "interior",
+      "nameKo": "여백 스튜디오",
+      "industryKo": "인테리어",
+      "tagKo": "덜어낸 자리에 머무는 하루",
+      "accent": "#8b8f96"
+    },
+    {
+      "slug": "pension",
+      "nameKo": "산일호 풀빌라",
+      "industryKo": "펜션·풀빌라",
+      "tagKo": "산이 가장 가까운 하룻밤",
+      "accent": "#8c7148"
+    },
+    {
+      "slug": "academy",
+      "nameKo": "메리트 입시컨설팅",
+      "industryKo": "학원·교육",
+      "tagKo": "길을 잘 아는 사람과 걷는 1년",
+      "accent": "#3a6aa8"
+    },
+    {
+      "slug": "studio",
+      "nameKo": "무드그래프 스튜디오",
+      "industryKo": "사진·영상 스튜디오",
+      "tagKo": "분위기까지 담는 한 컷",
+      "accent": "#8a8a8a"
+    },
+    {
+      "slug": "manufacture",
+      "nameKo": "한울정밀",
+      "industryKo": "제조업·B2B",
+      "tagKo": "미크론 단위에서 시작되는 신뢰",
+      "accent": "#5b6573"
+    },
+    {
+      "slug": "insurance",
+      "nameKo": "온재무설계",
+      "industryKo": "보험·재무설계",
+      "tagKo": "인생의 굽이마다, 곁에",
+      "accent": "#d9a441"
+    },
+    {
+      "slug": "saas",
+      "nameKo": "Stackline",
+      "industryKo": "SaaS·스타트업",
+      "tagKo": "흩어진 업무 데이터를 한 줄로",
+      "accent": "#6b55e6"
+    },
+    {
+      "slug": "fintech",
+      "nameKo": "온플로우",
+      "industryKo": "핀테크",
+      "tagKo": "복잡한 정산을 가장 간단하게",
+      "accent": "#4b2aff"
+    },
+    {
+      "slug": "agency-quote",
+      "nameKo": "위즈웍스",
+      "industryKo": "에이전시",
+      "tagKo": "견적까지 한 번에 받는 에이전시",
+      "accent": "#4058ff"
+    },
+    {
+      "slug": "agency-dark",
+      "nameKo": "논픽셀",
+      "industryKo": "디자인 스튜디오",
+      "tagKo": "다크 에디토리얼 포트폴리오",
+      "accent": "#ff623d"
+    },
+    {
+      "slug": "agency-interactive",
+      "nameKo": "플럭스랩",
+      "industryKo": "인터랙티브 스튜디오",
+      "tagKo": "스토리 패널과 가로 갤러리",
+      "accent": "#315cff"
+    }
+  ]
+}
