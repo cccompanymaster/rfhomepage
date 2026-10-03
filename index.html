@@ -45,6 +45,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
     <link rel="stylesheet" href="/assets/css/common.css?v=a9243851" />
+    <!-- 첫 진입 책장 게이트: 세션당 1회. 해시(#how 등)로 들어오거나, 데이터 절약 모드이거나, WebGL이 없으면 건너뜀 -->
+    <script>
+      (function () {
+        try {
+          if (location.hash || sessionStorage.getItem('noah_intro_seen')) return;
+          if (navigator.connection && navigator.connection.saveData) return;
+          var c = document.createElement('canvas');
+          var gl = c.getContext('webgl2') || c.getContext('webgl');
+          if (!gl) return;
+          var lose = gl.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
+          document.documentElement.classList.add('intro-on');
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/bookshelf/intro.css?v=3d15be5b" />
     <style>
       /* ── 다크 에디토리얼 토큰 (레퍼런스 16 톤) — common.css 오버라이드 ── */
       body { background: var(--bg); color: var(--text); }
@@ -632,6 +647,72 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <!-- ══ 첫 진입: 레퍼런스 책장 (ThreeUI Bookshelf, MIT) ══ -->
+    <div id="shelf-intro" class="shelf-intro" data-state="loading" data-mode="shelf"
+         data-renderer="/assets/bookshelf/bookshelf-renderer.js?v=dea3f0a2"
+         role="dialog" aria-modal="true" aria-labelledby="si-title">
+      <div class="bookshelf" tabindex="0" aria-describedby="si-sub">
+        <canvas class="bookshelf__canvas" aria-label="레퍼런스 책장. 좌우 화살표로 고르고 Enter로 펼칩니다."></canvas>
+        <div class="bookshelf__source-controls" aria-hidden="true">
+          <div id="loading" hidden></div>
+          <p id="fallback-status"></p>
+          <section id="browse-ui"></section>
+          <aside id="detail-panel"><div class="detail-controls"><p class="microcopy"></p></div></aside>
+          <span id="selection-title"></span><span id="selection-note"></span><span id="counter"></span><span id="palette-label"></span>
+          <div id="markers"></div>
+          <button id="previous" type="button" tabindex="-1"></button><button id="next" type="button" tabindex="-1"></button>
+          <button id="inspect" type="button" tabindex="-1"></button><button id="close-detail" type="button" tabindex="-1"></button>
+          <button id="reset-view" type="button" tabindex="-1"></button><button id="toggle-book" type="button" tabindex="-1"></button>
+          <button id="previous-page" type="button" tabindex="-1"></button><button id="next-page" type="button" tabindex="-1"></button>
+          <span id="page-label"></span><span id="page-counter"></span>
+          <span id="detail-eyebrow"></span><span id="detail-title"></span><span id="detail-deck"></span>
+          <span id="detail-binding"></span><span id="detail-format"></span><span id="detail-theme"></span><span id="detail-motif"></span>
+          <span id="live-region"></span>
+          <span id="pointer-label"><span id="pointer-label-index"></span><span id="pointer-label-title"></span></span>
+        </div>
+      </div>
+
+      <div class="si-loading" aria-hidden="true">책장을 꺼내는 중…</div>
+
+      <header class="si-top">
+        <a href="/" class="si-logo" aria-label="NOAH 노아홈페이지"><span class="si-logo-mark" aria-hidden="true"></span>NOAH</a>
+        <button type="button" class="si-skip" data-si="skip">건너뛰기</button>
+      </header>
+
+      <div class="si-copy">
+        <p class="si-eyebrow">REFERENCE · 18 DESIGNS</p>
+        <h2 id="si-title">싸니까 대충 만드는 거<br />아니냐고요?</h2>
+        <p class="si-sub" id="si-sub">직접 골라 보세요. 책을 누르면 그 디자인이 펼쳐집니다.</p>
+      </div>
+
+      <div class="si-detail-copy" aria-hidden="true">
+        <p class="si-eyebrow" data-si-d-eyebrow>REFERENCE · 01</p>
+        <p class="si-detail-name" data-si-d-name>라온치과의원</p>
+        <p class="si-sub" data-si-d-tag>처음 오는 환자가 편안해지는 치과</p>
+        <p class="si-detail-hint">표지를 넘기거나 책장을 끌어 보세요</p>
+      </div>
+
+      <div class="si-dock">
+        <p class="si-caption" aria-live="polite">
+          <span class="si-caption-name" data-si-name>라온치과의원</span>
+          <span class="si-caption-meta" data-si-meta>치과 · 처음 오는 환자가 편안해지는 치과</span>
+        </p>
+        <div class="si-bar" data-si-bar="shelf" role="group" aria-label="책 고르기">
+          <button type="button" class="si-btn is-icon" data-si="prev" aria-label="이전 디자인">‹</button>
+          <span class="si-count" data-si-count>1 / 7</span>
+          <button type="button" class="si-btn is-icon" data-si="next" aria-label="다음 디자인">›</button>
+          <button type="button" class="si-btn is-primary" data-si="open">펼쳐 보기</button>
+        </div>
+        <div class="si-bar" data-si-bar="detail" role="group" aria-label="펼친 디자인" hidden>
+          <button type="button" class="si-btn" data-si="back">← 다른 디자인 보기</button>
+          <a class="si-btn" data-si="visit" href="/templates/dental" target="_blank" rel="noopener">이 디자인 열어보기 ↗</a>
+          <button type="button" class="si-btn is-primary" data-si="how">어떻게 만들죠? →</button>
+        </div>
+        <a class="si-all" href="/references">18종 전체 보기</a>
+      </div>
+      <p class="si-live" aria-live="polite"></p>
+    </div>
+
     <!-- 상단 이벤트 선정자 유도 배너 → 사전 정보 작성 페이지 -->
     <div class="event-banner-wrap" id="event-banner">
       <a class="event-banner" href="/intake" data-banner-id="noah-intake">
@@ -890,32 +971,18 @@
         <h2 class="serif" style="font-size: clamp(28px,4.6vw,46px); line-height:1.26">싸니까 대충 만드는 거<br />아니냐고요?</h2>
         <p class="mt-6 text-base leading-8" style="color: var(--text-dim)">
           말로 설명하는 것보다 직접 보시는 게 빠릅니다.<br />
-          아래는 전부 <strong style="color:var(--text)">지금 열어볼 수 있는 실제 페이지</strong>입니다. 클릭해서 스크롤해 보세요.
+          책장의 7권은 전부 <strong style="color:var(--text)">지금 열어볼 수 있는 실제 페이지</strong>입니다. 펼쳐 보세요.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
-        <a href="/templates/fintech" class="ref-card" style="padding:20px">
-          <div class="ref-card-meta"><span class="ref-card-industry">Fintech · Scroll</span><span class="ref-card-num" style="color:var(--accent);font-weight:700">NEW</span></div>
-          <h3 class="ref-card-title">온플로우</h3>
-          <p class="ref-card-tag">스크롤에 따라 화면이 바뀌는 핀테크 랜딩</p>
-          <div class="mockup-desktop mt-4"><div class="mockup-desktop-screen"><img class="preview-img" src="/assets/images/previews/fintech-desktop.webp" alt="온플로우 화면 미리보기" loading="lazy" decoding="async" width="880" height="550" /></div></div>
-        </a>
-        <a href="/templates/clinic" class="ref-card" style="padding:20px">
-          <div class="ref-card-meta"><span class="ref-card-industry">Clinic · Luxury</span><span class="ref-card-num">14 / 18</span></div>
-          <h3 class="ref-card-title">본연 클리닉</h3>
-          <p class="ref-card-tag">메가메뉴부터 예약까지 갖춘 성형외과</p>
-          <div class="mockup-desktop mt-4"><div class="mockup-desktop-screen"><img class="preview-img" src="/assets/images/previews/clinic-desktop.webp" alt="본연 클리닉 화면 미리보기" loading="lazy" decoding="async" width="880" height="550" /></div></div>
-        </a>
-        <a href="/templates/cafe" class="ref-card" style="padding:20px">
-          <div class="ref-card-meta"><span class="ref-card-industry">Cafe · Bakery</span><span class="ref-card-num">03 / 18</span></div>
-          <h3 class="ref-card-title">오월의 다정</h3>
-          <p class="ref-card-tag">사진 한 장으로 분위기를 전하는 카페</p>
-          <div class="mockup-desktop mt-4"><div class="mockup-desktop-screen"><img class="preview-img" src="/assets/images/previews/cafe-desktop.webp" alt="오월의 다정 화면 미리보기" loading="lazy" decoding="async" width="880" height="550" /></div></div>
-        </a>
+      <div class="reveal">
+        <button type="button" class="shelf-teaser" data-shelf-open aria-label="레퍼런스 책장 열기">
+          <img src="/assets/bookshelf/poster.webp" alt="레퍼런스 7개가 책처럼 꽂힌 책장. 표지마다 각 사이트의 모바일 화면이 들어 있습니다." width="1600" height="800" loading="lazy" decoding="async" />
+          <span class="shelf-teaser-cta">책장 열어보기 →</span>
+        </button>
       </div>
 
-      <div class="text-center mt-12 reveal">
+      <div class="text-center mt-10 reveal">
         <a href="/references" class="inline-flex px-7 py-4 rounded-full font-bold text-sm nb-cta">18개 전부 보기 →</a>
         <p class="mt-4 text-sm" style="color: var(--text-quiet)">치과·법무법인·펜션·제조업까지, 업종별로 나눠 두었습니다.</p>
       </div>
@@ -1271,5 +1338,6 @@
         el.textContent = count;
       })();
     </script>
+    <script type="module" src="/assets/bookshelf/intro.js?v=42fc8ee9"></script>
   </body>
 </html>

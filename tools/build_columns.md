@@ -105,3 +105,13 @@ python3 tools/indexnow.py --since YYYY-MM-DD   # 바뀐 페이지를 네이버·
 - `llms.txt` — AI가 사이트를 요약해 읽는 파일. **가격·포함 항목·환불 규정·디자인 목록이 바뀌면 같이 고쳐야 합니다.**
 - `robots.txt` — AI 크롤러 허용 목록과 Content-Signal. 학습만 막으려면 `ai-train=no`.
 - FAQPage 구조화 데이터 — `build_assets.py`가 화면의 `<details class="faq">`에서 자동으로 만듭니다. 직접 고치지 마세요.
+
+## 홈 첫 화면 책장 (레퍼런스 7권)
+
+ThreeUI Bookshelf(MIT, Three.js r165)를 우리 레퍼런스로 바꿔 씁니다. 렌더러 동작 코드는 원본 그대로이고, **책 데이터·표지·컬렉션 이름·import 경로**만 바꿉니다.
+
+- 책 바꾸기: `content/bookshelf/books.json` 수정 → 표지 화면이 필요하면 `content/bookshelf/screens/<slug>.png`(390×844 @2x 모바일 캡처)
+- 빌드: `python3 tools/build_bookshelf.py --upstream /path/to/threeui` → `python3 tools/build_assets.py`
+  (원본: `git clone https://github.com/MengTo/threeui`)
+- 노출 규칙: 세션당 1회 자동. 주소에 `#해시`가 있거나 데이터 절약 모드·WebGL 미지원이면 건너뜀. 홈 레퍼런스 구간 "책장 열어보기"로 언제든 다시 열림
+- 분석 이벤트: `intro_view` · `intro_open_book` · `intro_visit` · `intro_exit`(method: how / skip)

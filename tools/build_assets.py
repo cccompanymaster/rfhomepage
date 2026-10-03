@@ -40,8 +40,8 @@ PRETENDARD_CDN = re.compile(r'<link\s+rel="stylesheet"\s+href="https://cdn\.jsde
 GFONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/'
 PRECONNECT = ('<link rel="preconnect" href="https://fonts.googleapis.com" />\n    '
               '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n    ')
-# 버전을 붙일 자산: /assets/css/*.css, /assets/js/*.js, 폰트 CSS (상대경로 ./ ../ 포함)
-ASSET_REF = re.compile(r'((?:\.\.?/|/)assets/(?:css|js|fonts/pretendard)/[\w.-]+\.(?:css|js))(?:\?v=[0-9a-f]+)?"')
+# 버전을 붙일 자산: /assets/css/*.css, /assets/js/*.js, 폰트 CSS, 책장 스크립트 (상대경로 ./ ../ 포함)
+ASSET_REF = re.compile(r'((?:\.\.?/|/)assets/(?:css|js|fonts/pretendard|bookshelf)/[\w.-]+\.(?:css|js))(?:\?v=[0-9a-f]+)?"')
 
 
 def build_tailwind():
