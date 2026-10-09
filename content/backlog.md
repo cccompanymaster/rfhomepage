@@ -11,20 +11,20 @@
 
 | 질문 (검색창에 치는 문장) | 근거 | 유형 | 상태 | 제안 URL |
 |---|---|---|---|---|
-| 20만원으로 홈페이지 만들 수 있나 | 추정 · 가격 페이지와 '저렴한 홈페이지 제작' 칼럼 사이의 빈칸 | question | backlog | /columns/homepage-200k |
-| 소상공인 홈페이지 제작 어디서 | 추정 · 지원사업 칼럼만 있고 제작 자체는 없음 | question | backlog | /columns/small-business-homepage |
-| 1인 사업자 홈페이지 필요한가 | 추정 | question | backlog | /columns/solo-business-homepage |
-| 인스타그램만 있으면 홈페이지 없어도 되나 | 추정 · 문의 단골 질문으로 예상 | comparison | backlog | /columns/instagram-vs-homepage |
-| 스마트스토어와 홈페이지 차이 | 추정 | comparison | backlog | /columns/smartstore-vs-homepage |
-| 홈페이지 7일 만에 만들 수 있나 | 추정 · '제작 기간' 칼럼은 일반론, NOAH 일정 근거 페이지 없음 | question | backlog | /columns/homepage-in-7-days |
-| 송도·연수구 홈페이지 제작 | 추정 · 사업장 소재지, 지역 칼럼에 인천은 있으나 송도 없음 | question | backlog | /columns/songdo-homepage |
+| 20만원으로 홈페이지 만들 수 있나 | 추정 · 가격 페이지와 '저렴한 홈페이지 제작' 칼럼 사이의 빈칸 | question | **published 10-09** | /columns/homepage-200k |
+| 소상공인 홈페이지 제작 어디서 | 추정 | question | **보류** — '업체 선택 기준'·'지원사업' 칼럼과 같은 질문(중복 시 서로 순위를 나눠 먹음). 검색어 데이터로 수요 확인 후 기존 글 보강 | |
+| 1인 사업자 홈페이지 필요한가 | 추정 | question | **published 10-09** | /columns/solo-business-homepage |
+| 인스타그램만 있으면 홈페이지 없어도 되나 | 추정 · 문의 단골 질문으로 예상 | comparison | **published 10-09** | /columns/instagram-vs-homepage |
+| 스마트스토어와 홈페이지 차이 | 추정 | comparison | **published 10-09** | /columns/smartstore-vs-homepage |
+| 홈페이지 7일 만에 만들 수 있나 | 추정 · '제작 기간' 칼럼은 일반론, NOAH 일정 근거 페이지 없음 | question | **published 10-09** | /columns/homepage-in-7-days |
+| 송도·연수구 홈페이지 제작 | 추정 · 사업장 소재지 | question | **보류** — '인천 홈페이지 제작' 칼럼과 같은 질문. 실제 송도 고객 사례가 생기면 사례 중심으로 | |
 
 ## B. 기존 칼럼 보강 — 첫 문단 직답 (AEO 최우선)
 
 100편 모두 첫 문단이 "~궁금하실 겁니다" 식 도입부로 시작합니다. 답변엔진은 **첫 화면의 직답 문장**을 뽑아 가므로, 제목 질문에 대한 40자 내외 결론 한 문장을 맨 위에 둡니다.
 
-- [ ] 원고 JSON에 `question`·`answer` 필드 추가 → 빌더가 `answer`를 첫 문단으로 렌더
-- [ ] 1차: 비용·견적(10)·제작 가이드(12) 22편 — 가격·기간처럼 답이 숫자로 떨어지는 글부터
+- [x] 원고 JSON에 `question`·`answer` 필드 추가 → 빌더가 '한 줄 답' 상자로 렌더 (+ Article `abstract`)
+- [x] 1차: 비용·견적(10)·제작 가이드(12) 22편 — 2026-10-09 반영, 검수표 `content/columns/answers-review.md`
 - [ ] 2차: SEO(15)·운영(10)
 - [ ] 3차: 나머지
 - 규칙: 수치는 원고 본문과 대조, 사람이 검수한 뒤 발행. 한 번에 100편 자동 교체 금지.

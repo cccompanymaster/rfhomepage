@@ -52,7 +52,16 @@
 - [논픽셀](https://noahhomepage.co.kr/templates/agency-dark): 스튜디오 포트폴리오 (다크)
 - [플럭스랩](https://noahhomepage.co.kr/templates/agency-interactive): 스튜디오 (인터랙티브)
 
-## 홈페이지 제작 칼럼 (100편)
+## 노아홈페이지에 대해 자주 묻는 질문
+
+- [20만원으로 홈페이지를 만들 수 있나요?](https://noahhomepage.co.kr/columns/homepage-200k): 템플릿형이면 가능. 199,000원에 들어 있는 것과 따로 드는 비용
+- [홈페이지를 7일 만에 만들 수 있나요?](https://noahhomepage.co.kr/columns/homepage-in-7-days): 자료가 모인 날부터 7일. 날짜별 일정과 일정이 밀리는 조건
+- [인스타그램만 있으면 홈페이지는 없어도 되나요?](https://noahhomepage.co.kr/columns/instagram-vs-homepage): 역할 비교와 함께 쓰는 법
+- [스마트스토어가 있으면 홈페이지는 필요 없나요?](https://noahhomepage.co.kr/columns/smartstore-vs-homepage): 판매 채널과 브랜드 공간의 차이
+- [1인 사업자도 홈페이지가 필요한가요?](https://noahhomepage.co.kr/columns/solo-business-homepage): 판단 기준과 한 페이지 최소 구성
+- [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
+
+## 홈페이지 제작 칼럼 (105편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준

@@ -71,6 +71,10 @@
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
       /* 목차 */
+      .answer-box { border: 1px solid rgba(255, 90, 43, .26); background: var(--accent-soft); border-radius: 14px; padding: 18px 22px; }
+      .answer-q { font-size: 13.5px; font-weight: 700; color: var(--accent-deep); margin-bottom: 6px; }
+      .answer-q::before { content: 'Q. '; }
+      .answer-a { font-size: 17px; line-height: 1.75; color: var(--text); font-weight: 600; }
       .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
       .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
       .toc ol { list-style: none; counter-reset: t; }
@@ -187,21 +191,21 @@
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
         <div class="rel grid sm:grid-cols-2 gap-3">
-        <a href="/columns/template-homepage">
+        <a href="/columns/freelancer-vs-agency">
           <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">템플릿 홈페이지 제작, 장점과 한계를 솔직하게 정리했습니다</p>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작, 프리랜서와 에이전시 어디에 맡길까</p>
         </a>
-        <a href="/columns/custom-vs-template">
+        <a href="/columns/avoid-scam">
           <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">맞춤 제작과 템플릿 홈페이지, 무엇이 어떻게 다를까</p>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 사기 예방, 계약 전 확인할 위험 신호</p>
         </a>
-        <a href="/columns/choose-agency">
+        <a href="/columns/ownership-transfer">
           <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 방식 비교</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 업체 선택 기준 5가지 체크리스트</p>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 소유권 이전, 도메인부터 소스코드까지 정리</p>
         </a>
-        <a href="/columns/mobile-optimize">
-          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">모바일 최적화 체크리스트, 375px에서 꼭 확인할 것들</p>
+        <a href="/columns/keyword-research">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">SEO·검색노출</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">SEO 키워드 선정 방법, 작은 사이트가 이기는 법</p>
         </a>
         </div>
       </section>

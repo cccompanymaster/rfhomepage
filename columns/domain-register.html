@@ -32,7 +32,7 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="article:published_time" content="2026-08-19" />
-    <meta property="article:modified_time" content="2026-09-12" />
+    <meta property="article:modified_time" content="2026-10-09" />
     <meta property="article:section" content="제작 가이드" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="도메인 등록 방법, 5분 만에 이해하는 절차" />
@@ -71,6 +71,10 @@
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
       /* 목차 */
+      .answer-box { border: 1px solid rgba(255, 90, 43, .26); background: var(--accent-soft); border-radius: 14px; padding: 18px 22px; }
+      .answer-q { font-size: 13.5px; font-weight: 700; color: var(--accent-deep); margin-bottom: 6px; }
+      .answer-q::before { content: 'Q. '; }
+      .answer-a { font-size: 17px; line-height: 1.75; color: var(--text); font-weight: 600; }
       .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
       .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
       .toc ol { list-style: none; counter-reset: t; }
@@ -108,7 +112,7 @@
       .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
       .hub-pill:hover { border-color: var(--accent); color: var(--text); }
     </style>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "도메인 등록 방법, 5분 만에 이해하는 절차", "description": "도메인 등록 방법을 처음부터 설명합니다. 등록업체 선택, 도메인 검색과 결제, 소유자 정보 입력, 갱신 관리까지 초보자가 알아야 할 것만 담았습니다.", "datePublished": "2026-08-19", "dateModified": "2026-09-12", "inLanguage": "ko-KR", "wordCount": 1070, "articleSection": "제작 가이드", "keywords": "도메인 등록 방법, 도메인, 도메인 등록, 홈페이지 준비", "image": "https://noahhomepage.co.kr/assets/images/og/domain-register.png", "author": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/domain-register"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "도메인 등록 방법"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "도메인 등록 방법, 5분 만에 이해하는 절차", "description": "도메인 등록 방법을 처음부터 설명합니다. 등록업체 선택, 도메인 검색과 결제, 소유자 정보 입력, 갱신 관리까지 초보자가 알아야 할 것만 담았습니다.", "abstract": "등록업체에서 원하는 이름을 검색해 결제하면 되고, 비용은 보통 연 1만~3만원대입니다. 소유자는 반드시 본인 명의로 하고 자동 갱신을 켜 두세요.", "datePublished": "2026-08-19", "dateModified": "2026-10-09", "inLanguage": "ko-KR", "wordCount": 1070, "articleSection": "제작 가이드", "keywords": "도메인 등록 방법, 도메인, 도메인 등록, 홈페이지 준비", "image": "https://noahhomepage.co.kr/assets/images/og/domain-register.png", "author": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/domain-register"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "도메인 등록 방법"}}</script>
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "제작 가이드", "item": "https://noahhomepage.co.kr/columns/topic/guide"}, {"@type": "ListItem", "position": 4, "name": "도메인 등록 방법, 5분 만에 이해하는 절차", "item": "https://noahhomepage.co.kr/columns/domain-register"}]}</script>
   </head>
   <body>
@@ -139,11 +143,15 @@
       <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">도메인 등록 방법, 5분 만에 이해하는 절차</h1>
       <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">도메인 등록 방법을 처음부터 설명합니다. 등록업체 선택, 도메인 검색과 결제, 소유자 정보 입력, 갱신 관리까지 초보자가 알아야 할 것만 담았습니다.</p>
       <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
-        <time datetime="2026-08-19">2026.08.19</time> <span>·</span><span>수정 <time datetime="2026-09-12">2026.09.12</time></span>
+        <time datetime="2026-08-19">2026.08.19</time> <span>·</span><span>수정 <time datetime="2026-10-09">2026.10.09</time></span>
         <span>·</span><span>약 5분</span>
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
+      <section class="answer-box mt-8" aria-label="한 줄 답">
+        <p class="answer-q">도메인은 어떻게 등록하나요?</p>
+        <p class="answer-a">등록업체에서 원하는 이름을 검색해 결제하면 되고, 비용은 보통 연 1만~3만원대입니다. 소유자는 반드시 본인 명의로 하고 자동 갱신을 켜 두세요.</p>
+      </section>
       <nav class="toc mt-10" aria-label="목차">
         <p class="lb">이 글의 순서</p>
         <ol>
@@ -187,21 +195,21 @@
       <section class="mt-14">
         <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
         <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/production-period">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 기간, 방식별로 얼마나 걸릴까</p>
+        </a>
+        <a href="/columns/prepare-materials">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 제작 준비물 체크리스트 10가지</p>
+        </a>
         <a href="/columns/web-hosting">
           <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
           <p class="text-sm font-bold mt-1.5 leading-6">웹호스팅 선택 기준, 초보 사장님용 가이드</p>
         </a>
-        <a href="/columns/ssl-setup">
-          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">SSL 인증서 설치, 자물쇠 표시 만드는 법</p>
-        </a>
-        <a href="/columns/essential-pages">
-          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">제작 가이드</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 필수 페이지 구성, 5페이지면 충분하다</p>
-        </a>
-        <a href="/columns/law-firm-homepage">
+        <a href="/columns/dermatology-homepage">
           <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">업종별 제작</span>
-          <p class="text-sm font-bold mt-1.5 leading-6">법무법인 홈페이지 제작, 신뢰를 설계하는 방법</p>
+          <p class="text-sm font-bold mt-1.5 leading-6">피부과 홈페이지 제작, 시술 100개를 정리하는 기술</p>
         </a>
         </div>
       </section>

@@ -34,7 +34,7 @@ jobs:
       SITE: https://noahhomepage.co.kr
       KEY: d1ebd682684f953fad9c2a85b7c238bf
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 

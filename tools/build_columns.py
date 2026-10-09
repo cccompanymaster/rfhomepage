@@ -4,13 +4,13 @@
 
   content/columns/batch-*.json
       ↓
-  columns/<slug>.html        개별 칼럼 100편
+  columns/<slug>.html        개별 칼럼
   columns/index.html         전체 목록 (검색·필터·페이지네이션)
   columns/topic/<cluster>.html  토픽 허브 8개 (필라 페이지)
   columns/feed.xml           RSS
 
 실행:  python3 tools/build_columns.py
-OG 이미지까지 재생성:  python3 tools/build_columns.py --og
+OG 이미지(없는 것만) 생성:  python3 tools/build_columns.py --og   (전체 다시: --og-all)
   (OG는 Pretendard OTF 필요 — tools/build_columns.md 참고)
 """
 import json, glob, re, os, html, sys
@@ -125,6 +125,10 @@ STYLE = '''      body { background: var(--bg); color: var(--text); }
       .pager button:disabled { opacity: .35; cursor: not-allowed; }
 
       /* 목차 */
+      .answer-box { border: 1px solid rgba(255, 90, 43, .26); background: var(--accent-soft); border-radius: 14px; padding: 18px 22px; }
+      .answer-q { font-size: 13.5px; font-weight: 700; color: var(--accent-deep); margin-bottom: 6px; }
+      .answer-q::before { content: 'Q. '; }
+      .answer-a { font-size: 17px; line-height: 1.75; color: var(--text); font-weight: 600; }
       .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
       .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
       .toc ol { list-style: none; counter-reset: t; }
@@ -329,6 +333,15 @@ def build_article(art, all_cols, slugset, by_cluster):
           <p class="text-sm font-bold mt-1.5 leading-6">{esc(r['title'])}</p>
         </a>''' for r in rels)
 
+    # 한 줄 답 — 글이 답하는 질문과 결론을 첫 화면에 (답변엔진이 뽑아 가는 문장)
+    answer_html = ''
+    if art.get('answer'):
+        answer_html = f'''      <section class="answer-box mt-8" aria-label="한 줄 답">
+        <p class="answer-q">{esc(art.get('question') or art['title'])}</p>
+        <p class="answer-a">{esc(art['answer'])}</p>
+      </section>
+'''
+
     toc_html = ''
     if len(toc) >= 3:
         items = '\n'.join(f'          <li><a href="#{aid}">{esc(t)}</a></li>' for aid, t in toc)
@@ -361,6 +374,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         "@type": "Article",
         "headline": art['title'][:110],
         "description": art['desc'],
+        **({"abstract": art['answer']} if art.get('answer') else {}),
         "datePublished": art['date'],
         "dateModified": art['updated'],
         "inLanguage": "ko-KR",
@@ -447,7 +461,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         <span>·</span><span>NOAH 편집팀</span>
       </div>
 
-{toc_html}
+{answer_html}{toc_html}
 
       <article class="prose mt-10">
 {body}
@@ -591,7 +605,7 @@ def build_index(cols):
         'cluster': a['cluster'], 'cat': CLUSTERS[a['cluster']]['name'],
         'date': a['date'], 'readMin': a.get('readMin', 5),
         'kw': a['kw'], 'tags': a.get('tags', []),
-    } for a in cols]
+    } for a in sorted(cols, key=lambda a: a['date'], reverse=True)]   # 새 글 먼저, 같은 날은 원래 순서
 
     chips = '\n'.join(
         f'<button class="chip" data-c="{k}" aria-pressed="false">{esc(v["name"])}</button>'
@@ -619,7 +633,7 @@ def build_index(cols):
         "@context": "https://schema.org",
         "@type": "Blog",
         "name": "NOAH 홈페이지 제작 칼럼",
-        "description": "홈페이지 제작 비용·업종별 제작·SEO·운영까지, 사장님이 실제로 궁금해하는 것들을 정리한 100편의 칼럼.",
+        "description": f"홈페이지 제작 비용·업종별 제작·SEO·운영까지, 사장님이 실제로 궁금해하는 것들을 정리한 {len(cols)}편의 칼럼.",
         "url": f"{SITE}/columns/",
         "inLanguage": "ko-KR",
         "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": BRAND, "url": SITE},
@@ -638,11 +652,11 @@ def build_index(cols):
     {GTM}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>홈페이지 제작 칼럼 100선 · NOAH 노아홈페이지</title>
-    <meta name="description" content="홈페이지 제작 비용부터 업종별 제작, SEO, 운영·유지보수까지. 사장님이 실제로 궁금해하는 것들을 정리한 100편의 칼럼입니다." />
+    <title>홈페이지 제작 칼럼 {len(cols)}편 · NOAH 노아홈페이지</title>
+    <meta name="description" content="홈페이지 제작 비용부터 업종별 제작, SEO, 운영·유지보수까지. 사장님이 실제로 궁금해하는 것들을 정리한 {len(cols)}편의 칼럼입니다." />
     <link rel="canonical" href="{SITE}/columns/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="홈페이지 제작 칼럼 100선 · NOAH" />
+    <meta property="og:title" content="홈페이지 제작 칼럼 {len(cols)}편 · NOAH" />
     <meta property="og:description" content="비용·업종별·SEO·운영까지, 홈페이지 제작의 모든 것." />
     <meta property="og:url" content="{SITE}/columns/" />
     <meta property="og:image" content="{SITE}/assets/images/og-cover.jpg" />
@@ -666,7 +680,7 @@ def build_index(cols):
         <p class="text-xs tracking-[0.24em] mb-4" style="color: var(--text-quiet)">NOAH COLUMNS</p>
         <h1 class="disp" style="font-size: clamp(30px, 5.4vw, 46px); line-height: 1.3">홈페이지 제작,<br />궁금한 것부터 하나씩</h1>
         <p class="mt-6 text-[15px] leading-8" style="color: var(--text-dim)">
-          비용·업종별 제작·검색 노출·운영까지 <strong style="color:var(--text)">100편</strong>으로 정리했습니다.<br />
+          비용·업종별 제작·검색 노출·운영까지 <strong style="color:var(--text)">{len(cols)}편</strong>으로 정리했습니다.<br />
           광고가 아니라, 사장님이 판단하실 수 있게 쓴 글입니다.
         </p>
       </div>
@@ -768,8 +782,11 @@ def build_index(cols):
 
 
 def build_rss(cols):
+    # 최신 발행 순 → 같은 날이면 최근 수정 순 (원고 번호 순으로 자르면 새 글이 빠짐)
+    recent = sorted(cols, key=lambda a: (a['date'], a['updated']), reverse=True)[:40]
+    last = max(a['updated'] for a in cols)
     items = []
-    for a in cols[:40]:
+    for a in recent:
         d = date.fromisoformat(a['date'])
         items.append(f'''    <item>
       <title>{esc(a['title'])}</title>
@@ -787,6 +804,7 @@ def build_rss(cols):
     <atom:link href="{SITE}/columns/feed.xml" rel="self" type="application/rss+xml" />
     <description>홈페이지 제작 비용·업종별 제작·SEO·운영까지 정리한 칼럼</description>
     <language>ko</language>
+    <lastBuildDate>{date.fromisoformat(last).strftime('%a, %d %b %Y')} 09:00:00 +0900</lastBuildDate>
 {chr(10).join(items)}
   </channel>
 </rss>
@@ -815,7 +833,12 @@ def build_og_images(cols):
     f_cat = ImageFont.truetype(os.path.join(fp, 'Pretendard-Bold.otf'), 26)
     f_brand = ImageFont.truetype(os.path.join(fp, 'Pretendard-SemiBold.otf'), 28)
 
+    force = '--og-all' in sys.argv
+    made = 0
     for a in cols:
+        if not force and os.path.exists(os.path.join(OG_DIR, a['slug'] + '.png')):
+            continue
+        made += 1
         img = Image.new('RGB', (1200, 630), '#0B0C0F')
         d = ImageDraw.Draw(img)
         # 상단 브랜드 그라디언트 바
@@ -842,7 +865,7 @@ def build_og_images(cols):
         url = 'noahhomepage.co.kr'
         d.text((1128 - d.textlength(url, font=f_brand), 562), url, font=f_brand, fill='#5A5852')
         img.save(os.path.join(OG_DIR, a['slug'] + '.png'), optimize=True)
-    return len(cols)
+    return made
 
 
 def update_sitemap(cols):
