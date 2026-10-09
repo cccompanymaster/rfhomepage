@@ -4,3 +4,7 @@ _workspace/
 
 # 쇼케이스 원본 캡처(재생성 가능, 46MB) — tools/capture_showcase.mjs
 content/showcase/screens/
+
+# 파이썬 캐시
+__pycache__/
+*.pyc
