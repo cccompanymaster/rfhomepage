@@ -552,7 +552,7 @@ body { font-size: 17px; line-height: 1.75; }
     from { transform: translateY(140%); opacity: 0; }
     to   { transform: translateY(0); opacity: 1; }
   }
-  .banner-bottom .label { flex: 1 1 100%; }
+  .banner-bottom .label { flex: 1 1 100%; white-space: normal; }
 }
 
 /* ============================================================

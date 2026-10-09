@@ -26,6 +26,7 @@
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process): 7일 일정, 수정 범위, 호스팅·도메인, 기본 페이지 수
 - [레퍼런스](https://noahhomepage.co.kr/references): 고를 수 있는 디자인 18종 (실제로 작동하는 데모 페이지)
 - [상담 신청](https://noahhomepage.co.kr/contact): 무료 상담, 영업일 1일 안에 회신
+- [회사 소개](https://noahhomepage.co.kr/about): 운영사, 일하는 방식(가격 공개·결과 비보장·소유권 이전·환불 기준), 사업자 정보
 - [이용약관·환불 규정](https://noahhomepage.co.kr/terms)
 - [개인정보처리방침](https://noahhomepage.co.kr/privacy)
 

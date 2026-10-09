@@ -458,7 +458,7 @@ def build_article(art, all_cols, slugset, by_cluster):
       <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
         <time datetime="{art['date']}">{art['date'].replace('-', '.')}</time>{f' <span>·</span><span>수정 <time datetime="{art["updated"]}">{art["updated"].replace("-", ".")}</time></span>' if art['updated'] != art['date'] else ''}
         <span>·</span><span>약 {art.get('readMin', 5)}분</span>
-        <span>·</span><span>NOAH 편집팀</span>
+        <span>·</span><a href="/about" class="underline-offset-2 hover:underline">NOAH 편집팀</a>
       </div>
 
 {answer_html}{toc_html}

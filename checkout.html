@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=57428b13" />
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-    <link rel="stylesheet" href="/assets/css/common.css?v=112435df" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=b1fa8595" />
     <style>
       body { background: var(--bg); color: var(--text); }
       .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
@@ -288,7 +288,7 @@
         storeId: '',      // 예: 'store-xxxxxxxx-xxxx-...'
         channelKey: '',   // 예: 'channel-key-xxxx...'
       };
-      // 주문 기록·결제 검증 백엔드 (노아폼백엔드 — type:'order' / 'payment' 처리)
+      // 노아폼백엔드 (Apps Script) — 주문 접수는 type:'consult'(handleConsult), 카드결제 검증은 type:'payment'(handlePayment)
       const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec';
       const KAKAO_URL = 'https://pf.kakao.com/_ENCKX/chat';
       const TEL = '010-6658-6482';
@@ -497,10 +497,15 @@
           const sig = JSON.stringify(o);
           if (window.__sent && window.__sent.sig === sig) { showDone(window.__sent.html); return; }  // 같은 주문 두 번 접수 방지
           const orderId = 'NO-' + new Date().toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
-          btn.disabled = true; btn.textContent = '주문 접수 중…';
-          await postGAS({ type: 'order', status: 'pending_manual', orderId, ...o });
-          btn.disabled = false; btn.textContent = '결제하기';
           const txt = orderText(o, orderId);
+          const pick = window.NOAH_PICK?.get?.();
+          btn.disabled = true; btn.textContent = '주문 접수 중…';
+          // 이미 운영 중인 상담 접수(handleConsult)로 보냅니다 — 백엔드에 주문 전용 처리가 없어도 사장님 메일·시트에 도착
+          await postGAS({ type: 'consult', kind: 'order', sendBrochure: false, orderId, status: 'pending_manual',
+            name: o.name, phone: o.phone, email: o.email, industry: `결제 페이지 주문 · 총 ${won(o.total)}`, reference: pick?.nameKo || '',
+            message: txt, total: o.total, receipt: o.receipt, bizno: o.bizno });
+          btn.disabled = false; btn.textContent = '결제하기';
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', { lead_source: 'checkout_order', value: o.total, currency: 'KRW', design: pick?.slug || '(none)', from_showcase: pick ? 'yes' : 'no' });
           showDone(`
             <span style="font-size:40px">📋</span>
             <h3 id="done-title" class="disp text-xl mt-3">주문이 접수되었습니다</h3>
