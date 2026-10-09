@@ -490,7 +490,7 @@
         if ($('#b-site').value) { showDone('<h3 id="done-title" class="disp text-xl">접수되었습니다</h3>'); return; }  // 봇 허니팟
         const o = buildOrder();
         const btn = $('#pay-btn');
-        if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: o.total, currency: 'KRW', items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })) });
+        if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: o.total, currency: 'KRW', items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })), design: window.NOAH_PICK?.current?.slug || '(none)' });
 
         /* 데모 모드 — 포트원 키 미설정: 주문만 접수하고 결제는 안내 */
         if (!PORTONE.storeId || !PORTONE.channelKey) {
@@ -589,5 +589,6 @@
         else showDone(`<span style="font-size:40px">🔎</span><h3 id="done-title" class="disp text-xl mt-3">결제 확인 중입니다</h3><p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">결제 결과를 확인해 이메일로 안내드립니다. 안내가 없으면 ${TEL} 로 연락 주세요.</p><div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
       })();
     </script>
+    <script src="/assets/js/pick.js?v=35edf0c2" defer></script>
   </body>
 </html>

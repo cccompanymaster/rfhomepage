@@ -586,24 +586,24 @@
               <label class="block text-sm mb-2" style="color: var(--text-dim)">관심 있는 디자인 (선택)</label>
               <select class="field-dark" name="reference">
                 <option value="">아직 정하지 않았어요</option>
-                <option>01 라온치과의원</option>
-                <option>02 정평 법무법인</option>
-                <option>03 오월의 다정 (카페)</option>
-                <option>04 화월 (다이닝)</option>
-                <option>05 여백 스튜디오 (인테리어)</option>
-                <option>06 루티드 (필라테스)</option>
-                <option>07 단정 (에스테틱)</option>
-                <option>08 Stackline (SaaS)</option>
-                <option>09 산일호 (풀빌라)</option>
-                <option>10 무드그래프 (스튜디오)</option>
-                <option>11 메리트 (학원)</option>
-                <option>12 한울정밀 (제조)</option>
-                <option>13 온재무설계 (보험 · 스토리텔링형)</option>
-                <option>14 본연 클리닉 (성형외과·피부과)</option>
-                <option>15 위즈웍스 (전환·견적형 에이전시)</option>
-                <option>16 논픽셀 (다크 에디토리얼)</option>
-                <option>17 플럭스랩 (인터랙티브)</option>
-                <option>18 온플로우 (핀테크 스크롤 랜딩)</option>
+                <option data-slug="dental">01 라온치과의원</option>
+                <option data-slug="law">02 정평 법무법인</option>
+                <option data-slug="cafe">03 오월의 다정 (카페)</option>
+                <option data-slug="restaurant">04 화월 (다이닝)</option>
+                <option data-slug="interior">05 여백 스튜디오 (인테리어)</option>
+                <option data-slug="pilates">06 루티드 (필라테스)</option>
+                <option data-slug="beauty">07 단정 (에스테틱)</option>
+                <option data-slug="saas">08 Stackline (SaaS)</option>
+                <option data-slug="pension">09 산일호 (풀빌라)</option>
+                <option data-slug="studio">10 무드그래프 (스튜디오)</option>
+                <option data-slug="academy">11 메리트 (학원)</option>
+                <option data-slug="manufacture">12 한울정밀 (제조)</option>
+                <option data-slug="insurance">13 온재무설계 (보험 · 스토리텔링형)</option>
+                <option data-slug="clinic">14 본연 클리닉 (성형외과·피부과)</option>
+                <option data-slug="agency-quote">15 위즈웍스 (전환·견적형 에이전시)</option>
+                <option data-slug="agency-dark">16 논픽셀 (다크 에디토리얼)</option>
+                <option data-slug="agency-interactive">17 플럭스랩 (인터랙티브)</option>
+                <option data-slug="fintech">18 온플로우 (핀테크 스크롤 랜딩)</option>
               </select>
             </div>
             <div class="md:col-span-2">
@@ -919,6 +919,10 @@
         fd.forEach((v, k) => { payload[k] = v; });
         payload.timestamp = new Date().toISOString();
         payload.referrer = document.referrer || '직접 접속';
+        // 첫 화면 쇼케이스에서 "이게 좋겠어요!"로 고른 디자인 (있을 때만)
+        const pick = window.NOAH_PICK?.get?.();
+        if (pick) { payload.design_pick = pick.nameKo; payload.design_pick_slug = pick.slug; payload.pick_source = 'showcase'; }
+        const chosenSlug = form.querySelector('select[name="reference"] option:checked')?.dataset.slug || '';
 
         try {
           // 1) 상담 접수 + 소개서 자동 발송 트리거 (Apps Script가 handleConsult 안에서 처리)
@@ -938,6 +942,14 @@
               event_category: 'lead',
               event_label: 'consult_form',
               value: 1,
+              design: chosenSlug || '(none)',
+              from_showcase: pick ? 'yes' : 'no',
+            });
+            // GA4 권장 전환 이벤트 — 관리 → 이벤트에서 '주요 이벤트'로 표시하면 전환으로 집계
+            gtag('event', 'generate_lead', {
+              lead_source: 'consult_form',
+              design: chosenSlug || '(none)',
+              from_showcase: pick ? 'yes' : 'no',
             });
           }
 
@@ -953,5 +965,6 @@
         }
       });
     </script>
+    <script src="/assets/js/pick.js?v=35edf0c2" defer></script>
   </body>
 </html>

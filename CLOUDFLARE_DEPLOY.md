@@ -103,13 +103,15 @@ NOAH 사이트를 GitHub Pages → **Cloudflare Pages**로 옮기는 5분 가이
 
 ## 🧹 GitHub Pages 끄기 (배포 확인 후)
 
-Cloudflare Pages가 정상 동작하면, 혼란 방지를 위해 GitHub Pages는 끄시는 걸 추천:
+운영 사이트는 Cloudflare(Workers Builds)가 이 브랜치에 푸시될 때마다 배포합니다.
+GitHub Pages 복사본은 필요 없고, 같은 사이트가 두 주소에 떠 있으면 검색엔진에 좋지 않습니다.
 
-1. https://github.com/cccompanymaster/rfhomepage/settings/pages
-2. 우측 상단 **Unpublish site** 클릭
-3. 확인
-
-(`.github/workflows/deploy-pages.yml` 파일은 그대로 두셔도 무방. 사용 안 됨)
+- 2026-10-09: 푸시마다 저장소 전체를 GitHub Pages로 올리던 `.github/workflows/deploy-pages.yml` 삭제
+  (이 워크플로는 `.assetsignore` 를 따르지 않아 원고·도구 폴더까지 공개 배포하고 있었음)
+- 이미 올라가 있는 복사본은 설정에서 내려야 사라집니다:
+  1. https://github.com/cccompanymaster/rfhomepage/settings/pages
+  2. **Unpublish site** (또는 Source 를 None 으로)
+  3. 확인
 
 ---
 

@@ -229,11 +229,42 @@ function start() {
   idle(() => loadNear(N));
 }
 
+/* "이게 좋겠어요!" — 고른 디자인을 기억해 상담 신청서·결제·사전정보 시트에 미리 채움 (assets/js/pick.js) */
+const PICK_KEY = 'noah_pick';
+function rememberPick(d) {
+  try { localStorage.setItem(PICK_KEY, JSON.stringify({ slug: d.slug, nameKo: d.nameKo, ts: Date.now() })); } catch (_) { return false; }
+  track('select_item', { item_list_name: 'showcase', items: [{ item_id: d.slug, item_name: d.nameKo }] });
+  return true;
+}
+
+/* 히어로로 넘어간 뒤 잠깐 보여주는 안내 — 무엇을 기억했는지 알리고 바로 취소할 수 있게 */
+function pickToast(d) {
+  document.querySelector('.sc-toast')?.remove();
+  const t = document.createElement('div');
+  t.className = 'sc-toast';
+  t.setAttribute('role', 'status');
+  t.innerHTML = '<span class="sc-toast-text"><strong></strong> 디자인을 기억해 둘게요. 상담 신청서에 미리 넣어 드립니다.</span>' +
+    '<a class="sc-toast-go" href="/contact">상담 신청 →</a><button type="button" class="sc-toast-undo">취소</button>';
+  t.querySelector('strong').textContent = d.nameKo;
+  t.querySelector('.sc-toast-undo').addEventListener('click', () => {
+    try { localStorage.removeItem(PICK_KEY); } catch (_) {}
+    t.querySelector('.sc-toast-text').textContent = '기억한 디자인을 지웠어요.';
+    t.querySelector('.sc-toast-go').remove();
+    t.querySelector('.sc-toast-undo').remove();
+    setTimeout(() => t.remove(), 1800);
+  });
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('is-on'));
+  setTimeout(() => { t.classList.remove('is-on'); setTimeout(() => t.remove(), 400); }, 7000);
+}
+
 function exit(method) {
   if (leaving) return;
   leaving = true;
   try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (_) {}
-  track('intro_exit', { method, item: DESIGNS[sel]?.slug });
+  const d = DESIGNS[sel];
+  track('intro_exit', { method, item: d?.slug });
+  const picked = method === 'how' && d && rememberPick(d);
   window.scrollTo(0, 0);
   const finish = () => {
     stopScroll();
@@ -241,6 +272,7 @@ function exit(method) {
     root.classList.remove('is-leaving');
     const h1 = document.querySelector('#hero h1');
     if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
+    if (picked) pickToast(d);
   };
   html.classList.add('intro-leaving');
   root.classList.add('is-leaving');

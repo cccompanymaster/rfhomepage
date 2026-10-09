@@ -1,0 +1,76 @@
+# 바뀐 페이지를 검색엔진(Bing·네이버 등 IndexNow 참여 엔진)에 바로 알립니다.
+#
+# 흐름: 푸시 → Cloudflare 배포(Workers Builds)가 성공으로 끝날 때까지 기다림
+#       → 키 파일이 실제 사이트에 있는지 확인 → 이번 푸시에서 바뀐 페이지만 전송
+# 수동 실행(Actions 탭 → Run workflow)에서 "전체"를 고르면 사이트맵 전체를 보냅니다.
+# 스크립트: tools/indexnow.py   키 파일: 루트의 d1ebd682684f953fad9c2a85b7c238bf.txt (지우지 마세요)
+name: IndexNow
+
+on:
+  push:
+    branches: [claude/homepage-reference-designs-SXEMC]
+    paths: ['**/*.html', 'sitemap.xml']
+  workflow_dispatch:
+    inputs:
+      all:
+        description: '사이트맵 전체 URL 보내기'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  checks: read
+
+concurrency:
+  group: indexnow-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SITE: https://noahhomepage.co.kr
+      KEY: d1ebd682684f953fad9c2a85b7c238bf
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cloudflare 배포 완료 대기
+        run: |
+          # 이 커밋의 "Workers Builds" 체크가 끝날 때까지 최대 15분
+          for i in $(seq 1 60); do
+            c=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/check-runs" \
+                  --jq '[.check_runs[] | select(.name | test("Workers Builds")) | (.conclusion // .status)] | first // "none"')
+            echo "[$i] Cloudflare: $c"
+            case "$c" in
+              success) sleep 20; exit 0 ;;                       # 엣지 반영 여유
+              failure|cancelled|timed_out|action_required)
+                echo "::warning::Cloudflare 배포가 실패해 IndexNow 를 보내지 않습니다."; exit 1 ;;
+            esac
+            if [ "$c" = "none" ] && [ "$i" -ge 12 ]; then
+              echo "::warning::Workers Builds 체크를 찾지 못했습니다. 3분 기다린 뒤 진행합니다."
+              sleep 180; exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::15분 안에 배포가 끝나지 않았습니다."; exit 1
+
+      - name: 키 파일 확인
+        run: |
+          got=$(curl -fsSL "$SITE/$KEY.txt" || true)
+          if [ "$got" != "$KEY" ]; then
+            echo "::error::$SITE/$KEY.txt 에서 키를 읽지 못했습니다 (받은 값: '$got')"; exit 1
+          fi
+
+      - name: IndexNow 전송
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.all }}" = "true" ]; then
+            python3 tools/indexnow.py
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            python3 tools/indexnow.py --changed "${{ github.event.before }}" "${{ github.sha }}"
+          else
+            python3 tools/indexnow.py --changed "${{ github.sha }}~1" "${{ github.sha }}"
+          fi
