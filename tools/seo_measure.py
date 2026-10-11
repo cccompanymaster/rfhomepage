@@ -263,6 +263,27 @@ def site_checks():
     return s, urls
 
 
+def lh_nodes(details, k=3):
+    """Lighthouse details 트리에서 DOM 노드(snippet)를 앞에서부터 k개 찾습니다"""
+    out = []
+    def walk(x):
+        if len(out) >= k:
+            return
+        if isinstance(x, dict):
+            if x.get('type') == 'node' and (x.get('snippet') or x.get('selector')):
+                label = re.sub(r'\s+', ' ', x.get('nodeLabel') or '')[:50]
+                snip = (x.get('selector') or x.get('snippet'))[:90] + (f' “{label}”' if label else '')
+                if snip not in out:
+                    out.append(snip)
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(details or {})
+    return out
+
+
 def lighthouse_summary(folder):
     rows = []
     for f in sorted(glob.glob(os.path.join(folder, '*.json'))):
@@ -287,6 +308,15 @@ def lighthouse_summary(folder):
             'tbt_ms': round(nv('total-blocking-time')) if nv('total-blocking-time') is not None else None,
             'fcp_s': round(nv('first-contentful-paint') / 1000, 2) if nv('first-contentful-paint') else None,
             'seo_fail': seo_fail,
+            # 느린 이유 — Lighthouse 버전에 따라 감사 이름이 달라 후보를 차례로 봅니다
+            'lcp_el': next((n[0] for n in (lh_nodes((au.get(a) or {}).get('details'), 1) for a in
+                            ('largest-contentful-paint-element', 'lcp-breakdown-insight', 'lcp-discovery-insight')) if n), None),
+            'cls_els': next((n for n in (lh_nodes((au.get(a) or {}).get('details'), 3) for a in
+                             ('layout-shifts', 'cls-culprits-insight', 'layout-shift-elements')) if n), []),
+            'savings': sorted(([a.get('title', a['id']), round((a.get('metricSavings') or {}).get('LCP') or
+                                (a.get('details') or {}).get('overallSavingsMs') or 0)]
+                               for a in au.values() if a.get('score') is not None and a['score'] < 0.9),
+                              key=lambda x: -x[1])[:4],
         })
     return rows
 
@@ -370,6 +400,21 @@ def report(site, pages, lh, when):
         for r in lh:
             path = urlparse(r['url'] or '').path or '/'
             w(f"| {path} | {r['perf']} | {r['seo']} | {r['a11y']} | {r['bp']} | {r['lcp_s']}s | {r['cls']} | {r['tbt_ms']}ms | {', '.join(r['seo_fail']) or '-'} |")
+        slow = [r for r in lh if (r['lcp_s'] or 0) > 2.5 or (r['cls'] or 0) > 0.1]
+        if slow:
+            w('')
+            w('#### 느린 이유 (LCP 2.5초·CLS 0.1 초과 페이지)')
+            for r in slow:
+                path = urlparse(r['url'] or '').path or '/'
+                w('')
+                w(f"**{path}** — LCP {r['lcp_s']}s · CLS {r['cls']}")
+                if r.get('lcp_el'):
+                    w(f"- LCP 요소: `{r['lcp_el']}`")
+                for el in r.get('cls_els') or []:
+                    w(f"- 레이아웃 이동: `{el}`")
+                sv = [f"{t} (LCP −{ms}ms)" if ms else t for t, ms in r.get('savings') or [] if ms]
+                if sv:
+                    w('- 개선 여지: ' + ' · '.join(sv))
     issues = [('응답 이상', bad_status, lambda p: f"{p.get('status') or p.get('error')}"),
               ('리다이렉트되는 사이트맵 URL', redirected, lambda p: ' → '.join(str(h['status']) for h in p['hops']) + f" → {p.get('final')}"),
               ('noindex', noindex, lambda p: p.get('robots') or p.get('x_robots')),

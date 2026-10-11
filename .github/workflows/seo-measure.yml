@@ -40,7 +40,7 @@ jobs:
           mkdir -p measure/lh
           for path in / /pricing /process /references /about /columns/homepage-200k; do
             slug=$(echo "$path" | sed 's#^/##; s#/#_#g'); slug=${slug:-home}
-            npx -y lighthouse@13.4.1 "$SITE$path" --quiet \
+            npx -y lighthouse@13.4.1 "$SITE$path" --quiet --locale=ko \
               --output=json --output-path="measure/lh/$slug.json" \
               --only-categories=performance,seo,accessibility,best-practices \
               --chrome-flags="--headless=new --no-sandbox --disable-gpu" \
