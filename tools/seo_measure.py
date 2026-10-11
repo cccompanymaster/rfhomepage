@@ -284,7 +284,7 @@ def lh_nodes(details, k=3):
     return out
 
 
-def lighthouse_summary(folder):
+def lighthouse_runs(folder):
     rows = []
     for f in sorted(glob.glob(os.path.join(folder, '*.json'))):
         try:
@@ -319,6 +319,24 @@ def lighthouse_summary(folder):
                               key=lambda x: -x[1])[:4],
         })
     return rows
+
+
+def lighthouse_summary(folder):
+    """페이지마다 여러 번 돌린 결과를 묶어 중앙값으로 — Lighthouse 실험실 수치는 실행마다 크게 흔들림"""
+    groups = {}
+    for r in lighthouse_runs(folder):
+        groups.setdefault(norm(r['url']), []).append(r)
+    out = []
+    for url, rs in groups.items():
+        ok = [r for r in rs if r['perf'] is not None]
+        def med(k):
+            vals = [r[k] for r in ok if r[k] is not None]
+            return statistics.median(vals) if vals else None
+        rep = sorted(ok, key=lambda r: r['lcp_s'] or 0)[len(ok) // 2] if ok else rs[0]
+        out.append({**rep, 'url': url, 'runs': len(ok), 'tries': len(rs),
+                    **{k: med(k) for k in ('perf', 'seo', 'a11y', 'bp', 'lcp_s', 'cls', 'tbt_ms', 'fcp_s')},
+                    'seo_fail': sorted({a for r in ok for a in r['seo_fail']})})
+    return out
 
 
 def mark(ok, warn=False):
@@ -393,13 +411,17 @@ def report(site, pages, lh, when):
     w(f"- 참고(User-Agent 만 바꾼 요청, 확정 아님): " + ' · '.join(f'{k} {v}' for k, v in site['ua_probe'].items()))
     if lh:
         w('')
-        w('### Lighthouse (모바일, 분석 스크립트 차단)')
+        w(f"### Lighthouse (모바일, 분석 스크립트 차단, 페이지당 {max(r['tries'] for r in lh)}회 중앙값)")
         w('')
         w('| 페이지 | 성능 | SEO | 접근성 | 권장사항 | LCP | CLS | TBT | SEO 감점 항목 |')
         w('|---|---|---|---|---|---|---|---|---|')
         for r in lh:
             path = urlparse(r['url'] or '').path or '/'
-            w(f"| {path} | {r['perf']} | {r['seo']} | {r['a11y']} | {r['bp']} | {r['lcp_s']}s | {r['cls']} | {r['tbt_ms']}ms | {', '.join(r['seo_fail']) or '-'} |")
+            if not r['runs']:
+                w(f"| {path} | 측정 실패 | | | | | | | |")
+                continue
+            f = lambda v, spec='g', unit='': '–' if v is None else f'{v:{spec}}{unit}'
+            w(f"| {path} | {f(r['perf'])} | {f(r['seo'])} | {f(r['a11y'])} | {f(r['bp'])} | {f(r['lcp_s'], '.2f', 's')} | {f(r['cls'], '.3f')} | {f(r['tbt_ms'], 'g', 'ms')} | {', '.join(r['seo_fail']) or '-'} |")
         slow = [r for r in lh if (r['lcp_s'] or 0) > 2.5 or (r['cls'] or 0) > 0.1]
         if slow:
             w('')

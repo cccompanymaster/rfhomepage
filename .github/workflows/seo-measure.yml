@@ -38,16 +38,19 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p measure/lh
+          npm i -g lighthouse@13.4.1 >/dev/null 2>&1
           for path in / /pricing /process /references /about /columns/homepage-200k; do
             slug=$(echo "$path" | sed 's#^/##; s#/#_#g'); slug=${slug:-home}
-            npx -y lighthouse@13.4.1 "$SITE$path" --quiet --locale=ko \
-              --output=json --output-path="measure/lh/$slug.json" \
+            for n in 1 2 3; do   # 실행마다 수치가 흔들려 3번 돌려 중앙값을 씁니다
+            lighthouse "$SITE$path" --quiet --locale=ko \
+              --output=json --output-path="measure/lh/$slug-$n.json" \
               --only-categories=performance,seo,accessibility,best-practices \
               --chrome-flags="--headless=new --no-sandbox --disable-gpu" \
               --blocked-url-patterns='*googletagmanager.com*' \
               --blocked-url-patterns='*google-analytics.com*' \
               --blocked-url-patterns='*analytics.google.com*' \
-              || echo "::warning::Lighthouse 실패: $path"
+              || echo "::warning::Lighthouse 실패: $path ($n회차)"
+            done
           done
 
       - name: 크롤러 점검 + 요약
