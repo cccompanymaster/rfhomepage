@@ -422,14 +422,14 @@ def report(site, pages, lh, when):
                 continue
             f = lambda v, spec='g', unit='': '–' if v is None else f'{v:{spec}}{unit}'
             w(f"| {path} | {f(r['perf'])} | {f(r['seo'])} | {f(r['a11y'])} | {f(r['bp'])} | {f(r['lcp_s'], '.2f', 's')} | {f(r['cls'], '.3f')} | {f(r['tbt_ms'], 'g', 'ms')} | {', '.join(r['seo_fail']) or '-'} |")
-        slow = [r for r in lh if (r['lcp_s'] or 0) > 2.5 or (r['cls'] or 0) > 0.1]
+        slow = [r for r in lh if r['runs'] and ((r['lcp_s'] or 0) > 2.5 or (r['cls'] or 0) > 0.1)]
         if slow:
             w('')
             w('#### 느린 이유 (LCP 2.5초·CLS 0.1 초과 페이지)')
             for r in slow:
                 path = urlparse(r['url'] or '').path or '/'
                 w('')
-                w(f"**{path}** — LCP {r['lcp_s']}s · CLS {r['cls']}")
+                w(f"**{path}** — LCP {r['lcp_s']:.2f}s · CLS {r['cls']:.3f}")
                 if r.get('lcp_el'):
                     w(f"- LCP 요소: `{r['lcp_el']}`")
                 for el in r.get('cls_els') or []:
