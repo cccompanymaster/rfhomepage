@@ -56,7 +56,8 @@ for (const d of designs) {
     const ctx = await browser.newContext({ viewport: { width: v.vw, height: v.vh }, deviceScaleFactor: v.dpr, isMobile: v.mobile, hasTouch: v.mobile });
     await ctx.route(/googletagmanager|google-analytics|ipify/, (r) => r.fulfill({ body: '{}' }));
     const page = await ctx.newPage();
-    await page.goto(`${BASE}/templates/${d.slug}.html`, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
+    // query: 방문 시각에 따라 화면이 바뀌는 템플릿은 캡처 상태를 고정 (예: accounting ?tod=dawn)
+    await page.goto(`${BASE}/templates/${d.slug}.html${d.query || ''}`, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
     await prepare(page);
     await page.screenshot({ path: path.join(OUT, `${d.slug}-${v.name}.png`) });
     const h = await page.evaluate(() => document.documentElement.scrollHeight);
