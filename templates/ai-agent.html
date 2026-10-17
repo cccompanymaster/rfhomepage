@@ -1,0 +1,1813 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kairos — 수백 개의 AI 에이전트, 하나의 관제 화면</title>
+    <link rel="canonical" href="https://noahhomepage.co.kr/templates/ai-agent" />
+    <meta name="description" content="사내 AI 에이전트의 실행을 실시간으로 관찰하고, 위험한 행동은 승인 정책으로 통제하고, 평가로 개선하는 운영 플랫폼 Kairos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kairos — 수백 개의 AI 에이전트, 하나의 관제 화면" />
+    <meta property="og:description" content="에이전트 실행 트레이스, 승인 정책, 평가 비교를 한 화면에서." />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/previews/ai-agent-desktop.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/previews/ai-agent-desktop.webp" />
+    <meta name="theme-color" content="#08090A" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2308090A'/%3E%3Cpath d='M23.8 11.5A9 9 0 1 1 16 7' fill='none' stroke='%23F7F8F8' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='21.4' cy='7.9' r='2.2' fill='%23F7F8F8'/%3E%3C/svg%3E" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/jetbrains-mono/jetbrains-mono-latin.woff2" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
+    <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
+    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+    <style>
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('/assets/fonts/jetbrains-mono/jetbrains-mono-latin.woff2') format('woff2');
+        font-weight: 100 800;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* ── 디자인 토큰 ── */
+      :root {
+        --bg: #08090A;          /* 페이지 기본 */
+        --surface-1: #0F1011;   /* 카드·패널·사이드바 */
+        --surface-2: #16171A;   /* hover·떠 있는 요소 */
+        --surface-3: #1E1F23;   /* 표면2 위 hover (파생) */
+        --text: #F7F8F8;        /* 제목·핵심 문장 */
+        --text-2: #8A8F98;      /* 설명·메타 (배경 대비 6.1:1) */
+        --text-3: #62666D;      /* 플레이스홀더·비활성 전용 */
+        --line: rgba(255, 255, 255, 0.08);
+        --accent: #7B8CFF;      /* 주요 CTA 1곳 + 활성 상태 */
+        --ok: #4CB782;
+        --warn: #F2C94C;
+        --err: #EB5757;
+        --btn-light: #E6E7E9;   /* 밝은 회색 채움 버튼 */
+        --r-card: 8px;
+        --r-btn: 6px;
+        --font-sans: 'Pretendard Variable', Pretendard, system-ui, 'Noto Sans KR', sans-serif;
+        --font-mono: 'JetBrains Mono', 'Pretendard Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+        --dur: 180ms;
+        --maxw: 1200px;
+        --gutter: 24px;
+        --pad-x: 24px;
+        --sec-y: 160px;
+        --hd-h: 64px;
+        --fab-r: 112px;
+        color-scheme: dark;
+      }
+      @media (max-width: 767px) { :root { --sec-y: 96px; --pad-x: 20px; } }
+      @media (max-width: 640px) { :root { --fab-r: 94px; } }
+
+      /* ── 기본 ── */
+      html { background: var(--bg); scroll-padding-top: 88px; }
+      body {
+        margin: 0; background: var(--bg); color: var(--text);
+        font-family: var(--font-sans); font-size: 16px; line-height: 1.6; font-weight: 400;
+        letter-spacing: -0.006em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      }
+      @media (max-width: 640px) { body { font-size: 16px; } }
+      strong, b { font-weight: 510; }
+      a { color: inherit; text-decoration: none; }
+      button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: inherit; }
+      ul, ol { list-style: none; margin: 0; padding: 0; }
+      p, dl, dd, figure, blockquote { margin: 0; }
+      svg { display: block; }
+      [hidden] { display: none !important; }
+      ::selection { background: rgba(247, 248, 248, 0.2); color: var(--text); }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+      a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+        outline: 2px solid var(--accent); outline-offset: 2px;
+      }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      .mono { font-family: var(--font-mono); letter-spacing: 0; font-variant-ligatures: none; }
+      .tnum { font-variant-numeric: tabular-nums; }
+      .wrap { width: 100%; max-width: calc(var(--maxw) + var(--pad-x) * 2); margin: 0 auto; padding: 0 var(--pad-x); }
+      .sec { padding: var(--sec-y) 0; }
+      .g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+      /* 스크롤 등장 — 투명도 + 위로 8px만 */
+      .reveal { opacity: 0; transform: translateY(8px); transition: opacity 200ms var(--ease), transform 200ms var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      /* ── 타입 스케일 ── */
+      .t-hero { margin: 0; font-size: clamp(36px, 8vw, 64px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; }
+      .t-h2 { margin: 0; font-size: 40px; line-height: 1.1; letter-spacing: -0.022em; font-weight: 600; }
+      .t-h3 { margin: 0; font-size: 20px; line-height: 1.3; letter-spacing: -0.012em; font-weight: 510; }
+      .t-body { font-size: 16px; line-height: 1.6; color: var(--text-2); }
+      .t-cap { font-size: 13px; line-height: 1.5; color: var(--text-2); }
+      @media (max-width: 767px) { .t-h2 { font-size: clamp(28px, 7.4vw, 40px); line-height: 1.15; } }
+      .t-h2, .t-h3, .hero-sub { text-wrap: balance; }
+      .t-body, .pts li, .mx-d, .cl-item p, .vo-q blockquote p { text-wrap: pretty; }
+      @media (hover: none) and (pointer: coarse), (max-width: 767px) { .kbd-hint { display: none !important; } }
+      .sec-label { display: flex; align-items: baseline; gap: 10px; margin: 0 0 20px; font-size: 13px; line-height: 1.2; font-weight: 510; color: var(--text-2); letter-spacing: 0; }
+      .sec-label .num { font-family: var(--font-mono); font-weight: 400; color: var(--text); }
+
+      /* ── 버튼·칩 ── */
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        height: 40px; padding: 0 16px; border-radius: var(--r-btn);
+        font-size: 15px; font-weight: 510; letter-spacing: -0.01em; line-height: 1; white-space: nowrap;
+        transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), transform 150ms var(--ease);
+      }
+      .btn:active { transform: translateY(1px); }
+      .btn-lg { height: 48px; padding: 0 22px; font-size: 16px; }
+      .btn-sm { height: 32px; padding: 0 12px; font-size: 13px; }
+      .btn-light { background: var(--btn-light); color: var(--bg); }
+      .btn-light:hover { background: var(--text); }
+      .btn-sub { background: var(--surface-2); color: var(--text); }
+      .btn-sub:hover { background: var(--surface-3); }
+      .btn-accent { background: var(--accent); color: var(--bg); }
+      .btn-accent:hover { background: #8F9DFF; }
+      .tlink { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 510; color: var(--text); border-radius: 4px; }
+      .tlink .arr { display: inline-block; transition: transform var(--dur) var(--ease); }
+      .tlink:hover .arr { transform: translateX(3px); }
+      .kbd {
+        display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+        min-width: 22px; height: 22px; padding: 0 6px; border-radius: 5px;
+        background: var(--surface-2); border: 1px solid var(--line); color: var(--text-2);
+        font: 400 12px/1 var(--font-mono); letter-spacing: 0; white-space: nowrap; vertical-align: middle;
+        transition: color 150ms var(--ease), background-color 150ms var(--ease);
+      }
+      .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+      .c-ok { color: var(--ok); } .c-warn { color: var(--warn); } .c-err { color: var(--err); }
+      .c-run { color: var(--text-2); }
+      .dot.c-run { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+      .is-live .dot.c-run { animation: pulse 1.4s ease-in-out infinite; }
+      @keyframes pulse { 50% { opacity: 0.3; } }
+      .badge {
+        display: inline-flex; align-items: center; gap: 6px; height: 20px; padding: 0 7px; border-radius: 4px;
+        font-size: 12px; font-weight: 510; line-height: 1; white-space: nowrap; letter-spacing: 0;
+        background: var(--surface-2); color: var(--text-2);
+      }
+      .badge.ok { color: var(--ok); background: rgba(76, 183, 130, 0.1); }
+      .badge.warn { color: var(--warn); background: rgba(242, 201, 76, 0.1); }
+      .badge.err { color: var(--err); background: rgba(235, 87, 87, 0.1); }
+      .chip-ex {
+        display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 4px;
+        background: var(--surface-2); color: var(--text-2); font-size: 12px; font-weight: 510; line-height: 1;
+        white-space: nowrap; letter-spacing: 0; vertical-align: middle;
+      }
+      .icon-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 10px;
+        border-radius: var(--r-btn); color: var(--text-2); font-size: 12px; font-weight: 510;
+        transition: background-color 150ms var(--ease), color 150ms var(--ease);
+      }
+      .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+      .icon-btn svg { width: 12px; height: 12px; }
+      .icon-btn .i-play { display: none; }
+      .icon-btn[data-paused="true"] .i-play { display: block; }
+      .icon-btn[data-paused="true"] .i-pause { display: none; }
+      main:focus, h2[tabindex="-1"]:focus { outline: none; }
+      .hd .skip-link:focus { top: 14px; left: 50%; transform: translateX(-50%); background: var(--surface-2); color: var(--text); outline: 2px solid var(--accent); }
+
+      /* ── 헤더 ── */
+      .hd {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 90; height: var(--hd-h);
+        border-bottom: 1px solid transparent;
+        transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+      }
+      .hd.is-scrolled, .hd.menu-open {
+        background: rgba(8, 9, 10, 0.72); border-bottom-color: var(--line);
+        -webkit-backdrop-filter: saturate(150%) blur(14px); backdrop-filter: saturate(150%) blur(14px);
+      }
+      .hd.menu-open { background: var(--bg); }
+      .hd-in { height: 100%; display: flex; align-items: center; gap: 28px; }
+      .logo { display: inline-flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); border-radius: 4px; flex: none; }
+      .logo svg { width: 20px; height: 20px; }
+      body:has(> .fab-back) .hd .logo { margin-left: max(0px, calc(var(--fab-r) - max(var(--pad-x), 50vw - 600px))); }
+      .hd-nav { display: flex; gap: 2px; }
+      .hd-nav a { padding: 6px 10px; border-radius: 6px; font-size: 14px; font-weight: 510; color: var(--text-2); transition: color 150ms var(--ease); }
+      .hd-nav a:hover { color: var(--text); }
+      .hd-act { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+      .hd-k { display: inline-flex; align-items: center; height: 32px; padding: 0 6px; border-radius: 6px; }
+      .hd-k:hover .kbd { color: var(--text); background: var(--surface-3); }
+      .hd-login { padding: 6px 10px; border-radius: 6px; font-size: 14px; font-weight: 510; color: var(--text-2); transition: color 150ms var(--ease); }
+      .hd-login:hover { color: var(--text); }
+      .hd-menu { display: none; width: 36px; height: 36px; border-radius: 6px; align-items: center; justify-content: center; color: var(--text); }
+      .hd-menu svg { width: 18px; height: 18px; }
+      .hd-menu .i-x { display: none; }
+      .hd-menu[aria-expanded="true"] .i-x { display: block; }
+      .hd-menu[aria-expanded="true"] .i-bars { display: none; }
+      .mnav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg); padding: 8px var(--pad-x) 20px; }
+      .mnav a { display: block; padding: 12px 0; font-size: 16px; font-weight: 510; color: var(--text); }
+      .mnav a.dim { color: var(--text-2); }
+      @media (max-width: 860px) {
+        .hd-nav, .hd-k, .hd-login { display: none; }
+        .hd-menu { display: inline-flex; }
+      }
+      @media (min-width: 861px) { .mnav { display: none !important; } }
+
+      /* ── 히어로 ── */
+      .hero { position: relative; padding-top: calc(var(--hd-h) + 88px); }
+      .hero-sub { margin-top: 24px; max-width: 760px; font-size: 20px; line-height: 1.5; letter-spacing: -0.012em; color: var(--text-2); }
+      .hero-cta { margin-top: 40px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+      .cta-2 { display: inline-flex; align-items: center; gap: 10px; }
+      @media (max-width: 767px) {
+        .hero { padding-top: calc(var(--hd-h) + 48px); }
+        .hero-sub { margin-top: 18px; font-size: 17px; line-height: 1.55; }
+        .hero-cta { margin-top: 28px; gap: 20px; }
+      }
+      /* ── 히어로 제품 화면 ── */
+      .shot { position: relative; margin: 72px 0 0; height: 640px; overflow: hidden; isolation: isolate; }
+      .shot::before {
+        content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+        background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 20%), rgba(255, 255, 255, 0.055), transparent 70%);
+        transition: opacity 200ms var(--ease);
+      }
+      .shot.lit::before { opacity: 1; }
+      .shot::after {
+        content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 54%; z-index: 3; pointer-events: none;
+        background: linear-gradient(180deg, rgba(8, 9, 10, 0) 0%, rgba(8, 9, 10, 0.72) 48%, var(--bg) 94%);
+      }
+      .app {
+        position: relative; z-index: 1; height: 780px; display: grid; grid-template-rows: 44px minmax(0, 1fr);
+        background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden;
+        font-size: 13px; line-height: 1.35; letter-spacing: -0.004em; color: var(--text); user-select: none;
+      }
+      .app-top { display: flex; align-items: center; gap: 18px; padding: 0 14px 0 16px; border-bottom: 1px solid var(--line); min-width: 0; }
+      .a-ws { display: flex; align-items: center; gap: 8px; font-weight: 510; flex: none; }
+      .a-ws-m { width: 20px; height: 20px; border-radius: 5px; background: var(--surface-2); display: grid; place-items: center; }
+      .a-ws-m svg { width: 12px; height: 12px; }
+      .a-dim { color: var(--text-2); }
+      .a-crumb { display: flex; align-items: center; gap: 8px; color: var(--text-2); white-space: nowrap; }
+      .a-crumb .cur { color: var(--text); }
+      .a-search {
+        margin-left: auto; flex: 0 1 300px; height: 28px; border-radius: 6px; background: var(--bg);
+        display: flex; align-items: center; gap: 8px; padding: 0 4px 0 10px; color: var(--text-2); white-space: nowrap; overflow: hidden;
+      }
+      .a-search svg { width: 13px; height: 13px; flex: none; }
+      .a-search .kbd { margin-left: auto; height: 20px; font-size: 11px; }
+      .a-right { margin-left: auto; display: flex; align-items: center; gap: 14px; color: var(--text-2); white-space: nowrap; }
+      .a-env { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; }
+      .a-av { width: 24px; height: 24px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; font-size: 10.5px; font-weight: 510; color: var(--text); }
+      .app-body { display: grid; grid-template-columns: 188px minmax(0, 1fr) 372px; min-height: 0; }
+      .a-side { padding: 12px 10px; }
+      .a-nav li, .a-fav li { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 10px; border-radius: 6px; color: var(--text-2); white-space: nowrap; }
+      .a-nav li.is-on { background: var(--surface-2); color: var(--text); }
+      .a-nav svg { width: 15px; height: 15px; flex: none; }
+      .a-cnt { margin-left: auto; font-size: 11.5px; color: var(--text-2); }
+      .a-side-h { margin: 20px 10px 6px; font-size: 11.5px; font-weight: 510; color: var(--text-2); }
+      .a-sq { width: 16px; height: 16px; border-radius: 4px; background: var(--surface-2); display: grid; place-items: center; font-size: 9.5px; color: var(--text); flex: none; }
+      .a-list { padding: 14px 16px; min-width: 0; }
+      .a-lh { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; white-space: nowrap; }
+      .a-title { font-size: 14px; font-weight: 600; }
+      .a-tabs { display: flex; gap: 2px; min-width: 0; }
+      .a-tabs span { height: 24px; padding: 0 9px; border-radius: 5px; display: inline-flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 12px; }
+      .a-tabs span.is-on { background: var(--surface-2); color: var(--text); }
+      .a-tabs .n { font-family: var(--font-mono); font-size: 11px; color: var(--text-2); }
+      .a-filter { margin-left: auto; height: 24px; padding: 0 9px; border-radius: 5px; background: var(--surface-2); display: inline-flex; align-items: center; color: var(--text-2); font-size: 12px; }
+      .a-row {
+        position: relative; display: grid; grid-template-columns: 8px 92px minmax(0, 1fr) 84px 56px 58px 46px;
+        column-gap: 12px; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; white-space: nowrap;
+      }
+      .a-row > span { overflow: hidden; text-overflow: ellipsis; }
+      .a-row-h { height: 30px; margin-bottom: 4px; border-radius: 0; border-bottom: 1px solid var(--line); color: var(--text-2); font-size: 11.5px; }
+      .a-row.is-sel { background: var(--surface-2); }
+      .a-row.is-sel::before { content: ""; position: absolute; left: 0; top: 9px; bottom: 9px; width: 2px; border-radius: 2px; background: var(--accent); }
+      .a-row .id { font-family: var(--font-mono); font-size: 12px; color: var(--text-2); letter-spacing: 0; }
+      .a-row.is-sel .id { color: var(--text); }
+      .a-row .st { color: var(--text-2); }
+      .a-row .r { text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--text-2); letter-spacing: 0; }
+      .a-row-h .r { font-family: var(--font-sans); font-size: 11.5px; }
+      .a-trace { margin: 8px 8px 8px 0; padding: 16px; border-radius: var(--r-card); background: var(--surface-2); min-width: 0; }
+      .tr-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .tr-id { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0; }
+      .tr-agent { margin-top: 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.012em; }
+      .tr-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; }
+      .tr-meta dt { font-size: 11px; color: var(--text-2); }
+      .tr-meta dd { margin-top: 2px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; }
+      .tr-axis { display: grid; grid-template-columns: 100px minmax(0, 1fr) 54px; gap: 12px; margin: 18px 0 4px; font-size: 10.5px; color: var(--text-2); }
+      .tr-axis .ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); letter-spacing: 0; }
+      .tr-rows li { display: grid; grid-template-columns: 100px minmax(0, 1fr) 54px; gap: 12px; align-items: center; height: 38px; padding: 0 6px; margin: 0 -6px; border-radius: 6px; }
+      .tr-rows li.is-sel { background: rgba(255, 255, 255, 0.04); }
+      .tr-n { display: flex; flex-direction: column; gap: 1px; font-size: 12.5px; white-space: nowrap; min-width: 0; }
+      .tr-n .mono { font-size: 10.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; }
+      .tr-tk { position: relative; height: 8px; border-radius: 2px; background: rgba(255, 255, 255, 0.04); }
+      .tr-tk i { position: absolute; top: 0; bottom: 0; border-radius: 2px; background: rgba(247, 248, 248, 0.34); }
+      .tr-tk i.wait { right: 0; background: repeating-linear-gradient(135deg, rgba(247, 248, 248, 0.3) 0 3px, rgba(247, 248, 248, 0.08) 3px 6px); }
+      .tr-ms { font-family: var(--font-mono); font-size: 11.5px; text-align: right; color: var(--text-2); letter-spacing: 0; white-space: nowrap; }
+      .tr-det { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+      .tr-det-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 510; }
+      .tr-pol { margin-top: 10px; padding: 9px 11px; border-radius: 6px; background: var(--bg); font-size: 12.5px; }
+      .tr-pol .pol-n { color: var(--text-2); margin-right: 8px; }
+      .tr-kv { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 7px 10px; margin-top: 12px; font-size: 12px; }
+      .tr-kv dt { color: var(--text-2); }
+      .tr-btns { display: flex; gap: 8px; margin-top: 14px; }
+      .mbtn { flex: 1; height: 30px; border-radius: 6px; display: grid; place-items: center; font-size: 12.5px; font-weight: 510; background: var(--surface-3); color: var(--text); }
+      .mbtn.light { background: var(--btn-light); color: var(--bg); }
+      @media (max-width: 1239px) {
+        .app-body { grid-template-columns: minmax(0, 1fr) 360px; }
+        .a-side { display: none; }
+      }
+      @media (max-width: 1023px) {
+        .app-body { grid-template-columns: minmax(0, 1fr) 320px; }
+        .a-row { grid-template-columns: 8px 88px minmax(0, 1fr) 56px; }
+        .a-row > :nth-child(4), .a-row > :nth-child(6), .a-row > :nth-child(7) { display: none; }
+        .a-crumb, .a-tabs span:nth-child(n+3), .a-env.env-name { display: none; }
+      }
+      @media (max-width: 767px) {
+        .shot { margin-top: 44px; height: 540px; }
+        .shot::after { height: 34%; }
+        .app { height: auto; display: block; background: var(--surface-2); }
+        .app-top, .a-list { display: none; }
+        .app-body { display: block; }
+        .a-trace { margin: 0; padding: 16px 14px; background: transparent; }
+        .tr-axis, .tr-rows li { grid-template-columns: 92px minmax(0, 1fr) 52px; gap: 10px; }
+      }
+      /* ── 고객 로고 바 ── */
+      .logos { padding: 8px 0 0; }
+      .logo-lead { text-align: center; font-size: 15px; color: var(--text-2); }
+      .logo-row { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 24px; align-items: center; margin-top: 36px; opacity: 0.4; filter: grayscale(1); }
+      .logo-row li { display: flex; justify-content: center; }
+      .logo-row svg { width: 100%; max-width: 120px; height: auto; }
+      .logo-cap { margin-top: 28px; text-align: center; }
+      @media (max-width: 1023px) { .logo-row { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 28px; } }
+      @media (max-width: 560px) {
+        .logo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px; }
+        .logo-row li:nth-child(n+7) { display: none; }
+      }
+
+      /* ── 기능 섹션 공통 ── */
+      .feat { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+      .feat-copy { grid-column: 1 / span 5; padding-top: 8px; }
+      .feat-vis { grid-column: 7 / span 6; min-width: 0; }
+      .feat-copy .t-h2 + .t-body { margin-top: 20px; }
+      .pts { margin-top: 36px; display: grid; gap: 20px; }
+      .pts li { font-size: 15px; line-height: 1.6; color: var(--text-2); }
+      .pts strong { display: block; margin-bottom: 2px; color: var(--text); font-size: 16px; }
+      .card { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--r-card); min-width: 0; }
+      .demo-cap { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      @media (max-width: 1023px) {
+        .feat-copy, .feat-vis { grid-column: 1 / -1; }
+        .feat-vis { margin-top: 48px; }
+      }
+
+      /* ── 1.0 관찰: 실시간 트레이스 ── */
+      .lt { padding: 20px; }
+      .lt-h { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .lt-run { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0; }
+      .lt-agent { font-size: 14px; font-weight: 510; }
+      .lt-h .icon-btn { margin-left: auto; }
+      .lt-axis, .lt-rows li { display: grid; grid-template-columns: 136px minmax(0, 1fr) 76px; gap: 14px; }
+      .lt-axis { margin: 22px 0 4px; font-size: 11px; color: var(--text-2); }
+      .lt-axis .ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); letter-spacing: 0; }
+      .lt-rows li { align-items: center; height: 48px; }
+      .lt-n { display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--text-2); white-space: nowrap; min-width: 0; transition: color 150ms var(--ease); }
+      .lt-n .mono { font-size: 11.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; }
+      .is-act .lt-n, .is-done .lt-n { color: var(--text); }
+      .lt-tk { position: relative; height: 10px; border-radius: 3px; background: rgba(255, 255, 255, 0.04); }
+      .lt-tk i { position: absolute; top: 0; bottom: 0; left: 0; width: 0; border-radius: 3px; background: rgba(247, 248, 248, 0.34); clip-path: inset(0 100% 0 0); }
+      .is-done .lt-tk i { clip-path: none; }
+      .is-act .lt-tk i { background: var(--accent); }
+      .lt-tk i.wait { background: repeating-linear-gradient(135deg, rgba(247, 248, 248, 0.32) 0 3px, rgba(247, 248, 248, 0.08) 3px 6px); }
+      .lt-ms { font-family: var(--font-mono); font-size: 12px; text-align: right; color: var(--text-2); letter-spacing: 0; white-space: nowrap; }
+      .is-done .lt-ms { color: var(--text); }
+      .lt-sum { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); min-height: 37px; }
+      .lt-sum .v { font-family: var(--font-mono); color: var(--text); letter-spacing: 0; }
+      .lt-log { margin-top: 16px; padding: 12px 14px; border-radius: 6px; background: var(--bg); font-family: var(--font-mono); font-size: 11.5px; line-height: 20px; height: 124px; overflow: hidden; color: var(--text-2); letter-spacing: 0; }
+      .lt-log p { white-space: pre; overflow: hidden; text-overflow: ellipsis; height: 20px; }
+      .lt-log p:last-child { color: var(--text); }
+      .lt-log .lm { font-family: var(--font-sans); font-size: 12px; letter-spacing: -0.004em; }
+      @media (max-width: 480px) { .lt-log .lt-time { display: none; } }
+      @media (max-width: 767px) {
+        .lt { padding: 16px; }
+        .lt-axis, .lt-rows li { grid-template-columns: 92px minmax(0, 1fr) 62px; gap: 10px; }
+        .lt-n { font-size: 13px; }
+      }
+
+      /* ── 2.0 통제: 정책 편집기 ── */
+      .ctl-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+      .ctl-head .copy { grid-column: 1 / span 6; }
+      .ctl-head .pts { grid-column: 8 / span 5; margin-top: 0; }
+      .pe-scn { display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; margin-top: 56px; }
+      .pe-scn .lbl { font-size: 13px; color: var(--text-2); }
+      .scn-list { display: flex; gap: 6px; flex-wrap: wrap; }
+      .scn-btn { height: 32px; padding: 0 12px; border-radius: 6px; font-size: 13px; font-weight: 510; color: var(--text-2); transition: color 150ms var(--ease), background-color 150ms var(--ease); }
+      .scn-btn:hover { color: var(--text); background: var(--surface-2); }
+      .scn-btn[aria-pressed="true"] { color: var(--text); background: var(--surface-2); }
+      .pe-scn .icon-btn { margin-left: auto; }
+      .pe { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gutter); }
+      .pe-bar { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 12px 0 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+      .pe-file { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0; overflow: hidden; text-overflow: ellipsis; }
+      .pe-tabs { margin-left: auto; display: flex; gap: 2px; }
+      .pe-tabs span { height: 26px; padding: 0 10px; border-radius: 5px; display: inline-flex; align-items: center; font-size: 12px; color: var(--text-2); }
+      .pe-tabs span.is-on { background: var(--surface-2); color: var(--text); }
+      .pe-ed { display: flex; flex-direction: column; }
+      .pe-lines { counter-reset: ln; padding: 12px 0; flex: 1; }
+      .pe-line { position: relative; display: flex; align-items: center; min-height: 46px; padding: 6px 16px 6px 0; font-size: 14px; transition: background-color 180ms var(--ease); }
+      .pe-line::before { counter-increment: ln; content: counter(ln); flex: none; width: 48px; padding-right: 18px; text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+      .pe-a { flex: 0 0 172px; }
+      .pe-arr { flex: none; width: 30px; color: var(--text-2); }
+      .pe-r { flex: 1; min-width: 0; }
+      .pe-line.is-edit { background: var(--surface-2); }
+      .pe-line.is-edit::after { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 2px; border-radius: 2px; background: var(--accent); }
+      .pe-line.is-void .pe-a, .pe-line.is-void .pe-arr, .pe-line.is-void .pe-r { visibility: hidden; }
+      .caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 1px; vertical-align: -0.16em; background: var(--text); }
+      .is-live .caret { animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .pe-foot { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); min-height: 52px; }
+      .pe-foot .mbtn { flex: none; margin-left: auto; padding: 0 12px; }
+      .pe-im { display: flex; flex-direction: column; }
+      .pe-im-h { padding: 16px 16px 14px; border-bottom: 1px solid var(--line); }
+      .pe-im-t { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--text-2); }
+      .pe-cnt { font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+      .pe-cnt .from { font-size: 16px; font-weight: 400; color: var(--text-2); }
+      .pe-sum { margin-top: 4px; font-size: 13px; color: var(--text-2); min-height: 21px; }
+      .pi-rows { padding: 8px; }
+      .pi-row { display: grid; grid-template-columns: 6px minmax(0, 1fr) auto; align-items: center; column-gap: 12px; row-gap: 2px; min-height: 54px; padding: 8px 10px; border-radius: 6px; transition: opacity 180ms var(--ease), transform 180ms var(--ease), background-color 180ms var(--ease); }
+      .pi-row .dot { grid-row: 1 / span 2; color: var(--text-2); }
+      .pi-row .dot.c-warn { color: var(--warn); }
+      .pi-row .dot.c-err { color: var(--err); }
+      .pi-row .nm { font-size: 14px; font-weight: 510; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pi-row .mt { grid-column: 2; font-size: 12.5px; color: var(--text-2); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pi-row .badge { grid-column: 3; grid-row: 1 / span 2; }
+      .pi-row .badge:empty { display: none; }
+      .pi-row.is-new { background: rgba(255, 255, 255, 0.03); }
+      .pi-row.is-enter { opacity: 0; transform: translateY(8px); }
+      .pi-row.is-void { visibility: hidden; }
+      .pe-im .pe-foot { margin-top: auto; }
+      @media (max-width: 1023px) {
+        .ctl-head .copy, .ctl-head .pts { grid-column: 1 / -1; }
+        .ctl-head .pts { margin-top: 36px; }
+        .pe { grid-template-columns: minmax(0, 1fr); }
+      }
+      @media (max-width: 767px) {
+        .pe-scn { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+        .scn-list { grid-column: 1 / -1; grid-row: 2; }
+        .pe-line { flex-wrap: wrap; align-items: baseline; padding-right: 12px; }
+        .pe-line::before { width: 36px; padding-right: 12px; }
+        .pe-a { flex: 0 1 auto; margin-right: 6px; }
+        .pe-arr { width: 20px; }
+        .pe-r { flex: 1 1 100%; padding-left: 36px; }
+        .pe-tabs span:first-child { display: none; }
+      }
+      /* ── 3.0 개선: 평가 비교 표 ── */
+      .imp .feat-copy { grid-column: 1 / span 4; }
+      .imp .feat-vis { grid-column: 6 / span 7; }
+      .ev-h { display: flex; align-items: center; justify-content: space-between; gap: 14px 16px; flex-wrap: wrap; padding: 16px 16px 16px 20px; border-bottom: 1px solid var(--line); }
+      .ev-t { font-size: 14px; font-weight: 510; }
+      .ev-s { margin-top: 2px; font-size: 12.5px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+      .ev-s .mono { font-size: 12px; }
+      .seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 7px; background: var(--bg); }
+      .seg button { height: 28px; padding: 0 11px; border-radius: 5px; font-size: 12.5px; font-weight: 510; color: var(--text-2); white-space: nowrap; transition: color 150ms var(--ease), background-color 150ms var(--ease); }
+      .seg button:hover { color: var(--text); }
+      .seg button[aria-checked="true"] { background: var(--surface-2); color: var(--text); }
+      .ev-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-variant-numeric: tabular-nums; }
+      .ev-table th, .ev-table td { padding: 18px 20px; text-align: left; vertical-align: middle; font-weight: 400; }
+      .ev-table col.c1 { width: 28%; } .ev-table col.c2, .ev-table col.c3 { width: 26%; } .ev-table col.c4 { width: 20%; }
+      .ev-table thead th { padding-top: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 400; color: var(--text-2); }
+      .ev-table thead .ver { display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 13px; color: var(--text); letter-spacing: 0; }
+      .ev-table tbody th { font-size: 14px; font-weight: 510; color: var(--text); }
+      .ev-table tbody th span { display: block; margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--text-2); }
+      .ev-table tbody tr + tr > * { border-top: 1px solid var(--line); }
+      .ev-table tbody { transition: opacity 150ms var(--ease); }
+      .ev-table tbody.swap { opacity: 0.25; }
+      .ev-v { display: block; font-family: var(--font-mono); font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; color: var(--text); }
+      .old .ev-v { color: var(--text-2); }
+      .ev-bar { position: relative; display: block; height: 4px; max-width: 150px; margin-top: 10px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden; }
+      .ev-bar i { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 2px; background: rgba(247, 248, 248, 0.26); transition: width 200ms var(--ease); }
+      .new .ev-bar i { background: rgba(247, 248, 248, 0.62); }
+      .ev-foot { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); }
+      .ev-foot .v { color: var(--text); }
+      @media (max-width: 1023px) { .imp .feat-copy, .imp .feat-vis { grid-column: 1 / -1; } }
+      @media (max-width: 767px) {
+        .ev-h { padding: 14px; }
+        .seg { width: 100%; }
+        .seg button { flex: 1; padding: 0 4px; font-size: 12px; }
+        .ev-table th, .ev-table td { padding: 14px 8px; }
+        .ev-table th:first-child, .ev-table td:first-child { padding-left: 14px; }
+        .ev-table col.c1 { width: 27%; } .ev-table col.c2, .ev-table col.c3 { width: 24%; } .ev-table col.c4 { width: 25%; }
+        .ev-table thead th { font-size: 11px; }
+        .ev-table tbody th { font-size: 13px; }
+        .ev-v { font-size: 14px; }
+        .ev-table .badge { padding: 0 5px; font-size: 11px; }
+        .ev-foot { padding: 14px; }
+      }
+
+      /* ── ⌘K 속도 ── */
+      .kd-in { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-bottom: 1px solid var(--line); font-size: 16px; }
+      .kd-in > svg { width: 16px; height: 16px; color: var(--text-2); flex: none; }
+      .kd-q { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+      .kd-q .ph { color: var(--text-2); }
+      .kd-list { padding: 8px; height: 284px; overflow: hidden; }
+      .kd-g { height: 28px; padding: 8px 10px 0; font-size: 11.5px; font-weight: 510; color: var(--text-2); }
+      .kd-it { position: relative; display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 10px; border-radius: 6px; font-size: 14px; white-space: nowrap; transition: background-color 150ms var(--ease); }
+      .kd-it > svg, .cmdk-o > svg { width: 15px; height: 15px; flex: none; color: var(--text-2); }
+      .kd-it .meta, .cmdk-o .hint { margin-left: auto; padding-left: 12px; font-size: 12.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .kd-it .meta.mono, .cmdk-o .hint.mono { font-size: 11.5px; }
+      .kd-it.is-act, .cmdk-o[aria-selected="true"] { background: var(--surface-2); }
+      .kd-it.is-act::before, .cmdk-o[aria-selected="true"]::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; border-radius: 2px; background: var(--accent); }
+      .kd-res { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); white-space: nowrap; overflow: hidden; }
+      .kd-res .dot { color: var(--text-2); }
+      .kd-res.is-done { color: var(--text); }
+      .kd-res.is-done .dot { color: var(--ok); }
+      .keys { display: flex; flex-wrap: wrap; gap: 14px 22px; margin-top: 36px; }
+      .keys li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-2); }
+      .kbd.is-hit { color: var(--bg); background: var(--btn-light); }
+      .try { margin-top: 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+      /* ── 신뢰 지표 ── */
+      .mx-grid { margin-top: 64px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+      .mx { padding-top: 28px; border-top: 1px solid var(--line); }
+      .mx-k { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; font-weight: 510; }
+      .mx-v { margin-top: 22px; font-size: 64px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .mx-v .u { margin-left: 4px; font-size: 24px; font-weight: 510; letter-spacing: -0.01em; color: var(--text-2); }
+      .mx-d { margin-top: 18px; max-width: 320px; font-size: 15px; color: var(--text-2); }
+      .mx-src { margin-top: 10px; }
+      .mx-cap { margin-top: 48px; }
+      @media (max-width: 860px) { .mx-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; } .mx-v { font-size: 56px; } }
+
+      /* ── 고객 인용 + 체인지로그 ── */
+      .vo-q { max-width: 1000px; }
+      .vo-q blockquote p { font-size: 32px; line-height: 1.42; font-weight: 510; letter-spacing: -0.022em; }
+      .vo-q figcaption { margin-top: 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--text-2); }
+      .vo-av { width: 36px; height: 36px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; flex: none; }
+      .vo-av svg { width: 16px; height: 16px; color: var(--text-2); }
+      .vo-who { color: var(--text); font-weight: 510; }
+      .cl { margin-top: 128px; }
+      .cl-h { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+      .cl-h .tlink { font-size: 14px; color: var(--text-2); }
+      .cl-h .tlink:hover { color: var(--text); }
+      .cl-list { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+      .cl-item { display: flex; flex-direction: column; gap: 12px; padding: 24px; }
+      .cl-meta { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--text-2); letter-spacing: 0; }
+      .cl-meta .v { color: var(--text); }
+      .cl-item p { font-size: 15px; color: var(--text-2); }
+      @media (max-width: 1023px) { .cl-list { grid-template-columns: minmax(0, 1fr); } }
+      @media (max-width: 767px) { .vo-q blockquote p { font-size: 22px; line-height: 1.5; } .cl { margin-top: 88px; } }
+
+      /* ── 최종 CTA ── */
+      .fin-cta { margin-top: 40px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .fin-note { margin-top: 20px; }
+
+      /* ── 푸터 ── */
+      .ft { padding: 72px 0 40px; border-top: 1px solid var(--line); }
+      .ft-top { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 48px; }
+      .ft-brand { grid-column: 1 / span 3; }
+      .ft-brand p { margin-top: 14px; font-size: 14px; color: var(--text-2); }
+      .ft-mail { display: inline-block; margin-top: 8px; font-family: var(--font-mono); font-size: 13px; color: var(--text-2); letter-spacing: 0; transition: color 150ms var(--ease); }
+      .ft-mail:hover { color: var(--text); }
+      .ft-cols { grid-column: 5 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gutter); }
+      .ft-h { font-size: 13px; font-weight: 510; }
+      .ft-cols ul { margin-top: 14px; display: grid; gap: 10px; }
+      .ft-cols a { font-size: 13px; color: var(--text-2); border-radius: 3px; transition: color 150ms var(--ease); }
+      .ft-cols a:hover { color: var(--text); }
+      .ft-bot { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); display: grid; gap: 6px; font-size: 12px; line-height: 1.6; color: var(--text-2); }
+      .ft-note { margin-top: 12px; }
+      @media (max-width: 1023px) { .ft-brand, .ft-cols { grid-column: 1 / -1; } }
+      @media (max-width: 640px) { .ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; } }
+
+      /* ── 명령 메뉴(⌘K) 대화상자 ── */
+      dialog.cmdk {
+        width: min(640px, calc(100vw - 32px)); max-width: none; max-height: min(540px, calc(100dvh - 96px));
+        margin: 12vh auto auto; padding: 0; border: 1px solid var(--line); border-radius: 10px;
+        background: var(--surface-2); color: var(--text); overflow: hidden;
+        opacity: 0; transform: translateY(8px); transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+      }
+      dialog.cmdk[open] { display: flex; flex-direction: column; }
+      dialog.cmdk.is-open { opacity: 1; transform: none; }
+      dialog.cmdk::backdrop { background: rgba(8, 9, 10, 0.64); }
+      .cmdk-s { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 12px 0 16px; border-bottom: 1px solid var(--line); flex: none; }
+      .cmdk-s > svg { width: 16px; height: 16px; color: var(--text-2); flex: none; }
+      .cmdk-s input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 16px; letter-spacing: -0.01em; }
+      .cmdk-s input:focus, .cmdk-s input:focus-visible { outline: none; }
+      .cmdk-s input::placeholder { color: var(--text-3); opacity: 1; }
+      .cmdk-x { flex: none; border-radius: 5px; }
+      .cmdk-x:hover .kbd { color: var(--text); }
+      .cmdk-list { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px; }
+      .cmdk-g { padding: 10px 10px 6px; font-size: 11.5px; font-weight: 510; color: var(--text-2); }
+      .cmdk-o { position: relative; display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 10px; border-radius: 6px; font-size: 14px; cursor: pointer; }
+      .cmdk-o .hint .kbd { height: 20px; min-width: 20px; font-size: 11px; }
+      .cmdk-o[aria-selected="true"] { background: var(--surface-3); }
+      .cmdk-empty { padding: 32px 10px; text-align: center; font-size: 14px; color: var(--text-2); }
+      .cmdk-f { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; min-height: 42px; padding: 8px 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-2); flex: none; }
+      .cmdk-f span { display: inline-flex; align-items: center; gap: 6px; }
+      .cmdk-f .kbd { height: 20px; min-width: 20px; font-size: 11px; }
+      @media (hover: none) and (pointer: coarse), (max-width: 767px) { .cmdk-f { display: none; } }
+
+      /* ── 알림 메시지 ── */
+      .toast {
+        position: fixed; left: 50%; bottom: 24px; z-index: 120; max-width: calc(100vw - 32px); width: max-content;
+        padding: 12px 16px; border-radius: var(--r-card); background: var(--surface-2); border: 1px solid var(--line);
+        color: var(--text); font-size: 14px; font-weight: 510; text-align: center; pointer-events: none;
+        opacity: 0; transform: translate(-50%, 8px); transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+      }
+      .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+      /* ── 동작 줄이기: 모든 데모는 최종 상태로 ── */
+      @media (hover: none), (pointer: coarse) { .shot::before { display: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        .is-live .dot.c-run, .is-live .caret { animation: none !important; }
+        .shot::before { display: none; }
+        .tlink:hover .arr { transform: none; }
+        .btn:active { transform: none; }
+        dialog.cmdk, .toast { transition: none; }
+        .icon-btn[data-paused] { display: none; }
+      }
+    </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","@id":"https://noahhomepage.co.kr/templates/ai-agent#webpage","url":"https://noahhomepage.co.kr/templates/ai-agent","name":"Kairos — 수백 개의 AI 에이전트, 하나의 관제 화면","description":"NOAH 노아홈페이지의 AI 에이전트 운영 SaaS 홈페이지 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.","inLanguage":"ko-KR","isPartOf":{"@id":"https://noahhomepage.co.kr/#website"},"publisher":{"@id":"https://noahhomepage.co.kr/#org"}}
+    </script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-mark" viewBox="0 0 32 32"><path d="M23.8 11.5A9 9 0 1 1 16 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21.4" cy="7.9" r="2.2" fill="currentColor"/></symbol>
+      <symbol id="i-run" viewBox="0 0 16 16"><path d="M2.5 4h11M2.5 8h11M2.5 12h7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-wait" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3.2l2.1 1.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-agent" viewBox="0 0 16 16"><rect x="2.8" y="4.2" width="10.4" height="8.6" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.8v2.4M6 8.4h.01M10 8.4h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3-2.1 5.3-5 6.6-2.9-1.3-5-3.6-5-6.6v-4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 16 16"><path d="M3 13V8.5M8 13V3M13 13V6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-db" viewBox="0 0 16 16"><ellipse cx="8" cy="4" rx="5" ry="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-coin" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 6.2 6.8 10.2 8 7l1.2 3.2 1.2-4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m10.6 10.6 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 12 12"><path d="M3.6 2.2v7.6M8.4 2.2v7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-play" viewBox="0 0 12 12"><path d="M3.2 1.9v8.2L10 6Z" fill="currentColor"/></symbol>
+      <symbol id="i-go" viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.6v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 16 16"><path d="M4 1.8h5.4L12.4 5v9.2H4ZM9.4 1.8V5h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+      <symbol id="i-set" viewBox="0 0 16 16"><path d="M2.5 5h11M2.5 11h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="6" cy="5" r="1.9" fill="#16171A" stroke="currentColor" stroke-width="1.4"/><circle cx="10.4" cy="11" r="1.9" fill="#16171A" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-bars" viewBox="0 0 18 18"><path d="M3 6.5h12M3 11.5h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-x" viewBox="0 0 18 18"><path d="m4.5 4.5 9 9m0-9-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-user" viewBox="0 0 16 16"><circle cx="8" cy="5.6" r="2.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2.8 14c.6-2.6 2.7-4 5.2-4s4.6 1.4 5.2 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    </svg>
+
+    <!-- ═══ 1. 헤더 ═══ -->
+    <header class="hd" id="hd">
+      <a href="#main" class="skip-link">본문 바로가기</a>
+      <div class="wrap hd-in">
+        <a class="logo" href="#top" aria-label="Kairos 처음으로"><svg aria-hidden="true"><use href="#i-mark" /></svg><span>Kairos</span></a>
+        <nav class="hd-nav" aria-label="주 메뉴">
+          <a href="#observe">제품</a>
+          <a href="#voices">고객 사례</a>
+          <a href="#changelog">체인지로그</a>
+          <a href="#" data-demo="pricing">요금제</a>
+        </nav>
+        <div class="hd-act">
+          <button class="hd-k" type="button" data-cmdk-open aria-keyshortcuts="Meta+K Control+K"><span class="kbd"><span data-mod>⌘</span>K</span><span class="sr-only"> 명령 메뉴 열기</span></button>
+          <a class="hd-login" href="#" data-demo="login">로그인</a>
+          <a class="btn btn-light btn-sm" href="#" data-demo="start">시작하기</a>
+          <button class="hd-menu" id="hd-menu" type="button" aria-expanded="false" aria-controls="mnav" aria-label="메뉴 열기"><svg class="i-bars" aria-hidden="true"><use href="#i-bars" /></svg><svg class="i-x" aria-hidden="true"><use href="#i-x" /></svg></button>
+        </div>
+      </div>
+      <nav class="mnav" id="mnav" aria-label="모바일 메뉴" hidden>
+        <a href="#observe">제품</a>
+        <a href="#voices">고객 사례</a>
+        <a href="#changelog">체인지로그</a>
+        <a href="#" data-demo="pricing">요금제</a>
+        <a class="dim" href="#" data-demo="login">로그인</a>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- ═══ 2. 히어로 ═══ -->
+      <section class="hero" id="top" aria-labelledby="hero-t">
+        <div class="wrap">
+          <h1 class="t-hero" id="hero-t">수백 개의 에이전트,<br />하나의 관제 화면</h1>
+          <p class="hero-sub">Kairos는 사내 AI 에이전트의 배포·관찰·통제를 한 화면에서 처리하는 운영 플랫폼입니다.</p>
+          <div class="hero-cta">
+            <a class="btn btn-light btn-lg" href="#" data-demo="start">무료로 시작하기</a>
+            <span class="cta-2"><a class="tlink" href="#observe" data-goto="#observe" data-key-target aria-keyshortcuts="D">데모 보기 <span class="arr" aria-hidden="true">→</span></a><kbd class="kbd kbd-hint" data-key-hint aria-hidden="true">D</kbd></span>
+          </div>
+
+          <figure class="shot" id="shot" role="img" aria-label="Kairos 제품 화면 예시. 왼쪽은 에이전트 실행 목록, 오른쪽은 정산 리포트 에이전트 실행의 단계별 트레이스로, 외부 메일 발송 승인을 기다리는 중입니다.">
+            <div class="app" aria-hidden="true">
+              <div class="app-top">
+                <div class="a-ws"><span class="a-ws-m"><svg><use href="#i-mark" /></svg></span>운영팀</div>
+                <div class="a-crumb"><span>에이전트 운영</span><span>/</span><span class="cur">실행</span></div>
+                <div class="a-search"><svg><use href="#i-search" /></svg>실행, 에이전트, 정책 검색<span class="kbd"><span data-mod>⌘</span>K</span></div>
+                <div class="a-right"><span class="a-env"><i class="dot c-ok"></i>수집 정상</span><span class="a-env env-name mono">production</span><span class="a-av">KH</span></div>
+              </div>
+              <div class="app-body">
+                <aside class="a-side">
+                  <ul class="a-nav">
+                    <li class="is-on"><svg><use href="#i-run" /></svg>실행<span class="a-cnt mono">2,184</span></li>
+                    <li><svg><use href="#i-wait" /></svg>승인 대기<span class="a-cnt mono">3</span></li>
+                    <li><svg><use href="#i-agent" /></svg>에이전트<span class="a-cnt mono">42</span></li>
+                    <li><svg><use href="#i-shield" /></svg>정책</li>
+                    <li><svg><use href="#i-chart" /></svg>평가</li>
+                    <li><svg><use href="#i-db" /></svg>데이터셋</li>
+                    <li><svg><use href="#i-coin" /></svg>비용</li>
+                  </ul>
+                  <p class="a-side-h">즐겨찾는 에이전트</p>
+                  <ul class="a-fav">
+                    <li><span class="a-sq">정</span>정산 리포트</li>
+                    <li><span class="a-sq">고</span>고객 문의 분류</li>
+                    <li><span class="a-sq">재</span>재고 예측</li>
+                    <li><span class="a-sq">계</span>계약서 검토</li>
+                    <li><span class="a-sq">사</span>사내 검색 도우미</li>
+                  </ul>
+                </aside>
+                <div class="a-list">
+                  <div class="a-lh">
+                    <span class="a-title">실행</span>
+                    <div class="a-tabs"><span class="is-on">전체 <span class="n">2,184</span></span><span>진행 중 <span class="n">12</span></span><span>승인 대기 <span class="n">3</span></span><span>실패 <span class="n">3</span></span></div>
+                    <span class="a-filter">최근 1시간</span>
+                  </div>
+                  <div class="a-row a-row-h"><span></span><span>실행 ID</span><span>에이전트</span><span>단계</span><span class="r">소요</span><span class="r">토큰</span><span class="r">비용</span></div>
+                  <div class="a-row is-sel"><i class="dot c-warn"></i><span class="id">run_8f3a21</span><span>정산 리포트 에이전트</span><span class="st">승인 대기</span><span class="r" id="h-d1">6.8s</span><span class="r">12,480</span><span class="r">₩184</span></div>
+                  <div class="a-row"><i class="dot c-run" id="h-s2"></i><span class="id">run_8f39c0</span><span>고객 문의 분류</span><span class="st" id="h-st2">도구 호출</span><span class="r" id="h-d2">1.8s</span><span class="r" id="h-t2">3,102</span><span class="r" id="h-c2">₩41</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f37d4</span><span>사내 검색 도우미</span><span class="st">응답 완료</span><span class="r">2.41s</span><span class="r">5,870</span><span class="r">₩62</span></div>
+                  <div class="a-row"><i class="dot c-err"></i><span class="id">run_8f36e2</span><span>재고 예측</span><span class="st">시간 초과</span><span class="r">30.0s</span><span class="r">8,944</span><span class="r">₩119</span></div>
+                  <div class="a-row"><i class="dot c-run" id="h-s5"></i><span class="id">run_8f35a9</span><span>회의록 정리</span><span class="st" id="h-st5">검색</span><span class="r" id="h-d5">0.9s</span><span class="r" id="h-t5">1,240</span><span class="r" id="h-c5">₩16</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f3318</span><span>계약서 검토</span><span class="st">응답 완료</span><span class="r">5.81s</span><span class="r">9,214</span><span class="r">₩131</span></div>
+                  <div class="a-row"><i class="dot c-warn"></i><span class="id">run_8f30be</span><span>구매 요청 처리</span><span class="st">승인 대기</span><span class="r">2m 14s</span><span class="r">4,077</span><span class="r">₩58</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f2e47</span><span>고객 문의 분류</span><span class="st">응답 완료</span><span class="r">1.92s</span><span class="r">2,988</span><span class="r">₩38</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f2b03</span><span>채용 서류 요약</span><span class="st">응답 완료</span><span class="r">3.37s</span><span class="r">7,402</span><span class="r">₩97</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f28f1</span><span>정산 리포트 에이전트</span><span class="st">응답 완료</span><span class="r">6.02s</span><span class="r">11,936</span><span class="r">₩171</span></div>
+                  <div class="a-row"><i class="dot c-ok"></i><span class="id">run_8f2690</span><span>사내 검색 도우미</span><span class="st">응답 완료</span><span class="r">2.08s</span><span class="r">4,415</span><span class="r">₩51</span></div>
+                </div>
+                <div class="a-trace">
+                  <div class="tr-top"><span class="tr-id">run_8f3a21</span><span class="badge warn"><i class="dot"></i>승인 대기</span></div>
+                  <p class="tr-agent">정산 리포트 에이전트 <span class="a-dim">· v3.2</span></p>
+                  <dl class="tr-meta">
+                    <div><dt>시작</dt><dd>14:02:11</dd></div>
+                    <div><dt>경과</dt><dd id="h-el">6.8s</dd></div>
+                    <div><dt>토큰</dt><dd>12,480</dd></div>
+                    <div><dt>비용</dt><dd>₩184</dd></div>
+                  </dl>
+                  <div class="tr-axis"><span>단계</span><span class="ticks"><span>0s</span><span>2s</span><span>4s</span><span>6s</span></span><span></span></div>
+                  <ol class="tr-rows">
+                    <li><span class="tr-n">계획<span class="mono">plan</span></span><span class="tr-tk"><i style="left:0;width:6.9%"></i></span><span class="tr-ms">412ms</span></li>
+                    <li><span class="tr-n">검색<span class="mono">docs.search</span></span><span class="tr-tk"><i style="left:6.9%;width:20.1%"></i></span><span class="tr-ms">1,204ms</span></li>
+                    <li><span class="tr-n">도구 호출<span class="mono">erp.query</span></span><span class="tr-tk"><i style="left:26.9%;width:38.6%"></i></span><span class="tr-ms">2,318ms</span></li>
+                    <li><span class="tr-n">도구 호출<span class="mono">sheet.write</span></span><span class="tr-tk"><i style="left:65.5%;width:10.7%"></i></span><span class="tr-ms">640ms</span></li>
+                    <li class="is-sel"><span class="tr-n">승인 대기<span class="mono">mail.send</span></span><span class="tr-tk"><i class="wait" style="left:76.2%"></i></span><span class="tr-ms">대기 중</span></li>
+                    <li><span class="tr-n a-dim">응답<span class="mono">respond</span></span><span class="tr-tk"></span><span class="tr-ms">—</span></li>
+                  </ol>
+                  <div class="tr-det">
+                    <div class="tr-det-h"><span>승인 요청 · <span class="mono">mail.send</span></span><span class="a-dim mono">apr_2041</span></div>
+                    <p class="tr-pol"><span class="pol-n">정책 #1</span>외부 메일 발송 → 승인 필요</p>
+                    <dl class="tr-kv">
+                      <dt>수신</dt><dd>외부 회계법인 담당자 2명</dd>
+                      <dt>첨부</dt><dd>9월 정산 리포트.xlsx</dd>
+                      <dt>승인자</dt><dd>재무팀장</dd>
+                    </dl>
+                    <div class="tr-btns"><span class="mbtn">반려</span><span class="mbtn light">승인</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ═══ 3. 고객 로고 바 ═══ -->
+      <section class="logos" id="customers" aria-label="고객사">
+        <div class="wrap">
+          <p class="logo-lead">스타트업부터 중견기업까지, 에이전트를 운영하는 팀이 Kairos를 씁니다</p>
+          <ul class="logo-row" aria-hidden="true">
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><circle cx="14" cy="16" r="9" /><rect x="30" y="12" width="62" height="8" rx="4" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><rect x="5" y="7" width="18" height="18" rx="5" /><rect x="31" y="9" width="46" height="6" rx="3" /><rect x="31" y="18" width="30" height="5" rx="2.5" opacity=".6" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><path d="M14 6 24 25H4Z" /><rect x="32" y="12" width="70" height="8" rx="4" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="none" stroke="#F7F8F8" stroke-width="3"><circle cx="11" cy="16" r="7" /><circle cx="20" cy="16" r="7" /><rect x="34" y="13.5" width="52" height="5" rx="2.5" fill="#F7F8F8" stroke="none" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><path d="M14 5l9.5 5.5v11L14 27l-9.5-5.5v-11Z" /><rect x="31" y="12" width="48" height="8" rx="4" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><path d="M14 5 25 16 14 27 3 16Z" /><rect x="32" y="12" width="26" height="8" rx="4" /><rect x="62" y="12" width="34" height="8" rx="4" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><rect x="4" y="8" width="5" height="16" rx="2.5" /><rect x="12" y="5" width="5" height="22" rx="2.5" /><rect x="20" y="10" width="5" height="12" rx="2.5" /><rect x="33" y="12" width="58" height="8" rx="4" /></svg></li>
+            <li><svg viewBox="0 0 120 32" width="120" height="32" fill="#F7F8F8"><path d="M4 23a10 10 0 0 1 20 0Z" /><rect x="4" y="25" width="20" height="2.5" rx="1.25" /><rect x="32" y="12" width="40" height="8" rx="4" /></svg></li>
+          </ul>
+          <p class="t-cap logo-cap">고객사 로고 자리 · 실제 고객사 로고로 교체</p>
+        </div>
+      </section>
+      <!-- ═══ 4. 1.0 관찰 ═══ -->
+      <section class="sec" id="observe" aria-labelledby="obs-t">
+        <div class="wrap feat">
+          <div class="feat-copy reveal">
+            <p class="sec-label"><span class="num">1.0</span>관찰</p>
+            <h2 class="t-h2" id="obs-t" tabindex="-1">모든 실행을<br />단계별로 추적합니다</h2>
+            <p class="t-body">계획부터 응답까지, 에이전트가 거친 모든 단계가 밀리초 단위 트레이스로 남습니다. 어디서 느려졌는지, 토큰을 어디에 썼는지 실행이 끝나기 전에 보입니다.</p>
+            <ul class="pts">
+              <li><strong>실시간 트레이스</strong>진행 중인 실행도 지금 어느 단계에 있는지 바로 확인합니다.</li>
+              <li><strong>토큰·비용 집계</strong>실행, 에이전트, 팀 단위로 토큰과 비용을 나눠 봅니다.</li>
+              <li><strong>실패 재현</strong>실패한 실행을 같은 입력과 도구 응답으로 다시 돌려 원인을 찾습니다.</li>
+            </ul>
+          </div>
+          <div class="feat-vis reveal">
+            <figure>
+              <div class="card lt" id="lt">
+                <div class="lt-h" aria-hidden="true">
+                  <span class="lt-run" id="lt-run">run_9d42b7</span>
+                  <span class="lt-agent" id="lt-agent">계약서 검토</span>
+                  <span class="badge ok" id="lt-badge">완료</span>
+                </div>
+                <div class="lt-axis" aria-hidden="true"><span>단계</span><span class="ticks" id="lt-ticks"><span>0s</span><span>2s</span><span>4s</span><span>6s</span></span><span></span></div>
+                <ol class="lt-rows" id="lt-rows" aria-hidden="true">
+                  <li class="is-done"><span class="lt-n"><span>계획</span><span class="mono">plan</span></span><span class="lt-tk"><i style="left:0;width:6.33%"></i></span><span class="lt-ms">380ms</span></li>
+                  <li class="is-done"><span class="lt-n"><span>검색</span><span class="mono">docs.search</span></span><span class="lt-tk"><i style="left:6.33%;width:19%"></i></span><span class="lt-ms">1,140ms</span></li>
+                  <li class="is-done"><span class="lt-n"><span>도구 호출</span><span class="mono">clause.compare</span></span><span class="lt-tk"><i style="left:25.33%;width:31.5%"></i></span><span class="lt-ms">1,890ms</span></li>
+                  <li class="is-done"><span class="lt-n"><span>승인 대기</span><span class="mono">legal.review</span></span><span class="lt-tk"><i style="left:56.83%;width:20%"></i></span><span class="lt-ms">1,200ms</span></li>
+                  <li class="is-done"><span class="lt-n"><span>응답</span><span class="mono">respond</span></span><span class="lt-tk"><i style="left:76.83%;width:20.03%"></i></span><span class="lt-ms">1,202ms</span></li>
+                </ol>
+                <div class="lt-sum" aria-hidden="true">
+                  <span>소요 <span class="v" id="lt-s-ms">5,812ms</span></span>
+                  <span>토큰 <span class="v" id="lt-s-tk">9,214</span></span>
+                  <span>비용 <span class="v" id="lt-s-c">₩131</span></span>
+                  <span>승인 <span class="v" id="lt-s-ap">1건</span></span>
+                </div>
+                <div class="lt-log" id="lt-log" aria-hidden="true">
+                  <p><span class="lt-time">14:02:12.724  </span>docs.search    <span class="lm">조항 12건 검색</span></p>
+                  <p><span class="lt-time">14:02:14.614  </span>clause.compare <span class="lm">표준 조항과 비교</span></p>
+                  <p><span class="lt-time">14:02:14.614  </span>legal.review   <span class="lm">승인 요청 → 법무팀</span></p>
+                  <p><span class="lt-time">14:02:15.814  </span>legal.review   <span class="lm">승인됨 · 법무팀</span></p>
+                  <p><span class="lt-time">14:02:17.016  </span>run.end        <span class="lm">완료 · 5,812ms · ₩131</span></p>
+                </div>
+              </div>
+              <figcaption class="demo-cap">
+                <span class="t-cap">예시 화면 · 실행 데이터는 가상의 예시입니다.<span class="sr-only"> 계약서 검토, 고객 문의 분류, 재고 예측 에이전트의 실행이 계획, 검색, 도구 호출, 승인 대기, 응답 단계로 차례로 진행되고 단계별 소요 시간이 표시됩니다.</span></span>
+                <button class="icon-btn" type="button" id="lt-pause" data-paused="false" aria-label="일시정지: 실시간 트레이스 데모"><svg class="i-pause" aria-hidden="true"><use href="#i-pause" /></svg><svg class="i-play" aria-hidden="true"><use href="#i-play" /></svg><span class="lbl">일시정지</span></button>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 5. 2.0 통제 ═══ -->
+      <section class="sec" id="control" aria-labelledby="ctl-t">
+        <div class="wrap">
+          <div class="ctl-head reveal">
+            <div class="copy">
+              <p class="sec-label"><span class="num">2.0</span>통제</p>
+              <h2 class="t-h2" id="ctl-t" tabindex="-1">위험한 행동은<br />승인 없이 나가지 않습니다</h2>
+              <p class="t-body" style="margin-top:20px;max-width:540px">외부 메일 발송, 결제 API 호출, 개인정보 조회. 에이전트가 할 수 있는 일을 정책 한 줄로 정하고, 바꾸기 전에 영향받는 에이전트부터 확인하세요.</p>
+            </div>
+            <ul class="pts">
+              <li><strong>권한 범위</strong>에이전트마다 쓸 수 있는 도구와 데이터를 나눕니다.</li>
+              <li><strong>승인 흐름</strong>금액, 수신 대상, 시간대 조건에 따라 담당자 승인을 받습니다.</li>
+              <li><strong>변경 영향 미리보기</strong>저장하기 전에 지난 7일 실행 기준으로 영향을 계산합니다.</li>
+            </ul>
+          </div>
+          <div class="reveal">
+            <div class="pe-scn">
+              <span class="lbl" id="scn-lbl">변경 예시</span>
+              <div class="scn-list" role="group" aria-labelledby="scn-lbl">
+                <button class="scn-btn" type="button" data-scn="0" aria-pressed="true">결제 한도 낮추기</button>
+                <button class="scn-btn" type="button" data-scn="1" aria-pressed="false">검색 범위 좁히기</button>
+                <button class="scn-btn" type="button" data-scn="2" aria-pressed="false">새 규칙 추가</button>
+              </div>
+              <button class="icon-btn" type="button" id="pe-pause" data-paused="false" aria-label="일시정지: 정책 편집 데모"><svg class="i-pause" aria-hidden="true"><use href="#i-pause" /></svg><svg class="i-play" aria-hidden="true"><use href="#i-play" /></svg><span class="lbl">일시정지</span></button>
+            </div>
+            <div class="pe" id="pe">
+              <div class="card pe-ed">
+                <div class="pe-bar" aria-hidden="true"><span class="pe-file">approval-policy</span><span class="pe-tabs"><span>staging</span><span class="is-on">production</span></span></div>
+                <ol class="pe-lines" id="pe-lines" aria-label="승인 정책 예시">
+                  <li class="pe-line"><span class="pe-a">외부 메일 발송</span><span class="pe-arr" aria-hidden="true">→</span><span class="pe-r">승인 필요</span></li>
+                  <li class="pe-line is-edit"><span class="pe-a">결제 API 호출</span><span class="pe-arr" aria-hidden="true">→</span><span class="pe-r"><span class="tx">50만원</span><span class="caret" aria-hidden="true"></span><span> 초과 시 승인</span></span></li>
+                  <li class="pe-line"><span class="pe-a">고객 개인정보 조회</span><span class="pe-arr" aria-hidden="true">→</span><span class="pe-r">마스킹 후 허용</span></li>
+                  <li class="pe-line"><span class="pe-a">사내 문서 검색</span><span class="pe-arr" aria-hidden="true">→</span><span class="pe-r">허용</span></li>
+                  <li class="pe-line"><span class="pe-a">데이터 삭제</span><span class="pe-arr" aria-hidden="true">→</span><span class="pe-r">항상 차단</span></li>
+                  <li class="pe-line is-void" aria-hidden="true"><span class="pe-a">　</span><span class="pe-arr">→</span><span class="pe-r">　</span></li>
+                </ol>
+                <div class="pe-foot" aria-hidden="true"><span id="pe-foot-t">변경 1건 · 결제 API 호출 규칙</span><span class="mbtn">검토 요청</span></div>
+              </div>
+              <div class="card pe-im">
+                <div class="pe-im-h">
+                  <p class="pe-im-t"><span>영향받는 에이전트</span><span>지난 7일 실행 기준</span></p>
+                  <p class="pe-cnt"><span id="pe-cnt">5</span><span class="from" id="pe-from">개 · 기존 3개</span></p>
+                  <p class="pe-sum" id="pe-sum">승인 요청 주 25건 → 56건 예상</p>
+                </div>
+                <ul class="pi-rows" id="pi-rows">
+                  <li class="pi-row"><i class="dot"></i><span class="nm">정산 리포트 에이전트</span><span class="mt">결제 API · 주 21건</span><span class="badge"></span></li>
+                  <li class="pi-row"><i class="dot"></i><span class="nm">구매 요청 처리</span><span class="mt">결제 API · 주 14건</span><span class="badge"></span></li>
+                  <li class="pi-row"><i class="dot"></i><span class="nm">광고비 집행 도우미</span><span class="mt">결제 API · 주 4건</span><span class="badge"></span></li>
+                  <li class="pi-row is-new"><i class="dot c-warn"></i><span class="nm">환불 처리 도우미</span><span class="mt">결제 API · 주 11건</span><span class="badge warn">승인 필요로 전환</span></li>
+                  <li class="pi-row is-new"><i class="dot c-warn"></i><span class="nm">출장비 정산</span><span class="mt">결제 API · 주 6건</span><span class="badge warn">승인 필요로 전환</span></li>
+                </ul>
+                <div class="pe-foot"><span class="t-cap">예시 데이터 · 저장 전 미리 계산한 값입니다.</span></div>
+              </div>
+            </div>
+            <p class="sr-only" id="pe-live" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+      <!-- ═══ 6. 3.0 개선 ═══ -->
+      <section class="sec imp" id="improve" aria-labelledby="imp-t">
+        <div class="wrap feat">
+          <div class="feat-copy reveal">
+            <p class="sec-label"><span class="num">3.0</span>개선</p>
+            <h2 class="t-h2" id="imp-t" tabindex="-1">바꾸기 전에,<br />숫자로 비교합니다</h2>
+            <p class="t-body">프롬프트나 모델을 바꾸면 같은 평가셋으로 기존 버전과 나란히 돌립니다. 정확도가 오르고 비용이 내려갔는지 확인한 뒤에 배포하세요.</p>
+            <ul class="pts">
+              <li><strong>실제 사례로 만든 평가셋</strong>운영 중인 실행에서 고른 사례로 평가셋을 만들고 계속 늘립니다.</li>
+              <li><strong>회귀 감지</strong>한 지표라도 나빠지면 배포 전에 알려 줍니다.</li>
+            </ul>
+          </div>
+          <div class="feat-vis reveal">
+            <figure class="card ev">
+              <div class="ev-h">
+                <div><p class="ev-t">프롬프트 v18 평가</p><p class="ev-s"><span class="mono">eval_1029</span> · 평가셋 <span id="ev-n">4,340</span>건</p></div>
+                <div class="seg" id="ev-seg" role="radiogroup" aria-label="평가셋 선택">
+                  <button type="button" role="radio" aria-checked="true" data-ds="all">전체</button>
+                  <button type="button" role="radio" aria-checked="false" tabindex="-1" data-ds="fin">정산</button>
+                  <button type="button" role="radio" aria-checked="false" tabindex="-1" data-ds="legal">계약서</button>
+                  <button type="button" role="radio" aria-checked="false" tabindex="-1" data-ds="search">사내 검색</button>
+                </div>
+              </div>
+              <table class="ev-table">
+                <caption class="sr-only">프롬프트 v17(현재 배포)과 v18(후보)의 평가 결과 비교, 예시 데이터</caption>
+                <colgroup><col class="c1" /><col class="c2" /><col class="c3" /><col class="c4" /></colgroup>
+                <thead>
+                  <tr><th scope="col">지표</th><th scope="col"><span class="ver">v17</span>현재 배포</th><th scope="col"><span class="ver">v18</span>후보</th><th scope="col">변화</th></tr>
+                </thead>
+                <tbody id="ev-body">
+                  <tr data-m="acc"><th scope="row">정확도<span>높을수록 좋음</span></th><td class="old"><span class="ev-v">91.2%</span><span class="ev-bar" aria-hidden="true"><i style="width:91.2%"></i></span></td><td class="new"><span class="ev-v">94.3%</span><span class="ev-bar" aria-hidden="true"><i style="width:94.3%"></i></span></td><td><span class="badge ok">+3.1%p</span></td></tr>
+                  <tr data-m="hal"><th scope="row">환각 비율<span>낮을수록 좋음</span></th><td class="old"><span class="ev-v">3.6%</span><span class="ev-bar" aria-hidden="true"><i style="width:45%"></i></span></td><td class="new"><span class="ev-v">1.8%</span><span class="ev-bar" aria-hidden="true"><i style="width:22.5%"></i></span></td><td><span class="badge ok">−1.8%p</span></td></tr>
+                  <tr data-m="p95"><th scope="row">p95 지연<span>낮을수록 좋음</span></th><td class="old"><span class="ev-v">2.84s</span><span class="ev-bar" aria-hidden="true"><i style="width:56.8%"></i></span></td><td class="new"><span class="ev-v">2.31s</span><span class="ev-bar" aria-hidden="true"><i style="width:46.2%"></i></span></td><td><span class="badge ok">−0.53s</span></td></tr>
+                  <tr data-m="cost"><th scope="row">1천 건당 비용<span>낮을수록 좋음</span></th><td class="old"><span class="ev-v">₩4,570</span><span class="ev-bar" aria-hidden="true"><i style="width:57.1%"></i></span></td><td class="new"><span class="ev-v">₩3,870</span><span class="ev-bar" aria-hidden="true"><i style="width:48.4%"></i></span></td><td><span class="badge ok">−15.3%</span></td></tr>
+                </tbody>
+              </table>
+              <figcaption class="ev-foot"><span class="chip-ex">예시 데이터</span><span id="ev-verdict" aria-live="polite">4개 지표 모두 개선 · <span class="v">배포 권장</span></span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 7. 속도: ⌘K ═══ -->
+      <section class="sec" id="speed" aria-labelledby="spd-t">
+        <div class="wrap feat">
+          <div class="feat-copy reveal">
+            <p class="sec-label">속도</p>
+            <h2 class="t-h2" id="spd-t">⌘K 하나로</h2>
+            <p class="t-body" style="margin-top:20px">에이전트 찾기, 실패한 실행 재시도, 정책 열기까지. 손을 키보드에서 떼지 않고 처리합니다. ⌘ 키가 없는 키보드에서는 Ctrl+K를 누르세요.</p>
+            <ul class="keys" aria-label="명령 메뉴 단축키">
+              <li><span class="kbd" data-k="open"><span data-mod>⌘</span>K</span>열기</li>
+              <li><span class="kbd" data-k="up">↑</span><span class="kbd" data-k="down">↓</span>이동</li>
+              <li><span class="kbd" data-k="enter">↵</span>실행</li>
+              <li><span class="kbd" data-k="esc">esc</span>닫기</li>
+            </ul>
+            <div class="try">
+              <button class="btn btn-sub" type="button" data-cmdk-open aria-keyshortcuts="Meta+K Control+K">직접 열어 보기</button>
+              <kbd class="kbd kbd-hint" aria-hidden="true"><span data-mod>⌘</span>K</kbd>
+            </div>
+          </div>
+          <div class="feat-vis reveal">
+            <figure>
+              <div class="card kd" id="kd" aria-hidden="true">
+                <div class="kd-in"><svg><use href="#i-search" /></svg><span class="kd-q" id="kd-q">재시도</span><span class="kbd">esc</span></div>
+                <div class="kd-list" id="kd-list">
+                  <p class="kd-g">작업</p>
+                  <div class="kd-it is-act"><svg><use href="#i-retry" /></svg>실패한 실행 재시도<span class="meta mono">run_8f36e2</span></div>
+                  <div class="kd-it"><svg><use href="#i-doc" /></svg>재시도 정책 보기<span class="meta">정책 #7</span></div>
+                  <p class="kd-g">실행</p>
+                  <div class="kd-it"><svg><use href="#i-run" /></svg>재시도된 실행 모아 보기<span class="meta">오늘 14건</span></div>
+                </div>
+                <div class="kd-res is-done" id="kd-res"><i class="dot"></i><span id="kd-res-t">재시도 대기열에 추가했습니다 · run_8f36e2</span></div>
+              </div>
+              <figcaption class="demo-cap">
+                <span class="t-cap">자동 재생 데모 · 키 입력은 예시입니다.<span class="sr-only"> 명령 메뉴에 검색어를 입력하면 목록이 좁혀지고, 화살표로 항목을 고른 뒤 엔터로 실행합니다.</span></span>
+                <button class="icon-btn" type="button" id="kd-pause" data-paused="false" aria-label="일시정지: 명령 메뉴 데모"><svg class="i-pause" aria-hidden="true"><use href="#i-pause" /></svg><svg class="i-play" aria-hidden="true"><use href="#i-play" /></svg><span class="lbl">일시정지</span></button>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 8. 신뢰 지표 ═══ -->
+      <section class="sec" id="trust" aria-labelledby="mx-t">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="sec-label">신뢰</p>
+            <h2 class="t-h2" id="mx-t">에이전트가 늘어도<br />관제 화면은 느려지지 않습니다</h2>
+          </div>
+          <div class="mx-grid">
+            <div class="mx reveal">
+              <p class="mx-k">트레이스 표시 지연 <span class="chip-ex">예시 수치</span></p>
+              <p class="mx-v">180<span class="u">ms</span></p>
+              <p class="mx-d">실행 단계가 끝난 뒤 관제 화면에 나타나기까지 걸리는 시간, p95 기준</p>
+              <p class="t-cap mx-src">출처 표기 자리 · 예: 내부 측정, 최근 30일</p>
+            </div>
+            <div class="mx reveal">
+              <p class="mx-k">가동률 <span class="chip-ex">예시 수치</span></p>
+              <p class="mx-v">99.95<span class="u">%</span></p>
+              <p class="mx-d">트레이스 수집 API 기준, 최근 90일</p>
+              <p class="t-cap mx-src">출처 표기 자리 · 예: 공개 상태 페이지</p>
+            </div>
+            <div class="mx reveal">
+              <p class="mx-k">처리량 <span class="chip-ex">예시 수치</span></p>
+              <p class="mx-v">1.2<span class="u">억 스팬/일</span></p>
+              <p class="mx-d">하루 동안 수집하고 저장하는 실행 단계 수</p>
+              <p class="t-cap mx-src">출처 표기 자리 · 예: 운영 대시보드 집계</p>
+            </div>
+          </div>
+          <p class="t-cap mx-cap reveal">예시 수치 · 실제 데이터와 출처로 교체</p>
+        </div>
+      </section>
+      <!-- ═══ 9. 고객 인용 + 체인지로그 ═══ -->
+      <section class="sec" id="voices" aria-labelledby="vo-t">
+        <div class="wrap">
+          <h2 class="sec-label reveal" id="vo-t">고객 이야기</h2>
+          <figure class="vo-q reveal">
+            <blockquote><p>“에이전트가 마흔 개를 넘기자 어디서 무엇이 실패하는지 아는 사람이 없었습니다. 지금은 실패한 실행을 같은 입력으로 바로 다시 돌려 보고, 결제나 외부 메일 같은 위험한 호출은 승인 없이 나가지 않습니다.”</p></blockquote>
+            <figcaption><span class="vo-av" aria-hidden="true"><svg><use href="#i-user" /></svg></span><span class="vo-who">핀테크 스타트업 · 플랫폼 엔지니어링 리드</span><span class="chip-ex">예시 후기</span></figcaption>
+          </figure>
+
+          <div class="cl" id="changelog">
+            <div class="cl-h reveal">
+              <h2 class="t-h2" tabindex="-1">체인지로그</h2>
+              <a class="tlink" href="#" data-demo="changelog">전체 업데이트 보기 <span class="arr" aria-hidden="true">→</span></a>
+            </div>
+            <p class="t-body reveal" style="margin-top:16px">2주마다 운영 현장에서 필요했던 기능을 내보냅니다.</p>
+            <ol class="cl-list">
+              <li class="card cl-item reveal">
+                <p class="cl-meta"><time datetime="2026-10-14">2026.10.14</time><span class="v">v2.6</span></p>
+                <h3 class="t-h3">승인 정책 버전 관리</h3>
+                <p>정책을 바꾸기 전과 후를 나란히 비교하고, 문제가 생기면 이전 버전으로 바로 되돌립니다.</p>
+              </li>
+              <li class="card cl-item reveal">
+                <p class="cl-meta"><time datetime="2026-09-30">2026.09.30</time><span class="v">v2.5</span></p>
+                <h3 class="t-h3">평가 결과 자동 비교</h3>
+                <p>새 프롬프트나 모델을 올리면 기존 버전과 정확도·비용·지연을 같은 평가셋으로 비교합니다.</p>
+              </li>
+              <li class="card cl-item reveal">
+                <p class="cl-meta"><time datetime="2026-09-16">2026.09.16</time><span class="v">v2.4</span></p>
+                <h3 class="t-h3">메신저에서 바로 승인</h3>
+                <p>승인 요청이 오면 메신저 알림에서 내용을 확인하고 승인하거나 반려합니다.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 10. 최종 CTA ═══ -->
+      <section class="sec" id="start" aria-labelledby="fin-t">
+        <div class="wrap reveal">
+          <h2 class="t-hero" id="fin-t">에이전트는 늘었고,<br />통제는 이제 시작입니다</h2>
+          <div class="fin-cta">
+            <a class="btn btn-accent btn-lg" href="#" data-demo="start">무료로 시작하기</a>
+            <a class="btn btn-sub btn-lg" href="#" data-demo="book">데모 예약하기</a>
+          </div>
+          <p class="t-cap fin-note">카드 등록 없이 시작합니다. 도입 상담은 영업일 기준 하루 안에 연락드립니다.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ═══ 푸터 ═══ -->
+    <footer class="ft">
+      <div class="wrap">
+        <div class="ft-top">
+          <div class="ft-brand">
+            <a class="logo" href="#top" aria-label="Kairos 처음으로"><svg aria-hidden="true"><use href="#i-mark" /></svg><span>Kairos</span></a>
+            <p>사내 AI 에이전트를 배포하고, 관찰하고, 통제하는 운영 플랫폼</p>
+            <a class="ft-mail" href="mailto:hello@kairos.example">hello@kairos.example</a>
+          </div>
+          <nav class="ft-cols" aria-label="푸터 메뉴">
+            <div><p class="ft-h" id="fh-1">제품</p><ul aria-labelledby="fh-1"><li><a href="#observe">관찰</a></li><li><a href="#control">통제</a></li><li><a href="#improve">개선</a></li><li><a href="#changelog">체인지로그</a></li><li><a href="#" data-demo="pricing">요금제</a></li></ul></div>
+            <div><p class="ft-h" id="fh-2">개발자</p><ul aria-labelledby="fh-2"><li><a href="#" data-demo="link">문서</a></li><li><a href="#" data-demo="link">API 레퍼런스</a></li><li><a href="#" data-demo="link">SDK</a></li><li><a href="#" data-demo="link">상태 페이지</a></li></ul></div>
+            <div><p class="ft-h" id="fh-3">보안</p><ul aria-labelledby="fh-3"><li><a href="#" data-demo="link">보안 개요</a></li><li><a href="#" data-demo="link">데이터 처리 방침</a></li><li><a href="#" data-demo="link">권한 관리</a></li><li><a href="#" data-demo="link">취약점 신고</a></li></ul></div>
+            <div><p class="ft-h" id="fh-4">회사</p><ul aria-labelledby="fh-4"><li><a href="#" data-demo="link">회사 소개</a></li><li><a href="#" data-demo="link">채용</a></li><li><a href="#" data-demo="link">블로그</a></li><li><a href="#" data-demo="book">도입 문의</a></li></ul></div>
+            <div><p class="ft-h" id="fh-5">약관</p><ul aria-labelledby="fh-5"><li><a href="#" data-demo="link">이용약관</a></li><li><a href="#" data-demo="link">개인정보처리방침</a></li><li><a href="#" data-demo="link">서비스 수준 협약</a></li></ul></div>
+          </nav>
+        </div>
+        <div class="ft-bot">
+          <p>카이로스 주식회사 · 대표 ○○○ · 사업자등록번호 000-00-00000 · 서울특별시 ○○구 ○○로 00</p>
+          <p>hello@kairos.example · 02-000-0000</p>
+          <p>© 2026 Kairos</p>
+          <p class="ft-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 명령 메뉴 (⌘K / Ctrl+K) -->
+    <dialog class="cmdk" id="cmdk" aria-label="명령 메뉴">
+      <div class="cmdk-s">
+        <svg aria-hidden="true"><use href="#i-search" /></svg>
+        <input id="cmdk-in" type="text" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list" aria-label="명령 검색" placeholder="명령 또는 섹션 검색…" autocomplete="off" spellcheck="false" />
+        <button class="cmdk-x" type="button" data-cmdk-close aria-label="명령 메뉴 닫기"><span class="kbd" aria-hidden="true">esc</span></button>
+      </div>
+      <div class="cmdk-list" id="cmdk-list" role="listbox" aria-label="명령 목록"></div>
+      <p class="cmdk-empty" id="cmdk-empty" hidden>일치하는 명령이 없습니다.</p>
+      <div class="cmdk-f" aria-hidden="true"><span><span class="kbd">↑</span><span class="kbd">↓</span>이동</span><span><span class="kbd">↵</span>실행</span><span><span class="kbd">esc</span>닫기</span></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      (() => {
+        'use strict';
+        const $ = (s, r = document) => r.querySelector(s);
+        const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+        const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
+        let reduce = mqReduce.matches;
+        const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent || '');
+        if (!isMac) $$('[data-mod]').forEach((el) => { el.textContent = 'Ctrl '; });
+
+        /* ── 알림 메시지 ── */
+        const toastEl = $('#toast');
+        let toastT = 0;
+        function toast(msg) {
+          toastEl.textContent = msg;
+          toastEl.classList.add('is-on');
+          clearTimeout(toastT);
+          toastT = setTimeout(() => toastEl.classList.remove('is-on'), 2800);
+        }
+        const MSG = {
+          start: '시안 데모 — 실제로 가입되지 않습니다.',
+          book: '시안 데모 — 실제로 전송되지 않습니다.',
+          login: '시안 데모 — 로그인 화면은 실제 운영 시 연결됩니다.',
+          pricing: '시안 데모 — 요금제 페이지는 실제 운영 시 연결됩니다.',
+          changelog: '시안 데모 — 전체 체인지로그는 실제 운영 시 연결됩니다.',
+          link: '시안 데모 — 실제 페이지는 운영 시 연결됩니다.'
+        };
+
+        /* ── 헤더: 스크롤 시 반투명 블러 ── */
+        const hd = $('#hd');
+        const onScroll = () => hd.classList.toggle('is-scrolled', scrollY > 8);
+        addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        /* ── 모바일 메뉴 ── */
+        const mBtn = $('#hd-menu');
+        const mNav = $('#mnav');
+        function setMenu(open) {
+          mBtn.setAttribute('aria-expanded', String(open));
+          mBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+          mNav.hidden = !open;
+          hd.classList.toggle('menu-open', open);
+        }
+        const menuOpen = () => mBtn.getAttribute('aria-expanded') === 'true';
+        mBtn.addEventListener('click', () => setMenu(!menuOpen()));
+        mNav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+
+        /* ── 시안용 링크·버튼: 실제 전송 없음 ── */
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest('[data-demo]');
+          if (!a) return;
+          e.preventDefault();
+          toast(MSG[a.dataset.demo] || MSG.link);
+        });
+
+        /* ── 섹션 이동 (단축키·명령 메뉴) ── */
+        function goto(sel) {
+          const t = $(sel);
+          if (!t) return;
+          t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          const h = t.querySelector('h2[tabindex="-1"]') || (t.matches('h2[tabindex="-1"]') ? t : null);
+          if (h) h.focus({ preventScroll: true });
+        }
+        $$('[data-goto]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); goto(a.dataset.goto); }));
+
+        /* ── 스크롤 등장: 투명도 + 8px ── */
+        const rv = $$('.reveal');
+        if ('IntersectionObserver' in window && !reduce) {
+          const io = new IntersectionObserver((es) => es.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          }), { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+          rv.forEach((el) => io.observe(el));
+        } else {
+          rv.forEach((el) => el.classList.add('in'));
+        }
+
+        /* ── 히어로 광원: 마우스 위치를 따르는 6% 이하 radial ── */
+        const shot = $('#shot');
+        const fine = matchMedia('(hover: hover) and (pointer: fine)');
+        let lx = 0, ly = 0, lPend = false;
+        shot.addEventListener('pointermove', (e) => {
+          if (reduce || !fine.matches || e.pointerType !== 'mouse') return;
+          const r = shot.getBoundingClientRect();
+          lx = e.clientX - r.left; ly = e.clientY - r.top;
+          if (lPend) return;
+          lPend = true;
+          requestAnimationFrame(() => {
+            lPend = false;
+            shot.style.setProperty('--mx', lx + 'px');
+            shot.style.setProperty('--my', ly + 'px');
+            shot.classList.add('lit');
+          });
+        });
+        shot.addEventListener('pointerleave', () => shot.classList.remove('lit'));
+
+        /* ── 데모 공통 엔진: rAF 하나, 화면 밖·탭 숨김·일시정지 시 멈춤 ── */
+        const demos = [];
+        let raf = 0, last = 0;
+        const running = (d) => d.vis && !d.paused && !reduce && !document.hidden;
+        function frame(now) {
+          const dt = Math.min(64, now - last);
+          last = now;
+          let any = false;
+          for (const d of demos) if (d.on) { d.tick(dt); any = true; }
+          raf = any ? requestAnimationFrame(frame) : 0;
+        }
+        function sync() {
+          let any = false;
+          for (const d of demos) {
+            const on = running(d);
+            if (on !== d.on) { d.on = on; d.root.classList.toggle('is-live', on); }
+            if (on) any = true;
+          }
+          if (any && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+        }
+        const vio = new IntersectionObserver((es) => {
+          es.forEach((e) => {
+            const d = e.target._demo;
+            if (e.isIntersecting && !d.started && !reduce) { d.started = true; d.reset(); }
+            d.vis = e.isIntersecting;
+          });
+          sync();
+        }, { threshold: 0 });
+        function demo(root, o) {
+          const d = Object.assign({ root, vis: false, paused: false, on: false, started: false, reset() {}, final() {} }, o);
+          root._demo = d;
+          demos.push(d);
+          vio.observe(root);
+          return d;
+        }
+        function bindPause(d, btn, name) {
+          d.btn = btn;
+          btn.addEventListener('click', () => setPaused(d, !d.paused));
+          d.pauseName = name;
+        }
+        function setPaused(d, v) {
+          d.paused = v;
+          if (d.btn) {
+            d.btn.dataset.paused = String(v);
+            d.btn.querySelector('.lbl').textContent = v ? '재생' : '일시정지';
+            d.btn.setAttribute('aria-label', (v ? '재생: ' : '일시정지: ') + d.pauseName);
+          }
+          sync();
+        }
+        document.addEventListener('visibilitychange', sync);
+
+        /* 순차 실행 큐: [지연(ms), 함수] — 지연은 앞 단계 기준 */
+        function Seq() { this.q = []; this.i = 0; this.w = 0; }
+        Seq.prototype.add = function (ms, fn) { this.q.push([ms, fn]); return this; };
+        Seq.prototype.tick = function (dt) {
+          this.w += dt;
+          while (this.i < this.q.length && this.w >= this.q[this.i][0]) {
+            this.w -= this.q[this.i][0];
+            const fn = this.q[this.i][1];
+            this.i++;
+            fn();
+          }
+        };
+
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const isId = (s) => /^[\w.\-]+$/.test(s);
+        const fmtN = (n) => Math.round(n).toLocaleString('ko-KR');
+        const fmtMs = (ms) => fmtN(ms) + 'ms';
+        function fmtDur(ms) {
+          const s = ms / 1000;
+          if (s < 60) return s.toFixed(1) + 's';
+          return Math.floor(s / 60) + 'm ' + String(Math.floor(s % 60)).padStart(2, '0') + 's';
+        }
+
+        /* ── 히어로: 진행 중인 실행 값이 실시간으로 갱신 ── */
+        const H = { el: $('#h-el'), d1: $('#h-d1'), d2: $('#h-d2'), d5: $('#h-d5') };
+        demo(shot, {
+          wait: 6800, r2: 1800, r5: 900, acc: 0, done2: false, done5: false, mid5: false,
+          tick(dt) {
+            this.wait += dt;
+            if (!this.done2) this.r2 += dt;
+            if (!this.done5) this.r5 += dt;
+            this.acc += dt;
+            if (this.acc < 100) return;
+            this.acc = 0;
+            const w = fmtDur(this.wait);
+            H.el.textContent = w; H.d1.textContent = w;
+            if (!this.done2) {
+              H.d2.textContent = (this.r2 / 1000).toFixed(1) + 's';
+              if (this.r2 >= 4200) {
+                this.done2 = true;
+                $('#h-s2').className = 'dot c-ok';
+                $('#h-st2').textContent = '응답 완료';
+                H.d2.textContent = '4.20s'; $('#h-t2').textContent = '3,512'; $('#h-c2').textContent = '₩46';
+              }
+            }
+            if (!this.done5) {
+              H.d5.textContent = (this.r5 / 1000).toFixed(1) + 's';
+              if (!this.mid5 && this.r5 >= 2600) { this.mid5 = true; $('#h-st5').textContent = '도구 호출'; }
+              if (this.r5 >= 5100) {
+                this.done5 = true;
+                $('#h-s5').className = 'dot c-ok';
+                $('#h-st5').textContent = '응답 완료';
+                H.d5.textContent = '5.10s'; $('#h-t5').textContent = '6,208'; $('#h-c5').textContent = '₩81';
+              }
+            }
+          }
+        });
+        /* ── 1.0 관찰: 실시간 실행 트레이스 ── */
+        const LT_NAMES = ['계획', '검색', '도구 호출', '승인 대기', '응답'];
+        let ltSerial = 0x9d42b7;                                   // 정적 화면의 run_9d42b7 다음부터
+        let ltNextBase = ((14 * 60 + 2) * 60 + 17) * 1000 + 16 + 2600; // 14:02:17.016 이후
+        const RUNS = [
+          { agent: '계약서 검토', axis: 6, tokens: 9214, cost: 131, ap: '1건',
+            spans: [
+              { tool: 'plan', ms: 380, log: '계획 수립 · 4단계' },
+              { tool: 'docs.search', ms: 1140, log: '조항 12건 검색' },
+              { tool: 'clause.compare', ms: 1890, log: '표준 조항과 비교' },
+              { tool: 'legal.review', ms: 1200, wait: '승인 요청 → 법무팀', log: '승인됨 · 법무팀' },
+              { tool: 'respond', ms: 1202, log: '검토 의견 전달' }
+            ] },
+          { agent: '고객 문의 분류', axis: 3, tokens: 2746, cost: 35, ap: '없음',
+            spans: [
+              { tool: 'plan', ms: 210, log: '계획 수립 · 2단계' },
+              { tool: 'crm.lookup', ms: 640, log: '고객 이력 3건 조회' },
+              { tool: 'ticket.update', ms: 520, log: '분류 · 환불 문의' },
+              { tool: 'policy.check', ms: 0, log: '해당 정책 없음 · 건너뜀' },
+              { tool: 'respond', ms: 380, log: '담당 팀 배정' }
+            ] },
+          { agent: '재고 예측', axis: 9, tokens: 14032, cost: 203, ap: '1건',
+            spans: [
+              { tool: 'plan', ms: 520, log: '계획 수립 · 5단계' },
+              { tool: 'sales.history', ms: 1580, log: '지난 90일 판매량 조회' },
+              { tool: 'erp.query', sub: 'erp.query · retry 1', ms: 3920, log: '시간 초과 → 재시도 1회 · 성공' },
+              { tool: 'po.create', ms: 1460, wait: '발주 2,400만원 → 승인 요청', log: '승인됨 · 구매팀장' },
+              { tool: 'respond', ms: 880, log: '발주 제안 전달' }
+            ] }
+        ];
+        const LT = {
+          run: $('#lt-run'), agent: $('#lt-agent'), badge: $('#lt-badge'), ticks: $$('#lt-ticks span'),
+          rows: $$('#lt-rows li').map((li) => ({ li, nm: li.querySelector('.lt-n > span'), sub: li.querySelector('.lt-n .mono'), bar: li.querySelector('.lt-tk i'), ms: li.querySelector('.lt-ms') })),
+          sms: $('#lt-s-ms'), stk: $('#lt-s-tk'), sc: $('#lt-s-c'), sap: $('#lt-s-ap'), log: $$('#lt-log p')
+        };
+        const pad2 = (n) => String(n).padStart(2, '0');
+        function clockAt(ms) {
+          let t = Math.round(ms);
+          const msec = t % 1000; t = Math.floor(t / 1000);
+          const s = t % 60; t = Math.floor(t / 60);
+          return pad2(Math.floor(t / 60)) + ':' + pad2(t % 60) + ':' + pad2(s) + '.' + String(msec).padStart(3, '0');
+        }
+        function setBadge(el, kind, text) { el.className = 'badge' + (kind ? ' ' + kind : ''); el.textContent = text; }
+        const lt = demo($('#lt'), {
+          k: 0, T: 0, st: [], starts: [], total: 0, end: false, hold: 0,
+          load(k) {
+            const r = RUNS[k];
+            const axis = r.axis * 1000;
+            let s = 0;
+            this.k = k; this.T = 0; this.end = false; this.hold = 0; this.starts = [];
+            r.spans.forEach((sp) => { this.starts.push(s); s += sp.ms; });
+            this.total = s;
+            this.st = r.spans.map(() => 0);
+            ltSerial += 0x1f7 + k * 0x35;
+            this.base = ltNextBase;
+            ltNextBase = this.base + this.total + 2600;
+            LT.run.textContent = 'run_' + ltSerial.toString(16);
+            LT.agent.textContent = r.agent;
+            setBadge(LT.badge, '', '실행 중');
+            LT.ticks.forEach((t, i) => { t.textContent = (r.axis * i / 3) + 's'; });
+            LT.rows.forEach((row, i) => {
+              const sp = r.spans[i];
+              row.li.className = '';
+              row.nm.textContent = LT_NAMES[i];
+              row.sub.textContent = sp.sub || sp.tool;
+              row.bar.className = '';
+              row.bar.style.left = (this.starts[i] / axis * 100).toFixed(2) + '%';
+              row.bar.style.width = (sp.ms / axis * 100).toFixed(2) + '%';
+              row.bar.style.clipPath = '';
+              row.ms.textContent = '—';
+            });
+            LT.sms.textContent = '0ms'; LT.stk.textContent = '0'; LT.sc.textContent = '₩0'; LT.sap.textContent = '—';
+            this.log('run.start', r.agent + ' 실행 시작', 0);
+          },
+          log(tool, text, at) {
+            const line = '<span class="lt-time">' + clockAt(this.base + at) + '  </span>' + tool.padEnd(15, ' ') + '<span class="lm">' + esc(text) + '</span>';
+            for (let i = 0; i < LT.log.length - 1; i++) LT.log[i].innerHTML = LT.log[i + 1].innerHTML;
+            LT.log[LT.log.length - 1].innerHTML = line;
+          },
+          reset() { this.load(1); },
+          tick(dt) {
+            if (this.end) {
+              this.hold += dt;
+              if (this.hold >= 2600) this.load((this.k + 1) % RUNS.length);
+              return;
+            }
+            this.T += dt;
+            const r = RUNS[this.k];
+            r.spans.forEach((sp, i) => {
+              const row = LT.rows[i];
+              if (this.st[i] === 0 && this.T >= this.starts[i]) {
+                this.st[i] = 1;
+                row.li.className = 'is-act';
+                if (sp.wait) { row.bar.classList.add('wait'); setBadge(LT.badge, 'warn', '승인 대기'); this.log(sp.tool, sp.wait, this.starts[i]); }
+              }
+              if (this.st[i] !== 1) return;
+              const el = this.T - this.starts[i];
+              const p = sp.ms ? Math.min(1, el / sp.ms) : 1;
+              row.bar.style.clipPath = 'inset(0 ' + ((1 - p) * 100).toFixed(2) + '% 0 0)';
+              row.ms.textContent = fmtMs(Math.min(el, sp.ms));
+              if (p < 1) return;
+              this.st[i] = 2;
+              row.li.className = 'is-done';
+              row.bar.classList.remove('wait');
+              row.bar.style.clipPath = '';
+              row.ms.textContent = sp.ms ? fmtMs(sp.ms) : '건너뜀';
+              if (sp.wait) setBadge(LT.badge, '', '실행 중');
+              this.log(sp.tool, sp.log, this.starts[i] + sp.ms);
+            });
+            const f = Math.min(1, this.T / this.total);
+            LT.sms.textContent = fmtMs(Math.min(this.T, this.total));
+            LT.stk.textContent = fmtN(r.tokens * f);
+            LT.sc.textContent = '₩' + fmtN(r.cost * f);
+            if (this.T >= this.total) {
+              this.end = true;
+              setBadge(LT.badge, 'ok', '완료');
+              LT.sap.textContent = r.ap;
+              this.log('run.end', '완료 · ' + fmtMs(this.total) + ' · ₩' + fmtN(r.cost), this.total);
+            }
+          }
+        });
+        bindPause(lt, $('#lt-pause'), '실시간 트레이스 데모');
+
+        /* ── 2.0 통제: 정책 한 줄 변경 → 영향받는 에이전트 갱신 ── */
+        const BASE = [['외부 메일 발송', '승인 필요'], ['결제 API 호출', '100만원 초과 시 승인'], ['고객 개인정보 조회', '마스킹 후 허용'], ['사내 문서 검색', '허용'], ['데이터 삭제', '항상 차단']];
+        const SCN = [
+          { label: '결제 한도 낮추기', line: 1, pre: '', from: '100만원', to: '50만원', post: ' 초과 시 승인', foot: '변경 1건 · 결제 API 호출 규칙',
+            before: { n: 3, sum: '승인 요청 주 25건', rows: [['정산 리포트 에이전트', '결제 API · 주 12건'], ['구매 요청 처리', '결제 API · 주 9건'], ['광고비 집행 도우미', '결제 API · 주 4건']] },
+            after: { n: 5, from: '기존 3개', sum: '승인 요청 주 25건 → 56건 예상', rows: [['정산 리포트 에이전트', '결제 API · 주 21건'], ['구매 요청 처리', '결제 API · 주 14건'], ['광고비 집행 도우미', '결제 API · 주 4건'], ['환불 처리 도우미', '결제 API · 주 11건', 'warn', '승인 필요로 전환'], ['출장비 정산', '결제 API · 주 6건', 'warn', '승인 필요로 전환']] } },
+          { label: '검색 범위 좁히기', line: 3, pre: '', from: '허용', to: '인사 문서는 차단', post: '', foot: '변경 1건 · 사내 문서 검색 규칙',
+            before: { n: 0, sum: '현재 이 규칙으로 막히는 호출 없음', rows: [] },
+            after: { n: 3, from: '기존 0개', sum: '인사 문서 조회 주 60건이 막힙니다', rows: [['사내 검색 도우미', '인사 문서 조회 · 주 38건', 'err', '차단 적용'], ['채용 서류 요약', '인사 문서 조회 · 주 17건', 'warn', '예외 승인 필요'], ['회의록 정리', '인사 문서 조회 · 주 5건', 'err', '차단 적용']] } },
+          { label: '새 규칙 추가', line: 5, add: ['고객 데이터 내보내기', '승인 필요'], foot: '추가 1건 · 고객 데이터 내보내기 규칙',
+            before: { n: 0, sum: '새 규칙 · 아직 적용 전', rows: [] },
+            after: { n: 3, from: '새 규칙', sum: '승인 요청 주 22건 예상', rows: [['리포트 메일러', 'CSV 내보내기 · 주 12건', 'warn', '승인 필요'], ['고객 문의 분류', 'CSV 내보내기 · 주 7건', 'warn', '승인 필요'], ['CS 답변 초안', 'CSV 내보내기 · 주 3건', 'warn', '승인 필요']] } }
+        ];
+        const PE = {
+          lines: $$('#pe-lines .pe-line').map((li) => ({ li, a: li.querySelector('.pe-a'), r: li.querySelector('.pe-r') })),
+          foot: $('#pe-foot-t'), cnt: $('#pe-cnt'), from: $('#pe-from'), sum: $('#pe-sum'),
+          rows: $$('#pi-rows .pi-row').map((li) => ({ li, dot: li.querySelector('.dot'), nm: li.querySelector('.nm'), mt: li.querySelector('.mt'), b: li.querySelector('.badge') })),
+          btns: $$('.scn-btn'), live: $('#pe-live')
+        };
+        const CARET = '<span class="caret" aria-hidden="true"></span>';
+        function peBase() {
+          PE.lines.forEach((L, i) => {
+            L.li.classList.remove('is-edit');
+            const on = i < BASE.length;
+            L.a.textContent = on ? BASE[i][0] : '　';
+            L.r.textContent = on ? BASE[i][1] : '　';
+            L.li.classList.toggle('is-void', !on);
+            if (on) L.li.removeAttribute('aria-hidden'); else L.li.setAttribute('aria-hidden', 'true');
+          });
+        }
+        function peShowLine(L) { L.li.classList.remove('is-void'); L.li.removeAttribute('aria-hidden'); L.li.classList.add('is-edit'); }
+        function peRule(L, pre, mid, post) { L.r.innerHTML = '<span class="tx">' + esc(pre + mid) + '</span>' + CARET + '<span>' + esc(post) + '</span>'; }
+        function peImpact(st, after, animate) {
+          let n = 0;
+          PE.cnt.textContent = st.n;
+          PE.from.textContent = after ? '개 · ' + st.from : '개 · 현재';
+          PE.sum.textContent = st.sum;
+          PE.rows.forEach((R, i) => {
+            const r = st.rows[i];
+            R.li.style.transitionDelay = '';
+            if (!r) { R.li.className = 'pi-row is-void'; return; }
+            R.nm.textContent = r[0];
+            R.mt.textContent = r[1];
+            R.dot.className = 'dot' + (r[2] ? ' c-' + r[2] : '');
+            R.b.className = 'badge' + (r[2] ? ' ' + r[2] : '');
+            R.b.textContent = r[3] || '';
+            R.li.className = 'pi-row' + (r[2] ? ' is-new' : '');
+            if (animate && r[2]) {
+              R.li.classList.add('is-enter');
+              R.li.style.transitionDelay = (n++ * 70) + 'ms';
+              requestAnimationFrame(() => requestAnimationFrame(() => R.li.classList.remove('is-enter')));
+            }
+          });
+        }
+        const pe = demo($('#pe'), {
+          k: 0, seq: null,
+          press(k) { PE.btns.forEach((b, i) => b.setAttribute('aria-pressed', String(i === k))); },
+          start(k) {
+            const S = SCN[k];
+            const L = PE.lines[S.line];
+            const q = new Seq();
+            this.k = k;
+            this.press(k);
+            peBase();
+            peShowLine(L);
+            if (S.add) {
+              let a = '', r = '';
+              L.a.innerHTML = CARET;
+              L.r.textContent = '';
+              q.add(700, () => {});
+              for (const ch of S.add[0]) q.add(95, () => { a += ch; L.a.innerHTML = esc(a) + CARET; });
+              q.add(260, () => { L.a.textContent = a; L.r.innerHTML = CARET; });
+              for (const ch of S.add[1]) q.add(95, () => { r += ch; L.r.innerHTML = esc(r) + CARET; });
+            } else {
+              let mid = S.from;
+              peRule(L, S.pre, mid, S.post);
+              q.add(800, () => {});
+              for (let i = 0; i < S.from.length; i++) q.add(55, () => { mid = mid.slice(0, -1); peRule(L, S.pre, mid, S.post); });
+              q.add(180, () => {});
+              for (const ch of S.to) q.add(95, () => { mid += ch; peRule(L, S.pre, mid, S.post); });
+            }
+            PE.foot.textContent = '편집 중';
+            peImpact(S.before, false, false);
+            q.add(320, () => { PE.sum.textContent = '영향 계산 중…'; });
+            q.add(480, () => { peImpact(S.after, true, true); PE.foot.textContent = S.foot; });
+            q.add(3800, () => this.start((this.k + 1) % SCN.length));
+            this.seq = q;
+          },
+          final(k) {
+            const S = SCN[k == null ? this.k : k];
+            const L = PE.lines[S.line];
+            this.k = SCN.indexOf(S);
+            this.seq = null;
+            this.press(this.k);
+            peBase();
+            peShowLine(L);
+            if (S.add) { L.a.textContent = S.add[0]; L.r.innerHTML = esc(S.add[1]) + CARET; } else peRule(L, S.pre, S.to, S.post);
+            peImpact(S.after, true, false);
+            PE.foot.textContent = S.foot;
+          },
+          reset() { this.start(0); },
+          tick(dt) { if (this.seq) this.seq.tick(dt); }
+        });
+        bindPause(pe, $('#pe-pause'), '정책 편집 데모');
+        PE.btns.forEach((b, i) => b.addEventListener('click', () => {
+          const S = SCN[i];
+          if (reduce || pe.paused) pe.final(i); else { pe.started = true; pe.start(i); }
+          PE.live.textContent = S.label + ': 영향받는 에이전트 ' + S.after.n + '개. ' + S.after.sum;
+        }));
+        /* ── 3.0 개선: 평가셋별 비교 표 ── */
+        const EV = {
+          all: { n: '4,340', acc: [91.2, 94.3], hal: [3.6, 1.8], p95: [2.84, 2.31], cost: [4570, 3870] },
+          fin: { n: '1,200', acc: [89.5, 95.1], hal: [4.6, 1.7], p95: [3.12, 2.48], cost: [5340, 4180] },
+          legal: { n: '840', acc: [86.3, 90.8], hal: [6.1, 3.2], p95: [3.66, 3.92], cost: [7910, 6870] },
+          search: { n: '2,300', acc: [94.0, 95.2], hal: [2.2, 1.4], p95: [1.96, 1.71], cost: [2950, 2610] }
+        };
+        const sgn = (v, s) => (v > 0 ? '+' : v < 0 ? '−' : '±') + s;
+        const MET = {
+          acc: { up: true, max: 100, f: (v) => v.toFixed(1) + '%', d: (a, b) => sgn(b - a, Math.abs(b - a).toFixed(1) + '%p') },
+          hal: { up: false, max: 8, f: (v) => v.toFixed(1) + '%', d: (a, b) => sgn(b - a, Math.abs(b - a).toFixed(1) + '%p') },
+          p95: { up: false, max: 5, f: (v) => v.toFixed(2) + 's', d: (a, b) => sgn(b - a, Math.abs(b - a).toFixed(2) + 's') },
+          cost: { up: false, max: 8000, f: (v) => '₩' + v.toLocaleString('ko-KR'), d: (a, b) => sgn(b - a, Math.abs((b - a) / a * 100).toFixed(1) + '%') }
+        };
+        const evBody = $('#ev-body');
+        const evBtns = $$('#ev-seg [role="radio"]');
+        let evT = 0;
+        function evRender(ds) {
+          const D = EV[ds];
+          const worse = [];
+          $$('tr', evBody).forEach((tr) => {
+            const M = MET[tr.dataset.m];
+            const [a, b] = D[tr.dataset.m];
+            const td = tr.querySelectorAll('td');
+            td[0].querySelector('.ev-v').textContent = M.f(a);
+            td[0].querySelector('.ev-bar i').style.width = Math.min(100, a / M.max * 100).toFixed(1) + '%';
+            td[1].querySelector('.ev-v').textContent = M.f(b);
+            td[1].querySelector('.ev-bar i').style.width = Math.min(100, b / M.max * 100).toFixed(1) + '%';
+            const good = M.up ? b > a : b < a;
+            setBadge(td[2].querySelector('.badge'), good ? 'ok' : 'err', M.d(a, b));
+            if (!good) worse.push(tr.querySelector('th').firstChild.textContent.trim());
+          });
+          $('#ev-n').textContent = D.n;
+          $('#ev-verdict').innerHTML = worse.length
+            ? worse.length + '개 지표 악화 · <span class="v">' + esc(worse.join(', ')) + ' 확인 필요</span>'
+            : '4개 지표 모두 개선 · <span class="v">배포 권장</span>';
+        }
+        function evSelect(i, focus) {
+          evBtns.forEach((b, j) => { b.setAttribute('aria-checked', String(i === j)); b.tabIndex = i === j ? 0 : -1; });
+          if (focus) evBtns[i].focus();
+          const ds = evBtns[i].dataset.ds;
+          clearTimeout(evT);
+          if (reduce) { evRender(ds); return; }
+          evBody.classList.add('swap');
+          evT = setTimeout(() => { evRender(ds); evBody.classList.remove('swap'); }, 150);
+        }
+        evBtns.forEach((b, i) => {
+          b.addEventListener('click', () => evSelect(i, false));
+          b.addEventListener('keydown', (e) => {
+            const n = evBtns.length;
+            let j = -1;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % n;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + n) % n;
+            else if (e.key === 'Home') j = 0;
+            else if (e.key === 'End') j = n - 1;
+            if (j < 0) return;
+            e.preventDefault();
+            evSelect(j, true);
+          });
+        });
+
+        /* ── 속도: ⌘K 자동 재생 데모 ── */
+        const ICON = (n) => '<svg aria-hidden="true"><use href="#i-' + n + '"/></svg>';
+        const KD_IDLE = [{ g: '최근' }, { i: 'agent', t: '정산 리포트 에이전트', m: '에이전트' }, { i: 'wait', t: '승인 대기 보기', m: '3건' }, { i: 'doc', t: '승인 정책 열기', m: 'production' }, { g: '작업' }, { i: 'retry', t: '실패한 실행 재시도', m: 'run_8f36e2' }, { i: 'chart', t: '평가 비교 열기', m: 'eval_1029' }];
+        const KD = [
+          { q: ['재', '재시', '재시도'], moves: 0, res: '재시도 대기열에 추가했습니다 · run_8f36e2',
+            items: [{ g: '작업' }, { i: 'retry', t: '실패한 실행 재시도', m: 'run_8f36e2' }, { i: 'doc', t: '재시도 정책 보기', m: '정책 #7' }, { g: '실행' }, { i: 'run', t: '재시도된 실행 모아 보기', m: '오늘 14건' }] },
+          { q: ['결', '결제'], moves: 1, res: '결제 승인 대기 2건을 열었습니다',
+            items: [{ g: '정책' }, { i: 'doc', t: '결제 API 호출 규칙 열기', m: '정책 #2' }, { g: '승인' }, { i: 'wait', t: '결제 승인 대기 보기', m: '2건' }, { i: 'run', t: '결제 도구 호출 기록', m: '오늘 128건' }] },
+          { q: ['평', '평가'], moves: 2, res: '평가 대기 중인 에이전트 2개를 열었습니다',
+            items: [{ g: '평가' }, { i: 'chart', t: '평가 비교 열기', m: 'eval_1029' }, { i: 'db', t: '평가셋 관리', m: '4,340건' }, { g: '에이전트' }, { i: 'agent', t: '평가 대기 중인 에이전트', m: '2개' }] }
+        ];
+        const KQ = $('#kd-q'), KL = $('#kd-list'), KR = $('#kd-res'), KRT = $('#kd-res-t');
+        function kdList(items, act) {
+          let k = -1;
+          KL.innerHTML = items.map((it) => (it.g
+            ? '<p class="kd-g">' + it.g + '</p>'
+            : '<div class="kd-it' + (++k === act ? ' is-act' : '') + '">' + ICON(it.i) + it.t + '<span class="meta' + (isId(it.m) ? ' mono' : '') + '">' + it.m + '</span></div>')).join('');
+        }
+        function kdHit(name) {
+          const el = $('.keys [data-k="' + name + '"]');
+          if (!el) return;
+          el.classList.add('is-hit');
+          setTimeout(() => el.classList.remove('is-hit'), 220);
+        }
+        function kdIdle() {
+          KQ.innerHTML = '<span class="ph">명령 또는 검색어 입력</span>';
+          kdList(KD_IDLE, 0);
+          KR.classList.remove('is-done');
+          KRT.textContent = '입력하는 대로 목록이 좁혀집니다';
+        }
+        const kd = demo($('#kd'), {
+          k: 0, seq: null,
+          start(k) {
+            const S = KD[k];
+            const q = new Seq();
+            let act = 0;
+            this.k = k;
+            kdIdle();
+            q.add(500, () => kdHit('open'));
+            S.q.forEach((txt, i) => q.add(i ? 170 : 600, () => { KQ.innerHTML = esc(txt) + '<span class="caret"></span>'; kdList(S.items, 0); }));
+            for (let m = 0; m < S.moves; m++) q.add(420, () => { kdHit('down'); kdList(S.items, ++act); });
+            q.add(520, () => { kdHit('enter'); KR.classList.add('is-done'); KRT.textContent = S.res; });
+            q.add(2000, () => kdHit('esc'));
+            q.add(260, () => this.start((this.k + 1) % KD.length));
+            this.seq = q;
+          },
+          final() {
+            const S = KD[0];
+            this.seq = null;
+            KQ.textContent = S.q[S.q.length - 1];
+            kdList(S.items, 0);
+            KR.classList.add('is-done');
+            KRT.textContent = S.res;
+          },
+          reset() { this.start(0); },
+          tick(dt) { if (this.seq) this.seq.tick(dt); }
+        });
+        bindPause(kd, $('#kd-pause'), '명령 메뉴 데모');
+
+        /* ── 명령 메뉴: ⌘K / Ctrl+K로 여는 실제 대화상자 ── */
+        let singleKeys = true;
+        const allPaused = () => demos.every((d) => d.paused);
+        const val = (v) => (typeof v === 'function' ? v() : v);
+        const norm = (s) => s.toLowerCase().replace(/\s+/g, '');
+        function setSingleKeys(v) {
+          singleKeys = v;
+          $$('[data-key-hint]').forEach((el) => { el.hidden = !v; });
+          $$('[data-key-target]').forEach((el) => { if (v) el.setAttribute('aria-keyshortcuts', 'D'); else el.removeAttribute('aria-keyshortcuts'); });
+        }
+        const CMDS = [
+          { g: '이동', i: 'go', t: '데모 보기 · 1.0 관찰', k: 'D', kw: 'demo observe trace 데모 관찰 트레이스 실행', run: () => goto('#observe'), msg: '1.0 관찰로 이동했습니다.' },
+          { g: '이동', i: 'go', t: '2.0 통제 · 승인 정책', kw: 'control policy 통제 정책 승인 권한', run: () => goto('#control'), msg: '2.0 통제로 이동했습니다.' },
+          { g: '이동', i: 'go', t: '3.0 개선 · 평가 비교', kw: 'improve eval 개선 평가 비교', run: () => goto('#improve'), msg: '3.0 개선으로 이동했습니다.' },
+          { g: '이동', i: 'go', t: '체인지로그', kw: 'changelog release 업데이트 릴리스 새 기능', run: () => goto('#changelog'), msg: '체인지로그로 이동했습니다.' },
+          { g: '작업', i: 'retry', t: '실패한 실행 재시도', h: 'run_8f36e2', kw: 'retry 재시도 실패 오류', msg: '시안 데모 — 실제 실행은 재시도되지 않습니다.' },
+          { g: '작업', i: 'doc', t: '결제 API 호출 규칙 열기', h: '정책 #2', kw: 'payment policy 결제 한도 정책',
+            run: () => { goto('#control'); if (reduce || pe.paused) pe.final(0); else { pe.started = true; pe.start(0); } }, msg: '2.0 통제의 결제 규칙으로 이동했습니다.' },
+          { g: '작업', i: 'go', t: '데모 예약하기', kw: 'book demo 데모 예약 상담 도입', msg: MSG.book },
+          { g: '작업', i: 'go', t: '무료로 시작하기', kw: 'start signup free 무료 시작 가입', msg: MSG.start },
+          { g: '설정', i: 'set', t: () => (singleKeys ? '한 글자 단축키 끄기' : '한 글자 단축키 켜기'), h: 'D 키', kw: 'shortcut keyboard 단축키 키보드',
+            run: () => setSingleKeys(!singleKeys), msg: () => (singleKeys ? '한 글자 단축키(D)를 켰습니다.' : '한 글자 단축키(D)를 껐습니다.') },
+          { g: '설정', i: 'set', t: () => (allPaused() ? '데모 애니메이션 다시 재생' : '데모 애니메이션 모두 멈추기'), kw: 'animation motion pause play 애니메이션 모션 정지 재생',
+            run: () => { const v = !allPaused(); demos.forEach((d) => setPaused(d, v)); }, msg: () => (allPaused() ? '모든 데모 애니메이션을 멈췄습니다.' : '데모 애니메이션을 다시 재생합니다.') }
+        ];
+        const dlg = $('#cmdk'), input = $('#cmdk-in'), list = $('#cmdk-list'), empty = $('#cmdk-empty'), xBtn = $('.cmdk-x');
+        let filtered = [], active = 0, lastFocus = null, isOpen = false, closeT = 0;
+        function setActive(i, scroll) {
+          active = i;
+          $$('.cmdk-o', list).forEach((o, j) => o.setAttribute('aria-selected', String(j === i)));
+          const cur = document.getElementById('co-' + i);
+          if (cur) {
+            input.setAttribute('aria-activedescendant', cur.id);
+            if (scroll) cur.scrollIntoView({ block: 'nearest' });
+          } else input.removeAttribute('aria-activedescendant');
+        }
+        function renderList() {
+          const q = norm(input.value);
+          filtered = CMDS.filter((c) => !q || norm(val(c.t) + (c.h || '') + c.kw + c.g).includes(q));
+          list.textContent = '';
+          empty.hidden = filtered.length > 0;
+          let grp = null, g = null;
+          filtered.forEach((c, i) => {
+            if (c.g !== g) {
+              g = c.g;
+              grp = document.createElement('div');
+              grp.setAttribute('role', 'group');
+              grp.setAttribute('aria-labelledby', 'cg-' + i);
+              grp.innerHTML = '<div class="cmdk-g" id="cg-' + i + '" role="presentation">' + g + '</div>';
+              list.appendChild(grp);
+            }
+            const o = document.createElement('div');
+            o.className = 'cmdk-o';
+            o.id = 'co-' + i;
+            o.setAttribute('role', 'option');
+            o.innerHTML = ICON(c.i) + '<span>' + esc(val(c.t)) + '</span>'
+              + (c.k && singleKeys ? '<span class="hint"><span class="kbd kbd-hint">' + c.k + '</span></span>' : c.h ? '<span class="hint' + (isId(c.h) ? ' mono' : '') + '">' + esc(c.h) + '</span>' : '');
+            o.addEventListener('mousemove', () => { if (active !== i) setActive(i, false); });
+            o.addEventListener('click', () => exec(i));
+            grp.appendChild(o);
+          });
+          setActive(Math.min(active, Math.max(0, filtered.length - 1)), false);
+        }
+        function open() {
+          if (isOpen) return;
+          isOpen = true;
+          clearTimeout(closeT);
+          if (menuOpen()) setMenu(false);
+          if (!dlg.open) {
+            lastFocus = document.activeElement;
+            input.value = '';
+            active = 0;
+            renderList();
+            dlg.showModal();
+          }
+          input.focus();
+          if (reduce) dlg.classList.add('is-open'); else requestAnimationFrame(() => dlg.classList.add('is-open'));
+        }
+        function close() {
+          if (!isOpen) return;
+          isOpen = false;
+          dlg.classList.remove('is-open');
+          const done = () => {
+            if (dlg.open) dlg.close();
+            if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+          };
+          if (reduce) done(); else closeT = setTimeout(done, 160);
+        }
+        function exec(i) {
+          const c = filtered[i];
+          if (!c) return;
+          close();
+          setTimeout(() => { if (c.run) c.run(); toast(val(c.msg)); }, reduce ? 0 : 170);
+        }
+        dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+        dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+        xBtn.addEventListener('click', close);
+        input.addEventListener('input', () => { active = 0; renderList(); });
+        dlg.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const n = filtered.length;
+            if (n) setActive(e.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n, true);
+          } else if (e.key === 'Enter' && e.target === input) {
+            if (e.isComposing) return;
+            e.preventDefault();
+            exec(active);
+          } else if (e.key === 'Tab') {
+            e.preventDefault();
+            (document.activeElement === input ? xBtn : input).focus();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            close();
+          }
+        });
+        $$('[data-cmdk-open]').forEach((b) => b.addEventListener('click', open));
+
+        /* ── 전역 단축키: ⌘K / Ctrl+K, D(데모 보기) ── */
+        document.addEventListener('keydown', (e) => {
+          const k = e.key;
+          if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.code === 'KeyK' || k === 'k' || k === 'K')) {
+            e.preventDefault();
+            if (isOpen) close(); else open();
+            return;
+          }
+          if (isOpen) return;
+          if (k === 'Escape' && menuOpen()) { setMenu(false); mBtn.focus(); return; }
+          if (!singleKeys || e.metaKey || e.ctrlKey || e.altKey || e.repeat || e.isComposing) return;
+          const t = e.target;
+          if (t && t.closest && t.closest('input, textarea, select, [contenteditable]')) return;
+          if (e.code === 'KeyD' || k === 'd' || k === 'D') { e.preventDefault(); goto('#observe'); }
+        });
+
+        /* ── 동작 줄이기: 모든 데모를 최종 상태로 고정 ── */
+        lt.final = function () {
+          this.load(0);
+          for (let t = 0; t <= this.total + 32 && !this.end; t += 16) this.tick(16);
+        };
+        function applyReduce() {
+          if (reduce) {
+            demos.forEach((d) => { if (d.started) d.final(); }); // 시작 전이면 정적 HTML이 이미 최종 상태
+            rv.forEach((el) => el.classList.add('in'));
+            shot.classList.remove('lit');
+          } else {
+            demos.forEach((d) => { d.started = d.vis; if (d.vis) d.reset(); });
+          }
+          sync();
+        }
+        const onReduce = (e) => { reduce = e.matches; applyReduce(); };
+        if (mqReduce.addEventListener) mqReduce.addEventListener('change', onReduce); else mqReduce.addListener(onReduce);
+        if (reduce) applyReduce();
+        sync();
+      })();
+    </script>
+  </body>
+</html>

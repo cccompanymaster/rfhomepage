@@ -53,7 +53,8 @@ for (const d of designs) {
     { name: 'desktop', vw: 1440, vh: 900, dpr: 1, tall: 2700, mobile: false },
     { name: 'mobile', vw: 390, vh: 844, dpr: 2, tall: 2532, mobile: true },
   ]) {
-    const ctx = await browser.newContext({ viewport: { width: v.vw, height: v.vh }, deviceScaleFactor: v.dpr, isMobile: v.mobile, hasTouch: v.mobile });
+    // reducedMotion: 스크롤 연동 장면이 있는 템플릿은 최종 상태로 캡처 (예: keyboard 분해도)
+    const ctx = await browser.newContext({ viewport: { width: v.vw, height: v.vh }, deviceScaleFactor: v.dpr, isMobile: v.mobile, hasTouch: v.mobile, reducedMotion: d.reducedMotion ? 'reduce' : 'no-preference' });
     await ctx.route(/googletagmanager|google-analytics|ipify/, (r) => r.fulfill({ body: '{}' }));
     const page = await ctx.newPage();
     // query: 방문 시각에 따라 화면이 바뀌는 템플릿은 캡처 상태를 고정 (예: accounting ?tod=dawn)

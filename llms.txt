@@ -1,10 +1,10 @@
 # NOAH 노아홈페이지
 
-> 노아홈페이지(NOAH)는 씨씨컴퍼니가 운영하는 소상공인·중소기업용 홈페이지 제작 서비스입니다. 업종별로 미리 만들어 둔 디자인 18종 중 하나를 고르면 그 위에 업체 브랜드(상호·로고·색·사진·문구)를 적용해, 자료 확인 후 7일 안에 오픈합니다. 기본 제작비는 199,000원(부가세 별도, 부가세 포함 218,900원)입니다.
+> 노아홈페이지(NOAH)는 씨씨컴퍼니가 운영하는 소상공인·중소기업용 홈페이지 제작 서비스입니다. 업종별로 미리 만들어 둔 디자인 21종 중 하나를 고르면 그 위에 업체 브랜드(상호·로고·색·사진·문구)를 적용해, 자료 확인 후 7일 안에 오픈합니다. 기본 제작비는 199,000원(부가세 별도, 부가세 포함 218,900원)입니다.
 
 ## 핵심 사실
 
-- 서비스: 업종별 디자인 18종 중 선택 → 브랜드 적용 → 오픈. 처음부터 새로 디자인하는 맞춤 제작이 아님
+- 서비스: 업종별 디자인 21종 중 선택 → 브랜드 적용 → 오픈. 처음부터 새로 디자인하는 맞춤 제작이 아님
 - 기본 제작비: 199,000원, 부가세 별도, 1회 결제
 - 제작 기간: 자료가 모인 날부터 7일 (Day 1 상담·디자인 선택 → Day 2–3 콘텐츠·카피 → Day 4–5 디자인 적용 → Day 6 검수·수정 → Day 7 오픈)
 - 기본 포함: PC·태블릿·모바일 반응형, 한국어 카피 검수, 검색 기본 설정(메타·구조화 데이터), 카카오톡 공유 미리보기, 1년 호스팅, 도메인 연결·SSL 안내, 1년 무제한 텍스트 수정, 파비콘 제작·보유 로고 SVG 변환, 완료 후 소스 코드·계정 이전
@@ -24,13 +24,13 @@
 - [가격](https://noahhomepage.co.kr/pricing): 기본 패키지 포함·불포함 항목, 1년 무제한 수정 플랜
 - [옵션 안내](https://noahhomepage.co.kr/options): 서브페이지·로고·예약 캘린더·SEO 등 추가 옵션 설명과 현재 단가
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process): 7일 일정, 수정 범위, 호스팅·도메인, 기본 페이지 수
-- [레퍼런스](https://noahhomepage.co.kr/references): 고를 수 있는 디자인 18종 (실제로 작동하는 데모 페이지)
+- [레퍼런스](https://noahhomepage.co.kr/references): 고를 수 있는 디자인 21종 (실제로 작동하는 데모 페이지)
 - [상담 신청](https://noahhomepage.co.kr/contact): 무료 상담, 영업일 1일 안에 회신
 - [회사 소개](https://noahhomepage.co.kr/about): 운영사, 일하는 방식(가격 공개·결과 비보장·소유권 이전·환불 기준), 사업자 정보
 - [이용약관·환불 규정](https://noahhomepage.co.kr/terms)
 - [개인정보처리방침](https://noahhomepage.co.kr/privacy)
 
-## 디자인 18종 (업종별 데모)
+## 디자인 21종 (업종별 데모)
 
 레퍼런스의 업체명은 모두 데모용 가상 업체이며, 실제 고객 사례가 아닙니다.
 
@@ -52,6 +52,9 @@
 - [위즈웍스](https://noahhomepage.co.kr/templates/agency-quote): 에이전시 (견적형)
 - [논픽셀](https://noahhomepage.co.kr/templates/agency-dark): 스튜디오 포트폴리오 (다크)
 - [플럭스랩](https://noahhomepage.co.kr/templates/agency-interactive): 스튜디오 (인터랙티브)
+- [Kairos](https://noahhomepage.co.kr/templates/ai-agent): AI 에이전트 운영 SaaS (다크, 제품 화면 중심)
+- [hollow](https://noahhomepage.co.kr/templates/keyboard): 기계식 키보드 쇼핑몰 (D2C, 사전 예약)
+- [Sumday](https://noahhomepage.co.kr/templates/accounting): 세무·회계 자동화 SaaS
 
 ## 노아홈페이지에 대해 자주 묻는 질문
 

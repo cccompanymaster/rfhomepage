@@ -36,8 +36,6 @@
         const total = refCards.length;
         const counter = document.querySelector('[data-card-counter]');
         if (counter) counter.textContent = `${visible} / ${total} references`;
-        // resize iframes after layout shift
-        setTimeout(refit, 50);
       });
     });
   }

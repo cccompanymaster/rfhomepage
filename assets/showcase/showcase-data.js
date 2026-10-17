@@ -251,5 +251,47 @@ export const DESIGNS = [
     "m": "/assets/showcase/agency-interactive-m.webp?v=d26dcea5",
     "mt": "/assets/showcase/agency-interactive-mt.webp?v=b968a071",
     "mtRatio": 6.4932
+  },
+  {
+    "slug": "ai-agent",
+    "nameKo": "Kairos",
+    "industryKo": "AI 에이전트 SaaS",
+    "tagKo": "수백 개의 에이전트, 하나의 관제 화면",
+    "accent": "#7b8cff",
+    "url": "/templates/ai-agent",
+    "d": "/assets/showcase/ai-agent-d.webp?v=c451d57b",
+    "dt": "/assets/showcase/ai-agent-dt.webp?v=85baf50b",
+    "dtRatio": 1.875,
+    "m": "/assets/showcase/ai-agent-m.webp?v=d264fefb",
+    "mt": "/assets/showcase/ai-agent-mt.webp?v=17cbf422",
+    "mtRatio": 6.4932
+  },
+  {
+    "slug": "keyboard",
+    "nameKo": "hollow",
+    "industryKo": "키보드 쇼핑몰",
+    "tagKo": "전부 보여드립니다",
+    "accent": "#ff2d20",
+    "url": "/templates/keyboard",
+    "d": "/assets/showcase/keyboard-d.webp?v=25c64cee",
+    "dt": "/assets/showcase/keyboard-dt.webp?v=96c0f3d5",
+    "dtRatio": 1.875,
+    "m": "/assets/showcase/keyboard-m.webp?v=8d0e2827",
+    "mt": "/assets/showcase/keyboard-mt.webp?v=e2a43c97",
+    "mtRatio": 6.4932
+  },
+  {
+    "slug": "accounting",
+    "nameKo": "Sumday",
+    "industryKo": "세무·회계 SaaS",
+    "tagKo": "결산이 끝나는 날을 앞당기세요",
+    "accent": "#e4f45c",
+    "url": "/templates/accounting",
+    "d": "/assets/showcase/accounting-d.webp?v=f8fe0fa5",
+    "dt": "/assets/showcase/accounting-dt.webp?v=780b8968",
+    "dtRatio": 1.875,
+    "m": "/assets/showcase/accounting-m.webp?v=c8b6876e",
+    "mt": "/assets/showcase/accounting-mt.webp?v=004f8a44",
+    "mtRatio": 6.4932
   }
 ];
