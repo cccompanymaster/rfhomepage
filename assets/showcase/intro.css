@@ -137,6 +137,14 @@
 /* 멈출 때: 스크롤한 자리에서 정지한 채 흐려지고 첫 화면이 다시 드러남 */
 .sc-view.is-settling img.sc-tall { animation: sc-scroll var(--dur, 14s) ease-in-out var(--delay, 1.4s) infinite alternate; animation-play-state: paused; }
 @keyframes sc-scroll { to { transform: translateY(var(--shift, 0px)); } }
+/* PC 모니터: 긴 화면이라 출발이 굼떠 보여 내려갈 때 초반만 조금 빠르게 — 바닥 도착·되돌아오기는 부드럽게 */
+@keyframes sc-scroll-pc {
+  0%   { transform: translateY(0); animation-timing-function: cubic-bezier(0.3, 0.06, 0.35, 1); }
+  50%  { transform: translateY(var(--shift, 0px)); animation-timing-function: ease-in-out; }
+  100% { transform: translateY(0); }
+}
+.sc-monitor .sc-view.is-scrolling img.sc-tall.is-loaded { animation: sc-scroll-pc calc(var(--dur, 14s) * 2) linear var(--delay, 1.4s) infinite; }
+.sc-monitor .sc-view.is-settling img.sc-tall { animation: sc-scroll-pc calc(var(--dur, 14s) * 2) linear var(--delay, 1.4s) infinite; animation-play-state: paused; }
 /* 펼친 화면에서만 마우스를 올리면 멈춤 — 고르는 중엔 가운데 모니터 위에 커서가 있어도 계속 스크롤 */
 .sc-intro[data-mode="detail"] .sc-view:hover img.sc-tall { animation-play-state: paused; }
 
@@ -191,7 +199,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sc-item, .sc-copy > *, .sc-glow { transition: none; }
-  .sc-view.is-scrolling img.sc-tall.is-loaded { animation: none; }
+  .sc-view.is-scrolling img.sc-tall.is-loaded, .sc-intro .sc-view.is-scrolling img.sc-tall.is-loaded { animation: none; }
   .sc-intro.is-leaving { transform: none; opacity: 0; transition: opacity 0.2s linear; }
   .intro-leaving #hero { animation: none; }
 }
