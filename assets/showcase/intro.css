@@ -132,10 +132,13 @@
 }
 .sc-view img.is-loaded { opacity: 1; }
 .sc-view img.sc-tall { opacity: 0; }
-.sc-view.is-scrolling img.sc-tall.is-loaded { opacity: 1; animation: sc-scroll var(--dur, 14s) ease-in-out 1.4s infinite alternate; }
+.sc-view.is-scrolling img.sc-tall.is-loaded { opacity: 1; animation: sc-scroll var(--dur, 14s) ease-in-out var(--delay, 1.4s) infinite alternate; }
 .sc-view.is-scrolling img.sc-first { opacity: 0; }
+/* 멈출 때: 스크롤한 자리에서 정지한 채 흐려지고 첫 화면이 다시 드러남 */
+.sc-view.is-settling img.sc-tall { animation: sc-scroll var(--dur, 14s) ease-in-out var(--delay, 1.4s) infinite alternate; animation-play-state: paused; }
 @keyframes sc-scroll { to { transform: translateY(var(--shift, 0px)); } }
-.sc-view:hover img.sc-tall { animation-play-state: paused; }
+/* 펼친 화면에서만 마우스를 올리면 멈춤 — 고르는 중엔 가운데 모니터 위에 커서가 있어도 계속 스크롤 */
+.sc-intro[data-mode="detail"] .sc-view:hover img.sc-tall { animation-play-state: paused; }
 
 /* ── 하단 도크 ── */
 .sc-dock {

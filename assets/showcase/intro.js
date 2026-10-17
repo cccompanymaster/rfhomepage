@@ -1,7 +1,8 @@
 /* ============================================================
    홈 첫 화면 — 기기 목업 쇼케이스
    위 줄: 모니터(데스크톱 화면) · 아래 줄: 휴대폰(모바일 화면). 같은 디자인끼리 세로로 짝.
-   흐름: 고르기(‹ › · 스와이프 · 옆 기기 클릭) → 펼쳐 보기(두 화면이 실제처럼 스크롤)
+   흐름: 고르기(‹ › · 스와이프 · 옆 기기 클릭, 한 디자인에 1초 머물면 두 화면이 스크롤)
+        → 펼쳐 보기(크게 띄워 실제처럼 스크롤)
         → [다른 디자인 보기] / [홈페이지로 보기] / [이게 좋겠어요!] → 히어로
    첫 방문(세션당 1회) 자동 표시, 홈 레퍼런스 구간 버튼으로 다시 열 수 있음.
    ============================================================ */
@@ -154,11 +155,12 @@ function select(i, announce = true) {
   $('[data-sc="visit"]').href = d.url;
   loadNear();
   place();
+  if (mode === 'shelf') scheduleShelfScroll();
   if (announce) $('.sc-live').textContent = `${sel + 1}번째, ${d.nameKo}. ${d.industryKo}.`;
 }
 
-/* ── 펼치기: 두 화면을 긴 캡처로 바꿔 천천히 스크롤 ── */
-function startScroll(view, src, ratio) {
+/* ── 두 화면을 긴 캡처로 바꿔 천천히 스크롤 (펼쳤을 때 · 고르는 중 1초 머물 때) ── */
+function tallOf(view, src) {
   let tall = view.querySelector('img.sc-tall');
   if (!tall) {
     tall = document.createElement('img');
@@ -168,16 +170,53 @@ function startScroll(view, src, ratio) {
     tall.addEventListener('load', () => tall.classList.add('is-loaded'));
     view.appendChild(tall);
   }
+  if (!tall.src) tall.src = src;
+  return tall;
+}
+function startScroll(view, src, ratio, delay = 1.4) {
+  if (view.classList.contains('is-scrolling')) return;   // 이미 스크롤 중이면 그대로 이어감
+  const tall = tallOf(view, src);
   const w = view.clientWidth;
   const h = view.clientHeight;
   const shift = Math.min(0, h - w * ratio);
   view.style.setProperty('--shift', `${Math.round(shift)}px`);
   view.style.setProperty('--dur', `${Math.max(8, Math.min(20, Math.abs(shift) / 45)).toFixed(1)}s`);
-  if (!tall.src) tall.src = src;
-  if (!reduceMotion.matches) view.classList.add('is-scrolling');
+  view.style.setProperty('--delay', `${delay}s`);
+  if (reduceMotion.matches) return;
+  // 긴 캡처가 다 받아진 뒤에 바꿔 끼움 (빈 화면 깜빡임 없게). 그 사이 멈췄으면 켜지 않음
+  const run = view._run = (view._run || 0) + 1;
+  const go = () => { if (view._run === run) { view.classList.remove('is-settling'); view.classList.add('is-scrolling'); } };
+  if (tall.complete && tall.naturalWidth) go(); else tall.addEventListener('load', go, { once: true });
 }
+/* 멈출 때는 스크롤한 자리에서 멈춘 채 첫 화면과 겹쳐 사라지게 — 맨 위로 툭 튀지 않게 */
 function stopScroll() {
-  root.querySelectorAll('.sc-view.is-scrolling').forEach((v) => v.classList.remove('is-scrolling'));
+  root.querySelectorAll('.sc-view').forEach((v) => {
+    const run = v._run = (v._run || 0) + 1;
+    if (!v.classList.contains('is-scrolling')) return;
+    v.classList.remove('is-scrolling');
+    v.classList.add('is-settling');
+    setTimeout(() => { if (v._run === run) v.classList.remove('is-settling'); }, 550);
+  });
+}
+
+/* 고르는 중 한 디자인에 1초 머물면 모니터·휴대폰이 그 사이트를 스크롤해 보여 줌 (긴 캡처는 0.3초째부터 미리 받음) */
+let shelfTimer = 0;
+let preloadTimer = 0;
+function clearShelfScroll() { clearTimeout(shelfTimer); clearTimeout(preloadTimer); }
+function scheduleShelfScroll() {
+  clearShelfScroll();
+  stopScroll();
+  if (reduceMotion.matches || mode !== 'shelf' || leaving) return;
+  const i = sel;
+  const d = DESIGNS[i];
+  const mv = items[i].mon.querySelector('.sc-view');
+  const pv = items[i].phone.querySelector('.sc-view');
+  preloadTimer = setTimeout(() => { tallOf(mv, d.dt); tallOf(pv, d.mt); }, 300);
+  shelfTimer = setTimeout(() => {
+    if (mode !== 'shelf' || sel !== i || leaving) return;
+    startScroll(mv, d.dt, d.dtRatio, 0);
+    startScroll(pv, d.mt, d.mtRatio, 0);
+  }, 1000);
 }
 
 let scrollTimer = 0;
@@ -201,12 +240,13 @@ function setMode(next) {
   place();
   const d = DESIGNS[sel];
   if (next === 'detail') {
+    clearShelfScroll();
     scheduleDetailScroll();
     $('.sc-live').textContent = `${d.nameKo}을 펼쳤습니다. 다른 디자인 보기, 홈페이지로 보기, 이게 좋겠어요 버튼이 있습니다.`;
     track('intro_open', { item: d.slug });
     $('[data-sc="how"]').focus({ preventScroll: true });
   } else {
-    stopScroll();
+    scheduleShelfScroll();
     $('.sc-stage').focus({ preventScroll: true });
   }
 }
@@ -261,6 +301,7 @@ function pickToast(d) {
 function exit(method) {
   if (leaving) return;
   leaving = true;
+  clearShelfScroll();
   try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (_) {}
   const d = DESIGNS[sel];
   track('intro_exit', { method, item: d?.slug });
@@ -332,6 +373,7 @@ window.addEventListener('resize', () => {
     measure();
     place();
     if (mode === 'detail') { stopScroll(); scheduleDetailScroll(); }
+    else scheduleShelfScroll();
   });
 });
 
