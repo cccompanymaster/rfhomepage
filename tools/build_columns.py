@@ -105,66 +105,6 @@ HEAD_COMMON = '''<meta name="robots" content="index, follow, max-snippet:-1, max
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css" />'''
 
-STYLE = '''      body { background: var(--bg); color: var(--text); }
-      .disp { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; letter-spacing: -0.03em; font-weight: 700; }
-      .col-head { border-bottom: 1px solid var(--line); }
-      .chip { display:inline-flex; align-items:center; padding: 9px 17px; border-radius: 999px; border: 1px solid var(--line); font-size: 14.5px; font-weight: 600; color: var(--text-dim); background: transparent; transition: all .2s; white-space: nowrap; cursor: pointer; }
-      .chip:hover { border-color: rgba(17,24,33,.24); color: var(--text); }
-      .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-      .card { display:block; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-soft); padding: 22px; transition: transform .25s, border-color .25s; height: 100%; }
-      .card:hover { transform: translateY(-3px); border-color: rgba(17,24,33,.20); box-shadow: 0 14px 30px -18px rgba(17,24,33,.22); }
-      .card .cat { font-size: 12px; letter-spacing: .16em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-      .card h3 { font-size: 19px; font-weight: 700; line-height: 1.4; margin: 10px 0 8px; }
-      .card p { font-size: 15px; line-height: 1.75; color: var(--text-dim); }
-      .card .meta { font-size: 13px; color: var(--text-quiet); margin-top: 14px; }
-      .f-search { width: 100%; padding: 16px 20px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font-size: 16.5px; }
-      .f-search:focus { outline: none; border-color: var(--accent-deep); box-shadow: 0 0 0 3px rgba(255,90,43,.16); }
-      .pager button { min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); font-size: 14px; font-weight: 600; transition: all .2s; }
-      .pager button:hover:not(:disabled) { border-color: rgba(17,24,33,.24); color: var(--text); }
-      .pager button[aria-current="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-      .pager button:disabled { opacity: .35; cursor: not-allowed; }
-
-      /* 목차 */
-      .answer-box { border: 1px solid rgba(255, 90, 43, .26); background: var(--accent-soft); border-radius: 14px; padding: 18px 22px; }
-      .answer-q { font-size: 13.5px; font-weight: 700; color: var(--accent-deep); margin-bottom: 6px; }
-      .answer-q::before { content: 'Q. '; }
-      .answer-a { font-size: 17px; line-height: 1.75; color: var(--text); font-weight: 600; }
-      .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
-      .toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
-      .toc ol { list-style: none; counter-reset: t; }
-      .toc li { counter-increment: t; margin-bottom: 9px; }
-      .toc li:last-child { margin-bottom: 0; }
-      .toc a { font-size: 16px; color: var(--text-dim); line-height: 1.55; display: flex; gap: 10px; transition: color .18s; }
-      .toc a::before { content: counter(t, decimal-leading-zero); font-size: 11.5px; color: var(--text-quiet); font-weight: 700; padding-top: 3px; flex-shrink: 0; }
-      .toc a:hover { color: var(--text); }
-
-      /* 본문 타이포 */
-      .prose { font-size: 17.5px; line-height: 1.95; color: var(--text-dim); }
-      .prose h2 { font-family:'Space Grotesk','Pretendard Variable',sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 46px 0 16px; padding-top: 22px; border-top: 1px solid var(--line-soft); scroll-margin-top: 24px; }
-      .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-      .prose h3 { font-size: 20px; font-weight: 700; color: var(--text); margin: 28px 0 10px; scroll-margin-top: 24px; }
-      .prose p { margin: 0 0 18px; }
-      .prose strong { color: var(--text); font-weight: 700; }
-      .prose a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,90,43,.42); transition: text-decoration-color .2s; }
-      .prose a:hover { text-decoration-color: var(--accent); }
-      .prose ul, .prose ol { margin: 0 0 20px; padding-left: 20px; }
-      .prose li { margin-bottom: 11px; }
-      .prose ul li { list-style: none; position: relative; padding-left: 16px; }
-      .prose ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent-deep); }
-      .prose ol { list-style: decimal; }
-      .prose ol li { padding-left: 4px; }
-      .prose blockquote { border-left: 3px solid var(--accent-deep); padding: 4px 0 4px 18px; margin: 0 0 20px; color: var(--text); font-style: normal; }
-      .prose table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 16px; display: block; overflow-x: auto; }
-      .prose th, .prose td { border: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
-      .prose th { background: var(--bg-soft); color: var(--text); font-weight: 700; white-space: nowrap; }
-      .prose code { background: var(--bg-elev); padding: 2px 7px; border-radius: 5px; font-size: 13.5px; color: var(--accent); }
-      .cta-box { border: 1px solid rgba(255,90,43,.28); border-radius: 18px; background: linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,0)); padding: 30px; }
-      .rel a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
-      .rel a:hover { border-color: rgba(17,24,33,.20); background: var(--bg-soft); }
-      .pn a { display:block; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: border-color .2s, background .2s; }
-      .pn a:hover { border-color: rgba(17,24,33,.20); background: var(--bg-soft); }
-      .hub-pill { display:inline-flex; align-items:center; gap:7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--text-dim); transition: all .2s; }
-      .hub-pill:hover { border-color: var(--accent); color: var(--text); }'''
 
 NAV = '''    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
       <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
@@ -434,9 +374,7 @@ def build_article(art, all_cols, slugset, by_cluster):
     <meta name="twitter:image" content="{SITE}/assets/images/og/{art['slug']}.png" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
-    <style>
-{STYLE}
-    </style>
+    <link rel="stylesheet" href="/assets/css/columns.css" />
     <script type="application/ld+json">{json.dumps(ld_article, ensure_ascii=False)}</script>
     <script type="application/ld+json">{json.dumps(ld_crumb, ensure_ascii=False)}</script>
   </head>
@@ -557,9 +495,7 @@ def build_hub(cl, arts, all_cols):
     <meta property="og:locale" content="ko_KR" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
-    <style>
-{STYLE}
-    </style>
+    <link rel="stylesheet" href="/assets/css/columns.css" />
     <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
     <script type="application/ld+json">{json.dumps(ld_crumb, ensure_ascii=False)}</script>
   </head>
@@ -664,9 +600,7 @@ def build_index(cols):
     <meta property="og:locale" content="ko_KR" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
-    <style>
-{STYLE}
-    </style>
+    <link rel="stylesheet" href="/assets/css/columns.css" />
     <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
     <script type="application/ld+json">{json.dumps(ld_crumb, ensure_ascii=False)}</script>
   </head>

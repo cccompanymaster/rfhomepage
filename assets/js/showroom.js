@@ -16,9 +16,6 @@
     });
   });
 
-  /* iframe 라이브 프리뷰 → 정적 스크린샷(assets/images/previews)으로 대체됨.
-     재생성: tools/capture_previews.md 참고 */
-
   /* -------- 카테고리 필터 -------- */
   const chips = document.querySelectorAll('.cat-chip[data-cat]');
   const refCards = document.querySelectorAll('.ref-card[data-cat]');
