@@ -2,7 +2,7 @@
 //
 //   python3 -m http.server 8799 &          # 저장소 루트에서
 //   node tools/capture_showcase.mjs        # → content/showcase/screens/*.png
-//   python3 tools/build_showcase.py        # → assets/showcase/*.webp
+//   python3 tools/build_showcase.py        # → assets/showcase/*.webp + 레퍼런스 카드 미리보기 assets/images/previews/*.webp
 //
 // 찍는 것 (템플릿마다 4장)
 //   <slug>-desktop.png       1440×900  — 모니터 목업 첫 화면

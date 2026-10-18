@@ -13,6 +13,9 @@
       assets/showcase/<slug>-m.webp   휴대폰 첫 화면      440×952
       assets/showcase/<slug>-mt.webp  휴대폰 스크롤 화면  440×(최대 2860)
       assets/showcase/showcase-data.js
+      assets/images/previews/<slug>-desktop.webp  레퍼런스 페이지 카드 미리보기  880×550
+      assets/images/previews/<slug>-mobile.webp                                  300×649
+      (designs.json 에서 previewOnly 인 항목은 쇼케이스에 넣지 않고 미리보기만 만듭니다)
 """
 import hashlib
 import json
@@ -24,6 +27,7 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'content', 'showcase')
 OUT = os.path.join(ROOT, 'assets', 'showcase')
+PREV = os.path.join(ROOT, 'assets', 'images', 'previews')
 
 VIEWS = [  # (캡처 이름, 출력 접미사, 출력 폭, 품질)
     ('desktop', 'd', 1120, 80),
@@ -31,6 +35,17 @@ VIEWS = [  # (캡처 이름, 출력 접미사, 출력 폭, 품질)
     ('mobile', 'm', 440, 80),
     ('mobile-tall', 'mt', 440, 72),
 ]
+PREVIEWS = [('desktop', 880), ('mobile', 300)]   # (캡처 이름, 출력 폭) — references.html 카드
+
+
+def to_webp(slug, cap, dst, width, q):
+    src = os.path.join(SRC, 'screens', f'{slug}-{cap}.png')
+    if not os.path.exists(src):
+        sys.exit(f'✗ 캡처가 없습니다: {src}  (node tools/capture_showcase.mjs {slug})')
+    im = Image.open(src).convert('RGB')
+    im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+    im.save(dst, 'WEBP', quality=q, method=6)
+    return im
 
 
 def main():
@@ -39,16 +54,15 @@ def main():
     total = 0
     items = []
     for d in designs:
+        for cap, width in PREVIEWS:
+            to_webp(d['slug'], cap, os.path.join(PREV, f"{d['slug']}-{cap}.webp"), width, 80)
+        if d.get('previewOnly'):
+            continue
         item = {k: d[k] for k in ('slug', 'nameKo', 'industryKo', 'tagKo', 'accent')}
         item['url'] = f"/templates/{d['slug']}"
         for cap, suf, width, q in VIEWS:
-            src = os.path.join(SRC, 'screens', f"{d['slug']}-{cap}.png")
-            if not os.path.exists(src):
-                sys.exit(f'✗ 캡처가 없습니다: {src}  (node tools/capture_showcase.mjs {d["slug"]})')
-            im = Image.open(src).convert('RGB')
-            im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
             dst = os.path.join(OUT, f"{d['slug']}-{suf}.webp")
-            im.save(dst, 'WEBP', quality=q, method=6)
+            im = to_webp(d['slug'], cap, dst, width, q)
             total += os.path.getsize(dst)
             h = hashlib.sha1(open(dst, 'rb').read()).hexdigest()[:8]
             item[suf] = f"/assets/showcase/{d['slug']}-{suf}.webp?v={h}"
@@ -71,7 +85,7 @@ def main():
             open(intro, 'w', encoding='utf-8').write(t2)
 
     print(f'✓ {len(items)}종 × 4장 WebP  합계 {total / 1e6:.1f}MB (한 번에 다 받지 않음 — 보이는 것부터)')
-    print('✓ showcase-data.js')
+    print(f'✓ showcase-data.js · 레퍼런스 미리보기 {len(designs)}종 × 2장')
 
 
 if __name__ == '__main__':
