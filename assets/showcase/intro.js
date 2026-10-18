@@ -155,12 +155,13 @@ function select(i, announce = true) {
   $('[data-sc="visit"]').href = d.url;
   loadNear();
   place();
-  if (mode === 'shelf') scheduleShelfScroll();
+  scheduleScroll();
   if (announce) $('.sc-live').textContent = `${sel + 1}번째, ${d.nameKo}. ${d.industryKo}.`;
 }
 
-/* ── 두 화면을 긴 캡처로 바꿔 천천히 스크롤 (펼쳤을 때 · 고르는 중 1초 머물 때) ── */
-function tallOf(view, src) {
+/* ── 두 화면을 긴 캡처로 바꿔 천천히 스크롤 ── */
+function startScroll(view, src, ratio, delay) {
+  if (view.classList.contains('is-scrolling')) return;   // 고르다 펼치면 하던 스크롤을 이어감
   let tall = view.querySelector('img.sc-tall');
   if (!tall) {
     tall = document.createElement('img');
@@ -170,66 +171,34 @@ function tallOf(view, src) {
     tall.addEventListener('load', () => tall.classList.add('is-loaded'));
     view.appendChild(tall);
   }
-  if (!tall.src) tall.src = src;
-  return tall;
-}
-function startScroll(view, src, ratio, delay = 1.4) {
-  if (view.classList.contains('is-scrolling')) return;   // 이미 스크롤 중이면 그대로 이어감
-  const tall = tallOf(view, src);
   const w = view.clientWidth;
   const h = view.clientHeight;
   const shift = Math.min(0, h - w * ratio);
   view.style.setProperty('--shift', `${Math.round(shift)}px`);
   view.style.setProperty('--dur', `${Math.max(8, Math.min(20, Math.abs(shift) / 45)).toFixed(1)}s`);
   view.style.setProperty('--delay', `${delay}s`);
-  if (reduceMotion.matches) return;
-  // 긴 캡처가 다 받아진 뒤에 바꿔 끼움 (빈 화면 깜빡임 없게). 그 사이 멈췄으면 켜지 않음
-  const run = view._run = (view._run || 0) + 1;
-  const go = () => { if (view._run === run) { view.classList.remove('is-settling'); view.classList.add('is-scrolling'); } };
+  if (!tall.src) tall.src = src;
+  // 다 받아진 뒤 바꿔 끼움 (빈 화면 깜빡임 없게). 그새 다른 디자인으로 넘어갔으면 켜지 않음
+  const go = () => { if (!leaving && view.closest('.sc-item').dataset.off === '0') view.classList.add('is-scrolling'); };
   if (tall.complete && tall.naturalWidth) go(); else tall.addEventListener('load', go, { once: true });
 }
-/* 멈출 때는 스크롤한 자리에서 멈춘 채 첫 화면과 겹쳐 사라지게 — 맨 위로 툭 튀지 않게 */
 function stopScroll() {
-  root.querySelectorAll('.sc-view').forEach((v) => {
-    const run = v._run = (v._run || 0) + 1;
-    if (!v.classList.contains('is-scrolling')) return;
-    v.classList.remove('is-scrolling');
-    v.classList.add('is-settling');
-    setTimeout(() => { if (v._run === run) v.classList.remove('is-settling'); }, 550);
-  });
+  root.querySelectorAll('.sc-view.is-scrolling').forEach((v) => v.classList.remove('is-scrolling'));
 }
 
-/* 고르는 중 한 디자인에 1초 머물면 모니터·휴대폰이 그 사이트를 스크롤해 보여 줌 (긴 캡처는 0.3초째부터 미리 받음) */
-let shelfTimer = 0;
-let preloadTimer = 0;
-function clearShelfScroll() { clearTimeout(shelfTimer); clearTimeout(preloadTimer); }
-function scheduleShelfScroll() {
-  clearShelfScroll();
-  stopScroll();
-  if (reduceMotion.matches || mode !== 'shelf' || leaving) return;
-  const i = sel;
-  const d = DESIGNS[i];
-  const mv = items[i].mon.querySelector('.sc-view');
-  const pv = items[i].phone.querySelector('.sc-view');
-  preloadTimer = setTimeout(() => { tallOf(mv, d.dt); tallOf(pv, d.mt); }, 300);
-  shelfTimer = setTimeout(() => {
-    if (mode !== 'shelf' || sel !== i || leaving) return;
-    startScroll(mv, d.dt, d.dtRatio, 0);
-    startScroll(pv, d.mt, d.mtRatio, 0);
-  }, 1000);
-}
-
+/* 고르는 중 1초 머물면, 펼친 뒤엔 기기가 자리 잡으면(0.65초) 가운데 모니터·휴대폰이 스크롤 */
 let scrollTimer = 0;
-function scheduleDetailScroll() {
+function scheduleScroll() {
   clearTimeout(scrollTimer);
-  // 기기가 자리 잡은 뒤 크기를 재야 스크롤 길이가 맞음
+  if (mode === 'shelf') stopScroll();
+  if (reduceMotion.matches) return;
+  const detail = mode === 'detail';
   scrollTimer = setTimeout(() => {
-    if (mode !== 'detail') return;
     const d = DESIGNS[sel];
     const { mon, phone } = items[sel];
-    startScroll(mon.querySelector('.sc-view'), d.dt, d.dtRatio);
-    startScroll(phone.querySelector('.sc-view'), d.mt, d.mtRatio);
-  }, reduceMotion.matches ? 0 : 650);
+    startScroll(mon.querySelector('.sc-view'), d.dt, d.dtRatio, detail ? 1.4 : 0);
+    startScroll(phone.querySelector('.sc-view'), d.mt, d.mtRatio, detail ? 1.4 : 0);
+  }, detail ? 650 : 1000);
 }
 
 function setMode(next) {
@@ -238,15 +207,13 @@ function setMode(next) {
   $('[data-sc-bar="shelf"]').hidden = next === 'detail';
   $('[data-sc-bar="detail"]').hidden = next !== 'detail';
   place();
+  scheduleScroll();
   const d = DESIGNS[sel];
   if (next === 'detail') {
-    clearShelfScroll();
-    scheduleDetailScroll();
     $('.sc-live').textContent = `${d.nameKo}을 펼쳤습니다. 다른 디자인 보기, 홈페이지로 보기, 이게 좋겠어요 버튼이 있습니다.`;
     track('intro_open', { item: d.slug });
     $('[data-sc="how"]').focus({ preventScroll: true });
   } else {
-    scheduleShelfScroll();
     $('.sc-stage').focus({ preventScroll: true });
   }
 }
@@ -301,7 +268,7 @@ function pickToast(d) {
 function exit(method) {
   if (leaving) return;
   leaving = true;
-  clearShelfScroll();
+  clearTimeout(scrollTimer);
   try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (_) {}
   const d = DESIGNS[sel];
   track('intro_exit', { method, item: d?.slug });
@@ -372,8 +339,8 @@ window.addEventListener('resize', () => {
   resizeRaf = requestAnimationFrame(() => {
     measure();
     place();
-    if (mode === 'detail') { stopScroll(); scheduleDetailScroll(); }
-    else scheduleShelfScroll();
+    stopScroll();
+    scheduleScroll();
   });
 });
 
