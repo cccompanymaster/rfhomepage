@@ -11,7 +11,7 @@
      같은 이름의 WebP가 있으면 덮어쓰므로, 사진 교체도 똑같이 하면 됩니다.
 
 건드리지 않는 것:
-  - og-cover.jpg          카카오톡·페이스북 미리보기 호환을 위해 JPG 유지
+  - og-intro.jpg          카카오톡·페이스북 미리보기 호환을 위해 JPG 유지
   - assets/images/og/     칼럼 OG 이미지(PNG)는 build_columns.py 가 관리
   - assets/images/previews/  이미 WebP
 """
@@ -26,7 +26,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(ROOT, 'assets', 'images')
 MAX_W = 1600          # 템플릿에서 가장 넓게 쓰는 폭(풀블리드 히어로) 기준
 QUALITY = 78
-SKIP_NAMES = {'og-cover.jpg'}
+SKIP_NAMES = {'og-intro.jpg'}
 SKIP_DIRS = {'og', 'previews'}
 # 참조를 찾아 고칠 파일
 TARGETS = ['*.html', 'templates/*.html', 'assets/js/*.js']
