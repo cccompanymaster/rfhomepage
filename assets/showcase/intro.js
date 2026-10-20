@@ -191,7 +191,7 @@ let scrollTimer = 0;
 function scheduleScroll() {
   clearTimeout(scrollTimer);
   if (mode === 'shelf') stopScroll();
-  if (reduceMotion.matches) return;
+  if (reduceMotion.matches || splashOn()) return;
   const detail = mode === 'detail';
   scrollTimer = setTimeout(() => {
     const d = DESIGNS[sel];
@@ -218,6 +218,36 @@ function setMode(next) {
   }
 }
 
+/* ── 쇼케이스 앞 브랜드 인트로 (index.html .sc-splash) ──
+   애니메이션은 첫 화면부터 CSS로 재생되고, 여기서는 끝나는 시점만 잡아 위로 걷어냄.
+   화면을 누르거나 아무 키나 누르면 바로 쇼케이스로. 홈 중간의 '펼쳐 보기'로 다시 열 때는 건너뜀 */
+const splash = root?.querySelector('[data-sc-splash]');
+const splashOn = () => !!splash && html.classList.contains('intro-on') && !html.classList.contains('splash-off');
+let splashTimer = 0;
+function endSplash(method) {
+  if (!splashOn() || splash.classList.contains('is-out')) return;
+  clearTimeout(splashTimer);
+  if (method) track('intro_splash_skip', { method });
+  splash.classList.add('is-out');
+  setTimeout(() => {
+    html.classList.add('splash-off');
+    splash.classList.remove('is-out');
+    scheduleScroll();
+    $('.sc-stage').focus({ preventScroll: true });
+  }, reduceMotion.matches ? 200 : 700);
+}
+splash?.addEventListener('click', (e) => { e.stopPropagation(); endSplash('click'); });
+root?.addEventListener('keydown', (e) => {
+  if (!splashOn() || e.key === 'Tab') return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  endSplash('key');
+}, true);
+if (splashOn()) {
+  // 첫 화면부터 재생 중이므로 페이지가 열린 시점 기준으로 약 3.3초(움직임 줄이기면 1.8초) 뒤에 걷음
+  splashTimer = setTimeout(endSplash, Math.max(300, (reduceMotion.matches ? 1800 : 3300) - performance.now()));
+}
+
 /* ── 열기 / 나가기 ── */
 function start() {
   leaving = false;
@@ -231,7 +261,7 @@ function start() {
   $('[data-sc-bar="detail"]').hidden = true;
   select(sel, false);
   track('intro_view');
-  requestAnimationFrame(() => $('.sc-stage').focus({ preventScroll: true }));
+  requestAnimationFrame(() => (splashOn() ? splash : $('.sc-stage')).focus({ preventScroll: true }));
   const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
   idle(() => loadNear(N));
 }
@@ -346,7 +376,7 @@ window.addEventListener('resize', () => {
 
 /* 홈 레퍼런스 구간의 "펼쳐 보기" */
 document.querySelectorAll('[data-showcase-open]').forEach((el) => {
-  el.addEventListener('click', () => { window.scrollTo(0, 0); start(); });
+  el.addEventListener('click', () => { html.classList.add('splash-off'); window.scrollTo(0, 0); start(); });
 });
 
 if (root && html.classList.contains('intro-on')) start();
