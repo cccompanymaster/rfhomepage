@@ -33,36 +33,312 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233a4a3a'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css" />
     <link rel="stylesheet" href="/assets/fonts/maruburi/maruburi.css?v=481df8bb" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ===== 산일호 — 슬로 트래블 매거진 (에디토리얼) ===== */
       :root {
-        --bg: #f7f3eb;
-        --bg-soft: #ebe2cf;
-        --primary: #3a4a3a;
-        --primary-soft: #5a6e5a;
-        --accent: #8a7448;
-        --ink: #2a2418;
-        --ink-soft: #6f6650;
-        --line: #d8cfb6;
+        --paper: #f4f1e9;
+        --paper-2: #e9e5d8;
+        --paper-hi: #fbfaf5;
+        --ink: #1d2a21;          /* 숲빛 잉크 */
+        --ink-2: #46524a;
+        --ink-3: #5a655c;
+        --rule: rgba(29, 42, 33, .16);
+        --rule-2: rgba(29, 42, 33, .55);
+        --forest: #24372a;
+        --forest-2: #2e4535;
+        --on-forest: #f4f1e9;
+        --on-forest-2: #c9d1c3;
+        --forest-rule: rgba(244, 241, 233, .2);
+        --f-head: 'MaruBuri', serif;
+        --f-han: 'Noto Serif KR', serif;
+        --f-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+        --wrap: 1240px;
+        --gut: 20px;
+        --side: max(var(--gut), calc((100% - var(--wrap)) / 2));
+        --ease: cubic-bezier(.2, .7, .2, 1);
+        --sec: clamp(88px, 11vw, 160px);
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
-      .serif { font-family: 'MaruBuri', serif; letter-spacing: -0.025em; }
-      .container-x { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 48px; padding-right: 48px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(160deg, #c4ccba 0%, #8a9d80 50%, #4a5a48 100%); position: relative; overflow: hidden; }
-      .ph::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.4), transparent 55%); }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(247,243,235,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#f5efde; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
-      .btn-primary:hover { background:#1f2c1f; }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
-      .btn-ghost:hover { background:var(--primary); color:#fff; }
-      .row { border-top: 1px solid var(--line); }
+      @media (min-width: 768px) { :root { --gut: 40px; } }
+      @media (min-width: 1280px) { :root { --gut: 56px; } }
+
+      html { font-synthesis: none; }
+      [tabindex="-1"]:focus { outline: none; }
+      body {
+        background: var(--paper); color: var(--ink);
+        font-family: var(--f-sans); font-size: 16px; line-height: 1.75; font-weight: 400;
+        -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word;
+      }
+      [id] { scroll-margin-top: 76px; }
+      ::selection { background: var(--forest); color: var(--on-forest); }
+      .wrap { max-width: calc(var(--wrap) + 2 * var(--gut)); margin: 0 auto; padding: 0 var(--gut); }
+      .head, .han { font-synthesis: none; }
+      .head { font-family: var(--f-head); font-weight: 400; letter-spacing: -0.03em; }
+      .han { font-family: var(--f-han); }
+      .num { font-family: var(--f-head); font-variant-numeric: lining-nums tabular-nums; }
+
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      .kicker { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; }
+      .kicker .en { font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; }
+      .kicker .n { font-family: var(--f-head); font-weight: 600; font-size: 14px; letter-spacing: 0; color: var(--ink); }
+      .kicker::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--rule-2); }
+      .h2 { font-family: var(--f-head); font-weight: 400; font-size: clamp(32px, 4.3vw, 58px); line-height: 1.22; letter-spacing: -0.035em; }
+      .lede { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.85; color: var(--ink-2); }
+
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 26px; border-radius: 999px; border: 1px solid var(--forest); font-family: var(--f-sans); font-size: 15px; font-weight: 600; line-height: 1; cursor: pointer; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+      .btn .arr { display: inline-block; transition: transform .3s var(--ease); }
+      .btn:hover .arr { transform: translateX(4px); }
+      .btn-forest { background: var(--forest); color: var(--on-forest); }
+      .btn-forest:hover { background: #172419; border-color: #172419; }
+      .btn-line { background: transparent; color: var(--forest); }
+      .btn-line:hover { background: var(--forest); color: var(--on-forest); }
+      .btn-paper { background: var(--on-forest); color: var(--forest); border-color: var(--on-forest); }
+      .btn-paper:hover { background: #fff; border-color: #fff; }
+      .btn-ghost-w { background: rgba(255, 255, 255, .06); color: #fff; border-color: rgba(255, 255, 255, .62); }
+      .btn-ghost-w:hover { background: #fff; color: var(--forest); border-color: #fff; }
+      .btn-sm { min-height: 40px; padding: 0 18px; font-size: 14px; }
+      a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+      /* ===== 헤더 ===== */
+      .mast { position: sticky; top: 0; z-index: 50; background: rgba(244, 241, 233, .93); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
+      .mast-in { height: 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+      .mast-nav, .side-link { display: none; }
+      .mast-nav a, .side-link a { position: relative; font-size: 14px; color: var(--ink-2); padding: 6px 0; transition: color .2s; }
+      .mast-nav a::after, .side-link a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+      .mast-nav a:hover, .side-link a:hover { color: var(--ink); }
+      .mast-nav a:hover::after, .side-link a:hover::after { transform: scaleX(1); }
+      .logo { grid-column: 2; display: inline-flex; align-items: baseline; gap: 8px; color: var(--ink); }
+      .logo .ko { font-family: var(--f-head); font-weight: 600; font-size: 21px; letter-spacing: -0.02em; }
+      .logo .han { font-size: 13px; font-weight: 400; letter-spacing: .12em; color: var(--ink-3); }
+      .mast-right { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+      .menu-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--ink); border: 1px solid var(--rule-2); background: transparent; cursor: pointer; }
+      .menu-btn .bars { width: 14px; height: 8px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; transition: transform .3s var(--ease); }
+      .menu-btn[aria-expanded="true"] .bars { transform: scaleY(.3); }
+      .mnav { position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-bottom: 1px solid var(--rule); box-shadow: 0 24px 40px -24px rgba(29, 42, 33, .35); }
+      .mnav[hidden] { display: none; }
+      .mnav ol { padding: 6px var(--gut) 20px; }
+      .mnav a { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-family: var(--f-head); font-size: 20px; letter-spacing: -0.02em; }
+      .mnav a .n { font-size: 14px; color: var(--ink-3); min-width: 22px; font-variant-numeric: lining-nums; }
+      @media (max-width: 420px) { .logo .han { display: none; } .menu-btn .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } .menu-btn { padding: 0 12px; } }
+      @media (min-width: 1024px) {
+        .mast-in { height: 72px; }
+        .mast-nav { display: flex; gap: 28px; justify-content: flex-end; padding-right: 22px; }
+        .mast-right { justify-content: space-between; }
+        .side-link { display: flex; gap: 28px; padding-left: 22px; }
+        .menu-btn { display: none; }
+        .mnav { display: none !important; }
+      }
+
+      /* ===== 히어로: 풀블리드 표지 ===== */
+      .hero { position: relative; height: calc(100svh - 60px); min-height: 600px; max-height: 960px; overflow: hidden; color: #fff; background: #2b3129; }
+      @media (min-width: 1024px) { .hero { height: calc(100svh - 72px); min-height: 640px; } }
+      .hero-media { position: absolute; inset: 0; margin: 0; }
+      .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 50%; }
+      .hero::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background:
+          linear-gradient(to top, rgba(11, 17, 13, .86) 0%, rgba(11, 17, 13, .62) 30%, rgba(11, 17, 13, .18) 58%, rgba(11, 17, 13, 0) 76%),
+          linear-gradient(to bottom, rgba(11, 17, 13, .74) 0, rgba(11, 17, 13, .58) 64px, rgba(11, 17, 13, .12) 140px, rgba(11, 17, 13, 0) 200px); }
+      .hero-in { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding-top: 28px; padding-bottom: clamp(28px, 5vh, 56px); }
+      .hero-top { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; letter-spacing: .06em; color: #fff; text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+      .hero-top .han { letter-spacing: .2em; }
+      .hero-top .r { display: none; }
+      .hero-bottom { display: grid; gap: 28px; }
+      .hero h1 { font-family: var(--f-head); font-weight: 400; font-size: clamp(42px, 10.5vw, 80px); line-height: 1.12; letter-spacing: -0.045em; text-shadow: 0 2px 30px rgba(0, 0, 0, .25); }
+      .hero h1 .line { display: block; white-space: nowrap; }
+      .hero .stand { margin-top: 20px; max-width: 27em; font-size: clamp(16px, 1.35vw, 18.5px); line-height: 1.8; color: rgba(255, 255, 255, .92); }
+      .hero-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .hero-meta { display: flex; flex-wrap: wrap; gap: 6px 0; border-top: 1px solid rgba(255, 255, 255, .35); padding-top: 14px; font-size: 13px; color: rgba(255, 255, 255, .88); }
+      .hero-meta li { padding-right: 14px; margin-right: 14px; border-right: 1px solid rgba(255, 255, 255, .3); line-height: 1.3; }
+      .hero-meta li:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+      .hero-cap { display: none; }
+      @media (max-width: 639px) { .hero-in { padding-bottom: 72px; } }
+      @media (min-width: 900px) {
+        .hero-top .r { display: block; }
+        .hero h1 { font-size: clamp(52px, 5.4vw, 78px); }
+        .hero-media img { transform: scale(1.08); transform-origin: 0% 55%; }
+        .hero-bottom { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 48px; }
+        .hero-meta { grid-column: 1 / -1; }
+        .hero-cap { display: block; max-width: 220px; padding-bottom: 6px; font-size: 12.5px; line-height: 1.6; color: rgba(255, 255, 255, .85); text-align: right; }
+        .hero-cap b { display: block; font-family: var(--f-head); font-weight: 600; font-size: 13px; letter-spacing: .02em; color: #fff; }
+      }
+
+      /* ===== 에세이 ===== */
+      .sec { padding: var(--sec) 0; }
+      .essay { display: grid; gap: 40px; }
+      .essay-head .h2 { margin-top: 22px; }
+      .essay-head .dek { margin-top: 22px; font-family: var(--f-head); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.6; letter-spacing: -0.02em; color: var(--ink-2); }
+      .glance { margin-top: 36px; border-top: 1px solid var(--ink); }
+      .glance div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; }
+      .glance dt { color: var(--ink-3); font-size: 13px; }
+      .essay-body { font-size: clamp(16px, 1.25vw, 17.5px); line-height: 1.95; color: var(--ink); }
+      .essay-body p + p { margin-top: 1.15em; }
+      .essay-body .drop::first-letter { float: left; font-family: var(--f-head); font-weight: 400; font-size: 4em; line-height: .92; padding: .06em .12em 0 0; color: var(--forest); }
+      .pull { margin: 40px 0; padding: 26px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
+      .pull p { font-family: var(--f-head); font-size: clamp(24px, 2.5vw, 34px); line-height: 1.5; letter-spacing: -0.035em; color: var(--forest); }
+      .pull .who { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+      @media (min-width: 960px) {
+        .essay { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(48px, 7vw, 120px); align-items: start; }
+        .essay-body { padding-top: 6px; }
+      }
+
+      /* ===== 객실: 매거진 스프레드 ===== */
+      .rooms { background: var(--paper-2); }
+      .rooms-head { display: grid; gap: 22px; margin-bottom: clamp(48px, 7vw, 96px); }
+      .rooms-head .h2 { margin-top: 22px; }
+      .room { display: grid; gap: 26px; padding: clamp(36px, 5vw, 64px) 0; border-top: 1px solid var(--rule-2); }
+      .room:first-of-type { border-top: 1px solid var(--ink); }
+      .room-fig { margin: 0; }
+      .room-fig .ph { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: #c9cdbf; }
+      @media (min-width: 900px) { .room-fig .ph { aspect-ratio: 5 / 6; } }
+      .room-fig.wide .ph { aspect-ratio: 4 / 3; }
+      .room-fig img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+      .room:hover .room-fig img { transform: scale(1.025); }
+      .cap { display: flex; gap: 12px; align-items: baseline; margin-top: 12px; font-size: 13px; line-height: 1.6; color: var(--ink-3); }
+      .cap .n { flex: none; font-family: var(--f-head); font-weight: 600; font-size: 12.5px; color: var(--ink); letter-spacing: .04em; }
+      .room-no { font-family: var(--f-head); font-weight: 600; font-size: 14px; letter-spacing: .08em; color: var(--ink-3); font-variant-numeric: lining-nums; }
+      .room h3 { margin-top: 10px; font-family: var(--f-head); font-weight: 400; font-size: clamp(40px, 5vw, 68px); line-height: 1.1; letter-spacing: -0.04em; }
+      .room .tag { margin-top: 12px; font-family: var(--f-head); font-weight: 600; font-size: 15px; color: var(--forest); letter-spacing: -0.01em; }
+      .room .desc { margin-top: 18px; font-size: 16px; line-height: 1.85; color: var(--ink-2); max-width: 30em; }
+      .spec { margin-top: 26px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+      .spec div { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--rule); }
+      .spec div:nth-child(odd) { border-right: 1px solid var(--rule); }
+      .spec div:nth-child(even) { padding-left: 14px; }
+      .spec dt { font-size: 12px; letter-spacing: .06em; color: var(--ink-3); }
+      .spec dd { margin-top: 2px; font-size: 15px; font-weight: 500; color: var(--ink); }
+      .room-foot { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; }
+      .price { display: flex; align-items: baseline; gap: 8px; }
+      .price .lbl { font-size: 13px; color: var(--ink-3); }
+      .price .v { font-family: var(--f-head); font-weight: 600; font-size: 26px; letter-spacing: -0.01em; font-variant-numeric: lining-nums; }
+      .tlink { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; color: var(--forest); padding: 6px 0 4px; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size .35s var(--ease); }
+      .tlink:hover { background-size: 0 1px; background-position: 100% 100%; }
+      @media (min-width: 900px) {
+        .rooms-head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; column-gap: 48px; }
+        .room { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center; }
+        .room .room-fig { grid-column: 1 / span 6; }
+        .room .room-text { grid-column: 8 / span 5; }
+        .room.flip .room-fig { grid-column: 7 / span 6; grid-row: 1; }
+        .room.flip .room-text { grid-column: 1 / span 5; grid-row: 1; }
+        .room .room-fig.wide { grid-column: 1 / span 7; }
+        .room.flip .room-fig.wide { grid-column: 6 / span 7; }
+      }
+
+      /* ===== 부대시설: 인덱스 ===== */
+      .index-grid { display: grid; gap: 36px; }
+      .index-head .h2 { margin-top: 22px; }
+      .index-head .lede { margin-top: 20px; }
+      .idx { border-top: 1px solid var(--ink); counter-reset: idx; }
+      .idx li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 10px; padding: 15px 0 16px; border-bottom: 1px solid var(--rule); }
+      .idx .n { font-family: var(--f-head); font-weight: 600; font-size: 13px; color: var(--ink-3); padding-top: 3px; font-variant-numeric: lining-nums tabular-nums; }
+      .idx .row { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+      .idx h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+      .idx .dots { flex: 1 1 auto; min-width: 14px; height: 3px; transform: translateY(-3px); background-image: radial-gradient(circle, rgba(29, 42, 33, .4) 1px, transparent 1.3px); background-size: 7px 3px; background-repeat: repeat-x; }
+      .idx .v { flex: none; font-size: 14px; color: var(--ink-2); }
+      .idx .note { grid-column: 2; font-size: 13.5px; color: var(--ink-3); line-height: 1.6; }
+      @media (min-width: 900px) {
+        .index-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: clamp(48px, 6vw, 96px); align-items: start; }
+        .idx { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+      }
+
+      /* 사계절 */
+      .seasons { margin-top: clamp(72px, 9vw, 128px); border-top: 1px solid var(--ink); }
+      .seasons-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; padding: 16px 0 4px; }
+      .seasons-h h3 { font-family: var(--f-head); font-size: 24px; letter-spacing: -0.03em; }
+      .seasons-h p { font-size: 13px; color: var(--ink-3); }
+      .seasons ol { display: grid; grid-template-columns: 1fr 1fr; }
+      .seasons li { padding: 20px 16px 22px 0; border-top: 1px solid var(--rule); }
+      .seasons li:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--rule); }
+      .seasons .s { font-family: var(--f-head); font-size: clamp(30px, 3.4vw, 44px); line-height: 1; letter-spacing: -0.04em; }
+      .seasons h4 { margin-top: 12px; font-size: 15px; font-weight: 600; }
+      .seasons li p { margin-top: 4px; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+      @media (min-width: 900px) {
+        .seasons ol { grid-template-columns: repeat(4, 1fr); }
+        .seasons li, .seasons li:nth-child(even) { padding: 24px 24px 6px; border-left: 1px solid var(--rule); }
+        .seasons li:first-child { padding-left: 0; border-left: 0; }
+      }
+
+      /* ===== 주변: 1박 2일 일정 ===== */
+      .around { background: var(--paper-2); }
+      .it-grid { display: grid; gap: 40px; }
+      .it-head .h2 { margin-top: 22px; }
+      .it-head .lede { margin-top: 20px; }
+      .it-fig { margin: 32px 0 0; }
+      .it-fig .ph { overflow: hidden; aspect-ratio: 4 / 5; background: #c9cdbf; }
+      .it-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+      .day { border-top: 1px solid var(--ink); }
+      .day + .day { margin-top: 44px; }
+      .day-h { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 6px; }
+      .day-h h3 { font-family: var(--f-head); font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+      .day-h span { font-size: 12px; letter-spacing: .14em; color: var(--ink-3); text-transform: uppercase; }
+      .stop { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 16px; padding: 18px 0 20px; border-bottom: 1px solid var(--rule); }
+      .stop time { font-family: var(--f-head); font-size: 17px; line-height: 1.45; color: var(--forest); font-variant-numeric: lining-nums; }
+      .stop h4 { font-family: var(--f-head); font-weight: 400; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; letter-spacing: -0.03em; }
+      .stop p { margin-top: 6px; font-size: 14.5px; line-height: 1.75; color: var(--ink-2); }
+      .stop .dist { display: inline-block; margin-top: 8px; font-size: 12.5px; font-weight: 600; color: var(--forest); border: 1px solid var(--rule-2); border-radius: 999px; padding: 2px 10px; }
+      .it-note { margin-top: 18px; font-size: 13px; color: var(--ink-3); }
+      @media (max-width: 420px) { .stop { grid-template-columns: 1fr; } .stop time { font-size: 15px; } }
+      @media (min-width: 960px) {
+        .it-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(48px, 6vw, 104px); align-items: start; }
+        .stop { grid-template-columns: 120px minmax(0, 1fr); }
+        .stop time { font-size: 19px; }
+      }
+
+      /* ===== 예약 — 숲색 반전 ===== */
+      .book { background: var(--forest); color: var(--on-forest); }
+      .book .kicker { color: var(--on-forest-2); }
+      .book .kicker .n { color: var(--on-forest); }
+      .book .kicker::after { background: var(--forest-rule); }
+      .book-grid { display: grid; gap: 48px; }
+      .book .h2 { margin-top: 22px; }
+      .book .lede { margin-top: 22px; color: var(--on-forest-2); }
+      .channels { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .btn-on { background: transparent; color: var(--on-forest); border-color: rgba(244, 241, 233, .55); }
+      .btn-on:hover { background: var(--on-forest); color: var(--forest); border-color: var(--on-forest); }
+      .book a:focus-visible, .book button:focus-visible { outline-color: var(--on-forest); }
+      .terms { margin-top: 36px; border-top: 1px solid var(--forest-rule); }
+      .terms div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--forest-rule); font-size: 14.5px; line-height: 1.65; }
+      .terms dt { font-size: 13px; color: var(--on-forest-2); padding-top: 1px; }
+      .terms dd { color: var(--on-forest); }
+      .demo-toast { margin-top: 16px; min-height: 0; font-size: 14px; font-weight: 600; }
+      .demo-toast:not(:empty) { display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 999px; background: var(--on-forest); color: var(--forest); }
+      .form-card { background: var(--paper-hi); color: var(--ink); padding: 28px 20px 30px; border-radius: 4px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .55); }
+      .form-card-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 16px; margin-bottom: 22px; border-bottom: 1px solid var(--ink); }
+      .form-card-h h3 { font-family: var(--f-head); font-size: 24px; letter-spacing: -0.03em; }
+      .form-card-h p { font-size: 12.5px; color: var(--ink-3); }
+      .fields { display: grid; grid-template-columns: 1fr; gap: 18px; }
+      .f label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+      .f label .opt { font-weight: 400; color: var(--ink-3); }
+      .field { width: 100%; min-height: 50px; padding: 12px 14px; background: #fff; border: 1px solid rgba(29, 42, 33, .3); border-radius: 4px; color: var(--ink); font: 400 16px/1.4 var(--f-sans); transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none; }
+      select.field { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231d2a21' stroke-width='1.3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+      textarea.field { min-height: 96px; resize: vertical; }
+      .field:hover { border-color: rgba(29, 42, 33, .55); }
+      .field:focus { outline: none; border-color: var(--forest); box-shadow: 0 0 0 3px rgba(36, 55, 42, .18); }
+      .consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 20px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); cursor: pointer; }
+      .consent input { margin-top: 3px; width: 17px; height: 17px; flex: none; accent-color: var(--forest); }
+      .consent a { text-decoration: underline; text-underline-offset: 3px; }
+      .form-foot { margin-top: 22px; display: grid; gap: 14px; }
+      .form-foot .btn { width: 100%; }
+      .toast { font-size: 14px; font-weight: 600; }
+      .toast:not(:empty) { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 4px; background: var(--forest); color: var(--on-forest); }
+      @media (min-width: 640px) { .fields { grid-template-columns: 1fr 1fr; } .f.full { grid-column: 1 / -1; } .form-card { padding: 34px 34px 36px; } }
+      @media (min-width: 1024px) { .book-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(48px, 6vw, 96px); align-items: start; } }
+
+      /* ===== 푸터 ===== */
+      .foot { padding: 64px 0 120px; font-size: 14px; color: var(--ink-2); }
+      .foot-top { display: grid; gap: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+      .foot .logo { display: inline-flex; }
+      .foot .logo .ko { font-size: 26px; }
+      .foot .logo .han { display: inline; font-size: 15px; }
+      .foot p { line-height: 1.8; }
+      .foot a:hover { text-decoration: underline; text-underline-offset: 4px; }
+      .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 20px; }
+      .foot-bottom a { color: var(--forest); font-weight: 600; }
+      .demo-note { margin-top: 18px; font-size: 12px; color: var(--ink-3); }
+      @media (min-width: 900px) { .foot-top { grid-template-columns: 1.1fr 1.2fr 1fr; } }
     </style>
     <meta name="theme-color" content="#3a4a3a" />
     <script type="application/ld+json">
@@ -89,287 +365,412 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color:var(--primary)">산일호 山一號</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+
+    <header class="mast">
+      <div class="wrap mast-in">
+        <nav class="mast-nav" aria-label="주요 메뉴">
           <a href="#about">소개</a>
           <a href="#rooms">객실</a>
           <a href="#facility">부대시설</a>
-          <a href="#around">주변</a>
-          <a href="#book">예약</a>
         </nav>
-        <a href="#book" class="btn-primary text-sm" style="padding:10px 18px">예약하기</a>
+        <a href="#top" class="logo" aria-label="산일호 — 맨 위로"><span class="ko">산일호</span><span class="han" aria-hidden="true">山一號</span></a>
+        <div class="mast-right">
+          <nav class="side-link" aria-label="보조 메뉴">
+            <a href="#around">주변</a>
+            <a href="#book">예약 안내</a>
+          </nav>
+          <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mnav"><span class="bars" aria-hidden="true"></span><span class="lbl">메뉴</span><span class="sr-only"> 열기</span></button>
+          <a href="#book" class="btn btn-forest btn-sm">예약하기</a>
+        </div>
       </div>
+      <nav id="mnav" class="mnav" aria-label="모바일 메뉴" hidden>
+        <ol>
+          <li><a href="#about"><span class="n">01</span>소개</a></li>
+          <li><a href="#rooms"><span class="n">02</span>객실 네 채</a></li>
+          <li><a href="#facility"><span class="n">03</span>부대시설 · 사계절</a></li>
+          <li><a href="#around"><span class="n">04</span>주변 · 1박 2일</a></li>
+          <li><a href="#book"><span class="n">05</span>예약 안내</a></li>
+        </ol>
+      </nav>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="relative">
-        <div class="ph absolute inset-0" style="position:absolute;inset:0;background-image:url('../assets/images/pension/04-view.webp');background-size:cover;background-position:center;filter:brightness(0.62) saturate(0.9);"></div>
-        <div class="container-x relative pt-28 md:pt-44 pb-32 md:pb-48 text-center" style="color: #fff">
-          <p class="eyebrow mb-8 reveal" style="color:#dccfa6">강원도 인제 · 자작나무숲 자락</p>
-          <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.2] tracking-[-0.025em] reveal">
-            산이 가장 가까운<br />하룻밤.
-          </h1>
-          <p class="mt-10 text-base md:text-lg max-w-xl mx-auto reveal" style="color: rgba(255,255,255,.85)">
-            네 채의 단독 풀빌라. 옆집 소리도 들리지 않는 거리에서, 산을 올려다보며 잠드는 시간.
-          </p>
-          <div class="mt-12 flex flex-wrap gap-3 justify-center reveal">
-            <a href="#book" class="btn-primary" style="background:#fff; color:var(--primary)">자리 예약하기 →</a>
-            <a href="#rooms" class="btn-ghost" style="color:#fff; border-color:rgba(255,255,255,.6)">객실 둘러보기</a>
+      <!-- ============ HERO — 표지 ============ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <figure class="hero-media">
+          <img src="../assets/images/pension/04-view.webp" width="1376" height="768" alt="통창 너머 겹겹의 산 능선과 수영장 데크를 바라보며 서 있는 사람" fetchpriority="high" />
+        </figure>
+        <div class="wrap hero-in">
+          <div class="hero-top">
+            <span>강원도 인제 · 자작나무숲 자락</span>
+            <span class="r">단독 풀빌라 네 채 · <span class="han">山一號</span></span>
+          </div>
+          <div class="hero-bottom">
+            <div>
+              <h1 id="hero-title"><span class="line">산이 가장 가까운</span> <span class="line">하룻밤.</span></h1>
+              <p class="stand">네 채의 단독 풀빌라. 옆집 소리도 들리지 않는 거리에서, 산을 올려다보며 잠드는 시간.</p>
+              <div class="hero-cta">
+                <a href="#book" class="btn btn-paper">예약 문의하기 <span class="arr" aria-hidden="true">→</span></a>
+                <a href="#rooms" class="btn btn-ghost-w">객실 둘러보기</a>
+              </div>
+            </div>
+            <p class="hero-cap"><b>표지</b>거실 큰 창 너머로 들어오는 인제의 능선.</p>
+            <ul class="hero-meta" aria-label="한눈에 보기">
+              <li>단독 채 4</li>
+              <li>전 객실 풀·자쿠지</li>
+              <li>체크인 16:00 · 체크아웃 11:00</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- ABOUT -->
-      <section id="about" class="container-x py-24 md:py-32">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">ABOUT</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 채의 집,<br />한 가족의 시간.
-            </h2>
+      <!-- ============ 01 ESSAY ============ -->
+      <section id="about" class="sec" aria-labelledby="about-title">
+        <div class="wrap essay">
+          <div class="essay-head reveal">
+            <p class="kicker"><span class="n">01</span><span class="en">Essay</span>산일호에 대하여</p>
+            <h2 id="about-title" class="h2">한 채의 집,<br />한 가족의 시간.</h2>
+            <p class="dek">여행도 일이 되는 요즘, 쉼다운 쉼이 필요합니다.</p>
+            <dl class="glance">
+              <div><dt>위치</dt><dd>강원특별자치도 인제 · 자작나무숲 자락</dd></div>
+              <div><dt>객실</dt><dd>흩어진 단독 채 네 곳, 채마다 독립 마당</dd></div>
+              <div><dt>입·퇴실</dt><dd>체크인 16:00 · 체크아웃 11:00</dd></div>
+              <div><dt>식사</dt><dd>직접 조리, 또는 조식 도시락 사전 신청</dd></div>
+            </dl>
           </div>
-          <div class="md:col-span-7 space-y-5 leading-relaxed text-base md:text-lg reveal" style="color: var(--ink-soft)">
-            <p>산일호는 단지가 아닌, 흩어진 네 채의 집입니다. 옆 객실의 소음이나, 풀장을 함께 쓰는 일이 없습니다.</p>
-            <p>각 채마다 독립된 마당과 자쿠지·노천탕이 있고, 거실의 큰 창은 모두 산을 바라봅니다.</p>
-            <p>식사는 직접 해 드시거나, 사전에 신청하시면 인근 한식 명인의 도시락을 마당으로 가져다 드립니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ROOMS -->
-      <section id="rooms" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">ROOMS</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">네 채, 각각의 분위기.</h2>
-          </div>
-          <div class="grid md:grid-cols-2 gap-8">
-            <article class="reveal">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/02-bath-coffee.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">솔채</h3><span class="text-sm" style="color:var(--ink-soft)">2인 / 자쿠지</span></div>
-              <p class="mt-3" style="color: var(--ink-soft)">소나무 숲을 정면으로 바라보는 가장 작은 채. 두 분만의 조용한 하룻밤에.</p>
-              <p class="mt-3 serif text-lg">평일 ₩390,000~</p>
-            </article>
-            <article class="reveal mt-12 md:mt-20">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/04-view.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">자작채</h3><span class="text-sm" style="color:var(--ink-soft)">4인 / 풀 + 자쿠지</span></div>
-              <p class="mt-3" style="color: var(--ink-soft)">자작나무숲이 가장 가까운 채. 4인 가족이 머물기에 알맞은 단층 구조.</p>
-              <p class="mt-3 serif text-lg">평일 ₩520,000~</p>
-            </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/02-bath-coffee.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">달채</h3><span class="text-sm" style="color:var(--ink-soft)">4인 / 노천탕</span></div>
-              <p class="mt-3" style="color: var(--ink-soft)">밤이 가장 잘 보이는 자리. 노천탕에서 보이는 별이 단연 좋습니다.</p>
-              <p class="mt-3 serif text-lg">평일 ₩560,000~</p>
-            </article>
-            <article class="reveal mt-12 md:mt-20">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/04-view.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between"><h3 class="serif text-2xl">산마루채</h3><span class="text-sm" style="color:var(--ink-soft)">6인 / 풀 + 노천탕</span></div>
-              <p class="mt-3" style="color: var(--ink-soft)">가장 높은 지대에 자리한 단독 채. 거실의 큰 창에서 산이 정면으로 들어옵니다.</p>
-              <p class="mt-3 serif text-lg">평일 ₩720,000~</p>
-            </article>
+          <div class="essay-body reveal">
+            <p class="drop">산일호는 단지가 아닌, 흩어진 네 채의 집입니다. 옆 객실의 소음이나, 풀장을 함께 쓰는 일이 없습니다. 옆방 소리 없이, 우리 가족만의 마당이 있을 뿐입니다.</p>
+            <p>각 채마다 독립된 마당과 자쿠지·노천탕이 있고, 거실의 큰 창은 모두 산을 바라봅니다. 온수풀은 사계절 내내 데워 두어, 한겨울에도 미지근한 물에 몸을 담글 수 있습니다.</p>
+            <blockquote class="pull">
+              <p>물에 발을 담그는 순간,<br />한 주의 긴장이 풀려나가는 저녁.</p>
+            </blockquote>
+            <p>식사는 직접 해 드시거나, 사전에 신청하시면 인근 한식 명인의 도시락을 마당으로 가져다 드립니다. 체크인 때는 근처 맛집과 산책로까지 미리 알려 드립니다. 준비에 지쳐 떠나는 여행이 되지 않도록, 필요한 것은 저희가 먼저 챙겨 두겠습니다.</p>
           </div>
         </div>
       </section>
 
-      <!-- FACILITY -->
-      <section id="facility" class="container-x py-24 md:py-32">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-4 reveal">
-            <p class="eyebrow mb-4">FACILITY</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">필요한 것, 모두 안에.</h2>
+      <!-- ============ 02 ROOMS ============ -->
+      <section id="rooms" class="sec rooms" aria-labelledby="rooms-title">
+        <div class="wrap">
+          <header class="rooms-head reveal">
+            <div>
+              <p class="kicker"><span class="n">02</span><span class="en">Rooms</span>객실</p>
+              <h2 id="rooms-title" class="h2">네 채, 각각의 분위기.</h2>
+            </div>
+            <p class="lede">작은 채부터 여섯 명이 머무는 채까지. 모든 채가 서로 떨어져 있어, 문을 닫으면 숲과 물소리만 남습니다.</p>
+          </header>
+
+          <article class="room reveal" aria-labelledby="r1">
+            <figure class="room-fig">
+              <div class="ph"><img src="../assets/images/pension/02-bath-coffee.webp" width="1376" height="768" alt="안개 낀 소나무 숲을 바라보며 데크에 앉아 커피를 마시는 사람" loading="lazy" style="object-position: 74% 50%;" /></div>
+              <figcaption class="cap"><span class="n">No. 01</span><span>소나무 숲을 마주한 아침 데크.</span></figcaption>
+            </figure>
+            <div class="room-text">
+              <p class="room-no">No. 01 — 2인</p>
+              <h3 id="r1">솔채</h3>
+              <p class="tag">소나무 숲을 정면으로</p>
+              <p class="desc">소나무 숲을 정면으로 바라보는 가장 작은 채. 두 분만의 조용한 하룻밤에.</p>
+              <dl class="spec">
+                <div><dt>평형</dt><dd>12평 단층</dd></div>
+                <div><dt>인원</dt><dd>기준 2인</dd></div>
+                <div><dt>침구</dt><dd>퀸 침대 1</dd></div>
+                <div><dt>물</dt><dd>자쿠지</dd></div>
+                <div><dt>반려동물</dt><dd>동반 가능</dd></div>
+                <div><dt>조망</dt><dd>소나무 숲</dd></div>
+              </dl>
+              <div class="room-foot">
+                <p class="price"><span class="lbl">평일</span><span class="v">₩390,000~</span></p>
+                <a href="#book" class="tlink" data-room="솔채">솔채 예약 문의 <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room flip reveal" aria-labelledby="r2">
+            <figure class="room-fig">
+              <div class="ph"><img src="../assets/images/pension/04-view.webp" width="1376" height="768" alt="숲을 내려다보는 수영장 데크와 장작이 쌓인 거실 한쪽" loading="lazy" style="object-position: 100% 50%;" /></div>
+              <figcaption class="cap"><span class="n">No. 02</span><span>거실 창 밖으로 이어지는 풀 데크.</span></figcaption>
+            </figure>
+            <div class="room-text">
+              <p class="room-no">No. 02 — 4인</p>
+              <h3 id="r2">자작채</h3>
+              <p class="tag">자작나무숲이 가장 가까운 채</p>
+              <p class="desc">자작나무숲이 가장 가까운 채. 4인 가족이 머물기에 알맞은 단층 구조.</p>
+              <dl class="spec">
+                <div><dt>평형</dt><dd>20평 단층</dd></div>
+                <div><dt>인원</dt><dd>기준 4인</dd></div>
+                <div><dt>침구</dt><dd>퀸 1 · 싱글 2</dd></div>
+                <div><dt>물</dt><dd>풀 + 자쿠지</dd></div>
+                <div><dt>반려동물</dt><dd>동반 가능</dd></div>
+                <div><dt>조망</dt><dd>자작나무숲</dd></div>
+              </dl>
+              <div class="room-foot">
+                <p class="price"><span class="lbl">평일</span><span class="v">₩520,000~</span></p>
+                <a href="#book" class="tlink" data-room="자작채">자작채 예약 문의 <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room reveal" aria-labelledby="r3">
+            <figure class="room-fig">
+              <div class="ph"><img src="../assets/images/pension/02-bath-coffee.webp" width="1376" height="768" alt="안개 낀 계곡을 내려다보는 돌로 쌓은 노천탕" loading="lazy" style="object-position: 0% 50%;" /></div>
+              <figcaption class="cap"><span class="n">No. 03</span><span>계곡 쪽으로 열린 돌 노천탕.</span></figcaption>
+            </figure>
+            <div class="room-text">
+              <p class="room-no">No. 03 — 4인</p>
+              <h3 id="r3">달채</h3>
+              <p class="tag">밤이 가장 잘 보이는 자리</p>
+              <p class="desc">밤이 가장 잘 보이는 자리. 노천탕에서 보이는 별이 단연 좋습니다.</p>
+              <dl class="spec">
+                <div><dt>평형</dt><dd>18평 단층</dd></div>
+                <div><dt>인원</dt><dd>기준 4인</dd></div>
+                <div><dt>침구</dt><dd>퀸 1 · 온돌 요 2</dd></div>
+                <div><dt>물</dt><dd>노천탕</dd></div>
+                <div><dt>반려동물</dt><dd>동반 불가</dd></div>
+                <div><dt>조망</dt><dd>밤하늘 · 계곡</dd></div>
+              </dl>
+              <div class="room-foot">
+                <p class="price"><span class="lbl">평일</span><span class="v">₩560,000~</span></p>
+                <a href="#book" class="tlink" data-room="달채">달채 예약 문의 <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room flip reveal" aria-labelledby="r4">
+            <figure class="room-fig">
+              <div class="ph"><img src="../assets/images/pension/04-view.webp" width="1376" height="768" alt="거실 소파 너머 통창 가득 들어오는 산 능선" loading="lazy" style="object-position: 30% 50%;" /></div>
+              <figcaption class="cap"><span class="n">No. 04</span><span>산이 정면으로 들어오는 거실 통창.</span></figcaption>
+            </figure>
+            <div class="room-text">
+              <p class="room-no">No. 04 — 6인</p>
+              <h3 id="r4">산마루채</h3>
+              <p class="tag">가장 높은 지대의 단독 채</p>
+              <p class="desc">가장 높은 지대에 자리한 단독 채. 거실의 큰 창에서 산이 정면으로 들어옵니다.</p>
+              <dl class="spec">
+                <div><dt>평형</dt><dd>28평 단층</dd></div>
+                <div><dt>인원</dt><dd>기준 6인</dd></div>
+                <div><dt>침구</dt><dd>킹 1 · 퀸 1 · 온돌 요 2</dd></div>
+                <div><dt>물</dt><dd>풀 + 노천탕</dd></div>
+                <div><dt>반려동물</dt><dd>동반 불가</dd></div>
+                <div><dt>조망</dt><dd>산 능선 정면</dd></div>
+              </dl>
+              <div class="room-foot">
+                <p class="price"><span class="lbl">평일</span><span class="v">₩720,000~</span></p>
+                <a href="#book" class="tlink" data-room="산마루채">산마루채 예약 문의 <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ 03 FACILITY — 인덱스 ============ -->
+      <section id="facility" class="sec" aria-labelledby="facility-title">
+        <div class="wrap">
+          <div class="index-grid">
+            <div class="index-head reveal">
+              <p class="kicker"><span class="n">03</span><span class="en">Index</span>부대시설</p>
+              <h2 id="facility-title" class="h2">필요한 것,<br />모두 안에.</h2>
+              <p class="lede">장을 보러 나가지 않아도 되도록, 채마다 같은 것을 같은 자리에 둡니다.</p>
+            </div>
+            <ol class="idx reveal">
+              <li><span class="n">01</span><div><div class="row"><h3>풀·자쿠지</h3><span class="dots" aria-hidden="true"></span><span class="v">전 객실</span></div><p class="note">계절별 적정 온수 유지</p></div></li>
+              <li><span class="n">02</span><div><div class="row"><h3>바비큐 화로</h3><span class="dots" aria-hidden="true"></span><span class="v">4인 세트 ₩60,000</span></div><p class="note">목재·도구 모두 비치</p></div></li>
+              <li><span class="n">03</span><div><div class="row"><h3>조식 도시락 신청</h3><span class="dots" aria-hidden="true"></span><span class="v">전날 18:00까지</span></div><p class="note">사전 예약제, 마당으로 가져다 드립니다</p></div></li>
+              <li><span class="n">04</span><div><div class="row"><h3>반려동물 동반</h3><span class="dots" aria-hidden="true"></span><span class="v">솔채·자작채</span></div><p class="note">10kg 이하 · 추가 ₩30,000</p></div></li>
+              <li><span class="n">05</span><div><div class="row"><h3>전기차 충전</h3><span class="dots" aria-hidden="true"></span><span class="v">완속 충전기 4기</span></div></div></li>
+              <li><span class="n">06</span><div><div class="row"><h3>큐레이션 책장</h3><span class="dots" aria-hidden="true"></span><span class="v">30권</span></div><p class="note">계절마다 새로 들이는 책</p></div></li>
+              <li><span class="n">07</span><div><div class="row"><h3>풀 키친</h3><span class="dots" aria-hidden="true"></span><span class="v">전 객실</span></div><p class="note">인덕션 · 기본 양념</p></div></li>
+              <li><span class="n">08</span><div><div class="row"><h3>Wi-Fi · OTT</h3><span class="dots" aria-hidden="true"></span><span class="v">전 객실</span></div><p class="note">늦잠을 위한 암막 커튼까지</p></div></li>
+            </ol>
           </div>
-          <div class="md:col-span-8 grid grid-cols-2 gap-x-10 gap-y-8 reveal">
-            <div><h3 class="font-semibold">전 객실 풀·자쿠지</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">계절별 적정 온수 유지</p></div>
-            <div><h3 class="font-semibold">바비큐 화로</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">목재·도구 모두 비치</p></div>
-            <div><h3 class="font-semibold">조식 도시락 신청</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">전날 18시까지 사전 예약</p></div>
-            <div><h3 class="font-semibold">반려동물 동반 (지정 객실)</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">솔채·자작채 가능</p></div>
-            <div><h3 class="font-semibold">전기차 충전</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">완속 충전기 4기</p></div>
-            <div><h3 class="font-semibold">큐레이션 책장</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">계절마다 새로 들이는 책 30권</p></div>
+
+          <div class="seasons reveal">
+            <div class="seasons-h">
+              <h3>사계절, 산일호의 다른 얼굴</h3>
+              <p>언제 와도 같은 집, 다른 풍경.</p>
+            </div>
+            <ol>
+              <li><p class="s" aria-hidden="true">봄</p><h4>산벚꽃 길</h4><p>3월 말부터 진입로 양쪽이 옅은 분홍빛으로 물듭니다.</p></li>
+              <li><p class="s" aria-hidden="true">여름</p><h4>야외 풀과 별빛</h4><p>수온 28도 유지, 자정까지 풀에 머무실 수 있습니다.</p></li>
+              <li><p class="s" aria-hidden="true">가을</p><h4>단풍과 모닥불</h4><p>10월 중순, 객실마다 작은 화로를 무료로 빌려드립니다.</p></li>
+              <li><p class="s" aria-hidden="true">겨울</p><h4>노천탕과 눈</h4><p>12월부터 노천 자쿠지를 42도로 유지, 눈 오는 날이 가장 인기입니다.</p></li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- AROUND -->
-      
-      <!-- ====================== FOUR SEASONS ====================== -->
-      <section id="seasons" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">FOUR SEASONS</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">사계절, 산일호의 다른 얼굴</h2>
+      <!-- ============ 04 AROUND — 1박 2일 ============ -->
+      <section id="around" class="sec around" aria-labelledby="around-title">
+        <div class="wrap it-grid">
+          <div class="it-head reveal">
+            <p class="kicker"><span class="n">04</span><span class="en">Itinerary</span>주변</p>
+            <h2 id="around-title" class="h2">체크인부터<br />체크아웃까지.</h2>
+            <p class="lede">처음 오시는 분도 헤매지 않도록 산일호가 미리 짜둔 1박 2일 동선입니다. 차로 30분 안, 직접 다녀온 곳만 안내드립니다.</p>
+            <figure class="it-fig">
+              <div class="ph"><img src="../assets/images/pension/03-walk.webp" width="1376" height="768" alt="흰 자작나무가 늘어선 숲길을 손잡고 걷는 두 사람" loading="lazy" /></div>
+              <figcaption class="cap"><span class="n">오전 9시</span><span>원대리 자작나무숲, 산일호에서 차로 12분.</span></figcaption>
+            </figure>
           </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">봄 — 산벚꽃 길</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">3월 말부터 진입로 양쪽이 옅은 분홍빛으로 물듭니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">여름 — 야외 풀과 별빛</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">수온 28도 유지, 자정까지 풀에 머무실 수 있습니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">가을 — 단풍과 모닥불</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">10월 중순, 객실마다 작은 화로를 무료로 빌려드립니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">겨울 — 노천탕과 눈</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">12월부터 노천 자쿠지를 42도로 유지, 눈 오는 날이 가장 인기입니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
 
-      <section id="around" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">AROUND</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">차로 30분 안의 자리들.</h2>
-          </div>
-          <div class="grid md:grid-cols-3 gap-8">
-            <article class="reveal">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/03-walk.webp');background-size:cover;background-position:center;"></div>
-              <h3 class="mt-5 text-lg font-semibold">원대리 자작나무숲</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 12분. 4계절 모두 좋습니다.</p>
-            </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/03-walk.webp');background-size:cover;background-position:center;"></div>
-              <h3 class="mt-5 text-lg font-semibold">내린천 산책로</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 18분. 아침 산책으로 좋습니다.</p>
-            </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/pension/02-bath-coffee.webp');background-size:cover;background-position:center;"></div>
-              <h3 class="mt-5 text-lg font-semibold">오일장 · 한식 명인집</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">차로 25분. 직접 다녀온 곳만 안내드립니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- BOOK -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
           <div class="reveal">
-            <p class="eyebrow mb-5">이번 주말, 진짜 쉬고 싶으시다면</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              여행도 일이 되는 요즘, 쉼다운 쉼이 필요합니다.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">독채 프라이빗 풀</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">옆방 소리 없는 우리 가족만의 마당</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">사계절 온수풀</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">한겨울에도 미지근한 물에 몸을 담급니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">체크인 컨시어지</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">근처 맛집·산책로까지 미리 알려드려요</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">준비에 지쳐 떠나는 여행은, 돌아올 때 더 피곤합니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">물에 발을 담그는 순간, 한 주의 긴장이 풀려나가는 저녁.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#book" class="btn-primary">객실 예약하기 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">주변 코스 가이드 받기</a>
+            <section class="day" aria-label="첫째 날">
+              <div class="day-h"><h3>첫째 날</h3><span>Day 1</span></div>
+              <ol>
+                <li class="stop"><time>오후 4시</time><div><h4>체크인, 마당부터 천천히</h4><p>짐을 풀고 마당과 풀을 먼저 둘러보세요. 근처 맛집과 산책로는 체크인 때 미리 알려드립니다.</p></div></li>
+                <li class="stop"><time>오후 6시 30분</time><div><h4>능이백숙 한 상</h4><p>걸어서 다녀오는 산장 식당의 능이백숙. 예약이 필요합니다.</p><span class="dist">도보 12분</span></div></li>
+                <li class="stop"><time>오후 9시</time><div><h4>풀빌라의 시간</h4><p>야외 풀·자쿠지에서 별 보기. 와인은 객실 냉장고에 준비해 둡니다.</p></div></li>
+              </ol>
+            </section>
+            <section class="day" aria-label="둘째 날">
+              <div class="day-h"><h3>둘째 날</h3><span>Day 2</span></div>
+              <ol>
+                <li class="stop"><time>오전 8시</time><div><h4>테라스의 아침</h4><p>조식 바스켓을 테라스에서, 직접 내린 드립커피와 함께.</p></div></li>
+                <li class="stop"><time>오전 9시</time><div><h4>자작나무 숲길</h4><p>원대리 자작나무숲. 사계절 모두 좋지만, 아침 안개가 남은 시간이 가장 조용합니다.</p><span class="dist">차로 12분</span></div></li>
+                <li class="stop"><time>오전 11시</time><div><h4>체크아웃, 돌아가는 길</h4><p>내린천 산책로를 걷거나, 오일장과 한식 명인집에 들러 점심을 드시고 출발하세요.</p><span class="dist">차로 18분 · 25분</span></div></li>
+              </ol>
+            </section>
+            <p class="it-note">이동 시간은 산일호 기준 자가용 소요 시간입니다.</p>
           </div>
         </div>
       </section>
 
-      
-      <!-- ====================== 1N 2D COURSE ====================== -->
-      <section id="course" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">1N 2D COURSE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">체크인부터 체크아웃까지, 추천 동선</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">처음 오시는 분도 헤매지 않도록 산일호가 미리 짜둔 코스.</p>
+      <!-- ============ 05 BOOK ============ -->
+      <section id="book" class="sec book" aria-labelledby="book-title">
+        <div class="wrap book-grid">
+          <div class="reveal">
+            <p class="kicker"><span class="n">05</span><span class="en">Booking</span>예약 안내</p>
+            <h2 id="book-title" class="h2">조용한 하룻밤을<br />골라드릴게요.</h2>
+            <p class="lede">예약은 네이버·인스타그램 DM·전화 모두 받습니다. 성수기·기념일 일정은 1개월 전부터 빠르게 마감됩니다.</p>
+            <div class="channels">
+              <button type="button" class="btn btn-paper" data-demo>네이버에서 예약 <span class="arr" aria-hidden="true">→</span></button>
+              <a href="tel:0335550001" class="btn btn-on">033-555-0001</a>
+            </div>
+            <p class="demo-toast" role="status" aria-live="polite"></p>
+            <dl class="terms">
+              <div><dt>입·퇴실</dt><dd>체크인 16:00 / 체크아웃 11:00 · 조식은 전날 18:00까지 사전 예약</dd></div>
+              <div><dt>인원</dt><dd>기준 인원은 객실별 안내 · 추가 인원 1인당 ₩30,000 (영유아 무료)</dd></div>
+              <div><dt>추가 요금</dt><dd>청소비 ₩50,000 (객실료 별도) · 바비큐 4인 세트 ₩60,000</dd></div>
+              <div><dt>반려동물</dt><dd>솔채·자작채 한정 · 10kg 이하 · 추가 ₩30,000 · 객실 침대 출입 금지</dd></div>
+              <div><dt>객실 시설</dt><dd>풀 키친(인덕션·기본 양념) · Wi-Fi · OTT · 암막 커튼</dd></div>
+              <div><dt>취소 정책</dt><dd>소비자분쟁해결기준 — 7일 전 100% / 5일 전 70% / 3일 전 50% / 당일·노쇼 환불 불가</dd></div>
+            </dl>
           </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">Day1 14:00 체크인 후</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">차로 7분, 산막이옛길 산책 (왕복 1시간).</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">Day1 18:30 저녁</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">도보 12분 거리 '솔밭산장'에서 능이백숙 (예약 필수).</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">Day1 21:00 풀빌라 시간</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">야외 풀·자쿠지·별 보기, 와인은 객실 냉장고에 준비.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">Day2 10:00 아침</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">조식 바스켓을 테라스에서, 직접 내린 드립커피와 함께.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">Day2 11:00 체크아웃 전</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">차로 15분 '문광저수지' 메타세콰이어길 사진 찍기.</p>
-            </article>
-          </div>
-        </div>
-      </section>
 
-
-      <section id="book" class="py-24 md:py-32" style="background: var(--primary); color: #f5efde">
-        <div class="container-x text-center max-w-2xl mx-auto reveal">
-          <p class="eyebrow mb-4" style="color: #dccfa6">BOOK</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">조용한 하룻밤을<br />골라드릴게요.</h2>
-          <p class="mt-8 leading-relaxed" style="color: rgba(245,239,222,.75)">
-            예약은 네이버·인스타그램 DM·전화 모두 받습니다.<br />
-            성수기·기념일 일정은 1개월 전부터 빠르게 마감됩니다.
-          </p>
-          <div class="mt-10 flex flex-wrap gap-3 justify-center">
-            <a href="#" class="btn-primary" style="background:#fff; color:var(--primary)">네이버에서 예약 →</a>
-            <a href="tel:033-555-0001" class="btn-ghost" style="color:#fff; border-color:rgba(255,255,255,.5)">033 · 555 · 0001</a>
-          </div>
-          <ul class="mt-10 text-sm space-y-2 text-left max-w-2xl mx-auto" style="color: rgba(245,239,222,.75)">
-            <li>· <strong>체크인 16:00 / 체크아웃 11:00</strong> · 조식은 전날 18:00까지 사전 예약</li>
-            <li>· <strong>기준 인원</strong>: 객실별 안내 · <strong>추가 인원</strong> 1인당 ₩30,000 (영유아 무료)</li>
-            <li>· <strong>청소비</strong> ₩50,000 (객실료 별도) · <strong>바비큐 4인 세트</strong> ₩60,000</li>
-            <li>· <strong>반려동물</strong>: 솔채·자작채 한정 · 10kg 이하 · 추가 ₩30,000 · 객실 침대 출입 금지</li>
-            <li>· <strong>객실 시설</strong>: 풀 키친(인덕션·기본 양념) · Wi-Fi · 넷플릭스 · 암막 커튼</li>
-            <li>· <strong>취소 정책</strong> (소비자분쟁해결기준): 7일 전 100% / 5일 전 70% / 3일 전 50% / 당일·노쇼 환불 불가</li>
-          </ul>
-          <p class="mt-10 text-sm" style="color: #dccfa6">강원특별자치도 인제군 OO면 OO길 123 · 농어촌민박업 신고 제2024-OO호</p>
+          <form class="form-card reveal" id="book-form" novalidate>
+            <div class="form-card-h">
+              <h3>예약 문의</h3>
+              <p>확인 후 연락드립니다</p>
+            </div>
+            <div class="fields">
+              <div class="f"><label for="b-name">성함</label><input id="b-name" name="name" class="field" required autocomplete="name" /></div>
+              <div class="f"><label for="b-tel">연락처</label><input id="b-tel" name="tel" class="field" required type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" /></div>
+              <div class="f"><label for="b-room">객실</label><select id="b-room" name="room" class="field" required><option value="">선택</option><option>솔채 (2인)</option><option>자작채 (4인)</option><option>달채 (4인)</option><option>산마루채 (6인)</option><option>추천받고 싶어요</option></select></div>
+              <div class="f"><label for="b-date">체크인 날짜</label><input id="b-date" name="date" class="field" required type="date" /></div>
+              <div class="f"><label for="b-nights">숙박</label><select id="b-nights" name="nights" class="field"><option>1박</option><option>2박</option><option>3박 이상</option></select></div>
+              <div class="f"><label for="b-people">인원</label><select id="b-people" name="people" class="field"><option>2명</option><option>3명</option><option>4명</option><option>5명</option><option>6명</option><option>7명 이상</option></select></div>
+              <div class="f full"><label for="b-note">요청 사항 <span class="opt">(선택)</span></label><textarea id="b-note" name="note" class="field" rows="3" placeholder="반려동물 동반, 조식 도시락, 기념일 등"></textarea></div>
+            </div>
+            <label class="consent">
+              <input type="checkbox" required />
+              <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 자세한 사항은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+            </label>
+            <div class="form-foot">
+              <button type="submit" class="btn btn-forest">예약 문의 보내기 <span class="arr" aria-hidden="true">→</span></button>
+              <p class="toast" role="status" aria-live="polite"></p>
+            </div>
+          </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 산일호 풀빌라 · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-top">
+          <div>
+            <p class="logo"><span class="ko">산일호</span><span class="han" aria-hidden="true">山一號</span></p>
+            <p style="margin-top:10px">산이 가장 가까운 하룻밤.</p>
+          </div>
+          <div>
+            <p>강원특별자치도 인제군 OO면 OO길 123</p>
+            <p>농어촌민박업 신고 제2024-OO호</p>
+          </div>
+          <div>
+            <p>예약 <a href="tel:0335550001">033-555-0001</a></p>
+            <p>사업자등록번호 000-00-00000</p>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <p>© 2026 산일호 풀빌라</p>
+          <a href="/">← 쇼룸으로 돌아가기</a>
+        </div>
+        <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      (function () {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        // 첫 화면이 그려진 뒤, 아래쪽 사진을 미리 받아 둠(빠른 스크롤·캡처에도 빈 칸이 없도록)
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            document.querySelectorAll('img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; });
+          }, 1200);
+        });
+
+        // 같은 페이지 앵커 — 부드러운 스크롤(모션 감소 시 즉시 이동)
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest('a[href^="#"]');
+          if (!a || e.defaultPrevented) return;
+          var id = a.getAttribute('href');
+          var t = id.length > 1 && document.querySelector(id);
+          if (!t) return;
+          e.preventDefault();
+          t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+          t.focus({ preventScroll: true });
+          if (history.pushState) history.pushState(null, '', id);
+        });
+
+        // 모바일 메뉴
+        var btn = document.querySelector('.menu-btn');
+        var panel = document.getElementById('mnav');
+        function setMenu(open) {
+          btn.setAttribute('aria-expanded', String(open));
+          panel.hidden = !open;
+          btn.querySelector('.sr-only').textContent = open ? ' 닫기' : ' 열기';
+        }
+        btn.addEventListener('click', function () { setMenu(panel.hidden); if (!panel.hidden) panel.querySelector('a').focus(); });
+        panel.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { setMenu(false); btn.focus(); } });
+        document.addEventListener('click', function (e) { if (!panel.hidden && !e.target.closest('.mast')) setMenu(false); });
+
+        var DEMO = '시안 데모 — 실제로 전송되지 않습니다.';
+        function say(el) { el.textContent = ''; setTimeout(function () { el.textContent = DEMO; }, 30); }
+
+        // 객실별 문의 링크 → 폼 객실 미리 선택
+        var roomSel = document.getElementById('b-room');
+        document.querySelectorAll('[data-room]').forEach(function (a) {
+          a.addEventListener('click', function () {
+            var name = a.getAttribute('data-room');
+            [].some.call(roomSel.options, function (o) { if (o.text.indexOf(name) === 0) { roomSel.value = o.value; return true; } });
+          });
+        });
+
+        // 예약 채널 버튼 — 시안 데모
+        document.querySelectorAll('[data-demo]').forEach(function (b) {
+          b.addEventListener('click', function (e) { e.preventDefault(); say(document.querySelector('.demo-toast')); });
+        });
+
+        // 문의 폼 — 시안 데모
+        var form = document.getElementById('book-form');
+        form.addEventListener('submit', function (e) { e.preventDefault(); say(form.querySelector('.toast')); });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="pension" role="region" aria-label="알림 배너">
@@ -381,9 +782,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="naver" href="https://booking.naver.com/" target="_blank" rel="noopener" aria-label="네이버에서 예약"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 4v8.5L9.5 4H4v16h5.5v-8.5L14.5 20H20V4z"/></svg><span class="tip">네이버에서 예약</span></a>
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 문의"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 문의</span></a>
-      <a class="phone" href="tel:0335550001" target="_blank" rel="noopener" aria-label="033-555-0001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">033-555-0001</span></a>
+      <a class="naver" href="https://booking.naver.com/" target="_blank" rel="noopener" aria-label="네이버에서 예약"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.5 4v8.5L9.5 4H4v16h5.5v-8.5L14.5 20H20V4z"/></svg><span class="tip">네이버에서 예약</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 문의"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 문의</span></a>
+      <a class="phone" href="tel:0335550001" target="_blank" rel="noopener" aria-label="033-555-0001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">033-555-0001</span></a>
     </div>
 
   </body>

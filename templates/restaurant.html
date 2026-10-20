@@ -33,37 +33,337 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css" />
     <link rel="stylesheet" href="/assets/fonts/cormorant-garamond/cormorant-garamond.css?v=6359ce6c" />
     <link rel="stylesheet" href="/assets/fonts/nanum-myeongjo/nanum-myeongjo.css?v=72a7e1c3" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ===== 화월 — 계절 미식 매거진 (에디토리얼) ===== */
       :root {
-        --bg: #0a0a0a;
-        --bg-soft: #141414;
-        --primary: #d4af37;
-        --primary-soft: #b58e1f;
-        --ink: #f3ead2;
-        --ink-soft: rgba(243,234,210,.65);
-        --line: rgba(212,175,55,.18);
+        --paper: #f3eee4;
+        --paper-2: #ebe4d5;
+        --paper-hi: #faf7f0;
+        --ink: #16130f;
+        --ink-2: #4a443b;
+        --ink-3: #6b6356;
+        --rule: rgba(22, 19, 15, .16);
+        --rule-2: rgba(22, 19, 15, .5);
+        --gold: #d4af37;          /* 검정 위 가는 선·숫자 */
+        --gold-ink: #7d6019;      /* 종이 위 숫자 (대비 5.1:1) */
+        --night: #100e0b;
+        --night-2: #1a1713;
+        --night-ink: #efe7d6;
+        --night-soft: #a39a8a;
+        --night-rule: rgba(239, 231, 214, .14);
+        --f-display: 'Nanum Myeongjo', serif;
+        --f-latin: 'Cormorant Garamond', 'Nanum Myeongjo', serif;
+        --f-han: 'Noto Serif KR', serif;
+        --f-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+        --wrap: 1240px;
+        --gut: 20px;
+        --side: max(var(--gut), calc((100% - var(--wrap)) / 2));
+        --ease: cubic-bezier(.2, .7, .2, 1);
+        --sec: clamp(88px, 11vw, 160px);
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); font-weight: 300; }
-      .serif { font-family: 'Cormorant Garamond', 'Nanum Myeongjo', serif; font-weight: 500; letter-spacing: -0.015em; font-synthesis: none; }
-      h1.serif, h2.serif { font-weight: 500; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: radial-gradient(ellipse at 30% 20%, #2a2a2a, #0a0a0a 70%); position: relative; overflow: hidden; }
-      .ph::after { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 80%, rgba(212,175,55,.18), transparent 55%); }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(10,10,10,.75); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:transparent; color:var(--primary); border:1px solid var(--primary); font-weight:600; font-size:14px; letter-spacing:.05em; transition:.2s; }
-      .btn-primary:hover { background:var(--primary); color:#0a0a0a; }
-      .row { border-top: 1px solid var(--line); }
-      .field { width:100%; padding:14px 16px; background:transparent; border:1px solid var(--line); color:var(--ink); font-size:15px; }
-      .field:focus { outline:none; border-color: var(--primary); }
+      @media (min-width: 768px) { :root { --gut: 40px; } }
+      @media (min-width: 1280px) { :root { --gut: 56px; } }
+
+      html { font-synthesis: none; }
+      [tabindex="-1"]:focus { outline: none; }
+      body {
+        background: var(--paper); color: var(--ink);
+        font-family: var(--f-sans); font-size: 16px; line-height: 1.7; font-weight: 400;
+        -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+        word-break: keep-all; overflow-wrap: break-word;
+      }
+      [id] { scroll-margin-top: 84px; }
+      ::selection { background: var(--ink); color: var(--paper); }
+      .wrap { max-width: calc(var(--wrap) + 2 * var(--gut)); margin: 0 auto; padding: 0 var(--gut); }
+      .display, .h2, .h3, .han, .latin, .quote, .prose { font-synthesis: none; }
+      .display { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.035em; }
+      .han { font-family: var(--f-han); }
+      .latin { font-family: var(--f-latin); }
+      .it { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; letter-spacing: .01em; }
+
+      /* reveal (스크린샷 도구 규약) */
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      /* 공통 텍스트 장치 */
+      .kicker { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; }
+      .kicker .num { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 17px; letter-spacing: 0; color: var(--gold-ink); }
+      .kicker::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--rule-2); }
+      .h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(34px, 4.6vw, 62px); line-height: 1.16; letter-spacing: -0.035em; }
+      .lnum { font-variant-numeric: lining-nums; }
+      .lede { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.8; color: var(--ink-2); }
+      .small { font-size: 13.5px; line-height: 1.7; color: var(--ink-3); }
+
+      /* 버튼 */
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; padding: 0 26px; border: 1px solid var(--ink); font-family: var(--f-sans); font-size: 15px; font-weight: 600; letter-spacing: .01em; line-height: 1; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); cursor: pointer; }
+      .btn .arr { display: inline-block; transition: transform .3s var(--ease); }
+      .btn:hover .arr { transform: translateX(4px); }
+      .btn-ink { background: var(--ink); color: var(--paper); }
+      .btn-ink:hover { background: #2e2820; border-color: #2e2820; }
+      .btn-line { background: transparent; color: var(--ink); }
+      .btn-line:hover { background: var(--ink); color: var(--paper); }
+      .btn-paper { background: var(--night-ink); color: var(--night); border-color: var(--night-ink); }
+      .btn-paper:hover { background: #fff; border-color: #fff; }
+      .btn-sm { min-height: 40px; padding: 0 18px; font-size: 14px; }
+      .link-u { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--ink); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding: 6px 0 4px; transition: background-size .35s var(--ease); }
+      .link-u:hover { background-size: 0 1px; background-position: 100% 100%; }
+      a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+      .night a:focus-visible, .night button:focus-visible { outline-color: var(--gold); }
+
+      /* ===== 마스트헤드 ===== */
+      .mast { position: sticky; top: 0; z-index: 50; background: rgba(243, 238, 228, .92); -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1); border-bottom: 1px solid var(--rule); }
+      .mast-in { height: 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+      .mast-nav { display: none; }
+      .mast-nav a, .side-link a { position: relative; font-size: 14px; color: var(--ink-2); padding: 6px 0; transition: color .2s; }
+      .mast-nav a::after, .side-link a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+      .mast-nav a:hover, .side-link a:hover { color: var(--ink); }
+      .mast-nav a:hover::after, .side-link a:hover::after { transform: scaleX(1); }
+      .mast-logo { grid-column: 2; display: inline-flex; align-items: baseline; gap: 10px; color: var(--ink); }
+      .mast-logo .han { font-size: 25px; font-weight: 500; letter-spacing: .04em; line-height: 1; }
+      .mast-logo .en { font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--ink-3); }
+      .mast-right { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+      .mast-right .side-link { display: none; }
+      .menu-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; font-size: 14px; font-weight: 600; color: var(--ink); border: 1px solid var(--rule); background: transparent; cursor: pointer; }
+      .menu-btn .bars { width: 14px; height: 8px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; transition: transform .3s var(--ease); }
+      .menu-btn[aria-expanded="true"] .bars { transform: scaleY(.3); }
+      .mnav { position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-bottom: 1px solid var(--rule); box-shadow: 0 24px 40px -24px rgba(22, 19, 15, .35); }
+      .mnav[hidden] { display: none; }
+      .mnav ol { padding: 8px var(--gut) 20px; }
+      .mnav a { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-family: var(--f-display); font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
+      .mnav a .it { font-size: 16px; color: var(--gold-ink); min-width: 22px; }
+      @media (max-width: 420px) { .mast-logo .en { display: none; } .menu-btn .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+      @media (min-width: 1024px) {
+        .mast-in { height: 72px; }
+        .mast-nav { display: flex; gap: 28px; justify-content: flex-end; padding-right: 20px; }
+        .mast-right { justify-content: space-between; }
+        .mast-right .side-link { display: flex; gap: 28px; padding-left: 20px; }
+        .menu-btn { display: none; }
+        .mnav { display: none !important; }
+      }
+
+      /* ===== 히어로: 매거진 오프너 ===== */
+      .folio { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); }
+      .folio .it { font-size: 15px; color: var(--ink-2); }
+      .folio .f-r { display: none; }
+      @media (min-width: 768px) { .folio .f-r { display: block; } }
+      .hero { padding-bottom: clamp(64px, 8vw, 120px); }
+      .hero-grid { display: grid; grid-template-columns: [full-start] var(--side) [c-start] minmax(0, 1fr) [c-end] var(--side) [full-end]; row-gap: 40px; padding-top: 36px; }
+      .hero-text { grid-column: c-start / c-end; }
+      .hero-fig { grid-column: full-start / full-end; margin: 0; }
+      .hero-kicker { font-size: 13.5px; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; }
+      .hero h1 { margin-top: 22px; font-size: clamp(44px, 9.4vw, 76px); line-height: 1.1; }
+      .hero h1 .line { display: block; white-space: nowrap; }
+      .standfirst { margin-top: 26px; max-width: 30em; font-family: var(--f-display); font-size: clamp(17px, 1.45vw, 20px); line-height: 1.85; color: var(--ink-2); letter-spacing: -0.01em; }
+      .hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+      .hero-facts { margin-top: 44px; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; border-top: 1px solid var(--rule-2); }
+      .hero-facts div { padding: 14px 14px 0 0; margin-right: 14px; border-right: 1px solid var(--rule); }
+      @media (min-width: 480px) { .hero-facts div { padding-right: 22px; margin-right: 22px; } }
+      .hero-facts div:last-child { border-right: 0; margin-right: 0; }
+      .hero-facts dt { font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); }
+      .hero-facts dd { margin-top: 4px; font-variant-numeric: lining-nums; font-family: var(--f-latin); font-size: clamp(19px, 4.8vw, 22px); font-weight: 500; line-height: 1.2; letter-spacing: .01em; white-space: nowrap; }
+      .hero-facts dd .ko { font-family: var(--f-display); font-size: 18px; }
+      .fig-img { position: relative; overflow: hidden; background: #0d0b09; }
+      .fig-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .hero-fig .fig-img { aspect-ratio: 4 / 3; }
+      .hero-fig .fig-img img { object-position: 45% 60%; }
+      .figcap { display: flex; gap: 14px; align-items: baseline; margin-top: 12px; font-size: 13px; line-height: 1.6; color: var(--ink-3); }
+      .figcap .it { flex: none; font-size: 15px; color: var(--ink-2); }
+      .hero-fig .figcap { padding: 0 var(--side); }
+      @media (min-width: 900px) {
+        .hero-grid { grid-template-columns: [full-start] var(--side) [c-start] minmax(0, 5.6fr) [gap] clamp(32px, 4vw, 72px) [fig] minmax(0, 6.4fr) [c-end] var(--side) [full-end]; align-items: stretch; padding-top: clamp(40px, 5vw, 64px); }
+        .hero-text { grid-column: c-start / gap; padding-bottom: 2px; }
+        .hero h1 { font-size: clamp(50px, 6.3vw, 96px); }
+        .hero-fig { grid-column: fig / full-end; display: flex; flex-direction: column; }
+        .hero-fig .fig-img { aspect-ratio: auto; flex: 1 1 auto; min-height: 440px; }
+        .hero-fig .figcap { padding: 0 var(--side) 0 0; }
+      }
+
+      /* ===== 목차 스트립 ===== */
+      .toc { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
+      .toc ol { display: grid; grid-template-columns: 1fr; }
+      .toc a { display: grid; grid-template-columns: 34px 1fr; gap: 4px 10px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--rule); transition: background .25s; }
+      .toc li:last-child a { border-bottom: 0; }
+      .toc .it { font-size: 18px; color: var(--gold-ink); }
+      .toc .t { font-family: var(--f-display); font-size: 19px; letter-spacing: -0.02em; }
+      .toc .d { grid-column: 2; font-size: 13px; color: var(--ink-3); }
+      .toc a:hover .t { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+      @media (min-width: 768px) {
+        .toc ol { grid-template-columns: repeat(4, 1fr); }
+        .toc a { border-bottom: 0; border-right: 1px solid var(--rule); padding: 22px 20px 24px; }
+        .toc li:first-child a { padding-left: 0; }
+        .toc li:last-child a { border-right: 0; }
+      }
+
+      /* ===== 01 셰프의 노트 (아티클) ===== */
+      .sec { padding: var(--sec) 0; }
+      .sec-head { display: grid; gap: 22px; margin-bottom: clamp(44px, 6vw, 80px); }
+      .byline { font-size: 13.5px; color: var(--ink-3); letter-spacing: .02em; }
+      .byline .it { font-size: 16px; color: var(--ink-2); }
+      .art { display: grid; gap: 48px; }
+      .art-fig .fig-img { aspect-ratio: 4 / 5; }
+      .art-fig .fig-img img { object-position: 80% 50%; }
+      .bio { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule-2); }
+      .bio h3 { font-size: 13px; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; }
+      .bio p { margin-top: 10px; font-family: var(--f-display); font-size: 17px; line-height: 1.75; }
+      .bio ul { margin-top: 12px; }
+      .bio li { padding: 9px 0; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink-2); }
+      .prose { font-family: var(--f-display); font-size: clamp(17px, 1.25vw, 18.5px); line-height: 1.95; color: var(--ink); letter-spacing: -0.005em; }
+      .prose p + p { margin-top: 1.1em; }
+      .prose .drop::first-letter { float: left; font-size: 4.1em; line-height: .9; padding: .06em .12em 0 0; color: var(--ink); }
+      .quote { margin: 44px 0; padding: 28px 0 30px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
+      .quote .mark { display: block; font-family: 'Cormorant Garamond', serif; font-size: 64px; line-height: .5; height: 26px; color: var(--gold-ink); }
+      .quote p { font-family: var(--f-display); font-size: clamp(26px, 2.7vw, 38px); line-height: 1.4; letter-spacing: -0.03em; }
+      .quote footer { margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+      .notes { margin-top: 52px; }
+      .notes-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+      .notes-h h3 { font-family: var(--f-display); font-size: 22px; letter-spacing: -0.02em; }
+      .notes-h p { font-size: 13px; color: var(--ink-3); }
+      .notes ul { display: grid; grid-template-columns: 1fr; column-gap: 32px; }
+      .notes li { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+      .notes li h4 { font-size: 15.5px; font-weight: 600; }
+      .notes li p { margin-top: 4px; font-size: 14.5px; color: var(--ink-2); line-height: 1.7; }
+      @media (min-width: 640px) { .notes ul { grid-template-columns: 1fr 1fr; } }
+      @media (min-width: 900px) {
+        .sec-head.split { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; column-gap: 48px; }
+        .art { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(40px, 6vw, 96px); align-items: start; }
+      }
+      .promise { margin-top: clamp(64px, 8vw, 112px); border-top: 1px solid var(--ink); }
+      .promise-h { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding: 16px 0 6px; }
+      .promise-h h3 { font-family: var(--f-display); font-size: 22px; letter-spacing: -0.02em; }
+      .promise-h p { font-size: 13px; color: var(--ink-3); }
+      .promise ol { display: grid; grid-template-columns: 1fr; }
+      .promise li { padding: 20px 0 22px; border-top: 1px solid var(--rule); }
+      .promise .n { font-variant-numeric: lining-nums; font-family: 'Cormorant Garamond', serif; font-size: 30px; line-height: 1; font-weight: 500; color: var(--gold-ink); }
+      .promise h4 { margin-top: 12px; font-size: 16px; font-weight: 600; }
+      .promise li p { margin-top: 6px; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+      @media (min-width: 640px) { .promise ol { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+      @media (min-width: 1024px) {
+        .promise ol { grid-template-columns: repeat(4, 1fr); column-gap: 0; }
+        .promise li { padding: 22px 24px 4px; border-top: 0; border-left: 1px solid var(--rule); }
+        .promise li:first-child { border-left: 0; padding-left: 0; }
+      }
+
+      /* ===== 02 코스 — 검정 반전 ===== */
+      .night { background: var(--night); color: var(--night-ink); }
+      .night .kicker { color: var(--night-soft); }
+      .night .kicker .num { color: var(--gold); }
+      .night .kicker::after { background: var(--gold); opacity: .6; }
+      .course { position: relative; }
+      .course-grid { display: grid; gap: 56px; }
+      .course-intro .h2 { margin-top: 22px; }
+      .course-intro .lede { margin-top: 22px; color: var(--night-soft); max-width: 26em; }
+      .price { margin-top: 36px; padding: 18px 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--night-rule); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+      .price .lbl { font-size: 13px; letter-spacing: .1em; color: var(--night-soft); }
+      .price .v { font-variant-numeric: lining-nums; font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 3.2vw, 44px); font-weight: 500; line-height: 1; letter-spacing: .01em; }
+      .price-note { margin-top: 10px; font-size: 13px; color: var(--night-soft); }
+      .course-intro .btn { margin-top: 28px; }
+      .course-fig { margin-top: 44px; }
+      .course-fig .fig-img { aspect-ratio: 5 / 4; background: var(--night); }
+      .course-fig .fig-img img { object-position: 60% 50%; transform: scale(1.35); transform-origin: 62% 55%; }
+      .course-fig .figcap { color: var(--night-soft); }
+      .course-fig .figcap .it { color: var(--night-ink); }
+      .menu-card { border-top: 1px solid var(--night-ink); }
+      .menu-card-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--night-rule); font-size: 13px; letter-spacing: .06em; color: var(--night-soft); }
+      .menu-card-h .it { font-size: 16px; letter-spacing: .02em; color: var(--night-ink); }
+      .menu li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0 14px; padding: 22px 0 24px; border-bottom: 1px solid var(--night-rule); }
+      .menu .no { font-family: var(--f-han); font-weight: 300; font-size: 30px; line-height: 1.1; color: var(--gold); text-align: center; }
+      .m-line { display: flex; align-items: baseline; gap: 12px; }
+      .m-line h3 { font-family: var(--f-display); font-weight: 400; font-size: clamp(20px, 2vw, 25px); line-height: 1.35; letter-spacing: -0.025em; min-width: 0; }
+      .m-dots { flex: 1 1 auto; min-width: 20px; height: 1px; transform: translateY(-5px); background-image: radial-gradient(circle, rgba(239, 231, 214, .45) 1px, transparent 1.3px); background-size: 7px 3px; background-repeat: repeat-x; background-position: 0 50%; height: 3px; }
+      .m-cat { flex: none; font-size: 13px; letter-spacing: .04em; color: var(--night-soft); }
+      .m-desc { margin-top: 6px; font-size: 14.5px; line-height: 1.7; color: var(--night-soft); }
+      .menu-tea { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0 14px; padding: 22px 0 6px; }
+      .menu-tea .no { font-family: var(--f-han); font-weight: 300; font-size: 26px; line-height: 1.2; color: var(--night-soft); text-align: center; }
+      .menu-tea .m-line h3 { font-size: clamp(18px, 1.6vw, 21px); }
+      .course-print { margin-top: clamp(56px, 7vw, 96px); display: grid; gap: 24px; border-top: 1px solid var(--night-rule); padding-top: 28px; }
+      .course-print h3 { font-size: 13px; letter-spacing: .06em; color: var(--night-ink); font-weight: 600; }
+      .course-print p { margin-top: 8px; font-size: 14px; line-height: 1.75; color: var(--night-soft); }
+      @media (min-width: 900px) {
+        .course-grid { grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr); column-gap: clamp(48px, 6vw, 104px); align-items: start; }
+        .menu li, .menu-tea { grid-template-columns: 64px minmax(0, 1fr); gap: 0 20px; }
+        .menu .no { font-size: 34px; }
+        .course-print { grid-template-columns: repeat(3, 1fr); column-gap: 40px; }
+      }
+
+      /* ===== 03 잔과 자리 ===== */
+      .trio { display: grid; gap: 0; border-top: 1px solid var(--ink); }
+      .trio > div { padding: 28px 0 36px; border-bottom: 1px solid var(--rule); }
+      .trio > div:last-child { border-bottom: 0; }
+      .trio h3 { display: flex; align-items: baseline; gap: 10px; font-size: 13px; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; }
+      .trio h3 .it { font-size: 17px; letter-spacing: 0; color: var(--gold-ink); }
+      .trio .sub { margin-top: 14px; font-family: var(--f-display); font-size: clamp(22px, 2vw, 27px); line-height: 1.35; letter-spacing: -0.03em; }
+      .seats { display: flex; align-items: flex-end; gap: 12px; margin-top: 18px; }
+      .seats .big { font-variant-numeric: lining-nums; font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(120px, 13vw, 184px); line-height: .78; letter-spacing: -0.04em; color: var(--ink); }
+      .seats .unit { font-family: var(--f-display); font-size: 26px; padding-bottom: 6px; }
+      .trio .body { margin-top: 18px; font-size: 15px; line-height: 1.75; color: var(--ink-2); }
+      .ledger { margin-top: 18px; }
+      .ledger li { padding: 14px 0; border-top: 1px solid var(--rule); }
+      .ledger li:first-child { border-top: 0; }
+      .l-row { display: flex; align-items: baseline; gap: 10px; }
+      .l-row h4 { font-size: 16px; font-weight: 600; min-width: 0; }
+      .l-dots { flex: 1 1 auto; min-width: 16px; height: 3px; transform: translateY(-3px); background-image: radial-gradient(circle, rgba(22, 19, 15, .4) 1px, transparent 1.3px); background-size: 7px 3px; background-repeat: repeat-x; }
+      .l-row .p { flex: none; font-variant-numeric: lining-nums; font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; letter-spacing: .01em; }
+      .l-row .p.t { font-family: var(--f-sans); font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: 0; }
+      .ledger li > p { margin-top: 4px; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+      @media (min-width: 1024px) {
+        .trio { grid-template-columns: 1fr 1fr 1fr; }
+        .trio > div { padding: 30px 36px 8px; border-bottom: 0; border-left: 1px solid var(--rule); }
+        .trio > div:first-child { padding-left: 0; border-left: 0; }
+        .trio > div:last-child { padding-right: 0; }
+      }
+
+      /* ===== 04 예약 ===== */
+      .reserve { background: var(--paper-2); }
+      .res-grid { display: grid; gap: 48px; }
+      .res-info .h2 { margin-top: 22px; }
+      .res-info .lede { margin-top: 24px; }
+      .terms { margin-top: 34px; border-top: 1px solid var(--ink); }
+      .terms div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; line-height: 1.65; }
+      .terms dt { color: var(--ink-3); font-size: 13px; letter-spacing: .04em; padding-top: 1px; }
+      .terms dd { color: var(--ink); }
+      .tel { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+      .tel .lbl { font-size: 13px; color: var(--ink-3); letter-spacing: .06em; }
+      .tel a { font-variant-numeric: lining-nums; font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; letter-spacing: .02em; border-bottom: 1px solid var(--rule-2); line-height: 1.1; }
+      .form-card { background: var(--paper-hi); border: 1px solid var(--rule); padding: 28px 20px 30px; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -40px rgba(22, 19, 15, .35); }
+      .form-card-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 16px; margin-bottom: 22px; border-bottom: 1px solid var(--ink); }
+      .form-card-h h3 { font-family: var(--f-display); font-size: 24px; letter-spacing: -0.02em; }
+      .form-card-h p { font-size: 12.5px; color: var(--ink-3); }
+      .fields { display: grid; grid-template-columns: 1fr; gap: 18px; }
+      .f label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: var(--ink-2); letter-spacing: .02em; }
+      .f label .opt { font-weight: 400; color: var(--ink-3); }
+      .field { width: 100%; min-height: 50px; padding: 12px 14px; background: #fff; border: 1px solid rgba(22, 19, 15, .28); border-radius: 0; color: var(--ink); font: 400 16px/1.4 var(--f-sans); transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none; }
+      select.field { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2316130f' stroke-width='1.3'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+      textarea.field { min-height: 104px; resize: vertical; }
+      .field:hover { border-color: rgba(22, 19, 15, .5); }
+      .field:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(125, 96, 25, .22); }
+      .consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 20px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); cursor: pointer; }
+      .consent input { margin-top: 3px; width: 17px; height: 17px; flex: none; accent-color: var(--ink); }
+      .consent a { text-decoration: underline; text-underline-offset: 3px; }
+      .form-foot { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+      .form-foot .btn { width: 100%; }
+      .toast { min-height: 1.6em; font-size: 14px; font-weight: 600; color: var(--ink); }
+      .toast:not(:empty) { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--ink); color: var(--paper); width: 100%; }
+      .toast:not(:empty)::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
+      @media (min-width: 640px) { .fields { grid-template-columns: 1fr 1fr; } .f.full { grid-column: 1 / -1; } .form-card { padding: 34px 34px 36px; } .form-foot .btn { width: auto; } }
+      @media (min-width: 1024px) { .res-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(48px, 6vw, 96px); align-items: start; } }
+
+      /* ===== 푸터 ===== */
+      .foot { background: var(--night); color: var(--night-soft); padding: 72px 0 120px; font-size: 14px; }
+      .foot-top { display: grid; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--night-rule); }
+      .foot-logo { display: flex; align-items: baseline; gap: 14px; color: var(--night-ink); }
+      .foot-logo .han { font-size: 40px; font-weight: 300; letter-spacing: .06em; line-height: 1; }
+      .foot-logo .k { font-family: var(--f-display); font-size: 18px; }
+      .foot p { line-height: 1.8; }
+      .foot a { color: var(--night-ink); }
+      .foot a:hover { text-decoration: underline; text-underline-offset: 4px; }
+      .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 22px; }
+      .demo-note { margin-top: 18px; font-size: 12px; color: #8f8778; }
+      @media (min-width: 900px) { .foot-top { grid-template-columns: 1.2fr 1fr 1fr; } }
     </style>
     <meta name="theme-color" content="#0a0a0a" />
     <script type="application/ld+json">
@@ -90,380 +390,374 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="serif text-2xl font-semibold tracking-tight" style="color: var(--primary)">花月</a>
-        <nav class="hidden md:flex items-center gap-10 text-sm" style="color: var(--ink-soft)">
-          <a href="#chef" class="hover:text-[color:var(--primary)]">셰프</a>
-          <a href="#course" class="hover:text-[color:var(--primary)]">코스</a>
-          <a href="#pairing" class="hover:text-[color:var(--primary)]">페어링</a>
-          <a href="#space" class="hover:text-[color:var(--primary)]">공간</a>
-          <a href="#reserve" class="hover:text-[color:var(--primary)]">예약</a>
+
+    <header class="mast">
+      <div class="wrap mast-in">
+        <nav class="mast-nav" aria-label="주요 메뉴">
+          <a href="#chef">셰프의 노트</a>
+          <a href="#course">코스</a>
+          <a href="#pairing">페어링</a>
         </nav>
-        <a href="#reserve" class="btn-primary text-sm" style="padding:10px 20px">RESERVE</a>
+        <a href="#top" class="mast-logo" aria-label="화월 — 맨 위로"><span class="han" aria-hidden="true">花月</span><span class="en" aria-hidden="true">Hwawol</span></a>
+        <div class="mast-right">
+          <nav class="side-link" aria-label="보조 메뉴">
+            <a href="#space">공간·대관</a>
+            <a href="#reserve">예약 안내</a>
+          </nav>
+          <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mnav"><span class="bars" aria-hidden="true"></span><span class="lbl">목차</span><span class="sr-only"> 열기</span></button>
+          <a href="#reserve" class="btn btn-ink btn-sm">예약하기</a>
+        </div>
       </div>
+      <nav id="mnav" class="mnav" aria-label="모바일 목차" hidden>
+        <ol>
+          <li><a href="#chef"><span class="it">01</span>셰프의 노트</a></li>
+          <li><a href="#course"><span class="it">02</span>5월의 코스</a></li>
+          <li><a href="#pairing"><span class="it">03</span>페어링 · 공간 · 대관</a></li>
+          <li><a href="#reserve"><span class="it">04</span>예약</a></li>
+        </ol>
+      </nav>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="relative overflow-hidden">
-        <div class="ph absolute inset-0" style="background-image:url('../assets/images/restaurant/02-dish.webp');background-size:cover;background-position:center;opacity:0.4;"></div>
-        <div class="container-x relative pt-32 md:pt-44 pb-32 md:pb-48">
-          <div class="reveal">
-            <!-- 시그니처 오너먼트: 골드 라인 + 印 -->
-            <div class="flex items-center gap-4 mb-8" aria-hidden="true">
-              <span class="block w-12 h-px" style="background: var(--primary); opacity:.6"></span>
-              <svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="1" fill="none" stroke="#d4af37" stroke-width="1" /><text x="7" y="10" text-anchor="middle" font-size="8" fill="#d4af37" font-family="serif">月</text></svg>
-              <span class="block w-12 h-px" style="background: var(--primary); opacity:.6"></span>
-            </div>
-            <p class="eyebrow mb-8">MODERN KOREAN DINING · SEOUL</p>
-            <h1 class="serif text-5xl md:text-7xl lg:text-[84px] font-semibold leading-[1.18] tracking-[-0.02em] max-w-4xl">
-              계절을 담아낸<br />일곱 코스.
-            </h1>
-            <p class="mt-10 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              한 달은 한 가지 식재로 시작합니다. 산과 바다에서 가장 정성껏 기른 식재를 골라,<br />
-              일곱 번의 정찬으로 옮겨 드립니다.
-            </p>
-            <div class="mt-12 flex flex-wrap gap-3">
-              <a href="#reserve" class="btn-primary">자리를 예약합니다 <span aria-hidden="true">→</span></a>
-            </div>
+      <!-- ============ HERO — 매거진 오프너 ============ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap">
+          <div class="folio">
+            <span><span class="it">2026</span> · 5월의 코스</span>
+            <span>이달의 식재 — 죽순</span>
+            <span class="f-r">서울 강남구 도산대로</span>
           </div>
+        </div>
+        <div class="hero-grid">
+          <div class="hero-text">
+            <p class="hero-kicker">모던 한식 다이닝 · 하루 두 번의 저녁</p>
+            <h1 id="hero-title" class="display"><span class="line">계절을 담아낸</span> <span class="line">일곱 코스.</span></h1>
+            <p class="standfirst">한 달은 한 가지 식재로 시작합니다. 산과 바다에서 가장 정성껏 기른 식재를 골라, 일곱 번의 정찬으로 옮겨 드립니다.</p>
+            <div class="hero-cta">
+              <a href="#reserve" class="btn btn-ink">자리 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+              <a href="#course" class="link-u">5월 코스 보기</a>
+            </div>
+            <dl class="hero-facts">
+              <div><dt>저녁</dt><dd>18:00 · 20:30</dd></div>
+              <div><dt>좌석</dt><dd>14<span class="ko">석</span></dd></div>
+              <div><dt>코스 1인</dt><dd>₩220,000</dd></div>
+            </dl>
+          </div>
+          <figure class="hero-fig">
+            <div class="fig-img">
+              <img src="../assets/images/restaurant/02-dish.webp" width="1376" height="768" alt="검은 석판 위에 담은 참돔 구이와 햇죽순, 하얀 두유 거품" fetchpriority="high" />
+            </div>
+            <figcaption class="figcap"><span class="it">Fig. 1</span><span>5월 코스의 한 접시. 제철 참돔과 햇죽순, 두유 거품.</span></figcaption>
+          </figure>
         </div>
       </section>
 
-      <!-- CHEF -->
-      <section id="chef" class="container-x py-24 md:py-36">
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-          <div class="md:col-span-5 reveal">
-            <div class="ph aspect-[4/5]"  style="background-image:url('../assets/images/restaurant/02-dish.webp');background-size:cover;background-position:center;"></div>
-          </div>
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">CHEF</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 사람의 손,<br />한 계절의 자리.
-            </h2>
-            <p class="mt-8 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">
-              화월의 모든 코스는 셰프 김유한이 직접 다듬은 식재로 구성됩니다.
-              한 번에 14개의 자리만을 운영하는 이유는,
-              한 분의 손님께 단 한 번뿐인 코스를 내드리기 위해서입니다.
-            </p>
-            <ul class="mt-10 space-y-3 text-sm" style="color: var(--ink-soft)">
-              <li class="row pt-3">· 전 도쿄 ‘니혼료리 사쿠라이’ 부주방</li>
-              <li class="row pt-3">· 전 청담 ‘담연’ 헤드 셰프</li>
-              <li class="row pt-3">· 미쉐린 가이드 서울 2024 셀렉티드</li>
-            </ul>
-          </div>
+      <!-- ============ 목차 ============ -->
+      <nav class="wrap" aria-label="이 페이지의 구성">
+        <div class="toc">
+          <ol>
+            <li><a href="#chef"><span class="it">01</span><span class="t">셰프의 노트</span><span class="d">한 사람의 손, 한 계절의 자리</span></a></li>
+            <li><a href="#course"><span class="it">02</span><span class="t">5월의 코스</span><span class="d">일곱 접시와 마지막 차 한 잔</span></a></li>
+            <li><a href="#pairing"><span class="it">03</span><span class="t">잔과 자리</span><span class="d">페어링 · 14석 · 프라이빗 다이닝</span></a></li>
+            <li><a href="#reserve"><span class="it">04</span><span class="t">예약</span><span class="d">18:00 · 20:30, 매월 첫째 주 오픈</span></a></li>
+          </ol>
         </div>
+      </nav>
 
-        <!-- 주방의 약속 -->
-        <div class="mt-20 pt-12 border-t reveal" style="border-color: var(--line)">
-          <p class="eyebrow mb-6">OUR KITCHEN · 주방의 약속</p>
-          <div class="grid md:grid-cols-4 gap-6">
+      <!-- ============ 01 CHEF'S NOTE — 아티클 ============ -->
+      <section id="chef" class="sec" aria-labelledby="chef-title">
+        <div class="wrap">
+          <header class="sec-head split reveal">
             <div>
-              <p class="serif text-2xl" style="color: var(--primary)">01</p>
-              <h3 class="mt-3 text-base font-semibold">위생복·위생모 착용</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">전 조리 인력은 매일 세탁된 위생복과 위생모, 마스크를 착용합니다.</p>
+              <p class="kicker"><span class="num">01</span>셰프의 노트</p>
+              <h2 id="chef-title" class="h2" style="margin-top:22px">한 사람의 손,<br />한 계절의 자리.</h2>
             </div>
-            <div>
-              <p class="serif text-2xl" style="color: var(--primary)">02</p>
-              <h3 class="mt-3 text-base font-semibold">HACCP 자율 관리</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">식재 입고 온도, 보관, 조리 단계까지 매일 기록·점검합니다.</p>
-            </div>
-            <div>
-              <p class="serif text-2xl" style="color: var(--primary)">03</p>
-              <h3 class="mt-3 text-base font-semibold">월 1회 외부 위생 점검</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">독립 위생 컨설턴트가 매달 주방을 점검하고 보고서를 비치합니다.</p>
-            </div>
-            <div>
-              <p class="serif text-2xl" style="color: var(--primary)">04</p>
-              <h3 class="mt-3 text-base font-semibold">콜드체인 식자재</h3>
-              <p class="mt-2 text-sm" style="color: var(--ink-soft)">생선·육류는 산지 직송 콜드체인으로 당일 입고된 것만 사용합니다.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+            <p class="byline"><span class="it">Words</span> — 셰프 김유한<br />5월, 봄이 한창 무르익는 식재료의 기록.</p>
+          </header>
 
-      <!-- COURSE -->
-      <section id="course" class="py-24 md:py-36" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-16">
-            <p class="eyebrow mb-4">COURSE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              5월의 일곱 자리.
-            </h2>
-            <p class="mt-6" style="color: var(--ink-soft)">매월 첫째 주에 새 코스를 공개합니다. 5월의 주제는 ‘죽순’.</p>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-x-12">
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">一</span><span class="text-xs" style="color:var(--ink-soft)">아뮤즈</span></div>
-              <h3 class="serif text-2xl mt-3">햇 죽순과 두유 거품</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">담양 죽순의 첫 자리. 두유 거품과 차조기 오일.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">二</span><span class="text-xs" style="color:var(--ink-soft)">전채</span></div>
-              <h3 class="serif text-2xl mt-3">새조개와 미나리</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">남해 새조개를 살짝 데쳐, 미나리유와 함께.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">三</span><span class="text-xs" style="color:var(--ink-soft)">탕</span></div>
-              <h3 class="serif text-2xl mt-3">맑은 죽순탕</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">12시간 다시마 우린 국물에, 죽순과 표고.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">四</span><span class="text-xs" style="color:var(--ink-soft)">생선</span></div>
-              <h3 class="serif text-2xl mt-3">참돔 솔잎 구이</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">제철 참돔, 솔잎 향을 입혀 차분하게.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">五</span><span class="text-xs" style="color:var(--ink-soft)">육류</span></div>
-              <h3 class="serif text-2xl mt-3">한우 안심과 봄나물</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">35일 드라이에이징 한우, 두릅·취나물 사이드.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">六</span><span class="text-xs" style="color:var(--ink-soft)">식사</span></div>
-              <h3 class="serif text-2xl mt-3">죽순 솥밥</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">갓 지은 솥밥, 죽순과 들기름. 김치 한 가지.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">七</span><span class="text-xs" style="color:var(--ink-soft)">디저트</span></div>
-              <h3 class="serif text-2xl mt-3">청매실 빙수</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">초여름의 청매실, 직접 끓인 시럽과 함께.</p>
-            </article>
-            <article class="reveal py-8 row">
-              <div class="flex items-baseline justify-between"><span class="serif text-3xl" style="color:var(--primary)">茶</span><span class="text-xs" style="color:var(--ink-soft)">마지막 한 잔</span></div>
-              <h3 class="serif text-2xl mt-3">하동 우전 차</h3>
-              <p class="mt-3" style="color:var(--ink-soft)">하루의 끝을 마무리하는 첫물 차.</p>
-            </article>
-          </div>
-
-          <div class="mt-12 text-sm space-y-2" style="color: var(--ink-soft)">
-            <p>· 코스 1인 ₩220,000 (부가세 포함, 봉사료 10% 별도)</p>
-            <p>· <strong>알레르기 안내</strong> — 우유·계란·메밀·새우·게·콩·들깨가 코스에 포함될 수 있습니다. 사전 안내 시 일부 조정 가능합니다.</p>
-            <p>· <strong>원산지 표기</strong> — 한우(국내산) · 참돔(국내 남해) · 새조개(국내 남해) · 죽순(전남 담양) · 김치(국내산) · 쌀(국내산)</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAIRING -->
-      
-      <!-- ====================== CHEF'S NOTE ====================== -->
-      <section id="chef-note" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">CHEF'S NOTE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">이번 달, 화월의 식탁</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">5월 — 봄이 한창 무르익는 식재료의 기록.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">산청 죽순</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">갓 올라온 어린 죽순을 들기름과 다시마 육수에 살짝 데칩니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">남해 도다리</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">쑥과 함께 맑게 끓여 봄의 끝자락을 한 그릇에 담았습니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">햇완두콩</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">껍질째 볶아 단맛을 끌어올린 뒤, 게살과 곁들였습니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">강원 곰취</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">장아찌로 한 달 숙성, 오겹수육의 마지막 한 입을 위해.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="pairing" class="container-x py-24 md:py-36">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">PAIRING</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              코스에 따라 흐르는<br />다섯 잔.
-            </h2>
-          </div>
-          <div class="md:col-span-7 reveal space-y-6">
-            <div class="row pt-6 flex items-baseline justify-between">
-              <div>
-                <h3 class="text-xl font-semibold">와인 페어링</h3>
-                <p class="text-sm mt-1" style="color: var(--ink-soft)">자연주의 와인 중심, 코스마다 한 잔씩 5잔</p>
+          <div class="art">
+            <aside class="art-side reveal" aria-label="사진과 셰프 소개">
+              <figure class="art-fig">
+                <div class="fig-img">
+                  <img src="../assets/images/restaurant/03-service.webp" width="1376" height="768" alt="카운터 너머로 손님에게 접시를 내는 화월의 서버" loading="lazy" />
+                </div>
+                <figcaption class="figcap"><span class="it">Fig. 2</span><span>카운터 너머로 내는 한 접시. 한 번에 14석만 받습니다.</span></figcaption>
+              </figure>
+              <div class="bio">
+                <h3>셰프 김유한</h3>
+                <p>일식과 한식 주방을 두루 거쳐, 화월의 모든 코스를 직접 짓습니다.</p>
+                <ul>
+                  <li>도쿄 일식 주방 부주방</li>
+                  <li>청담 한식 다이닝 헤드 셰프</li>
+                </ul>
               </div>
-              <p class="serif text-xl">+₩90,000</p>
-            </div>
-            <div class="row pt-6 flex items-baseline justify-between">
-              <div>
-                <h3 class="text-xl font-semibold">전통주 페어링</h3>
-                <p class="text-sm mt-1" style="color: var(--ink-soft)">국내 양조장의 청주·약주 5종</p>
+            </aside>
+
+            <div class="art-body">
+              <div class="prose reveal">
+                <p class="drop">화월의 모든 코스는 셰프 김유한이 직접 다듬은 식재로 구성됩니다. 한 번에 14개의 자리만 운영하는 이유는, 한 분의 손님께 단 한 번뿐인 코스를 내드리기 위해서입니다.</p>
+                <p>그 주에 가장 좋은 재료만 코스에 올립니다. 전통의 정신은 지키되 접시는 오늘의 미감으로 담고, 기념일과 함께 오신 분에 맞춘 세심한 응대까지 코스의 일부로 여깁니다.</p>
               </div>
-              <p class="serif text-xl">+₩70,000</p>
-            </div>
-            <div class="row pt-6 flex items-baseline justify-between">
-              <div>
-                <h3 class="text-xl font-semibold">논알콜 페어링</h3>
-                <p class="text-sm mt-1" style="color: var(--ink-soft)">계절 차·발효 음료 5종</p>
+
+              <blockquote class="quote reveal">
+                <span class="mark" aria-hidden="true">“</span>
+                <p>오래 마음에 남을 한 끼,<br />그 무게를 압니다.</p>
+                <footer>— 셰프 김유한</footer>
+              </blockquote>
+
+              <div class="prose reveal">
+                <p>어렵게 마련한 자리가 평범한 외식으로 끝나지 않도록. 함께한 분의 표정이, 그 식사를 오래 기억하게 만듭니다.</p>
               </div>
-              <p class="serif text-xl">+₩45,000</p>
+
+              <div class="notes reveal">
+                <div class="notes-h">
+                  <h3>이번 달, 화월의 식탁</h3>
+                  <p>5월의 식재 넷</p>
+                </div>
+                <ul>
+                  <li><h4>산청 죽순</h4><p>갓 올라온 어린 죽순을 들기름과 다시마 육수에 살짝 데칩니다.</p></li>
+                  <li><h4>남해 도다리</h4><p>쑥과 함께 맑게 끓여 봄의 끝자락을 한 그릇에 담았습니다.</p></li>
+                  <li><h4>햇완두콩</h4><p>껍질째 볶아 단맛을 끌어올린 뒤, 게살과 곁들였습니다.</p></li>
+                  <li><h4>강원 곰취</h4><p>장아찌로 한 달 숙성, 오겹수육의 마지막 한 입을 위해.</p></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- SPACE -->
-      <section id="space" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-12 max-w-xl">
-            <p class="eyebrow mb-4">SPACE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">14석의 정찬.</h2>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="ph aspect-[3/4] reveal"  style="background-image:url('../assets/images/restaurant/03-service.webp');background-size:cover;background-position:center;"></div>
-            <div class="ph aspect-[3/4] mt-8 reveal"  style="background-image:url('../assets/images/restaurant/02-dish.webp');background-size:cover;background-position:center;"></div>
-            <div class="ph aspect-[3/4] reveal"  style="background-image:url('../assets/images/restaurant/03-service.webp');background-size:cover;background-position:center;"></div>
+          <div class="promise reveal">
+            <div class="promise-h">
+              <h3>주방의 약속</h3>
+              <p>보이지 않는 곳까지 매일 기록합니다.</p>
+            </div>
+            <ol>
+              <li><p class="n" aria-hidden="true">01</p><h4>위생복·위생모 착용</h4><p>전 조리 인력은 매일 세탁된 위생복과 위생모, 마스크를 착용합니다.</p></li>
+              <li><p class="n" aria-hidden="true">02</p><h4>HACCP 자율 관리</h4><p>식재 입고 온도, 보관, 조리 단계까지 매일 기록·점검합니다.</p></li>
+              <li><p class="n" aria-hidden="true">03</p><h4>월 1회 외부 위생 점검</h4><p>독립 위생 컨설턴트가 매달 주방을 점검하고 보고서를 비치합니다.</p></li>
+              <li><p class="n" aria-hidden="true">04</p><h4>콜드체인 식자재</h4><p>생선·육류는 산지 직송 콜드체인으로 당일 입고된 것만 사용합니다.</p></li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- RESERVE -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">한 번의 식사로 기억될 자리를 찾으신다면</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              오래 마음에 남을 한 끼, 그 무게를 압니다.
-            </h2>
+      <!-- ============ 02 COURSE — 검정 메뉴 페이지 ============ -->
+      <section id="course" class="sec night course" aria-labelledby="course-title">
+        <div class="wrap">
+          <div class="course-grid">
+            <div class="course-intro reveal">
+              <p class="kicker"><span class="num">02</span>이달의 코스</p>
+              <h2 id="course-title" class="h2">5월의<br />일곱 자리.</h2>
+              <p class="lede">매월 첫째 주에 새 코스를 공개합니다. 5월의 주제는 ‘죽순’. 코스는 약 2시간 30분 동안 이어집니다.</p>
+              <div class="price">
+                <span class="lbl">코스 1인</span>
+                <span class="v">₩220,000</span>
+              </div>
+              <p class="price-note">부가세 포함, 봉사료 10% 별도</p>
+              <a href="#reserve" class="btn btn-paper">이 코스로 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+              <figure class="course-fig">
+                <div class="fig-img">
+                  <img src="../assets/images/restaurant/02-dish.webp" width="1376" height="768" alt="그을린 죽순과 차조기 잎, 두유 거품을 가까이에서 본 모습" loading="lazy" />
+                </div>
+                <figcaption class="figcap"><span class="it">Fig. 3</span><span>담양 햇죽순, 두유 거품과 차조기.</span></figcaption>
+              </figure>
+            </div>
+
+            <div class="menu-card reveal">
+              <div class="menu-card-h"><span class="it">Menu · May 2026</span><span>일곱 코스 · 차 한 잔</span></div>
+              <ol class="menu">
+                <li><span class="no" aria-hidden="true">一</span><div><div class="m-line"><h3>햇 죽순과 두유 거품</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">아뮤즈</span></div><p class="m-desc">담양 죽순의 첫 자리. 두유 거품과 차조기 오일.</p></div></li>
+                <li><span class="no" aria-hidden="true">二</span><div><div class="m-line"><h3>새조개와 미나리</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">전채</span></div><p class="m-desc">남해 새조개를 살짝 데쳐, 미나리유와 함께.</p></div></li>
+                <li><span class="no" aria-hidden="true">三</span><div><div class="m-line"><h3>맑은 죽순탕</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">탕</span></div><p class="m-desc">12시간 다시마 우린 국물에, 죽순과 표고.</p></div></li>
+                <li><span class="no" aria-hidden="true">四</span><div><div class="m-line"><h3>참돔 솔잎 구이</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">생선</span></div><p class="m-desc">제철 참돔, 솔잎 향을 입혀 차분하게.</p></div></li>
+                <li><span class="no" aria-hidden="true">五</span><div><div class="m-line"><h3>한우 안심과 봄나물</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">육류</span></div><p class="m-desc">35일 드라이에이징 한우, 두릅·취나물 사이드.</p></div></li>
+                <li><span class="no" aria-hidden="true">六</span><div><div class="m-line"><h3>죽순 솥밥</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">식사</span></div><p class="m-desc">갓 지은 솥밥, 죽순과 들기름. 김치 한 가지.</p></div></li>
+                <li><span class="no" aria-hidden="true">七</span><div><div class="m-line"><h3>청매실 빙수</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">디저트</span></div><p class="m-desc">초여름의 청매실, 직접 끓인 시럽과 함께.</p></div></li>
+              </ol>
+              <div class="menu-tea">
+                <span class="no" aria-hidden="true">茶</span>
+                <div><div class="m-line"><h3>하동 우전 차</h3><span class="m-dots" aria-hidden="true"></span><span class="m-cat">마지막 한 잔</span></div><p class="m-desc">하루의 끝을 마무리하는 첫물 차.</p></div>
+              </div>
+            </div>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">제철 재료 큐레이션</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">그 주에 가장 좋은 재료만 코스에 올립니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">한식의 격을 입힌 코스</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">전통의 정신을 지키되, 오늘의 미감으로</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">프라이빗 다이닝 케어</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">기념일과 손님에 맞춘 세심한 응대까지</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
+          <div class="course-print reveal">
             <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">어렵게 마련한 자리가 평범한 외식으로 끝나면, 그날은 다시 오지 않습니다.</p>
+              <h3>알레르기 안내</h3>
+              <p>우유·계란·메밀·새우·게·콩·들깨가 코스에 포함될 수 있습니다. 사전 안내 시 일부 조정 가능합니다.</p>
             </div>
             <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">함께한 분의 표정이, 그 식사를 오래 기억하게 만듭니다.</p>
+              <h3>원산지 표기</h3>
+              <p>한우(국내산) · 참돔(국내 남해) · 새조개(국내 남해) · 죽순(전남 담양) · 김치(국내산) · 쌀(국내산)</p>
             </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#reserve" class="btn-primary">코스 예약하기 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">이달의 코스 메뉴 보기</a>
+            <div>
+              <h3>코스 안내</h3>
+              <p>코스 1인 ₩220,000 (부가세 포함, 봉사료 10% 별도). 다음 달 코스는 매월 첫째 주에 공개합니다.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      
-      <!-- ====================== PRIVATE DINING ====================== -->
-      <section id="private" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">PRIVATE DINING</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">조용한 자리, 전체 대관</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">상견례·기념일·임원 만찬을 위한 단독 공간을 마련합니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">프라이빗 룸 (4–8인)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">별도 입구와 화장실, 전담 서버가 동행합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">전체 대관 (최대 24인)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">평일 점심·저녁 가능, 코스 1인 18만원부터.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">와인 코르키지</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">750ml 한 병당 5만원, 최대 2병까지 가능합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">케이크·꽃 반입</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">사전 안내 시 보관 및 세팅을 도와드립니다.</p>
-            </article>
+      <!-- ============ 03 PAIRING · SPACE · PRIVATE ============ -->
+      <section id="pairing" class="sec" aria-labelledby="pairing-title">
+        <div class="wrap">
+          <header class="sec-head split reveal">
+            <div>
+              <p class="kicker"><span class="num">03</span>잔과 자리</p>
+              <h2 id="pairing-title" class="h2" style="margin-top:22px">코스에 따라 흐르는<br />다섯 잔, 조용한 자리.</h2>
+            </div>
+            <p class="lede">코스마다 한 잔씩 곁들이는 페어링, 그리고 상견례·기념일·임원 만찬을 위한 단독 공간을 마련합니다.</p>
+          </header>
+
+          <div class="trio reveal">
+            <div id="space">
+              <h3><span class="it">a.</span>공간</h3>
+              <div class="seats" aria-label="14석"><span class="big" aria-hidden="true">14</span><span class="unit" aria-hidden="true">석의 정찬.</span></div>
+              <p class="body">카운터를 중심으로 한 번에 14석만 엽니다. 하루 두 타임, 18:00와 20:30에 시작해 약 2시간 30분 동안 코스가 이어집니다.</p>
+            </div>
+            <div>
+              <h3><span class="it">b.</span>페어링 · 다섯 잔</h3>
+              <p class="sub">코스에 맞춰<br />한 잔씩.</p>
+              <ul class="ledger">
+                <li><div class="l-row"><h4>와인 페어링</h4><span class="l-dots" aria-hidden="true"></span><span class="p">+₩90,000</span></div><p>자연주의 와인 중심, 코스마다 한 잔씩 5잔</p></li>
+                <li><div class="l-row"><h4>전통주 페어링</h4><span class="l-dots" aria-hidden="true"></span><span class="p">+₩70,000</span></div><p>국내 양조장의 청주·약주 5종</p></li>
+                <li><div class="l-row"><h4>논알콜 페어링</h4><span class="l-dots" aria-hidden="true"></span><span class="p">+₩45,000</span></div><p>계절 차·발효 음료 5종</p></li>
+              </ul>
+            </div>
+            <div id="private">
+              <h3><span class="it">c.</span>프라이빗 다이닝</h3>
+              <p class="sub">조용한 자리,<br />전체 대관.</p>
+              <ul class="ledger">
+                <li><div class="l-row"><h4>프라이빗 룸</h4><span class="l-dots" aria-hidden="true"></span><span class="p t">4–8인</span></div><p>별도 입구와 화장실, 전담 서버가 동행합니다.</p></li>
+                <li><div class="l-row"><h4>전체 대관</h4><span class="l-dots" aria-hidden="true"></span><span class="p t">최대 24인</span></div><p>평일 점심·저녁 가능, 코스 1인 18만원부터. 대관료는 ₩3,200,000부터 사전 협의합니다.</p></li>
+                <li><div class="l-row"><h4>와인 코르키지</h4><span class="l-dots" aria-hidden="true"></span><span class="p">₩50,000</span></div><p>750ml 한 병당, 최대 2병까지 가능합니다.</p></li>
+                <li><div class="l-row"><h4>케이크·꽃 반입</h4><span class="l-dots" aria-hidden="true"></span><span class="p t">사전 안내</span></div><p>미리 알려주시면 보관과 세팅을 도와드립니다.</p></li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-
-      <section id="reserve" class="container-x py-24 md:py-36">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">RESERVE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 분의 시간,<br />한 번의 정찬.
-            </h2>
-            <p class="mt-8 leading-relaxed" style="color: var(--ink-soft)">
-              하루 두 타임, 18:00 / 20:30 — 코스는 약 2시간 30분 진행됩니다.
-              매월 첫째 주 월요일 자정, 다음 달 예약이 열립니다.
-            </p>
-            <ul class="mt-8 text-sm space-y-2" style="color: var(--ink-soft)">
-              <li>· <strong>예약금</strong>: 1인 ₩50,000 — 잔금은 매장에서 결제</li>
-              <li>· <strong>취소 정책</strong>: 방문 2일 전까지 100% 환불, 1일 전 50%, 당일/노쇼 환불 불가</li>
-              <li>· <strong>드레스코드</strong>: 스마트 캐주얼 (반바지·슬리퍼 입장 제한)</li>
-              <li>· <strong>외부 주류</strong>: 와인 1병당 코키지 ₩50,000</li>
-              <li>· <strong>전체 대관</strong>: 14석 ₩3,200,000부터 (사전 협의)</li>
-            </ul>
+      <!-- ============ 04 RESERVE ============ -->
+      <section id="reserve" class="sec reserve" aria-labelledby="reserve-title">
+        <div class="wrap res-grid">
+          <div class="res-info reveal">
+            <p class="kicker"><span class="num">04</span>예약</p>
+            <h2 id="reserve-title" class="h2">한 분의 시간,<br />한 번의 정찬.</h2>
+            <p class="lede">하루 두 타임, 18:00 / 20:30 — 코스는 약 2시간 30분 진행됩니다. 매월 첫째 주 월요일 자정, 다음 달 예약이 열립니다.</p>
+            <dl class="terms">
+              <div><dt>예약금</dt><dd>1인 ₩50,000 — 잔금은 매장에서 결제</dd></div>
+              <div><dt>취소 정책</dt><dd>방문 2일 전까지 100% 환불, 1일 전 50%, 당일·노쇼 환불 불가</dd></div>
+              <div><dt>드레스코드</dt><dd>스마트 캐주얼 (반바지·슬리퍼 입장 제한)</dd></div>
+              <div><dt>외부 주류</dt><dd>와인 1병당 코키지 ₩50,000</dd></div>
+              <div><dt>전체 대관</dt><dd>₩3,200,000부터, 사전 협의 (위 프라이빗 다이닝 참고)</dd></div>
+            </dl>
+            <p class="tel"><span class="lbl">전화 예약</span><a href="tel:025550507">02-555-0507</a></p>
           </div>
-          <form class="md:col-span-7 reveal" onsubmit="event.preventDefault(); alert('예약 요청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
-            <div class="grid md:grid-cols-2 gap-4">
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label><input class="field" required type="tel" /></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 날짜</label><input class="field" required type="date" /></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">시간</label><select class="field" required><option value="">선택</option><option>18:00</option><option>20:30</option></select></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">인원</label><select class="field" required><option>1명</option><option>2명</option><option>3명</option><option>4명</option></select></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">페어링</label><select class="field"><option>없음</option><option>와인</option><option>전통주</option><option>논알콜</option></select></div>
-              <div class="md:col-span-2"><label class="block text-sm mb-2" style="color: var(--ink-soft)">알레르기 / 요청 사항</label><textarea class="field" rows="3"></textarea></div>
+
+          <form class="form-card reveal" id="reserve-form" novalidate>
+            <div class="form-card-h">
+              <h3>예약 요청</h3>
+              <p>확인 후 연락드립니다</p>
             </div>
-            <label class="flex items-start gap-2 mt-6 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-              <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-              <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+            <div class="fields">
+              <div class="f"><label for="r-name">성함</label><input id="r-name" name="name" class="field" required autocomplete="name" /></div>
+              <div class="f"><label for="r-tel">연락처</label><input id="r-tel" name="tel" class="field" required type="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" /></div>
+              <div class="f"><label for="r-date">희망 날짜</label><input id="r-date" name="date" class="field" required type="date" /></div>
+              <div class="f"><label for="r-time">시간</label><select id="r-time" name="time" class="field" required><option value="">선택</option><option>18:00</option><option>20:30</option></select></div>
+              <div class="f"><label for="r-party">인원</label><select id="r-party" name="party" class="field" required><option>1명</option><option selected>2명</option><option>3명</option><option>4명</option></select></div>
+              <div class="f"><label for="r-pair">페어링 <span class="opt">(선택)</span></label><select id="r-pair" name="pairing" class="field"><option>없음</option><option>와인</option><option>전통주</option><option>논알콜</option></select></div>
+              <div class="f full"><label for="r-note">알레르기 / 요청 사항 <span class="opt">(선택)</span></label><textarea id="r-note" name="note" class="field" rows="3"></textarea></div>
+            </div>
+            <label class="consent">
+              <input type="checkbox" required />
+              <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 자세한 사항은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
             </label>
-            <button class="btn-primary mt-6 w-full md:w-auto justify-center">예약 요청 보내기</button>
+            <div class="form-foot">
+              <button type="submit" class="btn btn-ink">예약 요청 보내기 <span class="arr" aria-hidden="true">→</span></button>
+              <p class="toast" role="status" aria-live="polite"></p>
+            </div>
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-14 text-sm" style="color: var(--ink-soft); border-top: 1px solid var(--line)">
-      <div class="container-x flex flex-wrap justify-between gap-6">
-        <div>
-          <p class="serif text-xl" style="color: var(--primary)">花月 화월</p>
-          <p class="mt-3">서울특별시 강남구 도산대로 OO길 22, 2층</p>
-          <p>예약 02-555-0507 · reserve@hwawol.kr</p>
-          <p class="mt-2">사업자등록번호 000-00-00000</p>
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-top">
+          <div>
+            <p class="foot-logo"><span class="han" aria-hidden="true">花月</span><span class="k">화월</span></p>
+            <p style="margin-top:14px">계절을 담아낸 일곱 코스.</p>
+          </div>
+          <div>
+            <p>서울특별시 강남구 도산대로 OO길 22, 2층</p>
+            <p>예약 <a href="tel:025550507">02-555-0507</a> · reserve@hwawol.kr</p>
+          </div>
+          <div>
+            <p>사업자등록번호 000-00-00000</p>
+            <p>저녁 18:00 · 20:30</p>
+          </div>
         </div>
-        <div class="text-right">
-          <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
-          <p class="mt-2">© 2026 HWAWOL</p>
+        <div class="foot-bottom">
+          <p>© 2026 HWAWOL</p>
+          <a href="/">← 쇼룸으로 돌아가기</a>
         </div>
+        <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      (function () {
+        // 스크롤 리빌
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        // 첫 화면이 그려진 뒤, 아래쪽 사진을 미리 받아 둠(빠른 스크롤·캡처에도 빈 칸이 없도록)
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            document.querySelectorAll('img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; });
+          }, 1200);
+        });
+
+        // 같은 페이지 앵커 — 부드러운 스크롤(모션 감소 시 즉시 이동)
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest('a[href^="#"]');
+          if (!a || e.defaultPrevented) return;
+          var id = a.getAttribute('href');
+          var t = id.length > 1 && document.querySelector(id);
+          if (!t) return;
+          e.preventDefault();
+          t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+          t.focus({ preventScroll: true });
+          if (history.pushState) history.pushState(null, '', id);
+        });
+
+        // 모바일 목차
+        var btn = document.querySelector('.menu-btn');
+        var panel = document.getElementById('mnav');
+        function setMenu(open) {
+          btn.setAttribute('aria-expanded', String(open));
+          panel.hidden = !open;
+          btn.querySelector('.sr-only').textContent = open ? ' 닫기' : ' 열기';
+        }
+        btn.addEventListener('click', function () { setMenu(panel.hidden); if (!panel.hidden) panel.querySelector('a').focus(); });
+        panel.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { setMenu(false); btn.focus(); } });
+        document.addEventListener('click', function (e) { if (!panel.hidden && !e.target.closest('.mast')) setMenu(false); });
+
+        // 예약 폼 — 시안 데모
+        var form = document.getElementById('reserve-form');
+        var toast = form.querySelector('.toast');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          toast.textContent = '';
+          setTimeout(function () { toast.textContent = '시안 데모 — 실제로 전송되지 않습니다.'; }, 30);
+        });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="restaurant" role="region" aria-label="알림 배너">
@@ -475,9 +769,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="phone" href="tel:025550507" target="_blank" rel="noopener" aria-label="02-555-0507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">02-555-0507</span></a>
-      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@hwawol.kr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@hwawol.kr</span></a>
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널</span></a>
+      <a class="phone" href="tel:025550507" target="_blank" rel="noopener" aria-label="02-555-0507"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">02-555-0507</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@hwawol.kr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@hwawol.kr</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널</span></a>
     </div>
 
   </body>
