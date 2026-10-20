@@ -2,67 +2,11 @@
   "_comment": "홈 첫 화면 기기 목업 쇼케이스 (위: 모니터, 아래: 휴대폰). 순서·문구를 바꾼 뒤 python3 tools/build_showcase.py → python3 tools/build_assets.py. 화면 캡처는 node tools/capture_showcase.mjs. 레퍼런스 페이지 카드 미리보기도 같은 캡처로 만들며, previewOnly 는 쇼케이스에 넣지 않고 미리보기만 만듭니다",
   "designs": [
     {
-      "slug": "dental",
-      "nameKo": "라온치과의원",
-      "industryKo": "치과",
-      "tagKo": "치과가 처음인 마음으로, 끝까지 정성껏",
-      "accent": "#1d7a5f"
-    },
-    {
-      "slug": "cafe",
-      "nameKo": "오월의 다정",
-      "industryKo": "카페·베이커리",
-      "tagKo": "하루의 가장 다정한 한 잔",
-      "accent": "#c23a1d"
-    },
-    {
-      "slug": "law",
-      "nameKo": "정평 법무법인",
-      "industryKo": "법무법인",
-      "tagKo": "바르게 듣고, 정확하게 답합니다",
-      "accent": "#c9a961"
-    },
-    {
-      "slug": "restaurant",
-      "nameKo": "화월",
-      "industryKo": "한식 다이닝",
-      "tagKo": "계절을 담아낸 일곱 코스",
-      "accent": "#c9a24a"
-    },
-    {
-      "slug": "pilates",
-      "nameKo": "루티드 필라테스",
-      "industryKo": "필라테스",
-      "tagKo": "뿌리부터 단단해지는 나의 코어",
-      "accent": "#4f7a5a"
-    },
-    {
       "slug": "clinic",
       "nameKo": "본연 클리닉",
       "industryKo": "성형외과·피부과",
       "tagKo": "본래의 얼굴에서 시작합니다",
       "accent": "#b89a78"
-    },
-    {
-      "slug": "beauty",
-      "nameKo": "단정 에스테틱",
-      "industryKo": "피부관리",
-      "tagKo": "단정한 매일을 위한 피부 루틴",
-      "accent": "#8a2f45"
-    },
-    {
-      "slug": "interior",
-      "nameKo": "여백 스튜디오",
-      "industryKo": "인테리어",
-      "tagKo": "덜어낸 자리에 머무는 하루",
-      "accent": "#d9301c"
-    },
-    {
-      "slug": "pension",
-      "nameKo": "산일호 풀빌라",
-      "industryKo": "펜션·풀빌라",
-      "tagKo": "산이 가장 가까운 하룻밤",
-      "accent": "#8c7148"
     },
     {
       "slug": "academy",
@@ -72,25 +16,11 @@
       "accent": "#f0b429"
     },
     {
-      "slug": "studio",
-      "nameKo": "무드그래프 스튜디오",
-      "industryKo": "사진·영상 스튜디오",
-      "tagKo": "분위기까지 담는 한 컷",
-      "accent": "#dcb98f"
-    },
-    {
-      "slug": "manufacture",
-      "nameKo": "한울정밀",
-      "industryKo": "제조업·B2B",
-      "tagKo": "미크론 단위에서 시작되는 신뢰",
-      "accent": "#006fb5"
-    },
-    {
-      "slug": "insurance",
-      "nameKo": "온재무설계",
-      "industryKo": "보험·재무설계",
-      "tagKo": "인생의 굽이마다, 곁에",
-      "accent": "#b08d45"
+      "slug": "pension",
+      "nameKo": "산일호 풀빌라",
+      "industryKo": "펜션·풀빌라",
+      "tagKo": "산이 가장 가까운 하룻밤",
+      "accent": "#8c7148"
     },
     {
       "slug": "saas",
@@ -100,11 +30,32 @@
       "accent": "#6b55e6"
     },
     {
-      "slug": "fintech",
-      "nameKo": "온플로우",
-      "industryKo": "핀테크",
-      "tagKo": "복잡한 정산을 가장 간단하게",
-      "accent": "#4b2aff"
+      "slug": "interior",
+      "nameKo": "여백 스튜디오",
+      "industryKo": "인테리어",
+      "tagKo": "덜어낸 자리에 머무는 하루",
+      "accent": "#d9301c"
+    },
+    {
+      "slug": "dental",
+      "nameKo": "라온치과의원",
+      "industryKo": "치과",
+      "tagKo": "치과가 처음인 마음으로, 끝까지 정성껏",
+      "accent": "#1d7a5f"
+    },
+    {
+      "slug": "restaurant",
+      "nameKo": "화월",
+      "industryKo": "한식 다이닝",
+      "tagKo": "계절을 담아낸 일곱 코스",
+      "accent": "#c9a24a"
+    },
+    {
+      "slug": "ai-agent",
+      "nameKo": "Kairos",
+      "industryKo": "AI 에이전트 SaaS",
+      "tagKo": "수백 개의 에이전트, 하나의 관제 화면",
+      "accent": "#7b8cff"
     },
     {
       "slug": "agency-quote",
@@ -114,25 +65,18 @@
       "accent": "#4058ff"
     },
     {
-      "slug": "agency-dark",
-      "nameKo": "논픽셀",
-      "industryKo": "디자인 스튜디오",
-      "tagKo": "다크 에디토리얼 포트폴리오",
-      "accent": "#ff623d"
+      "slug": "beauty",
+      "nameKo": "단정 에스테틱",
+      "industryKo": "피부관리",
+      "tagKo": "단정한 매일을 위한 피부 루틴",
+      "accent": "#8a2f45"
     },
     {
-      "slug": "agency-interactive",
-      "nameKo": "플럭스랩",
-      "industryKo": "인터랙티브 스튜디오",
-      "tagKo": "스토리 패널과 가로 갤러리",
-      "accent": "#315cff"
-    },
-    {
-      "slug": "ai-agent",
-      "nameKo": "Kairos",
-      "industryKo": "AI 에이전트 SaaS",
-      "tagKo": "수백 개의 에이전트, 하나의 관제 화면",
-      "accent": "#7b8cff"
+      "slug": "cafe",
+      "nameKo": "오월의 다정",
+      "industryKo": "카페·베이커리",
+      "tagKo": "하루의 가장 다정한 한 잔",
+      "accent": "#c23a1d"
     },
     {
       "slug": "keyboard",
@@ -143,12 +87,68 @@
       "reducedMotion": true
     },
     {
+      "slug": "insurance",
+      "nameKo": "온재무설계",
+      "industryKo": "보험·재무설계",
+      "tagKo": "인생의 굽이마다, 곁에",
+      "accent": "#b08d45"
+    },
+    {
+      "slug": "manufacture",
+      "nameKo": "한울정밀",
+      "industryKo": "제조업·B2B",
+      "tagKo": "미크론 단위에서 시작되는 신뢰",
+      "accent": "#006fb5"
+    },
+    {
+      "slug": "agency-interactive",
+      "nameKo": "플럭스랩",
+      "industryKo": "인터랙티브 스튜디오",
+      "tagKo": "스토리 패널과 가로 갤러리",
+      "accent": "#315cff"
+    },
+    {
+      "slug": "agency-dark",
+      "nameKo": "논픽셀",
+      "industryKo": "디자인 스튜디오",
+      "tagKo": "다크 에디토리얼 포트폴리오",
+      "accent": "#ff623d"
+    },
+    {
+      "slug": "pilates",
+      "nameKo": "루티드 필라테스",
+      "industryKo": "필라테스",
+      "tagKo": "뿌리부터 단단해지는 나의 코어",
+      "accent": "#4f7a5a"
+    },
+    {
       "slug": "accounting",
       "nameKo": "Sumday",
       "industryKo": "세무·회계 SaaS",
       "tagKo": "결산이 끝나는 날을 앞당기세요",
       "accent": "#e4f45c",
       "query": "?tod=dawn"
+    },
+    {
+      "slug": "fintech",
+      "nameKo": "온플로우",
+      "industryKo": "핀테크",
+      "tagKo": "복잡한 정산을 가장 간단하게",
+      "accent": "#4b2aff"
+    },
+    {
+      "slug": "studio",
+      "nameKo": "무드그래프 스튜디오",
+      "industryKo": "사진·영상 스튜디오",
+      "tagKo": "분위기까지 담는 한 컷",
+      "accent": "#dcb98f"
+    },
+    {
+      "slug": "law",
+      "nameKo": "정평 법무법인",
+      "industryKo": "법무법인",
+      "tagKo": "바르게 듣고, 정확하게 답합니다",
+      "accent": "#c9a961"
     },
     {
       "slug": "blog",
