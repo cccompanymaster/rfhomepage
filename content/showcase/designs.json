@@ -13,14 +13,14 @@
       "nameKo": "오월의 다정",
       "industryKo": "카페·베이커리",
       "tagKo": "하루의 가장 다정한 한 잔",
-      "accent": "#a8743f"
+      "accent": "#c23a1d"
     },
     {
       "slug": "law",
       "nameKo": "정평 법무법인",
       "industryKo": "법무법인",
       "tagKo": "바르게 듣고, 정확하게 답합니다",
-      "accent": "#3d5375"
+      "accent": "#c9a961"
     },
     {
       "slug": "restaurant",
@@ -48,14 +48,14 @@
       "nameKo": "단정 에스테틱",
       "industryKo": "피부관리",
       "tagKo": "단정한 매일을 위한 피부 루틴",
-      "accent": "#c76b84"
+      "accent": "#8a2f45"
     },
     {
       "slug": "interior",
       "nameKo": "여백 스튜디오",
       "industryKo": "인테리어",
       "tagKo": "덜어낸 자리에 머무는 하루",
-      "accent": "#8b8f96"
+      "accent": "#d9301c"
     },
     {
       "slug": "pension",
@@ -69,28 +69,28 @@
       "nameKo": "메리트 입시컨설팅",
       "industryKo": "학원·교육",
       "tagKo": "길을 잘 아는 사람과 걷는 1년",
-      "accent": "#3a6aa8"
+      "accent": "#f0b429"
     },
     {
       "slug": "studio",
       "nameKo": "무드그래프 스튜디오",
       "industryKo": "사진·영상 스튜디오",
       "tagKo": "분위기까지 담는 한 컷",
-      "accent": "#8a8a8a"
+      "accent": "#dcb98f"
     },
     {
       "slug": "manufacture",
       "nameKo": "한울정밀",
       "industryKo": "제조업·B2B",
       "tagKo": "미크론 단위에서 시작되는 신뢰",
-      "accent": "#5b6573"
+      "accent": "#006fb5"
     },
     {
       "slug": "insurance",
       "nameKo": "온재무설계",
       "industryKo": "보험·재무설계",
       "tagKo": "인생의 굽이마다, 곁에",
-      "accent": "#d9a441"
+      "accent": "#b08d45"
     },
     {
       "slug": "saas",

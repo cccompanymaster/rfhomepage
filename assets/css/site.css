@@ -30,19 +30,19 @@ body { background: var(--bg); color: var(--text); }
 
 /* placeholder gradients per industry */
 .ph-dental    { --ph-from:#d6f0e6; --ph-to:#f0fbf6; color:#0f5d4a; }
-.ph-law       { --ph-from:#1f2937; --ph-to:#374151; color:#fff; }
-.ph-cafe      { --ph-from:#f5e6d3; --ph-to:#ede0c8; color:#5a3e1f; }
-.ph-restaurant{ --ph-from:#1a1a1a; --ph-to:#2a2a2a; color:#d4af37; }
-.ph-interior  { --ph-from:#e5e7eb; --ph-to:#f3f4f6; color:#1f2937; }
-.ph-pilates   { --ph-from:#d1e7d6; --ph-to:#c4dcc8; color:#1f4731; }
+.ph-law       { --ph-from:#f7f5f0; --ph-to:#efebe2; color:#111a27; }
+.ph-cafe      { --ph-from:#c23a1d; --ph-to:#ffd463; color:#fff6e3; }
+.ph-restaurant{ --ph-from:#f3eee4; --ph-to:#ebe4d5; color:#16130f; }
+.ph-interior  { --ph-from:#ffffff; --ph-to:#f5f5f3; color:#0b0b0b; }
+.ph-pilates   { --ph-from:#dde7d5; --ph-to:#fbe5d4; color:#1f3529; }
 .ph-beauty    { --ph-from:#fde4e8; --ph-to:#fad1d8; color:#9b3a4e; }
 .ph-saas      { --ph-from:#e8e0ff; --ph-to:#c7b8ff; color:#3d2bb8; }
-.ph-pension   { --ph-from:#ddd0bb; --ph-to:#c9b896; color:#5a4a2a; }
+.ph-pension   { --ph-from:#46524a; --ph-to:#24372a; color:#f4f1e9; }
 .ph-studio    { --ph-from:#0a0a0a; --ph-to:#1a1a1a; color:#fff; }
 .ph-academy   { --ph-from:#d6e4f0; --ph-to:#b8cee8; color:#1e3a5f; }
-.ph-manufacture{--ph-from:#d1d5db; --ph-to:#9ca3af; color:#1f2937; }
-.ph-insurance { --ph-from:#122320; --ph-to:#16302b; color:#d9a441; }
-.ph-clinic    { --ph-from:#141312; --ph-to:#2b2823; color:#c8b49a; }
+.ph-manufacture{--ph-from:#ffffff; --ph-to:#eef5fb; color:#0a0a0a; }
+.ph-insurance { --ph-from:#f6f2ea; --ph-to:#efe8db; color:#1f3a30; }
+.ph-clinic    { --ph-from:#f7f4ee; --ph-to:#e9e2d6; color:#17140f; }
 .ph-agq       { --ph-from:#4058FF; --ph-to:#101522; color:#fff; }
 .ph-agd       { --ph-from:#0B0C0F; --ph-to:#1C1F25; color:#FF623D; }
 .ph-agi       { --ph-from:#315CFF; --ph-to:#10130F; color:#D7FF47; }

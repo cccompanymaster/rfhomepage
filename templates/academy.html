@@ -22,9 +22,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>메리트 입시컨설팅 — 길을 잘 아는 사람과 걷는 1년</title>
     <link rel="canonical" href="https://noahhomepage.co.kr/templates/academy" />
-    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/previews/academy-desktop.webp?v=0a387cdc" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/previews/academy-desktop.webp?v=3f96123c" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/previews/academy-desktop.webp?v=0a387cdc" />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/previews/academy-desktop.webp?v=3f96123c" />
     <meta name="description" content="메리트는 1:1 입시 컨설팅으로 학생의 진로를 끝까지 따라가는 학습 멘토링입니다. 진학과 함께, 한 사람의 1년을 책임집니다." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="메리트 입시컨설팅 — 길을 잘 아는 사람과 걷는 1년" />
@@ -34,7 +34,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e3a5f'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
     <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css?v=40c0665d" />
-    <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=c6fd5aca" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
       /* ───────── 메리트 — 벤토 그리드 ───────── */
@@ -101,6 +101,8 @@
       /* 헤더 */
       .top { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 245, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
       .top-in { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px; }
+      /* 왼쪽 위 공용 '쇼룸' 버튼(약 20–100px)에 로고가 가리지 않게 */
+      .top-in { padding-left: max(var(--pad), calc(116px - max(0px, (100vw - var(--wrap)) / 2))); }
       .logo { display: inline-flex; align-items: baseline; gap: 8px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; color: var(--navy); }
       .logo i { font-style: normal; width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); align-self: center; }
       .nav { display: none; gap: 30px; font-size: 15px; color: var(--ink-soft); }
@@ -108,7 +110,8 @@
       .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
       .nav a:hover { color: var(--navy); }
       .nav a:hover::after { transform: scaleX(1); }
-      .top .btn { min-height: 40px; padding: 0 18px; font-size: 14px; }
+      .top .btn { min-height: 40px; padding: 0 18px; font-size: 14px; white-space: nowrap; }
+      @media (max-width: 420px) { .top .btn { padding: 0 14px; } .top .btn .long { display: none; } }
       @media (min-width: 960px) { .nav { display: flex; } }
 
       /* 히어로 */
@@ -408,7 +411,7 @@
           <a href="#mentors">컨설턴트</a>
           <a href="#consult">무료 진단 신청</a>
         </nav>
-        <a href="#consult" class="btn btn-navy">무료 진단 신청</a>
+        <a href="#consult" class="btn btn-navy">무료 진단<span class="long"> 신청</span></a>
       </div>
     </header>
 
