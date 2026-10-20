@@ -38,35 +38,397 @@
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ================================================================
+         오월의 다정 — 맥시멀리즘
+         초콜릿 브라운 · 토마토 레드 · 버터 옐로 세 가지 색을 꽉 채우고,
+         살짝 기운 스티커·체크·도트·스캘럽 무늬와 손그림 일러스트를 사진과 겹칩니다.
+         메뉴·영업시간·예약 버튼은 무늬 없는 단색 면 위에 따로 둡니다.
+         ================================================================ */
       :root {
-        --bg: #faf6ee;
-        --bg-soft: #f1e8d6;
-        --primary: #5a3e1f;
-        --primary-soft: #8b6a44;
-        --accent: #c98e4a;
-        --ink: #3a2a17;
-        --ink-soft: #806c54;
-        --line: #e6dcc6;
+        --choco: #3a2116;
+        --choco-2: #59382a;
+        --tomato: #c23a1d;
+        --tomato-2: #a32e14;
+        --butter: #ffd463;
+        --butter-2: #ffe7a3;
+        --cream: #fff6e3;
+        --cream-2: #fbead0;
+        --ink: #3a2116;
+        --ink-soft: #5e4234;
+        --on-dark: #fff6e3;
+        --on-dark-soft: #f3dcc4;
+        --r-l: 28px;
+        --r-m: 20px;
+        --hard: 5px 5px 0 var(--choco);
+        --wrap: 1280px;
+        --gutter: clamp(18px, 3.6vw, 48px);
+        --display: 'Fraunces', 'Hahmlet', serif;
+        --sans: 'Pretendard Variable', Pretendard, system-ui, -apple-system, sans-serif;
+        --ease: cubic-bezier(.2, .8, .2, 1);
+        --dots: radial-gradient(rgba(58, 33, 22, .2) 2.2px, transparent 2.7px);
+        --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 20 2, 30 2, 45 11 S 70 20, 88 10 S 115 2, 132 11 S 160 20, 178 9 S 195 6, 198 8' fill='none' stroke='%23ffd463' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
-      .serif { font-family: 'Fraunces', 'Hahmlet', serif; letter-spacing: -0.025em; }
-      h1.serif, h2.serif { font-weight: 500; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #f5e6d3, #ddc8a3 60%, #b88c54); position: relative; overflow: hidden; }
-      .ph::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 25% 30%, rgba(255,255,255,.5), transparent 55%); }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(250,246,238,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
-      .btn-primary:hover { background:#3d2a14; }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
-      .btn-ghost:hover { background:var(--primary); color:#fff; }
-      .menu-row { display:grid; grid-template-columns: 1fr auto; gap:24px; padding: 22px 0; border-top: 1px solid var(--line); }
-      .menu-row:last-child { border-bottom: 1px solid var(--line); }
-      .dots { flex:1; border-bottom: 1px dotted var(--line); margin: 0 12px 8px; }
+      html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+      body { margin: 0; font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+      img { display: block; max-width: 100%; }
+      a { color: inherit; text-decoration: none; }
+      ::selection { background: var(--butter); color: var(--choco); }
+      :focus-visible { outline: 3px solid var(--choco); outline-offset: 3px; border-radius: 8px; }
+      .dark :focus-visible, .on-tomato :focus-visible { outline-color: var(--butter); }
+      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-inline: var(--gutter); box-sizing: border-box; }
+      .nw { white-space: nowrap; }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+      /* 제목 — 라틴·숫자는 Fraunces, 한글은 Hahmlet(가변 굵기, 실제 볼드) */
+      .display { font-family: var(--display); font-weight: 800; font-synthesis: none; font-variation-settings: 'opsz' 72; letter-spacing: -0.03em; }
+      .h2 { margin: 0; font-size: clamp(36px, 5.2vw, 74px); line-height: 1.08; }
+      .lead-s { margin: 18px 0 0; font-size: clamp(15.5px, 1.3vw, 18px); line-height: 1.75; max-width: 32em; }
+
+      /* ---------- 무늬 ---------- */
+      .pat-dots { background-color: var(--butter); background-image: var(--dots); background-size: 22px 22px; }
+      .pat-check { background-color: var(--cream); background-image: linear-gradient(90deg, rgba(194, 58, 29, .13) 50%, transparent 0), linear-gradient(rgba(194, 58, 29, .13) 50%, transparent 0); background-size: 56px 56px; }
+      .scallop { position: relative; }
+      .scallop::before { content: ''; position: absolute; left: 0; right: 0; top: -15px; height: 16px; background: radial-gradient(circle at 16px 16px, var(--sc) 15.5px, transparent 16px) 0 0 / 32px 16px repeat-x; pointer-events: none; }
+
+      /* ---------- 스티커 ---------- */
+      .sticker { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px 10px; border: 2.5px solid var(--choco); border-radius: 999px; background: var(--cream); color: var(--choco); box-shadow: 3px 3px 0 var(--choco); font: 800 15px/1 var(--display); font-synthesis: none; letter-spacing: -0.01em; white-space: nowrap; transform: rotate(var(--r, -4deg)); }
+      .sticker.s-butter { background: var(--butter); }
+      .sticker.s-tomato { background: var(--tomato); color: var(--cream); }
+      .sticker.s-choco { background: var(--choco); color: var(--butter); border-color: var(--choco); box-shadow: 3px 3px 0 var(--butter); }
+      .sticker svg { width: 16px; height: 16px; flex-shrink: 0; }
+      .badge { position: relative; display: grid; place-items: center; width: 124px; aspect-ratio: 1; transform: rotate(var(--r, 10deg)); color: var(--cream); text-align: center; }
+      .badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      .badge span { position: relative; font: 900 26px/1 var(--display); font-synthesis: none; letter-spacing: .02em; }
+      .badge small { display: block; margin-top: 4px; font: 700 13px/1.1 var(--display); letter-spacing: 0; }
+      @keyframes wobble {
+        0%, 100% { transform: rotate(var(--r, -4deg)); }
+        25% { transform: rotate(calc(var(--r, -4deg) - 7deg)) scale(1.04); }
+        55% { transform: rotate(calc(var(--r, -4deg) + 5deg)) scale(1.04); }
+        80% { transform: rotate(calc(var(--r, -4deg) - 2deg)); }
+      }
+      @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+        .wob:hover { animation: wobble .7s ease-in-out; }
+      }
+
+      /* ---------- 버튼 (단색 · 고대비) ---------- */
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 26px; border-radius: 999px; border: 2.5px solid var(--choco); font: 700 16px/1 var(--sans); letter-spacing: -0.01em; white-space: nowrap; cursor: pointer; box-shadow: 4px 4px 0 var(--choco); transition: transform .15s var(--ease), box-shadow .15s var(--ease), background .2s; }
+      .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--choco); }
+      .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--choco); }
+      .btn .arr { font-family: var(--display); font-weight: 700; }
+      .btn-butter { background: var(--butter); color: var(--choco); }
+      .btn-choco { background: var(--choco); color: var(--cream); box-shadow: 4px 4px 0 var(--butter); }
+      .btn-choco:hover { box-shadow: 6px 6px 0 var(--butter); }
+      .btn-choco:active { box-shadow: 1px 1px 0 var(--butter); }
+      .btn-cream { background: var(--cream); color: var(--choco); }
+      .btn-sm { min-height: 44px; padding: 0 18px; font-size: 14.5px; box-shadow: 3px 3px 0 var(--choco); }
+      .btn-sm:hover { box-shadow: 4px 4px 0 var(--choco); }
+
+      /* ---------- 헤더 ---------- */
+      .site-head { position: sticky; top: 0; z-index: 60; background: var(--cream); border-bottom: 2.5px solid var(--choco); }
+      .site-head .wrap { display: flex; align-items: center; gap: 24px; height: 70px; }
+      .logo { display: inline-flex; align-items: center; gap: 10px; font: 800 24px/1 'Hahmlet', serif; letter-spacing: -0.04em; color: var(--choco); white-space: nowrap; }
+      .logo svg { width: 30px; height: 30px; flex-shrink: 0; }
+      .gnb { display: flex; gap: 6px; margin-left: auto; }
+      .gnb a { padding: 9px 14px; border-radius: 999px; font-size: 15px; font-weight: 600; color: var(--choco); transition: background .2s; }
+      .gnb a:hover { background: var(--butter); }
+      .head-cta { margin-left: 6px; }
+      .menu-btn { display: none; width: 44px; height: 44px; border-radius: 50%; border: 2.5px solid var(--choco); background: var(--butter); color: var(--choco); cursor: pointer; place-items: center; box-shadow: 2px 2px 0 var(--choco); }
+      .menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; position: relative; transition: transform .25s var(--ease), background .2s; }
+      .menu-btn span::before, .menu-btn span::after { content: ''; position: absolute; left: 0; }
+      .menu-btn span::before { top: -5px; } .menu-btn span::after { top: 5px; }
+      .menu-btn[aria-expanded="true"] span { background: transparent; }
+      .menu-btn[aria-expanded="true"] span::before { transform: translateY(5px) rotate(45deg); }
+      .menu-btn[aria-expanded="true"] span::after { transform: translateY(-5px) rotate(-45deg); }
+      .m-nav { display: none; }
+
+      /* ---------- 히어로 ---------- */
+      .hero { display: grid; grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr); min-height: clamp(620px, calc(100vh - 72px - 60px), 820px); border-bottom: 2.5px solid var(--choco); }
+      .hero-copy { background: var(--tomato); color: var(--cream); padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 64px) clamp(40px, 5vw, 64px) max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter))); display: flex; flex-direction: column; justify-content: center; border-right: 2.5px solid var(--choco); }
+      .tags { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 28px; }
+      .hero h1 { margin: 0; font-size: clamp(50px, 7vw, 112px); line-height: 1.04; color: var(--cream); }
+      .hero h1 .ln { white-space: nowrap; }
+      .hero h1 .squig { padding-bottom: .12em; background: var(--squiggle) left bottom / 100% .2em no-repeat; }
+      .hero .lead { margin: 30px 0 0; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.75; max-width: 30em; color: var(--cream); }
+      .hero .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+      .hero-info { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 28px 0 0; padding: 16px 0 0; border-top: 2px dashed rgba(255, 246, 227, .55); font-size: 14.5px; font-weight: 600; color: var(--cream); }
+      .hero-info span { display: inline-flex; align-items: center; gap: 8px; }
+      .hero-info span + span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--butter); margin-right: 10px; }
+
+      .hero-collage { position: relative; overflow: hidden; min-height: 560px; }
+      .polaroid { position: absolute; margin: 0; padding: 12px 12px 14px; background: var(--cream); border: 3px solid var(--choco); border-radius: 6px; box-shadow: 8px 8px 0 var(--choco); transform: rotate(var(--r, -3deg)); }
+      .polaroid .img { overflow: hidden; border-radius: 2px; border: 2px solid var(--choco); background: #e9cfa8; }
+      .polaroid img { width: 100%; height: 100%; object-fit: cover; }
+      .polaroid figcaption { margin-top: 10px; padding-left: 4px; font: 700 15px/1.3 'Hahmlet', serif; color: var(--choco); text-align: left; letter-spacing: -0.02em; }
+      .p-main { left: 9%; top: 11%; width: 70%; --r: -3deg; z-index: 2; }
+      .p-main .img { aspect-ratio: 4 / 3; }
+      .p-small { right: 5%; bottom: 8%; width: 36%; --r: 5deg; z-index: 3; padding-bottom: 12px; }
+      .p-small .img { aspect-ratio: 1; }
+      .p-small img { object-position: 35% 50%; }
+      .hero-collage .b-sig { position: absolute; right: 6%; top: 5%; z-index: 4; }
+      .hero-collage .s-roast { position: absolute; left: 6%; bottom: 21%; z-index: 4; --r: -7deg; }
+      .hero-collage .s-walk { position: absolute; left: 12%; bottom: 7%; z-index: 4; --r: 4deg; }
+      .ill { position: absolute; pointer-events: none; overflow: visible; }
+      .hero-collage .i-cup { left: 2%; top: 3%; width: 116px; z-index: 3; transform: rotate(-8deg); }
+      .hero-collage .i-croissant { left: 33%; bottom: 15%; width: 128px; z-index: 4; transform: rotate(-10deg); }
+      .hero-collage .i-star1 { right: 30%; top: 4%; width: 40px; z-index: 1; }
+      .hero-collage .i-star2 { left: 4%; bottom: 6%; width: 30px; }
+      .hero-collage .i-star3 { right: 3%; top: 46%; width: 34px; z-index: 1; }
+
+      /* ---------- 티커 (정지형 띠) ---------- */
+      .ticker { background: var(--choco); color: var(--butter); overflow: hidden; border-bottom: 2.5px solid var(--choco); }
+      .ticker-row { display: flex; align-items: center; gap: 22px; padding: 14px 0; white-space: nowrap; font: 800 22px/1 var(--display); font-synthesis: none; letter-spacing: -0.01em; width: max-content; }
+      .ticker-row svg { width: 20px; height: 20px; flex-shrink: 0; }
+      .ticker-row .alt { color: var(--cream); }
+
+      /* ---------- 섹션 공통 ---------- */
+      .sec { position: relative; padding: clamp(72px, 9vw, 124px) 0; }
+      .sec-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: clamp(36px, 4.6vw, 60px); }
+      .kick { display: inline-flex; margin-bottom: 18px; }
+      .dark { background: var(--choco); color: var(--on-dark); }
+      .on-tomato { background: var(--tomato); color: var(--cream); }
+
+      /* ---------- 이야기 ---------- */
+      #story { background: var(--cream); overflow: hidden; border-bottom: 2.5px solid var(--choco); }
+      .story-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+      .story-big { position: relative; }
+      .year { display: block; margin-top: 18px; font: 900 clamp(88px, 13vw, 190px)/.9 'Fraunces', serif; font-variation-settings: 'opsz' 144; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 2.5px var(--choco); }
+      .year-wrap { position: relative; display: inline-block; }
+      .year-wrap .sticker { position: absolute; right: -18px; top: 6px; --r: 9deg; }
+      .story-card { position: relative; padding: clamp(26px, 3.4vw, 44px); background: var(--butter); border: 3px solid var(--choco); border-radius: var(--r-l); box-shadow: 8px 8px 0 var(--choco); }
+      .story-card p { margin: 0; font-size: clamp(15.5px, 1.25vw, 17.5px); line-height: 1.85; color: var(--choco); }
+      .story-card p + p { margin-top: 14px; }
+      .story-card .i-cup2 { right: -28px; top: -54px; width: 104px; transform: rotate(10deg); }
+
+      /* ---------- 시그니처 ---------- */
+      #signature { --sc: var(--butter); background-color: var(--butter); background-image: var(--dots); background-size: 22px 22px; border-bottom: 2.5px solid var(--choco); }
+      .sig-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
+      .sig { position: relative; display: flex; flex-direction: column; border: 3px solid var(--choco); border-radius: var(--r-l); box-shadow: 7px 7px 0 var(--choco); overflow: visible; }
+      .sig:nth-child(1) { background: var(--cream); transform: rotate(-1deg); }
+      .sig:nth-child(2) { background: var(--tomato); color: var(--cream); transform: rotate(.8deg); }
+      .sig:nth-child(3) { background: var(--choco); color: var(--cream); transform: rotate(-.6deg); box-shadow: 7px 7px 0 var(--tomato); }
+      .sig-art { position: relative; margin: 14px 14px 0; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; border: 2.5px solid var(--choco); }
+      .sig-art img { width: 100%; height: 100%; object-fit: cover; object-position: 26% 64%; }
+      .sig-art.a-pear { background: var(--butter); background-image: radial-gradient(rgba(58, 33, 22, .16) 2px, transparent 2.5px); background-size: 18px 18px; }
+      .sig-art.a-chestnut { background: var(--cream-2); background-image: linear-gradient(90deg, rgba(194, 58, 29, .16) 50%, transparent 0), linear-gradient(rgba(194, 58, 29, .16) 50%, transparent 0); background-size: 32px 32px; }
+      .sig-art svg.drink { position: absolute; left: 50%; bottom: 6%; height: 84%; transform: translateX(-50%); }
+      .sig-body { padding: 22px 24px 26px; }
+      .sig-no { font: 800 13px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; opacity: .9; }
+      .sig h3 { margin: 10px 0 0; font: 800 clamp(26px, 2.4vw, 32px)/1.2 var(--display); font-synthesis: none; letter-spacing: -0.03em; }
+      .sig p { margin: 10px 0 0; font-size: 15.5px; line-height: 1.75; }
+      .sig .sticker { position: absolute; top: -16px; right: 16px; z-index: 2; }
+      .sig .price-chip { display: inline-flex; margin-top: 16px; padding: 6px 12px; border-radius: 999px; background: var(--cream); color: var(--choco); border: 2px solid var(--choco); font: 700 14px/1 var(--sans); }
+
+      /* ---------- 메뉴 (가장 읽기 쉽게) ---------- */
+      #menu { border-bottom: 2.5px solid var(--choco); }
+      .menu-grid { display: grid; grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+      .menu-aside .h2, .space-grid .h2 { font-size: clamp(34px, 3.6vw, 52px); }
+      .note-card { margin-top: 28px; padding: 22px 22px 20px; background: var(--cream); border: 2.5px solid var(--choco); border-radius: var(--r-m); box-shadow: 5px 5px 0 var(--choco); }
+      .note-card .price-rule { margin: 0 0 14px; padding-bottom: 14px; border-bottom: 2px dashed rgba(58, 33, 22, .3); font-weight: 700; font-size: 15.5px; color: var(--choco); }
+      .note-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+      .note-card strong { color: var(--choco); }
+      .board { background: var(--cream); border: 3px solid var(--choco); border-radius: var(--r-l); box-shadow: 9px 9px 0 var(--choco); overflow: hidden; }
+      .board-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; background: var(--choco); color: var(--butter); }
+      .board-head strong { font: 900 30px/1 'Fraunces', serif; font-variation-settings: 'opsz' 96; letter-spacing: .02em; }
+      .board-head span { font-size: 13.5px; font-weight: 600; color: var(--cream); }
+      .board-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(28px, 4vw, 52px); padding: 26px clamp(20px, 3vw, 36px) 30px; }
+      .group + .group { margin-top: 30px; }
+      .board-body > div:first-child .group { margin-top: 0; }
+      .group h3 { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 6px; padding: 8px 14px 9px; border-radius: 999px; background: var(--tomato); color: var(--cream); font: 800 14px/1 'Fraunces', serif; letter-spacing: .1em; }
+      .m-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; column-gap: 14px; padding: 14px 0 13px; border-bottom: 2px dotted rgba(58, 33, 22, .32); }
+      .m-row:last-child { border-bottom: 0; }
+      .m-row .nm { font-size: 17px; font-weight: 700; color: var(--choco); letter-spacing: -0.01em; }
+      .m-row .pr { font: 700 22px/1 'Fraunces', serif; font-variant-numeric: lining-nums tabular-nums; color: var(--choco); }
+      .m-row .ds { grid-column: 1 / -1; margin-top: 3px; font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+      .tag-sig { display: inline-block; margin-left: 6px; padding: 3px 7px 4px; border-radius: 6px; background: var(--butter); border: 1.5px solid var(--choco); font: 800 11px/1 'Fraunces', serif; letter-spacing: .08em; vertical-align: 2px; }
+
+      /* ---------- 공간 ---------- */
+      #space { --sc: var(--choco); overflow-x: clip; }
+      .space-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+      #space .lead-s { color: var(--on-dark-soft); }
+      .space-collage { position: relative; height: clamp(440px, 46vw, 620px); }
+      .space-collage .polaroid { box-shadow: 8px 8px 0 var(--tomato); }
+      .space-collage .q1 { left: 0; top: 4%; width: 60%; --r: -3deg; z-index: 2; }
+      .space-collage .q1 .img { aspect-ratio: 4 / 5; }
+      .space-collage .q1 img { object-position: 46% 50%; }
+      .space-collage .q2 { right: 0; top: 20%; width: 46%; --r: 4deg; z-index: 3; }
+      .space-collage .q2 .img { aspect-ratio: 3 / 4; }
+      .space-collage .q2 img { object-position: 14% 50%; }
+      .tape { position: absolute; top: -14px; left: 50%; width: 92px; height: 28px; margin-left: -46px; background: rgba(255, 212, 99, .85); border: 1.5px solid rgba(58, 33, 22, .25); transform: rotate(-4deg); z-index: 2; }
+      .space-collage .s-seat { position: absolute; right: 0; top: 6%; z-index: 4; --r: 6deg; }
+      .space-collage .i-star4 { left: 62%; bottom: 0; width: 44px; }
+      .space-collage .i-star5 { left: 52%; top: 4%; width: 26px; }
+
+      /* ---------- 다정한 하루 ---------- */
+      #journey { --sc: var(--tomato); }
+      .j-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+      .ticket { position: relative; padding: 26px 24px 26px; background: var(--cream); color: var(--choco); border: 3px solid var(--choco); border-radius: var(--r-m); box-shadow: 6px 6px 0 var(--choco); }
+      .ticket::before, .ticket::after { content: ''; position: absolute; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%; background: var(--tomato); border: 3px solid var(--choco); }
+      .ticket::before { left: -14px; clip-path: inset(0 0 0 50%); }
+      .ticket::after { right: -14px; clip-path: inset(0 50% 0 0); }
+      .ticket .no { font: 900 34px/1 'Fraunces', serif; color: var(--tomato); }
+      .ticket svg { position: absolute; right: 18px; top: 18px; width: 54px; height: 54px; }
+      .ticket h3 { margin: 18px 0 0; font: 800 22px/1.3 var(--display); font-synthesis: none; letter-spacing: -0.03em; }
+      .ticket p { margin: 6px 0 0; font-size: 15px; color: var(--ink-soft); }
+      .then { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+      .then > div { padding: 22px 24px; border-radius: var(--r-m); }
+      .then .label { display: inline-block; margin-bottom: 8px; font-size: 12.5px; font-weight: 800; letter-spacing: .14em; }
+      .then p { margin: 0; font-size: 16px; line-height: 1.7; }
+      .then .off { border: 2.5px dashed rgba(255, 246, 227, .7); }
+      .then .on { background: var(--butter); color: var(--choco); border: 3px solid var(--choco); box-shadow: 5px 5px 0 var(--choco); }
+      .j-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+
+      /* ---------- 이번 주 ---------- */
+      #weekly { --sc: var(--butter); background-color: var(--butter); background-image: var(--dots); background-size: 22px 22px; border-top: 2.5px solid var(--choco); border-bottom: 2.5px solid var(--choco); }
+      .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+      .day { position: relative; padding: 52px 20px 24px; border: 3px solid var(--choco); border-radius: var(--r-m); box-shadow: 5px 5px 0 var(--choco); background: var(--cream); }
+      .day:nth-child(2) { background: var(--tomato); color: var(--cream); }
+      .day:nth-child(4) { background: var(--choco); color: var(--cream); box-shadow: 5px 5px 0 var(--tomato); }
+      .day .sticker { position: absolute; top: -16px; left: 16px; }
+      .day:nth-child(odd) { transform: rotate(-.8deg); }
+      .day:nth-child(even) { transform: rotate(.8deg); }
+      .day h3 { margin: 0; font: 800 21px/1.3 var(--display); font-synthesis: none; letter-spacing: -0.03em; }
+      .day p { margin: 8px 0 0; font-size: 14.5px; line-height: 1.65; }
+      .day .off-day { display: inline-block; margin-top: 2px; font-size: 13px; font-weight: 700; color: var(--tomato); }
+
+      /* ---------- 단골 약속 ---------- */
+      #regulars { background: var(--cream); }
+      .reg-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+      .stamp { position: relative; }
+      .stamp svg { width: 100%; height: auto; transform: rotate(-3deg); filter: drop-shadow(8px 8px 0 var(--choco)); }
+      .stamp .sticker { position: absolute; right: 4%; bottom: -6%; --r: 6deg; }
+      .promises { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; list-style: none; margin: 0; padding: 0; }
+      .promises li { padding: 22px 22px 24px; border: 2.5px solid var(--choco); border-radius: var(--r-m); background: var(--cream-2); }
+      .promises li:nth-child(1), .promises li:nth-child(4) { background: var(--butter-2); }
+      .promises h3 { display: flex; align-items: center; gap: 10px; margin: 0; font: 800 20px/1.3 var(--display); font-synthesis: none; letter-spacing: -0.03em; }
+      .promises h3 svg { width: 28px; height: 28px; flex-shrink: 0; }
+      .promises p { margin: 8px 0 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+
+      /* ---------- 오시는 길 · 예약 (단색, 무늬 없음) ---------- */
+      #visit { --sc: var(--choco); }
+      .visit-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+      #visit .h2 { color: var(--cream); }
+      .hours { margin: 36px 0 0; }
+      .hours div { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1.5px solid rgba(255, 246, 227, .25); font-size: 17px; }
+      .hours div:last-child { border-bottom: 1.5px solid rgba(255, 246, 227, .25); }
+      .hours dt { color: var(--butter); font-weight: 700; }
+      .hours dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+      .facts { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 9px; font-size: 15px; color: var(--on-dark-soft); }
+      .facts li { position: relative; padding-left: 18px; }
+      .facts li::before { content: ''; position: absolute; left: 0; top: .7em; width: 7px; height: 7px; border-radius: 50%; background: var(--butter); }
+      .addr { margin-top: 30px; padding: 22px 24px; border-radius: var(--r-m); background: rgba(255, 246, 227, .08); border: 1.5px solid rgba(255, 246, 227, .25); }
+      .addr p { margin: 0; font-size: 17px; line-height: 1.65; color: var(--cream); }
+      .addr .sns { margin-top: 10px; font-size: 15px; color: var(--butter); font-weight: 600; }
+      .resv { padding: clamp(24px, 3vw, 36px); background: var(--cream); color: var(--choco); border-radius: var(--r-l); border: 3px solid var(--choco); box-shadow: 9px 9px 0 var(--butter); }
+      .resv h3 { margin: 0; font: 800 28px/1.25 var(--display); font-synthesis: none; letter-spacing: -0.03em; }
+      .resv .hint { margin: 6px 0 18px; font-size: 14px; color: var(--ink-soft); }
+      .map { display: block; width: 100%; height: auto; margin-bottom: 20px; border-radius: 16px; border: 2.5px solid var(--choco); }
+      .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .fld { display: block; margin-top: 12px; }
+      .fld > span { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: var(--choco); }
+      .fld input, .fld select { width: 100%; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 2px solid var(--choco); border-radius: 12px; background: #fff; font: 500 15.5px var(--sans); color: var(--choco); }
+      .fld input::placeholder { color: #8a6f60; }
+      .fld input:focus, .fld select:focus { outline: none; box-shadow: 0 0 0 4px var(--butter); }
+      .agree { display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 18px; font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); cursor: pointer; }
+      .agree input { margin-top: 3px; width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--choco); }
+      .agree a { text-decoration: underline; text-underline-offset: 2px; }
+      .resv .btn { width: 100%; }
+      .resv .btn-choco { box-shadow: 4px 4px 0 var(--tomato); }
+      .resv .btn-choco:hover { box-shadow: 6px 6px 0 var(--tomato); }
+      .status { display: none; align-items: center; gap: 10px; margin: 16px 0 0; padding: 12px 16px; border-radius: 12px; background: var(--butter); border: 2px solid var(--choco); font-size: 14.5px; font-weight: 700; color: var(--choco); }
+      .status.show { display: flex; }
+
+      /* ---------- 푸터 ---------- */
+      .site-foot { padding: 40px 0 130px; background: var(--cream); color: var(--ink-soft); font-size: 14px; border-top: 2.5px solid var(--choco); }
+      .site-foot .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+      .site-foot .row a { color: var(--choco); font-weight: 700; }
+      .site-foot .row a:hover { text-decoration: underline; }
+      .demo-note { margin: 16px 0 0; font-size: 12.5px; }
+
+      /* ---------- 리빌 ---------- */
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+      .sig.reveal.in:nth-child(1) { transform: rotate(-1deg); }
+      .sig.reveal.in:nth-child(2) { transform: rotate(.8deg); }
+      .sig.reveal.in:nth-child(3) { transform: rotate(-.6deg); }
+      .day.reveal.in:nth-child(odd) { transform: rotate(-.8deg); }
+      .day.reveal.in:nth-child(even) { transform: rotate(.8deg); }
+
+      /* ---------- 반응형 ---------- */
+      @media (max-width: 1360px) { .site-head .wrap { padding-left: max(var(--gutter), 112px); } }
+      @media (max-width: 1180px) {
+        .gnb { display: none; }
+        .head-cta { margin-left: auto; }
+        .menu-btn { display: grid; }
+        .m-nav { position: absolute; left: 0; right: 0; top: 100%; background: var(--cream); border-bottom: 2.5px solid var(--choco); padding: 6px var(--gutter) 18px; flex-direction: column; }
+        .m-nav.open { display: flex; }
+        .m-nav a { padding: 14px 0; border-bottom: 2px dotted rgba(58, 33, 22, .25); font-size: 17px; font-weight: 700; }
+        .week { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 30px; }
+        .week .day { grid-column: span 2; }
+        .week .day:nth-child(n+4) { grid-column: span 3; }
+      }
+      @media (max-width: 960px) {
+        .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+        .hero-copy { border-right: 0; border-bottom: 2.5px solid var(--choco); padding: 44px var(--gutter) 44px; }
+        .hero-collage { height: clamp(500px, 96vw, 640px); min-height: 0; }
+        .story-grid, .menu-grid, .space-grid, .reg-grid, .visit-grid { grid-template-columns: minmax(0, 1fr); }
+        .sig-grid { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin-inline: auto; gap: 34px; }
+        .j-grid { grid-template-columns: minmax(0, 1fr); }
+        .stamp { max-width: 460px; }
+      }
+      @media (max-width: 720px) {
+        .board-body { grid-template-columns: minmax(0, 1fr); }
+        .board-body > div + div .group:first-child { margin-top: 30px; }
+        .week { grid-template-columns: minmax(0, 1fr); }
+        .week .day, .week .day:nth-child(n+4) { grid-column: auto; }
+        .promises, .then { grid-template-columns: minmax(0, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .site-head .wrap { height: 64px; gap: 10px; padding-left: 92px; padding-right: 14px; }
+        .logo { font-size: 20px; gap: 7px; }
+        .logo svg { width: 24px; height: 24px; }
+        .head-cta { min-height: 40px; padding: 0 14px; font-size: 13.5px; box-shadow: 2px 2px 0 var(--choco); }
+        .menu-btn { width: 40px; height: 40px; }
+        .hide-s { display: none; }
+        .hero h1 { font-size: clamp(42px, 12.4vw, 60px); }
+        .hero .cta-row .btn { flex: 1 1 100%; }
+        .hero-info { font-size: 13.5px; }
+        .p-main { left: 4%; top: 6%; width: 84%; }
+        .p-small { width: 46%; right: 3%; bottom: 4%; }
+        .polaroid { padding: 9px 9px 11px; box-shadow: 6px 6px 0 var(--choco); }
+        .polaroid figcaption { font-size: 14px; margin-top: 7px; }
+        .badge { width: 92px; }
+        .badge span { font-size: 20px; }
+        .badge small { font-size: 11px; }
+        .hero-collage .b-sig { right: 3%; top: 2%; }
+        .hero-collage .i-cup { width: 70px; left: 0; top: 0; }
+        .hero-collage .i-croissant { width: 86px; left: 10%; bottom: 13%; }
+        .hero-collage .s-roast { left: 3%; bottom: 27%; }
+        .hero-collage .s-walk { left: 3%; bottom: 3%; }
+        .hero-collage .i-star3 { top: 60%; }
+        .sticker { font-size: 13.5px; padding: 8px 13px 9px; }
+        .ticker-row { font-size: 18px; padding: 12px 0; }
+        .h2 { font-size: clamp(32px, 9.4vw, 42px); }
+        .year-wrap .sticker { right: -6px; }
+        .story-card .i-cup2 { right: -10px; top: -46px; width: 80px; }
+        .board { border-radius: 22px; box-shadow: 6px 6px 0 var(--choco); }
+        .board-head { padding: 14px 18px; }
+        .board-head strong { font-size: 24px; }
+        .board-body { padding: 20px 18px 22px; }
+        .m-row .nm { font-size: 16px; }
+        .m-row .pr { font-size: 20px; }
+        .space-collage { height: clamp(380px, 108vw, 460px); }
+        .space-collage .q1 { width: 66%; }
+        .space-collage .q2 { width: 50%; top: 26%; }
+        .f-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+        .hours div { font-size: 15.5px; }
+        .site-foot { padding-bottom: 150px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { transition: none; }
+        .btn { transition: none; }
+        .btn:hover, .btn:active { transform: none; }
+      }
     </style>
     <meta name="theme-color" content="#5a3e1f" />
     <script type="application/ld+json">
@@ -93,56 +455,103 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color: var(--primary)">오월의 다정</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
-          <a href="#story" class="hover:text-[color:var(--primary)]">우리 이야기</a>
-          <a href="#signature" class="hover:text-[color:var(--primary)]">시그니처</a>
-          <a href="#menu" class="hover:text-[color:var(--primary)]">메뉴</a>
-          <a href="#space" class="hover:text-[color:var(--primary)]">공간</a>
-          <a href="#visit" class="hover:text-[color:var(--primary)]">오시는 길</a>
+
+    <!-- 손그림 일러스트 모음 (재사용) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="scallop" viewBox="0 0 120 120"><path d="M118 60 L117.5 62.5 L116.1 64.9 L114 67.1 L111.4 69.1 L111 71.3 L112.6 74.1 L113.8 76.9 L114.1 79.7 L113.6 82.2 L112.2 84.3 L110 86 L107.2 87.2 L104 88.1 L102.8 89.9 L103.2 93.2 L103.2 96.2 L102.5 98.9 L101 101 L98.9 102.5 L96.2 103.2 L93.2 103.2 L89.9 102.8 L88.1 104 L87.2 107.2 L86 110 L84.3 112.2 L82.2 113.6 L79.7 114.1 L76.9 113.8 L74.1 112.6 L71.3 111 L69.1 111.4 L67.1 114 L64.9 116.1 L62.5 117.5 L60 118 L57.5 117.5 L55.1 116.1 L52.9 114 L50.9 111.4 L48.7 111 L45.9 112.6 L43.1 113.8 L40.3 114.1 L37.8 113.6 L35.7 112.2 L34 110 L32.8 107.2 L31.9 104 L30.1 102.8 L26.8 103.2 L23.8 103.2 L21.1 102.5 L19 101 L17.5 98.9 L16.8 96.2 L16.8 93.2 L17.2 89.9 L16 88.1 L12.8 87.2 L10 86 L7.8 84.3 L6.4 82.2 L5.9 79.7 L6.2 76.9 L7.4 74.1 L9 71.3 L8.6 69.1 L6 67.1 L3.9 64.9 L2.5 62.5 L2 60 L2.5 57.5 L3.9 55.1 L6 52.9 L8.6 50.9 L9 48.7 L7.4 45.9 L6.2 43.1 L5.9 40.3 L6.4 37.8 L7.8 35.7 L10 34 L12.8 32.8 L16 31.9 L17.2 30.1 L16.8 26.8 L16.8 23.8 L17.5 21.1 L19 19 L21.1 17.5 L23.8 16.8 L26.8 16.8 L30.1 17.2 L31.9 16 L32.7 12.8 L34 10 L35.7 7.8 L37.8 6.4 L40.3 5.9 L43.1 6.2 L45.9 7.4 L48.7 9 L50.9 8.6 L52.9 6 L55.1 3.9 L57.5 2.5 L60 2 L62.5 2.5 L64.9 3.9 L67.1 6 L69.1 8.6 L71.3 9 L74.1 7.4 L76.9 6.2 L79.7 5.9 L82.2 6.4 L84.3 7.8 L86 10 L87.2 12.8 L88.1 16 L89.9 17.2 L93.2 16.8 L96.2 16.8 L98.9 17.5 L101 19 L102.5 21.1 L103.2 23.8 L103.2 26.8 L102.8 30.1 L104 31.9 L107.2 32.8 L110 34 L112.2 35.7 L113.6 37.8 L114.1 40.3 L113.8 43.1 L112.6 45.9 L111 48.7 L111.4 50.9 L114 52.9 L116.1 55.1 L117.5 57.5Z" /></symbol>
+        <symbol id="star" viewBox="0 0 100 100"><path d="M50 4 C 53 33, 64 46, 96 50 C 64 54, 53 66, 50 96 C 47 66, 36 54, 4 50 C 36 46, 47 33, 50 4 Z" stroke="#3a2116" stroke-width="5" stroke-linejoin="round" /></symbol>
+        <symbol id="cup" viewBox="0 0 120 120"><g fill="none" stroke="#3a2116" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 50 C 22 49, 88 48, 88 50 C 89 74, 80 92, 55 92 C 31 92, 21 74, 22 50 Z" fill="#fff6e3" /><path d="M87 58 C 101 55, 106 66, 99 74 C 95 79, 88 80, 83 78" /><path d="M10 95 C 30 104, 80 105, 102 95" /><path d="M40 62 C 46 70, 62 71, 70 62" stroke="#c23a1d" /><path d="M42 38 C 34 30, 48 25, 40 14" /><path d="M56 36 C 48 28, 62 23, 54 10" /><path d="M70 38 C 62 30, 76 25, 68 14" /></g></symbol>
+        <symbol id="croissant" viewBox="0 0 140 90"><g stroke="#3a2116" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="60" rx="17" ry="10" transform="rotate(-30 22 60)" fill="#e39a3b" /><ellipse cx="118" cy="60" rx="17" ry="10" transform="rotate(30 118 60)" fill="#e39a3b" /><ellipse cx="43" cy="45" rx="20" ry="17" transform="rotate(-24 43 45)" fill="#f0b452" /><ellipse cx="97" cy="45" rx="20" ry="17" transform="rotate(24 97 45)" fill="#f0b452" /><ellipse cx="70" cy="39" rx="23" ry="22" fill="#ffd463" /><path d="M59 27 C 63 23, 71 22, 78 25" fill="none" stroke="#fff6e3" stroke-width="3.5" /><path d="M33 39 C 36 35, 41 33, 46 34" fill="none" stroke="#fff6e3" stroke-width="3" /></g></symbol>
+      </defs>
+    </svg>
+
+    <header class="site-head">
+      <div class="wrap">
+        <a href="#top" class="logo" aria-label="오월의 다정 처음으로"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#ffd463" /></svg>오월의 다정</a>
+        <nav class="gnb" aria-label="주요 메뉴">
+          <a href="#story">우리 이야기</a>
+          <a href="#signature">시그니처</a>
+          <a href="#menu">메뉴</a>
+          <a href="#space">공간</a>
+          <a href="#weekly">이번 주</a>
+          <a href="#visit">오시는 길</a>
         </nav>
-        <a href="#visit" class="btn-primary text-sm" style="padding:10px 18px">예약 / 매장 방문</a>
+        <a href="#visit" class="btn btn-choco btn-sm head-cta"><span>예약<span class="hide-s"> / 매장 방문</span></span></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-nav" aria-label="메뉴 열기"><span></span></button>
+        <nav class="m-nav" id="m-nav" aria-label="모바일 메뉴">
+          <a href="#story">우리 이야기</a>
+          <a href="#signature">시그니처</a>
+          <a href="#menu">메뉴 · 가격</a>
+          <a href="#space">공간</a>
+          <a href="#weekly">이번 주</a>
+          <a href="#visit">예약 · 오시는 길</a>
+        </nav>
       </div>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-12 md:pt-20 pb-24 md:pb-32">
-        <div class="reveal">
-          <p class="eyebrow mb-6">SINCE 2018 · 성수동</p>
-          <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.2] tracking-[-0.025em] max-w-4xl">
-            하루의 가장<br />다정한 한 잔.
-          </h1>
+      <!-- ============ HERO ============ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy on-tomato">
+          <div class="tags" aria-hidden="true">
+            <span class="sticker s-butter wob" style="--r:-4deg">SINCE 2018</span>
+            <span class="sticker wob" style="--r:3deg">성수동 골목 안</span>
+          </div>
+          <p class="sr-only">2018년부터 성수동에서 문을 연 카페</p>
+          <h1 id="hero-title" class="display"><span class="ln">하루의 가장</span><br /><span class="ln"><span class="squig">다정한</span> 한 잔.</span></h1>
+          <p class="lead">아침의 첫 잔, 점심 뒤의 한 모금, 늦은 오후의 또 한 잔. 일 년 중 가장 다정한 달의 이름을 빌려, 매일 같은 자리에서 오늘의 한 잔을 내려드립니다.</p>
+          <div class="cta-row">
+            <a href="#menu" class="btn btn-butter">오늘의 메뉴 보기 <span class="arr" aria-hidden="true">→</span></a>
+            <a href="#visit" class="btn btn-choco">자리 예약 · 오시는 길</a>
+          </div>
+          <p class="hero-info"><span>화—일 영업 · 월요일 휴무</span><span>라스트 오더 20:30</span><span>성수이로 OO길 17</span></p>
         </div>
-        <div class="mt-12 grid md:grid-cols-12 gap-10 items-end">
-          <div class="md:col-span-7 reveal">
-            <div class="ph aspect-[16/10] rounded-3xl"  style="background-image:url('../assets/images/cafe/02-handover.webp');background-size:cover;background-position:center;"></div>
-          </div>
-          <div class="md:col-span-5 reveal">
-            <p class="text-base md:text-lg leading-relaxed" style="color: var(--ink-soft)">
-              아침의 첫 잔, 점심 뒤의 한 모금, 늦은 오후의 또 한 잔.<br />
-              일 년 중 가장 다정한 달의 이름을 빌려, 매일 같은 자리에서 오늘의 한 잔을 내려드립니다.
-            </p>
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href="#menu" class="btn-primary">오늘의 메뉴 보기 <span aria-hidden="true">→</span></a>
-              <a href="#visit" class="btn-ghost">오시는 길</a>
-            </div>
-          </div>
+
+        <div class="hero-collage pat-dots">
+          <svg class="ill i-cup" viewBox="0 0 120 120" aria-hidden="true"><use href="#cup" /></svg>
+          <figure class="polaroid p-main">
+            <div class="img"><img src="../assets/images/cafe/02-handover.webp" width="1376" height="768" fetchpriority="high" alt="카운터 너머로 바리스타가 손님에게 웃으며 커피잔을 건네는 모습" /></div>
+            <figcaption>첫 잔을 건네는 시간</figcaption>
+          </figure>
+          <figure class="polaroid p-small">
+            <div class="img"><img src="../assets/images/cafe/04-pastry.webp" width="1376" height="768" alt="흰 리넨 위에 놓인 반으로 가른 크루아상과 구움과자 세 개" /></div>
+          </figure>
+          <span class="badge b-sig wob" style="--r:12deg" aria-hidden="true"><svg viewBox="0 0 120 120"><use href="#scallop" fill="#c23a1d" stroke="#3a2116" stroke-width="3" /></svg><span>SIG<small>오월라떼</small></span></span>
+          <span class="sticker s-choco s-roast wob" aria-hidden="true">원두 직접 로스팅</span>
+          <span class="sticker s-tomato s-walk wob" aria-hidden="true">역에서 걸어서 6분</span>
+          <svg class="ill i-croissant" viewBox="0 0 140 90" aria-hidden="true"><use href="#croissant" /></svg>
+          <svg class="ill i-star1" viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#c23a1d" /></svg>
+          <svg class="ill i-star2" viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#fff6e3" /></svg>
+          <svg class="ill i-star3" viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#fff6e3" /></svg>
         </div>
       </section>
 
-      <!-- STORY -->
-      <section id="story" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">우리 이야기</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              가까운 동네에<br />오래 머무는 일.
-            </h2>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-row">
+          <span>하루의 가장 다정한 한 잔</span><svg viewBox="0 0 100 100"><use href="#star" fill="#ffd463" stroke="none" /></svg>
+          <span class="alt">SINCE 2018</span><svg viewBox="0 0 100 100"><use href="#star" fill="#c23a1d" /></svg>
+          <span>성수동 골목 안 단독주택 1층</span><svg viewBox="0 0 100 100"><use href="#star" fill="#ffd463" /></svg>
+          <span class="alt">격주 토요일 로스팅</span><svg viewBox="0 0 100 100"><use href="#star" fill="#c23a1d" /></svg>
+          <span>수요일은 오븐 데이</span><svg viewBox="0 0 100 100"><use href="#star" fill="#ffd463" /></svg>
+          <span class="alt">텀블러 오면 500원 할인</span><svg viewBox="0 0 100 100"><use href="#star" fill="#c23a1d" /></svg>
+          <span>하루의 가장 다정한 한 잔</span><svg viewBox="0 0 100 100"><use href="#star" fill="#ffd463" /></svg>
+        </div>
+      </div>
+
+      <!-- ============ STORY ============ -->
+      <section id="story" class="sec" aria-labelledby="story-title">
+        <div class="wrap story-grid">
+          <div class="story-big reveal">
+            <span class="sticker s-butter kick" style="--r:-3deg">우리 이야기</span>
+            <h2 id="story-title" class="display h2">가까운 동네에<br />오래 머무는 일.</h2>
+            <div class="year-wrap" aria-hidden="true">
+              <span class="year">2018</span>
+              <span class="sticker s-tomato wob">성수동에서</span>
+            </div>
           </div>
-          <div class="md:col-span-7 space-y-5 leading-relaxed text-base md:text-lg reveal" style="color: var(--ink-soft)">
+          <div class="story-card reveal">
+            <svg class="ill i-cup2" viewBox="0 0 120 120" aria-hidden="true"><use href="#cup" /></svg>
             <p>오월의 다정은 골목 안 작은 자리에서 시작했습니다. 2주에 한 번 직접 산지를 골라 볶고, 매일 같은 시간 문을 엽니다.</p>
             <p>화려한 단독 메뉴보다 매일 마실 수 있는 한 잔을 만드는 일에 더 마음을 씁니다. 문을 닫는 시간보다 문을 여는 시간이 더 중요하다고 믿어서요.</p>
             <p>오늘도 단골 손님의 이름과 평소 마시는 잔을 외우는, 그 정도의 다정함을 지키려 합니다.</p>
@@ -150,245 +559,304 @@
         </div>
       </section>
 
-      <!-- SIGNATURE -->
-      <section id="signature" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">시그니처</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            계절을 담은<br />세 가지 한 잔.
-          </h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <article class="reveal">
-            <div class="ph aspect-square rounded-2xl"  style="background-image:url('../assets/images/cafe/01-counter-latte.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 01</p>
-            <h3 class="serif text-2xl mt-1">오월라떼</h3>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">진한 에스프레소와 우유, 한 줄기 흑임자 시럽. 어른의 라떼라고 부르는 분도 있어요.</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-square rounded-2xl"  style="background-image:url('../assets/images/cafe/01-counter-latte.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 02</p>
-            <h3 class="serif text-2xl mt-1">청배 에이드</h3>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">나주 청배를 직접 졸여 만든 청. 톡 쏘는 청량감 끝에 은근한 단맛이 남습니다.</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-square rounded-2xl"  style="background-image:url('../assets/images/cafe/04-pastry.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-6 text-sm" style="color: var(--accent)">SIGNATURE 03</p>
-            <h3 class="serif text-2xl mt-1">밤 크림 더치</h3>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">12시간 콜드브루 위에 무가당 밤 크림을 한 겹. 가을·겨울 한정 메뉴입니다.</p>
-          </article>
+      <!-- ============ SIGNATURE ============ -->
+      <section id="signature" class="sec" aria-labelledby="sig-title">
+        <div class="wrap">
+          <div class="sec-top reveal">
+            <div>
+              <span class="sticker s-choco kick" style="--r:-3deg">시그니처</span>
+              <h2 id="sig-title" class="display h2">계절을 담은<br />세 가지 한 잔.</h2>
+            </div>
+            <p class="lead-s" style="margin:0">가게 문을 연 날부터 가장 많이 찾아주신 세 잔입니다. 계절이 바뀌면 재료도 조금씩 바뀝니다.</p>
+          </div>
+          <div class="sig-grid">
+            <article class="sig reveal">
+              <span class="sticker s-butter wob" style="--r:6deg" aria-hidden="true">SIG 01</span>
+              <div class="sig-art"><img src="../assets/images/cafe/01-counter-latte.webp" width="1376" height="768" loading="lazy" alt="창가 원목 바 위에 놓인 라테아트 라떼 한 잔과 쿠키" /></div>
+              <div class="sig-body">
+                <span class="sig-no">Signature 01</span>
+                <h3>오월라떼</h3>
+                <p>진한 에스프레소와 우유, 한 줄기 흑임자 시럽. 어른의 라떼라고 부르는 분도 있어요.</p>
+              </div>
+            </article>
+            <article class="sig reveal">
+              <span class="sticker s-choco wob" style="--r:-5deg" aria-hidden="true">SIG 02</span>
+              <div class="sig-art a-pear" role="img" aria-label="청배 에이드 손그림 — 배 조각을 꽂은 키 큰 유리잔">
+                <svg class="drink" viewBox="0 0 120 160" aria-hidden="true"><g stroke="#3a2116" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M70 6 L58 92" fill="none" /><path d="M24 30 L96 30 L86 150 L34 150 Z" fill="#fff6e3" /><path d="M27 62 C 45 56, 72 68, 93 60 L86 150 L34 150 Z" fill="#c9e08a" /><circle cx="48" cy="98" r="5" fill="#fff6e3" /><circle cx="66" cy="120" r="4" fill="#fff6e3" /><circle cx="58" cy="80" r="3.5" fill="#fff6e3" /><circle cx="72" cy="96" r="3" fill="#fff6e3" /><path d="M86 30 C 86 12, 112 12, 112 30 C 112 40, 100 44, 92 40" fill="#e9f0b0" /><path d="M99 22 L101 28" fill="none" /></g></svg>
+              </div>
+              <div class="sig-body">
+                <span class="sig-no">Signature 02</span>
+                <h3>청배 에이드</h3>
+                <p>나주 청배를 직접 졸여 만든 청. 톡 쏘는 청량감 끝에 은근한 단맛이 남습니다.</p>
+                <span class="price-chip">6,500원</span>
+              </div>
+            </article>
+            <article class="sig reveal">
+              <span class="sticker s-butter wob" style="--r:5deg" aria-hidden="true">가을·겨울 한정</span>
+              <div class="sig-art a-chestnut" role="img" aria-label="밤 크림 더치 손그림 — 콜드브루 위에 밤 크림을 얹은 잔">
+                <svg class="drink" viewBox="0 0 120 160" aria-hidden="true"><g stroke="#3a2116" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 56 L100 56 L92 150 L28 150 Z" fill="#5b3424" /><path d="M20 56 C 20 40, 32 34, 44 38 C 50 26, 72 26, 78 38 C 90 34, 100 42, 100 56 Z" fill="#f6e2c2" /><path d="M48 30 C 50 16, 70 14, 74 28 C 70 34, 52 36, 48 30 Z" fill="#9a5a2e" /><path d="M58 16 L62 8" fill="none" /><path d="M36 84 C 44 80, 54 88, 64 82" stroke="#fff6e3" fill="none" /><path d="M42 110 L84 110" stroke="#8a5338" fill="none" /></g></svg>
+              </div>
+              <div class="sig-body">
+                <span class="sig-no">Signature 03</span>
+                <h3>밤 크림 더치</h3>
+                <p>12시간 콜드브루 위에 무가당 밤 크림을 한 겹. 가을·겨울 한정 메뉴입니다.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
-      <!-- MENU -->
-      <section id="menu" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-4 reveal">
-            <p class="eyebrow mb-4">메뉴</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">매일 마실 수 있는<br />한 잔.</h2>
-            <p class="mt-6" style="color: var(--ink-soft)">전 메뉴 매장·테이크아웃 동일가, 디카페인 옵션은 +500원.</p>
-            <ul class="mt-4 text-xs space-y-1" style="color: var(--ink-soft)">
-              <li>· <strong>원두</strong>: 에티오피아 시다모, 콜롬비아 우일라 블렌드 · 직접 로스팅 (격주 토요일)</li>
-              <li>· <strong>우유</strong>: 단일목장 1A 등급 (서울우유)</li>
-              <li>· <strong>알레르기 안내</strong>: 우유·계란·밀·견과류·대두 함유 메뉴가 있습니다. 자세한 사항은 카운터에서 안내 드립니다.</li>
-              <li>· <strong>카페인 함량</strong>: 아메리카노 1잔(355ml) 약 90mg · 디카페인 약 5mg</li>
+      <!-- ============ MENU ============ -->
+      <section id="menu" class="sec pat-check" aria-labelledby="menu-title">
+        <div class="wrap menu-grid">
+          <div class="menu-aside reveal">
+            <span class="sticker s-tomato kick" style="--r:-3deg">메뉴</span>
+            <h2 id="menu-title" class="display h2">매일 마실 수 있는<br />한 잔.</h2>
+            <div class="note-card">
+              <p class="price-rule">전 메뉴 매장·테이크아웃 동일가,<br />디카페인 옵션은 +500원.</p>
+              <ul>
+                <li><strong>원두</strong> — 에티오피아 시다모, 콜롬비아 우일라 블렌드 · 직접 로스팅 (격주 토요일)</li>
+                <li><strong>우유</strong> — 단일목장 1A 등급</li>
+                <li><strong>알레르기 안내</strong> — 우유·계란·밀·견과류·대두 함유 메뉴가 있습니다. 자세한 사항은 카운터에서 안내해 드립니다.</li>
+                <li><strong>카페인 함량</strong> — 아메리카노 1잔(355ml) 약 90mg · 디카페인 약 5mg</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="board reveal">
+            <div class="board-head"><strong>MENU</strong><span>가격 단위 · 원</span></div>
+            <div class="board-body">
+              <div>
+                <div class="group">
+                  <h3>COFFEE</h3>
+                  <div class="m-row"><span class="nm">아메리카노</span><span class="pr">5,000</span><span class="ds">자체 블렌드, 산미보다 단맛이 길게</span></div>
+                  <div class="m-row"><span class="nm">카페라떼</span><span class="pr">5,500</span><span class="ds">매일 들어오는 단일목장 우유</span></div>
+                  <div class="m-row"><span class="nm">바닐라 빈 라떼</span><span class="pr">6,000</span><span class="ds">통 바닐라빈을 우려낸 직접 시럽</span></div>
+                  <div class="m-row"><span class="nm">콜드브루</span><span class="pr">5,500</span><span class="ds">12시간 저온 추출, 깊은 단맛</span></div>
+                </div>
+              </div>
+              <div>
+                <div class="group">
+                  <h3>NON-COFFEE</h3>
+                  <div class="m-row"><span class="nm">호지차 라떼</span><span class="pr">6,000</span><span class="ds">교토산 호지차, 부드러운 끝맛</span></div>
+                  <div class="m-row"><span class="nm">유자차</span><span class="pr">6,000</span><span class="ds">고흥 유자청, 직접 담급니다</span></div>
+                  <div class="m-row"><span class="nm">청배 에이드<span class="tag-sig">SIG</span></span><span class="pr">6,500</span></div>
+                </div>
+                <div class="group">
+                  <h3>DESSERT</h3>
+                  <div class="m-row"><span class="nm">바스크 치즈케이크</span><span class="pr">6,500</span></div>
+                  <div class="m-row"><span class="nm">밤 휘낭시에 (2개)</span><span class="pr">5,000</span></div>
+                  <div class="m-row"><span class="nm">우유잼 스콘</span><span class="pr">4,500</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SPACE ============ -->
+      <section id="space" class="sec dark scallop" aria-labelledby="space-title">
+        <div class="wrap space-grid">
+          <div class="reveal">
+            <span class="sticker s-butter kick" style="--r:-3deg">공간</span>
+            <h2 id="space-title" class="display h2">오래 머물러도<br />지치지 않는 자리.</h2>
+            <p class="lead-s">골목 안쪽 단독주택 1층. 창가 카운터에는 혼자 앉기 좋은 1인석이 있고, 오후에는 햇빛이 테이블까지 길게 들어옵니다.</p>
+          </div>
+          <div class="space-collage reveal">
+            <figure class="polaroid q1">
+              <span class="tape" aria-hidden="true"></span>
+              <div class="img"><img src="../assets/images/cafe/03-empty-seat.webp" width="1376" height="768" loading="lazy" alt="햇살이 비스듬히 드는 빈 원목 테이블과 의자, 테이블 위의 커피잔과 신문" /></div>
+              <figcaption>오후의 빈자리</figcaption>
+            </figure>
+            <figure class="polaroid q2">
+              <span class="tape" aria-hidden="true" style="transform:rotate(5deg)"></span>
+              <div class="img"><img src="../assets/images/cafe/01-counter-latte.webp" width="1376" height="768" loading="lazy" alt="골목이 내다보이는 창가 원목 카운터와 높은 의자" /></div>
+              <figcaption>창가 카운터 1인석</figcaption>
+            </figure>
+            <span class="sticker s-tomato s-seat wob" aria-hidden="true">좌석 22석 · 1인석 4석</span>
+            <svg class="ill i-star4" viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#ffd463" /></svg>
+            <svg class="ill i-star5" viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#c23a1d" /></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ JOURNEY ============ -->
+      <section id="journey" class="sec on-tomato scallop" aria-labelledby="journey-title">
+        <div class="wrap">
+          <div class="sec-top reveal">
+            <div>
+              <span class="sticker s-butter kick" style="--r:-3deg">하루 한 번, 나를 위한 자리</span>
+              <h2 id="journey-title" class="display h2">분주한 하루 끝,<br />다정한 한 잔이 <span class="nw">필요한 날.</span></h2>
+            </div>
+          </div>
+          <div class="j-grid">
+            <article class="ticket reveal">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cup" /></svg>
+              <span class="no" aria-hidden="true">01</span>
+              <h3>오늘의 원두 한 잔</h3>
+              <p>그날 가장 좋은 콩으로 내려드립니다.</p>
+            </article>
+            <article class="ticket reveal">
+              <svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="#3a2116" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8 C 16 20, 16 26, 18 30 L42 30 C 44 26, 44 20, 44 8" fill="#ffd463" /><path d="M14 30 L46 30 L46 36 L14 36 Z" fill="#c23a1d" /><path d="M18 36 L14 54 M42 36 L46 54 M20 46 L40 46" /></g></svg>
+              <span class="no" aria-hidden="true">02</span>
+              <h3>혼자여도 편한 자리</h3>
+              <p>조용한 음악과 따뜻한 조명, 1인석까지.</p>
+            </article>
+            <article class="ticket reveal">
+              <svg viewBox="0 0 60 60" aria-hidden="true"><g stroke="#3a2116" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34 L52 34 L50 52 L10 52 Z" fill="#ffd463" /><path d="M8 34 C 8 22, 18 16, 30 16 C 42 16, 52 22, 52 34" fill="#fff6e3" /><path d="M8 42 L52 42" fill="none" /><circle cx="30" cy="11" r="5" fill="#c23a1d" /></g></svg>
+              <span class="no" aria-hidden="true">03</span>
+              <h3>계절을 담은 디저트</h3>
+              <p>그달에만 만나는 한 가지 메뉴.</p>
+            </article>
+          </div>
+          <div class="then reveal">
+            <div class="off"><span class="label">미루시면</span><p>지친 하루를 그냥 흘려보내면, 내일은 더 무거워집니다.</p></div>
+            <div class="on"><span class="label">시작하시면</span><p>퇴근길 단골 자리에 앉아, 오늘 하루가 슬며시 정리되는 시간.</p></div>
+          </div>
+          <div class="j-cta reveal">
+            <a href="#visit" class="btn btn-butter">오늘 자리 예약 <span class="arr" aria-hidden="true">→</span></a>
+            <a href="#menu" class="btn btn-cream">이달의 메뉴 구경하기</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ THIS WEEK ============ -->
+      <section id="weekly" class="sec" aria-labelledby="weekly-title">
+        <div class="wrap">
+          <div class="sec-top reveal">
+            <div>
+              <span class="sticker s-tomato kick" style="--r:-3deg">THIS WEEK</span>
+              <h2 id="weekly-title" class="display h2">이번 주,<br />다정의 한 잔.</h2>
+            </div>
+            <p class="lead-s" style="margin:0">매주 월요일 업데이트되는 빵과 작은 이벤트.</p>
+          </div>
+          <ul class="week">
+            <li class="day reveal"><span class="sticker s-choco" style="--r:-6deg">MON</span><h3>월요일</h3><span class="off-day">정기 휴무</span><p>가게를 쉬며 청소하고, 한 주를 준비하는 시간을 가집니다.</p></li>
+            <li class="day reveal"><span class="sticker s-butter" style="--r:5deg">WED</span><h3>수요일 — 오븐 데이</h3><p>버터 스콘과 무화과 파운드를 새로 굽는 날입니다.</p></li>
+            <li class="day reveal"><span class="sticker s-tomato" style="--r:-4deg">THU</span><h3>목요일 — 노트 클래스</h3><p>오후 7시, 작은 손글씨 워크숍 (선착순 6명).</p></li>
+            <li class="day reveal"><span class="sticker s-butter" style="--r:6deg">FRI · SAT</span><h3>금 · 토</h3><p>오전 9시 오픈, 해 질 무렵까지 천천히 머물러도 좋습니다.</p></li>
+            <li class="day reveal"><span class="sticker s-tomato" style="--r:-5deg">SUN</span><h3>일요일 — 책방 데이</h3><p>큐레이션 책 한 권 무료 대여, 한 시간 독서 자리.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ REGULARS ============ -->
+      <section id="regulars" class="sec" aria-labelledby="reg-title">
+        <div class="wrap">
+          <div class="sec-top reveal">
+            <div>
+              <span class="sticker s-butter kick" style="--r:-3deg">REGULARS</span>
+              <h2 id="reg-title" class="display h2">다정한 손님께 드리는<br />작은 약속.</h2>
+            </div>
+          </div>
+          <div class="reg-grid">
+            <div class="stamp reveal" aria-hidden="true">
+              <svg viewBox="0 0 400 250"><rect x="6" y="6" width="388" height="238" rx="22" fill="#fff6e3" stroke="#3a2116" stroke-width="5" /><rect x="6" y="6" width="388" height="58" rx="22" fill="#c23a1d" stroke="#3a2116" stroke-width="5" /><rect x="8" y="44" width="384" height="20" fill="#c23a1d" /><line x1="6" y1="64" x2="394" y2="64" stroke="#3a2116" stroke-width="5" /><text x="28" y="45" font-family="Hahmlet, serif" font-weight="800" font-size="24" fill="#fff6e3">오월의 다정 도장 카드</text><text x="372" y="44" text-anchor="end" font-family="Fraunces, serif" font-weight="800" font-size="18" fill="#ffd463">10 = 1</text><g stroke="#3a2116" stroke-width="3.5"><circle cx="58" cy="118" r="26" fill="#ffd463" /><circle cx="129" cy="118" r="26" fill="#ffd463" /><circle cx="200" cy="118" r="26" fill="#ffd463" /><circle cx="271" cy="118" r="26" fill="#ffd463" /><circle cx="342" cy="118" r="26" fill="#ffd463" /><circle cx="58" cy="190" r="26" fill="#ffd463" /><circle cx="129" cy="190" r="26" fill="none" stroke-dasharray="6 6" /><circle cx="200" cy="190" r="26" fill="none" stroke-dasharray="6 6" /><circle cx="271" cy="190" r="26" fill="none" stroke-dasharray="6 6" /><circle cx="342" cy="190" r="26" fill="#fff6e3" /></g><g fill="#c23a1d"><use href="#star" x="40" y="100" width="36" height="36" /><use href="#star" x="111" y="100" width="36" height="36" /><use href="#star" x="182" y="100" width="36" height="36" /><use href="#star" x="253" y="100" width="36" height="36" /><use href="#star" x="324" y="100" width="36" height="36" /><use href="#star" x="40" y="172" width="36" height="36" /></g><use href="#cup" x="318" y="166" width="48" height="48" /></svg>
+              <span class="sticker s-choco">음료 10잔에 한 잔</span>
+            </div>
+            <ul class="promises">
+              <li class="reveal"><h3><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star" fill="#c23a1d" /></svg>도장 카드</h3><p>음료 10잔에 한 잔, 원하실 때 디저트로도 바꿔드려요.</p></li>
+              <li class="reveal"><h3><svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#3a2116" stroke-width="2.6" stroke-linejoin="round"><path d="M6 18 L34 18 L32 34 L8 34 Z" fill="#ffd463" /><path d="M6 18 C 6 10, 34 10, 34 18" fill="#fff6e3" /><path d="M20 4 L20 10" /><circle cx="20" cy="4" r="2" fill="#c23a1d" /></g></svg>생일의 달</h3><p>그 달 한 번, 좋아하시는 빵 한 조각 곁들여 드립니다.</p></li>
+              <li class="reveal"><h3><svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#3a2116" stroke-width="2.6" stroke-linejoin="round"><path d="M12 6 L28 6 L26 36 L14 36 Z" fill="#c23a1d" /><path d="M10 6 L30 6" /><path d="M13 16 L27 16" stroke="#fff6e3" /></g></svg>텀블러 반가움</h3><p>직접 가져오신 컵에 음료 담아드리고 500원 깎아드려요.</p></li>
+              <li class="reveal"><h3><svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#3a2116" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 C 4 10, 36 10, 36 20 Z" fill="#c23a1d" /><path d="M20 20 L20 32 C 20 36, 14 36, 14 32" fill="none" /><path d="M20 8 L20 11" /></g></svg>비 오는 날</h3><p>우산 잊고 오신 손님께 따뜻한 차 한 잔 더 내어드립니다.</p></li>
             </ul>
           </div>
-          <div class="md:col-span-8 reveal">
-            <h3 class="serif text-xl mb-2">COFFEE</h3>
-            <div>
-              <div class="menu-row"><div><p class="font-medium">아메리카노</p><p class="text-sm" style="color:var(--ink-soft)">자체 블렌드, 산미보다 단맛이 길게</p></div><p class="serif text-lg">5,000</p></div>
-              <div class="menu-row"><div><p class="font-medium">카페라떼</p><p class="text-sm" style="color:var(--ink-soft)">매일 들어오는 단일목장 우유</p></div><p class="serif text-lg">5,500</p></div>
-              <div class="menu-row"><div><p class="font-medium">바닐라 빈 라떼</p><p class="text-sm" style="color:var(--ink-soft)">통 바닐라빈을 우려낸 직접 시럽</p></div><p class="serif text-lg">6,000</p></div>
-              <div class="menu-row"><div><p class="font-medium">콜드브루</p><p class="text-sm" style="color:var(--ink-soft)">12시간 저온 추출, 깊은 단맛</p></div><p class="serif text-lg">5,500</p></div>
-            </div>
-            <h3 class="serif text-xl mb-2 mt-12">NON-COFFEE</h3>
-            <div>
-              <div class="menu-row"><div><p class="font-medium">호지차 라떼</p><p class="text-sm" style="color:var(--ink-soft)">교토산 호지차, 부드러운 끝맛</p></div><p class="serif text-lg">6,000</p></div>
-              <div class="menu-row"><div><p class="font-medium">유자차</p><p class="text-sm" style="color:var(--ink-soft)">고흥 유자청, 직접 담급니다</p></div><p class="serif text-lg">6,000</p></div>
-              <div class="menu-row"><div><p class="font-medium">청배 에이드 <span class="text-xs" style="color:var(--accent)">SIG</span></p></div><p class="serif text-lg">6,500</p></div>
-            </div>
-            <h3 class="serif text-xl mb-2 mt-12">DESSERT</h3>
-            <div>
-              <div class="menu-row"><div><p class="font-medium">바스크 치즈케이크</p></div><p class="serif text-lg">6,500</p></div>
-              <div class="menu-row"><div><p class="font-medium">밤 휘낭시에 (2개)</p></div><p class="serif text-lg">5,000</p></div>
-              <div class="menu-row"><div><p class="font-medium">우유잼 스콘</p></div><p class="serif text-lg">4,500</p></div>
-            </div>
-          </div>
         </div>
       </section>
 
-      <!-- SPACE -->
-      <section id="space" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">공간</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            오래 머물러도<br />지치지 않는 자리.
-          </h2>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div class="ph aspect-[3/4] rounded-2xl reveal"  style="background-image:url('../assets/images/cafe/03-empty-seat.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-[3/4] rounded-2xl reveal mt-8"  style="background-image:url('../assets/images/cafe/03-empty-seat.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-[3/4] rounded-2xl reveal"  style="background-image:url('../assets/images/cafe/01-counter-latte.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-[3/4] rounded-2xl reveal mt-8"  style="background-image:url('../assets/images/cafe/04-pastry.webp');background-size:cover;background-position:center;"></div>
-        </div>
-      </section>
-
-      <!-- VISIT -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
+      <!-- ============ VISIT (단색 영역) ============ -->
+      <section id="visit" class="sec dark scallop" aria-labelledby="visit-title">
+        <div class="wrap visit-grid">
           <div class="reveal">
-            <p class="eyebrow mb-5">하루 한 번, 나를 위한 자리</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              분주한 하루 끝, 다정한 한 잔이 필요한 날.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">오늘의 원두 한 잔</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">그날 가장 좋은 콩으로 내려드립니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">혼자여도 편한 자리</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">조용한 음악과 따뜻한 조명, 1인석까지</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">계절을 담은 디저트</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">그달에만 만나는 한 가지 메뉴</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">지친 하루를 그냥 흘려보내면, 내일은 더 무거워집니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">퇴근길 단골 자리에 앉아, 오늘 하루가 슬며시 정리되는 시간.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#visit" class="btn-primary">오늘 자리 예약 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">이달의 메뉴 구경하기</a>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== THIS WEEK ====================== -->
-      <section id="weekly" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">THIS WEEK</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">이번 주, 다정의 한 잔</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">매주 월요일 업데이트되는 빵과 작은 이벤트.</p>
-          </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">월·화</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">정기 휴무. 원두 로스팅과 청소의 시간을 가집니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">수요일 — 오븐 데이</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">버터 스콘과 무화과 파운드를 새로 굽는 날입니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">목요일 — 노트 클래스</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">오후 7시, 작은 손글씨 워크숍 (선착순 6명).</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">금·토</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">오전 9시 오픈, 해 질 무렵까지 천천히 머물러도 좋습니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">일요일 — 책방 데이</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">큐레이션 책 한 권 무료 대여, 한 시간 독서 자리.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      
-      <!-- ====================== REGULARS ====================== -->
-      <section id="regulars" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">REGULARS</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">다정한 손님께 드리는 작은 약속</h2>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">도장 카드</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">음료 10잔에 한 잔, 원하실 때 디저트로도 바꿔드려요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">생일의 달</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">그 달 한 번, 좋아하시는 빵 한 조각 곁들여 드립니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">텀블러 반가움</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">직접 가져오신 컵에 음료 담아드리고 500원 깎아드려요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">비 오는 날</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">우산 잊고 오신 손님께 따뜻한 차 한 잔 더 내어드립니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-
-      <section id="visit" class="py-24 md:py-32" style="background: var(--primary); color: #fdf6ea">
-        <div class="container-x grid md:grid-cols-2 gap-12">
-          <div class="reveal">
-            <p class="eyebrow mb-4" style="color: #f0c685">오시는 길</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              월요일을 빼고<br />매일 같은 자리에.
-            </h2>
-            <dl class="mt-12 space-y-4 text-base">
-              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">화 — 일</dt><dd>10:00 — 21:00</dd></div>
-              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">월요일</dt><dd>휴무</dd></div>
-              <div class="flex justify-between border-b pb-4" style="border-color: rgba(253,246,234,.2)"><dt style="color:#f0c685">라스트 오더</dt><dd>20:30</dd></div>
+            <span class="sticker s-butter kick" style="--r:-3deg">오시는 길</span>
+            <h2 id="visit-title" class="display h2">월요일을 빼고<br />매일 같은 자리에.</h2>
+            <dl class="hours">
+              <div><dt>화 — 목 · 일</dt><dd>10:00 — 21:00</dd></div>
+              <div><dt>금 · 토</dt><dd>09:00 — 21:00</dd></div>
+              <div><dt>월요일</dt><dd>휴무</dd></div>
+              <div><dt>라스트 오더</dt><dd>20:30</dd></div>
             </dl>
-            <ul class="mt-8 text-sm space-y-2" style="color: rgba(253,246,234,.85)">
-              <li>· 좌석 22석 · 카운터 4석 (1인석)</li>
-              <li>· 무선 와이파이 · 콘센트 카운터·창가</li>
-              <li>· 노트북 작업 환영 (단, 주말 12—14시 제한)</li>
-              <li>· 반려동물 동반 불가 · 단체 6인 이상 사전 문의</li>
+            <ul class="facts">
+              <li>좌석 22석 · 카운터 4석 (1인석)</li>
+              <li>무선 와이파이 · 콘센트 카운터·창가</li>
+              <li>노트북 작업 환영 (단, 주말 12—14시 제한)</li>
+              <li>반려동물 동반 불가 · 단체 6인 이상 사전 문의</li>
             </ul>
+            <div class="addr">
+              <p>서울특별시 성동구 성수이로 OO길 17<br />OO역 3번 출구 도보 6분, 골목 안쪽 단독주택 1층</p>
+              <p class="sns">@ohwol_dajeong · 02-555-0526</p>
+            </div>
           </div>
-          <div class="reveal">
-            <div class="ph aspect-[4/3] rounded-2xl"  style="background-image:url('../assets/images/cafe/03-empty-seat.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-6 text-lg leading-relaxed">서울특별시 성동구 성수이로 OO길 17<br />OO역 3번 출구 도보 6분, 골목 안쪽 단독주택 1층</p>
-            <p class="mt-3" style="color:#f0c685">@ohwol_dajeong · 02-555-0526</p>
-          </div>
+
+          <form class="resv reveal" id="resv-form" novalidate>
+            <svg class="map" viewBox="0 0 400 170" aria-hidden="true"><rect width="400" height="170" fill="#ffd463" /><g stroke="#fff6e3" stroke-width="16" stroke-linecap="round"><path d="M-10 52 L410 40" /><path d="M120 -10 L136 180" /><path d="M300 -10 L286 180" /><path d="M136 120 L410 112" /></g><path d="M78 46 C 110 70, 150 70, 190 92 S 250 118, 300 128" fill="none" stroke="#c23a1d" stroke-width="4" stroke-dasharray="9 8" stroke-linecap="round" /><rect x="40" y="26" width="74" height="34" rx="10" fill="#3a2116" /><text x="77" y="49" text-anchor="middle" font-family="Pretendard Variable, sans-serif" font-weight="700" font-size="14" fill="#fff6e3">OO역 3번</text><g transform="translate(300 128)"><path d="M0 0 C -16 -18, -16 -40, 0 -40 C 16 -40, 16 -18, 0 0 Z" fill="#c23a1d" stroke="#3a2116" stroke-width="3.5" /><circle cx="0" cy="-27" r="6" fill="#fff6e3" stroke="#3a2116" stroke-width="2.5" /></g><text x="318" y="160" font-family="Hahmlet, serif" font-weight="800" font-size="15" fill="#3a2116">오월의 다정</text><text x="168" y="84" font-family="Pretendard Variable, sans-serif" font-weight="700" font-size="13" fill="#3a2116">도보 6분</text></svg>
+            <h3>자리 예약 요청</h3>
+            <p class="hint">평일 오후·주말 자리를 미리 잡아드립니다. 6인 이상 단체는 이 양식으로 먼저 문의해 주세요.</p>
+            <div class="f-row">
+              <label class="fld"><span>성함</span><input name="name" autocomplete="name" required /></label>
+              <label class="fld"><span>연락처</span><input name="tel" type="tel" autocomplete="tel" placeholder="010-0000-0000" required /></label>
+            </div>
+            <div class="f-row">
+              <label class="fld"><span>방문 날짜 · 시간</span><input name="when" placeholder="예: 토요일 오후 3시" required /></label>
+              <label class="fld"><span>인원</span>
+                <select name="people" required>
+                  <option value="">선택해 주세요</option>
+                  <option>1명</option><option>2명</option><option>3명</option><option>4명</option><option>5명</option><option>6명 이상 (단체 문의)</option>
+                </select>
+              </label>
+            </div>
+            <label class="agree">
+              <input type="checkbox" required />
+              <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 자세한 내용은 <a href="#visit">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+            </label>
+            <button class="btn btn-choco" type="submit">자리 예약 요청하기 <span class="arr" aria-hidden="true">→</span></button>
+            <p class="status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-10 text-sm" style="background: var(--bg); color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 오월의 다정 · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="row">
+          <span>© 2026 오월의 다정 · 사업자등록번호 000-00-00000</span>
+          <a href="/">← 쇼룸으로 돌아가기</a>
+        </div>
+        <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      (function () {
+        /* 스크롤 리빌 */
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: .05 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        /* 모바일 메뉴 */
+        var btn = document.querySelector('.menu-btn'), nav = document.getElementById('m-nav');
+        function closeNav() { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', '메뉴 열기'); }
+        btn.addEventListener('click', function () {
+          var open = !nav.classList.contains('open');
+          nav.classList.toggle('open', open);
+          btn.setAttribute('aria-expanded', String(open));
+          btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+          if (open) nav.querySelector('a').focus();
+        });
+        nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeNav); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { closeNav(); btn.focus(); } });
+
+        /* 자리 예약 — 시안 데모 */
+        var form = document.getElementById('resv-form'), status = form.querySelector('.status');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          status.textContent = '시안 데모 — 실제로 전송되지 않습니다.';
+          status.classList.add('show');
+        });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="cafe" role="region" aria-label="알림 배너">
@@ -400,9 +868,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@ohwol_dajeong"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@ohwol_dajeong</span></a>
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널</span></a>
-      <a class="blog" href="https://blog.naver.com/" target="_blank" rel="noopener" aria-label="네이버 블로그"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 4h18v3H3zM3 10h18v3H3zM3 16h12v3H3z"/></svg><span class="tip">네이버 블로그</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@ohwol_dajeong"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@ohwol_dajeong</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널</span></a>
+      <a class="blog" href="https://blog.naver.com/" target="_blank" rel="noopener" aria-label="네이버 블로그"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h18v3H3zM3 10h18v3H3zM3 16h12v3H3z"/></svg><span class="tip">네이버 블로그</span></a>
     </div>
 
   </body>

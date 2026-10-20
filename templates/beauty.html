@@ -38,34 +38,350 @@
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ================================================================
+         단정 端正 — 그레이니 그라데이션
+         따뜻한 흰 바탕 위로 로즈·피치·라일락 빛이 크게 번지고,
+         확대하면 보이는 고운 필름 입자. 글자는 단순하고 단정하게.
+         ================================================================ */
       :root {
-        --bg: #fdf7f4;
-        --bg-soft: #fae9e3;
-        --primary: #9b3a4e;
-        --primary-soft: #b86173;
-        --accent: #c08b76;
-        --ink: #3a1e23;
-        --ink-soft: #826b6e;
-        --line: #f0dad2;
+        --paper: #fcf7f3;
+        --paper-2: #f8eee9;
+        --ink: #2e1c1f;
+        --ink-2: #5a4043;
+        --ink-3: #634a4d;
+        --wine: #8a2f45;
+        --wine-deep: #6b2335;
+        --rose: 241, 172, 186;
+        --peach: 249, 196, 160;
+        --lilac: 206, 190, 238;
+        --plum: #2f1a22;
+        --line: rgba(46, 28, 31, .13);
+        --line-soft: rgba(46, 28, 31, .08);
+        --glass: rgba(255, 255, 255, .62);
+        --glass-strong: rgba(255, 255, 255, .8);
+        --glass-edge: rgba(255, 255, 255, .9);
+        --r-xl: 32px;
+        --r-l: 24px;
+        --r-m: 16px;
+        --wrap: 1240px;
+        --gutter: clamp(20px, 4vw, 48px);
+        --display: 'Instrument Serif', 'Diphylleia', serif;
+        --sans: 'Pretendard Variable', Pretendard, system-ui, -apple-system, sans-serif;
+        --ease: cubic-bezier(.2, .8, .2, 1);
+        --shadow: 0 30px 60px -36px rgba(74, 30, 42, .35);
+        /* 필름 입자 — 블렌드 모드 없이 알파만 쓰는 노이즈라 스크롤·모바일에 가볍습니다 */
+        --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .1 0 0 0 0 .13 1.9 0 0 0 -.72'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+        --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .95 0 0 0 0 .93 1.9 0 0 0 -.72'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); }
-      /* 라틴은 Instrument Serif, 한글은 Diphylleia. 한글에 가짜 굵기·기울임을 만들지 않게 font-synthesis: none */
-      .serif { font-family: 'Instrument Serif', 'Diphylleia', serif; font-weight: 400; letter-spacing: -0.01em; font-synthesis: none; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #ffe4dc, #f3c2bf 60%, #c79b9d); position: relative; overflow: hidden; }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(253,247,244,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-family: 'Instrument Serif', 'Diphylleia', serif; font-style: italic; font-size: 16px; letter-spacing: 0.04em; color: var(--accent); font-synthesis: none; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
-      .btn-primary:hover { background: #7c2939; }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
-      .btn-ghost:hover { background:var(--primary); color:#fff; }
-      .row { border-top: 1px solid var(--line); }
-      .field { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:15px; }
-      .field:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(192,139,118,.18);}
+      html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+      body { margin: 0; font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+      img { display: block; max-width: 100%; }
+      a { color: inherit; text-decoration: none; }
+      ::selection { background: rgba(var(--rose), .55); }
+      :focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; border-radius: 6px; }
+
+      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-inline: var(--gutter); box-sizing: border-box; }
+
+      /* 제목 — 라틴은 Instrument Serif, 한글은 Diphylleia(400 단일). 가짜 굵기·기울임 금지 */
+      .display { font-family: var(--display); font-weight: 400; font-synthesis: none; letter-spacing: -0.012em; }
+      .it { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+      .kicker { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; font-size: 13px; letter-spacing: .02em; color: var(--ink-2); }
+      .kicker .it { font-size: 19px; letter-spacing: .01em; color: var(--wine); }
+      .kicker .bar { width: 28px; height: 1px; background: currentColor; opacity: .45; }
+      .h2 { font-size: clamp(32px, 4.4vw, 56px); line-height: 1.2; margin: 0; }
+      .sub { margin: 18px 0 0; font-size: clamp(15px, 1.25vw, 17px); color: var(--ink-2); max-width: 34em; }
+
+      /* ---------- 필름 입자 + 번진 빛 ---------- */
+      .grain { position: relative; isolation: isolate; }
+      .grain > .wrap { position: relative; z-index: 1; }
+      .grain::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: var(--grain); background-size: 200px; opacity: .22; }
+      .blobs { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 82%, transparent 100%); }
+      .hero .blobs { -webkit-mask-image: linear-gradient(180deg, #000 0, #000 80%, transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 80%, transparent 100%); }
+      .blob { position: absolute; border-radius: 50%; will-change: transform; animation: drift 22s ease-in-out infinite alternate; animation-play-state: paused; }
+      .blobs.run .blob { animation-play-state: running; }
+      .blob.rose  { background: radial-gradient(closest-side, rgba(var(--rose), .9), rgba(var(--rose), .45) 55%, rgba(var(--rose), 0)); }
+      .blob.peach { background: radial-gradient(closest-side, rgba(var(--peach), .85), rgba(var(--peach), .4) 55%, rgba(var(--peach), 0)); animation-duration: 26s; animation-delay: -6s; }
+      .blob.lilac { background: radial-gradient(closest-side, rgba(var(--lilac), .85), rgba(var(--lilac), .38) 55%, rgba(var(--lilac), 0)); animation-duration: 30s; animation-delay: -12s; }
+      @keyframes drift {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(4%, -5%, 0) scale(1.08); }
+      }
+
+      /* ---------- 헤더 ---------- */
+      .site-head { position: sticky; top: 0; z-index: 60; background: rgba(252, 247, 243, .78); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); border-bottom: 1px solid var(--line-soft); }
+      .site-head .wrap { display: flex; align-items: center; gap: 28px; height: 72px; }
+      .logo { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--display); font-synthesis: none; font-size: 25px; line-height: 1; color: var(--ink); white-space: nowrap; }
+      .logo .han { font-family: 'Diphylleia', serif; font-size: 15px; color: var(--wine); letter-spacing: .18em; }
+      .gnb { display: flex; gap: 30px; margin-left: auto; font-size: 14.5px; color: var(--ink-2); }
+      .gnb a { position: relative; padding: 6px 0; transition: color .2s; }
+      .gnb a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--wine); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+      .gnb a:hover { color: var(--ink); }
+      .gnb a:hover::after { transform: scaleX(1); }
+      .head-cta { margin-left: 8px; }
+      .menu-btn { display: none; margin-left: 4px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--glass); color: var(--ink); cursor: pointer; place-items: center; }
+      .menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 16px; height: 1.5px; background: currentColor; border-radius: 2px; position: relative; transition: transform .3s var(--ease), background .2s; }
+      .menu-btn span::before, .menu-btn span::after { content: ''; position: absolute; left: 0; }
+      .menu-btn span::before { top: -5px; } .menu-btn span::after { top: 5px; }
+      .menu-btn[aria-expanded="true"] span { background: transparent; }
+      .menu-btn[aria-expanded="true"] span::before { transform: translateY(5px) rotate(45deg); }
+      .menu-btn[aria-expanded="true"] span::after { transform: translateY(-5px) rotate(-45deg); }
+      .m-nav { display: none; }
+
+      /* ---------- 버튼 ---------- */
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font: 600 15px/1 var(--sans); letter-spacing: -.005em; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .25s var(--ease), box-shadow .25s; border: 1px solid transparent; white-space: nowrap; }
+      .btn .arr { transition: transform .3s var(--ease); }
+      .btn:hover .arr { transform: translateX(4px); }
+      .btn-solid { background: var(--wine); color: #fff; box-shadow: 0 14px 30px -14px rgba(138, 47, 69, .6); }
+      .btn-solid:hover { background: var(--wine-deep); transform: translateY(-1px); }
+      .btn-line { border-color: rgba(46, 28, 31, .28); color: var(--ink); background: rgba(255, 255, 255, .35); }
+      .btn-line:hover { border-color: var(--ink); background: rgba(255, 255, 255, .7); }
+      .btn-sm { min-height: 42px; padding: 0 18px; font-size: 14px; }
+
+      /* ---------- 히어로 ---------- */
+      .hero { padding: clamp(40px, 7vw, 96px) 0 clamp(72px, 9vw, 128px); overflow: hidden; }
+      .hero .b1 { width: 760px; height: 760px; right: -180px; top: -220px; }
+      .hero .b2 { width: 680px; height: 680px; left: -260px; bottom: -300px; }
+      .hero .b3 { width: 520px; height: 520px; left: 34%; top: -120px; }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+      .hero-copy { position: relative; }
+      .hero-copy::before { content: ''; position: absolute; z-index: -1; left: -12%; top: -10%; width: 110%; height: 120%; background: radial-gradient(closest-side, rgba(255, 251, 248, .95), rgba(255, 251, 248, .55) 50%, rgba(255, 251, 248, 0)); pointer-events: none; }
+      .hero h1 { font-size: clamp(40px, 5.05vw, 76px); line-height: 1.16; margin: 0; color: var(--ink); }
+      .hero h1 .ln { white-space: nowrap; }
+      .hero h1 .soft { color: var(--wine); }
+      .lead { margin: 30px 0 0; font-size: clamp(16px, 1.35vw, 18.5px); line-height: 1.8; color: var(--ink-2); max-width: 30em; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+      .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 0; padding: 0; list-style: none; }
+      .facts li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 13.5px; color: var(--ink-2); }
+      .facts b { font-weight: 600; color: var(--ink); }
+      .facts .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--wine); opacity: .8; }
+
+      .hero-media { position: relative; margin: 0; justify-self: end; width: 100%; max-width: 470px; }
+      .arch { position: relative; aspect-ratio: 11 / 15; border-radius: 50% 50% var(--r-xl) var(--r-xl) / 36.67% 36.67% var(--r-xl) var(--r-xl); overflow: hidden; box-shadow: var(--shadow); background: linear-gradient(160deg, #f3d3d2, #e7c2c8); }
+      .arch img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; }
+      .arch-line { position: absolute; inset: -14px -14px 28px 14px; z-index: -1; border: 1px solid rgba(138, 47, 69, .35); border-radius: 50% 50% var(--r-xl) var(--r-xl) / 36.67% 36.67% var(--r-xl) var(--r-xl); }
+      .float-card { position: absolute; left: -44px; bottom: 44px; max-width: 250px; padding: 16px 20px 17px; border-radius: 20px; background: var(--glass-strong); border: 1px solid var(--glass-edge); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 20px 40px -24px rgba(74, 30, 42, .45); }
+      .float-card .it { display: block; font-size: 17px; color: var(--wine); line-height: 1.1; }
+      .float-card strong { display: block; margin-top: 6px; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 22px; line-height: 1.25; color: var(--ink); }
+      .float-card small { display: block; margin-top: 4px; font-size: 12.5px; color: var(--ink-2); letter-spacing: .01em; }
+
+      /* ---------- 섹션 공통 ---------- */
+      .sec { position: relative; padding: clamp(80px, 10vw, 140px) 0; }
+      .sec-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+      .sec-head .sub { margin: 0; justify-self: end; }
+      .glass { background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(16px) saturate(130%); -webkit-backdrop-filter: blur(16px) saturate(130%); border-radius: var(--r-l); box-shadow: 0 24px 50px -40px rgba(74, 30, 42, .4); }
+
+      /* ---------- 약속 ---------- */
+      #promise { overflow: hidden; }
+      #promise .b1 { width: 620px; height: 620px; left: calc(50% - 310px); top: 18%; }
+      #promise .b2 { width: 480px; height: 480px; right: -160px; top: -120px; }
+      .promise-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .promise { padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column; min-height: 280px; }
+      .promise .num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 54px; line-height: 1; color: var(--wine); opacity: .85; }
+      .promise h3 { margin: auto 0 0; padding-top: 40px; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 26px; line-height: 1.3; }
+      .promise p { margin: 12px 0 0; color: var(--ink-2); font-size: 15.5px; }
+
+      /* ---------- 프로그램 · 가격 ---------- */
+      #programs { overflow: hidden; }
+      #programs .b1 { width: 600px; height: 600px; left: -240px; top: 10%; }
+      #programs .b2 { width: 520px; height: 520px; right: -200px; bottom: -160px; }
+      .prog-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+      .soft-frame { margin: 40px 0 0; }
+      .soft-frame .img { aspect-ratio: 4 / 5; border-radius: 160px 160px var(--r-l) var(--r-l); overflow: hidden; box-shadow: var(--shadow); background: #ecd3d2; }
+      .soft-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 68% 50%; }
+      .soft-frame figcaption { margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+      .menu { padding: clamp(24px, 3.4vw, 48px); }
+      .menu-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--ink); }
+      .menu-top .it { font-size: 24px; color: var(--ink); }
+      .menu-top span:last-child { font-size: 12.5px; color: var(--ink-3); letter-spacing: .04em; }
+      .free-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 22px 0 6px; padding: 16px 20px; border-radius: var(--r-m); background: linear-gradient(100deg, rgba(var(--rose), .38), rgba(var(--peach), .34) 60%, rgba(var(--lilac), .34)); }
+      .free-row p { margin: 0; font-size: 15px; color: var(--ink); }
+      .free-row p small { display: block; font-size: 13px; color: var(--ink-2); }
+      .free-row strong { font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 22px; color: var(--wine-deep); white-space: nowrap; }
+      .item { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; column-gap: 16px; row-gap: 6px; padding: 26px 0 24px; border-bottom: 1px solid var(--line); }
+      .item:last-of-type { border-bottom: 0; }
+      .item .no { grid-row: span 2; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; line-height: 1.3; color: var(--wine); }
+      .item h3 { margin: 0; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: clamp(22px, 2vw, 27px); line-height: 1.3; }
+      .item h3 .dur { margin-left: 10px; font-family: var(--sans); font-size: 13px; letter-spacing: .02em; color: var(--ink-3); vertical-align: 3px; }
+      .item .price { font-family: 'Instrument Serif', serif; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.2; text-align: right; color: var(--ink); white-space: nowrap; }
+      .item .price small { font-family: var(--sans); font-size: 13px; margin-left: 3px; color: var(--ink-2); }
+      .item p { grid-column: 2 / 4; margin: 0; color: var(--ink-2); font-size: 15px; max-width: 36em; }
+      .menu-notes { margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--ink); list-style: none; display: grid; gap: 6px; font-size: 13.5px; color: var(--ink-2); }
+      .menu-notes li { padding-left: 14px; position: relative; }
+      .menu-notes li::before { content: ''; position: absolute; left: 0; top: .78em; width: 5px; height: 1px; background: currentColor; }
+
+      /* ---------- 루틴(방식) ---------- */
+      #routine { overflow: hidden; }
+      #routine .b1 { width: 700px; height: 700px; right: -220px; top: 4%; }
+      #routine .b2 { width: 520px; height: 520px; left: 18%; bottom: -220px; }
+      .routine-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+      .routine-photo { margin: 0; }
+      .routine-photo .img { aspect-ratio: 4 / 5; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow); background: #ecd3d2; }
+      .routine-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; }
+      .routine-photo figcaption { margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+      .steps { list-style: none; margin: 40px 0 0; padding: 0; position: relative; }
+      .steps::before { content: ''; position: absolute; left: 23px; top: 24px; bottom: 24px; width: 1px; background: linear-gradient(180deg, rgba(var(--rose), 1), rgba(var(--peach), 1), rgba(var(--lilac), 1)); }
+      .steps li { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; padding: 14px 0; }
+      .steps .dot { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 20px; color: var(--wine-deep); background: radial-gradient(circle at 30% 30%, #fff, rgba(var(--rose), .75)); border: 1px solid var(--glass-edge); box-shadow: 0 10px 20px -12px rgba(74, 30, 42, .4); }
+      .steps li:nth-child(2) .dot { background: radial-gradient(circle at 30% 30%, #fff, rgba(var(--peach), .85)); }
+      .steps li:nth-child(3) .dot { background: radial-gradient(circle at 30% 30%, #fff, rgba(var(--lilac), .9)); }
+      .steps h3 { margin: 4px 0 0; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 24px; line-height: 1.3; }
+      .steps p { margin: 4px 0 0; color: var(--ink-2); font-size: 15px; }
+      .then { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+      .then > div { padding: 22px 24px; border-radius: var(--r-m); }
+      .then .label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .14em; color: var(--ink-3); margin-bottom: 8px; }
+      .then .on .label { color: var(--wine); }
+      .then p { margin: 0; font-size: 15.5px; line-height: 1.7; }
+      .then .off { border: 1px dashed rgba(46, 28, 31, .25); }
+      .then .on { background: var(--glass-strong); border: 1px solid var(--glass-edge); }
+
+      /* ---------- 60분 · 24시간 ---------- */
+      #guide { padding-bottom: clamp(48px, 6vw, 80px); }
+      .timeline { margin-top: 8px; }
+      .tl-bar { display: grid; grid-template-columns: 10fr 15fr 25fr 10fr; gap: 6px; height: 14px; }
+      .tl-bar span { border-radius: 999px; }
+      .tl-bar span:nth-child(1) { background: linear-gradient(90deg, rgba(var(--rose), .95), rgba(var(--rose), .7)); }
+      .tl-bar span:nth-child(2) { background: linear-gradient(90deg, rgba(var(--peach), .95), rgba(var(--peach), .75)); }
+      .tl-bar span:nth-child(3) { background: linear-gradient(90deg, rgba(var(--rose), .8), rgba(var(--lilac), .95)); }
+      .tl-bar span:nth-child(4) { background: linear-gradient(90deg, rgba(var(--lilac), .9), rgba(var(--lilac), .6)); }
+      .tl-scale { position: relative; height: 22px; margin-top: 10px; font-family: 'Instrument Serif', serif; font-size: 16px; line-height: 22px; color: var(--ink-3); }
+      .tl-scale span { position: absolute; top: 0; transform: translateX(-50%); }
+      .tl-scale span:first-child { transform: none; }
+      .tl-scale span:last-child { transform: translateX(-100%); }
+      .tl-steps { display: grid; grid-template-columns: 10fr 15fr 25fr 10fr; gap: 6px; list-style: none; margin: 26px 0 0; padding: 0; }
+      .tl-steps li { padding: 20px 18px 0 0; border-top: 1px solid var(--line); }
+      .tl-steps .t { display: block; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: var(--wine); }
+      .tl-steps h3 { margin: 6px 0 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
+      .tl-steps p { margin: 6px 0 0; font-size: 14.5px; color: var(--ink-2); }
+      #aftercare { padding-top: clamp(48px, 6vw, 80px); overflow: hidden; }
+      #aftercare .b1 { width: 560px; height: 560px; left: -180px; top: -60px; }
+      #aftercare .b2 { width: 600px; height: 600px; right: -200px; bottom: -260px; }
+      .after-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+      .after-grid li { padding: 26px 24px 28px; }
+      .after-grid .when { display: inline-flex; align-items: baseline; gap: 6px; font-family: var(--display); font-synthesis: none; font-size: 30px; line-height: 1; color: var(--wine-deep); }
+      .after-grid h3 { margin: 22px 0 0; font-size: 17px; font-weight: 600; }
+      .after-grid p { margin: 6px 0 0; font-size: 14.5px; color: var(--ink-2); }
+
+      /* ---------- 후기 ---------- */
+      #voice { overflow: hidden; }
+      #voice .b1 { width: 640px; height: 640px; right: 10%; top: -260px; }
+      .chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 600; color: var(--wine-deep); background: rgba(255, 255, 255, .75); border: 1px solid rgba(138, 47, 69, .25); letter-spacing: .01em; }
+      .voice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .voice { margin: 0; padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column; }
+      .voice .q { font-family: 'Instrument Serif', serif; font-size: 72px; line-height: .6; height: 34px; color: rgba(138, 47, 69, .55); }
+      .voice blockquote { margin: 18px 0 0; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: clamp(20px, 1.7vw, 23px); line-height: 1.55; color: var(--ink); }
+      .voice figcaption { margin-top: auto; padding-top: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-2); }
+
+      /* ---------- 예약 ---------- */
+      #book { background: radial-gradient(120% 90% at 85% 0%, #4a1f30 0%, var(--plum) 60%); color: #fbf1ee; overflow: hidden; }
+      #book.grain::after { background-image: var(--grain-light); opacity: .1; }
+      #book .blobs { -webkit-mask-image: none; mask-image: none; }
+      #book .b1 { width: 820px; height: 820px; right: -160px; top: -300px; opacity: .62; }
+      #book .b2 { width: 640px; height: 640px; right: 18%; bottom: -380px; opacity: .5; }
+      #book .b3 { width: 560px; height: 560px; left: -300px; bottom: -200px; opacity: .3; }
+      .book-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+      #book .kicker { color: rgba(251, 241, 238, .9); }
+      #book .kicker .it { color: #ffd2c9; }
+      #book .h2 { color: #fff7f4; }
+      #book .sub { color: rgba(251, 241, 238, .92); }
+      .hours { margin: 40px 0 0; display: grid; gap: 0; }
+      .hours div { display: flex; justify-content: space-between; gap: 16px; padding: 15px 0; border-top: 1px solid rgba(251, 241, 238, .2); font-size: 15.5px; }
+      .hours div:last-child { border-bottom: 1px solid rgba(251, 241, 238, .2); }
+      .hours dt { color: #ffd2c9; }
+      .hours dd { margin: 0; text-align: right; color: #fff7f4; }
+      .policy { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 10px; font-size: 13.5px; line-height: 1.65; color: rgba(251, 241, 238, .84); }
+      .policy li { padding-left: 16px; position: relative; }
+      .policy li::before { content: ''; position: absolute; left: 0; top: .75em; width: 6px; height: 1px; background: #ffd2c9; }
+      .policy strong { color: #fff7f4; font-weight: 600; }
+      .form { padding: clamp(26px, 3vw, 40px); border-radius: var(--r-l); background: rgba(255, 252, 250, .97); color: var(--ink); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .55); }
+      .form h3 { margin: 0; font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 28px; line-height: 1.3; }
+      .form .hint { margin: 6px 0 22px; font-size: 13.5px; color: var(--ink-2); }
+      .fld { display: block; margin-top: 14px; }
+      .fld > span { display: block; margin-bottom: 7px; font-size: 13.5px; font-weight: 500; color: var(--ink-2); }
+      .fld input, .fld select { width: 100%; box-sizing: border-box; min-height: 50px; padding: 0 16px; border-radius: 12px; border: 1px solid rgba(46, 28, 31, .18); background: #fff; font: 400 15px var(--sans); color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+      .fld input::placeholder { color: #8d7a7c; }
+      .fld input:focus, .fld select:focus { outline: none; border-color: var(--wine); box-shadow: 0 0 0 4px rgba(var(--rose), .45); }
+      .agree { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 18px; font-size: 13px; line-height: 1.6; color: var(--ink-2); cursor: pointer; }
+      .agree input { margin-top: 3px; width: 17px; height: 17px; flex-shrink: 0; accent-color: var(--wine); }
+      .agree a { text-decoration: underline; text-underline-offset: 2px; }
+      .form .btn { width: 100%; }
+      .status { display: none; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 16px; border-radius: 12px; background: #f6e6e9; color: var(--wine-deep); font-size: 14px; font-weight: 600; }
+      .status.show { display: flex; }
+      .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--wine); flex-shrink: 0; }
+
+      /* ---------- 푸터 ---------- */
+      .site-foot { padding: 40px 0 120px; font-size: 13.5px; color: var(--ink-2); background: var(--paper); }
+      .site-foot .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+      .site-foot .row a { color: var(--wine); }
+      .site-foot .row a:hover { text-decoration: underline; }
+      .demo-note { margin: 18px 0 0; font-size: 12px; color: var(--ink-3); }
+
+      /* ---------- 리빌 ---------- */
+      .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      /* ---------- 반응형 ---------- */
+      @media (max-width: 1360px) { .site-head .wrap { padding-left: max(var(--gutter), 112px); } }
+      @media (max-width: 1080px) {
+        .gnb { display: none; }
+        .head-cta { margin-left: auto; }
+        .menu-btn { display: grid; }
+        .m-nav { position: absolute; left: 0; right: 0; top: 100%; background: rgba(252, 247, 243, .97); border-bottom: 1px solid var(--line); padding: 8px var(--gutter) 20px; flex-direction: column; box-shadow: 0 24px 40px -30px rgba(46, 28, 31, .35); }
+        .m-nav.open { display: flex; }
+        .m-nav a { padding: 14px 0; border-bottom: 1px solid var(--line-soft); font-size: 16px; }
+        .float-card { left: -24px; }
+      }
+      @media (max-width: 900px) {
+        .hero-grid, .prog-grid, .routine-grid, .book-grid, .sec-head { grid-template-columns: minmax(0, 1fr); }
+        .sec-head .sub { justify-self: start; }
+        .hero-media { justify-self: center; max-width: 420px; margin-top: 8px; }
+        .soft-frame { display: none; }
+        .promise-grid, .voice-grid { grid-template-columns: minmax(0, 1fr); }
+        .promise { min-height: 0; }
+        .promise h3 { padding-top: 24px; }
+        .after-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .routine-photo .img { aspect-ratio: 16 / 11; }
+        #book .b1 { width: 560px; height: 560px; right: -300px; top: -320px; opacity: .45; }
+        #book .b2 { right: -260px; }
+      }
+      @media (max-width: 640px) {
+        .site-head .wrap { height: 62px; gap: 10px; padding-left: 96px; padding-right: 16px; }
+        .logo { font-size: 21px; }
+        .logo .han { display: none; }
+        .head-cta { min-height: 40px; padding: 0 14px; font-size: 13.5px; }
+        .menu-btn { width: 40px; height: 40px; }
+        .hero h1 { font-size: clamp(34px, 9.6vw, 46px); }
+        .lead { margin-top: 22px; }
+        .lead br { display: none; }
+        .cta-row .btn { flex: 1 1 100%; }
+        .h2 { font-size: clamp(28px, 8.2vw, 36px); }
+        .facts { margin-top: 28px; gap: 8px; }
+        .facts li { font-size: 12.5px; padding: 8px 12px; }
+        .float-card { left: 12px; right: 12px; bottom: 16px; max-width: none; }
+        .hero-media { max-width: 340px; }
+        .arch-line { inset: -10px -10px 24px 10px; }
+        .menu { padding: 22px 18px; border-radius: 20px; }
+        .item { grid-template-columns: 30px minmax(0, 1fr) auto; column-gap: 10px; }
+        .item h3 .dur { display: block; margin: 2px 0 0; vertical-align: 0; }
+        .item p { grid-column: 2 / 4; }
+        .free-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 16px; }
+        .then { grid-template-columns: minmax(0, 1fr); }
+        .tl-steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
+        .tl-steps li { display: grid; grid-template-columns: 72px minmax(0, 1fr); column-gap: 12px; padding: 16px 0; }
+        .tl-steps .t { grid-row: span 2; }
+        .tl-steps h3 { margin: 0; }
+        .after-grid { grid-template-columns: minmax(0, 1fr); }
+        .after-grid li { display: grid; grid-template-columns: 92px minmax(0, 1fr); column-gap: 14px; padding: 20px; }
+        .after-grid .when { grid-row: span 2; font-size: 26px; }
+        .after-grid h3 { margin: 0; }
+        .hours div { font-size: 14.5px; }
+        .site-foot { padding-bottom: 150px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .blob { animation: none !important; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .btn, .btn .arr, .gnb a::after { transition: none; }
+      }
     </style>
     <meta name="theme-color" content="#9b3a4e" />
     <script type="application/ld+json">
@@ -92,307 +408,366 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="serif text-xl font-semibold tracking-tight" style="color:var(--primary)">단정 端正</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+
+    <header class="site-head">
+      <div class="wrap">
+        <a href="#top" class="logo" aria-label="단정 에스테틱 처음으로">단정 <span class="han" aria-hidden="true">端正</span></a>
+        <nav class="gnb" aria-label="주요 메뉴">
           <a href="#promise">우리의 약속</a>
-          <a href="#programs">시술 프로그램</a>
-          <a href="#price">가격</a>
+          <a href="#programs">프로그램 · 가격</a>
+          <a href="#routine">케어 방식</a>
           <a href="#voice">후기</a>
-          <a href="#book">방문 예약</a>
+          <a href="#book">오시는 길</a>
         </nav>
-        <a href="#book" class="btn-primary text-sm" style="padding:10px 18px">방문 예약</a>
+        <a href="#book" class="btn btn-solid btn-sm head-cta">방문 예약</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-nav" aria-label="메뉴 열기"><span></span></button>
+        <nav class="m-nav" id="m-nav" aria-label="모바일 메뉴">
+          <a href="#promise">우리의 약속</a>
+          <a href="#programs">프로그램 · 가격</a>
+          <a href="#routine">케어 방식</a>
+          <a href="#voice">후기</a>
+          <a href="#book">방문 예약 · 오시는 길</a>
+        </nav>
       </div>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">SKINCARE STUDIO · 청담</p>
-            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
-              단정한 매일을 위한,<br />하나의 피부 루틴.
-            </h1>
-            <p class="mt-8 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              자극을 더하는 시술이 아니라, 매일을 가꾸는 루틴을 함께 만듭니다.<br />
-              1:1 피부 분석으로 시작해, 한 분께 맞는 한 장의 루틴표.
-            </p>
-            <div class="mt-10 flex flex-wrap gap-3">
-              <a href="#book" class="btn-primary">방문 예약 <span aria-hidden="true">→</span></a>
-              <a href="#programs" class="btn-ghost">프로그램 보기</a>
+      <!-- ============ HERO ============ -->
+      <section class="hero grain" aria-labelledby="hero-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob rose b1"></span>
+          <span class="blob peach b2"></span>
+          <span class="blob lilac b3"></span>
+        </div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="kicker"><span class="it">Skincare studio</span><span class="bar" aria-hidden="true"></span>청담 · 1:1 피부 루틴</p>
+            <h1 id="hero-title" class="display"><span class="ln">단정한 매일을 위한,</span><br /><span class="ln">하나의 <span class="soft">피부 루틴.</span></span></h1>
+            <p class="lead">자극을 더하는 시술이 아니라, 매일을 가꾸는 루틴을 함께 만듭니다. <br />1:1 피부 분석으로 시작해, 한 분께 맞는 한 장의 루틴표를 드립니다.</p>
+            <div class="cta-row">
+              <a href="#book" class="btn btn-solid">방문 예약 <span class="arr" aria-hidden="true">→</span></a>
+              <a href="#programs" class="btn btn-line">프로그램 · 가격 보기</a>
             </div>
-          </div>
-          <div class="md:col-span-5 reveal">
-            <div class="ph aspect-[4/5] rounded-3xl"  style="background-image:url('../assets/images/beauty/01-treatment.webp');background-size:cover;background-position:center;"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROMISE -->
-      <section id="promise" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-14">
-            <p class="eyebrow mb-4">우리의 약속</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              자극보다 회복,<br />효과보다 안전.
-            </h2>
-          </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <span class="serif text-4xl" style="color:var(--accent)">01</span>
-              <h3 class="mt-6 text-xl font-semibold">권하지 않는 시술</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">필요하지 않은 시술은 권하지 않습니다. 가끔은 ‘아무것도 하지 마세요’가 가장 좋은 처방입니다.</p>
-            </article>
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <span class="serif text-4xl" style="color:var(--accent)">02</span>
-              <h3 class="mt-6 text-xl font-semibold">성분을 숨기지 않습니다</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">Environ · Biologique Recherche 등 사용 화장품의 전체 성분을 확인하실 수 있습니다.</p>
-            </article>
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <span class="serif text-4xl" style="color:var(--accent)">03</span>
-              <h3 class="mt-6 text-xl font-semibold">집에서 이어가는 루틴</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">관리실의 한 시간보다, 집에서의 매일이 더 중요합니다. 홈케어 가이드를 함께 드립니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROGRAMS -->
-      <section id="programs" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">시술 프로그램</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            네 가지 케어,<br />하나의 처방.
-          </h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-6">
-          <article class="row pt-8 reveal">
-            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">진정 케어</h3><span class="text-xs" style="color: var(--ink-soft)">PROGRAM 01 · 60분</span></div>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">계절 환절기에 흔들리는 피부를 위한 가장 기본의 케어. 클렌징 · 진정 마스크 · LED.</p>
-          </article>
-          <article class="row pt-8 reveal">
-            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">탄력 케어</h3><span class="text-xs" style="color: var(--ink-soft)">PROGRAM 02 · 80분</span></div>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">근육의 흐름을 따라가는 페이셜 마사지와 탄력 앰플. 일주일치 피로가 풀리는 시간.</p>
-          </article>
-          <article class="row pt-8 reveal">
-            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">트러블 진정</h3><span class="text-xs" style="color: var(--ink-soft)">PROGRAM 03 · 70분</span></div>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">트러블이 가라앉을 때까지 단계별로 관리합니다. 안전한 진정 위주, 자극 시술은 권하지 않습니다.</p>
-          </article>
-          <article class="row pt-8 reveal">
-            <div class="flex items-baseline justify-between"><h3 class="serif text-2xl">웨딩 8주 루틴</h3><span class="text-xs" style="color: var(--ink-soft)">PROGRAM 04 · 패키지</span></div>
-            <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">결혼식 8주 전부터 시작하는 단계별 케어. 사진과 함께 변화를 점검합니다.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- PRICE -->
-      <section id="price" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-12">
-            <p class="eyebrow mb-4">가격</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              과장 없이,<br />정찰가로 받습니다.
-            </h2>
-          </div>
-          <div class="bg-white rounded-2xl p-8 md:p-12 reveal">
-            <div class="row pt-6 flex justify-between items-baseline"><div><h3 class="font-semibold text-lg">진정 케어</h3><p class="text-sm mt-1" style="color: var(--ink-soft)">60분</p></div><p class="serif text-2xl">120,000</p></div>
-            <div class="row pt-6 flex justify-between items-baseline mt-4"><div><h3 class="font-semibold text-lg">탄력 케어</h3><p class="text-sm mt-1" style="color: var(--ink-soft)">80분</p></div><p class="serif text-2xl">180,000</p></div>
-            <div class="row pt-6 flex justify-between items-baseline mt-4"><div><h3 class="font-semibold text-lg">트러블 진정</h3><p class="text-sm mt-1" style="color: var(--ink-soft)">70분</p></div><p class="serif text-2xl">150,000</p></div>
-            <div class="row pt-6 flex justify-between items-baseline mt-4"><div><h3 class="font-semibold text-lg">웨딩 8주 루틴</h3><p class="text-sm mt-1" style="color: var(--ink-soft)">8회 패키지</p></div><p class="serif text-2xl">1,200,000</p></div>
-            <p class="mt-8 text-xs" style="color: var(--ink-soft)">· 첫 방문 시 1:1 피부 분석 30분 무료 진행 · 상담 후 시술 여부는 자유롭게 결정하실 수 있습니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- VOICE -->
-      
-      <!-- ====================== TREATMENT GUIDE ====================== -->
-      <section id="guide" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">TREATMENT GUIDE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">시술 시작부터 끝까지, 단정의 60분</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">처음 오시는 분도 편안하게 흐름을 따라가실 수 있도록.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">01 피부 진단 (10분)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">유수분·민감도·색소를 측정해 오늘의 시술을 조율합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">02 클렌징 &amp; 각질 정리 (15분)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">효소 필링으로 표면을 정돈, 흡수력을 끌어올립니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">03 메인 케어 (25분)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">맞춤 앰플 도포 후 LED 또는 RF 디바이스를 진행합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">04 진정 마스크 (10분)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">당일 외출이 가능하도록 붉은기를 가라앉히고 마무리합니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="voice" class="container-x py-24 md:py-32">
-        <div class="reveal mb-12 max-w-2xl">
-          <p class="eyebrow mb-4">단골의 이야기</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            오래 다녀주신<br />분들의 한 마디.
-          </h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <figure class="bg-white p-8 rounded-2xl reveal" style="border:1px solid var(--line)">
-            <blockquote class="serif text-lg leading-relaxed">“처음으로 ‘오늘은 그냥 가셔도 돼요’라는 말을 들은 곳이에요.”</blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">30대 직장인 · 진정 케어</figcaption>
-          </figure>
-          <figure class="bg-white p-8 rounded-2xl reveal" style="border:1px solid var(--line)">
-            <blockquote class="serif text-lg leading-relaxed">“성분 카드를 같이 읽어주시는 게 가장 큰 차이였어요.”</blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">40대 · 탄력 케어</figcaption>
-          </figure>
-          <figure class="bg-white p-8 rounded-2xl reveal" style="border:1px solid var(--line)">
-            <blockquote class="serif text-lg leading-relaxed">“결혼식 8주 전부터 받았는데, 사진보다 거울이 먼저 알았어요.”</blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">예비신부 · 웨딩 루틴</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- BOOK -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">거울 앞에서 작게 한숨이 나는 날</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              피부에 자신을 잃은 시간, 충분히 이해합니다.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">정밀 피부 진단</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">장비로 측정하고 데이터로 보여드립니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">단정한 케어 설계</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">필요 없는 시술은 권하지 않습니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">홈케어 루틴 코칭</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">관리실 밖에서도 결과가 이어지도록</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">관리를 미루는 사이, 모공과 잔주름은 조용히 자리를 잡습니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">민낯에 자신이 붙는 아침, 화장이 가벼워지는 변화부터 옵니다.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#book" class="btn-primary">첫 케어 예약하기 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">피부 타입별 홈케어 가이드 받기</a>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== AFTERCARE ====================== -->
-      <section id="aftercare" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">AFTERCARE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">시술 후 24시간, 이렇게 관리하세요</h2>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">당일 — 미온수 세안</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">미지근한 물로만, 클렌징 폼은 다음날부터 사용하세요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">24시간 — 자외선 차단</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">외출 시 SPF 50 이상 자외선 차단제를 꼭 발라주세요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">3일 — 각질 시술 금지</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">스크럽·필링패드 등 자극적 제품은 잠시 멈춰주세요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">7일 — 다음 케어 권장</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">효과를 이어가려면 일주일 뒤 재방문을 권해드립니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="book" class="py-24 md:py-32" style="background: var(--primary); color: #fdf7f4">
-        <div class="container-x grid md:grid-cols-2 gap-12">
-          <div class="reveal">
-            <p class="eyebrow mb-4" style="color: #f3c2bf">방문 예약</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              먼저, 30분의<br />피부 분석부터.
-            </h2>
-            <p class="mt-8 leading-relaxed" style="color: rgba(253,247,244,.75)">
-              첫 방문은 분석과 상담만 받으셔도 괜찮습니다. 시술 결정은 그 자리에서 하지 않으셔도 됩니다.
-            </p>
-            <ul class="mt-6 text-sm space-y-2" style="color: rgba(253,247,244,.7)">
-              <li>· <strong>본 매장은 공중위생관리법상 미용업(피부)</strong>이며, 의료행위(레이저·주사·필러 등)는 시술하지 않습니다.</li>
-              <li>· <strong>시술 전 패치 테스트</strong>: 첫 방문 시 알러지 패치 테스트를 진행합니다.</li>
-              <li>· <strong>시술 제한</strong>: 임신·수유 중, 광과민제·이소트레티노인 복용 중, 시술 부위 상처/염증 시</li>
-              <li>· <strong>환불 규정</strong>: 패키지 유효기간 6개월 / 미사용분 잔여 회차 환불 (방문판매법상 14일 이내 청약철회 가능)</li>
+            <ul class="facts">
+              <li><span class="pip" aria-hidden="true"></span><b>첫 방문</b> 피부 분석 30분 무료</li>
+              <li><b>화–토</b> 11:00–21:00</li>
+              <li><b>청담동</b> OO길 14, 3층</li>
             </ul>
-            <dl class="mt-10 space-y-4">
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(253,247,244,.18)"><dt style="color: #f3c2bf">화 — 토</dt><dd>11:00 — 21:00</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(253,247,244,.18)"><dt style="color: #f3c2bf">일·월</dt><dd>휴무</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(253,247,244,.18)"><dt style="color: #f3c2bf">위치</dt><dd>서울 강남구 청담동 OO길 14, 3층</dd></div>
-            </dl>
           </div>
-          <form class="bg-white p-8 rounded-2xl reveal" onsubmit="event.preventDefault(); alert('예약 요청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
-            <h3 class="serif text-2xl mb-6" style="color: var(--ink)">방문 예약 요청서</h3>
-            <div class="space-y-4" style="color: var(--ink)">
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label><input class="field" required type="tel" /></div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 프로그램</label>
-                <select class="field" required><option value="">선택</option><option>피부 분석만 (무료)</option><option>진정 케어</option><option>탄력 케어</option><option>트러블 진정</option><option>웨딩 8주 루틴</option></select>
-              </div>
-              <div><label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 일시</label><input class="field" placeholder="예: 5월 셋째 주 토요일 오후" /></div>
-              <label class="flex items-start gap-2 mt-4 mb-3 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-                <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
-              </label>
-              <button class="btn-primary w-full justify-center mt-2">방문 예약 요청</button>
+          <figure class="hero-media">
+            <span class="arch-line" aria-hidden="true"></span>
+            <div class="arch">
+              <img src="../assets/images/beauty/01-treatment.webp" width="1376" height="768" alt="관리사가 침대에 누운 고객의 얼굴을 두 손으로 부드럽게 감싸 관리하는 모습" fetchpriority="high" />
             </div>
+            <figcaption class="float-card">
+              <span class="it">Program 01</span>
+              <strong>진정 케어 · 60분</strong>
+              <small>클렌징 · 진정 마스크 · LED</small>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ PROMISE ============ -->
+      <section id="promise" class="sec grain" aria-labelledby="promise-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob lilac b1"></span>
+          <span class="blob peach b2"></span>
+        </div>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div>
+              <p class="kicker"><span class="it">Our promise</span><span class="bar" aria-hidden="true"></span>우리의 약속</p>
+              <h2 id="promise-title" class="display h2">자극보다 회복,<br />효과보다 안전.</h2>
+            </div>
+            <p class="sub">필요한 만큼만 하고, 쓰는 것은 모두 보여드리고, 관리실 밖의 매일까지 함께 챙깁니다. 단정이 지키는 세 가지입니다.</p>
+          </div>
+          <div class="promise-grid">
+            <article class="promise glass reveal">
+              <span class="num" aria-hidden="true">01</span>
+              <h3>권하지 않는 시술</h3>
+              <p>필요하지 않은 시술은 권하지 않습니다. 가끔은 ‘아무것도 하지 마세요’가 가장 좋은 처방입니다.</p>
+            </article>
+            <article class="promise glass reveal">
+              <span class="num" aria-hidden="true">02</span>
+              <h3>성분을 숨기지 않습니다</h3>
+              <p>관리에 쓰는 화장품의 전체 성분표를 그 자리에서 확인하실 수 있습니다. 궁금한 성분은 함께 읽어드립니다.</p>
+            </article>
+            <article class="promise glass reveal">
+              <span class="num" aria-hidden="true">03</span>
+              <h3>집에서 이어가는 루틴</h3>
+              <p>관리실의 한 시간보다 집에서의 매일이 더 중요합니다. 홈케어 가이드를 함께 드립니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROGRAMS + PRICE ============ -->
+      <section id="programs" class="sec grain" aria-labelledby="programs-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob rose b1"></span>
+          <span class="blob lilac b2"></span>
+        </div>
+        <div class="wrap prog-grid">
+          <div class="prog-aside reveal">
+            <p class="kicker"><span class="it">Programs</span><span class="bar" aria-hidden="true"></span>시술 프로그램 · 가격</p>
+            <h2 id="programs-title" class="display h2">네 가지 케어,<br />하나의 처방.</h2>
+            <p class="sub">과장 없이, 정찰가로 받습니다. 첫 방문 분석 결과를 보고 지금 필요한 케어 한 가지만 권해드립니다.</p>
+            <figure class="soft-frame">
+              <div class="img"><img src="../assets/images/beauty/04-prep.webp" width="1376" height="768" loading="lazy" alt="관리사가 관리실 협탁에서 수건과 화장품을 정리하며 관리를 준비하는 모습" /></div>
+              <figcaption>관리 전, 그날 쓸 제품과 도구를 한 분 몫만 따로 준비합니다.</figcaption>
+            </figure>
+          </div>
+
+          <div id="price" class="menu glass reveal">
+            <div class="menu-top"><span class="it">Price list</span><span>정찰가 · 원</span></div>
+            <div class="free-row">
+              <p>첫 방문 1:1 피부 분석 · 30분<small>상담 후 시술 여부는 자유롭게 결정하시면 됩니다.</small></p>
+              <strong>무료</strong>
+            </div>
+            <article class="item">
+              <span class="no" aria-hidden="true">01</span>
+              <h3>진정 케어<span class="dur">60분</span></h3>
+              <span class="price">120,000<small>원</small></span>
+              <p>환절기에 흔들리는 피부를 위한 가장 기본의 케어. 클렌징 · 진정 마스크 · LED.</p>
+            </article>
+            <article class="item">
+              <span class="no" aria-hidden="true">02</span>
+              <h3>탄력 케어<span class="dur">80분</span></h3>
+              <span class="price">180,000<small>원</small></span>
+              <p>근육의 흐름을 따라가는 페이셜 마사지와 탄력 앰플. 일주일치 피로가 풀리는 시간.</p>
+            </article>
+            <article class="item">
+              <span class="no" aria-hidden="true">03</span>
+              <h3>트러블 진정<span class="dur">70분</span></h3>
+              <span class="price">150,000<small>원</small></span>
+              <p>트러블이 가라앉을 때까지 단계별로 관리합니다. 안전한 진정 위주이며, 자극적인 시술은 권하지 않습니다.</p>
+            </article>
+            <article class="item">
+              <span class="no" aria-hidden="true">04</span>
+              <h3>웨딩 8주 루틴<span class="dur">8회 패키지</span></h3>
+              <span class="price">1,200,000<small>원</small></span>
+              <p>결혼식 8주 전부터 시작하는 단계별 케어. 회차마다 기록표로 피부 상태를 함께 점검합니다.</p>
+            </article>
+            <ul class="menu-notes">
+              <li>가격은 1회 기준이며, 웨딩 루틴만 8회 패키지 가격입니다.</li>
+              <li>패키지 환불 규정은 아래 방문 예약 안내에서 확인하실 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ROUTINE (방식) ============ -->
+      <section id="routine" class="sec grain" aria-labelledby="routine-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob peach b1"></span>
+          <span class="blob rose b2"></span>
+        </div>
+        <div class="wrap routine-grid">
+          <figure class="routine-photo reveal">
+            <div class="img"><img src="../assets/images/beauty/02-relaxed.webp" width="1376" height="768" loading="lazy" alt="헤어밴드를 하고 누운 고객이 눈을 감고 편안하게 페이셜 마사지를 받는 모습" /></div>
+            <figcaption>관리 중에는 설명보다 쉼이 먼저입니다. 궁금한 점은 끝난 뒤 천천히 답해드립니다.</figcaption>
+          </figure>
+          <div class="reveal">
+            <p class="kicker"><span class="it">How we care</span><span class="bar" aria-hidden="true"></span>거울 앞에서 작게 한숨이 나는 날</p>
+            <h2 id="routine-title" class="display h2">피부에 자신을 잃은 시간,<br />충분히 이해합니다.</h2>
+            <ol class="steps">
+              <li><span class="dot" aria-hidden="true">1</span><div><h3>정밀 피부 진단</h3><p>장비로 측정하고, 결과를 수치로 보여드립니다.</p></div></li>
+              <li><span class="dot" aria-hidden="true">2</span><div><h3>단정한 케어 설계</h3><p>필요 없는 시술은 권하지 않습니다.</p></div></li>
+              <li><span class="dot" aria-hidden="true">3</span><div><h3>홈케어 루틴 코칭</h3><p>관리실 밖에서도 관리가 이어지도록 순서를 정리해드립니다.</p></div></li>
+            </ol>
+            <div class="then">
+              <div class="off"><span class="label">미루시면</span><p>바쁜 날이 이어지면 피부 관리는 늘 다음 순서로 밀려납니다.</p></div>
+              <div class="on"><span class="label">시작하시면</span><p>내 피부에 맞는 순서를 알게 되면, 아침 루틴이 한결 가벼워집니다.</p></div>
+            </div>
+            <div class="cta-row">
+              <a href="#book" class="btn btn-solid">첫 케어 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+              <a href="#aftercare" class="btn btn-line">홈케어 가이드 미리 보기</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 60분 GUIDE ============ -->
+      <section id="guide" class="sec grain" aria-labelledby="guide-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div>
+              <p class="kicker"><span class="it">Treatment guide</span><span class="bar" aria-hidden="true"></span>관리 순서</p>
+              <h2 id="guide-title" class="display h2">시술 시작부터 끝까지,<br />단정의 60분.</h2>
+            </div>
+            <p class="sub">처음 오시는 분도 편안하게 흐름을 따라가실 수 있도록, 시간 순서대로 정리했습니다.</p>
+          </div>
+          <div class="timeline reveal">
+            <div class="tl-bar" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <div class="tl-scale" aria-hidden="true"><span style="left:0">0′</span><span style="left:16.67%">10′</span><span style="left:41.67%">25′</span><span style="left:83.33%">50′</span><span style="left:100%">60′</span></div>
+            <ol class="tl-steps">
+              <li><span class="t">10 min</span><h3>피부 진단</h3><p>유수분·민감도·색소를 측정해 오늘의 관리를 조율합니다.</p></li>
+              <li><span class="t">15 min</span><h3>클렌징 &amp; 각질 정리</h3><p>효소 필링으로 피부 표면을 정돈합니다.</p></li>
+              <li><span class="t">25 min</span><h3>메인 케어</h3><p>맞춤 앰플을 바른 뒤 LED 또는 RF 디바이스를 진행합니다.</p></li>
+              <li><span class="t">10 min</span><h3>진정 마스크</h3><p>당일 외출이 가능하도록 붉은기를 가라앉히고 마무리합니다.</p></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ AFTERCARE ============ -->
+      <section id="aftercare" class="sec grain" aria-labelledby="after-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob lilac b1"></span>
+          <span class="blob rose b2"></span>
+        </div>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div>
+              <p class="kicker"><span class="it">Aftercare</span><span class="bar" aria-hidden="true"></span>관리 후 안내</p>
+              <h2 id="after-title" class="display h2">시술 후 24시간,<br />이렇게 관리하세요.</h2>
+            </div>
+            <p class="sub">관리 당일부터 일주일까지, 집에서 지켜주시면 좋은 네 가지를 시간 순서로 적었습니다.</p>
+          </div>
+          <ul class="after-grid">
+            <li class="glass reveal"><span class="when">당일</span><h3>미온수 세안</h3><p>미지근한 물로만 세안하고, 클렌징 폼은 다음 날부터 사용하세요.</p></li>
+            <li class="glass reveal"><span class="when">24시간</span><h3>자외선 차단</h3><p>외출할 때는 SPF 50 이상 자외선 차단제를 꼭 발라주세요.</p></li>
+            <li class="glass reveal"><span class="when">3일</span><h3>각질 제품 쉬기</h3><p>스크럽·필링 패드처럼 자극이 있는 제품은 잠시 멈춰주세요.</p></li>
+            <li class="glass reveal"><span class="when">7일</span><h3>다음 케어 권장</h3><p>관리를 이어가시려면 일주일 뒤 재방문을 권해드립니다.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ VOICE ============ -->
+      <section id="voice" class="sec grain" aria-labelledby="voice-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob peach b1"></span>
+        </div>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div>
+              <p class="kicker"><span class="it">Voices</span><span class="bar" aria-hidden="true"></span>단골의 이야기</p>
+              <h2 id="voice-title" class="display h2">오래 다녀주신<br />분들의 한 마디.</h2>
+            </div>
+            <p class="sub">아래 후기는 예시입니다. 실제 운영 시 고객 동의를 받은 후기로 교체합니다.</p>
+          </div>
+          <div class="voice-grid">
+            <figure class="voice glass reveal">
+              <span class="q" aria-hidden="true">“</span>
+              <blockquote>처음으로 ‘오늘은 그냥 가셔도 돼요’라는 말을 들은 곳이에요.</blockquote>
+              <figcaption><span>30대 직장인 · 진정 케어</span><span class="chip">예시 후기</span></figcaption>
+            </figure>
+            <figure class="voice glass reveal">
+              <span class="q" aria-hidden="true">“</span>
+              <blockquote>성분 카드를 같이 읽어주시는 게 가장 큰 차이였어요.</blockquote>
+              <figcaption><span>40대 · 탄력 케어</span><span class="chip">예시 후기</span></figcaption>
+            </figure>
+            <figure class="voice glass reveal">
+              <span class="q" aria-hidden="true">“</span>
+              <blockquote>결혼식 8주 전부터 받았는데, 사진보다 거울이 먼저 알았어요.</blockquote>
+              <figcaption><span>예비신부 · 웨딩 루틴</span><span class="chip">예시 후기</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BOOK ============ -->
+      <section id="book" class="sec grain" aria-labelledby="book-title">
+        <div class="blobs" aria-hidden="true">
+          <span class="blob rose b1"></span>
+          <span class="blob peach b2"></span>
+          <span class="blob lilac b3"></span>
+        </div>
+        <div class="wrap book-grid">
+          <div class="reveal">
+            <p class="kicker"><span class="it">Visit</span><span class="bar" aria-hidden="true"></span>방문 예약</p>
+            <h2 id="book-title" class="display h2">먼저, 30분의<br />피부 분석부터.</h2>
+            <p class="sub">첫 방문은 분석과 상담만 받으셔도 괜찮습니다. 시술 결정은 그 자리에서 하지 않으셔도 됩니다.</p>
+            <dl class="hours">
+              <div><dt>화 — 토</dt><dd>11:00 — 21:00</dd></div>
+              <div><dt>일 · 월</dt><dd>휴무</dd></div>
+              <div><dt>위치</dt><dd>서울 강남구 청담동 OO길 14, 3층</dd></div>
+            </dl>
+            <ul class="policy">
+              <li><strong>본 매장은 공중위생관리법상 미용업(피부)</strong>이며, 의료행위(레이저·주사·필러 등)는 시술하지 않습니다.</li>
+              <li><strong>시술 전 패치 테스트</strong> — 첫 방문 시 알러지 패치 테스트를 진행합니다.</li>
+              <li><strong>시술 제한</strong> — 임신·수유 중, 광과민제·이소트레티노인 복용 중, 시술 부위에 상처나 염증이 있을 때</li>
+              <li><strong>환불 규정</strong> — 패키지 유효기간 6개월 / 미사용 잔여 회차 환불 (방문판매법상 14일 이내 청약철회 가능)</li>
+            </ul>
+          </div>
+          <form class="form reveal" id="book-form" novalidate>
+            <h3>방문 예약 요청서</h3>
+            <p class="hint">남겨주시면 확인 후 연락드려 시간을 맞춰드립니다.</p>
+            <label class="fld"><span>성함</span><input name="name" autocomplete="name" required /></label>
+            <label class="fld"><span>연락처</span><input name="tel" type="tel" autocomplete="tel" placeholder="010-0000-0000" required /></label>
+            <label class="fld"><span>희망 프로그램</span>
+              <select name="program" required>
+                <option value="">선택해 주세요</option>
+                <option>피부 분석만 (무료)</option>
+                <option>진정 케어</option>
+                <option>탄력 케어</option>
+                <option>트러블 진정</option>
+                <option>웨딩 8주 루틴</option>
+              </select>
+            </label>
+            <label class="fld"><span>희망 일시</span><input name="when" placeholder="예: 5월 셋째 주 토요일 오후" /></label>
+            <label class="agree">
+              <input type="checkbox" required />
+              <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간은 <a href="#book">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+            </label>
+            <button class="btn btn-solid" type="submit">방문 예약 요청 <span class="arr" aria-hidden="true">→</span></button>
+            <p class="status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 단정 에스테틱 · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="row">
+          <span>© 2026 단정 에스테틱 · 사업자등록번호 000-00-00000</span>
+          <a href="/">← 쇼룸으로 돌아가기</a>
+        </div>
+        <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      (function () {
+        /* 스크롤 리빌 */
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: .05 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        /* 블롭 — 화면에 보일 때만 천천히 움직임 (모션 줄이기 설정이면 정지) */
+        var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!still) {
+          var bio = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { e.target.classList.toggle('run', e.isIntersecting); });
+          });
+          document.querySelectorAll('.blobs').forEach(function (el) { bio.observe(el); });
+        }
+
+        /* 모바일 메뉴 */
+        var btn = document.querySelector('.menu-btn'), nav = document.getElementById('m-nav');
+        function closeNav() { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', '메뉴 열기'); }
+        btn.addEventListener('click', function () {
+          var open = !nav.classList.contains('open');
+          nav.classList.toggle('open', open);
+          btn.setAttribute('aria-expanded', String(open));
+          btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+          if (open) nav.querySelector('a').focus();
+        });
+        nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeNav); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { closeNav(); btn.focus(); } });
+
+        /* 예약 폼 — 시안 데모 */
+        var form = document.getElementById('book-form'), status = form.querySelector('.status');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          status.textContent = '시안 데모 — 실제로 전송되지 않습니다.';
+          status.classList.add('show');
+        });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="beauty" role="region" aria-label="알림 배너">
@@ -404,9 +779,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 1:1 상담"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 1:1 상담</span></a>
-      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@danjeong.skin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@danjeong.skin</span></a>
-      <a class="naver" href="https://booking.naver.com/" target="_blank" rel="noopener" aria-label="네이버 예약"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 4v8.5L9.5 4H4v16h5.5v-8.5L14.5 20H20V4z"/></svg><span class="tip">네이버 예약</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 1:1 상담"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 1:1 상담</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@danjeong.skin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@danjeong.skin</span></a>
+      <a class="naver" href="https://booking.naver.com/" target="_blank" rel="noopener" aria-label="네이버 예약"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.5 4v8.5L9.5 4H4v16h5.5v-8.5L14.5 20H20V4z"/></svg><span class="tip">네이버 예약</span></a>
     </div>
 
   </body>
