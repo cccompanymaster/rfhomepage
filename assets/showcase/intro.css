@@ -28,8 +28,11 @@
   flex-direction: column; align-items: center; justify-content: center; gap: clamp(28px, 6vh, 64px);
   padding: 24px; text-align: center; cursor: pointer;
   background: #0d0f13; clip-path: inset(0 0 0 0);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
 .intro-on:not(.splash-off) .sc-splash { display: flex; }
+/* 글꼴 준비 전엔 첫 프레임에서 멈춰 있음 (index.html 게이트가 splash-wait 를 걷음) */
+.splash-wait .sc-splash *, .splash-wait .sc-splash::before { animation-play-state: paused !important; }
 .sc-splash:focus { outline: none; }
 .sc-splash::before {
   content: ''; position: absolute; left: 50%; top: 44%; width: min(84vw, 980px); height: 56vh;
@@ -40,16 +43,20 @@
 .sp-copy { position: relative; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.32em; }
 .sp-l1 { font-size: clamp(44px, 11.5vw, 116px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.04; }
 .sp-l2 { font-size: clamp(20px, 3.4vw, 46px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.4; color: rgba(244, 242, 238, 0.86); text-wrap: balance; }
-.sp-m { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.02em 0.1em; margin-bottom: -0.1em; }
+/* 글자가 올라오는 마스크: 아래쪽만 자름(좌우를 자르면 자간이 좁은 글자 가장자리가 깎여 보임) */
+.sp-m { display: inline-block; vertical-align: top; padding-bottom: 0.12em; margin-bottom: -0.12em; clip-path: inset(-0.6em -0.6em 0 -0.6em); }
 .sp-i { display: inline-block; transform: translateY(108%); animation: sp-rise 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; animation-delay: calc(0.12s + var(--i) * 55ms); }
 .sp-l2 .sp-i { animation-delay: calc(0.62s + var(--i) * 95ms); }
-.sp-small { font-weight: 300; color: rgba(244, 242, 238, 0.58); }
-/* "풍성한" — 글자가 굵게 부풀면서 주황 그라데이션이 왼쪽부터 채워짐 */
-.sp-l2 .sp-rich { position: relative; font-weight: 400; animation: sp-rise 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.62s + 95ms) forwards, sp-swell 0.9s 1.3s cubic-bezier(0.3, 0, 0.2, 1) forwards; }
-.sp-rich::after {
-  content: attr(data-t); position: absolute; inset: 0;
-  background: linear-gradient(100deg, #FF5A2B, #FFB300); -webkit-background-clip: text; background-clip: text; color: transparent;
-  clip-path: inset(0 100% 0 0); animation: sp-wipe 0.8s 1.35s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+.sp-small { font-weight: 400; color: rgba(244, 242, 238, 0.64); }
+/* "풍성한" — 굵게 부풀면서 주황 그라데이션이 왼쪽부터 채워짐 (글자 하나에 배경을 채워 가장자리가 겹치지 않게) */
+.sp-l2 .sp-rich {
+  font-weight: 400; color: transparent; -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(100deg, #FF5A2B, #FFB300), linear-gradient(#f4f2ee, #f4f2ee);
+  background-size: 0% 100%, 100% 100%; background-repeat: no-repeat;
+  -webkit-background-clip: text; background-clip: text;
+  animation: sp-rise 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.62s + 95ms) forwards,
+             sp-swell 0.9s 1.3s cubic-bezier(0.3, 0, 0.2, 1) forwards,
+             sp-fill 0.8s 1.35s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 .sp-logo { position: relative; margin: 0; display: inline-flex; align-items: center; gap: clamp(10px, 1.4vw, 16px); }
 .sp-mark {
@@ -75,13 +82,14 @@
 @keyframes sp-fade { to { opacity: 1; } }
 @keyframes sp-swell { to { font-weight: 860; letter-spacing: 0.01em; } }
 @keyframes sp-wipe { to { clip-path: inset(0 0 0 0); } }
+@keyframes sp-fill { to { background-size: 100% 100%, 100% 100%; } }
 @keyframes sp-pop { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .sc-splash *, .sc-splash::before, .sc-splash *::after { animation: none !important; }
+  .sc-splash *, .sc-splash::before { animation: none !important; }
   .sp-i { transform: none; }
   .sc-splash::before, .sp-mark { opacity: 1; transform: none; }
-  .sp-rich { font-weight: 860; }
-  .sp-rich::after, .sp-word { clip-path: none; }
+  .sp-l2 .sp-rich { font-weight: 860; background-size: 100% 100%, 100% 100%; }
+  .sp-word { clip-path: none; }
   .sc-splash.is-out { clip-path: none; opacity: 0; transition: opacity 0.2s linear; }
 }
 
