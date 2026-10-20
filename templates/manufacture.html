@@ -33,40 +33,371 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a2733'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
-    <link rel="stylesheet" href="/assets/fonts/ibm-plex-sans-kr/ibm-plex-sans-kr.css?v=335b83e7" />
-    <link rel="stylesheet" href="/assets/fonts/ibm-plex-mono/ibm-plex-mono.css?v=fbf180f9" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ── 한울정밀 · 데이터시트 격자 (거터 0, 셀 단위) ─────────────────── */
+      @property --c { syntax: '*'; inherits: false; }
+      @property --t { syntax: '*'; inherits: false; }
+      @property --m { syntax: '*'; inherits: false; }
+
       :root {
-        --bg: #fafbfc;
-        --bg-soft: #eef1f4;
-        --primary: #1a2733;
-        --primary-soft: #2c4256;
+        --paper: #ffffff;
+        --paper-2: #f3f4f5;
+        --ink: #0a0a0a;
+        --ink-2: #474747;
+        --ink-3: #6b6b6b;
+        --rule: #e3e3e3;
+        --rule-2: #c8c8c8;
         --accent: #006fb5;
-        --ink: #14202c;
-        --ink-soft: #5a6a7c;
-        --line: #d8dde3;
+        --accent-dk: #005a93;
+        --accent-bg: #eef5fb;
+
+        --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        --maxw: 1376px;
+        --pad: 12px;
+        --cp: 10px;
+        --cols: 4;
+        --fab-r: 94px;
+        --top-h: 52px;
+        --sec-y: 72px;
+        --ease: cubic-bezier(.2,.7,.1,1);
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); font-weight: 400; }
-      .serif { font-family: 'IBM Plex Sans KR', 'Pretendard Variable', sans-serif; font-weight: 600; letter-spacing: -0.025em; }
-      .stat .serif, dd.serif, dl .serif { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; letter-spacing: -0.02em; }
-      .container-x { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 48px; padding-right: 48px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #d1d8e0 0%, #6b7c8e 60%, #2c3e50 100%); position: relative; overflow: hidden; }
-      .ph::after { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(0,111,181,.18), transparent 55%); }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(250,251,252,.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:4px; font-weight:600; font-size:14px; transition:.2s; }
-      .btn-primary:hover { background:#000; }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:4px; font-weight:600; font-size:14px;}
-      .btn-ghost:hover { background:var(--primary); color:#fff; }
-      .field { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:4px; background:#fff; font-size:15px;}
-      .field:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,111,181,.18);}
-      .stat { background:#fff; border:1px solid var(--line); border-radius:4px; padding:32px 28px;}
+      @media (min-width: 768px) { :root { --pad: 24px; --cp: 12px; --cols: 12; --fab-r: 112px; --sec-y: 96px; } }
+      @media (min-width: 1024px) { :root { --pad: 32px; --top-h: 56px; --sec-y: 112px; } }
+
+      html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+      body {
+        font-family: var(--font); background: var(--paper); color: var(--ink);
+        font-size: 15px; line-height: 1.65; letter-spacing: -0.01em;
+        font-variant-numeric: tabular-nums;
+        word-break: keep-all; overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: var(--accent); color: #fff; }
+      a { color: inherit; text-decoration: none; }
+      :focus-visible:not(.fab-back) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      /* 격자: 거터 없이 12칸, 칸 안쪽 여백 = --cp */
+      .wrap { width: min(100% - var(--pad) * 2, var(--maxw)); margin-inline: auto; }
+      .g { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); }
+      .g > * { grid-column: var(--m, 1 / -1); min-width: 0; padding-inline: var(--cp); }
+      @media (min-width: 768px) { .g > * { grid-column: var(--t, var(--c, 1 / -1)); } }
+      @media (min-width: 1024px) { .g > * { grid-column: var(--c, 1 / -1); } }
+      .g > .g, .g > .flush { padding-inline: 0; }
+      .ruler > span, .gl .wrap > i { grid-column: auto; }
+
+      .page { position: relative; isolation: isolate; }
+      .gl { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+      .gl .wrap { height: 100%; box-shadow: 1px 0 0 var(--rule); }
+      .gl i { height: 100%; padding: 0; border-left: 1px solid var(--rule); }
+      @media (max-width: 767.98px) { .gl i:nth-child(n+5) { display: none; } }
+
+      /* 상단 */
+      .top { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--ink); }
+      .top .gl { z-index: 0; }
+      .top .gl .wrap { box-shadow: 1px 0 0 var(--rule); }
+      .top-row { position: relative; z-index: 1; height: var(--top-h); }
+      .top-row > * { display: flex; align-items: center; }
+      .brand { gap: 10px; white-space: nowrap; }
+      .brand b { font-size: 15px; font-weight: 800; letter-spacing: .02em; }
+      .brand b i { font-style: normal; color: var(--accent); }
+      .brand span { font-size: 12px; font-weight: 500; color: var(--ink-3); }
+      @media (max-width: 479.98px), (min-width: 1024px) and (max-width: 1279.98px) { .brand span { display: none; } }
+      body:has(> .fab-back) .brand > :first-child { margin-left: max(0px, calc(var(--fab-r) - var(--cp) - max(var(--pad), (100vw - var(--maxw)) / 2))); }
+      .nav { display: none !important; }
+      .nav a { height: 100%; display: flex; align-items: center; gap: 6px; padding-inline: var(--cp); font-size: 13.5px; font-weight: 600; border-left: 1px solid transparent; transition: background .15s, color .15s; }
+      .nav a .n { font-size: 10.5px; color: var(--ink-3); font-weight: 600; }
+      .nav a:hover { background: var(--paper-2); }
+      .nav a[aria-current="true"] { color: var(--accent); }
+      .nav a[aria-current="true"] .n { color: var(--accent); }
+      .top-act { justify-content: flex-end; gap: 6px; }
+      .top-cta { display: none !important; }
+      .m-quote { height: 36px; padding: 0 12px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; }
+      .menu-btn { height: 36px; padding: 0 12px; border: 1px solid var(--ink); font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; background: var(--paper); }
+      .menu-btn .bars { width: 14px; height: 9px; border-block: 1.5px solid currentColor; }
+      .menu-btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
+      .ruler { display: none; position: relative; z-index: 1; height: 20px; border-top: 1px solid var(--rule); }
+      .ruler span { padding: 0; text-align: center; font-size: 9.5px; font-weight: 600; color: var(--ink-3); line-height: 20px; letter-spacing: .06em; }
+      .mnav { position: relative; z-index: 1; border-top: 1px solid var(--rule-2); background: var(--paper); }
+      .mnav ol { padding-block: 4px 16px; }
+      .mnav a { display: flex; gap: 12px; align-items: baseline; padding: 13px var(--cp); border-bottom: 1px solid var(--rule); font-size: 18px; font-weight: 600; }
+      .mnav a .n { font-size: 11px; color: var(--ink-3); width: 22px; }
+      @media (min-width: 768px) { .ruler { display: grid; } }
+      @media (min-width: 1024px) {
+        .nav { display: grid !important; grid-template-columns: subgrid; padding-inline: 0 !important; }
+        .menu-btn, .m-quote, .mnav { display: none !important; }
+        .top-act { padding-inline: 0 !important; }
+        .top-cta { display: flex !important; width: 100%; height: 100%; align-items: center; justify-content: space-between; padding-inline: var(--cp); background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; transition: background .15s; }
+        .top-cta:hover { background: var(--ink); }
+      }
+
+      /* 버튼 */
+      .btn { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 48px; padding: 0 16px; font-size: 14px; font-weight: 700; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); transition: background .15s, color .15s, border-color .15s; cursor: pointer; white-space: nowrap; }
+      .btn:hover { background: var(--ink); color: #fff; }
+      .btn-acc { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .btn-acc:hover { background: var(--ink); border-color: var(--ink); }
+      .btn .ar { font-weight: 400; }
+
+      /* 타이포 */
+      .tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+      .tag b { color: var(--ink); font-weight: 700; }
+      .h2 { font-size: clamp(28px, 3.5vw, 48px); line-height: 1.16; font-weight: 600; letter-spacing: -0.04em; }
+      .h3 { font-size: 17px; line-height: 1.45; font-weight: 700; letter-spacing: -0.02em; }
+      .body { font-size: 15px; line-height: 1.75; color: var(--ink-2); }
+      .small { font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+      .chip { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; font-size: 10.5px; font-weight: 700; letter-spacing: .02em; color: var(--accent); border: 1px solid var(--accent); white-space: nowrap; vertical-align: middle; background: var(--paper); }
+      .chip.ink { color: var(--ink); border-color: var(--ink); }
+      .acc { color: var(--accent); }
+
+      .sec { padding-block: var(--sec-y) 0; }
+      .sec:last-of-type { padding-bottom: var(--sec-y); }
+      .sec-head { border-top: 2px solid var(--ink); row-gap: 10px; padding-block: 14px 40px; }
+      .sec-no { font-size: 13px; font-weight: 700; }
+      .sec-no span { display: block; font-size: 44px; line-height: 1; font-weight: 300; letter-spacing: -0.05em; margin-top: 10px; }
+      .sec-head .h2 { padding-top: 2px; }
+      .sec-head .desc { align-self: end; }
+      @media (max-width: 767.98px) { .sec-no { display: flex; align-items: baseline; gap: 10px; } .sec-no span { font-size: 13px; margin: 0; font-weight: 700; letter-spacing: 0; color: var(--ink-3); } }
+      @media (min-width: 768px) { .sec-head { padding-bottom: 56px; } }
+
+      /* 표 (실제 table, 열 폭 = 12칸 배수) */
+      .dt { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; }
+      .dt caption { text-align: left; }
+      .dt th, .dt td { padding: 14px var(--cp); text-align: left; vertical-align: top; border-top: 1px solid var(--rule-2); }
+      .dt thead th { padding-block: 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--paper); }
+      .dt tbody tr { transition: background .15s; }
+      .dt tbody tr:hover { background: var(--paper-2); }
+      .dt tbody tr:last-child td, .dt tbody tr:last-child th { border-bottom: 1px solid var(--ink); }
+      .dt .no { font-size: 12px; font-weight: 700; color: var(--accent); }
+      .dt .item { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+      .dt .val { font-size: 16px; font-weight: 600; }
+      .dt td.note { color: var(--ink-2); }
+      .dt tfoot td { padding-block: 12px; font-size: 13px; font-weight: 700; border-top: 0; }
+      .c1 { width: 8.3333%; } .c2 { width: 16.6667%; } .c3 { width: 25%; } .c4 { width: 33.3333%; } .c5 { width: 41.6667%; }
+      @media (max-width: 767.98px) {
+        .dt, .dt tbody, .dt tr, .dt td, .dt th { display: block; }
+        .dt colgroup, .dt thead { display: none; }
+        .dt tbody tr { display: grid; grid-template-columns: 56px 1fr; border-top: 1px solid var(--rule-2); padding-block: 12px; }
+        .dt tbody tr:last-child { border-bottom: 1px solid var(--ink); }
+        .dt th, .dt td { border: 0 !important; padding: 2px var(--cp); }
+        .dt tbody tr > :first-child { grid-row: 1 / span 4; }
+        .dt td[data-k] { display: grid; grid-template-columns: 48px 1fr; gap: 10px; align-items: baseline; }
+        .dt td[data-k]::before { content: attr(data-k); font-size: 11px; font-weight: 600; color: var(--ink-3); }
+        .dt tfoot { display: block; }
+        .dt tfoot tr { display: flex; flex-wrap: wrap; gap: 4px 10px; padding: 12px var(--cp); }
+        .dt tfoot td { display: inline; padding: 0; }
+        .dt tfoot td:empty { display: none; }
+      }
+
+      /* 히어로 */
+      .hero { padding-top: 0; }
+      .tb { border-bottom: 1px solid var(--rule-2); }
+      .tb > div { padding-block: 10px; }
+      .tb dt { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); }
+      .tb dd { font-size: 13px; font-weight: 600; line-height: 1.45; margin-top: 2px; }
+      @media (max-width: 767.98px) { .tb > div:nth-child(odd) { border-right: 1px solid var(--rule); } .tb > div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); } }
+      .hero-main { padding-top: clamp(40px, 6vw, 80px); row-gap: 40px; }
+      .h1 { font-size: clamp(42px, 8.2vw, 124px); line-height: 1.02; font-weight: 650; letter-spacing: -0.055em; margin-left: -0.03em; }
+      .hero-kicker { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-bottom: 24px; }
+      .lead { margin-top: 28px; max-width: 34em; font-size: 16px; line-height: 1.75; color: var(--ink-2); }
+      .lead strong { color: var(--ink); font-weight: 700; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+      @media (min-width: 1024px) { .lead { font-size: 17px; } }
+
+      .spec { align-self: end; padding-inline: 0 !important; border: 1px solid var(--ink); background: var(--paper); }
+      .spec-hd { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px var(--cp); background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+      .spec-hd .chip { color: #fff; border-color: rgba(255,255,255,.7); background: transparent; }
+      .spec table { width: 100%; border-collapse: collapse; }
+      .spec th, .spec td { padding: 12px var(--cp); border-top: 1px solid var(--rule-2); text-align: left; vertical-align: bottom; }
+      .spec tr:first-child th, .spec tr:first-child td { border-top: 0; }
+      .spec th { font-size: 12px; font-weight: 600; color: var(--ink-2); width: 42%; }
+      .spec th small { display: block; font-size: 10px; font-weight: 700; color: var(--ink-3); letter-spacing: .06em; }
+      .spec td { font-size: clamp(28px, 2.9vw, 40px); line-height: 1.05; font-weight: 500; letter-spacing: -0.04em; }
+      .spec td .u { font-size: 14px; font-weight: 600; letter-spacing: 0; margin-left: 3px; color: var(--ink-2); }
+      .spec td.acc { color: var(--accent); }
+      .spec-ft { padding: 8px var(--cp); border-top: 1px solid var(--ink); font-size: 11.5px; color: var(--ink-2); }
+
+      .fig { margin-top: 48px; border-top: 1px solid var(--ink); }
+      .fig .ph { padding: 0 !important; overflow: hidden; background: var(--paper-2); }
+      .fig .ph img { width: 100%; height: 100%; object-fit: cover; }
+      .figcap { display: flex; gap: 12px; padding-block: 10px; font-size: 12.5px; color: var(--ink-2); border-bottom: 1px solid var(--rule-2); }
+      .figcap b { flex: none; font-size: 11px; font-weight: 700; color: var(--ink); letter-spacing: .06em; padding-top: 1px; }
+
+      /* 기업소개 */
+      .about-txt p + p { margin-top: 14px; }
+      .about-txt p:first-child { color: var(--ink); font-size: 17px; line-height: 1.7; }
+      .timeline { border-top: 1px solid var(--ink); }
+      .timeline li { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 12px; border-bottom: 1px solid var(--rule-2); font-size: 14px; }
+      .timeline b { font-size: 15px; font-weight: 700; }
+      .drawing { margin-top: 24px; }
+      .drawing svg { width: 100%; height: auto; display: block; }
+      @media (max-width: 1023.98px) { .about > * + * { margin-top: 28px; } }
+
+      /* 역량 */
+      .kpi { row-gap: 0; margin-bottom: 48px; }
+      .kpi .ph { aspect-ratio: 4 / 3; }
+      .kpi-cells { display: grid; grid-template-rows: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+      .kpi-cells > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6px 12px; padding: 16px var(--cp); border-bottom: 1px solid var(--rule-2); }
+      .kpi-cells > div:last-child { border-bottom-color: var(--ink); }
+      .kpi-cells .v { font-size: clamp(40px, 5.6vw, 84px); line-height: .95; font-weight: 500; letter-spacing: -0.05em; }
+      .kpi-cells .v .u { font-size: .32em; font-weight: 600; letter-spacing: 0; margin-left: 4px; color: var(--ink-2); }
+      .kpi-cells .k { grid-column: 1 / -1; font-size: 13px; color: var(--ink-2); }
+      .kpi-cells .k b { color: var(--ink); font-weight: 700; margin-right: 6px; }
+      @media (max-width: 767.98px) { .kpi .ph { margin-bottom: 0; } .kpi-cells { margin-top: 0; } }
+      .subhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; padding: 0 var(--cp) 12px; }
+      .subhead .h3 { font-size: 18px; }
+      .block + .block { margin-top: 56px; }
+
+      /* 공정 흐름 */
+      .flow { counter-reset: s; }
+      .flow-lane { align-self: stretch; border-top: 1px solid var(--ink); padding-block: 14px; }
+      .flow-lane p + p { margin-top: 8px; }
+      .flow ol { display: grid; grid-template-columns: subgrid; padding: 0 !important; }
+      .flow li { position: relative; grid-column: span 2; padding: 14px var(--cp) 22px; border-top: 1px solid var(--ink); }
+      .flow li::before { content: ''; position: absolute; left: 0; right: 0; top: 34px; height: 1px; background: var(--accent); }
+      .flow li::after { content: ''; position: absolute; right: -1px; top: 30px; border-left: 7px solid var(--accent); border-block: 4.5px solid transparent; }
+      .flow li:last-child::after { border: 0; width: 9px; height: 9px; background: var(--accent); top: 30px; right: 0; }
+      .flow .sn { position: relative; z-index: 1; display: inline-block; padding-right: 8px; background: var(--paper); font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: .04em; line-height: 16px; }
+      .flow h3 { margin-top: 18px; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.4; }
+      .flow p { margin-top: 6px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); }
+      .flow .t { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--ink); border: 1px solid var(--rule-2); padding: 1px 6px; }
+      @media (max-width: 1023.98px) and (min-width: 768px) {
+        .flow ol { grid-column: 1 / -1 !important; }
+        .flow li { grid-column: span 4; }
+        .flow li:nth-child(3)::after { border: 0; }
+      }
+      @media (max-width: 767.98px) {
+        .flow ol { display: block; }
+        .flow li { padding-left: 44px; border-top: 0; padding-bottom: 26px; }
+        .flow li::before { left: 15px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+        .flow li::after { left: 11px; right: auto; top: auto; bottom: -1px; border-top: 7px solid var(--accent); border-inline: 4.5px solid transparent; border-bottom: 0; }
+        .flow li:last-child::before { bottom: 50%; }
+        .flow li:last-child::after { left: 11px; bottom: auto; top: 50%; width: 9px; height: 9px; border: 0; }
+        .flow .sn { position: absolute; left: 0; top: 12px; width: 31px; text-align: center; padding: 3px 0; border: 1px solid var(--accent); }
+        .flow h3 { margin-top: 10px; }
+      }
+
+      /* 설비 */
+      .meas { margin-top: 48px; row-gap: 0; }
+      .meas .ph { aspect-ratio: 16 / 10; }
+      .meas-list { border-top: 1px solid var(--ink); }
+      .meas-list li { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: baseline; padding: 14px var(--cp); border-bottom: 1px solid var(--rule-2); }
+      .meas-list li:last-child { border-bottom-color: var(--ink); }
+      .meas-list .no { font-size: 12px; font-weight: 700; color: var(--accent); }
+      .meas-list b { font-size: 16px; font-weight: 700; }
+      .meas-list small { display: block; font-size: 13px; color: var(--ink-2); font-weight: 400; }
+      .meas-list .q { font-size: 22px; font-weight: 500; letter-spacing: -0.03em; }
+      .meas-list .q .u { font-size: 12px; font-weight: 600; color: var(--ink-2); margin-left: 2px; }
+
+      /* 인증 자리표시 */
+      .placeholder-note { display: flex; gap: 10px; align-items: center; padding: 10px var(--cp); margin-bottom: 0; background: var(--accent-bg); border: 1px solid var(--accent); font-size: 13px; font-weight: 600; color: var(--accent-dk); }
+      .certs { border-top: 1px solid var(--ink); }
+      .cert { position: relative; padding: 18px var(--cp) 20px !important; border-bottom: 1px solid var(--rule-2); border-right: 1px dashed var(--rule-2); background-image: repeating-linear-gradient(135deg, transparent 0 10px, rgba(0,0,0,.025) 10px 11px); }
+      .cert .code { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: .06em; }
+      .cert h3 { margin-top: 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+      .cert dl { margin-top: 12px; font-size: 13px; }
+      .cert dl > div { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 3px; }
+      .cert dt { color: var(--ink-3); }
+      .cert dd { color: var(--ink-3); letter-spacing: .1em; }
+      .cert .stamp { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700; color: var(--accent); border: 1px dashed var(--accent); padding: 2px 8px; }
+      .partners { margin-top: 40px; row-gap: 12px; border-top: 1px solid var(--ink); padding-top: 14px; }
+
+      /* 협력 (스토리) */
+      .why .ph { aspect-ratio: 4 / 3; }
+      .why-list { border-top: 1px solid var(--ink); }
+      .why-list li { display: grid; grid-template-columns: 52px 1fr; gap: 4px 10px; padding: 16px var(--cp); border-bottom: 1px solid var(--rule-2); }
+      .why-list .no { font-size: 12px; font-weight: 800; color: var(--accent); padding-top: 3px; }
+      .why-list p { grid-column: 2; font-size: 14px; color: var(--ink-2); }
+      .vs { display: grid; grid-template-columns: 1fr 1fr; margin-top: 24px; border-top: 1px solid var(--ink); }
+      .vs > div { padding: 14px var(--cp) 18px; }
+      .vs > div + div { border-left: 1px solid var(--rule-2); }
+      .vs .lbl { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); }
+      .vs .yes .lbl { color: var(--accent); }
+      .vs p:not(.lbl) { margin-top: 8px; font-size: 16px; line-height: 1.6; font-weight: 500; letter-spacing: -0.02em; }
+      @media (max-width: 767.98px) { .vs { grid-template-columns: 1fr; } .vs > div + div { border-left: 0; border-top: 1px solid var(--rule-2); } }
+      .why-cta { padding: 20px var(--cp) 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+      /* 견적 */
+      .rfq-side > * + * { margin-top: 32px; }
+      .kv { border-top: 1px solid var(--ink); }
+      .kv > div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 11px var(--cp); border-bottom: 1px solid var(--rule-2); font-size: 14px; }
+      .kv dt { font-size: 12.5px; font-weight: 700; color: var(--ink); padding-top: 1px; }
+      .kv dd { color: var(--ink-2); }
+      .kv dd a { color: var(--ink); font-weight: 600; }
+      .kv dd a:hover { color: var(--accent); }
+      .steps-mini { border-top: 1px solid var(--ink); }
+      .steps-mini li { display: grid; grid-template-columns: 40px 1fr auto; gap: 10px; padding: 10px var(--cp); border-bottom: 1px solid var(--rule-2); font-size: 13.5px; align-items: baseline; }
+      .steps-mini .no { font-size: 12px; font-weight: 800; color: var(--accent); }
+      .steps-mini b { font-weight: 700; display: block; font-size: 14px; }
+      .steps-mini span { color: var(--ink-2); }
+      .steps-mini em { font-style: normal; font-size: 12px; font-weight: 700; white-space: nowrap; }
+      .side-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--ink-3); padding: 0 var(--cp) 8px; }
+
+      .rfq { align-self: start; border: 1px solid var(--ink); background: var(--paper); padding: 0 !important; }
+      @media (max-width: 1023.98px) { .rfq { order: -1; } }
+      .rfq-hd { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px var(--cp); background: var(--ink); color: #fff; }
+      .rfq-hd h3 { font-size: 15px; font-weight: 700; }
+      .rfq-hd span { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: #c9c9c9; }
+      .rfq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fc { position: relative; border-bottom: 1px solid var(--rule-2); padding: 10px var(--cp) 8px; transition: background .15s; }
+      .fc:nth-child(odd):not(.full) { border-right: 1px solid var(--rule-2); }
+      .fc.full { grid-column: 1 / -1; }
+      .fc:focus-within { background: var(--accent-bg); box-shadow: inset 2px 0 0 var(--accent); }
+      .fc label, .fc .flabel { display: flex; gap: 8px; font-size: 11.5px; font-weight: 700; color: var(--ink-2); }
+      .fc label i, .fc .flabel i { font-style: normal; color: var(--accent); font-weight: 800; }
+      .fc label em { font-style: normal; color: var(--ink-3); font-weight: 500; }
+      .fc input, .fc select, .fc textarea { width: 100%; border: 0; background: transparent; padding: 6px 0 2px; font: inherit; font-size: 16px; line-height: 1.5; color: var(--ink); border-radius: 0; }
+      .fc input::placeholder, .fc textarea::placeholder { color: #767676; }
+      .fc input:focus, .fc select:focus, .fc textarea:focus { outline: none; }
+      .fc select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 9px) 60%, calc(100% - 4px) 60%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 20px; }
+      .fc textarea { resize: vertical; min-height: 72px; }
+      @media (max-width: 559.98px) { .rfq-grid { grid-template-columns: 1fr; } .fc:nth-child(odd):not(.full) { border-right: 0; } }
+
+      .drop { margin-top: 8px; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px; border: 1px dashed var(--ink-3); background: var(--paper); transition: border-color .15s, background .15s; }
+      .drop.is-over { border-color: var(--accent); background: #fff; border-style: solid; }
+      .drop svg { width: 34px; height: 40px; color: var(--ink); }
+      .drop p { font-size: 14px; font-weight: 600; line-height: 1.45; }
+      .drop p small { display: block; font-size: 12px; font-weight: 500; color: var(--ink-3); }
+      .drop .pick { position: relative; display: inline-flex; align-items: center; height: 36px; padding: 0 12px; border: 1px solid var(--ink); font-size: 13px; font-weight: 700; cursor: pointer; background: var(--paper); white-space: nowrap; }
+      .drop .pick:hover { background: var(--ink); color: #fff; }
+      .drop .pick input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+      .drop .pick:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+      @media (max-width: 559.98px) { .drop { grid-template-columns: auto 1fr; } .drop .pick { grid-column: 1 / -1; justify-content: center; } }
+      .files { margin-top: 8px; }
+      .files li { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 7px 0; border-top: 1px solid var(--rule); font-size: 13px; }
+      .files li b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .files li span { color: var(--ink-3); font-size: 12px; }
+      .files button { font-size: 12px; font-weight: 700; color: var(--accent); padding: 2px 4px; }
+      .files button:hover { text-decoration: underline; }
+      .checks { padding: 12px var(--cp); display: grid; gap: 8px; border-bottom: 1px solid var(--rule-2); }
+      .agree { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.55; color: var(--ink-2); cursor: pointer; }
+      .agree input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+      .agree a { text-decoration: underline; text-underline-offset: 2px; }
+      .rfq-ft { display: grid; grid-template-columns: 1fr; }
+      .rfq-submit { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 56px; padding: 0 var(--cp); background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .15s; }
+      .rfq-submit:hover { background: var(--ink); }
+      .demo-msg { font-size: 13px; font-weight: 700; color: var(--accent-dk); min-height: 0; }
+      .demo-msg:not(:empty) { padding: 10px var(--cp); border-top: 1px solid var(--rule-2); }
+      .why-cta .demo-msg:not(:empty) { padding: 0; border: 0; }
+
+      /* 바닥: 도면 표제란 */
+      .foot { padding-block: var(--sec-y) 112px; }
+      .title-block { border: 1px solid var(--ink); border-width: 2px 1px 1px; }
+      .title-block > div { padding-block: 10px; border-bottom: 1px solid var(--rule-2); }
+      .title-block > div:not(:last-child) { border-right: 1px solid var(--rule-2); }
+      .title-block dt { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); }
+      .title-block dd { margin-top: 2px; font-size: 13.5px; font-weight: 600; }
+      .title-block .brand-cell dd { font-size: 18px; font-weight: 800; letter-spacing: .01em; }
+      .title-block .brand-cell dd i { font-style: normal; color: var(--accent); }
+      .foot-row { padding-block: 14px; font-size: 13px; color: var(--ink-2); row-gap: 8px; }
+      .foot-row a { color: var(--ink); font-weight: 700; }
+      .foot-row a:hover { color: var(--accent); }
+      .demo-note { padding-inline: var(--cp); font-size: 11.5px; color: var(--ink-3); }
+      @media (max-width: 767.98px) { .title-block > div { border-right: 0 !important; } }
+
+      .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     </style>
     <meta name="theme-color" content="#1a2733" />
     <script type="application/ld+json">
@@ -93,356 +424,479 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+
     <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="font-bold tracking-tight text-lg" style="color:var(--primary)">HANUL <span style="color: var(--accent)">PRECISION</span></a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
-          <a href="#about">기업소개</a>
-          <a href="#capability">생산 역량</a>
-          <a href="#process">공정</a>
-          <a href="#cert">인증·실적</a>
-          <a href="#contact">견적 문의</a>
+      <div class="gl" aria-hidden="true"><div class="wrap g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="wrap g top-row">
+        <a href="#top" class="brand" style="--c: 1 / 4; --t: 1 / 6; --m: 1 / 3" aria-label="한울정밀 HANUL PRECISION, 맨 위로"><b>HANUL <i>PRECISION</i></b><span>한울정밀</span></a>
+        <nav class="nav" style="--c: 4 / 10" aria-label="주요 메뉴">
+          <a href="#about"><span class="n">01</span>기업</a>
+          <a href="#capability"><span class="n">02</span>역량</a>
+          <a href="#process"><span class="n">03</span>공정</a>
+          <a href="#equipment"><span class="n">04</span>설비</a>
+          <a href="#cert"><span class="n">05</span>인증</a>
+          <a href="#contact"><span class="n">07</span>견적</a>
         </nav>
-        <a href="#contact" class="btn-primary text-sm" style="padding:10px 18px">견적 문의</a>
+        <div class="top-act" style="--c: 11 / 13; --t: 6 / 13; --m: 3 / 5">
+          <a href="#contact" class="top-cta">견적 문의 <span aria-hidden="true">→</span></a>
+          <a href="#contact" class="m-quote">견적</a>
+          <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mnav"><span class="bars" aria-hidden="true"></span>메뉴</button>
+        </div>
       </div>
+      <div class="wrap g ruler" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+      <nav id="mnav" class="mnav" aria-label="모바일 메뉴" hidden>
+        <ol class="wrap">
+          <li><a href="#about"><span class="n">01</span>기업소개</a></li>
+          <li><a href="#capability"><span class="n">02</span>생산 역량</a></li>
+          <li><a href="#process"><span class="n">03</span>공정</a></li>
+          <li><a href="#equipment"><span class="n">04</span>설비</a></li>
+          <li><a href="#cert"><span class="n">05</span>인증·실적</a></li>
+          <li><a href="#contact"><span class="n">07</span>견적 문의</a></li>
+        </ol>
+      </nav>
     </header>
 
-    <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32 relative">
-        <!-- 시그니처 오너먼트: 기술 십자선 + 측정 마크 -->
-        <svg class="absolute top-6 right-6 md:top-10 md:right-10 pointer-events-none" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
-          <g fill="none" stroke="#006fb5" stroke-width="1">
-            <circle cx="60" cy="60" r="40" stroke-opacity="0.25" />
-            <circle cx="60" cy="60" r="20" stroke-opacity="0.4" />
-            <line x1="60" y1="0" x2="60" y2="20" stroke-opacity="0.5" />
-            <line x1="60" y1="100" x2="60" y2="120" stroke-opacity="0.5" />
-            <line x1="0" y1="60" x2="20" y2="60" stroke-opacity="0.5" />
-            <line x1="100" y1="60" x2="120" y2="60" stroke-opacity="0.5" />
-            <circle cx="60" cy="60" r="2" fill="#006fb5" />
-          </g>
-          <text x="60" y="115" text-anchor="middle" font-size="9" fill="#006fb5" fill-opacity="0.6" font-family="IBM Plex Mono, monospace">±2㎛</text>
-        </svg>
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">PRECISION COMPONENTS · SINCE 1992</p>
-            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
-              미크론 단위에서<br />시작되는 신뢰.
-            </h1>
-            <p class="mt-8 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              한울정밀은 자동차·반도체 정밀부품을 가공하는 33년차 제조 전문 기업입니다.<br />
-              ±2㎛의 공차 안에서, 같은 품질을 한결같이.
-            </p>
-            <div class="mt-10 flex flex-wrap gap-3">
-              <a href="#contact" class="btn-primary">견적 문의 <span aria-hidden="true">→</span></a>
-              <a href="#capability" class="btn-ghost">생산 역량 보기</a>
-            </div>
-          </div>
-          <div class="md:col-span-5 reveal grid grid-cols-2 gap-3">
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">설립</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="1992" data-format="year">0</span></p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">공차 정밀도</p><p class="serif text-3xl mt-2" style="color: var(--primary)">±2㎛</p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">생산 라인</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="42">0</span><span class="text-base">기</span></p></div>
-            <div class="stat"><p class="text-xs" style="color: var(--ink-soft)">납품 거래처</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="68">0</span><span class="text-base">사</span></p></div>
-          </div>
-        </div>
-      </section>
+    <div class="page">
+      <div class="gl" aria-hidden="true"><div class="wrap g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 
-      <!-- ABOUT -->
-      <section id="about" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">기업소개</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 가지 부품을<br />33년째.
-            </h2>
-          </div>
-          <div class="md:col-span-7 space-y-5 leading-relaxed text-base md:text-lg reveal" style="color: var(--ink-soft)">
-            <p>한울정밀은 1992년 평택에서 시작했습니다. 처음 받은 도면은 자동차 변속기 핵심부품 한 종이었고, 지금도 그 부품을 같은 라인에서 만들고 있습니다.</p>
-            <p>품목을 늘리기보다, 같은 부품의 공차와 표면 품질을 더 좁혀가는 일에 집중해왔습니다. 거래처가 한울정밀을 오랫동안 같은 라인의 협력사로 두는 이유입니다.</p>
-            <p>2015년 반도체 장비 부품으로 영역을 확장한 이후에도, 가공 품질의 기준을 자동차 부품과 동일하게 유지합니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CAPABILITY -->
-      <section id="capability" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">생산 역량</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">측정 가능한 신뢰.</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 01</p>
-            <h3 class="text-xl font-semibold mt-3">5축 동시 가공</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">DMG MORI · MAZAK 라인 12기. 복합 형상도 한 번 셋팅으로.</p>
-          </article>
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 02</p>
-            <h3 class="text-xl font-semibold mt-3">공차 ±2㎛</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">반도체 척·웨이퍼 핸들러 핵심부품에 사용되는 공차 수준.</p>
-          </article>
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 03</p>
-            <h3 class="text-xl font-semibold mt-3">자체 측정실</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">CMM·진원도·표면조도계로 전수 검사 후 출하합니다.</p>
-          </article>
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 04</p>
-            <h3 class="text-xl font-semibold mt-3">월 8만 EA</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">자동차 부품 기준 월 8만 EA 생산 능력. 공정 자동화 78%.</p>
-          </article>
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 05</p>
-            <h3 class="text-xl font-semibold mt-3">자체 설계 지원</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">제조 가능성 검토(DFM) · 공정 개선 제안. 도면 단계부터 함께.</p>
-          </article>
-          <article class="stat reveal">
-            <p class="text-xs" style="color: var(--accent)">CAPABILITY 06</p>
-            <h3 class="text-xl font-semibold mt-3">긴급 대응</h3>
-            <p class="mt-3 text-sm" style="color: var(--ink-soft)">긴급 발주 시 단순 형상 기준 24시간 내 시제품 제작 가능.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- PROCESS -->
-      <section id="process" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">PROCESS</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">도면부터 납품까지, 5단계.</h2>
-          </div>
-          <div class="grid md:grid-cols-5 gap-3">
-            <div class="bg-white p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color:var(--accent); font-weight:700">01</p>
-              <h3 class="mt-3 font-semibold">도면 검토 · DFM</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">제조 가능성 검토 후 24시간 내 회신.</p>
-            </div>
-            <div class="bg-white p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color:var(--accent); font-weight:700">02</p>
-              <h3 class="mt-3 font-semibold">시제품 제작</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">긴급 시 24시간 내, 일반 5일 이내.</p>
-            </div>
-            <div class="bg-white p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color:var(--accent); font-weight:700">03</p>
-              <h3 class="mt-3 font-semibold">양산 셋업</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">공정 표준화·CT 단축안을 함께 제안.</p>
-            </div>
-            <div class="bg-white p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color:var(--accent); font-weight:700">04</p>
-              <h3 class="mt-3 font-semibold">전수 검사</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">CMM 측정 보고서 함께 출하.</p>
-            </div>
-            <div class="bg-white p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color:var(--accent); font-weight:700">05</p>
-              <h3 class="mt-3 font-semibold">납품 · 사후 관리</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">로트별 추적 시스템. 5년간 이력 보존.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CERT -->
-      
-      <!-- ====================== INDUSTRIES ====================== -->
-      <section id="industries" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">INDUSTRIES</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">산업별, 한울이 맡아온 일</h2>
-          </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">자동차 부품</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">전기차 모터 하우징, 연 12만개 양산 — IATF 16949 대응.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">반도체 장비</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">진공 챔버용 정밀 가공품, ±5㎛ 공차로 납품 중.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">의료기기</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">수술기구 핸들 가공, ISO 13485 체계로 트레이서빌리티 확보.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">방산·항공</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">특수강 가공·열처리 일관 라인, KOLAS 시험 성적서 제공.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">에너지·중공업</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">대형 플랜트 부품 단조·기계가공, 최대 8m 워크피스 대응.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="cert" class="container-x py-24 md:py-32">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4">인증 · 실적</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">서류로도 증명되는 품질.</h2>
-          </div>
-          <div class="md:col-span-7 reveal">
-            <h3 class="font-semibold text-lg mb-4">인증</h3>
-            <ul class="grid grid-cols-2 gap-3 text-sm">
-              <li class="border p-4" style="border-color:var(--line)">ISO 9001 : 2015</li>
-              <li class="border p-4" style="border-color:var(--line)">IATF 16949 : 2016</li>
-              <li class="border p-4" style="border-color:var(--line)">ISO 14001 : 2015</li>
-              <li class="border p-4" style="border-color:var(--line)">뿌리기업 확인서</li>
-              <li class="border p-4" style="border-color:var(--line)">기술혁신형 중소기업 (Inno-Biz)</li>
-              <li class="border p-4" style="border-color:var(--line)">벤처기업 인증</li>
-            </ul>
-
-            <h3 class="font-semibold text-lg mb-4 mt-12">대표 협력 경험</h3>
-            <p class="text-sm" style="color:var(--ink-soft)">
-              완성차 모듈 부품 협력 (Tier 1·2) · 국내 반도체 장비 OEM 다수 · 이차전지 협력사 등 60여 사
-            </p>
-            <p class="text-xs mt-2" style="color:var(--ink-soft)">* 일부 거래처는 NDA로 익명 처리되었으며, 직거래/2차/3차 협력 관계는 사안별로 상이합니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">납기와 품질, 둘 다 양보할 수 없는 현장에</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              한 번의 불량이 라인 전체를 멈추는 일, 잘 압니다.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">도면 기반 사전 검토</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">양산 전에 공차와 공정을 함께 짚습니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">정밀 가공 및 검사</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">전수 검사 데이터로 품질을 증명합니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">납기 책임 관리</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">주간 리포트로 진행 상황을 공유드려요</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">공급사 하나가 흔들리면, 우리 라인이 하루 수천만 원씩 멈춥니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">거래 3년 차, 발주 메일 한 통이면 끝나는 안정된 협력.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#contact" class="btn-primary">견적 문의하기 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">품질 관리 백서 받기</a>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== RFQ PROCESS ====================== -->
-      <section id="rfq" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">RFQ PROCESS</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">도면 한 장에서 양산까지, 5단계</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">표준 견적은 영업일 기준 3일 안에 회신드립니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">01 도면 접수</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">STEP·DWG·PDF 등 수령 후 보안 서약과 함께 검토를 시작합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">02 가공성 검토 (1–2일)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">공차·열처리·표면처리 가능 여부와 대안을 정리해 회신합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">03 견적 회신 (3일 이내)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">단가·납기·MOQ를 명시한 정식 견적서를 발행합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">04 시제품 (2–3주)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">초도품 제작 후 측정 성적서와 함께 송부합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">05 양산 이관</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">PPAP 또는 자체 품질 매뉴얼 기준으로 양산 체계를 구축합니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="contact" class="py-24 md:py-32" style="background: var(--primary); color: #fff">
-        <div class="container-x grid md:grid-cols-2 gap-12">
-          <div class="reveal">
-            <p class="eyebrow mb-4" style="color: #5fb7ed">견적 문의</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              도면을 보내주시면,<br />24시간 내 회신드립니다.
-            </h2>
-            <p class="mt-8 leading-relaxed" style="color: rgba(255,255,255,.75)">
-              초기 상담은 무료. 도면이 없어도 스케치·요구사양만으로 1차 검토가 가능합니다.
-              비밀유지계약(NDA) 체결 후 본 견적을 드립니다.
-            </p>
-            <ul class="mt-6 text-sm space-y-2" style="color: rgba(255,255,255,.7)">
-              <li>· <strong>MOQ</strong>: 양산 1,000 EA부터 / 시제품 1 EA부터</li>
-              <li>· <strong>결제 조건</strong>: 월말 마감 익월 30일 (신규 거래는 사전 협의)</li>
-              <li>· <strong>품질 보증</strong>: 납품 후 12개월 / 자사 가공 불량 시 무상 재제작</li>
-              <li>· <strong>운송</strong>: EXW · FOB · DAP 가능 (국내 직송 / 부산항 수출)</li>
-              <li>· <strong>환경 대응</strong>: RoHS · REACH 대응 · 탄소 배출 보고 가능</li>
-            </ul>
-            <dl class="mt-10 space-y-4">
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:#5fb7ed">대표전화</dt><dd>031 · 555 · 1992</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:#5fb7ed">영업 이메일</dt><dd>sales@hanul-precision.kr</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:#5fb7ed">본사·공장</dt><dd>경기도 평택시 OO로 OO길 12</dd></div>
+      <main id="top">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="wrap">
+            <dl class="g tb">
+              <div style="--c: 1 / 4; --m: 1 / 3"><dt>품목</dt><dd>자동차·반도체 정밀부품</dd></div>
+              <div style="--c: 4 / 7; --m: 3 / 5"><dt>가공</dt><dd>5축 · 선삭 · 연삭 · 측정</dd></div>
+              <div style="--c: 7 / 10; --m: 1 / 3"><dt>본사·공장</dt><dd>경기도 평택</dd></div>
+              <div style="--c: 10 / 13; --m: 3 / 5"><dt>견적 회신</dt><dd>도면 접수 후 24시간 내</dd></div>
             </dl>
-          </div>
-          <form class="bg-white p-8 reveal" onsubmit="event.preventDefault(); alert('견적 문의가 접수되었습니다. 영업일 기준 24시간 내 회신드리겠습니다.');" style="color: var(--ink); border-radius:4px">
-            <h3 class="serif text-2xl mb-6">견적 문의서</h3>
-            <div class="space-y-4">
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">기업명</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">담당자 / 연락처</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">제품 종류</label>
-                <select class="field" required><option value="">선택</option><option>자동차 부품</option><option>반도체 장비 부품</option><option>일반 정밀 가공</option><option>시제품</option></select>
-              </div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">예상 수량 / 납기</label><input class="field" placeholder="예: 월 5,000 EA / 6주" /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">요구 사항</label><textarea class="field" rows="3" placeholder="공차·재질·표면 처리 등"></textarea></div>
-              <label class="flex items-start gap-2 mt-4 mb-3 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-                <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
-              </label>
-              <button class="btn-primary w-full justify-center mt-2">문의 보내기</button>
-              <p class="text-xs mt-2" style="color: var(--ink-soft)">· 도면 첨부는 회신 메일에 답신해 주시면 NDA 체결 후 처리됩니다.</p>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft); border-top:1px solid var(--line)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 한울정밀 · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
-      </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
-    </footer>
+            <div class="g hero-main">
+              <div style="--c: 1 / 9; --t: 1 / 13">
+                <p class="hero-kicker"><span class="tag"><b>Precision Components</b> · Since 1992</span></p>
+                <h1 id="hero-title" class="h1">미크론 단위에서<br />시작되는 신뢰.</h1>
+                <p class="lead">
+                  한울정밀은 자동차·반도체 정밀부품을 가공하는 33년차 제조 전문 기업입니다.
+                  <strong>±2㎛의 공차 안에서, 같은 품질을 한결같이.</strong>
+                </p>
+                <div class="cta-row">
+                  <a href="#contact" class="btn btn-acc">도면으로 견적 문의 <span class="ar" aria-hidden="true">→</span></a>
+                  <a href="#capability" class="btn">생산 역량 보기 <span class="ar" aria-hidden="true">↓</span></a>
+                </div>
+              </div>
+
+              <div class="spec" style="--c: 9 / 13; --t: 1 / 13">
+                <p class="spec-hd"><span>SPEC SHEET · 회사 개요</span><span class="chip">예시 수치</span></p>
+                <table>
+                  <caption class="sr-only">한울정밀 회사 개요 (예시 수치)</caption>
+                  <tbody>
+                    <tr><th scope="row"><small>S-01</small>설립</th><td><span data-count="1992" data-format="year">1992</span><span class="u">년</span></td></tr>
+                    <tr><th scope="row"><small>S-02</small>공차</th><td class="acc">±2<span class="u">㎛</span></td></tr>
+                    <tr><th scope="row"><small>S-03</small>생산 라인</th><td><span data-count="42">42</span><span class="u">기</span></td></tr>
+                    <tr><th scope="row"><small>S-04</small>납품처</th><td><span data-count="68">68</span><span class="u">사</span></td></tr>
+                  </tbody>
+                </table>
+                <p class="spec-ft">예시 수치 · 실제 데이터로 교체</p>
+              </div>
+            </div>
+
+            <figure class="g fig reveal">
+              <div class="ph flush" style="aspect-ratio: 1376 / 520">
+                <img src="../assets/images/manufacture/01-monitor.webp" width="1376" height="768" alt="5축 머시닝센터 앞에서 작업자가 조작반 화면으로 가공 상태를 확인하는 공장 내부" style="object-position: 50% 45%" />
+              </div>
+              <figcaption class="figcap"><b>FIG. 1</b>5축 동시 가공 라인. 복합 형상도 한 번 셋팅으로 가공합니다.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- 01 ABOUT -->
+        <section id="about" class="sec" aria-labelledby="h-about">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">기업소개 <span>01</span></p>
+              <h2 id="h-about" class="h2" style="--c: 3 / 9; --t: 3 / 13">한 가지 부품을<br />33년째.</h2>
+            </div>
+            <div class="g about">
+              <div class="about-txt body reveal" style="--c: 3 / 8; --t: 1 / 7">
+                <p>한울정밀은 1992년 평택에서 시작했습니다. 처음 받은 도면은 자동차 변속기 핵심부품 한 종이었고, 지금도 그 부품을 같은 라인에서 만들고 있습니다.</p>
+                <p>품목을 늘리기보다, 같은 부품의 공차와 표면 품질을 더 좁혀가는 일에 집중해왔습니다. 거래처가 한울정밀을 오랫동안 같은 라인의 협력사로 두는 이유입니다.</p>
+                <p>2015년 반도체 장비 부품으로 영역을 확장한 이후에도, 가공 품질의 기준을 자동차 부품과 동일하게 유지합니다.</p>
+              </div>
+              <div class="reveal" style="--c: 9 / 13; --t: 7 / 13">
+                <p class="side-title" style="padding-inline: 0">연혁 요약</p>
+                <ol class="timeline">
+                  <li><b>1992</b><span>평택에서 창업. 자동차 변속기 핵심부품 가공 시작</span></li>
+                  <li><b>2015</b><span>반도체 장비 부품으로 영역 확장</span></li>
+                  <li><b>현재</b><span>첫 부품을 같은 라인에서 계속 생산</span></li>
+                </ol>
+                <figure class="drawing">
+                  <svg viewBox="0 0 320 150" aria-hidden="true" fill="none" stroke-linecap="square">
+                    <g stroke="#0a0a0a" stroke-width="1.2">
+                      <path d="M30 62h46v-14h112v14h44v26h-44v14H76V88H30z" />
+                    </g>
+                    <g stroke="#0a0a0a" stroke-width=".6" stroke-dasharray="10 3 2 3">
+                      <path d="M18 75h228" />
+                    </g>
+                    <g stroke="#006fb5" stroke-width=".8">
+                      <path d="M76 120V106M188 120V106M80 116h104" />
+                      <path d="M80 116l6-3v6zM184 116l-6-3v6z" fill="#006fb5" />
+                      <path d="M200 48h22M200 102h22M216 52v46" />
+                      <path d="M216 52l-3 6h6zM216 98l-3-6h6z" fill="#006fb5" />
+                    </g>
+                    <g fill="#006fb5" font-family="'Pretendard Variable', sans-serif" font-size="9" font-weight="600">
+                      <text x="132" y="132" text-anchor="middle">42.000 ±0.002</text>
+                      <text x="226" y="79">Ø24 h6</text>
+                    </g>
+                    <g fill="#6b6b6b" font-family="'Pretendard Variable', sans-serif" font-size="8" font-weight="600" letter-spacing=".6">
+                      <text x="30" y="20">FIG. 0 — 단차 축 (도면 예시)</text>
+                      <text x="30" y="146">단위 mm · 척도 NTS</text>
+                    </g>
+                    <path d="M30 26h260" stroke="#c8c8c8" stroke-width=".6" />
+                  </svg>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 02 CAPABILITY -->
+        <section id="capability" class="sec" aria-labelledby="h-cap">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">생산 역량 <span>02</span></p>
+              <h2 id="h-cap" class="h2" style="--c: 3 / 9; --t: 3 / 13">측정 가능한 신뢰.</h2>
+              <p class="small desc" style="--c: 9 / 13; --t: 3 / 13">말보다 수치로 설명합니다. 공차·생산 능력·검사 방식을 한 표에 정리했습니다.</p>
+            </div>
+
+            <div class="g kpi">
+              <div class="ph flush reveal" style="--c: 1 / 7; --t: 1 / 7">
+                <img src="../assets/images/manufacture/02-calipers.webp" width="1376" height="768" loading="lazy" alt="측정실 정반 위에서 디지털 캘리퍼스로 원통형 가공품의 지름을 재는 손" style="width:100%; height:100%; object-fit:cover; object-position: 62% 50%" />
+              </div>
+              <div class="kpi-cells flush reveal" style="--c: 7 / 13; --t: 7 / 13">
+                <div><p class="v acc">±2<span class="u">㎛</span></p><span class="chip">예시 수치</span><p class="k"><b>공차</b>반도체 척·웨이퍼 핸들러 핵심부품에 쓰이는 수준</p></div>
+                <div><p class="v">80,000<span class="u">EA/월</span></p><p class="k"><b>생산 능력</b>자동차 부품 기준</p></div>
+                <div><p class="v">78<span class="u">%</span></p><p class="k"><b>공정 자동화</b>자동차 부품 라인 기준</p></div>
+              </div>
+            </div>
+
+            <div class="block reveal">
+              <div class="subhead"><h3 class="h3">02.1 역량 사양</h3><span class="chip">예시 수치</span></div>
+              <table class="dt">
+                <caption class="sr-only">생산 역량 사양표</caption>
+                <colgroup><col class="c1" /><col class="c3" /><col class="c3" /><col class="c5" /></colgroup>
+                <thead><tr><th scope="col">No.</th><th scope="col">항목</th><th scope="col">사양</th><th scope="col">설명</th></tr></thead>
+                <tbody>
+                  <tr><td class="no">C-01</td><th scope="row" class="item">5축 동시 가공</th><td class="val" data-k="사양">5축 머시닝센터 12기</td><td class="note" data-k="설명">복합 형상도 한 번 셋팅으로 가공합니다.</td></tr>
+                  <tr><td class="no">C-02</td><th scope="row" class="item">공차</th><td class="val acc" data-k="사양">±2㎛</td><td class="note" data-k="설명">반도체 척·웨이퍼 핸들러 핵심부품에 쓰이는 공차 수준.</td></tr>
+                  <tr><td class="no">C-03</td><th scope="row" class="item">자체 측정실</th><td class="val" data-k="사양">CMM · 진원도 · 표면조도</td><td class="note" data-k="설명">전수 검사 후 출하합니다.</td></tr>
+                  <tr><td class="no">C-04</td><th scope="row" class="item">생산 능력</th><td class="val" data-k="사양">월 8만 EA · 자동화 78%</td><td class="note" data-k="설명">자동차 부품 기준 월 생산 능력입니다.</td></tr>
+                  <tr><td class="no">C-05</td><th scope="row" class="item">설계 지원</th><td class="val" data-k="사양">DFM · 공정 개선 제안</td><td class="note" data-k="설명">제조 가능성 검토부터, 도면 단계에서 함께합니다.</td></tr>
+                  <tr><td class="no">C-06</td><th scope="row" class="item">긴급 대응</th><td class="val" data-k="사양">24시간 시제품</td><td class="note" data-k="설명">긴급 발주 시 단순 형상 기준으로 24시간 안에 시제품을 만듭니다.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="block reveal">
+              <div class="subhead"><h3 class="h3">02.2 적용 산업</h3><span class="small">산업별로 한울이 맡아온 일</span></div>
+              <table class="dt">
+                <caption class="sr-only">적용 산업별 대표 실적과 대응 기준</caption>
+                <colgroup><col class="c1" /><col class="c3" /><col class="c4" /><col class="c4" /></colgroup>
+                <thead><tr><th scope="col">No.</th><th scope="col">산업</th><th scope="col">대표 품목</th><th scope="col">기준 · 대응</th></tr></thead>
+                <tbody>
+                  <tr><td class="no">I-01</td><th scope="row" class="item">자동차 부품</th><td data-k="품목">전기차 모터 하우징, 연 12만 개 양산</td><td class="note" data-k="대응">IATF 16949 대응</td></tr>
+                  <tr><td class="no">I-02</td><th scope="row" class="item">반도체 장비</th><td data-k="품목">진공 챔버용 정밀 가공품</td><td class="note" data-k="대응">±5㎛ 공차로 납품 중</td></tr>
+                  <tr><td class="no">I-03</td><th scope="row" class="item">의료기기</th><td data-k="품목">수술기구 핸들 가공</td><td class="note" data-k="대응">ISO 13485 체계로 트레이서빌리티 확보</td></tr>
+                  <tr><td class="no">I-04</td><th scope="row" class="item">방산·항공</th><td data-k="품목">특수강 가공·열처리 일관 라인</td><td class="note" data-k="대응">KOLAS 시험 성적서 제공</td></tr>
+                  <tr><td class="no">I-05</td><th scope="row" class="item">에너지·중공업</th><td data-k="품목">대형 플랜트 부품 단조·기계가공</td><td class="note" data-k="대응">최대 8m 워크피스 대응</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 PROCESS -->
+        <section id="process" class="sec" aria-labelledby="h-proc">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">공정 <span>03</span></p>
+              <h2 id="h-proc" class="h2" style="--c: 3 / 9; --t: 3 / 13">도면부터 납품까지, 5단계.</h2>
+              <p class="small desc" style="--c: 9 / 13; --t: 3 / 13">도면 검토부터 사후 관리까지 같은 순서로 진행합니다. 측정 보고서는 제품과 함께 출하됩니다.</p>
+            </div>
+            <div class="g flow">
+              <div class="flow-lane reveal" style="--c: 1 / 3; --t: 1 / 13">
+                <p class="tag"><b>Flow</b> · 생산</p>
+                <p class="small">P1부터 P5까지, 모든 주문이 같은 순서로 진행됩니다.</p>
+              </div>
+              <ol style="--c: 3 / 13; --t: 1 / 13" class="reveal">
+                <li><span class="sn">P1</span><h3>도면 검토 · DFM</h3><p>제조 가능성을 검토해 회신합니다.</p><span class="t">24시간 내 회신</span></li>
+                <li><span class="sn">P2</span><h3>시제품 제작</h3><p>긴급 발주는 24시간 안에 만듭니다.</p><span class="t">일반 5일 이내</span></li>
+                <li><span class="sn">P3</span><h3>양산 셋업</h3><p>공정 표준화와 CT 단축안을 함께 제안합니다.</p><span class="t">공정 표준화</span></li>
+                <li><span class="sn">P4</span><h3>전수 검사</h3><p>CMM 측정 보고서를 함께 출하합니다.</p><span class="t">CMM 성적서</span></li>
+                <li><span class="sn">P5</span><h3>납품 · 사후 관리</h3><p>로트별 추적 시스템으로 관리합니다.</p><span class="t">이력 5년 보존</span></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 EQUIPMENT -->
+        <section id="equipment" class="sec" aria-labelledby="h-eq">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">설비 <span>04</span></p>
+              <h2 id="h-eq" class="h2" style="--c: 3 / 9; --t: 3 / 13">가공 42기, 측정실 1곳.</h2>
+              <p class="small desc" style="--c: 9 / 13; --t: 3 / 13"><span class="chip">예시 데이터</span> 설비 구성과 사양은 시안용 예시입니다. 실제 보유 설비 목록으로 바꿔 주세요.</p>
+            </div>
+
+            <div class="block reveal">
+              <table class="dt">
+                <caption class="sr-only">가공 설비 목록 (예시 데이터)</caption>
+                <colgroup><col class="c1" /><col class="c3" /><col class="c1" /><col class="c4" /><col class="c3" /></colgroup>
+                <thead><tr><th scope="col">No.</th><th scope="col">설비</th><th scope="col">대수</th><th scope="col">주요 사양</th><th scope="col">주 용도</th></tr></thead>
+                <tbody>
+                  <tr><td class="no">E-01</td><th scope="row" class="item">5축 머시닝센터</th><td class="val" data-k="대수">12</td><td data-k="사양">동시 5축 · 테이블 Ø630</td><td class="note" data-k="용도">하우징 · 복합 형상</td></tr>
+                  <tr><td class="no">E-02</td><th scope="row" class="item">수평형 머시닝센터</th><td class="val" data-k="대수">8</td><td data-k="사양">2면 팰릿 교환</td><td class="note" data-k="용도">양산 하우징 · 브래킷</td></tr>
+                  <tr><td class="no">E-03</td><th scope="row" class="item">CNC 선반</th><td class="val" data-k="대수">12</td><td data-k="사양">최대 가공 지름 Ø350</td><td class="note" data-k="용도">축 · 플랜지 · 슬리브</td></tr>
+                  <tr><td class="no">E-04</td><th scope="row" class="item">복합가공기</th><td class="val" data-k="대수">4</td><td data-k="사양">선삭 + 밀링 일체</td><td class="note" data-k="용도">한 번 셋팅 완성 가공</td></tr>
+                  <tr><td class="no">E-05</td><th scope="row" class="item">와이어 방전가공기</th><td class="val" data-k="대수">2</td><td data-k="사양">정밀 윤곽 가공</td><td class="note" data-k="용도">지그 · 치공구</td></tr>
+                  <tr><td class="no">E-06</td><th scope="row" class="item">원통 · 평면 연삭기</th><td class="val" data-k="대수">4</td><td data-k="사양">마무리 연삭</td><td class="note" data-k="용도">±2㎛ 공차 마감</td></tr>
+                </tbody>
+                <tfoot><tr><td></td><td>합계</td><td class="acc">42</td><td colspan="2">가공 설비 기준 · 측정 설비 별도</td></tr></tfoot>
+              </table>
+            </div>
+
+            <div class="g meas">
+              <figure class="reveal flush" style="--c: 1 / 7; --t: 1 / 7">
+                <div class="ph" style="aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-2)">
+                  <img src="../assets/images/manufacture/04-cmm.webp" width="1376" height="768" loading="lazy" alt="측정실에서 품질 담당자가 3차원 측정기로 알루미늄 가공품을 측정하는 모습" style="width:100%; height:100%; object-fit:cover; object-position: 55% 50%" />
+                </div>
+                <figcaption class="figcap" style="padding-inline: var(--cp)"><b>FIG. 2</b>자체 측정실. 출하 전 전 수량을 측정합니다.</figcaption>
+              </figure>
+              <div class="reveal flush" style="--c: 7 / 13; --t: 7 / 13">
+                <p class="side-title" style="padding-top: 0">측정 설비 · 예시 데이터</p>
+                <ul class="meas-list">
+                  <li><span class="no">M-01</span><b>3차원 측정기 (CMM)<small>형상·위치 공차, 측정 보고서 발행</small></b><span class="q">2<span class="u">대</span></span></li>
+                  <li><span class="no">M-02</span><b>진원도 측정기<small>축·보어의 진원도와 동축도</small></b><span class="q">1<span class="u">대</span></span></li>
+                  <li><span class="no">M-03</span><b>표면조도계<small>Ra·Rz 등 표면 거칠기</small></b><span class="q">2<span class="u">대</span></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 CERT -->
+        <section id="cert" class="sec" aria-labelledby="h-cert">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">인증 · 실적 <span>05</span></p>
+              <h2 id="h-cert" class="h2" style="--c: 3 / 9; --t: 3 / 13">서류로도 증명되는 품질.</h2>
+            </div>
+            <p class="placeholder-note reveal"><span class="chip">자리표시</span>아래 인증 칸은 시안용 자리표시입니다. 실제 보유 인증으로 교체하고, 인증번호와 유효기간을 채워 주세요.</p>
+            <ul class="g certs reveal" aria-label="인증 목록 자리표시">
+              <li class="cert" style="--c: 1 / 5; --t: 1 / 7; --m: 1 / 3"><p class="code">CERT-01</p><h3>ISO 9001 : 2015</h3><dl><div><dt>인증번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+              <li class="cert" style="--c: 5 / 9; --t: 7 / 13; --m: 3 / 5"><p class="code">CERT-02</p><h3>IATF 16949 : 2016</h3><dl><div><dt>인증번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+              <li class="cert" style="--c: 9 / 13; --t: 1 / 7; --m: 1 / 3"><p class="code">CERT-03</p><h3>ISO 14001 : 2015</h3><dl><div><dt>인증번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+              <li class="cert" style="--c: 1 / 5; --t: 7 / 13; --m: 3 / 5"><p class="code">CERT-04</p><h3>뿌리기업 확인서</h3><dl><div><dt>확인번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+              <li class="cert" style="--c: 5 / 9; --t: 1 / 7; --m: 1 / 3"><p class="code">CERT-05</p><h3>기술혁신형 중소기업 (Inno-Biz)</h3><dl><div><dt>확인번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+              <li class="cert" style="--c: 9 / 13; --t: 7 / 13; --m: 3 / 5"><p class="code">CERT-06</p><h3>벤처기업 인증</h3><dl><div><dt>확인번호</dt><dd>————</dd></div><div><dt>유효기간</dt><dd>————</dd></div></dl><span class="stamp">실제 보유 인증으로 교체</span></li>
+            </ul>
+            <div class="g partners reveal">
+              <h3 class="h3" style="--c: 1 / 4; --t: 1 / 4">대표 협력 경험 <span class="chip">예시</span></h3>
+              <div style="--c: 4 / 10; --t: 4 / 13">
+                <p class="body" style="color: var(--ink)">완성차 모듈 부품 협력 (Tier 1·2) · 국내 반도체 장비 OEM 다수 · 이차전지 협력사 등 60여 사</p>
+                <p class="small" style="margin-top: 6px">* 일부 거래처는 NDA로 익명 처리되었으며, 직거래/2차/3차 협력 관계는 사안별로 상이합니다.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 JOURNEY -->
+        <section id="journey" class="sec" aria-labelledby="h-journey">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">협력 <span>06</span></p>
+              <div style="--c: 3 / 11; --t: 3 / 13">
+                <p class="small" style="margin-bottom: 8px">납기와 품질, 둘 다 양보할 수 없는 현장에</p>
+                <h2 id="h-journey" class="h2">한 번의 불량이 라인 전체를<br />멈추는 일, 잘 압니다.</h2>
+              </div>
+            </div>
+            <div class="g why">
+              <figure class="reveal flush" style="--c: 1 / 6; --t: 1 / 7">
+                <div class="ph" style="aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2)">
+                  <img src="../assets/images/manufacture/03-meeting.webp" width="1376" height="768" loading="lazy" alt="공장 작업대에서 엔지니어 세 명이 도면과 태블릿을 펼쳐 놓고 가공 방법을 논의하는 모습" style="width:100%; height:100%; object-fit:cover; object-position: 50% 60%" />
+                </div>
+                <figcaption class="figcap" style="padding-inline: var(--cp)"><b>FIG. 3</b>양산 전 도면 검토. 공차와 공정을 같이 짚습니다.</figcaption>
+              </figure>
+              <div class="reveal flush" style="--c: 6 / 13; --t: 7 / 13">
+                <ol class="why-list">
+                  <li><span class="no">01</span><h3 class="h3">도면 기반 사전 검토</h3><p>양산 전에 공차와 공정을 함께 짚습니다.</p></li>
+                  <li><span class="no">02</span><h3 class="h3">정밀 가공 및 검사</h3><p>전수 검사 데이터로 품질을 증명합니다.</p></li>
+                  <li><span class="no">03</span><h3 class="h3">납기 책임 관리</h3><p>주간 리포트로 진행 상황을 공유드립니다.</p></li>
+                </ol>
+                <div class="vs">
+                  <div><p class="lbl">미루시면</p><p>공급사 하나가 흔들리면, 우리 라인이 하루 수천만 원씩 멈춥니다.</p></div>
+                  <div class="yes"><p class="lbl">시작하시면</p><p>거래 3년 차, 발주 메일 한 통이면 끝나는 안정된 협력.</p></div>
+                </div>
+                <div class="why-cta">
+                  <a href="#contact" class="btn btn-acc">견적 문의하기 <span class="ar" aria-hidden="true">→</span></a>
+                  <button type="button" class="btn" data-demo-btn>품질 관리 백서 받기 <span class="ar" aria-hidden="true">↓</span></button>
+                  <p class="demo-msg" role="status" aria-live="polite" data-msg></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 07 CONTACT / RFQ -->
+        <section id="contact" class="sec" aria-labelledby="h-contact">
+          <div class="wrap">
+            <div class="g sec-head reveal">
+              <p class="sec-no" style="--c: 1 / 3; --t: 1 / 3">견적 문의 <span>07</span></p>
+              <h2 id="h-contact" class="h2" style="--c: 3 / 9; --t: 3 / 13">도면을 보내주시면,<br />24시간 내 회신드립니다.</h2>
+              <p class="small desc" style="--c: 9 / 13; --t: 3 / 13">초기 상담은 무료입니다. 도면이 없어도 스케치·요구사양만으로 1차 검토가 가능하고, 비밀유지계약(NDA) 체결 후 본 견적을 드립니다.</p>
+            </div>
+
+            <div class="g" style="row-gap: 40px">
+              <div class="rfq-side flush reveal" style="--c: 1 / 6; --t: 1 / 13">
+                <div>
+                  <p class="side-title">연락처</p>
+                  <dl class="kv">
+                    <div><dt>대표전화</dt><dd><a href="tel:03155501992">031 · 555 · 1992</a></dd></div>
+                    <div><dt>영업 이메일</dt><dd><a href="mailto:sales@hanul-precision.kr">sales@hanul-precision.kr</a></dd></div>
+                    <div><dt>본사·공장</dt><dd>경기도 평택시 OO로 OO길 12</dd></div>
+                  </dl>
+                </div>
+                <div>
+                  <p class="side-title">거래 조건</p>
+                  <dl class="kv">
+                    <div><dt>MOQ</dt><dd>양산 1,000 EA부터 / 시제품 1 EA부터</dd></div>
+                    <div><dt>결제 조건</dt><dd>월말 마감 익월 30일 (신규 거래는 사전 협의)</dd></div>
+                    <div><dt>품질 보증</dt><dd>납품 후 12개월 / 자사 가공 불량 시 무상 재제작</dd></div>
+                    <div><dt>운송</dt><dd>EXW · FOB · DAP 가능 (국내 직송 / 부산항 수출)</dd></div>
+                    <div><dt>환경 대응</dt><dd>RoHS · REACH 대응 · 탄소 배출 보고 가능</dd></div>
+                  </dl>
+                </div>
+                <div>
+                  <p class="side-title">견적 절차 · 표준 견적은 영업일 기준 3일 안에 회신</p>
+                  <ol class="steps-mini">
+                    <li><span class="no">R1</span><span><b>도면 접수</b>STEP·DWG·PDF 등 수령 후 보안 서약과 함께 검토를 시작합니다.</span><em></em></li>
+                    <li><span class="no">R2</span><span><b>가공성 검토</b>공차·열처리·표면처리 가능 여부와 대안을 정리해 회신합니다.</span><em>1–2일</em></li>
+                    <li><span class="no">R3</span><span><b>견적 회신</b>단가·납기·MOQ를 명시한 정식 견적서를 발행합니다.</span><em>3일 이내</em></li>
+                    <li><span class="no">R4</span><span><b>시제품</b>초도품 제작 후 측정 성적서와 함께 송부합니다.</span><em>2–3주</em></li>
+                    <li><span class="no">R5</span><span><b>양산 이관</b>PPAP 또는 자체 품질 매뉴얼 기준으로 양산 체계를 구축합니다.</span><em></em></li>
+                  </ol>
+                </div>
+              </div>
+
+              <form class="rfq reveal" style="--c: 6 / 13; --t: 1 / 13" novalidate data-demo-form aria-labelledby="rfq-title">
+                <div class="rfq-hd"><h3 id="rfq-title">견적 요청서 RFQ</h3><span>FORM HP-RFQ-01</span></div>
+                <div class="rfq-grid">
+                  <div class="fc"><label for="f-co"><i>01</i>기업명</label><input id="f-co" name="company" autocomplete="organization" required /></div>
+                  <div class="fc"><label for="f-name"><i>02</i>담당자</label><input id="f-name" name="name" autocomplete="name" required /></div>
+                  <div class="fc"><label for="f-tel"><i>03</i>연락처</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="010-0000-0000" required /></div>
+                  <div class="fc"><label for="f-mail"><i>04</i>이메일</label><input id="f-mail" name="email" type="email" autocomplete="email" placeholder="name@company.example" /></div>
+                  <div class="fc"><label for="f-kind"><i>05</i>제품 종류</label>
+                    <select id="f-kind" name="kind" required><option value="">선택</option><option>자동차 부품</option><option>반도체 장비 부품</option><option>의료기기 부품</option><option>방산·항공 부품</option><option>일반 정밀 가공</option><option>시제품</option></select>
+                  </div>
+                  <div class="fc"><label for="f-mat"><i>06</i>재질 <em>선택</em></label><input id="f-mat" name="material" placeholder="예: SUS304, AL6061" /></div>
+                  <div class="fc"><label for="f-qty"><i>07</i>예상 수량 / 납기</label><input id="f-qty" name="qty" placeholder="예: 월 5,000 EA / 6주" /></div>
+                  <div class="fc"><label for="f-tol"><i>08</i>요구 공차 <em>선택</em></label><input id="f-tol" name="tolerance" placeholder="예: ±0.005 mm" /></div>
+                  <div class="fc full">
+                    <p class="flabel" id="drop-label"><i>09</i>도면 첨부 <em style="font-style:normal; color: var(--ink-3); font-weight:500">선택</em></p>
+                    <div class="drop" data-drop>
+                      <svg viewBox="0 0 34 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 1h22l10 10v28H1z" /><path d="M23 1v10h10" /><path d="M7 30h20M7 25h20M7 20h12" stroke="#006fb5" /></svg>
+                      <p>도면 파일을 여기로 끌어다 놓으세요<small>STEP · IGES · DWG · DXF · PDF, 파일당 50MB까지 · 시안 데모라 업로드되지 않습니다</small></p>
+                      <label class="pick">파일 선택<input type="file" multiple accept=".step,.stp,.igs,.iges,.dwg,.dxf,.pdf" aria-labelledby="drop-label" data-file /></label>
+                    </div>
+                    <ul class="files" data-files aria-live="polite"></ul>
+                  </div>
+                  <div class="fc full"><label for="f-req"><i>10</i>요구 사항</label><textarea id="f-req" name="req" rows="3" placeholder="공차·재질·표면 처리, 열처리, 검사 성적서 요청 등"></textarea></div>
+                </div>
+                <div class="checks">
+                  <label class="agree"><input type="checkbox" name="nda" /><span>NDA를 먼저 체결한 뒤 도면을 검토받고 싶습니다.</span></label>
+                  <label class="agree"><input type="checkbox" required /><span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span></label>
+                </div>
+                <div class="rfq-ft">
+                  <button type="submit" class="rfq-submit">견적 요청 보내기 <span aria-hidden="true">→</span></button>
+                  <p class="demo-msg" role="status" aria-live="polite" data-msg></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="foot">
+        <div class="wrap">
+          <dl class="g title-block">
+            <div class="brand-cell" style="--c: 1 / 4; --t: 1 / 5"><dt>회사</dt><dd>HANUL <i>PRECISION</i></dd></div>
+            <div style="--c: 4 / 7; --t: 5 / 9"><dt>본사·공장</dt><dd>경기도 평택시 OO로 OO길 12</dd></div>
+            <div style="--c: 7 / 10; --t: 9 / 13"><dt>대표전화</dt><dd>031 · 555 · 1992</dd></div>
+            <div style="--c: 10 / 13; --t: 1 / 13"><dt>영업 이메일</dt><dd>sales@hanul-precision.kr</dd></div>
+          </dl>
+          <div class="g foot-row">
+            <p style="--c: 1 / 9; --t: 1 / 9">© 2026 한울정밀 · 사업자등록번호 000-00-00000</p>
+            <p style="--c: 9 / 13; --t: 9 / 13"><a href="/">← 쇼룸으로 돌아가기</a></p>
+          </div>
+          <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
+        </div>
+      </footer>
+    </div>
 
     <script>
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      (() => {
+        const DEMO = '시안 데모 — 실제로 전송되지 않습니다.';
+        const say = (el) => { if (!el) return; el.textContent = ''; requestAnimationFrame(() => { el.textContent = DEMO; }); };
+        document.querySelectorAll('[data-demo-form]').forEach((f) => f.addEventListener('submit', (e) => { e.preventDefault(); say(f.querySelector('[data-msg]')); }));
+        document.querySelectorAll('[data-demo-btn]').forEach((b) => b.addEventListener('click', () => say(b.parentElement.querySelector('[data-msg]'))));
+
+        /* 도면 첨부 (데모: 파일 이름만 표시, 전송 없음) */
+        const drop = document.querySelector('[data-drop]');
+        const input = document.querySelector('[data-file]');
+        const list = document.querySelector('[data-files]');
+        let files = [];
+        const fmt = (n) => n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB';
+        const render = () => {
+          list.innerHTML = '';
+          files.forEach((f, i) => {
+            const li = document.createElement('li');
+            const name = document.createElement('b'); name.textContent = f.name;
+            const size = document.createElement('span'); size.textContent = fmt(f.size);
+            const rm = document.createElement('button'); rm.type = 'button'; rm.textContent = '삭제'; rm.setAttribute('aria-label', f.name + ' 삭제');
+            rm.addEventListener('click', () => { files.splice(i, 1); render(); input.focus(); });
+            li.append(name, size, rm); list.append(li);
+          });
+        };
+        const add = (fl) => { files = files.concat([...fl]).slice(0, 10); render(); };
+        if (drop && input) {
+          input.addEventListener('change', () => { add(input.files); input.value = ''; });
+          ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('is-over'); }));
+          ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('is-over'); }));
+          drop.addEventListener('drop', (e) => { if (e.dataTransfer && e.dataTransfer.files.length) add(e.dataTransfer.files); });
+        }
+
+        /* 모바일 메뉴 */
+        const btn = document.querySelector('.menu-btn');
+        const panel = document.getElementById('mnav');
+        const setOpen = (open) => { btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
+        btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+        panel.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); } });
+        matchMedia('(min-width: 1024px)').addEventListener('change', (m) => m.matches && setOpen(false));
+
+        /* 현재 구역 표시 */
+        const links = [...document.querySelectorAll('.nav a')];
+        const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver((es) => es.forEach((e) => {
+          const a = map.get(e.target.id); if (!a || !e.isIntersecting) return;
+          if (window.scrollY < 120) { links.forEach((l) => l.removeAttribute('aria-current')); return; }
+          links.forEach((l) => l.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true');
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        map.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="manufacture" role="region" aria-label="알림 배너">

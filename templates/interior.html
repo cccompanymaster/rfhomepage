@@ -33,32 +33,309 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f2426'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
-    <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css?v=40c0665d" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ── 여백 스튜디오 · 12단 격자 시스템 ─────────────────────────── */
+      @property --c { syntax: '*'; inherits: false; }
+      @property --t { syntax: '*'; inherits: false; }
+      @property --m { syntax: '*'; inherits: false; }
+
       :root {
-        --bg: #fafaf9;
-        --bg-soft: #f0efeb;
-        --primary: #1f2426;
-        --accent: #8a8278;
-        --ink: #1f2426;
-        --ink-soft: #6b6b65;
-        --line: #e2e1dc;
+        --paper: #ffffff;
+        --paper-2: #f5f5f3;
+        --ink: #0b0b0b;
+        --ink-2: #555555;
+        --ink-3: #767676;
+        --rule: #ebebeb;
+        --rule-2: #d6d6d6;
+        --accent: #d9301c;
+        --dark: #0b0b0b;
+        --dark-ink: #f2f2f0;
+        --dark-ink-2: #a9a9a6;
+        --dark-rule: rgba(255,255,255,.12);
+
+        --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        --maxw: 1312px;
+        --pad: 20px;
+        --gut: 16px;
+        --cols: 4;
+        --fab-r: 94px;
+        --top-h: 56px;
+        --sec-y: 88px;
+        --ease: cubic-bezier(.2,.7,.1,1);
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); font-feature-settings:'tnum'; font-weight: 400; }
-      .serif { font-family: 'Noto Serif KR', serif; font-weight: 300; letter-spacing: -0.03em; }
-      .container-x { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 48px; padding-right: 48px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #e9e7e1, #d6d3cc 60%, #9a978e); position: relative; overflow: hidden; }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(250,250,249,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; font-weight:500; font-size:14px; letter-spacing:.05em; transition:.2s; }
-      .btn-primary:hover { background:#000; }
-      .row { border-top: 1px solid var(--line); }
+      @media (min-width: 768px) { :root { --pad: 32px; --gut: 20px; --cols: 12; --fab-r: 112px; --sec-y: 112px; } }
+      @media (min-width: 1024px) { :root { --pad: 48px; --gut: 24px; --top-h: 60px; --sec-y: 136px; } }
+
+      html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+      body {
+        font-family: var(--font); background: var(--paper); color: var(--ink);
+        font-size: 16px; line-height: 1.7; font-weight: 400; letter-spacing: -0.01em;
+        word-break: keep-all; overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      }
+      ::selection { background: var(--ink); color: var(--paper); }
+      a { color: inherit; text-decoration: none; }
+      :focus-visible:not(.fab-back) { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .tnum { font-variant-numeric: tabular-nums; }
+
+      /* 격자 */
+      .wrap { width: min(100% - var(--pad) * 2, var(--maxw)); margin-inline: auto; }
+      .g { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); column-gap: var(--gut); }
+      .g > * { grid-column: var(--m, 1 / -1); min-width: 0; }
+      @media (min-width: 768px) { .g > * { grid-column: var(--t, var(--c, 1 / -1)); } }
+      @media (min-width: 1024px) { .g > * { grid-column: var(--c, 1 / -1); } }
+      .bleed { margin-inline: calc(var(--gut) / -2); padding-inline: calc(var(--gut) / 2); }
+      .g > .gl-auto, .ruler > span, .gl .wrap > i { grid-column: auto; }
+
+      /* 눈에 보이는 격자선: 거터 가운데에 1px */
+      .page { position: relative; isolation: isolate; }
+      .gl { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+      .gl .wrap { height: 100%; }
+      .gl i { position: relative; height: 100%; }
+      .gl i::before, .gl i:last-child::after {
+        content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule);
+        left: calc(var(--gut) / -2 - .5px);
+      }
+      .gl i:last-child::after { left: auto; right: calc(var(--gut) / -2 - .5px); }
+      .gl.dark i::before, .gl.dark i:last-child::after { background: var(--dark-rule); }
+      @media (max-width: 767.98px) {
+        .gl i:nth-child(n+5) { display: none; }
+        .gl i:nth-child(4)::after { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); right: calc(var(--gut) / -2 - .5px); }
+        .gl.dark i:nth-child(4)::after { background: var(--dark-rule); }
+      }
+
+      /* 상단 */
+      .top { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--rule-2); }
+      .top-row { height: var(--top-h); align-items: center; }
+      .brand { display: inline-flex; align-items: baseline; gap: 8px; font-weight: 700; font-size: 17px; letter-spacing: .06em; white-space: nowrap; }
+      .brand .mark { width: 9px; height: 9px; background: var(--accent); align-self: center; flex: none; }
+      .brand .ko { font-weight: 300; letter-spacing: 0; color: var(--ink-2); }
+      body:has(> .fab-back) .brand { margin-left: max(0px, calc(var(--fab-r) - max(var(--pad), (100vw - var(--maxw)) / 2))); }
+      .nav { display: none; }
+      .nav a { display: inline-flex; gap: 6px; align-items: baseline; font-size: 14px; font-weight: 500; white-space: nowrap; padding-block: 6px; position: relative; }
+      .nav a .n { font-size: 11px; color: var(--ink-3); font-weight: 500; font-variant-numeric: tabular-nums; }
+      .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+      .nav a:hover::after, .nav a[aria-current="true"]::after { transform: scaleX(1); }
+      .top-act { display: flex; gap: 8px; justify-content: flex-end; }
+      .menu-btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--ink); font-size: 13px; font-weight: 600; background: var(--paper); }
+      .menu-btn .bars { width: 14px; height: 9px; border-block: 1.5px solid currentColor; position: relative; }
+      .menu-btn[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+      .top-act .top-cta { display: none; }
+      .ruler { display: none; height: 24px; align-items: center; border-top: 1px solid var(--rule); }
+      .ruler span { position: relative; font-size: 10px; font-weight: 600; letter-spacing: .04em; color: var(--ink-3); font-variant-numeric: tabular-nums; line-height: 24px; }
+      .ruler span::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(var(--gut) / -2 - .5px); width: 1px; background: var(--rule); }
+      .ruler span:last-child::after { content: ''; position: absolute; top: 0; bottom: 0; right: calc(var(--gut) / -2 - .5px); width: 1px; background: var(--rule); }
+      .ruler span:nth-child(n+5) { display: none; }
+      .mnav { border-top: 1px solid var(--rule-2); background: var(--paper); }
+      .mnav ol { padding-block: 8px 20px; }
+      .mnav a { display: flex; gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 20px; font-weight: 500; }
+      .mnav a .n { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; width: 24px; }
+      @media (min-width: 768px) {
+        .ruler { display: grid; }
+        .ruler span:nth-child(n+5) { display: block; }
+        .top-act .top-cta { display: inline-flex; }
+      }
+      @media (min-width: 1024px) {
+        .nav { display: grid; grid-template-columns: subgrid; }
+        .menu-btn, .mnav { display: none !important; }
+        .top-act { justify-content: stretch; }
+        .top-act .top-cta { width: 100%; }
+      }
+      @media (min-width: 1024px) and (max-width: 1279.98px) { .nav a .n { display: none; } }
+
+      /* 버튼 */
+      .btn { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; padding: 0 18px; background: var(--ink); color: var(--paper); font-size: 14px; font-weight: 600; letter-spacing: -0.005em; border: 1px solid var(--ink); transition: background .2s, border-color .2s, color .2s; white-space: nowrap; cursor: pointer; }
+      .btn:hover { background: var(--accent); border-color: var(--accent); }
+      .btn .ar { font-weight: 400; transition: transform .25s var(--ease); }
+      .btn:hover .ar { transform: translateX(3px); }
+      .btn-line { background: transparent; color: var(--ink); }
+      .btn-line:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+      .btn-sm { min-height: 40px; font-size: 13px; padding: 0 14px; }
+      .on-dark .btn { background: var(--dark-ink); color: var(--ink); border-color: var(--dark-ink); }
+      .on-dark .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+      /* 공통 타이포 */
+      .kick { font-size: 12px; font-weight: 700; letter-spacing: .02em; color: var(--ink); }
+      .kick .n { color: var(--ink-3); font-weight: 600; margin-right: 10px; font-variant-numeric: tabular-nums; }
+      .h2 { font-size: clamp(32px, 4.6vw, 64px); line-height: 1.12; font-weight: 300; letter-spacing: -0.04em; }
+      .h3 { font-size: 20px; line-height: 1.4; font-weight: 650; letter-spacing: -0.02em; }
+      .body { font-size: 16px; line-height: 1.75; color: var(--ink-2); }
+      .small { font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+      .chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border: 1px solid var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .02em; color: var(--ink); white-space: nowrap; vertical-align: middle; }
+      .chip::before { content: ''; width: 5px; height: 5px; background: var(--accent); }
+      @media (min-width: 1024px) { .h3 { font-size: 22px; } .body { font-size: 17px; } }
+
+      .sec { padding-block: var(--sec-y); }
+      .sec + .sec { padding-top: 0; }
+      .sec-head { border-top: 1px solid var(--ink); padding-top: 18px; row-gap: 18px; margin-bottom: 56px; }
+      .sec-head .aside { align-self: end; }
+      @media (min-width: 768px) { .sec-head { margin-bottom: 80px; } }
+
+      /* 히어로 */
+      .hero { padding-top: 28px; padding-bottom: 0; }
+      .meta { row-gap: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--rule-2); }
+      .meta dt { font-size: 11px; font-weight: 600; color: var(--ink-3); letter-spacing: .02em; }
+      .meta dd { font-size: 13.5px; font-weight: 600; line-height: 1.45; }
+      .h1 { margin-top: clamp(40px, 6vw, 72px); font-size: clamp(48px, 14.5vw, 176px); line-height: 1.02; font-weight: 200; letter-spacing: -0.06em; margin-left: -0.04em; }
+      .h1 .dot { color: var(--accent); font-weight: 300; }
+      .hero-sub { margin-top: clamp(36px, 5vw, 64px); row-gap: 28px; }
+      .lead { font-size: 17px; line-height: 1.8; color: var(--ink); font-weight: 400; }
+      .lead em { font-style: normal; font-weight: 650; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .fig { margin-top: clamp(48px, 7vw, 96px); row-gap: 14px; }
+      .ph { background: var(--paper-2); overflow: hidden; }
+      .ph img { width: 100%; height: 100%; object-fit: cover; }
+      .cap { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+      .cap b { display: block; font-size: 11px; font-weight: 700; color: var(--ink); letter-spacing: .04em; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+      @media (min-width: 768px) {
+        .fig-hero > .ph, .fig-hero > .cap { grid-row: 1; }
+        .fig-hero > .cap { align-self: end; }
+        .lead { font-size: 18px; }
+      }
+
+      /* 원칙 */
+      .principles > li { border-top: 1px solid var(--rule-2); padding-block: 28px 40px; row-gap: 10px; }
+      .principles > li:last-child { border-bottom: 1px solid var(--rule-2); }
+      .bignum { font-size: clamp(56px, 7.2vw, 104px); line-height: .9; font-weight: 200; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+      @media (min-width: 768px) { .principles > li { padding-block: 32px 56px; } .principles .h3 { padding-top: 6px; } .principles .body { padding-top: 8px; } }
+
+      /* 프로젝트 */
+      .pair { row-gap: 32px; margin-bottom: 72px; align-items: start; }
+      .pair .ph-a { aspect-ratio: 3 / 2; }
+      .pair .ph-b { aspect-ratio: 3 / 4; }
+      .pair figure .cap { margin-top: 12px; }
+      .tbl { font-variant-numeric: tabular-nums; }
+      .tr { padding-block: 20px; border-top: 1px solid var(--rule-2); row-gap: 6px; align-items: baseline; transition: background .2s; }
+      .tbl .tr:last-child { border-bottom: 1px solid var(--ink); }
+      .th { padding-block: 10px; border-top: 1px solid var(--ink); font-size: 11.5px; font-weight: 700; color: var(--ink-3); letter-spacing: .02em; }
+      .td-num { font-size: 13px; font-weight: 600; color: var(--ink-3); transition: color .2s; }
+      .td-name strong { display: block; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.4; }
+      .td-name .desc { display: block; margin-top: 4px; font-size: 14px; line-height: 1.65; color: var(--ink-2); max-width: 36em; }
+      .td-meta { font-size: 14px; color: var(--ink); }
+      .works .tbody .tr:hover { background: var(--paper-2); }
+      .works .tbody .tr:hover .td-num { color: var(--accent); }
+      .tbl-foot { margin-top: 16px; }
+      @media (max-width: 767.98px) {
+        .tbl .th { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+        .td-meta { font-size: 13px; color: var(--ink-2); }
+        .td-meta + .td-meta { position: relative; }
+      }
+      @media (min-width: 768px) { .tr { padding-block: 26px; } .td-name strong { font-size: 22px; } }
+
+      /* 과정 */
+      .steps { display: grid; grid-template-columns: subgrid; row-gap: 40px; }
+      .steps > li { grid-column: 1 / -1; border-top: 1px solid var(--ink); padding-top: 16px; }
+      .steps .sn { display: block; font-size: 40px; line-height: 1; font-weight: 200; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; margin-bottom: 28px; }
+      .steps h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.4; }
+      .steps p { margin-top: 6px; font-size: 14.5px; line-height: 1.65; color: var(--ink-2); }
+      .dur { border-top: 1px solid var(--rule-2); padding-top: 16px; margin-top: 40px; }
+      .dur dl > div { display: flex; justify-content: space-between; gap: 12px; padding-block: 8px; border-bottom: 1px solid var(--rule); font-size: 14px; font-variant-numeric: tabular-nums; }
+      .dur dt { color: var(--ink-2); }
+      .dur dd { font-weight: 600; }
+      @media (max-width: 767.98px) {
+        .steps > li { display: grid; grid-template-columns: subgrid; }
+        .steps > li > * { grid-column: 2 / -1; }
+        .steps .sn { grid-column: 1 / 2; grid-row: 1 / 3; font-size: 32px; margin: 0; }
+      }
+      @media (min-width: 768px) { .steps > li { grid-column: span 4; } }
+      @media (min-width: 1024px) {
+        .steps > li { grid-column: span 2; }
+        .dur { margin-top: 0; }
+      }
+
+      /* 비용 */
+      .cost .tr { align-items: baseline; }
+      .cost-size { font-size: 22px; font-weight: 300; letter-spacing: -0.03em; line-height: 1.3; }
+      .cost-size b { font-weight: 600; }
+      .cost-wk { font-size: 16px; font-weight: 500; }
+      .cost-won { font-size: 28px; font-weight: 300; letter-spacing: -0.04em; line-height: 1.2; }
+      .cost-won small { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--ink-2); margin-left: 4px; }
+      .cost-won .pre { font-size: 12px; font-weight: 600; color: var(--ink-3); margin-right: 6px; letter-spacing: 0; }
+      .cost-note { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+      @media (max-width: 767.98px) {
+        .cost [data-k]::before { content: attr(data-k); display: block; font-size: 11px; font-weight: 600; color: var(--ink-3); margin-bottom: 2px; letter-spacing: .02em; }
+        .cost-won { font-size: 24px; }
+      }
+      @media (min-width: 1024px) { .cost-size { font-size: 26px; } .cost-won { font-size: 34px; } }
+      .basis { margin-top: 72px; row-gap: 0; }
+      .basis > .kick { margin-bottom: 18px; }
+      .basis dl { display: grid; grid-template-columns: subgrid; }
+      .basis dl > div { grid-column: 1 / -1; border-top: 1px solid var(--rule-2); padding-block: 16px 22px; }
+      .basis dt { font-size: 12px; font-weight: 700; color: var(--ink); }
+      .basis dd { margin-top: 6px; font-size: 14.5px; line-height: 1.65; color: var(--ink-2); }
+      @media (min-width: 768px) { .basis dl > div { grid-column: span 6; } }
+      @media (min-width: 1024px) { .basis dl > div { grid-column: span 4; } }
+
+      /* 후기 */
+      .quotes { row-gap: 40px; }
+      .quotes figure { border-top: 1px solid var(--ink); padding-top: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; }
+      .quotes blockquote { font-size: 21px; line-height: 1.55; font-weight: 300; letter-spacing: -0.03em; }
+      .quotes figcaption { font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
+      @media (min-width: 1024px) { .quotes blockquote { font-size: 25px; } }
+
+      /* 상담 전에 */
+      .why { row-gap: 32px; }
+      .why .k { font-size: 12px; font-weight: 700; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+      .why h3 { margin-top: 10px; }
+      .why p { margin-top: 6px; }
+      .why-item { border-top: 1px solid var(--rule-2); padding-top: 18px; }
+      .vs { margin-top: 64px; row-gap: 28px; }
+      .vs > div { border-top: 1px solid var(--ink); padding-top: 18px; }
+      .vs .lbl { font-size: 12px; font-weight: 700; color: var(--ink-3); }
+      .vs p:not(.lbl) { margin-top: 10px; font-size: 19px; line-height: 1.6; font-weight: 400; letter-spacing: -0.02em; }
+      .vs .yes .lbl { color: var(--ink); }
+      .why-cta { margin-top: 48px; row-gap: 12px; }
+      .why-cta .demo-msg { margin-top: 10px; }
+
+      /* 문의 (검정) */
+      .sec-dark { position: relative; isolation: isolate; background: var(--dark); color: var(--dark-ink); padding-block: var(--sec-y); }
+      .sec-dark .sec-head { border-top-color: var(--dark-ink); }
+      .sec-dark .kick, .sec-dark .h2 { color: var(--dark-ink); }
+      .sec-dark .kick .n { color: var(--dark-ink-2); }
+      .contact { row-gap: 56px; }
+      .contact .lead { color: var(--dark-ink); }
+      .contact .note { margin-top: 16px; font-size: 14px; line-height: 1.7; color: var(--dark-ink-2); }
+      .addr { margin-top: 40px; }
+      .addr > div { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding-block: 14px; border-top: 1px solid var(--dark-rule); font-size: 15px; }
+      .addr > div:last-child { border-bottom: 1px solid var(--dark-rule); }
+      .addr dt { color: var(--dark-ink-2); font-size: 13px; font-weight: 600; padding-top: 2px; }
+      .addr dd a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gut); row-gap: 20px; align-content: start; }
+      .form .full { grid-column: 1 / -1; }
+      .form-title { font-size: 12px; font-weight: 700; color: var(--dark-ink); border-top: 1px solid var(--dark-ink); padding-top: 18px; }
+      .f label, .f .flabel { display: block; font-size: 12px; font-weight: 600; color: var(--dark-ink-2); margin-bottom: 6px; }
+      .f input, .f select, .f textarea { width: 100%; background: transparent; color: var(--dark-ink); border: 0; border-bottom: 1px solid rgba(255,255,255,.4); border-radius: 0; padding: 10px 0; font: inherit; font-size: 16px; line-height: 1.5; transition: border-color .2s; }
+      .f select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--dark-ink) 50%), linear-gradient(135deg, var(--dark-ink) 50%, transparent 50%); background-position: calc(100% - 10px) 52%, calc(100% - 5px) 52%; background-size: 5px 5px; background-repeat: no-repeat; }
+      .f select option { color: var(--ink); }
+      .f textarea { resize: vertical; min-height: 96px; }
+      .f input::placeholder, .f textarea::placeholder { color: #8d8d8a; }
+      .f input:focus, .f select:focus, .f textarea:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
+      .f input:focus-visible, .f select:focus-visible, .f textarea:focus-visible { outline: none; }
+      .agree { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.6; color: var(--dark-ink-2); cursor: pointer; }
+      .agree input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+      .agree a { text-decoration: underline; text-underline-offset: 2px; }
+      .demo-msg { font-size: 13px; font-weight: 600; min-height: 1.6em; }
+      .demo-msg:not(:empty)::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+      .on-dark .demo-msg { color: var(--dark-ink); }
+
+      /* 바닥 */
+      .foot { padding-block: 0 120px; }
+      .foot .ruler { display: grid; border-top: 0; border-bottom: 1px solid var(--rule); }
+      .foot-mark { font-size: clamp(64px, 22vw, 248px); line-height: .9; font-weight: 200; letter-spacing: -0.07em; margin: 56px 0 40px -0.04em; white-space: nowrap; }
+      .foot-mark .dot { color: var(--accent); }
+      .foot-info { row-gap: 12px; padding-top: 18px; border-top: 1px solid var(--ink); font-size: 13px; color: var(--ink-2); }
+      .foot-info a { color: var(--ink); font-weight: 600; }
+      .foot-info a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .demo-note { margin-top: 24px; font-size: 11.5px; color: var(--ink-3); }
+
+      /* 스크롤 등장 */
+      .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
     </style>
     <meta name="theme-color" content="#1f2426" />
     <script type="application/ld+json">
@@ -85,291 +362,413 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+
     <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="font-semibold tracking-tight text-lg">YEOBAEK <span class="serif" style="color:var(--accent)">餘白</span></a>
-        <nav class="hidden md:flex items-center gap-10 text-sm" style="color: var(--ink-soft)">
-          <a href="#philosophy">철학</a>
-          <a href="#works">프로젝트</a>
-          <a href="#process">프로세스</a>
-          <a href="#contact">문의</a>
+      <div class="wrap g top-row">
+        <a href="#top" class="brand" style="--c: 1 / 4; --t: 1 / 5; --m: 1 / 3" aria-label="여백 스튜디오, 맨 위로"><span class="mark" aria-hidden="true"></span>YEOBAEK<span class="ko">여백</span></a>
+        <nav class="nav" style="--c: 4 / 10" aria-label="주요 메뉴">
+          <a href="#philosophy"><span class="n">01</span>철학</a>
+          <a href="#works"><span class="n">02</span>프로젝트</a>
+          <a href="#process"><span class="n">03</span>과정</a>
+          <a href="#cost"><span class="n">04</span>비용</a>
+          <a href="#contact"><span class="n">07</span>문의</a>
         </nav>
-        <a href="#contact" class="btn-primary text-xs">PROJECT INQUIRY</a>
+        <div class="top-act" style="--c: 11 / 13; --t: 9 / 13; --m: 3 / 5">
+          <a href="#contact" class="btn btn-sm top-cta">프로젝트 문의 <span class="ar" aria-hidden="true">→</span></a>
+          <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mnav"><span class="bars" aria-hidden="true"></span>메뉴</button>
+        </div>
       </div>
+      <div class="wrap g ruler" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span></div>
+      <nav id="mnav" class="mnav" aria-label="모바일 메뉴" hidden>
+        <ol class="wrap">
+          <li><a href="#philosophy"><span class="n">01</span>철학</a></li>
+          <li><a href="#works"><span class="n">02</span>프로젝트</a></li>
+          <li><a href="#process"><span class="n">03</span>과정</a></li>
+          <li><a href="#cost"><span class="n">04</span>비용</a></li>
+          <li><a href="#after"><span class="n">05</span>1년 뒤</a></li>
+          <li><a href="#contact"><span class="n">07</span>문의</a></li>
+        </ol>
+      </nav>
     </header>
 
-    <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-20 md:pt-32 pb-20 md:pb-28">
-        <div class="reveal">
-          <p class="eyebrow mb-10">INTERIOR DESIGN STUDIO · SEOUL</p>
-          <h1 class="serif text-5xl md:text-7xl lg:text-[88px] leading-[1.18] tracking-[-0.025em] max-w-5xl">
-            덜어낸 자리에<br />머무는 하루.
-          </h1>
-        </div>
-        <div class="mt-16 grid md:grid-cols-12 gap-10 items-end">
-          <div class="md:col-span-7 reveal">
-            <div class="ph aspect-[16/10]"  style="background-image:url('../assets/images/interior/02-site.webp');background-size:cover;background-position:center;"></div>
-          </div>
-          <div class="md:col-span-5 reveal">
-            <p class="text-base md:text-lg leading-relaxed" style="color: var(--ink-soft)">
-              여백 스튜디오는 사는 사람의 하루를 먼저 듣습니다.
-              가구의 자리보다 햇빛의 자리, 동선의 자리, 그리고 비워둘 자리.
-              우리가 가장 정성껏 설계하는 것은 가장 비어 있는 곳입니다.
-            </p>
-            <a href="#works" class="btn-primary mt-10">PROJECTS &nbsp;→</a>
-          </div>
-        </div>
-      </section>
+    <div class="page">
+      <div class="gl" aria-hidden="true"><div class="wrap g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 
-      <!-- PHILOSOPHY -->
-      <section id="philosophy" class="container-x py-24 md:py-32">
-        <div class="grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-4 reveal">
-            <p class="eyebrow mb-4">PHILOSOPHY</p>
-            <h2 class="serif text-3xl md:text-4xl font-semibold leading-tight tracking-tight">세 가지 원칙.</h2>
-          </div>
-          <div class="md:col-span-8 space-y-12">
-            <article class="reveal row pt-8 grid md:grid-cols-12 gap-6">
-              <p class="md:col-span-2 serif text-2xl" style="color: var(--accent)">01</p>
-              <div class="md:col-span-10">
-                <h3 class="text-2xl font-semibold mb-3">동선이 먼저, 마감은 나중</h3>
-                <p class="leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">아름다운 마감보다 먼저 그려야 하는 것은 아침에 일어난 사람의 동선입니다. 하루의 흐름이 막히지 않는 방을 먼저 그립니다.</p>
-              </div>
-            </article>
-            <article class="reveal row pt-8 grid md:grid-cols-12 gap-6">
-              <p class="md:col-span-2 serif text-2xl" style="color: var(--accent)">02</p>
-              <div class="md:col-span-10">
-                <h3 class="text-2xl font-semibold mb-3">소재는 시간을 견디는 것으로</h3>
-                <p class="leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">유행을 좇기보다 10년 뒤에도 손이 가는 소재를 고릅니다. 원목, 석재, 천연 도장 — 닳을수록 깊어지는 것들.</p>
-              </div>
-            </article>
-            <article class="reveal row pt-8 grid md:grid-cols-12 gap-6">
-              <p class="md:col-span-2 serif text-2xl" style="color: var(--accent)">03</p>
-              <div class="md:col-span-10">
-                <h3 class="text-2xl font-semibold mb-3">비울 자리를 먼저 정합니다</h3>
-                <p class="leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">채울 가구를 정하기 전에, 비워둘 자리부터 정합니다. 비어 있어야 머물 수 있는 자리가 집을 살게 합니다.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- WORKS -->
-      <section id="works" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="flex items-end justify-between mb-12 reveal">
-            <div>
-              <p class="eyebrow mb-4">SELECTED WORKS</p>
-              <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">2024 — 2025</h2>
-            </div>
-            <p class="text-sm" style="color: var(--ink-soft)">총 12개 프로젝트 중 4건</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-8">
-            <article class="reveal">
-              <div class="ph aspect-[4/5]"  style="background-image:url('../assets/images/interior/01-meeting.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between">
-                <h3 class="text-xl font-semibold">평창동 단독주택</h3>
-                <span class="text-sm" style="color: var(--ink-soft)">2025 · 단독주택 · 196㎡</span>
-              </div>
-              <p class="mt-3" style="color: var(--ink-soft)">세 가족의 동선을 한 층에 정돈한 평면. 마당으로 이어지는 시야를 비워두는 일.</p>
-            </article>
-            <article class="reveal mt-12 md:mt-24">
-              <div class="ph aspect-[4/5]"  style="background-image:url('../assets/images/interior/04-samples.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between">
-                <h3 class="text-xl font-semibold">한남동 부띠끄 호텔 객실</h3>
-                <span class="text-sm" style="color: var(--ink-soft)">2025 · 상업 · 32㎡ × 8객실</span>
-              </div>
-              <p class="mt-3" style="color: var(--ink-soft)">하루를 머무는 사람의 짐을 모두 정리할 수 있는 객실. 보이는 가구는 적게.</p>
-            </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/5]"  style="background-image:url('../assets/images/interior/02-site.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between">
-                <h3 class="text-xl font-semibold">서래마을 아파트 리모델</h3>
-                <span class="text-sm" style="color: var(--ink-soft)">2024 · 주거 · 132㎡</span>
-              </div>
-              <p class="mt-3" style="color: var(--ink-soft)">두 아이의 성장 시기에 맞춘 가변형 평면. 벽을 허무는 대신 문을 줄였습니다.</p>
-            </article>
-            <article class="reveal mt-12 md:mt-24">
-              <div class="ph aspect-[4/5]"  style="background-image:url('../assets/images/interior/01-meeting.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6 flex items-baseline justify-between">
-                <h3 class="text-xl font-semibold">성수동 작업실</h3>
-                <span class="text-sm" style="color: var(--ink-soft)">2024 · 상업 · 88㎡</span>
-              </div>
-              <p class="mt-3" style="color: var(--ink-soft)">일러스트레이터의 작업실. 종일 빛이 한 방향으로 머무는 자리에 책상을 두었습니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROCESS -->
-      <section id="process" class="container-x py-24 md:py-36">
-        <div class="reveal max-w-2xl mb-14">
-          <p class="eyebrow mb-4">PROCESS</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            듣는 일에 가장<br />많은 시간을 씁니다.
-          </h2>
-        </div>
-        <div class="grid md:grid-cols-5 gap-6">
-          <div class="reveal"><p class="serif text-3xl" style="color:var(--accent)">01</p><h3 class="mt-4 font-semibold text-lg">대화</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">하루의 동선을 듣는 2시간.</p></div>
-          <div class="reveal"><p class="serif text-3xl" style="color:var(--accent)">02</p><h3 class="mt-4 font-semibold text-lg">실측</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">현장 답사와 빛의 흐름 기록.</p></div>
-          <div class="reveal"><p class="serif text-3xl" style="color:var(--accent)">03</p><h3 class="mt-4 font-semibold text-lg">설계</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">평면·소재·조명을 한 번에.</p></div>
-          <div class="reveal"><p class="serif text-3xl" style="color:var(--accent)">04</p><h3 class="mt-4 font-semibold text-lg">시공</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">감리 주 2회 · 고정 협력사.</p></div>
-          <div class="reveal"><p class="serif text-3xl" style="color:var(--accent)">05</p><h3 class="mt-4 font-semibold text-lg">사후 점검</h3><p class="mt-2 text-sm" style="color:var(--ink-soft)">3개월·1년 두 차례 방문.</p></div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      
-      <!-- ====================== CASE BY SIZE ====================== -->
-      <section id="cases" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">CASE BY SIZE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">평수와 예산으로 가늠해 보기</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">최근 진행한 주거 프로젝트 평균치를 정리했습니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">20평대 신혼 / 4–6주</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">전체 리모델링 평당 180만원선, 가구 별도 진행.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">30평대 가족 / 6–8주</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">구조 변경 포함 평당 220만원선, 주방 확장 사례 다수.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">40평대 펜트하우스 / 10주</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">마감재 업그레이드 시 평당 280만원선부터.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">50평 이상 단독주택 / 12주+</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">설계부터 동행, 별도 견적 미팅을 권장합니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== AFTER LIVING ====================== -->
-      <section id="after" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">AFTER LIVING</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">여백의 집, 1년 뒤</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">입주 1년이 지난 클라이언트께 다시 여쭙습니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">성수동 38평 가족</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'아이 방 슬라이딩 도어가 가장 잘한 선택이었어요.'</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">분당 24평 신혼</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'주방 다용도실을 합친 게 살수록 편합니다.'</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">한남 52평 부부</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'1년이 지나도 변함없는 마감, 손님들이 늘 묻습니다.'</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">오래 머무는 공간을 그리신다면</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              집을 고치는 일, 마음까지 흔들리는 일입니다.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">라이프스타일 진단</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">사는 방식을 먼저 듣고 도면을 그립니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">투명한 견적과 일정</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">자재비·공정·납기를 한 장에 정리해 드립니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">준공 후 1년 케어</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">하자 점검과 보수까지 책임지고 마무리</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">잘못 고른 업체 하나에, 수천만 원과 6개월이 사라질 수 있습니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">현관문을 열 때마다 작게 안도하는 집, 그 공간이 매일을 바꿉니다.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#contact" class="btn-primary">현장 미팅 신청 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">스타일별 시공 사례집 받기</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="py-24 md:py-36" style="background: var(--primary); color: #f5f3ee">
-        <div class="container-x grid md:grid-cols-12 gap-12">
-          <div class="md:col-span-5 reveal">
-            <p class="eyebrow mb-4" style="color:#cdbf9b">CONTACT</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              비울 자리부터<br />함께 그려보겠습니다.
-            </h2>
-          </div>
-          <div class="md:col-span-7 reveal">
-            <p class="leading-relaxed mb-6" style="color: rgba(245,243,238,.7)">
-              주거·상업 모두 진행합니다. 30㎡부터, 단계별 컨설팅도 가능합니다.
-              아래 정보를 남겨 주시면 영업일 기준 2일 내 회신드립니다.
-            </p>
-            <ul class="mb-10 text-sm space-y-2" style="color: rgba(245,243,238,.7)">
-              <li>· <strong>설계 + 협력사 시공 감리</strong> 모델 — 실내건축공사업 등록 협력사와 함께 시공합니다.</li>
-              <li>· <strong>예산 가이드</strong>: 평당 ₩200만~₩400만 (마감재 등급에 따라 상이)</li>
-              <li>· <strong>시공 가능 지역</strong>: 수도권 전 지역 / 지방은 별도 협의</li>
-              <li>· <strong>평균 공사 기간</strong>: 32㎡ 4주 · 99㎡ 8주 · 165㎡ 12주</li>
-              <li>· <strong>자재 등급</strong>: 전 자재 E0~E1 등급 사용 / 친환경 HB 마크 우선</li>
-              <li>· <strong>하자 보수 보증</strong>: 마감재 1년, 누수·구조 2년 (건설산업기본법 기준)</li>
-            </ul>
-            <dl class="space-y-4">
-              <div class="row pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#cdbf9b">스튜디오</dt><dd>서울 종로구 자하문로 OO길 8</dd></div>
-              <div class="row pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#cdbf9b">전화</dt><dd>02 · 555 · 0414</dd></div>
-              <div class="row pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#cdbf9b">이메일</dt><dd>hello@yeobaek.studio</dd></div>
-              <div class="row pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#cdbf9b">인스타그램</dt><dd>@yeobaek.studio</dd></div>
+      <main id="top">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="wrap">
+            <dl class="g meta">
+              <div style="--c: 1 / 4; --m: 1 / 3"><dt>분야</dt><dd>주거 · 상업 인테리어</dd></div>
+              <div style="--c: 4 / 7; --m: 3 / 5"><dt>방식</dt><dd>설계 + 협력사 시공 감리</dd></div>
+              <div style="--c: 7 / 10; --m: 1 / 3"><dt>스튜디오</dt><dd>서울 종로구</dd></div>
+              <div style="--c: 10 / 13; --m: 3 / 5"><dt>규모</dt><dd>30㎡부터 상담</dd></div>
             </dl>
-            <a href="mailto:hello@yeobaek.studio" class="inline-block mt-12 px-8 py-4 bg-white text-[var(--primary)] font-medium" style="color: var(--primary)">PROJECT INQUIRY &nbsp;→</a>
-          </div>
-        </div>
-      </section>
-    </main>
 
-    <footer class="py-10 text-sm" style="background: var(--bg); color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 YEOBAEK STUDIO · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
-      </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
-    </footer>
+            <h1 id="hero-title" class="h1">덜어낸 자리에<br />머무는 하루<span class="dot">.</span></h1>
+
+            <div class="g hero-sub">
+              <p class="lead" style="--c: 7 / 12; --t: 6 / 13">
+                여백 스튜디오는 사는 사람의 하루를 먼저 듣습니다.
+                가구의 자리보다 햇빛의 자리, 동선의 자리, 그리고 비워둘 자리.
+                우리가 가장 정성껏 설계하는 것은 <em>가장 비어 있는 곳</em>입니다.
+              </p>
+              <div class="cta-row" style="--c: 7 / 13; --t: 6 / 13">
+                <a href="#contact" class="btn">프로젝트 문의 <span class="ar" aria-hidden="true">→</span></a>
+                <a href="#works" class="btn btn-line">프로젝트 보기 <span class="ar" aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+
+            <figure class="g fig fig-hero reveal">
+              <div class="ph" style="--c: 4 / 13; aspect-ratio: 1376 / 768">
+                <img src="../assets/images/interior/02-site.webp" width="1376" height="768" alt="철거를 마친 아파트 현장에서 디자이너가 줄자로 벽 치수를 재며 휴대폰에 기록하는 모습" />
+              </div>
+              <figcaption class="cap" style="--c: 1 / 4; --t: 1 / 4">
+                <b>Fig. 01 — 실측</b>
+                공사 전, 빛이 들어오는 방향과 벽의 상태부터 기록합니다.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- 01 PHILOSOPHY -->
+        <section id="philosophy" class="sec" aria-labelledby="h-phil">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">01</span>철학</p>
+              <h2 id="h-phil" class="h2" style="--c: 4 / 13; --t: 4 / 13">세 가지 원칙.</h2>
+            </div>
+            <ol class="principles">
+              <li class="g bleed reveal">
+                <span class="bignum" style="--c: 1 / 4; --t: 1 / 4; --m: 1 / -1" aria-hidden="true">01</span>
+                <h3 class="h3" style="--c: 4 / 8; --t: 4 / 8"><span class="sr-only">원칙 1. </span>동선이 먼저, 마감은 나중</h3>
+                <p class="body" style="--c: 8 / 13; --t: 8 / 13">아름다운 마감보다 먼저 그려야 하는 것은 아침에 일어난 사람의 동선입니다. 하루의 흐름이 막히지 않는 방을 먼저 그립니다.</p>
+              </li>
+              <li class="g bleed reveal">
+                <span class="bignum" style="--c: 1 / 4; --t: 1 / 4" aria-hidden="true">02</span>
+                <h3 class="h3" style="--c: 4 / 8; --t: 4 / 8"><span class="sr-only">원칙 2. </span>소재는 시간을 견디는 것으로</h3>
+                <p class="body" style="--c: 8 / 13; --t: 8 / 13">유행을 좇기보다 10년 뒤에도 손이 가는 소재를 고릅니다. 원목, 석재, 천연 도장 — 닳을수록 깊어지는 것들.</p>
+              </li>
+              <li class="g bleed reveal">
+                <span class="bignum" style="--c: 1 / 4; --t: 1 / 4" aria-hidden="true">03</span>
+                <h3 class="h3" style="--c: 4 / 8; --t: 4 / 8"><span class="sr-only">원칙 3. </span>비울 자리를 먼저 정합니다</h3>
+                <p class="body" style="--c: 8 / 13; --t: 8 / 13">채울 가구를 정하기 전에, 비워둘 자리부터 정합니다. 비어 있어야 머물 수 있는 자리가 집을 살게 합니다.</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- 02 WORKS -->
+        <section id="works" class="sec works" aria-labelledby="h-works">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">02</span>선정 프로젝트</p>
+              <h2 id="h-works" class="h2 tnum" style="--c: 4 / 10; --t: 4 / 10">2024 — 2025</h2>
+              <p class="small aside" style="--c: 10 / 13; --t: 10 / 13">총 12개 프로젝트 중 4건 <span class="chip">예시 수치</span></p>
+            </div>
+
+            <div class="g pair">
+              <figure class="reveal" style="--c: 1 / 8; --t: 1 / 8">
+                <div class="ph ph-a">
+                  <img src="../assets/images/interior/01-meeting.webp" width="1376" height="768" loading="lazy" alt="원목 테이블에 평면도와 마감재 샘플을 펼쳐 놓고 디자이너가 부부와 상담하는 장면" />
+                </div>
+                <figcaption class="cap"><b>Fig. 02 — 대화</b>도면을 펴기 전에, 하루의 동선부터 듣습니다.</figcaption>
+              </figure>
+              <figure class="reveal" style="--c: 9 / 13; --t: 9 / 13">
+                <div class="ph ph-b">
+                  <img src="../assets/images/interior/04-samples.webp" width="1376" height="768" loading="lazy" alt="톤이 다른 원목 샘플 세 장을 손에 겹쳐 들고 석재·패브릭 샘플과 비교하는 모습" style="object-position: 58% 50%" />
+                </div>
+                <figcaption class="cap"><b>Fig. 03 — 소재</b>원목·석재·패브릭 샘플을 손으로 대 보고 고릅니다.</figcaption>
+              </figure>
+            </div>
+
+            <div class="tbl" role="table" aria-label="선정 프로젝트 목록">
+              <div role="rowgroup">
+                <div role="row" class="g tr th bleed">
+                  <span role="columnheader" style="--c: 1 / 2; --t: 1 / 2">번호</span>
+                  <span role="columnheader" style="--c: 2 / 8; --t: 2 / 8">이름</span>
+                  <span role="columnheader" style="--c: 8 / 10; --t: 8 / 10">유형</span>
+                  <span role="columnheader" style="--c: 10 / 12; --t: 10 / 12">면적</span>
+                  <span role="columnheader" style="--c: 12 / 13; --t: 12 / 13">연도</span>
+                </div>
+              </div>
+              <div role="rowgroup" class="tbody">
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="td-num" style="--c: 1 / 2; --t: 1 / 2; --m: 1 / 2">01</span>
+                  <span role="cell" class="td-name" style="--c: 2 / 8; --t: 2 / 8; --m: 2 / 5"><strong>평창동 단독주택</strong><span class="desc">세 가족의 동선을 한 층에 정돈한 평면. 마당으로 이어지는 시야를 비워두는 일.</span></span>
+                  <span role="cell" class="td-meta" style="--c: 8 / 10; --t: 8 / 10; --m: 2 / 3">단독주택</span>
+                  <span role="cell" class="td-meta" style="--c: 10 / 12; --t: 10 / 12; --m: 3 / 4">196㎡</span>
+                  <span role="cell" class="td-meta" style="--c: 12 / 13; --t: 12 / 13; --m: 4 / 5">2025</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="td-num" style="--c: 1 / 2; --t: 1 / 2; --m: 1 / 2">02</span>
+                  <span role="cell" class="td-name" style="--c: 2 / 8; --t: 2 / 8; --m: 2 / 5"><strong>한남동 부띠끄 호텔 객실</strong><span class="desc">하루를 머무는 사람의 짐을 모두 정리할 수 있는 객실. 보이는 가구는 적게.</span></span>
+                  <span role="cell" class="td-meta" style="--c: 8 / 10; --t: 8 / 10; --m: 2 / 3">상업</span>
+                  <span role="cell" class="td-meta" style="--c: 10 / 12; --t: 10 / 12; --m: 3 / 4">32㎡ × 8객실</span>
+                  <span role="cell" class="td-meta" style="--c: 12 / 13; --t: 12 / 13; --m: 4 / 5">2025</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="td-num" style="--c: 1 / 2; --t: 1 / 2; --m: 1 / 2">03</span>
+                  <span role="cell" class="td-name" style="--c: 2 / 8; --t: 2 / 8; --m: 2 / 5"><strong>서래마을 아파트 리모델</strong><span class="desc">두 아이의 성장 시기에 맞춘 가변형 평면. 벽을 허무는 대신 문을 줄였습니다.</span></span>
+                  <span role="cell" class="td-meta" style="--c: 8 / 10; --t: 8 / 10; --m: 2 / 3">주거</span>
+                  <span role="cell" class="td-meta" style="--c: 10 / 12; --t: 10 / 12; --m: 3 / 4">132㎡</span>
+                  <span role="cell" class="td-meta" style="--c: 12 / 13; --t: 12 / 13; --m: 4 / 5">2024</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="td-num" style="--c: 1 / 2; --t: 1 / 2; --m: 1 / 2">04</span>
+                  <span role="cell" class="td-name" style="--c: 2 / 8; --t: 2 / 8; --m: 2 / 5"><strong>성수동 작업실</strong><span class="desc">일러스트레이터의 작업실. 종일 빛이 한 방향으로 머무는 자리에 책상을 두었습니다.</span></span>
+                  <span role="cell" class="td-meta" style="--c: 8 / 10; --t: 8 / 10; --m: 2 / 3">상업</span>
+                  <span role="cell" class="td-meta" style="--c: 10 / 12; --t: 10 / 12; --m: 3 / 4">88㎡</span>
+                  <span role="cell" class="td-meta" style="--c: 12 / 13; --t: 12 / 13; --m: 4 / 5">2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 PROCESS -->
+        <section id="process" class="sec" aria-labelledby="h-proc">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">03</span>과정</p>
+              <h2 id="h-proc" class="h2" style="--c: 4 / 13; --t: 4 / 13">듣는 일에 가장<br />많은 시간을 씁니다.</h2>
+            </div>
+            <div class="g">
+              <ol class="steps" style="--c: 1 / 11; --t: 1 / 13">
+                <li class="reveal"><span class="sn" aria-hidden="true">01</span><h3>대화</h3><p>하루의 동선을 듣는 2시간.</p></li>
+                <li class="reveal"><span class="sn" aria-hidden="true">02</span><h3>실측</h3><p>현장 답사와 빛의 흐름 기록.</p></li>
+                <li class="reveal"><span class="sn" aria-hidden="true">03</span><h3>설계</h3><p>평면·소재·조명을 한 번에.</p></li>
+                <li class="reveal"><span class="sn" aria-hidden="true">04</span><h3>시공</h3><p>감리 주 2회 · 고정 협력사.</p></li>
+                <li class="reveal"><span class="sn" aria-hidden="true">05</span><h3>사후 점검</h3><p>3개월·1년 두 차례 방문.</p></li>
+              </ol>
+              <div class="dur reveal" style="--c: 11 / 13; --t: 9 / 13">
+                <p class="kick">평균 공사 기간</p>
+                <dl class="mt-2">
+                  <div><dt>32㎡</dt><dd>4주</dd></div>
+                  <div><dt>99㎡</dt><dd>8주</dd></div>
+                  <div><dt>165㎡</dt><dd>12주</dd></div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 COST BY SIZE -->
+        <section id="cost" class="sec" aria-labelledby="h-cost">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">04</span>비용</p>
+              <h2 id="h-cost" class="h2" style="--c: 4 / 10; --t: 4 / 13">평수와 예산으로<br />가늠해 보기</h2>
+              <p class="small aside" style="--c: 10 / 13; --t: 4 / 13">최근 진행한 주거 프로젝트 평균치를 정리했습니다. <span class="chip">예시 수치 · 실제 데이터로 교체</span></p>
+            </div>
+
+            <div class="tbl cost" role="table" aria-label="평형별 공사 기간과 평당 비용">
+              <div role="rowgroup">
+                <div role="row" class="g tr th bleed">
+                  <span role="columnheader" style="--c: 1 / 5; --t: 1 / 5">규모</span>
+                  <span role="columnheader" style="--c: 5 / 7; --t: 5 / 7">공사 기간</span>
+                  <span role="columnheader" style="--c: 7 / 10; --t: 7 / 10">평당 비용</span>
+                  <span role="columnheader" style="--c: 10 / 13; --t: 10 / 13">기준</span>
+                </div>
+              </div>
+              <div role="rowgroup">
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="cost-size" style="--c: 1 / 5; --t: 1 / 5; --m: 1 / -1"><b>20평대</b> 신혼</span>
+                  <span role="cell" class="cost-wk" data-k="공사 기간" style="--c: 5 / 7; --t: 5 / 7; --m: 1 / 3">4–6주</span>
+                  <span role="cell" class="cost-won" data-k="평당 비용" style="--c: 7 / 10; --t: 7 / 10; --m: 3 / 5">180<small>만원선</small></span>
+                  <span role="cell" class="cost-note" style="--c: 10 / 13; --t: 10 / 13; --m: 1 / -1">전체 리모델링 기준, 가구는 별도로 진행합니다.</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="cost-size" style="--c: 1 / 5; --t: 1 / 5; --m: 1 / -1"><b>30평대</b> 가족</span>
+                  <span role="cell" class="cost-wk" data-k="공사 기간" style="--c: 5 / 7; --t: 5 / 7; --m: 1 / 3">6–8주</span>
+                  <span role="cell" class="cost-won" data-k="평당 비용" style="--c: 7 / 10; --t: 7 / 10; --m: 3 / 5">220<small>만원선</small></span>
+                  <span role="cell" class="cost-note" style="--c: 10 / 13; --t: 10 / 13; --m: 1 / -1">구조 변경 포함. 주방을 넓힌 사례가 많습니다.</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="cost-size" style="--c: 1 / 5; --t: 1 / 5; --m: 1 / -1"><b>40평대</b> 펜트하우스</span>
+                  <span role="cell" class="cost-wk" data-k="공사 기간" style="--c: 5 / 7; --t: 5 / 7; --m: 1 / 3">10주</span>
+                  <span role="cell" class="cost-won" data-k="평당 비용" style="--c: 7 / 10; --t: 7 / 10; --m: 3 / 5">280<small>만원선부터</small></span>
+                  <span role="cell" class="cost-note" style="--c: 10 / 13; --t: 10 / 13; --m: 1 / -1">마감재를 업그레이드하는 경우의 기준입니다.</span>
+                </div>
+                <div role="row" class="g tr bleed reveal">
+                  <span role="cell" class="cost-size" style="--c: 1 / 5; --t: 1 / 5; --m: 1 / -1"><b>50평 이상</b> 단독주택</span>
+                  <span role="cell" class="cost-wk" data-k="공사 기간" style="--c: 5 / 7; --t: 5 / 7; --m: 1 / 3">12주+</span>
+                  <span role="cell" class="cost-won" data-k="평당 비용" style="--c: 7 / 10; --t: 7 / 10; --m: 3 / 5"><span class="pre">별도</span>견적</span>
+                  <span role="cell" class="cost-note" style="--c: 10 / 13; --t: 10 / 13; --m: 1 / -1">설계부터 함께합니다. 견적 미팅을 따로 권해 드립니다.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="g basis">
+              <p class="kick reveal"><span class="n">04.1</span>진행 기준</p>
+              <dl class="reveal">
+                <div><dt>진행 방식</dt><dd>설계 + 협력사 시공 감리. 실내건축공사업 등록 협력사와 함께 시공합니다.</dd></div>
+                <div><dt>예산 가이드</dt><dd>평당 200만~400만 원. 마감재 등급에 따라 달라집니다.</dd></div>
+                <div><dt>시공 가능 지역</dt><dd>수도권 전 지역. 지방은 별도로 협의합니다.</dd></div>
+                <div><dt>자재 등급</dt><dd>전 자재 E0~E1 등급을 쓰고, 친환경 HB 마크 제품을 우선합니다.</dd></div>
+                <div><dt>하자 보수 보증</dt><dd>마감재 1년, 누수·구조 2년 (건설산업기본법 기준).</dd></div>
+                <div><dt>첫 상담</dt><dd>프로젝트 1차 상담은 무료입니다. 단계별 컨설팅도 가능합니다.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 AFTER LIVING -->
+        <section id="after" class="sec" aria-labelledby="h-after">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">05</span>1년 뒤</p>
+              <h2 id="h-after" class="h2" style="--c: 4 / 10; --t: 4 / 13">여백의 집, 1년 뒤</h2>
+              <p class="small aside" style="--c: 10 / 13; --t: 4 / 13">입주 1년이 지난 클라이언트께 다시 여쭙습니다. <span class="chip">예시 후기</span></p>
+            </div>
+            <div class="g quotes">
+              <figure class="reveal" style="--c: 1 / 5; --t: 1 / 5">
+                <blockquote>“아이 방 슬라이딩 도어가 가장 잘한 선택이었어요.”</blockquote>
+                <figcaption>성수동 · 38평 · 가족</figcaption>
+              </figure>
+              <figure class="reveal" style="--c: 5 / 9; --t: 5 / 9">
+                <blockquote>“주방과 다용도실을 합친 게 살수록 편합니다.”</blockquote>
+                <figcaption>분당 · 24평 · 신혼부부</figcaption>
+              </figure>
+              <figure class="reveal" style="--c: 9 / 13; --t: 9 / 13">
+                <blockquote>“1년이 지나도 마감이 그대로라, 손님들이 늘 묻습니다.”</blockquote>
+                <figcaption>한남 · 52평 · 부부</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 BEFORE YOU START -->
+        <section id="journey" class="sec" aria-labelledby="h-journey">
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">06</span>상담 전에</p>
+              <div style="--c: 4 / 13; --t: 4 / 13">
+                <p class="small" style="margin-bottom: 10px">오래 머무는 공간을 그리신다면</p>
+                <h2 id="h-journey" class="h2">집을 고치는 일,<br />마음까지 흔들리는 일입니다.</h2>
+              </div>
+            </div>
+            <div class="g why">
+              <div class="why-item reveal" style="--c: 4 / 7; --t: 1 / 5">
+                <p class="k">A</p>
+                <h3 class="h3">라이프스타일 진단</h3>
+                <p class="body">사는 방식을 먼저 듣고 도면을 그립니다.</p>
+              </div>
+              <div class="why-item reveal" style="--c: 7 / 10; --t: 5 / 9">
+                <p class="k">B</p>
+                <h3 class="h3">투명한 견적과 일정</h3>
+                <p class="body">자재비·공정·납기를 한 장에 정리해 드립니다.</p>
+              </div>
+              <div class="why-item reveal" style="--c: 10 / 13; --t: 9 / 13">
+                <p class="k">C</p>
+                <h3 class="h3">준공 후 1년 케어</h3>
+                <p class="body">하자 점검과 보수까지 책임지고 마무리합니다.</p>
+              </div>
+            </div>
+            <div class="g vs">
+              <div class="reveal" style="--c: 4 / 8; --t: 1 / 7">
+                <p class="lbl">미루시면</p>
+                <p>잘못 고른 업체 하나에, 수천만 원과 6개월이 사라질 수 있습니다.</p>
+              </div>
+              <div class="yes reveal" style="--c: 8 / 13; --t: 7 / 13">
+                <p class="lbl">시작하시면</p>
+                <p>현관문을 열 때마다 작게 안도하는 집. 그 공간이 매일을 바꿉니다.</p>
+              </div>
+            </div>
+            <div class="g why-cta reveal">
+              <div class="cta-row" style="--c: 4 / 13; --t: 1 / 13">
+                <a href="#contact" class="btn">현장 미팅 신청 <span class="ar" aria-hidden="true">→</span></a>
+                <button type="button" class="btn btn-line" data-demo-btn>스타일별 시공 사례집 받기 <span class="ar" aria-hidden="true">↓</span></button>
+              </div>
+              <p class="demo-msg" style="--c: 4 / 13; --t: 1 / 13" role="status" aria-live="polite" data-msg></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 07 CONTACT -->
+        <section id="contact" class="sec-dark on-dark" aria-labelledby="h-contact">
+          <div class="gl dark" aria-hidden="true"><div class="wrap g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="wrap">
+            <div class="g sec-head bleed reveal">
+              <p class="kick" style="--c: 1 / 4; --t: 1 / 4"><span class="n">07</span>문의</p>
+              <h2 id="h-contact" class="h2" style="--c: 4 / 13; --t: 4 / 13">비울 자리부터<br />함께 그려보겠습니다.</h2>
+            </div>
+            <div class="g contact">
+              <div class="reveal" style="--c: 1 / 6; --t: 1 / 13">
+                <p class="lead">주거·상업 모두 진행합니다. 30㎡부터, 단계별 컨설팅도 가능합니다. 아래 정보를 남겨 주시면 영업일 기준 2일 안에 회신드립니다.</p>
+                <dl class="addr">
+                  <div><dt>스튜디오</dt><dd>서울 종로구 자하문로 OO길 8</dd></div>
+                  <div><dt>전화</dt><dd class="tnum"><a href="tel:025550414">02 · 555 · 0414</a></dd></div>
+                  <div><dt>이메일</dt><dd><a href="mailto:hello@yeobaek.studio">hello@yeobaek.studio</a></dd></div>
+                  <div><dt>인스타그램</dt><dd>@yeobaek.studio</dd></div>
+                </dl>
+              </div>
+              <form class="form reveal" style="--c: 7 / 13; --t: 1 / 13" novalidate data-demo-form aria-labelledby="form-title">
+                <p id="form-title" class="form-title full">프로젝트 문의서</p>
+                <div class="f"><label for="q-name">이름</label><input id="q-name" name="name" autocomplete="name" required /></div>
+                <div class="f"><label for="q-tel">연락처</label><input id="q-tel" name="tel" type="tel" autocomplete="tel" placeholder="010-0000-0000" required /></div>
+                <div class="f"><label for="q-type">공간 유형</label>
+                  <select id="q-type" name="type" required><option value="">선택</option><option>아파트</option><option>단독주택</option><option>상업 공간</option><option>단계별 컨설팅</option></select>
+                </div>
+                <div class="f"><label for="q-size">면적</label><input id="q-size" name="size" inputmode="numeric" placeholder="예: 99㎡ / 30평" /></div>
+                <div class="f full"><label for="q-when">희망 시기</label>
+                  <select id="q-when" name="when"><option value="">선택</option><option>1개월 안</option><option>3개월 안</option><option>6개월 안</option><option>아직 미정</option></select>
+                </div>
+                <div class="f full"><label for="q-msg">하루를 들려주세요</label><textarea id="q-msg" name="msg" rows="3" placeholder="가족 구성, 지금 불편한 점, 꼭 남기고 싶은 것"></textarea></div>
+                <label class="agree full"><input type="checkbox" required /><span>(필수) 개인정보 수집·이용에 동의합니다. 자세한 내용은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span></label>
+                <div class="full" style="display:flex; flex-wrap:wrap; align-items:center; gap:16px">
+                  <button type="submit" class="btn">문의 보내기 <span class="ar" aria-hidden="true">→</span></button>
+                  <p class="demo-msg" role="status" aria-live="polite" data-msg></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="foot">
+        <div class="wrap g ruler" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span></div>
+        <div class="wrap">
+          <p class="foot-mark" aria-hidden="true">YEOBAEK<span class="dot">.</span></p>
+          <div class="g foot-info">
+            <p style="--c: 1 / 7; --t: 1 / 7">© 2026 YEOBAEK STUDIO · 사업자등록번호 000-00-00000</p>
+            <p style="--c: 7 / 10; --t: 7 / 10">서울 종로구 자하문로 OO길 8</p>
+            <p style="--c: 10 / 13; --t: 10 / 13"><a href="/">← 쇼룸으로 돌아가기</a></p>
+          </div>
+          <p class="demo-note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
+        </div>
+      </footer>
+    </div>
 
     <script>
       const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      (() => {
+        const DEMO = '시안 데모 — 실제로 전송되지 않습니다.';
+        const say = (el) => { if (!el) return; el.textContent = ''; requestAnimationFrame(() => { el.textContent = DEMO; }); };
+        document.querySelectorAll('[data-demo-form]').forEach((f) => f.addEventListener('submit', (e) => { e.preventDefault(); say(f.querySelector('[data-msg]')); }));
+        document.querySelectorAll('[data-demo-btn]').forEach((b) => b.addEventListener('click', () => say(b.closest('.why-cta').querySelector('[data-msg]'))));
+
+        const btn = document.querySelector('.menu-btn');
+        const panel = document.getElementById('mnav');
+        const setOpen = (open) => { btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
+        btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+        panel.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); } });
+        matchMedia('(min-width: 1024px)').addEventListener('change', (m) => m.matches && setOpen(false));
+
+        const links = [...document.querySelectorAll('.nav a')];
+        const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver((es) => es.forEach((e) => {
+          const a = map.get(e.target.id); if (!a) return;
+          if (window.scrollY < 120) { links.forEach((l) => l.removeAttribute('aria-current')); return; }
+          if (e.isIntersecting) { links.forEach((l) => l.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        map.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="interior" role="region" aria-label="알림 배너">
