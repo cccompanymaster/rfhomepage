@@ -40,129 +40,924 @@
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ============================================================
+         라온치과의원 — 그레이니 그라데이션 (차분한 민트·연초록·아이보리)
+         그레인은 히어로 · CTA 밴드 · 섹션 구분선에만. 나머지는 흰색/아이보리.
+         ============================================================ */
       :root {
-        --bg: #fdfdfb;
-        --bg-soft: #f3faf6;
-        --primary: #0f5d4a;
-        --primary-soft: #d6f0e6;
-        --accent: #5fb59a;
-        --ink: #16221d;
-        --ink-soft: #5e6b6f;
-        --line: #e6ebe7;
+        --bg: #fbfaf6;
+        --surface: #ffffff;
+        --surface-2: #f5f7f1;
+        --ink: #14211c;
+        --ink-2: #3b4943;
+        --ink-3: #59665f;
+        --line: #e3e7e0;
+        --line-2: #d2dad3;
+        --green: #1d7a5f;
+        --green-ink: #145a46;
+        --green-deep: #0e4335;
+        --mint: #bfe7d6;
+        --mint-2: #e3f3ea;
+        --sage: #d8ecca;
+        --ivory-warm: #f7e5c8;
+
+        --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+          'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        --serif: 'MaruBuri', 'Apple SD Gothic Neo', serif;
+
+        --maxw: 1200px;
+        --pad-x: 40px;
+        --fab-r: 112px;
+        --sec-y: 128px;
+        --hd-h: 68px;
+        --r-xl: 36px;
+        --r-lg: 28px;
+        --r-md: 20px;
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+        --shadow-soft: 0 1px 0 rgba(20, 33, 28, 0.03), 0 28px 56px -32px rgba(16, 66, 50, 0.3);
+        /* 필름 입자: 회색 노이즈를 soft-light 로 얹어 밝기는 그대로, 입자만 보이게 */
+        --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.7 0 0 0 -.35 1.7 0 0 0 -.35 1.7 0 0 0 -.35 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
-      html { scroll-behavior: smooth; }
+      @media (max-width: 767px) {
+        :root { --pad-x: 20px; --sec-y: 88px; --hd-h: 64px; }
+      }
+      @media (max-width: 640px) {
+        :root { --fab-r: 94px; }
+      }
+
+      html { scroll-behavior: smooth; scroll-padding-top: calc(var(--hd-h) + 16px); }
       body {
-        font-family:
-          'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
-          system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        font-family: var(--sans);
         background: var(--bg);
         color: var(--ink);
-        font-feature-settings: 'tnum';
+        font-size: 16px;
+        line-height: 1.65;
+        letter-spacing: -0.01em;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
       }
-      .serif { font-family: 'MaruBuri', serif; letter-spacing: -0.02em; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
+      ::selection { background: var(--mint); color: var(--ink); }
+      :focus-visible:not(.fab-back) { outline: 2.5px solid var(--green); outline-offset: 3px; }
 
-      /* 부드러운 등장 애니메이션 */
+      .serif {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        letter-spacing: -0.03em;
+      }
+      .wrap { width: 100%; max-width: calc(var(--maxw) + var(--pad-x) * 2); margin: 0 auto; padding: 0 var(--pad-x); }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+      /* 스크롤 등장 */
       .reveal {
         opacity: 0;
-        transform: translateY(24px);
-        transition:
-          opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-          transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transform: translateY(22px);
+        transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+        transition-delay: var(--d, 0ms);
       }
-      .reveal.in { opacity: 1; transform: translateY(0); }
+      .reveal.in { opacity: 1; transform: none; }
 
-      /* 플레이스홀더 일러스트 */
-      .ph {
-        background:
-          radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.6), transparent 50%),
-          radial-gradient(ellipse at 80% 80%, rgba(95,181,154,.3), transparent 50%),
-          linear-gradient(135deg, var(--primary-soft), #eaf6f0);
-        position: relative;
-        overflow: hidden;
+      /* 공통 그레인 · 블롭 */
+      .grain {
+        position: absolute;
+        inset: 0;
+        background-image: var(--noise);
+        background-size: 200px 200px;
+        mix-blend-mode: soft-light;
+        opacity: 0.65;
+        pointer-events: none;
       }
-      /* 헤더 */
-      .top {
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        will-change: transform;
+        animation: drift-a 46s ease-in-out infinite alternate;
+        animation-play-state: paused;
+      }
+      .is-live .blob { animation-play-state: running; }
+      @keyframes drift-a {
+        from { transform: translate3d(0, 0, 0) scale(1); }
+        to { transform: translate3d(6%, 7%, 0) scale(1.08); }
+      }
+      @keyframes drift-b {
+        from { transform: translate3d(0, 0, 0) scale(1.04); }
+        to { transform: translate3d(-8%, 6%, 0) scale(0.96); }
+      }
+      @keyframes drift-c {
+        from { transform: translate3d(0, 0, 0) scale(1); }
+        to { transform: translate3d(-6%, -8%, 0) scale(1.1); }
+      }
+
+      /* ---------- 버튼 ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        height: 56px;
+        padding: 0 28px;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .btn .arr { transition: transform 0.25s ease; }
+      .btn:hover .arr { transform: translateX(3px); }
+      .btn-primary {
+        background: var(--green);
+        color: #fff;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 26px -14px rgba(29, 122, 95, 0.75);
+      }
+      .btn-primary:hover { background: var(--green-ink); transform: translateY(-1px); }
+      .btn-soft {
+        background: rgba(255, 255, 255, 0.74);
+        color: var(--green-ink);
+        border: 1px solid rgba(29, 122, 95, 0.28);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .btn-soft:hover { background: #fff; border-color: var(--green); }
+      .btn-sm { height: 42px; padding: 0 18px; font-size: 14.5px; }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 24px;
+        padding: 0 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: var(--green-ink);
+        background: var(--mint-2);
+        border: 1px solid rgba(29, 122, 95, 0.18);
+        white-space: nowrap;
+      }
+
+      /* ---------- 헤더 ---------- */
+      .hd {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(253, 253, 251, 0.78);
-        backdrop-filter: saturate(180%) blur(14px);
-        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        height: var(--hd-h);
+        background: rgba(251, 250, 246, 0.62);
+        -webkit-backdrop-filter: saturate(160%) blur(16px);
+        backdrop-filter: saturate(160%) blur(16px);
+        border-bottom: 1px solid transparent;
+        transition: background 0.3s ease, border-color 0.3s ease;
+      }
+      .hd.is-scrolled { background: rgba(251, 250, 246, 0.9); border-bottom-color: var(--line); }
+      .hd:has(.mnav:not([hidden])) { z-index: 96; background: var(--bg); }
+      .hd-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: var(--hd-h); }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        white-space: nowrap;
+        margin-left: max(0px, calc(var(--fab-r) - max(var(--pad-x), 50vw - var(--maxw) / 2)));
+      }
+      .logo-mark {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        color: #fff;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 15px;
+        font-synthesis: none;
+        background: radial-gradient(circle at 28% 22%, #8fd8bb 0%, rgba(143, 216, 187, 0) 62%), var(--green);
+      }
+      .logo-mark .grain { opacity: 0.5; background-size: 120px 120px; }
+      .logo-mark b { position: relative; font-weight: 600; }
+      .gnb { display: none; }
+      .gnb a {
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 15px;
+        color: var(--ink-2);
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+      .gnb a:hover { background: rgba(29, 122, 95, 0.08); color: var(--green-ink); }
+      .hd-act { display: flex; align-items: center; gap: 10px; }
+      .hd-tel { display: none; font-size: 14.5px; font-weight: 600; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+      .hd-tel:hover { color: var(--green-ink); }
+      .hd-cta { display: none; }
+      .menu-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid var(--line-2);
+        color: var(--ink);
+      }
+      .menu-btn svg { width: 20px; height: 20px; }
+      .menu-btn .i-close { display: none; }
+      .menu-btn[aria-expanded='true'] .i-open { display: none; }
+      .menu-btn[aria-expanded='true'] .i-close { display: block; }
+      .mnav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 30px 40px -30px rgba(16, 66, 50, 0.35);
+        padding: 4px var(--pad-x) 22px;
+      }
+      .mnav[hidden] { display: none; }
+      .mnav a:not(.btn) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 2px;
+        font-size: 17px;
+        font-weight: 600;
         border-bottom: 1px solid var(--line);
       }
+      .mnav a:not(.btn)::after { content: '→'; color: var(--ink-3); font-weight: 400; }
+      .mnav .btn { width: 100%; margin-top: 18px; }
+      @media (min-width: 480px) { .hd-cta { display: inline-flex; } }
+      @media (min-width: 1024px) {
+        .gnb { display: flex; gap: 2px; }
+        .menu-btn, .mnav { display: none !important; }
+      }
+      @media (min-width: 1280px) { .hd-tel { display: inline; } }
 
-      /* 섹션 라벨 */
-      .eyebrow {
-        font-size: 12px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--primary);
+      /* ---------- 히어로 ---------- */
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        margin-top: calc(var(--hd-h) * -1);
+        padding: calc(var(--hd-h) + 64px) 0 56px;
+      }
+      .hero-bg { position: absolute; inset: 0; z-index: -1; background: var(--bg); overflow: hidden; }
+      .hero .b1 {
+        width: min(78vw, 1060px);
+        left: -16%;
+        top: -34%;
+        background: radial-gradient(circle, rgba(158, 218, 193, 0.95) 0%, rgba(176, 226, 205, 0.62) 34%, rgba(176, 226, 205, 0) 68%);
+      }
+      .hero .b2 {
+        width: min(70vw, 980px);
+        right: -22%;
+        top: -30%;
+        animation-name: drift-b;
+        animation-duration: 58s;
+        background: radial-gradient(circle, rgba(200, 231, 178, 0.95) 0%, rgba(208, 234, 190, 0.6) 36%, rgba(208, 234, 190, 0) 68%);
+      }
+      .hero .b3 {
+        width: min(66vw, 940px);
+        left: -4%;
+        bottom: -46%;
+        animation-name: drift-c;
+        animation-duration: 52s;
+        background: radial-gradient(circle, rgba(250, 212, 164, 0.95) 0%, rgba(250, 222, 186, 0.62) 38%, rgba(250, 222, 186, 0) 68%);
+      }
+      .hero .b4 {
+        width: min(44vw, 620px);
+        left: 6%;
+        top: 14%;
+        animation-name: drift-b;
+        animation-duration: 64s;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.25) 38%, rgba(255, 255, 255, 0) 66%);
+      }
+      .hero-bg::after {
+        /* 하단을 아이보리로 부드럽게 이어 붙임 */
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 120px;
+        background: linear-gradient(to bottom, rgba(251, 250, 246, 0), var(--bg));
+      }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 44px; align-items: center; }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 36px;
+        padding: 0 16px 0 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 6px 20px -12px rgba(16, 66, 50, 0.35);
+        font-size: 14px;
         font-weight: 600;
+        color: var(--green-ink);
+      }
+      .pill i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 4px rgba(29, 122, 95, 0.14);
+      }
+      .h-display {
+        margin-top: 28px;
+        font-size: clamp(42px, 6vw, 86px);
+        line-height: 1.16;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+      }
+      .h-display em { font-style: normal; color: var(--green-ink); }
+      .lead {
+        margin-top: 28px;
+        max-width: 30em;
+        font-size: clamp(16.5px, 1.4vw, 19px);
+        line-height: 1.75;
+        color: var(--ink-2);
+      }
+      .br-wide { display: none; }
+      @media (min-width: 1100px) { .br-wide { display: inline; } }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: start;
+        column-gap: clamp(28px, 4vw, 48px);
+        margin-top: 44px;
+        padding-top: 22px;
+        border-top: 1px solid rgba(20, 33, 28, 0.12);
+        max-width: 480px;
+      }
+      .stats dt { font-size: 13px; color: var(--ink-3); }
+      .stats dd {
+        margin-top: 4px;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        font-size: clamp(26px, 2.6vw, 32px);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        font-variant-numeric: tabular-nums;
+      }
+      .stats dd small { font-size: 0.5em; margin-left: 2px; font-family: var(--sans); font-weight: 600; color: var(--ink-2); }
+      .stats sup { font-size: 10px; top: -0.4em; margin-left: 1px; }
+      .stats-cap { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+
+      .hero-media { position: relative; margin: 0; }
+      .photo {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--r-xl);
+        background: var(--mint-2);
+      }
+      .photo::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+        pointer-events: none;
+      }
+      .photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--ox, 50%) var(--oy, 50%);
+        transform: scale(var(--s, 1));
+        transform-origin: var(--tx, 50%) 0;
+      }
+      .hero-photo {
+        aspect-ratio: 4 / 3;
+        box-shadow: 0 50px 90px -50px rgba(14, 67, 53, 0.55), 0 18px 36px -24px rgba(14, 67, 53, 0.3);
+        --ox: 0%;
+      }
+      .float-card {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        right: 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.88);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
+        backdrop-filter: blur(14px) saturate(150%);
+        box-shadow: 0 20px 40px -22px rgba(14, 67, 53, 0.45);
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--ink-2);
+      }
+      .float-card .ic {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(145deg, var(--mint-2), #f4efe2);
+        color: var(--green);
+      }
+      .float-card .ic svg { width: 22px; height: 22px; }
+      .float-card strong { display: block; color: var(--ink); font-size: 15px; font-weight: 700; }
+
+      .quick {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 48px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.8);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 0 24px 48px -32px rgba(14, 67, 53, 0.4);
+      }
+      .quick li:nth-child(even) { border-left: 1px solid var(--line); }
+      .quick li:nth-child(n + 3) { border-top: 1px solid var(--line); }
+      .nw { white-space: nowrap; }
+      .quick a {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100%;
+        padding: 16px 16px 18px;
+        border-radius: 24px;
+        transition: background 0.2s ease;
+      }
+      .quick a:hover { background: rgba(227, 243, 234, 0.55); }
+      .quick .q-ic {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: var(--mint-2);
+        color: var(--green);
+      }
+      .quick .q-ic svg { width: 19px; height: 19px; }
+      .quick .q-label { display: block; font-size: 12.5px; color: var(--ink-3); }
+      .quick .q-val { display: block; margin-top: 2px; font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.45; }
+
+      @media (max-width: 899px) {
+        /* 세로로 긴 모바일 히어로: 블롭을 화면 너비 기준으로 다시 배치 */
+        .hero .b1 { width: 150vw; left: -62vw; top: -46vw; }
+        .hero .b2 { width: 130vw; left: auto; right: -74vw; top: 70vw; }
+        .hero .b3 { width: 150vw; left: -50vw; top: 150vw; bottom: auto; }
+        .hero .b4 { width: 110vw; left: -20vw; top: 34vw; }
+      }
+      @media (min-width: 640px) {
+        .hero-photo { aspect-ratio: 16 / 11; }
+        .float-card { right: auto; max-width: 330px; left: 20px; bottom: 20px; }
+      }
+      @media (min-width: 900px) {
+        .hero { padding-top: calc(var(--hd-h) + 72px); }
+        .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 56px; }
+        .hero-photo { aspect-ratio: 1 / 1.1; --ox: 38%; }
+        .float-card { left: -32px; bottom: 36px; }
+      }
+      @media (min-width: 640px) {
+        .quick a { flex-direction: row; align-items: center; gap: 14px; padding: 20px 22px; }
+        .quick .q-ic { flex: none; width: 42px; height: 42px; }
+      }
+      @media (min-width: 1100px) {
+        .quick { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .quick li + li { border-left: 1px solid var(--line); }
+        .quick li:nth-child(n + 3) { border-top: 0; }
       }
 
-      /* 카드 */
-      .card {
-        background: #fff;
+      /* ---------- 섹션 공통 ---------- */
+      .sec { padding: var(--sec-y) 0; }
+      .sec-head { display: grid; gap: 18px; margin-bottom: clamp(40px, 5vw, 64px); }
+      @media (min-width: 900px) {
+        .sec-head.split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: end; column-gap: 56px; }
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--green-ink);
+      }
+      .eyebrow::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #9edcc2, var(--green) 70%);
+      }
+      .h2 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        font-size: clamp(30px, 4.2vw, 52px);
+        line-height: 1.24;
+        letter-spacing: -0.035em;
+      }
+      .h2-sm { font-size: clamp(30px, 3.4vw, 44px); }
+      .sec-lead { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.75; color: var(--ink-2); max-width: 32em; }
+
+      /* ---------- 진료철학 ---------- */
+      .promise-grid { display: grid; gap: 40px; }
+      .room-photo { aspect-ratio: 4 / 3; border-radius: var(--r-lg); --ox: 70%; --s: 1.14; --tx: 70%; }
+      .room-cap { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+      .principles { counter-reset: p; }
+      .principle {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        column-gap: 12px;
+        padding: 28px 0;
+        border-top: 1px solid var(--line-2);
+      }
+      .principle:last-child { border-bottom: 1px solid var(--line-2); }
+      .principle .n { font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 20px; color: var(--green); line-height: 1.5; }
+      .principle h3 { font-size: clamp(19px, 1.7vw, 22px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.45; }
+      .principle p { margin-top: 10px; color: var(--ink-2); line-height: 1.75; }
+      @media (min-width: 900px) {
+        .promise-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; }
+        .room-photo { aspect-ratio: 4 / 5; --ox: 64%; }
+        .promise-media { position: sticky; top: calc(var(--hd-h) + 28px); }
+        .principle { grid-template-columns: 72px minmax(0, 1fr); padding: 34px 0; }
+      }
+
+      /* ---------- 진료과목 ---------- */
+      .svc-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 640px) { .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 1024px) { .svc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+      .svc {
+        position: relative;
+        padding: 28px 28px 30px;
+        background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 32px 28px;
-        transition:
-          transform 0.4s ease,
-          border-color 0.3s ease,
-          box-shadow 0.4s ease;
+        border-radius: 24px;
+        transition: transform 0.35s var(--ease), border-color 0.35s ease, box-shadow 0.35s ease;
       }
-      .card:hover {
-        transform: translateY(-4px);
-        border-color: var(--accent);
-        box-shadow: 0 20px 40px -25px rgba(15, 93, 74, 0.25);
+      .svc:hover { transform: translateY(-3px); border-color: rgba(29, 122, 95, 0.32); box-shadow: var(--shadow-soft); }
+      .svc-top { display: flex; align-items: center; justify-content: space-between; }
+      .svc-ic {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(150deg, var(--mint-2) 0%, #f5f0e3 100%);
+        color: var(--green);
+      }
+      .svc-ic svg { width: 26px; height: 26px; }
+      .svc-no { font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 15px; color: var(--ink-3); }
+      .svc h3 { margin-top: 22px; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+      .svc .kick { margin-top: 4px; font-size: 14.5px; font-weight: 600; color: var(--green-ink); }
+      .svc p.desc { margin-top: 10px; font-size: 15.5px; line-height: 1.75; color: var(--ink-2); }
+      @media (max-width: 639px) {
+        /* 모바일: 아이콘 왼쪽, 글 오른쪽으로 압축 */
+        .svc { display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 16px; padding: 22px 20px 22px; border-radius: 20px; }
+        .svc-top { grid-row: span 3; align-self: start; }
+        .svc-ic { width: 48px; height: 48px; border-radius: 14px; }
+        .svc-no { display: none; }
+        .svc h3 { margin-top: 0; font-size: 19px; }
+        .svc p.desc { margin-top: 6px; font-size: 15px; line-height: 1.7; }
       }
 
-      /* 폼 */
+      /* ---------- 그레인 구분선 ---------- */
+      .seam { position: relative; height: 120px; overflow: hidden; pointer-events: none; }
+      .seam::before {
+        content: '';
+        position: absolute;
+        left: var(--pad-x);
+        right: var(--pad-x);
+        top: 50%;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(210, 218, 211, 0), var(--line-2) 18%, var(--line-2) 82%, rgba(210, 218, 211, 0));
+      }
+      .seam-glow {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(820px, 92vw);
+        height: 120px;
+        transform: translate(-50%, -50%);
+        background:
+          radial-gradient(40% 50% at 38% 50%, rgba(166, 221, 198, 0.95), rgba(166, 221, 198, 0) 100%),
+          radial-gradient(36% 46% at 64% 52%, rgba(251, 225, 192, 0.85), rgba(251, 225, 192, 0) 100%),
+          var(--bg);
+        -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 40%, transparent 100%);
+        mask-image: radial-gradient(50% 50% at 50% 50%, #000 40%, transparent 100%);
+      }
+      .seam-glow .grain { opacity: 0.7; }
+      @media (max-width: 767px) {
+        .seam { height: 88px; }
+        .seam-glow { width: 120vw; height: 88px; }
+      }
+
+      /* ---------- 의료진 ---------- */
+      .doc-grid { display: grid; gap: 20px; }
+      @media (min-width: 768px) { .doc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+      .doc {
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+      }
+      .doc .photo { border-radius: 0; aspect-ratio: 4 / 3; }
+      .doc .photo::after { display: none; }
+      .doc-body { padding: 26px 26px 30px; }
+      .doc-role { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      .doc-role .role { font-size: 14px; font-weight: 600; color: var(--green-ink); }
+      .doc h3 { margin-top: 8px; font-size: clamp(28px, 2.6vw, 34px); line-height: 1.25; }
+      .doc ul { margin-top: 18px; border-top: 1px solid var(--line); }
+      .doc li { display: flex; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
+      .doc li::before { content: ''; flex: none; width: 5px; height: 5px; margin-top: 10px; border-radius: 50%; background: var(--green); opacity: 0.6; }
+      @media (min-width: 1024px) { .doc-body { padding: 30px 34px 34px; } }
+
+      /* ---------- 첫 방문 ---------- */
+      .first { background: var(--surface); }
+      .steps { display: grid; gap: 0; counter-reset: s; }
+      .step { position: relative; padding: 0 0 30px 64px; }
+      .step-n {
+        position: absolute;
+        left: 0;
+        top: -4px;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 32% 28%, #f2fbf6 0%, var(--mint) 100%);
+        border: 1px solid rgba(29, 122, 95, 0.22);
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        font-size: 15px;
+        color: var(--green-ink);
+      }
+      .step::before {
+        content: '';
+        position: absolute;
+        left: 21.5px;
+        top: 46px;
+        bottom: 2px;
+        width: 1px;
+        background: repeating-linear-gradient(to bottom, var(--line-2) 0 4px, transparent 4px 8px);
+      }
+      .step:last-child::before { display: none; }
+      .step h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.45; }
+      .step p { margin-top: 6px; font-size: 15.5px; line-height: 1.7; color: var(--ink-2); }
+      @media (min-width: 900px) {
+        .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+        .step { padding: 68px 0 0; }
+        .step-n { top: 0; }
+        .step::before {
+          left: 56px;
+          right: -16px;
+          top: 22px;
+          bottom: auto;
+          width: auto;
+          height: 1px;
+          background: repeating-linear-gradient(to right, var(--line-2) 0 4px, transparent 4px 8px);
+        }
+      }
+      .weigh { display: grid; gap: 14px; margin-top: clamp(40px, 5vw, 64px); }
+      @media (min-width: 768px) { .weigh { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+      .weigh-item { padding: 26px 28px 28px; border-radius: 24px; background: var(--bg); border: 1px solid var(--line); }
+      .weigh-item.go { background: var(--mint-2); border-color: rgba(29, 122, 95, 0.2); }
+      .weigh-item .k { font-size: 13.5px; font-weight: 700; color: var(--ink-3); }
+      .weigh-item.go .k { color: var(--green-ink); }
+      .weigh-item p:last-child { margin-top: 8px; font-size: clamp(16.5px, 1.4vw, 18.5px); line-height: 1.65; color: var(--ink); }
+      .first .cta-row { margin-top: 32px; }
+
+      /* ---------- 비급여 ---------- */
+      .fee-grid { display: grid; gap: 36px; }
+      @media (min-width: 1024px) { .fee-grid { grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr); gap: 64px; align-items: start; } }
+      .fee-list { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 6px 26px; }
+      .fee-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .fee-list li:last-child { border-bottom: 0; }
+      .fee-list h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+      .fee-list .basis { margin-top: 2px; font-size: 14px; color: var(--ink-3); }
+      .fee-list .price { flex: none; text-align: right; font-size: 14px; color: var(--ink-3); white-space: nowrap; }
+      .fee-list .price strong {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        font-size: clamp(21px, 2vw, 25px);
+        letter-spacing: -0.02em;
+        color: var(--green-ink);
+        margin-right: 3px;
+      }
+      .fee-notes { margin-top: 22px; display: grid; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+      .fee-notes li { display: flex; gap: 8px; }
+      .fee-notes li::before { content: '·'; color: var(--ink-3); }
+      @media (min-width: 768px) { .fee-list { padding: 6px 34px; } .fee-list li { padding: 22px 0; } }
+
+      /* ---------- 후기 ---------- */
+      .voice-grid { display: grid; gap: 16px; }
+      @media (min-width: 900px) { .voice-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+      .quote {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 30px 28px 26px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+      }
+      .quote blockquote { font-family: var(--serif); font-weight: 400; font-synthesis: none; font-size: clamp(18.5px, 1.6vw, 20.5px); line-height: 1.65; letter-spacing: -0.02em; color: var(--ink); }
+      .quote blockquote::before { content: '“'; display: block; font-size: 40px; line-height: 0.6; margin: 10px 0 14px; color: var(--green); opacity: 0.55; }
+      .quote figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-3); }
+      .voice-note { margin-top: 18px; font-size: 13px; color: var(--ink-3); }
+
+      /* ---------- CTA 밴드 (그레인) ---------- */
+      .band {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 40px;
+        clip-path: inset(0 round 40px);
+        padding: clamp(64px, 8vw, 104px) clamp(24px, 6vw, 80px);
+        background: linear-gradient(135deg, #0c3d30 0%, #11503e 55%, #0d4233 100%);
+        color: #fff;
+        text-align: center;
+      }
+      .band-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: linear-gradient(135deg, #0c3d30 0%, #11503e 55%, #0d4233 100%); }
+      /* 밴드 블롭은 정지 — 둥근 모서리 + 합성 레이어 블렌드 조합의 모서리 깨짐 방지 */
+      .band .band-bg .blob { animation: none; will-change: auto; }
+      .band .b1 {
+        width: 70%;
+        left: -18%;
+        top: -60%;
+        background: radial-gradient(circle, rgba(52, 160, 120, 0.66) 0%, rgba(44, 150, 112, 0.24) 40%, rgba(44, 150, 112, 0) 68%);
+      }
+      .band .b2 {
+        width: 60%;
+        right: -16%;
+        bottom: -70%;
+        animation-name: drift-b;
+        animation-duration: 54s;
+        background: radial-gradient(circle, rgba(34, 128, 98, 0.7) 0%, rgba(34, 128, 98, 0.28) 42%, rgba(34, 128, 98, 0) 68%);
+      }
+      .band .grain { opacity: 0.45; }
+      .band .eyebrow { color: #eef8f2; }
+      .band .eyebrow::before { background: radial-gradient(circle at 35% 30%, #e3f3ea, #7fcfae 70%); }
+      .band h2 { margin-top: 18px; font-size: clamp(30px, 4.4vw, 56px); line-height: 1.28; letter-spacing: -0.035em; }
+      .band p.sub { margin: 18px auto 0; max-width: 30em; color: #fff; font-size: clamp(15.5px, 1.3vw, 17.5px); }
+      .band .cta-row { justify-content: center; margin-top: 36px; }
+      .btn-white { background: #fff; color: var(--green-ink); box-shadow: 0 16px 30px -18px rgba(0, 0, 0, 0.5); }
+      .btn-white:hover { background: #f1faf5; transform: translateY(-1px); }
+      .btn-line { border: 1px solid rgba(255, 255, 255, 0.45); color: #fff; font-variant-numeric: tabular-nums; }
+      .btn-line:hover { background: rgba(255, 255, 255, 0.1); border-color: #fff; }
+      .band :focus-visible { outline-color: #fff; }
+      @media (max-width: 767px) { .band { border-radius: 28px; clip-path: inset(0 round 28px); } }
+
+      /* ---------- 진료 안내 + 예약 ---------- */
+      .visit-grid { display: grid; gap: 48px; }
+      @media (min-width: 1024px) { .visit-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: start; } }
+      .hours { margin-top: 36px; border-top: 1px solid var(--line-2); }
+      .hours div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 4px;
+        border-bottom: 1px solid var(--line-2);
+        transition: background 0.3s ease;
+      }
+      .hours dt { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+      .hours dd { color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; }
+      .hours .today-chip { display: none; }
+      .hours .is-today { background: linear-gradient(90deg, rgba(227, 243, 234, 0.9), rgba(227, 243, 234, 0)); }
+      .hours .is-today .today-chip { display: inline-flex; }
+      .loc { display: grid; gap: 22px; margin-top: 36px; }
+      .loc .k { font-size: 13.5px; color: var(--ink-3); }
+      .loc .v { margin-top: 4px; font-size: 17px; line-height: 1.65; }
+      .tel-big {
+        display: inline-block;
+        margin-top: 2px;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-synthesis: none;
+        font-size: clamp(28px, 3vw, 36px);
+        letter-spacing: -0.01em;
+        color: var(--green-ink);
+      }
+      .tel-big:hover { color: var(--green); }
+      .notes { margin-top: 30px; display: grid; gap: 10px; padding: 22px 24px; border-radius: 20px; background: var(--surface-2); border: 1px solid var(--line); font-size: 14.5px; color: var(--ink-2); line-height: 1.65; }
+      .notes strong { color: var(--ink); font-weight: 700; }
+      .notes a { color: var(--green-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+      .book {
+        position: relative;
+        padding: clamp(26px, 4vw, 40px);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-soft);
+      }
+      .book h3 { margin-top: 12px; font-size: clamp(24px, 2.4vw, 28px); line-height: 1.35; }
+      .book .sub { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+      .fields { display: grid; gap: 16px; margin-top: 28px; }
+      .fields .row2 { display: grid; gap: 16px; }
+      @media (min-width: 560px) { .fields .row2 { grid-template-columns: 1fr 1fr; } }
+      .lbl { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 600; color: var(--ink-2); }
       .field {
         width: 100%;
-        padding: 14px 16px;
-        border: 1px solid var(--line);
-        border-radius: 10px;
+        height: 52px;
+        padding: 0 16px;
+        border: 1px solid var(--line-2);
+        border-radius: 14px;
         background: #fff;
-        font-size: 15px;
+        font: inherit;
+        font-size: 16px;
         color: var(--ink);
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
-      .field:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 4px rgba(95, 181, 154, 0.15);
+      textarea.field { height: auto; min-height: 104px; padding: 14px 16px; resize: vertical; line-height: 1.6; }
+      select.field {
+        appearance: none;
+        padding-right: 44px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2359665f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 18px;
       }
-
-      /* 버튼 */
-      .btn-primary {
-        display: inline-flex;
+      .field::placeholder { color: #6f7a74; }
+      .field:hover { border-color: #b9c4bc; }
+      .field:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 4px rgba(29, 122, 95, 0.14); }
+      .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 0; }
+      .seg legend { padding: 0; }
+      .seg label { position: relative; }
+      .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+      .seg span {
+        display: grid;
+        place-items: center;
+        height: 46px;
+        border-radius: 12px;
+        border: 1px solid var(--line-2);
+        font-size: 14.5px;
+        font-weight: 600;
+        color: var(--ink-2);
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+      .seg input:checked + span { background: var(--mint-2); border-color: var(--green); color: var(--green-ink); }
+      .seg input:focus-visible + span { outline: 2.5px solid var(--green); outline-offset: 2px; }
+      .agree { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); cursor: pointer; }
+      .agree input { flex: none; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--green); }
+      .agree a { text-decoration: underline; text-underline-offset: 3px; }
+      .book .btn { width: 100%; }
+      .fine { font-size: 13px; color: var(--ink-3); }
+      .toast {
+        display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 14px 26px;
-        background: var(--primary);
+        gap: 10px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding: 0 16px;
+        border-radius: 14px;
+        background: var(--green-deep);
         color: #fff;
-        border-radius: 999px;
+        font-size: 14.5px;
         font-weight: 600;
-        font-size: 15px;
-        transition: background 0.2s ease, transform 0.2s ease;
+        transition: max-height 0.35s var(--ease), opacity 0.35s ease, padding 0.35s var(--ease);
       }
-      .btn-primary:hover { background: #0a4438; transform: translateY(-1px); }
-      .btn-ghost {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 14px 22px;
-        color: var(--primary);
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: 15px;
-        border: 1px solid var(--primary);
-        transition: background 0.2s ease;
+      .toast.show { max-height: 80px; opacity: 1; padding: 14px 16px; }
+      .toast::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: #7fd8b4; }
+
+      /* ---------- 푸터 ---------- */
+      .ft { padding: 56px 0 120px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
+      .ft-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+      .ft .logo { margin-left: 0; font-size: 16px; }
+      .ft-back { color: var(--green-ink); font-weight: 600; }
+      .ft-back:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .ft-info { margin-top: 20px; line-height: 1.8; }
+      .ft-foot { margin-top: 10px; font-size: 13px; }
+      .ft-demo { margin-top: 18px; font-size: 12px; color: #6b7671; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .blob { animation: none !important; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .btn, .svc, .toast { transition: none; }
       }
-      .btn-ghost:hover { background: var(--primary-soft); }
     </style>
     <meta name="theme-color" content="#0f5d4a" />
     <script type="application/ld+json">
@@ -189,457 +984,534 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
+
     <!-- ====================== HEADER ====================== -->
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="flex items-center gap-2 font-bold tracking-tight">
-          <span
-            class="inline-grid place-items-center w-8 h-8 rounded-full text-white text-sm"
-            style="background: var(--primary)"
-            >라</span
-          >
+    <header class="hd" id="hd">
+      <div class="wrap hd-in">
+        <a href="#top" class="logo" aria-label="라온치과의원 처음으로">
+          <span class="logo-mark" aria-hidden="true"><span class="grain"></span><b>라</b></span>
           라온치과의원
         </a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
-          <a href="#promise" class="hover:text-[color:var(--primary)]">진료철학</a>
-          <a href="#services" class="hover:text-[color:var(--primary)]">진료과목</a>
-          <a href="#doctors" class="hover:text-[color:var(--primary)]">의료진</a>
-          <a href="#voice" class="hover:text-[color:var(--primary)]">환자 후기</a>
-          <a href="#visit" class="hover:text-[color:var(--primary)]">오시는 길</a>
+        <nav class="gnb" aria-label="주요 메뉴">
+          <a href="#promise">진료철학</a>
+          <a href="#services">진료과목</a>
+          <a href="#doctors">의료진</a>
+          <a href="#first-visit">첫 방문</a>
+          <a href="#fee">비급여 안내</a>
+          <a href="#visit">오시는 길</a>
         </nav>
-        <a href="#book" class="btn-primary text-sm" style="padding: 10px 18px">진료 예약</a>
+        <div class="hd-act">
+          <a class="hd-tel" href="tel:0212345678">02-1234-5678</a>
+          <a href="#book" class="btn btn-primary btn-sm hd-cta">진료 예약</a>
+          <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="메뉴 열기">
+            <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+            <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
       </div>
+      <nav class="mnav" id="mnav" aria-label="모바일 메뉴" hidden>
+        <a href="#promise">진료철학</a>
+        <a href="#services">진료과목</a>
+        <a href="#doctors">의료진</a>
+        <a href="#first-visit">첫 방문 안내</a>
+        <a href="#fee">비급여 진료비</a>
+        <a href="#visit">진료시간 · 오시는 길</a>
+        <a href="#book" class="btn btn-primary">진료 예약하기</a>
+      </nav>
     </header>
 
     <main id="top">
       <!-- ====================== HERO ====================== -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">동네에서 오래, 라온치과의원</p>
-            <h1
-              class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.18] tracking-tight"
-            >
-              치과가 처음인<br />마음으로,<br />끝까지 정성껏.
-            </h1>
-            <p
-              class="mt-8 text-base md:text-lg leading-relaxed max-w-xl"
-              style="color: var(--ink-soft)"
-            >
-              라온치과는 환자분이 진료실에 머무는 시간보다,<br />
-              댁으로 돌아가신 뒤의 회복을 더 오래 생각합니다.
-            </p>
-            <div class="mt-10 flex flex-wrap gap-3">
-              <a href="#book" class="btn-primary">
-                진료 예약하기
-                <span aria-hidden="true">→</span>
-              </a>
-              <a href="#visit" class="btn-ghost">진료시간 보기</a>
+      <section class="hero" data-ambient aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
+          <span class="blob b1"></span>
+          <span class="blob b2"></span>
+          <span class="blob b3"></span>
+          <span class="blob b4"></span>
+          <span class="grain"></span>
+        </div>
+
+        <div class="wrap">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="pill"><i aria-hidden="true"></i>동네에서 오래, 라온치과의원</p>
+              <h1 id="hero-title" class="serif h-display">치과가 처음인<br />마음으로,<br /><em>끝까지 정성껏.</em></h1>
+              <p class="lead">
+                라온치과는 환자분이 진료실에 머무는 시간보다,<br class="br-wide" />
+                댁으로 돌아가신 뒤의 회복을 더 오래 생각합니다.
+              </p>
+              <div class="cta-row">
+                <a href="#book" class="btn btn-primary">진료 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+                <a href="#visit" class="btn btn-soft">진료시간 보기</a>
+              </div>
+              <dl class="stats">
+                <div>
+                  <dt>개원</dt>
+                  <dd><span data-count="2014" data-format="year">2014</span></dd>
+                </div>
+                <div>
+                  <dt>누적 환자</dt>
+                  <dd><span data-count="38200">38,200</span><small>명+</small></dd>
+                </div>
+                <div>
+                  <dt>재진율<sup>*</sup></dt>
+                  <dd><span data-count="92">92</span><small>%</small></dd>
+                </div>
+              </dl>
+              <p class="stats-cap"><span class="chip">예시 수치</span> 실제 데이터로 교체 · 재진율 기준은 하단 표기</p>
             </div>
-            <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              <div>
-                <dt class="text-xs" style="color: var(--ink-soft)">개원</dt>
-                <dd class="serif text-2xl mt-1"><span data-count="2014" data-format="year">0</span></dd>
+
+            <figure class="hero-media">
+              <div class="photo hero-photo">
+                <img
+                  src="../assets/images/dental/01-consult.webp"
+                  width="1376"
+                  height="768"
+                  alt="원장이 태블릿에 띄운 엑스레이 사진을 가리키며 환자에게 진단 내용을 설명하는 모습"
+                  fetchpriority="high"
+                />
               </div>
-              <div>
-                <dt class="text-xs" style="color: var(--ink-soft)">누적 환자</dt>
-                <dd class="serif text-2xl mt-1"><span data-count="38200">0</span><span class="text-sm">명+</span></dd>
-              </div>
-              <div>
-                <dt class="text-xs" style="color: var(--ink-soft)">재진율<sup style="font-size:9px;">*</sup></dt>
-                <dd class="serif text-2xl mt-1"><span data-count="92">0</span>%</dd>
-              </div>
-            </dl>
+              <figcaption class="float-card">
+                <span class="ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg>
+                </span>
+                <span><strong>상담은 원장이 직접</strong>치료 계획과 비용을 종이 자료로 설명드립니다.</span>
+              </figcaption>
+            </figure>
           </div>
 
-          <div class="md:col-span-5 reveal">
-            <div class="ph rounded-3xl aspect-[4/5]"  style="background-image:url('../assets/images/dental/01-consult.webp');background-size:cover;background-position:center;"></div>
-          </div>
+          <ul class="quick" aria-label="빠른 안내">
+            <li>
+              <a href="#visit">
+                <span class="q-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                <span><span class="q-label">진료시간</span><span class="q-val"><span class="nw">평일 10–19시</span> · <span class="nw">토 10–14시</span></span></span>
+              </a>
+            </li>
+            <li>
+              <a href="#visit">
+                <span class="q-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+                <span><span class="q-label">오시는 길</span><span class="q-val"><span class="nw">OO역 3번 출구</span> <span class="nw">도보 4분</span></span></span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:0212345678">
+                <span class="q-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
+                <span><span class="q-label">전화 상담</span><span class="q-val">02-1234-5678</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="#fee">
+                <span class="q-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+                <span><span class="q-label">비급여 진료비</span><span class="q-val"><span class="nw">항목별 금액</span> <span class="nw">미리 보기</span></span></span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
       <!-- ====================== PROMISE ====================== -->
-      <section id="promise" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-16">
-            <p class="eyebrow mb-4">우리의 약속</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              꼭 필요한 진료만,<br />가장 부드러운 방식으로.
-            </h2>
+      <section id="promise" class="sec" aria-labelledby="promise-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">진료철학</p>
+              <h2 id="promise-title" class="h2" style="margin-top: 16px">꼭 필요한 진료만,<br />부드러운 방식으로.</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              진료실에 머무는 시간은 짧아도, 그 뒤의 생활은 깁니다.
+              그래서 라온은 세 가지를 지킵니다.
+            </p>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="card reveal">
-              <span
-                class="serif text-4xl"
-                style="color: var(--accent)"
-                >01</span
-              >
-              <h3 class="mt-6 text-xl font-semibold tracking-tight">정직한 진단</h3>
-              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
-                지금 꼭 해야 하는 진료와 더 지켜봐도 되는 진료를
-                구분해 말씀드립니다. 환자분의 시간과 비용을
-                먼저 헤아리는 것이 진단의 시작입니다.
-              </p>
-            </article>
-            <article class="card reveal">
-              <span class="serif text-4xl" style="color: var(--accent)">02</span>
-              <h3 class="mt-6 text-xl font-semibold tracking-tight">통증 최소화</h3>
-              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
-                긴장이 풀릴 만큼 천천히, 가능한 부드럽게.
-                마취 전 표면 마취부터 진료 중 호흡 가이드까지,
-                작은 단계마다 환자분의 신호를 먼저 살핍니다.
-              </p>
-            </article>
-            <article class="card reveal">
-              <span class="serif text-4xl" style="color: var(--accent)">03</span>
-              <h3 class="mt-6 text-xl font-semibold tracking-tight">끝까지 이어지는 관리</h3>
-              <p class="mt-3 leading-relaxed" style="color: var(--ink-soft)">
-                치료가 끝나도 끝이 아닙니다. 정기 점검 알림,
-                회복 경과 안내, 보철물 사후 점검까지 — 진료
-                후의 시간을 함께 책임지는 것이 라온의 약속입니다.
-              </p>
-            </article>
+          <div class="promise-grid">
+            <figure class="promise-media reveal">
+              <div class="photo room-photo">
+                <img
+                  src="../assets/images/dental/04-room-active.webp"
+                  width="1376"
+                  height="768"
+                  alt="창가에 화분이 놓인 밝은 진료실에서 직원이 진료 의자 옆 기구를 정리하는 모습"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption class="room-cap">라온치과의원 진료실</figcaption>
+            </figure>
+
+            <ol class="principles">
+              <li class="principle reveal">
+                <span class="n">01</span>
+                <div>
+                  <h3>정직한 진단</h3>
+                  <p>
+                    지금 꼭 해야 하는 진료와 더 지켜봐도 되는 진료를 구분해 말씀드립니다.
+                    환자분의 시간과 비용을 먼저 헤아리는 것이 진단의 시작입니다.
+                  </p>
+                </div>
+              </li>
+              <li class="principle reveal" style="--d: 60ms">
+                <span class="n">02</span>
+                <div>
+                  <h3>통증 최소화</h3>
+                  <p>
+                    긴장이 풀릴 만큼 천천히, 가능한 부드럽게.
+                    마취 전 표면 마취부터 진료 중 호흡 가이드까지, 작은 단계마다 환자분의 신호를 먼저 살핍니다.
+                  </p>
+                </div>
+              </li>
+              <li class="principle reveal" style="--d: 120ms">
+                <span class="n">03</span>
+                <div>
+                  <h3>끝까지 이어지는 관리</h3>
+                  <p>
+                    치료가 끝나도 끝이 아닙니다. 정기 점검 알림, 회복 경과 안내, 보철물 사후 점검까지.
+                    진료 뒤의 시간을 함께 책임지는 것이 라온의 약속입니다.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
       <!-- ====================== SERVICES ====================== -->
-      <section id="services" class="container-x py-24 md:py-32">
-        <div class="flex flex-wrap items-end justify-between gap-6 mb-14 reveal">
-          <div>
-            <p class="eyebrow mb-4">진료과목</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              치아의 일생을<br />함께 돌봅니다.
-            </h2>
+      <section id="services" class="sec" style="padding-top: 0" aria-labelledby="services-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">진료과목</p>
+              <h2 id="services-title" class="h2" style="margin-top: 16px">치아의 일생을<br />함께 돌봅니다.</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              한 가지 진료에 치우치지 않습니다. 보존부터 심미까지,
+              치아의 모든 단계를 한 곳에서 일관되게 관리합니다.
+            </p>
           </div>
-          <p class="max-w-md" style="color: var(--ink-soft)">
-            한 가지 진료에 치우치지 않습니다. 보존부터 심미까지,
-            치아의 모든 단계를 한 곳에서 일관되게 관리합니다.
-          </p>
-        </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- 6 services -->
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">임플란트</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 01</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              단단하게, 자연치아처럼. 잇몸뼈 상태 진단부터
-              사후 점검까지 한 분의 의료진이 책임집니다.
-            </p>
-          </article>
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">신경치료</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 02</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              치아를 지키는 가장 보수적인 선택. 발치를 미루기 위한
-              가장 정성스러운 방법으로 진행합니다.
-            </p>
-          </article>
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">치아교정</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 03</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              시작하기 가장 좋은 때는, 지금. 와이어부터 투명교정까지
-              생활 패턴에 맞춰 함께 골라드립니다.
-            </p>
-          </article>
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">보철·심미</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 04</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              닳고 깨진 자리를 자연스러운 모습으로 되살립니다.
-              표정에 어울리는 색과 형태를 함께 디자인합니다.
-            </p>
-          </article>
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">잇몸치료</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 05</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              오래 쓰려면, 잇몸부터. 일상에서 이어갈 수 있는
-              관리 습관까지 함께 안내해드립니다.
-            </p>
-          </article>
-          <article class="card reveal">
-            <div class="flex items-baseline justify-between">
-              <h3 class="text-xl font-semibold">어린이 진료</h3>
-              <span class="text-xs" style="color: var(--ink-soft)">SERVICE 06</span>
-            </div>
-            <p class="mt-4 leading-relaxed" style="color: var(--ink-soft)">
-              치과가 무섭지 않도록. 첫 진료의 기억이 평생을 좌우한다는
-              마음으로 천천히 다가갑니다.
-            </p>
-          </article>
+          <div class="svc-grid">
+            <article class="svc reveal">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5c-1.9 0-3.2 1.4-3.2 3.3 0 2 1.4 3.2 3.2 3.2h10c1.8 0 3.2-1.2 3.2-3.2 0-1.9-1.3-3.3-3.2-3.3-1.5 0-2.4.8-5 .8s-3.5-.8-5-.8z"/><path d="M9 10v2h6v-2M10 12l.5 8.5h3L14 12M9.6 15h4.8M9.8 18h4.4"/></svg></span>
+                <span class="svc-no">01</span>
+              </div>
+              <h3>임플란트</h3>
+              <p class="kick">오래 쓰실 수 있도록, 처음부터 꼼꼼하게.</p>
+              <p class="desc">잇몸뼈 상태 진단부터 사후 점검까지 한 분의 의료진이 책임집니다.</p>
+            </article>
+            <article class="svc reveal" style="--d: 60ms">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5c-2.4 0-4.2 1.9-4.2 4.5 0 2.2.9 3.6 1.5 5.3.7 2 .9 4.4 1.4 6.5.3 1.4 2 1.5 2.4.1l1.3-4.3c.3-1 1.5-1 1.8 0l1.3 4.3c.4 1.4 2.1 1.3 2.4-.1.5-2.1.7-4.5 1.4-6.5.6-1.7 1.5-3.1 1.5-5.3 0-2.6-1.8-4.5-4.2-4.5-1.7 0-2.6.9-4 .9s-2.3-.9-4-.9z"/><path d="M10.4 8.5c.4 2.2.3 4.4-.6 6.6M13.6 8.5c-.4 2.2-.3 4.4.6 6.6" stroke-dasharray="1.6 1.8"/></svg></span>
+                <span class="svc-no">02</span>
+              </div>
+              <h3>신경치료</h3>
+              <p class="kick">치아를 지키기 위한 보존적인 선택.</p>
+              <p class="desc">발치를 미룰 수 있도록 한 단계씩 정성껏 진행합니다.</p>
+            </article>
+            <article class="svc reveal" style="--d: 120ms">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="7" width="5" height="10" rx="2.2"/><rect x="9.5" y="6.5" width="5" height="11" rx="2.2"/><rect x="16.2" y="7" width="5" height="10" rx="2.2"/><path d="M2 12h20"/><rect x="4.2" y="10.8" width="2.2" height="2.4" rx=".4"/><rect x="10.9" y="10.8" width="2.2" height="2.4" rx=".4"/><rect x="17.6" y="10.8" width="2.2" height="2.4" rx=".4"/></svg></span>
+                <span class="svc-no">03</span>
+              </div>
+              <h3>치아교정</h3>
+              <p class="kick">고민 중이시라면, 상담부터 편하게.</p>
+              <p class="desc">와이어부터 투명교정까지 생활 패턴에 맞춰 함께 골라드립니다.</p>
+            </article>
+            <article class="svc reveal">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9.5 6.5 5l3 2.5L12 4l2.5 3.5 3-2.5L19 9.5"/><path d="M5 9.5h14c0 2-.8 3.3-1.4 4.8-.7 1.9-.8 4-1.3 6-.3 1.3-1.9 1.4-2.3.1l-1-3.4c-.3-.9-1.6-.9-1.9 0l-1 3.4c-.4 1.3-2 1.2-2.3-.1-.5-2-.6-4.1-1.3-6C5.8 12.8 5 11.5 5 9.5z"/></svg></span>
+                <span class="svc-no">04</span>
+              </div>
+              <h3>보철·심미</h3>
+              <p class="kick">닳고 깨진 자리를 자연스럽게.</p>
+              <p class="desc">표정에 어울리는 색과 형태를 환자분과 함께 정합니다.</p>
+            </article>
+            <article class="svc reveal" style="--d: 60ms">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5c-2.4 0-4.2 1.9-4.2 4.5 0 2.2.9 3.6 1.5 5.3.7 2 .9 4.4 1.4 6.5.3 1.4 2 1.5 2.4.1l1.3-4.3c.3-1 1.5-1 1.8 0l1.3 4.3c.4 1.4 2.1 1.3 2.4-.1.5-2.1.7-4.5 1.4-6.5.6-1.7 1.5-3.1 1.5-5.3 0-2.6-1.8-4.5-4.2-4.5-1.7 0-2.6.9-4 .9s-2.3-.9-4-.9z"/><path d="M3 13.5c2 1.4 3.6-.6 5.4.4S11 15 12 15s2.4-.4 3.6-1.1 3.4 1 5.4-.4"/></svg></span>
+                <span class="svc-no">05</span>
+              </div>
+              <h3>잇몸치료</h3>
+              <p class="kick">오래 쓰려면, 잇몸부터.</p>
+              <p class="desc">일상에서 이어갈 수 있는 관리 습관까지 함께 안내해드립니다.</p>
+            </article>
+            <article class="svc reveal" style="--d: 120ms">
+              <div class="svc-top">
+                <span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5c-2.4 0-4.2 1.9-4.2 4.5 0 2.2.9 3.6 1.5 5.3.7 2 .9 4.4 1.4 6.5.3 1.4 2 1.5 2.4.1l1.3-4.3c.3-1 1.5-1 1.8 0l1.3 4.3c.4 1.4 2.1 1.3 2.4-.1.5-2.1.7-4.5 1.4-6.5.6-1.7 1.5-3.1 1.5-5.3 0-2.6-1.8-4.5-4.2-4.5-1.7 0-2.6.9-4 .9s-2.3-.9-4-.9z"/><path d="M9.3 10.2c.9 1 1.7 1.4 2.7 1.4s1.8-.4 2.7-1.4"/><path d="M9.2 7.4h.01M14.8 7.4h.01" stroke-width="2.2"/></svg></span>
+                <span class="svc-no">06</span>
+              </div>
+              <h3>어린이 진료</h3>
+              <p class="kick">치과가 무섭지 않도록.</p>
+              <p class="desc">첫 진료의 기억이 오래 남는다는 마음으로 천천히 다가갑니다.</p>
+            </article>
+          </div>
         </div>
       </section>
+
+      <div class="seam" aria-hidden="true"><div class="seam-glow"><span class="grain"></span></div></div>
 
       <!-- ====================== DOCTORS ====================== -->
-      <section id="doctors" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-14">
-            <p class="eyebrow mb-4">의료진 소개</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 사람의 치아를<br />한 명의 의사가 끝까지.
-            </h2>
+      <section id="doctors" class="sec" style="padding-top: 72px" aria-labelledby="doctors-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">의료진 소개</p>
+              <h2 id="doctors-title" class="h2" style="margin-top: 16px">한 사람의 치아를<br />한 명의 의사가 끝까지.</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              진단부터 치료, 사후 점검까지 담당 원장이 바뀌지 않습니다.
+              처음 설명을 들은 의사에게 끝까지 진료받으실 수 있습니다.
+            </p>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8">
-            <article class="reveal">
-              <div class="ph rounded-2xl aspect-[4/5]"  style="background-image:url('../assets/images/dental/03-farewell.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6">
-                <p class="text-sm" style="color: var(--accent)">대표원장</p>
-                <h3 class="serif text-3xl mt-1">김라온</h3>
-                <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
-                  <li>· 서울대학교 치과대학 졸업</li>
-                  <li>· 전 OO대학교 치과병원 보철과 임상강사</li>
-                  <li>· 대한치과보철학회 정회원</li>
-                  <li>· 임플란트 임상 14년</li>
-                  <li>· 치과의사 면허 제00000호</li>
+          <div class="doc-grid">
+            <article class="doc reveal">
+              <div class="photo">
+                <img
+                  src="../assets/images/dental/03-farewell.webp"
+                  width="1376"
+                  height="768"
+                  alt="진료를 마친 환자와 접수대에서 웃으며 악수하는 원장"
+                  loading="lazy"
+                  style="--ox: 30%; --s: 1.12; --tx: 37%"
+                />
+              </div>
+              <div class="doc-body">
+                <p class="doc-role"><span class="role">대표원장</span><span class="chip">보철 · 임플란트</span></p>
+                <h3 class="serif">김라온</h3>
+                <ul>
+                  <li>서울대학교 치과대학 졸업</li>
+                  <li>전 OO대학교 치과병원 보철과 임상강사</li>
+                  <li>대한치과보철학회 정회원</li>
+                  <li>임플란트 임상 14년</li>
+                  <li>치과의사 면허 제00000호</li>
                 </ul>
               </div>
             </article>
-            <article class="reveal">
-              <div class="ph rounded-2xl aspect-[4/5]"  style="background-image:url('../assets/images/dental/02-prep.webp');background-size:cover;background-position:center;"></div>
-              <div class="mt-6">
-                <p class="text-sm" style="color: var(--accent)">부원장</p>
-                <h3 class="serif text-3xl mt-1">이서연</h3>
-                <ul class="mt-4 space-y-1 text-sm" style="color: var(--ink-soft)">
-                  <li>· 연세대학교 치과대학 졸업</li>
-                  <li>· 전 OO치과병원 교정과 진료의</li>
-                  <li>· 대한치과교정학회 인정의</li>
-                  <li>· 어린이·청소년 진료 다수 경력</li>
-                  <li>· 치과의사 면허 제00000호</li>
+            <article class="doc reveal" style="--d: 80ms">
+              <div class="photo">
+                <img
+                  src="../assets/images/dental/02-prep.webp"
+                  width="1376"
+                  height="768"
+                  alt="분홍색 진료복을 입은 의료진이 진료 의자 옆에서 기구를 준비하며 웃는 모습"
+                  loading="lazy"
+                  style="--ox: 62%; --s: 1.12; --tx: 62%"
+                />
+              </div>
+              <div class="doc-body">
+                <p class="doc-role"><span class="role">부원장</span><span class="chip">교정 · 어린이 진료</span></p>
+                <h3 class="serif">이서연</h3>
+                <ul>
+                  <li>연세대학교 치과대학 졸업</li>
+                  <li>전 OO치과병원 교정과 진료의</li>
+                  <li>대한치과교정학회 인정의</li>
+                  <li>어린이·청소년 진료 다수 경력</li>
+                  <li>치과의사 면허 제00000호</li>
                 </ul>
               </div>
             </article>
           </div>
         </div>
       </section>
+
+      <!-- ====================== FIRST VISIT ====================== -->
+      <section id="first-visit" class="sec first" aria-labelledby="first-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">첫 방문 안내</p>
+              <h2 id="first-title" class="h2" style="margin-top: 16px">처음 오시는 분께,<br />30분 안내</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              처음 치과 문을 두드리는 마음, 저희가 압니다.
+              예약부터 상담, 진단까지의 흐름을 미리 살펴보세요.
+            </p>
+          </div>
+
+          <ol class="steps">
+            <li class="step reveal">
+              <span class="step-n" aria-hidden="true">01</span>
+              <h3><span class="sr-only">1단계 </span>사전 문진</h3>
+              <p>전화 또는 카톡으로 증상과 내원 시간을 알려주세요.</p>
+            </li>
+            <li class="step reveal" style="--d: 60ms">
+              <span class="step-n" aria-hidden="true">02</span>
+              <h3><span class="sr-only">2단계 </span>디지털 검진</h3>
+              <p>3D CT와 구강 스캐너로 꼼꼼하게 진단합니다.</p>
+            </li>
+            <li class="step reveal" style="--d: 120ms">
+              <span class="step-n" aria-hidden="true">03</span>
+              <h3><span class="sr-only">3단계 </span>1:1 상담</h3>
+              <p>원장이 직접 치료 계획과 비용을 종이 자료로 설명합니다.</p>
+            </li>
+            <li class="step reveal" style="--d: 180ms">
+              <span class="step-n" aria-hidden="true">04</span>
+              <h3><span class="sr-only">4단계 </span>예약 확정</h3>
+              <p>원하시는 요일·시간을 선택해 다음 진료를 잡습니다.</p>
+            </li>
+          </ol>
+
+          <div class="weigh reveal">
+            <div class="weigh-item">
+              <p class="k">미루시면</p>
+              <p>작은 충치 하나도 1년이 채 안 되어 신경치료가 필요해질 수 있습니다.</p>
+            </div>
+            <div class="weigh-item go">
+              <p class="k">시작하시면</p>
+              <p>10년 뒤에도 본인 치아로 좋아하는 음식을 드시는 일상에 가까워집니다.</p>
+            </div>
+          </div>
+
+          <div class="cta-row reveal">
+            <a href="#book" class="btn btn-primary">진료 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+            <a href="#fee" class="btn btn-soft">비급여 진료비 보기</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== TREATMENT FEE ====================== -->
+      <section id="fee" class="sec" aria-labelledby="fee-title">
+        <div class="wrap fee-grid">
+          <div class="reveal">
+            <p class="eyebrow">비급여 진료비 안내</p>
+            <h2 id="fee-title" class="h2" style="margin-top: 16px">비급여 진료,<br />미리 확인하세요.</h2>
+            <p class="sec-lead" style="margin-top: 20px">
+              구강 상태에 따라 달라질 수 있어 상담 시 정확한 견적을 안내드립니다.
+            </p>
+            <p style="margin-top: 20px"><span class="chip">예시 금액</span></p>
+          </div>
+
+          <div class="reveal" style="--d: 80ms">
+            <ul class="fee-list">
+              <li>
+                <div><h3>임플란트 (1개)</h3><p class="basis">국산 프리미엄 픽스처 기준</p></div>
+                <p class="price"><strong>130만원</strong>부터</p>
+              </li>
+              <li>
+                <div><h3>올세라믹 크라운</h3><p class="basis">지르코니아 블록 기준</p></div>
+                <p class="price"><strong>45만원</strong>부터</p>
+              </li>
+              <li>
+                <div><h3>치아미백 (전악)</h3><p class="basis">병원 내 시술 1회</p></div>
+                <p class="price"><strong>25만원</strong>부터</p>
+              </li>
+              <li>
+                <div><h3>신경치료</h3><p class="basis">어금니 기준 · 보험 적용 가능</p></div>
+                <p class="price"><strong>18만원</strong>부터</p>
+              </li>
+              <li>
+                <div><h3>정기 스케일링</h3><p class="basis">연 1회 건강보험 적용</p></div>
+                <p class="price">본인부담 약 <strong>1.5만원</strong></p>
+              </li>
+            </ul>
+            <ul class="fee-notes">
+              <li>비급여 진료비용은 안내데스크에서도 확인하실 수 있습니다. (의료법 제45조)</li>
+              <li>건강보험·실손보험 청구용 진료비 영수증과 세부내역서를 발급해 드립니다.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="seam" aria-hidden="true"><div class="seam-glow"><span class="grain"></span></div></div>
 
       <!-- ====================== VOICE ====================== -->
-      
-      <!-- ====================== FIRST VISIT ====================== -->
-      <section id="first-visit" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">FIRST VISIT</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">처음 오시는 분께, 30분 안내</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">예약부터 상담, 진단까지의 흐름을 미리 살펴보세요.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">01 사전 문진</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">전화 또는 카톡으로 증상과 내원 시간을 알려주세요.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">02 디지털 검진</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">3D CT와 구강 스캐너로 통증 없이 정밀 진단합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">03 1:1 상담</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">원장이 직접 치료 계획과 비용을 종이 자료로 설명합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">04 예약 확정</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">원하시는 요일·시간을 선택해 다음 진료를 잡습니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== TREATMENT FEE ====================== -->
-      <section id="fee" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">TREATMENT FEE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">비급여 진료, 미리 확인하세요</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">구강 상태에 따라 달라질 수 있어 상담 시 정확한 견적을 안내드립니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">임플란트 (1개)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">국산 프리미엄 픽스처 기준 130만원부터</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">올세라믹 크라운</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">지르코니아 블록 기준 45만원부터</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">치아미백 (전악)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">병원 내 시술 1회 25만원부터</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">신경치료</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">어금니 기준 18만원부터, 보험 적용 가능</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">정기 스케일링</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">연 1회 건강보험 적용, 본인부담 약 1.5만원</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="voice" class="container-x py-24 md:py-32">
-        <div class="reveal max-w-2xl mb-14">
-          <p class="eyebrow mb-4">환자분의 목소리</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            오래 다녀주신<br />분들의 이야기.
-          </h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-          <figure class="card reveal">
-            <blockquote class="serif text-xl leading-relaxed" style="color: var(--ink)">
-              “스케일링만 받으러 갔는데,<br />다음 예약을 잡고 나오게 되는 곳이에요.”
-            </blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
-              30대 직장인 · 정기검진
-            </figcaption>
-          </figure>
-          <figure class="card reveal">
-            <blockquote class="serif text-xl leading-relaxed">
-              “통증이 심한 신경치료였는데,<br />대기실에서부터 안심이 됐습니다.”
-            </blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
-              40대 자영업 · 신경치료
-            </figcaption>
-          </figure>
-          <figure class="card reveal">
-            <blockquote class="serif text-xl leading-relaxed">
-              “아이가 치과를 무서워하지 않게 됐어요.<br />그것만으로도 감사한 일이에요.”
-            </blockquote>
-            <figcaption class="mt-6 text-sm" style="color: var(--ink-soft)">
-              30대 어머니 · 어린이 진료
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ====================== VISIT ====================== -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">동네에서 오래 다닐 치과를 찾으신다면</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              처음 치과 문을 두드리는 마음, 저희가 압니다.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">부담 없는 첫 진료</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">필요한 진료만 권합니다 — 정직한 진단부터</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">통증 최소화 진료</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">긴장이 풀릴 만큼 천천히, 가능한 부드럽게</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">끝까지 이어지는 점검</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">정기 알림과 사후 관리로 회복까지</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">미루시면 작은 충치 하나가 신경치료까지 가는 데 1년이 걸리지 않습니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">10년 뒤에도 본인 치아로 좋아하는 음식을 드시는 일상.</p>
+      <section id="voice" class="sec" style="padding-top: 72px" aria-labelledby="voice-title">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="reveal">
+              <p class="eyebrow">환자분의 목소리</p>
+              <h2 id="voice-title" class="h2" style="margin-top: 16px">오래 다녀주신<br />분들의 이야기.</h2>
             </div>
           </div>
 
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#book" class="btn-primary">진료 예약하기 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">비급여 진료비 안내 받기</a>
+          <div class="voice-grid">
+            <figure class="quote reveal">
+              <blockquote>스케일링만 받으러 갔는데, 다음 예약을 잡고 나오게 되는 곳이에요.</blockquote>
+              <figcaption><span class="chip">예시 후기</span>30대 직장인 · 정기검진</figcaption>
+            </figure>
+            <figure class="quote reveal" style="--d: 60ms">
+              <blockquote>통증이 심한 신경치료였는데, 대기실에서부터 안심이 됐습니다.</blockquote>
+              <figcaption><span class="chip">예시 후기</span>40대 자영업 · 신경치료</figcaption>
+            </figure>
+            <figure class="quote reveal" style="--d: 120ms">
+              <blockquote>아이가 치과를 무서워하지 않게 됐어요. 그것만으로도 감사한 일이에요.</blockquote>
+              <figcaption><span class="chip">예시 후기</span>30대 어머니 · 어린이 진료</figcaption>
+            </figure>
+          </div>
+          <p class="voice-note reveal">시안용 예시 문구입니다. 실제 운영 시에는 의료광고 심의 기준에 맞춰 게재합니다.</p>
+        </div>
+      </section>
+
+      <!-- ====================== CTA BAND ====================== -->
+      <section class="wrap" aria-labelledby="band-title">
+        <div class="band reveal">
+          <div class="band-bg" aria-hidden="true">
+            <span class="blob b1"></span>
+            <span class="blob b2"></span>
+            <span class="grain"></span>
+          </div>
+          <p class="eyebrow">라온치과의원</p>
+          <h2 id="band-title" class="serif">이 닦는 일처럼 가까이,<br />라온이 함께하겠습니다.</h2>
+          <p class="sub">예약은 아래 신청서로, 궁금한 점은 전화로 편하게 물어보세요.</p>
+          <div class="cta-row">
+            <a href="#book" class="btn btn-white">지금 예약하기 <span class="arr" aria-hidden="true">→</span></a>
+            <a href="tel:0212345678" class="btn btn-line">02-1234-5678</a>
           </div>
         </div>
       </section>
 
-      <section id="visit" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x grid md:grid-cols-2 gap-12">
+      <!-- ====================== VISIT + BOOK ====================== -->
+      <section id="visit" class="sec" aria-labelledby="visit-title">
+        <div class="wrap visit-grid">
           <div class="reveal">
-            <p class="eyebrow mb-4">진료 안내</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              월요일부터 토요일,<br />같은 자리에서 기다립니다.
-            </h2>
+            <p class="eyebrow">진료 안내</p>
+            <h2 id="visit-title" class="h2 h2-sm" style="margin-top: 16px">월요일부터 토요일,<br />같은 자리에서 기다립니다.</h2>
 
-            <dl class="mt-12 divide-y" style="border-color: var(--line)">
-              <div class="flex justify-between py-4">
-                <dt class="font-semibold">평일</dt>
-                <dd style="color: var(--ink-soft)">10:00 — 19:00</dd>
-              </div>
-              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
-                <dt class="font-semibold">점심시간</dt>
-                <dd style="color: var(--ink-soft)">13:00 — 14:00</dd>
-              </div>
-              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
-                <dt class="font-semibold">토요일</dt>
-                <dd style="color: var(--ink-soft)">10:00 — 14:00 (점심시간 없음)</dd>
-              </div>
-              <div class="flex justify-between py-4 border-t" style="border-color: var(--line)">
-                <dt class="font-semibold">일요일·공휴일</dt>
-                <dd style="color: var(--ink-soft)">휴진</dd>
-              </div>
+            <dl class="hours">
+              <div data-day="week"><dt>평일 <span class="chip today-chip">오늘</span></dt><dd>10:00 — 19:00</dd></div>
+              <div><dt>점심시간</dt><dd>13:00 — 14:00</dd></div>
+              <div data-day="sat"><dt>토요일 <span class="chip today-chip">오늘</span></dt><dd>10:00 — 14:00 (점심시간 없음)</dd></div>
+              <div data-day="sun"><dt>일요일·공휴일 <span class="chip today-chip">오늘</span></dt><dd>휴진</dd></div>
             </dl>
 
-            <div class="mt-12">
-              <p class="text-sm" style="color: var(--ink-soft)">위치</p>
-              <p class="mt-2 text-lg leading-relaxed">
-                서울특별시 OO구 OO로 OO길 5, 2층<br />
-                OO역 3번 출구에서 도보 4분
-              </p>
-              <p class="mt-6 text-sm" style="color: var(--ink-soft)">전화</p>
-              <a class="serif text-3xl mt-1 inline-block" href="tel:0212345678" style="color: var(--primary)">
-                02 · 1234 · 5678
-              </a>
-              <ul class="mt-8 text-sm space-y-2" style="color: var(--ink-soft)">
-                <li>· <strong>주차</strong>: 건물 지하 주차장 · 진료 시 1시간 무료</li>
-                <li>· <strong>응급/야간</strong>: 진료시간 외에는 OO대학교병원 응급실로 안내드립니다</li>
-                <li>· <strong>건강보험·실손보험</strong>: 청구용 진료비 영수증·세부내역서 발급 가능</li>
-                <li>· <strong>비급여 진료비</strong>는 안내데스크 또는 <a href="#" style="color:var(--primary);text-decoration:underline">비급여 안내</a>에서 확인하실 수 있습니다 (의료법 제45조)</li>
-              </ul>
+            <div class="loc">
+              <div>
+                <p class="k">위치</p>
+                <p class="v">서울특별시 OO구 OO로 OO길 5, 2층<br />OO역 3번 출구에서 도보 4분</p>
+              </div>
+              <div>
+                <p class="k">전화</p>
+                <a class="tel-big" href="tel:0212345678">02 · 1234 · 5678</a>
+              </div>
             </div>
+
+            <ul class="notes">
+              <li><strong>주차</strong> 건물 지하 주차장 · 진료 시 1시간 무료</li>
+              <li><strong>응급·야간</strong> 진료시간 외에는 OO대학교병원 응급실로 안내드립니다</li>
+              <li><strong>건강보험·실손보험</strong> 청구용 진료비 영수증·세부내역서 발급 가능</li>
+              <li><strong>비급여 진료비</strong> 안내데스크 또는 <a href="#fee">비급여 안내</a>에서 확인하실 수 있습니다 (의료법 제45조)</li>
+            </ul>
           </div>
 
-          <!-- 예약 폼 -->
-          <form id="book" class="card reveal" onsubmit="event.preventDefault(); alert('예약 요청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
-            <p class="eyebrow mb-4">진료 예약</p>
-            <h3 class="serif text-2xl mb-6">편하실 때 연락드릴게요.<br />정보를 남겨주세요.</h3>
+          <!-- 예약 폼 (시안 데모) -->
+          <form id="book" class="book reveal" style="--d: 80ms" novalidate>
+            <p class="eyebrow">진료 예약</p>
+            <h3 class="serif">편하실 때 연락드릴게요.<br />정보를 남겨주세요.</h3>
+            <p class="sub">확인 후 진료시간 안에 전화로 예약을 확정해 드립니다.</p>
 
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm mb-2" style="color: var(--ink-soft)">성함</label>
-                <input class="field" required placeholder="홍길동" />
+            <div class="fields">
+              <div class="row2">
+                <div>
+                  <label class="lbl" for="bk-name">성함</label>
+                  <input class="field" id="bk-name" name="name" autocomplete="name" required placeholder="홍길동" />
+                </div>
+                <div>
+                  <label class="lbl" for="bk-tel">연락처</label>
+                  <input class="field" id="bk-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required placeholder="010-0000-0000" />
+                </div>
               </div>
               <div>
-                <label class="block text-sm mb-2" style="color: var(--ink-soft)">연락처</label>
-                <input class="field" required type="tel" placeholder="010-0000-0000" />
-              </div>
-              <div>
-                <label class="block text-sm mb-2" style="color: var(--ink-soft)">희망 진료</label>
-                <select class="field" required>
+                <label class="lbl" for="bk-care">희망 진료</label>
+                <select class="field" id="bk-care" name="care" required>
                   <option value="">진료를 선택해 주세요</option>
                   <option>임플란트 상담</option>
                   <option>신경치료</option>
@@ -650,47 +1522,44 @@
                   <option>정기검진</option>
                 </select>
               </div>
+              <fieldset>
+                <legend class="lbl">희망 시간대</legend>
+                <div class="seg">
+                  <label><input type="radio" name="slot" value="평일 오전" checked /><span>평일 오전</span></label>
+                  <label><input type="radio" name="slot" value="평일 오후" /><span>평일 오후</span></label>
+                  <label><input type="radio" name="slot" value="토요일" /><span>토요일</span></label>
+                </div>
+              </fieldset>
               <div>
-                <label class="block text-sm mb-2" style="color: var(--ink-soft)">하실 말씀 (선택)</label>
-                <textarea class="field" rows="3" placeholder="궁금한 점이나 알려주실 사항을 자유롭게 적어주세요."></textarea>
+                <label class="lbl" for="bk-msg">하실 말씀 (선택)</label>
+                <textarea class="field" id="bk-msg" name="msg" rows="3" placeholder="궁금한 점이나 알려주실 사항을 자유롭게 적어주세요."></textarea>
               </div>
-              <label class="flex items-start gap-2 mt-4 mb-3 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-                <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+              <label class="agree">
+                <input type="checkbox" name="agree" required />
+                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
               </label>
-              <button type="submit" class="btn-primary w-full justify-center mt-2">
-                예약 요청 보내기
-              </button>
-              <p class="text-xs mt-2" style="color: var(--ink-soft)">
-                · 작성해 주신 정보는 진료 예약 안내 외 다른 목적으로 사용되지 않습니다.
-              </p>
+              <button type="submit" class="btn btn-primary">예약 요청 보내기 <span class="arr" aria-hidden="true">→</span></button>
+              <p class="toast" id="bookToast" role="status" aria-live="polite"></p>
+              <p class="fine">작성해 주신 정보는 진료 예약 안내 외 다른 목적으로 사용되지 않습니다.</p>
             </div>
           </form>
         </div>
       </section>
-
-      <!-- ====================== CTA ====================== -->
-      <section class="py-28 text-center" style="background: var(--primary); color: #fff">
-        <div class="container-x">
-          <p class="serif text-3xl md:text-5xl leading-tight tracking-tight reveal">
-            이 닦는 일처럼 가까이,<br />라온이 함께하겠습니다.
-          </p>
-          <a href="#book" class="inline-block mt-10 px-8 py-4 rounded-full bg-white font-semibold reveal" style="color: var(--primary)">
-            지금 예약하기
-          </a>
-        </div>
-      </section>
     </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x">
-        <p class="mb-3 text-xs"><sup>*</sup> 재진율은 2024년 정기검진 재방문 환자 기준입니다.</p>
-        <div class="flex flex-wrap justify-between gap-4">
-          <span>© 2026 라온치과의원 · 대표원장 김라온 · 의료기관 종별 치과의원 · 사업자등록번호 000-00-00000 · 의료광고 사전심의필 (제2025-XXX호)</span>
-          <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+    <footer class="ft">
+      <div class="wrap">
+        <div class="ft-top">
+          <a href="#top" class="logo" aria-label="라온치과의원 처음으로">
+            <span class="logo-mark" aria-hidden="true"><span class="grain"></span><b>라</b></span>
+            라온치과의원
+          </a>
+          <a href="/" class="ft-back">← 쇼룸으로 돌아가기</a>
         </div>
+        <p class="ft-info">© 2026 라온치과의원 · 대표원장 김라온 · 의료기관 종별 치과의원 · 사업자등록번호 000-00-00000 · 의료광고 사전심의필 (제2025-XXX호)</p>
+        <p class="ft-foot"><sup>*</sup> 재진율은 2024년 정기검진 재방문 환자 기준입니다.</p>
+        <p class="ft-demo">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
@@ -707,6 +1576,54 @@
         { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      (() => {
+        /* 블롭은 화면 안에 있을 때만 움직임 */
+        const live = new IntersectionObserver(
+          (entries) => entries.forEach((e) => e.target.classList.toggle('is-live', e.isIntersecting)),
+          { rootMargin: '60px 0px' }
+        );
+        document.querySelectorAll('[data-ambient]').forEach((el) => live.observe(el));
+
+        /* 헤더 스크롤 상태 */
+        const hd = document.getElementById('hd');
+        let ticking = false;
+        const sync = () => { hd.classList.toggle('is-scrolled', window.scrollY > 8); ticking = false; };
+        window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }, { passive: true });
+        sync();
+
+        /* 모바일 메뉴 */
+        const btn = document.getElementById('menuBtn');
+        const panel = document.getElementById('mnav');
+        const setOpen = (open) => {
+          btn.setAttribute('aria-expanded', String(open));
+          btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+          panel.hidden = !open;
+        };
+        btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+        panel.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); }
+        });
+
+        /* 오늘 요일 표시 */
+        const d = new Date().getDay();
+        const row = document.querySelector('[data-day="' + (d === 0 ? 'sun' : d === 6 ? 'sat' : 'week') + '"]');
+        if (row) row.classList.add('is-today');
+
+        /* 예약 폼 — 시안 데모 */
+        const form = document.getElementById('book');
+        const toast = document.getElementById('bookToast');
+        let timer;
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+          toast.textContent = '시안 데모 — 실제로 전송되지 않습니다.';
+          toast.classList.add('show');
+          clearTimeout(timer);
+          timer = setTimeout(() => toast.classList.remove('show'), 5000);
+        });
+      })();
     </script>
     <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
@@ -720,9 +1637,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널 상담"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널 상담</span></a>
-      <a class="phone" href="tel:0212345678" target="_blank" rel="noopener" aria-label="02-1234-5678"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">02-1234-5678</span></a>
-      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">인스타그램</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오 채널 상담"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오 채널 상담</span></a>
+      <a class="phone" href="tel:0212345678" target="_blank" rel="noopener" aria-label="02-1234-5678"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">02-1234-5678</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">인스타그램</span></a>
     </div>
 
   </body>

@@ -36,34 +36,846 @@
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ============================================================
+         루티드 필라테스 — 그레이니 그라데이션 (세이지 · 샌드 · 살구)
+         크고 유기적인 블롭이 10초 주기로 숨 쉬듯 움직이고, 필름 입자는 또렷하게.
+         ============================================================ */
       :root {
-        --bg: #f6f3ec;
-        --bg-soft: #e8e1d0;
-        --primary: #2d4a3a;
-        --primary-soft: #4f6b56;
-        --accent: #8aab8d;
-        --ink: #1c2b22;
-        --ink-soft: #5d6c61;
-        --line: #d8d2c1;
+        --bg: #f5f0e7;
+        --surface: #fffdf9;
+        --sand: #ece2d0;
+        --sand-2: #f1e9dc;
+        --sage: #b7c9ad;
+        --sage-2: #dde7d5;
+        --sage-deep: #4f6b56;
+        --apricot: #f3c2a0;
+        --apricot-2: #fbe5d4;
+        --forest: #2d4a3a;
+        --forest-ink: #1f3529;
+        --ink: #1d2a22;
+        --ink-2: #434f48;
+        --ink-3: #56615a;
+        --line: #e2d8c7;
+        --line-2: #d3c8b5;
+
+        --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+          'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+        --maxw: 1200px;
+        --pad-x: 40px;
+        --fab-r: 112px;
+        --sec-y: 136px;
+        --hd-h: 72px;
+        --r-xl: 44px;
+        --r-lg: 32px;
+        --r-md: 22px;
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+        --breath: 10s;
+        --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1.9 0 0 0 -.45 1.9 0 0 0 -.45 1.9 0 0 0 -.45 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; background: var(--bg); color: var(--ink); }
-      .serif { font-family: 'Pretendard Variable', Pretendard, sans-serif; font-weight: 800; letter-spacing: -0.04em; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #d6e7d4, #a8c1ac 60%, #6a8a72); position: relative; overflow: hidden; }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(246,243,236,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
-      .btn-primary:hover { background:#1a3024; transform:translateY(-1px); }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px; }
-      .btn-ghost:hover { background: var(--primary-soft); color:#fff; border-color: var(--primary-soft); }
-      .card { background:#fff; border-radius:20px; padding:30px; border:1px solid var(--line); transition:.3s; }
-      .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -25px rgba(45,74,58,.3); }
-      .field { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:15px; }
-      .field:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(138,171,141,.2);}
+      @media (max-width: 767px) {
+        :root { --pad-x: 20px; --sec-y: 96px; --hd-h: 64px; }
+      }
+      @media (max-width: 640px) {
+        :root { --fab-r: 94px; }
+      }
+
+      html { scroll-behavior: smooth; scroll-padding-top: calc(var(--hd-h) + 16px); }
+      body {
+        font-family: var(--sans);
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.65;
+        letter-spacing: -0.012em;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+      }
+      ::selection { background: var(--apricot); color: var(--ink); }
+      :focus-visible:not(.fab-back) { outline: 2.5px solid var(--forest); outline-offset: 3px; }
+
+      .wrap { width: 100%; max-width: calc(var(--maxw) + var(--pad-x) * 2); margin: 0 auto; padding: 0 var(--pad-x); }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      .nw { white-space: nowrap; }
+
+      /* 스크롤 등장 */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 1s var(--ease), transform 1s var(--ease);
+        transition-delay: var(--d, 0ms);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+
+      /* ---------- 그레인 · 블롭 ---------- */
+      .grain {
+        position: absolute;
+        inset: 0;
+        background-image: var(--noise);
+        background-size: 220px 220px;
+        mix-blend-mode: soft-light;
+        opacity: 0.9;
+        pointer-events: none;
+      }
+      .blob {
+        position: absolute;
+        will-change: transform;
+        animation: breathe-a var(--breath) ease-in-out infinite;
+        animation-play-state: paused;
+      }
+      .is-live .blob,
+      .is-live .orb,
+      .is-live .orb-label { animation-play-state: running; }
+      @keyframes breathe-a {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+        45% { transform: translate3d(3%, -4%, 0) scale(1.14) rotate(7deg); }
+      }
+      @keyframes breathe-b {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1.08) rotate(0deg); }
+        50% { transform: translate3d(-5%, 3%, 0) scale(0.94) rotate(-9deg); }
+      }
+      @keyframes breathe-c {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(0.96); }
+        40% { transform: translate3d(4%, 5%, 0) scale(1.12); }
+      }
+
+      /* ---------- 버튼 · 칩 ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        height: 58px;
+        padding: 0 30px;
+        border-radius: 999px;
+        font-size: 16.5px;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        white-space: nowrap;
+        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .btn .arr { transition: transform 0.25s ease; }
+      .btn:hover .arr { transform: translateX(3px); }
+      .btn-primary {
+        background: var(--forest);
+        color: #fff;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 14px 30px -16px rgba(31, 53, 41, 0.75);
+      }
+      .btn-primary:hover { background: var(--forest-ink); transform: translateY(-1px); }
+      .btn-ghost {
+        background: rgba(255, 253, 249, 0.6);
+        color: var(--forest);
+        border: 1.5px solid rgba(45, 74, 58, 0.35);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .btn-ghost:hover { background: var(--surface); border-color: var(--forest); }
+      .btn-sm { height: 44px; padding: 0 20px; font-size: 15px; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 26px;
+        padding: 0 11px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: var(--forest);
+        background: rgba(255, 253, 249, 0.75);
+        border: 1px solid rgba(45, 74, 58, 0.2);
+        white-space: nowrap;
+      }
+      .chip.warm { background: var(--apricot-2); border-color: rgba(138, 90, 60, 0.22); color: #6e4a30; }
+
+      /* ---------- 헤더 ---------- */
+      .hd {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: var(--hd-h);
+        background: rgba(245, 240, 231, 0.55);
+        -webkit-backdrop-filter: saturate(150%) blur(18px);
+        backdrop-filter: saturate(150%) blur(18px);
+        border-bottom: 1px solid transparent;
+        transition: background 0.3s ease, border-color 0.3s ease;
+      }
+      .hd.is-scrolled { background: rgba(245, 240, 231, 0.9); border-bottom-color: var(--line); }
+      .hd:has(.mnav:not([hidden])) { z-index: 96; background: var(--bg); }
+      .hd-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: var(--hd-h); }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--forest);
+        white-space: nowrap;
+        margin-left: max(0px, calc(var(--fab-r) - max(var(--pad-x), 50vw - var(--maxw) / 2)));
+      }
+      .logo-mark {
+        position: relative;
+        overflow: hidden;
+        width: 30px;
+        height: 30px;
+        border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+        background:
+          radial-gradient(circle at 30% 30%, #f6cfb0 0%, rgba(246, 207, 176, 0) 60%),
+          radial-gradient(circle at 75% 80%, #8fae8a 0%, rgba(143, 174, 138, 0) 70%),
+          #c9d6bd;
+      }
+      .logo-mark .grain { opacity: 1; background-size: 110px 110px; }
+      .logo-word { font-size: 17px; font-weight: 800; letter-spacing: 0.1em; }
+      .logo-ko { font-size: 14.5px; font-weight: 600; color: var(--ink-2); letter-spacing: -0.01em; }
+      .gnb { display: none; }
+      .gnb a {
+        padding: 8px 13px;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--ink-2);
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+      .gnb a:hover { background: rgba(45, 74, 58, 0.08); color: var(--forest); }
+      .hd-act { display: flex; align-items: center; gap: 10px; }
+      .hd-cta { display: none; }
+      .menu-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255, 253, 249, 0.75);
+        border: 1px solid var(--line-2);
+        color: var(--ink);
+      }
+      .menu-btn svg { width: 20px; height: 20px; }
+      .menu-btn .i-close { display: none; }
+      .menu-btn[aria-expanded='true'] .i-open { display: none; }
+      .menu-btn[aria-expanded='true'] .i-close { display: block; }
+      .mnav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 30px 40px -30px rgba(31, 53, 41, 0.35);
+        padding: 4px var(--pad-x) 22px;
+      }
+      .mnav[hidden] { display: none; }
+      .mnav a:not(.btn) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 2px;
+        font-size: 18px;
+        font-weight: 700;
+        border-bottom: 1px solid var(--line);
+      }
+      .mnav a:not(.btn)::after { content: '→'; color: var(--ink-3); font-weight: 400; }
+      .mnav .btn { width: 100%; margin-top: 18px; }
+      @media (min-width: 480px) { .hd-cta { display: inline-flex; } }
+      @media (min-width: 1024px) {
+        .gnb { display: flex; gap: 2px; }
+        .menu-btn, .mnav { display: none !important; }
+      }
+
+      /* ---------- 히어로 ---------- */
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        margin-top: calc(var(--hd-h) * -1);
+        padding: calc(var(--hd-h) + 56px) 0 0;
+        text-align: center;
+      }
+      .hero-bg { position: absolute; inset: 0 0 22% 0; z-index: -1; overflow: hidden; background: var(--bg); }
+      .hero-bg::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 200px;
+        background: linear-gradient(to bottom, rgba(245, 240, 231, 0), var(--bg));
+      }
+      .hero .bl-sage {
+        width: min(96vw, 1280px);
+        aspect-ratio: 1.15;
+        left: -26%;
+        top: -30%;
+        border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+        background: radial-gradient(closest-side, rgba(165, 192, 154, 0.95) 0%, rgba(178, 201, 166, 0.7) 40%, rgba(183, 201, 173, 0) 100%);
+      }
+      .hero .bl-apricot {
+        width: min(80vw, 1060px);
+        aspect-ratio: 1.05;
+        right: -20%;
+        top: -12%;
+        animation-name: breathe-b;
+        animation-duration: 11s;
+        border-radius: 58% 42% 48% 52% / 46% 58% 42% 54%;
+        background: radial-gradient(closest-side, rgba(244, 184, 146, 0.92) 0%, rgba(246, 196, 162, 0.62) 42%, rgba(246, 196, 162, 0) 100%);
+      }
+      .hero .bl-sand {
+        width: min(90vw, 1180px);
+        aspect-ratio: 1.6;
+        left: 14%;
+        top: 30%;
+        animation-name: breathe-c;
+        animation-duration: 12s;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(238, 224, 198, 0.95) 0%, rgba(240, 228, 206, 0.6) 45%, rgba(240, 228, 206, 0) 100%);
+      }
+      .hero .bl-deep {
+        width: min(46vw, 620px);
+        aspect-ratio: 1;
+        left: 4%;
+        top: 34%;
+        animation-duration: 9s;
+        animation-delay: -3s;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(141, 171, 132, 0.55) 0%, rgba(141, 171, 132, 0) 100%);
+      }
+      .eyebrow-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 38px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: rgba(255, 253, 249, 0.6);
+        border: 1px solid rgba(255, 253, 249, 0.9);
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--forest);
+      }
+      .eyebrow-pill b { font-weight: 700; letter-spacing: 0; }
+      .h-hero {
+        margin: 30px auto 0;
+        max-width: 12em;
+        font-size: clamp(46px, 7.6vw, 108px);
+        font-weight: 820;
+        line-height: 1.04;
+        letter-spacing: -0.055em;
+        color: var(--ink);
+      }
+      .h-hero .accent { color: #45614c; }
+      .lead {
+        margin: 30px auto 0;
+        max-width: 28em;
+        font-size: clamp(17px, 1.5vw, 20px);
+        line-height: 1.7;
+        color: var(--ink-2);
+        font-weight: 500;
+        text-wrap: balance;
+      }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+      .hero .cta-row { justify-content: center; }
+
+      .stage { position: relative; margin-top: clamp(84px, 8vw, 112px); }
+      .stage-photo {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        border-radius: 999px 999px var(--r-lg) var(--r-lg) / 46vw 46vw var(--r-lg) var(--r-lg);
+        background: var(--sand);
+        box-shadow: 0 50px 100px -60px rgba(31, 53, 41, 0.55);
+      }
+      .stage-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 12% 50%; }
+      .stage-photo::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 1px rgba(255, 253, 249, 0.5);
+        pointer-events: none;
+      }
+
+      /* 호흡 오브 */
+      .breath {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 132px;
+        height: 132px;
+        transform: translate(-50%, -50%);
+        display: grid;
+        place-items: center;
+        z-index: 2;
+      }
+      .orb {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 30% 26%, #ffe6d2 0%, rgba(255, 230, 210, 0) 46%),
+          radial-gradient(circle at 72% 80%, #93b287 0%, rgba(147, 178, 135, 0) 62%),
+          radial-gradient(circle at 50% 50%, #f5bd96 0%, #efc7a4 60%, #e2cfb0 100%);
+        box-shadow: 0 0 0 10px rgba(255, 253, 249, 0.35), 0 24px 50px -24px rgba(31, 53, 41, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+        animation: orb var(--breath) ease-in-out infinite;
+        animation-play-state: paused;
+      }
+      .orb .grain { opacity: 1; }
+      .orb-text { position: relative; display: grid; place-items: center; font-size: 14px; font-weight: 800; color: var(--forest-ink); letter-spacing: -0.01em; }
+      .orb-text span { grid-area: 1 / 1; }
+      .orb-label { animation: in-label var(--breath) ease-in-out infinite; animation-play-state: paused; }
+      .orb-label.out { animation-name: out-label; opacity: 0; }
+      .orb-static { display: none; }
+      @keyframes orb {
+        0%, 100% { transform: scale(0.8); }
+        40% { transform: scale(1); }
+      }
+      @keyframes in-label {
+        0%, 34% { opacity: 1; }
+        42%, 94% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes out-label {
+        0%, 34% { opacity: 0; }
+        42%, 94% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      .stats-dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+      .stats {
+        position: relative;
+        z-index: 2;
+        margin: -40px 12px 0;
+        padding: 18px 18px 16px;
+        border-radius: var(--r-md);
+        background: rgba(255, 253, 249, 0.86);
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(140%);
+        box-shadow: 0 24px 50px -30px rgba(31, 53, 41, 0.5);
+        text-align: left;
+      }
+      .stats dt { font-size: 12.5px; color: var(--ink-3); font-weight: 600; }
+      .stats dd { margin-top: 2px; font-size: clamp(24px, 2.6vw, 34px); font-weight: 820; letter-spacing: -0.04em; line-height: 1.15; font-variant-numeric: tabular-nums; color: var(--ink); }
+      .stats dd small { font-size: 0.5em; font-weight: 700; margin-left: 2px; color: var(--ink-2); letter-spacing: 0; }
+      .stats-cap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-3); }
+
+      @media (max-width: 767px) {
+        /* 세로로 긴 모바일 히어로: 블롭을 화면 너비 기준으로 */
+        .hero .bl-sage { width: 160vw; left: -70vw; top: 30vw; }
+        .hero .bl-apricot { width: 140vw; right: -70vw; top: -50vw; }
+        .hero .bl-sand { width: 150vw; left: -20vw; top: 110vw; }
+        .hero .bl-deep { width: 90vw; left: -30vw; top: 120vw; }
+        .lead { font-size: 16.5px; }
+        .breath { left: auto; right: 6px; width: 92px; height: 92px; transform: translateY(-58%); }
+        .orb-text { font-size: 12.5px; }
+      }
+      @media (min-width: 768px) {
+        .stage-photo { aspect-ratio: 16 / 8; border-radius: 999px 999px var(--r-xl) var(--r-xl) / 300px 300px var(--r-xl) var(--r-xl); }
+        .stage-photo img { object-position: 50% 42%; }
+        .breath { width: 140px; height: 140px; }
+        .stats {
+          position: absolute;
+          right: 32px;
+          bottom: 32px;
+          margin: 0;
+          width: min(470px, 52%);
+          padding: 20px 24px 16px;
+        }
+        .stats-dl { gap: 12px; }
+      }
+      @media (min-width: 1024px) {
+        .stage-photo { aspect-ratio: 16 / 7; }
+        .breath { width: 150px; height: 150px; }
+        .orb-text { font-size: 15.5px; }
+      }
+
+      /* ---------- 섹션 공통 ---------- */
+      .sec { padding: var(--sec-y) 0; }
+      .sec-head { display: grid; gap: 18px; margin-bottom: clamp(44px, 5.4vw, 72px); }
+      @media (min-width: 900px) {
+        .sec-head.split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: end; column-gap: 56px; }
+      }
+      .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--forest); }
+      .eyebrow::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+        background: radial-gradient(circle at 30% 30%, #f6cfb0, #8fae8a 75%);
+      }
+      .h2 {
+        text-wrap: balance;
+        margin-top: 16px;
+        font-size: clamp(34px, 5vw, 64px);
+        font-weight: 820;
+        line-height: 1.12;
+        letter-spacing: -0.05em;
+      }
+      .sec-lead { font-size: clamp(16px, 1.35vw, 18px); line-height: 1.75; color: var(--ink-2); max-width: 30em; }
+
+      /* ---------- 루티드의 방식 ---------- */
+      .way-grid { display: grid; gap: 14px; }
+      @media (min-width: 640px) { .way-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+      @media (min-width: 1100px) { .way-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
+      .way {
+        position: relative;
+        padding: 28px 26px 30px;
+        border-radius: var(--r-md);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+      }
+      .way:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -36px rgba(31, 53, 41, 0.45); }
+      .pebble {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 60px;
+        border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--forest-ink);
+        background: radial-gradient(circle at 30% 28%, #fde7d6 0%, rgba(253, 231, 214, 0) 60%), radial-gradient(circle at 76% 80%, #b3c8a8, rgba(179, 200, 168, 0) 70%), #ead9c2;
+      }
+      .way:nth-child(2) .pebble { border-radius: 44% 56% 48% 52% / 58% 42% 58% 42%; }
+      .way:nth-child(3) .pebble { border-radius: 52% 48% 40% 60% / 44% 52% 48% 56%; }
+      .way:nth-child(4) .pebble { border-radius: 60% 40% 52% 48% / 52% 46% 54% 48%; }
+      .pebble .grain { opacity: 1; background-size: 140px 140px; }
+      .pebble b { position: relative; }
+      .way h3 { margin-top: 24px; font-size: 21px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.35; }
+      .way p { margin-top: 10px; font-size: 15.5px; line-height: 1.75; color: var(--ink-2); }
+      @media (max-width: 639px) {
+        .way { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 16px; padding: 22px 20px; }
+        .pebble { grid-row: span 2; width: 52px; height: 50px; font-size: 16px; }
+        .way h3 { margin-top: 2px; font-size: 19px; }
+        .way p { margin-top: 6px; font-size: 15px; line-height: 1.7; }
+      }
+
+      /* ---------- 프로그램 ---------- */
+      .prog-grid { display: grid; gap: 16px; }
+      @media (min-width: 900px) { .prog-grid { grid-template-columns: 1.15fr 1fr 1fr; gap: 18px; align-items: stretch; } }
+      .prog {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        display: flex;
+        flex-direction: column;
+        padding: 32px 30px 30px;
+        border-radius: var(--r-lg);
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .prog.feature { border-color: transparent; background: #dfe6d3; clip-path: inset(0 round var(--r-lg)); }
+      .prog.feature .prog-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #e3e8d6; }
+      .prog.feature .prog-bg::before,
+      .prog.feature .prog-bg::after { content: ''; position: absolute; border-radius: 50%; }
+      .prog.feature .prog-bg::before {
+        width: 120%;
+        aspect-ratio: 1;
+        left: -40%;
+        top: -50%;
+        background: radial-gradient(closest-side, rgba(176, 200, 163, 0.95), rgba(176, 200, 163, 0));
+      }
+      .prog.feature .prog-bg::after {
+        width: 110%;
+        aspect-ratio: 1;
+        right: -50%;
+        bottom: -55%;
+        background: radial-gradient(closest-side, rgba(246, 200, 166, 0.85), rgba(246, 200, 166, 0));
+      }
+      .prog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .prog-cap { font-size: 13.5px; font-weight: 700; color: var(--ink-3); }
+      .prog h3 { margin-top: 18px; font-size: clamp(26px, 2.4vw, 32px); font-weight: 820; letter-spacing: -0.045em; line-height: 1.2; }
+      .prog .desc { margin-top: 10px; font-size: 15.5px; line-height: 1.7; color: var(--ink-2); }
+      .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+      .price { margin-top: auto; padding-top: 26px; }
+      .price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(45, 74, 58, 0.14); }
+      .price-row span { font-size: 14.5px; color: var(--ink-2); font-weight: 600; }
+      .price-row strong { font-size: clamp(22px, 2vw, 26px); font-weight: 820; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+      .price-row strong small { font-size: 13px; font-weight: 600; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
+      .prog .btn { margin-top: 14px; width: 100%; }
+
+      .match { margin-top: clamp(56px, 7vw, 96px); display: grid; gap: 28px; }
+      @media (min-width: 1024px) { .match { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 56px; } }
+      .match h3 { font-size: clamp(26px, 2.8vw, 36px); font-weight: 820; letter-spacing: -0.045em; line-height: 1.2; }
+      .match .sub { margin-top: 12px; color: var(--ink-2); }
+      .match-list { display: grid; gap: 10px; }
+      @media (min-width: 640px) { .match-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+      .match-item {
+        padding: 22px 24px 24px;
+        border-radius: var(--r-md);
+        background: var(--sand-2);
+        border: 1px solid var(--line);
+      }
+      .match-item .q { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 800; letter-spacing: -0.03em; }
+      .match-item .q::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sage-deep); }
+      .match-item p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+
+      /* ---------- 강사진 ---------- */
+      .coach-grid { display: grid; gap: 28px; }
+      @media (min-width: 640px) { .coach-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+      @media (min-width: 1024px) { .coach-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
+      .coach-photo {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        border-radius: 999px 999px var(--r-md) var(--r-md) / 220px 220px var(--r-md) var(--r-md);
+        background: var(--sand);
+      }
+      .coach-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--ox, 50%) 30%;
+        transform: scale(var(--s, 1));
+        transform-origin: var(--ox, 50%) 30%;
+        transition: transform 1.2s var(--ease);
+      }
+      .coach:hover .coach-photo img { transform: scale(calc(var(--s, 1) * 1.04)); }
+      .coach-body { padding: 22px 4px 0; }
+      .coach .role { font-size: 13.5px; font-weight: 700; color: var(--sage-deep); }
+      .coach h3 { margin-top: 4px; font-size: 28px; font-weight: 820; letter-spacing: -0.045em; }
+      .coach .cred { margin-top: 10px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+      .coach .tags { margin-top: 14px; }
+      @media (max-width: 639px) {
+        .coach-grid { gap: 16px; }
+        .coach { display: grid; grid-template-columns: 124px minmax(0, 1fr); column-gap: 18px; align-items: center; }
+        .coach-photo { border-radius: 999px 999px 18px 18px / 90px 90px 18px 18px; }
+        .coach-body { padding: 0; }
+        .coach h3 { font-size: 24px; }
+        .coach .cred { margin-top: 6px; font-size: 14px; line-height: 1.6; }
+        .coach .tags { margin-top: 10px; }
+      }
+
+      /* ---------- 시설 ---------- */
+      .space-grid { display: grid; gap: 36px; }
+      @media (min-width: 1024px) { .space-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center; } }
+      .space-loc { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-weight: 600; color: var(--ink-2); }
+      .board {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: var(--r-xl);
+        clip-path: inset(0 round var(--r-xl));
+        padding: clamp(20px, 3.4vw, 44px);
+      }
+      .board-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #ebe3d3; }
+      .board .blob { animation: none; will-change: auto; }
+      .board .bl-1 {
+        width: 90%;
+        aspect-ratio: 1.1;
+        right: -30%;
+        top: -40%;
+        border-radius: 58% 42% 48% 52% / 46% 58% 42% 54%;
+        background: radial-gradient(closest-side, rgba(244, 186, 148, 0.85), rgba(244, 186, 148, 0));
+      }
+      .board .bl-2 {
+        width: 95%;
+        aspect-ratio: 1;
+        left: -30%;
+        bottom: -45%;
+        border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+        background: radial-gradient(closest-side, rgba(160, 190, 148, 0.9), rgba(160, 190, 148, 0));
+      }
+      .amen { display: grid; gap: 12px; }
+      @media (min-width: 560px) { .amen { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+      .amen li {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 22px 22px 24px;
+        border-radius: var(--r-md);
+        background: rgba(255, 253, 249, 0.84);
+        box-shadow: 0 18px 36px -28px rgba(31, 53, 41, 0.45);
+        font-size: 17px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+      .amen .ic { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 15px; background: var(--sage-2); color: var(--forest); }
+      .amen .ic svg { width: 23px; height: 23px; }
+      .amen small { display: block; margin-top: 4px; font-size: 14px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink-3); }
+      @media (max-width: 559px) {
+        .amen li { flex-direction: row; align-items: center; padding: 16px 18px; }
+        .board .bl-1 { width: 170%; right: -80%; top: -30%; }
+        .board .bl-2 { width: 170%; left: -80%; bottom: -30%; }
+      }
+
+      /* ---------- 변화 기록 ---------- */
+      .changes { background: var(--surface); }
+      .chg-grid { display: grid; gap: 14px; }
+      @media (min-width: 640px) { .chg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+      @media (min-width: 1100px) { .chg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      .chg { padding: 26px 24px 24px; border-radius: var(--r-md); background: var(--bg); border: 1px solid var(--line); display: flex; flex-direction: column; }
+      .chg .k { font-size: 14px; font-weight: 700; color: var(--sage-deep); }
+      .chg h3 { margin-top: 4px; font-size: 20px; font-weight: 800; letter-spacing: -0.035em; }
+      .chg .metric { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; margin-top: 22px; font-weight: 820; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+      .chg .from { font-size: 22px; color: var(--ink-3); }
+      .chg .to { font-size: 34px; color: var(--ink); }
+      .chg .arrow { font-size: 18px; color: var(--ink-3); font-weight: 500; }
+      .chg .what { margin-top: 4px; font-size: 14px; color: var(--ink-3); }
+      .chg .who { margin-top: auto; padding-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-3); }
+      .chg .who .chip { background: var(--apricot-2); border-color: rgba(138, 90, 60, 0.2); color: #6e4a30; }
+      .chg-note { margin-top: 18px; font-size: 13.5px; color: var(--ink-3); }
+      @media (max-width: 639px) {
+        .chg { padding: 20px 20px 18px; }
+        .chg .metric { margin-top: 12px; }
+        .chg .to { font-size: 30px; }
+        .chg .who { padding-top: 12px; }
+      }
+
+      /* ---------- 숨 고르기 밴드 (그레인) ---------- */
+      .band {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: var(--r-xl);
+        clip-path: inset(0 round var(--r-xl));
+        padding: clamp(64px, 8vw, 112px) clamp(24px, 6vw, 88px);
+        background: #efe2cf;
+      }
+      .band-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #efe2cf; }
+      /* 밴드 블롭은 정지 — 둥근 모서리 + 합성 레이어 블렌드 조합의 모서리 깨짐 방지 */
+      .band .band-bg .blob { animation: none; will-change: auto; }
+      .band .bl-1 {
+        width: 80%;
+        aspect-ratio: 1.1;
+        left: -24%;
+        top: -48%;
+        border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+        background: radial-gradient(closest-side, rgba(170, 196, 158, 0.95), rgba(170, 196, 158, 0));
+      }
+      .band .bl-2 {
+        width: 74%;
+        aspect-ratio: 1;
+        right: -22%;
+        bottom: -52%;
+        animation-name: breathe-b;
+        animation-duration: 11s;
+        border-radius: 58% 42% 48% 52% / 46% 58% 42% 54%;
+        background: radial-gradient(closest-side, rgba(245, 184, 146, 0.9), rgba(245, 184, 146, 0));
+      }
+      @media (max-width: 767px) {
+        .band .bl-1 { width: 170vw; left: -80vw; top: -60vw; }
+        .band .bl-2 { width: 160vw; right: -80vw; bottom: -70vw; }
+      }
+      .band-in { display: grid; gap: 40px; }
+      @media (min-width: 1024px) { .band-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 64px; align-items: end; } }
+      .band h2 { font-size: clamp(32px, 4.4vw, 58px); font-weight: 820; line-height: 1.16; letter-spacing: -0.05em; margin-top: 16px; }
+      .weigh { display: grid; gap: 12px; }
+      .weigh div { padding: 22px 24px; border-radius: var(--r-md); background: rgba(255, 253, 249, 0.78); }
+      .weigh div.go { background: rgba(255, 253, 249, 0.92); }
+      .weigh .k { font-size: 13.5px; font-weight: 800; color: var(--ink-3); }
+      .weigh .go .k { color: var(--forest); }
+      .weigh p:last-child { margin-top: 6px; font-size: 17px; line-height: 1.6; font-weight: 600; color: var(--ink); }
+      .band .cta-row { margin-top: 28px; }
+
+      /* ---------- 체험 신청 ---------- */
+      .trial-grid { display: grid; gap: 48px; }
+      @media (min-width: 1024px) { .trial-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: start; } }
+      .trial-copy p.body { margin-top: 22px; color: var(--ink-2); font-size: 17px; line-height: 1.75; max-width: 30em; }
+      .hours { margin-top: 32px; border-top: 1px solid var(--line-2); }
+      .hours div { display: flex; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--line-2); }
+      .hours dt { font-weight: 800; color: var(--forest); }
+      .hours dd { color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; font-weight: 500; }
+      .policy { margin-top: 28px; display: grid; gap: 10px; padding: 22px 24px; border-radius: var(--r-md); background: var(--sand-2); border: 1px solid var(--line); font-size: 14.5px; line-height: 1.65; color: var(--ink-2); }
+      .policy strong { color: var(--ink); font-weight: 800; }
+
+      .form {
+        position: relative;
+        padding: clamp(26px, 4vw, 40px);
+        border-radius: var(--r-lg);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: 0 40px 80px -50px rgba(31, 53, 41, 0.45);
+      }
+      .form h3 { margin-top: 12px; font-size: clamp(26px, 2.6vw, 32px); font-weight: 820; letter-spacing: -0.045em; line-height: 1.25; }
+      .form .sub { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+      .fields { display: grid; gap: 16px; margin-top: 26px; }
+      .row2 { display: grid; gap: 16px; }
+      @media (min-width: 560px) { .row2 { grid-template-columns: 1fr 1fr; } }
+      .lbl { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 700; color: var(--ink-2); }
+      .field {
+        width: 100%;
+        height: 52px;
+        padding: 0 16px;
+        border: 1px solid var(--line-2);
+        border-radius: 14px;
+        background: #fff;
+        font: inherit;
+        font-size: 16px;
+        color: var(--ink);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      select.field {
+        appearance: none;
+        padding-right: 44px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2356615a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 18px;
+      }
+      .field::placeholder { color: #737b74; }
+      .field:hover { border-color: #bcae98; }
+      .field:focus { outline: none; border-color: var(--forest); box-shadow: 0 0 0 4px rgba(45, 74, 58, 0.14); }
+      .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 0; }
+      .seg legend { padding: 0; }
+      .seg label { position: relative; }
+      .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+      .seg span {
+        display: grid;
+        place-items: center;
+        height: 46px;
+        border-radius: 12px;
+        border: 1px solid var(--line-2);
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--ink-2);
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+      .seg input:checked + span { background: var(--sage-2); border-color: var(--forest); color: var(--forest); }
+      .seg input:focus-visible + span { outline: 2.5px solid var(--forest); outline-offset: 2px; }
+      .agree { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); cursor: pointer; }
+      .agree input { flex: none; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); }
+      .agree a { text-decoration: underline; text-underline-offset: 3px; }
+      .form .btn { width: 100%; }
+      .fine { font-size: 13px; color: var(--ink-3); }
+      .toast {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding: 0 16px;
+        border-radius: 14px;
+        background: var(--forest-ink);
+        color: #fff;
+        font-size: 14.5px;
+        font-weight: 700;
+        transition: max-height 0.35s var(--ease), opacity 0.35s ease, padding 0.35s var(--ease);
+      }
+      .toast.show { max-height: 80px; opacity: 1; padding: 14px 16px; }
+      .toast::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--apricot); }
+
+      /* ---------- 푸터 ---------- */
+      .ft { padding: 56px 0 120px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
+      .ft-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+      .ft .logo { margin-left: 0; }
+      .ft-back { color: var(--forest); font-weight: 700; }
+      .ft-back:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .ft-info { margin-top: 20px; }
+      .ft-demo { margin-top: 14px; font-size: 12px; color: #69706a; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .blob, .orb, .orb-label { animation: none !important; }
+        .orb { transform: none; }
+        .orb-label { display: none; }
+        .orb-static { display: block; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .btn, .way, .coach-photo img, .toast { transition: none; }
+      }
     </style>
     <meta name="theme-color" content="#2d4a3a" />
     <script type="application/ld+json">
@@ -90,319 +902,508 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
-    <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="font-bold tracking-tight text-lg" style="color:var(--primary)">ROOTED <span class="serif">·</span> 루티드</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+
+    <header class="hd" id="hd">
+      <div class="wrap hd-in">
+        <a href="#top" class="logo" aria-label="루티드 필라테스 처음으로">
+          <span class="logo-mark" aria-hidden="true"><span class="grain"></span></span>
+          <span class="logo-word">ROOTED</span>
+          <span class="logo-ko">루티드</span>
+        </a>
+        <nav class="gnb" aria-label="주요 메뉴">
           <a href="#way">우리의 방식</a>
-          <a href="#programs">프로그램</a>
+          <a href="#programs">프로그램·수강료</a>
           <a href="#trainers">강사진</a>
           <a href="#space">시설</a>
-          <a href="#trial">체험 신청</a>
+          <a href="#changes">변화 기록</a>
         </nav>
-        <a href="#trial" class="btn-primary text-sm" style="padding:10px 18px">무료 체험</a>
+        <div class="hd-act">
+          <a href="#trial" class="btn btn-primary btn-sm hd-cta">무료 체험</a>
+          <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="메뉴 열기">
+            <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+            <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
       </div>
+      <nav class="mnav" id="mnav" aria-label="모바일 메뉴" hidden>
+        <a href="#way">우리의 방식</a>
+        <a href="#programs">프로그램 · 수강료</a>
+        <a href="#trainers">강사진</a>
+        <a href="#space">시설</a>
+        <a href="#changes">변화 기록</a>
+        <a href="#trial" class="btn btn-primary">무료 체험 신청</a>
+      </nav>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">PILATES STUDIO · 한남</p>
-            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
-              뿌리부터<br />단단해지는<br /><span style="color:var(--accent)">나의 코어.</span>
-            </h1>
-            <p class="mt-8 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              덤벨이 아닌 호흡으로 시작합니다.<br />
-              일주일에 두 번, 8주면 흔들리지 않는 중심이 잡힙니다.
+      <!-- ====================== HERO ====================== -->
+      <section class="hero" data-ambient aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
+          <span class="blob bl-sage"></span>
+          <span class="blob bl-apricot"></span>
+          <span class="blob bl-sand"></span>
+          <span class="blob bl-deep"></span>
+          <span class="grain"></span>
+        </div>
+
+        <div class="wrap">
+          <p class="eyebrow-pill">PILATES STUDIO <b aria-hidden="true">·</b> <b>한남</b></p>
+          <h1 id="hero-title" class="h-hero">뿌리부터 단단해지는<br /><span class="accent">나의 코어.</span></h1>
+          <p class="lead">
+            덤벨이 아닌 호흡으로 시작합니다.<br />
+            일주일에 두 번, 8주면 <span class="nw">흔들리지 않는 중심이 잡힙니다.</span>
+          </p>
+          <div class="cta-row">
+            <a href="#trial" class="btn btn-primary">무료 체험 신청 <span class="arr" aria-hidden="true">→</span></a>
+            <a href="#programs" class="btn btn-ghost">프로그램 보기</a>
+          </div>
+
+          <div class="stage">
+            <div class="breath" aria-hidden="true">
+              <span class="orb"><span class="grain"></span></span>
+              <span class="orb-text">
+                <span class="orb-label">들이쉬고</span>
+                <span class="orb-label out">내쉬고</span>
+                <span class="orb-static">호흡 먼저</span>
+              </span>
+            </div>
+            <div class="stage-photo">
+              <img
+                src="../assets/images/pilates/01-correction.webp"
+                width="1376"
+                height="768"
+                alt="강사가 리포머 위에서 플랭크 자세를 하는 회원의 골반 위치를 손으로 잡아 주는 모습"
+                fetchpriority="high"
+              />
+            </div>
+            <div class="stats">
+              <dl class="stats-dl">
+                <div><dt>개원</dt><dd><span data-count="2020" data-format="year">2020</span></dd></div>
+                <div><dt>국제 자격 강사</dt><dd><span data-count="7">7</span><small>명</small></dd></div>
+                <div><dt>평균 출석률</dt><dd><span data-count="88">88</span><small>%</small></dd></div>
+              </dl>
+              <p class="stats-cap"><span class="chip warm">예시 수치</span> 실제 데이터로 교체</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== WAY ====================== -->
+      <section id="way" class="sec" aria-labelledby="way-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">루티드의 방식</p>
+              <h2 id="way-title" class="h2">운동이 아닌,<br />자세를 가르칩니다.</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              무게보다 호흡을, 횟수보다 자세를 먼저 봅니다.
+              루티드의 수업은 이 네 가지 순서로 흘러갑니다.
             </p>
-            <div class="mt-10 flex flex-wrap gap-3">
-              <a href="#trial" class="btn-primary">무료 체험 신청 <span aria-hidden="true">→</span></a>
-              <a href="#programs" class="btn-ghost">프로그램 보기</a>
+          </div>
+
+          <ol class="way-grid">
+            <li class="way reveal">
+              <span class="pebble" aria-hidden="true"><span class="grain"></span><b>01</b></span>
+              <h3>자세 분석으로 시작</h3>
+              <p>첫 수업은 50분 자세 분석. 자세·근력·통증을 기록하고, 내 몸이 어디서 무너져 있는지 사진과 함께 알려드립니다.</p>
+            </li>
+            <li class="way reveal" style="--d: 70ms">
+              <span class="pebble" aria-hidden="true"><span class="grain"></span><b>02</b></span>
+              <h3>호흡 먼저, 동작은 나중</h3>
+              <p>동작이 아무리 정확해도 호흡이 막히면 코어는 깨어나지 않습니다. 들이쉬고 내쉬는 것부터.</p>
+            </li>
+            <li class="way reveal" style="--d: 140ms">
+              <span class="pebble" aria-hidden="true"><span class="grain"></span><b>03</b></span>
+              <h3>8주 단위로 점검</h3>
+              <p>8주마다 자세를 다시 기록해 처음과 비교해 드립니다. 변화를 확인하는 가장 정직한 방법입니다.</p>
+            </li>
+            <li class="way reveal" style="--d: 210ms">
+              <span class="pebble" aria-hidden="true"><span class="grain"></span><b>04</b></span>
+              <h3>흔들림 없는 동행</h3>
+              <p>그날 컨디션에 맞춰 강도를 조절하고, 쉬는 날에도 메시지로 챙겨드립니다.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ====================== PROGRAMS ====================== -->
+      <section id="programs" class="sec" style="padding-top: 0" aria-labelledby="programs-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">프로그램 · 수강료</p>
+              <h2 id="programs-title" class="h2">나의 자리를<br />찾아드립니다.</h2>
             </div>
-            <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              <div><dt class="text-xs" style="color:var(--ink-soft)">개원</dt><dd class="serif text-2xl mt-1"><span data-count="2020" data-format="year">0</span></dd></div>
-              <div><dt class="text-xs" style="color:var(--ink-soft)">국제 자격 강사</dt><dd class="serif text-2xl mt-1"><span data-count="7">0</span><span class="text-sm">명</span></dd></div>
-              <div><dt class="text-xs" style="color:var(--ink-soft)">평균 출석률</dt><dd class="serif text-2xl mt-1"><span data-count="88">0</span>%</dd></div>
-            </dl>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              첫 자세 분석 결과를 보고 맞는 수업을 함께 정합니다.
+              그룹도 비슷한 단계의 회원끼리 묶어 진행합니다.
+            </p>
           </div>
-          <div class="md:col-span-5 reveal">
-            <div class="ph aspect-[4/5] rounded-3xl"  style="background-image:url('../assets/images/pilates/02-focus.webp');background-size:cover;background-position:center;"></div>
+
+          <div class="prog-grid">
+            <article class="prog feature reveal">
+              <div class="prog-bg" aria-hidden="true"><span class="grain"></span></div>
+              <div class="prog-top"><span class="prog-cap">강사 1명 · 회원 1명</span><span class="chip">PROGRAM 01</span></div>
+              <h3>1:1 프라이빗</h3>
+              <p class="desc">내 몸의 문제에만 집중하는 시간. 자세 분석에서 찾은 약한 고리부터 차근차근 다룹니다.</p>
+              <div class="tags"><span class="chip">자세 교정</span><span class="chip">통증 완화</span><span class="chip">출산 전후 회복</span></div>
+              <div class="price">
+                <div class="price-row"><span>8회</span><strong>₩880,000</strong></div>
+                <div class="price-row"><span>12회</span><strong>₩1,200,000</strong></div>
+                <a href="#trial" class="btn btn-primary">1:1 체험 예약 <span class="arr" aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="prog reveal" style="--d: 70ms">
+              <div class="prog-top"><span class="prog-cap">2인 정원</span><span class="chip">PROGRAM 02</span></div>
+              <h3>듀엣</h3>
+              <p class="desc">친구·가족과 함께. 1:1의 디테일을 더 가벼운 비용으로.</p>
+              <div class="tags"><span class="chip">함께 운동</span><span class="chip">맞춤 진도</span></div>
+              <div class="price">
+                <div class="price-row"><span>8회</span><strong>₩550,000<small>1인 기준</small></strong></div>
+              </div>
+            </article>
+            <article class="prog reveal" style="--d: 140ms">
+              <div class="prog-top"><span class="prog-cap">4인 정원</span><span class="chip">PROGRAM 03</span></div>
+              <h3>그룹</h3>
+              <p class="desc">자세 분석 후 비슷한 단계의 4인 그룹으로 매칭합니다. 매트·소도구 위주로 진행합니다.</p>
+              <div class="tags"><span class="chip">단계별 매칭</span><span class="chip">매트·소도구</span></div>
+              <div class="price">
+                <div class="price-row"><span>월 8회</span><strong>₩330,000</strong></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="match">
+            <div class="reveal">
+              <p class="eyebrow">목적별 추천</p>
+              <h3 style="margin-top: 14px">어떤 강사가<br />잘 맞을까요</h3>
+              <p class="sub">재활·산전산후처럼 세심한 관리가 필요하다면 1:1로 시작하길 권합니다.</p>
+            </div>
+            <ul class="match-list">
+              <li class="match-item reveal">
+                <p class="q">처음이라 어렵다면</p>
+                <p>기초 해부학 설명이 꼼꼼한 정수민 강사를 추천합니다.</p>
+              </li>
+              <li class="match-item reveal" style="--d: 60ms">
+                <p class="q">산전·산후 케어</p>
+                <p>재활 자격을 갖춘 김유나 강사가 도와드립니다.</p>
+              </li>
+              <li class="match-item reveal" style="--d: 120ms">
+                <p class="q">운동 강도를 높이고 싶다면</p>
+                <p>전직 무용수 출신 한도윤 강사의 클래스를 권합니다.</p>
+              </li>
+              <li class="match-item reveal" style="--d: 180ms">
+                <p class="q">통증 재활이 필요하다면</p>
+                <p>물리치료사 출신 이재훈 강사와 1:1로 시작하세요.</p>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- WAY -->
-      <section id="way" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal max-w-2xl mb-14">
-            <p class="eyebrow mb-4">루티드의 방식</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              운동이 아닌,<br />자세를 가르칩니다.
-            </h2>
+      <!-- ====================== TRAINERS ====================== -->
+      <section id="trainers" class="sec" style="padding-top: 0" aria-labelledby="trainers-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">강사진</p>
+              <h2 id="trainers-title" class="h2">한 자세를 가장<br />오래 들여다본 사람들.</h2>
+            </div>
+            <p class="sec-lead reveal" style="--d: 80ms">국제 지도자 자격을 갖춘 강사진 가운데 대표·시니어 강사를 소개합니다.</p>
           </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="card reveal">
-              <span class="serif text-4xl" style="color:var(--accent)">01</span>
-              <h3 class="mt-6 text-xl font-semibold">자세 분석으로 시작</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">첫 수업은 50분 자세 분석. 내 몸이 어디서 무너져 있는지 사진과 함께 알려드립니다.</p>
-            </article>
-            <article class="card reveal">
-              <span class="serif text-4xl" style="color:var(--accent)">02</span>
-              <h3 class="mt-6 text-xl font-semibold">호흡 먼저, 동작은 나중</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">동작이 아무리 정확해도 호흡이 막히면 코어는 깨어나지 않습니다. 들이쉬고 내쉬는 것부터.</p>
-            </article>
-            <article class="card reveal">
-              <span class="serif text-4xl" style="color:var(--accent)">03</span>
-              <h3 class="mt-6 text-xl font-semibold">8주 단위로 점검</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">8주마다 전·후 자세를 비교해 드립니다. 변화를 확인하는 가장 정직한 방법.</p>
-            </article>
-          </div>
-        </div>
-      </section>
 
-      <!-- PROGRAMS -->
-      <section id="programs" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">프로그램</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            나의 자리를<br />찾아드립니다.
-          </h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <article class="card reveal">
-            <p class="text-sm" style="color:var(--accent)">PROGRAM 01</p>
-            <h3 class="serif text-2xl mt-2">1:1 프라이빗</h3>
-            <p class="mt-4 leading-relaxed" style="color:var(--ink-soft)">자세 교정 · 통증 완화 · 출산 전후 회복. 강사 1명, 회원 1명.</p>
-            <p class="mt-6 text-sm" style="color: var(--ink-soft)">8회 ₩880,000 / 12회 ₩1,200,000</p>
-          </article>
-          <article class="card reveal">
-            <p class="text-sm" style="color:var(--accent)">PROGRAM 02</p>
-            <h3 class="serif text-2xl mt-2">듀엣 (2인)</h3>
-            <p class="mt-4 leading-relaxed" style="color:var(--ink-soft)">친구·가족과 함께. 1:1의 디테일을 절반의 비용으로.</p>
-            <p class="mt-6 text-sm" style="color: var(--ink-soft)">8회 ₩550,000 (1인 기준)</p>
-          </article>
-          <article class="card reveal">
-            <p class="text-sm" style="color:var(--accent)">PROGRAM 03</p>
-            <h3 class="serif text-2xl mt-2">그룹 (4인)</h3>
-            <p class="mt-4 leading-relaxed" style="color:var(--ink-soft)">자세 분석 후 비슷한 단계의 4인 그룹으로 매칭. 매트·소도구 위주.</p>
-            <p class="mt-6 text-sm" style="color: var(--ink-soft)">월 8회 ₩330,000</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- TRAINERS -->
-      <section id="trainers" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">강사진</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              한 자세를 가장<br />오래 들여다본 사람들.
-            </h2>
-          </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="reveal">
-              <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/pilates/01-correction.webp');background-size:cover;background-position:center;"></div>
-              <p class="mt-5 text-sm" style="color:var(--accent)">대표강사</p>
-              <h3 class="serif text-2xl mt-1">강수아</h3>
-              <p class="mt-3 text-sm" style="color:var(--ink-soft)">PMA-CPT · BASI Comprehensive 수료 · 임상 7년<br/>출산 전후·요추 통증 전담</p>
+          <div class="coach-grid">
+            <article class="coach reveal">
+              <div class="coach-photo">
+                <img src="../assets/images/pilates/01-correction.webp" width="1376" height="768" alt="리포머 옆에 무릎을 꿇고 회원의 자세를 바로잡아 주는 강수아 대표강사" loading="lazy" style="--ox: 14%" />
+              </div>
+              <div class="coach-body">
+                <p class="role">대표강사</p>
+                <h3>강수아</h3>
+                <p class="cred">국제 공인 지도자 자격 · 종합 과정 수료 · 임상 7년</p>
+                <div class="tags"><span class="chip">출산 전후</span><span class="chip">요추 통증 전담</span></div>
+              </div>
             </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/pilates/04-greeting.webp');background-size:cover;background-position:center;"></div>
-              <p class="mt-5 text-sm" style="color:var(--accent)">시니어</p>
-              <h3 class="serif text-2xl mt-1">임지원</h3>
-              <p class="mt-3 text-sm" style="color:var(--ink-soft)">Polestar Pilates Comprehensive · 임상 5년<br/>거북목·라운드숄더 자세 교정</p>
+            <article class="coach reveal" style="--d: 70ms">
+              <div class="coach-photo">
+                <img src="../assets/images/pilates/04-greeting.webp" width="1376" height="768" alt="스튜디오 입구에서 클립보드를 들고 회원에게 손을 흔들며 인사하는 임지원 강사" loading="lazy" style="--ox: 74%" />
+              </div>
+              <div class="coach-body">
+                <p class="role">시니어 강사</p>
+                <h3>임지원</h3>
+                <p class="cred">종합 과정 수료 · 임상 5년</p>
+                <div class="tags"><span class="chip">거북목</span><span class="chip">라운드숄더 교정</span></div>
+              </div>
             </article>
-            <article class="reveal">
-              <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/pilates/02-focus.webp');background-size:cover;background-position:center;"></div>
-              <p class="mt-5 text-sm" style="color:var(--accent)">시니어</p>
-              <h3 class="serif text-2xl mt-1">박해린</h3>
-              <p class="mt-3 text-sm" style="color:var(--ink-soft)">STOTT Pilates IMP · 무용 전공<br/>코어·골반 정렬 전문</p>
+            <article class="coach reveal" style="--d: 140ms">
+              <div class="coach-photo">
+                <img src="../assets/images/pilates/02-focus.webp" width="1376" height="768" alt="리포머 스트랩을 당기며 동작에 집중하는 박해린 강사" loading="lazy" style="--ox: 52%" />
+              </div>
+              <div class="coach-body">
+                <p class="role">시니어 강사</p>
+                <h3>박해린</h3>
+                <p class="cred">국제 지도자 과정 수료 · 무용 전공</p>
+                <div class="tags"><span class="chip">코어</span><span class="chip">골반 정렬</span></div>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- SPACE -->
-      <section id="space" class="container-x py-24 md:py-32">
-        <div class="reveal mb-12 max-w-2xl">
-          <p class="eyebrow mb-4">시설</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">개인 락커 · 샤워실 · 매트 무료 대여.</h2>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="ph aspect-square rounded-2xl reveal"  style="background-image:url('../assets/images/pilates/02-focus.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-square rounded-2xl reveal"  style="background-image:url('../assets/images/pilates/01-correction.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-square rounded-2xl reveal"  style="background-image:url('../assets/images/pilates/04-greeting.webp');background-size:cover;background-position:center;"></div>
-          <div class="ph aspect-square rounded-2xl reveal"  style="background-image:url('../assets/images/pilates/01-correction.webp');background-size:cover;background-position:center;"></div>
+      <!-- ====================== SPACE ====================== -->
+      <section id="space" class="sec" style="padding-top: 0" aria-labelledby="space-title">
+        <div class="wrap space-grid">
+          <div class="reveal">
+            <p class="eyebrow">시설</p>
+            <h2 id="space-title" class="h2">빈손으로 와도<br />괜찮습니다.</h2>
+            <p class="sec-lead" style="margin-top: 20px">개인 락커 · 샤워실 · 매트 무료 대여. 운동에 필요한 건 스튜디오에 준비해 두었습니다.</p>
+            <p class="space-loc"><span class="chip">위치</span> 한남동 OO길 12, 2층</p>
+          </div>
+          <div class="board reveal" style="--d: 80ms">
+            <div class="board-bg" aria-hidden="true"><span class="blob bl-1"></span><span class="blob bl-2"></span><span class="grain"></span></div>
+            <ul class="amen">
+              <li>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 3v18M9 11v2M15 11v2"/></svg></span>
+                <span>개인 락커<small>소지품을 두고 가볍게</small></span>
+              </li>
+              <li>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V8a4 4 0 0 1 8 0"/><path d="M10 8h6M11 12v1M14 12v1M17 12v1M11 16v1M14 16v1M17 16v1"/></svg></span>
+                <span>샤워실<small>출근 전·퇴근 후 수업도 편하게</small></span>
+              </li>
+              <li>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="6" rx="3"/><path d="M7 9v6M17 9v6"/></svg></span>
+                <span>매트 무료 대여<small>개인 매트 없이 오셔도 됩니다</small></span>
+              </li>
+              <li>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M8.5 12h2l1-2 2 4 1-2h1"/></svg></span>
+                <span>AED(자동제세동기) 비치<small>강사진 CPR 자격 보유</small></span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <!-- TRIAL -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      
       <!-- ====================== MEMBER CHANGES ====================== -->
-      <section id="changes" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">MEMBER CHANGES</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">12주, 자세가 바뀌는 시간</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">회원 동의를 받아 공유하는 실제 변화 기록입니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">거북목 — 이OO님 (32세)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">주 2회 12주, 목 전방 각도 18도에서 7도로 개선.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">골반 비대칭 — 김OO님 (28세)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">주 3회 8주, 좌우 높이 차 2cm에서 4mm로 감소.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">산후 코어 — 박OO님 (35세)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">주 2회 16주, 복직근 이개 2.5cm 정상 범위 회복.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">허리 통증 — 최OO님 (45세)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">주 2회 10주, VAS 통증 척도 7에서 2로 감소.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
-          <div class="reveal">
-            <p class="eyebrow mb-5">내 몸과 다시 친해지고 싶다면</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              거울 앞에 서기 망설여지는 마음, 알고 있어요.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">체형 1:1 분석</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">자세·근력·통증을 기록하고 시작합니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">맞춤 8주 플랜</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">오늘 컨디션에 맞춰 강도를 조절해드려요</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">흔들림 없는 동행</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">쉬는 날도 메시지로 챙겨드립니다</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">한 번 무너진 자세를 두면, 통증은 매년 한 곳씩 늘어납니다.</p>
+      <section id="changes" class="sec changes" aria-labelledby="changes-title">
+        <div class="wrap">
+          <div class="sec-head split">
+            <div class="reveal">
+              <p class="eyebrow">회원 변화 기록</p>
+              <h2 id="changes-title" class="h2">12주, 자세가<br />바뀌는 시간</h2>
             </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">8주 뒤, 계단을 오르며 가벼워진 어깨를 먼저 느끼게 됩니다.</p>
+            <p class="sec-lead reveal" style="--d: 80ms">
+              회원 동의를 받은 기록만 공유합니다.<br />
+              <span class="chip warm" style="margin-top: 10px">예시 기록 · 실제 데이터로 교체</span>
+            </p>
+          </div>
+
+          <div class="chg-grid">
+            <article class="chg reveal">
+              <p class="k">주 2회 · 12주</p>
+              <h3>거북목</h3>
+              <p class="metric"><span class="from">18°</span><span class="arrow" aria-hidden="true">→</span><span class="sr-only">에서</span><span class="to">7°</span></p>
+              <p class="what">목 전방 각도</p>
+              <p class="who"><span class="chip">예시 기록</span>30대 회원</p>
+            </article>
+            <article class="chg reveal" style="--d: 60ms">
+              <p class="k">주 3회 · 8주</p>
+              <h3>골반 비대칭</h3>
+              <p class="metric"><span class="from">2cm</span><span class="arrow" aria-hidden="true">→</span><span class="sr-only">에서</span><span class="to">4mm</span></p>
+              <p class="what">좌우 골반 높이 차</p>
+              <p class="who"><span class="chip">예시 기록</span>20대 회원</p>
+            </article>
+            <article class="chg reveal" style="--d: 120ms">
+              <p class="k">주 2회 · 16주</p>
+              <h3>산후 코어</h3>
+              <p class="metric"><span class="from">2.5cm</span><span class="arrow" aria-hidden="true">→</span><span class="sr-only">에서</span><span class="to">정상 범위</span></p>
+              <p class="what">복직근 이개</p>
+              <p class="who"><span class="chip">예시 기록</span>30대 회원</p>
+            </article>
+            <article class="chg reveal" style="--d: 180ms">
+              <p class="k">주 2회 · 10주</p>
+              <h3>허리 통증</h3>
+              <p class="metric"><span class="from">7</span><span class="arrow" aria-hidden="true">→</span><span class="sr-only">에서</span><span class="to">2</span></p>
+              <p class="what">통증 척도(VAS)</p>
+              <p class="who"><span class="chip">예시 기록</span>40대 회원</p>
+            </article>
+          </div>
+          <p class="chg-note reveal">운동 효과는 개인의 몸 상태와 참여 빈도에 따라 다릅니다.</p>
+        </div>
+      </section>
+
+      <!-- ====================== BREATH BAND ====================== -->
+      <section class="sec" aria-labelledby="band-title">
+        <div class="wrap">
+          <div class="band reveal">
+            <div class="band-bg" aria-hidden="true">
+              <span class="blob bl-1"></span>
+              <span class="blob bl-2"></span>
+              <span class="grain"></span>
+            </div>
+            <div class="band-in">
+              <div>
+                <p class="eyebrow">내 몸과 다시 친해지고 싶다면</p>
+                <h2 id="band-title">거울 앞에 서기<br />망설여지는 마음,<br />알고 있어요.</h2>
+                <div class="cta-row">
+                  <a href="#trial" class="btn btn-primary">1:1 체험 예약 <span class="arr" aria-hidden="true">→</span></a>
+                </div>
+              </div>
+              <div class="weigh">
+                <div>
+                  <p class="k">미루시면</p>
+                  <p>한 번 무너진 자세를 두면, 통증은 매년 한 곳씩 늘어납니다.</p>
+                </div>
+                <div class="go">
+                  <p class="k">시작하시면</p>
+                  <p>8주 뒤, 계단을 오르며 가벼워진 어깨를 먼저 느끼게 됩니다.</p>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#trial" class="btn-primary">1:1 체험 예약 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">체형별 운동 가이드 받기</a>
-          </div>
         </div>
       </section>
 
-      
-      <!-- ====================== MATCH YOUR TRAINER ====================== -->
-      <section id="matching" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">MATCH YOUR TRAINER</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">어떤 강사가 잘 맞을까요</h2>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">처음이라 어렵다면</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">기초 해부학 설명이 꼼꼼한 정수민 강사를 추천합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">산전·산후 케어</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">재활 자격을 갖춘 김유나 강사가 도와드립니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">운동 강도를 높이고 싶다면</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">전직 무용수 출신 한도윤 강사의 클래스를 권합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">통증 재활이 필요하다면</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">물리치료사 출신 이재훈 강사와 1:1로 시작하세요.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="trial" class="py-24 md:py-32" style="background: var(--primary); color: #f5f3ee">
-        <div class="container-x grid md:grid-cols-2 gap-12">
-          <div class="reveal">
-            <p class="eyebrow mb-4" style="color:#a8d4b0">무료 체험</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              50분의 자세 분석,<br />무료로 받아보세요.
-            </h2>
-            <p class="mt-8 leading-relaxed" style="color: rgba(245,243,238,.7)">
+      <!-- ====================== TRIAL ====================== -->
+      <section id="trial" class="sec" style="padding-top: 0" aria-labelledby="trial-title">
+        <div class="wrap trial-grid">
+          <div class="trial-copy reveal">
+            <p class="eyebrow">무료 체험</p>
+            <h2 id="trial-title" class="h2">50분의 자세 분석,<br />무료로 받아보세요.</h2>
+            <p class="body">
               첫 방문 시 자세 분석 + 호흡 가이드 + 1회 체험까지 포함됩니다.
               체험 후 등록 여부는 천천히 결정하셔도 됩니다.
             </p>
-            <ul class="mt-6 text-sm space-y-2" style="color: rgba(245,243,238,.7)">
-              <li>· <strong>임산부</strong>: 임신 16주 이후, 산부인과 운동 가능 소견 후 1:1 프로그램만 진행</li>
-              <li>· <strong>결석/이월</strong>: 월 2회 이월 가능, 당일 취소 차감</li>
-              <li>· <strong>환불 규정</strong> (체육시설법 시행규칙): 시작 전 100% / 1/3 경과 전 2/3 / 1/2 경과 전 1/2 환불</li>
-              <li>· <strong>안전</strong>: AED(자동제세동기) 비치 · 강사진 CPR 자격 보유</li>
-              <li>· <strong>편의</strong>: 개인 락커 · 샤워실 · 매트 무료 대여</li>
-            </ul>
-            <dl class="mt-10 space-y-4">
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#a8d4b0">평일</dt><dd>06:30 — 22:00</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#a8d4b0">주말</dt><dd>09:00 — 18:00</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(245,243,238,.18)"><dt style="color:#a8d4b0">위치</dt><dd>한남동 OO길 12, 2층</dd></div>
+            <dl class="hours">
+              <div><dt>평일</dt><dd>06:30 — 22:00</dd></div>
+              <div><dt>주말</dt><dd>09:00 — 18:00</dd></div>
+              <div><dt>위치</dt><dd>한남동 OO길 12, 2층</dd></div>
             </dl>
+            <ul class="policy">
+              <li><strong>임산부</strong> 임신 16주 이후, 산부인과 운동 가능 소견 후 1:1 프로그램만 진행</li>
+              <li><strong>결석·이월</strong> 월 2회 이월 가능, 당일 취소는 차감</li>
+              <li><strong>환불 규정</strong> (체육시설법 시행규칙) 시작 전 100% · 1/3 경과 전 2/3 · 1/2 경과 전 1/2 환불</li>
+              <li><strong>안전</strong> AED(자동제세동기) 비치 · 강사진 CPR 자격 보유</li>
+              <li><strong>편의</strong> 개인 락커 · 샤워실 · 매트 무료 대여</li>
+            </ul>
           </div>
-          <form class="bg-white p-8 rounded-2xl reveal" onsubmit="event.preventDefault(); alert('체험 신청이 접수되었습니다. 확인 후 연락드리겠습니다.');">
-            <h3 class="serif text-2xl mb-6" style="color: var(--ink)">체험 신청서</h3>
-            <div class="space-y-4" style="color: var(--ink)">
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">성함</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">연락처</label><input class="field" required type="tel" /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">관심 프로그램</label>
-                <select class="field" required><option value="">선택</option><option>1:1 프라이빗</option><option>듀엣</option><option>그룹</option></select>
+
+          <!-- 체험 신청 폼 (시안 데모) -->
+          <form id="trialForm" class="form reveal" style="--d: 80ms" novalidate>
+            <p class="eyebrow">체험 신청서</p>
+            <h3>편한 시간을 알려주세요.</h3>
+            <p class="sub">확인 후 담당 강사가 전화로 체험 일정을 잡아 드립니다.</p>
+            <div class="fields">
+              <div class="row2">
+                <div>
+                  <label class="lbl" for="tr-name">성함</label>
+                  <input class="field" id="tr-name" name="name" autocomplete="name" required placeholder="홍길동" />
+                </div>
+                <div>
+                  <label class="lbl" for="tr-tel">연락처</label>
+                  <input class="field" id="tr-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required placeholder="010-0000-0000" />
+                </div>
               </div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">현재 가장 불편한 부위 (선택)</label><input class="field" placeholder="예: 허리, 어깨, 골반" /></div>
-              <label class="flex items-start gap-2 mt-4 mb-3 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-                <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+              <div>
+                <label class="lbl" for="tr-prog">관심 프로그램</label>
+                <select class="field" id="tr-prog" name="program" required>
+                  <option value="">선택해 주세요</option>
+                  <option>1:1 프라이빗</option>
+                  <option>듀엣</option>
+                  <option>그룹</option>
+                </select>
+              </div>
+              <fieldset>
+                <legend class="lbl">희망 시간대</legend>
+                <div class="seg">
+                  <label><input type="radio" name="slot" value="평일 오전" checked /><span>평일 오전</span></label>
+                  <label><input type="radio" name="slot" value="평일 저녁" /><span>평일 저녁</span></label>
+                  <label><input type="radio" name="slot" value="주말" /><span>주말</span></label>
+                </div>
+              </fieldset>
+              <div>
+                <label class="lbl" for="tr-body">현재 가장 불편한 부위 (선택)</label>
+                <input class="field" id="tr-body" name="body" placeholder="예: 허리, 어깨, 골반" />
+              </div>
+              <label class="agree">
+                <input type="checkbox" name="agree" required />
+                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
               </label>
-              <button class="btn-primary w-full justify-center mt-2">신청하기</button>
+              <button type="submit" class="btn btn-primary">체험 신청하기 <span class="arr" aria-hidden="true">→</span></button>
+              <p class="toast" id="trialToast" role="status" aria-live="polite"></p>
+              <p class="fine">남겨 주신 정보는 체험 일정 안내에만 사용합니다.</p>
             </div>
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
-        <span>© 2026 ROOTED Pilates · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+    <footer class="ft">
+      <div class="wrap">
+        <div class="ft-top">
+          <a href="#top" class="logo" aria-label="루티드 필라테스 처음으로">
+            <span class="logo-mark" aria-hidden="true"><span class="grain"></span></span>
+            <span class="logo-word">ROOTED</span>
+            <span class="logo-ko">루티드</span>
+          </a>
+          <a href="/" class="ft-back">← 쇼룸으로 돌아가기</a>
+        </div>
+        <p class="ft-info">© 2026 ROOTED Pilates · 사업자등록번호 000-00-00000</p>
+        <p class="ft-demo">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      const io = new IntersectionObserver(
+        (es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))),
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      (() => {
+        /* 숨 쉬는 블롭 — 화면 안에 있을 때만 */
+        const live = new IntersectionObserver(
+          (entries) => entries.forEach((e) => e.target.classList.toggle('is-live', e.isIntersecting)),
+          { rootMargin: '60px 0px' }
+        );
+        document.querySelectorAll('[data-ambient]').forEach((el) => live.observe(el));
+
+        /* 헤더 스크롤 상태 */
+        const hd = document.getElementById('hd');
+        let ticking = false;
+        const sync = () => { hd.classList.toggle('is-scrolled', window.scrollY > 8); ticking = false; };
+        window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }, { passive: true });
+        sync();
+
+        /* 모바일 메뉴 */
+        const btn = document.getElementById('menuBtn');
+        const panel = document.getElementById('mnav');
+        const setOpen = (open) => {
+          btn.setAttribute('aria-expanded', String(open));
+          btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+          panel.hidden = !open;
+        };
+        btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+        panel.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); }
+        });
+
+        /* 체험 신청 — 시안 데모 */
+        const form = document.getElementById('trialForm');
+        const toast = document.getElementById('trialToast');
+        let timer;
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+          toast.textContent = '시안 데모 — 실제로 전송되지 않습니다.';
+          toast.classList.add('show');
+          clearTimeout(timer);
+          timer = setTimeout(() => toast.classList.remove('show'), 5000);
+        });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="pilates" role="region" aria-label="알림 배너">
@@ -414,9 +1415,9 @@
 
     <!-- 우측 세로 배너 -->
     <div class="banner-side" role="region" aria-label="채널·연락 바로가기">
-      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 상담</span></a>
-      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@rooted.pilates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@rooted.pilates</span></a>
-      <a class="phone" href="tel:0200000000" target="_blank" rel="noopener" aria-label="예약 문의 전화"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">예약 문의 전화</span></a>
+      <a class="kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg><span class="tip">카카오톡 상담</span></a>
+      <a class="insta" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="@rooted.pilates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span class="tip">@rooted.pilates</span></a>
+      <a class="phone" href="tel:0200000000" target="_blank" rel="noopener" aria-label="예약 문의 전화"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="tip">예약 문의 전화</span></a>
     </div>
 
   </body>
