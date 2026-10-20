@@ -37,33 +37,341 @@
     <link rel="stylesheet" href="/assets/css/tw.css?v=075c483a" />
     <link rel="stylesheet" href="../assets/css/common.css?v=b1fa8595" />
     <style>
+      /* ───────── 메리트 — 벤토 그리드 ───────── */
       :root {
-        --bg: #fdfcf6;
-        --bg-soft: #f3f0e2;
-        --primary: #1e3a5f;
-        --primary-soft: #2f5285;
-        --accent: #f0b429;
+        --bg: #fbfaf5;
+        --bg-soft: #f3f0e3;
+        --card: #ffffff;
+        --cream: #f6f2e4;
+        --line: #e6e0cb;
+        --line-strong: #d5cdb1;
+        --navy: #1e3a5f;
+        --navy-deep: #142b48;
+        --navy-soft: #2f5285;
+        --sky: #9db7d5;
+        --sky-pale: #d9e4f0;
         --ink: #15243a;
-        --ink-soft: #5d6a7e;
-        --line: #e1ddc8;
+        --ink-soft: #52607a;
+        --yellow: #f0b429;
+        --yellow-soft: #fbeec4;
+        --amber: #865700;
+        --on-navy-soft: rgba(255, 255, 255, 0.74);
+        --radius: 24px;
+        --radius-sm: 14px;
+        --gap: 16px;
+        --ease: cubic-bezier(.2, .8, .2, 1);
+        --shadow-lift: 0 22px 44px -26px rgba(21, 36, 58, 0.42);
+        --sans: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        --serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+        --wrap: 1320px;
+        --pad: 20px;
       }
+      @media (min-width: 768px) { :root { --pad: 40px; } }
+
       html { scroll-behavior: smooth; }
-      body { font-family: 'Pretendard Variable', Pretendard, system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--ink); }
-      .serif { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-weight: 600; letter-spacing: -0.025em; }
-      .container-x { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-      @media (min-width: 768px) { .container-x { padding-left: 40px; padding-right: 40px; } }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .ph { background: linear-gradient(135deg, #d6e4f0, #8aa9c9 60%, #4a6e96); position: relative; overflow: hidden; }
-      .top { position: sticky; top: 0; z-index: 50; background: rgba(253,252,246,.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-      .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
-      .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; background:var(--primary); color:#fff; border-radius:999px; font-weight:600; font-size:15px; transition:.2s; }
-      .btn-primary:hover { background:#0f2541; }
-      .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; color:var(--primary); border:1px solid var(--primary); border-radius:999px; font-weight:600; font-size:15px;}
-      .btn-ghost:hover { background:var(--primary); color:#fff; }
-      .field { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:8px; background:#fff; font-size:15px;}
-      .field:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,180,41,.2);}
-      .stat-card { background:#fff; border-radius:18px; padding:32px 28px; border:1px solid var(--line); }
+      body { font-family: var(--sans); background: var(--bg); color: var(--ink); }
+      .serif { font-family: var(--serif); font-weight: 600; letter-spacing: -0.03em; font-synthesis: none; }
+      h2, h3, .quote, .voice blockquote { text-wrap: balance; }
+      .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+      section[id] { scroll-margin-top: 76px; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      .eyebrow { display: flex; align-items: center; gap: 10px; height: 20px; line-height: 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: var(--amber); }
+      .eyebrow::before { content: ''; width: 18px; height: 2px; border-radius: 2px; background: var(--yellow); }
+      .chip { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; letter-spacing: 0; white-space: nowrap; background: var(--yellow-soft); color: #6b4500; }
+      .chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; }
+      .chip--navy { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
+      /* 버튼 */
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; transition: background .2s, color .2s, border-color .2s, transform .2s var(--ease); }
+      .btn svg { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+      .btn:hover svg { transform: translateX(3px); }
+      .btn-navy { background: var(--navy); color: #fff; }
+      .btn-navy:hover { background: var(--navy-deep); }
+      .btn-line { border: 1px solid var(--line-strong); color: var(--navy); background: var(--card); }
+      .btn-line:hover { border-color: var(--navy); }
+      .btn-yellow { background: var(--yellow); color: var(--navy-deep); }
+      .btn-yellow:hover { background: #f5c24d; }
+      .btn:focus-visible, .card-link:focus-visible, .nav a:focus-visible, a.card:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; border-radius: 999px; }
+      a.card:focus-visible { border-radius: var(--radius); }
+
+      /* 헤더 */
+      .top { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 245, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+      .top-in { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px; }
+      .logo { display: inline-flex; align-items: baseline; gap: 8px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; color: var(--navy); }
+      .logo i { font-style: normal; width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); align-self: center; }
+      .nav { display: none; gap: 30px; font-size: 15px; color: var(--ink-soft); }
+      .nav a { position: relative; padding: 6px 0; transition: color .2s; }
+      .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+      .nav a:hover { color: var(--navy); }
+      .nav a:hover::after { transform: scaleX(1); }
+      .top .btn { min-height: 40px; padding: 0 18px; font-size: 14px; }
+      @media (min-width: 960px) { .nav { display: flex; } }
+
+      /* 히어로 */
+      .hero { padding: 48px 0 88px; }
+      .hero-grid { display: grid; gap: 48px; }
+      .hero-copy { max-width: 640px; }
+      .hero-title { margin-top: 22px; font-size: clamp(42px, 9.6vw, 66px); line-height: 1.16; color: var(--navy); }
+      .nw { white-space: nowrap; }
+      .hl { position: relative; padding: 0 .08em; margin: 0 -.04em; background: linear-gradient(transparent 60%, var(--yellow) 60%, var(--yellow) 90%, transparent 90%) no-repeat 0 0 / 100% 100%; border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; animation: hl-draw 1s var(--ease) .35s both; }
+      @keyframes hl-draw { from { background-size: 0% 100%; } }
+      .lead { margin-top: 24px; font-size: 17px; line-height: 1.75; color: var(--ink-soft); max-width: 30em; }
+      .cta-row { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
+      @media (max-width: 479px) { .cta-row { display: grid; grid-template-columns: minmax(0, 1fr); } }
+      .hero-meta { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--ink-soft); }
+      .hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+      .hero-meta svg { width: 16px; height: 16px; color: var(--navy-soft); flex: none; }
+      @media (min-width: 768px) { .hero { padding: 64px 0 112px; } .lead { font-size: 18px; } }
+      @media (min-width: 900px) { .lead span { display: block; white-space: nowrap; } }
+      @media (min-width: 900px) and (max-width: 1179px) {
+        .hero-copy { max-width: none; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); column-gap: 48px; align-items: end; }
+        .hero-copy .eyebrow { grid-column: 1 / -1; justify-self: start; }
+        .hero-title { font-size: 58px; }
+        .hero-side .lead { margin-top: 0; font-size: 17px; }
+      }
+      @media (min-width: 1180px) {
+        .hero { padding: 48px 0 120px; }
+        .hero-grid { grid-template-columns: minmax(0, 468px) minmax(0, 1fr); gap: 52px; align-items: center; }
+        .hero-title { font-size: clamp(52px, 4.2vw, 62px); }
+      }
+
+      /* ───────── 벤토 공통 ───────── */
+      .bento { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 22px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); overflow: hidden; isolation: isolate; transition: transform .45s var(--ease), box-shadow .45s var(--ease), opacity .8s var(--ease); }
+      @media (min-width: 768px) { .card { padding: 26px; } }
+      a.card:hover, .card.is-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+      .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .card-label { font-size: 13px; font-weight: 600; letter-spacing: -0.005em; color: var(--ink-soft); }
+      .card-title { margin-top: 10px; font-size: 19px; font-weight: 650; line-height: 1.4; letter-spacing: -0.02em; color: var(--ink); }
+      .card-text { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+      .card-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+      .card-link svg { width: 14px; height: 14px; transition: transform .25s var(--ease); }
+      .card-link:hover svg { transform: translateX(3px); }
+
+      .card--navy { background: var(--navy); border-color: var(--navy); color: #fff; }
+      .card--navy .card-label { color: var(--on-navy-soft); }
+      .card--yellow { background: var(--yellow); border-color: var(--yellow); color: var(--navy-deep); }
+      .card--yellow .card-label { color: #5b3d00; }
+      .card--cream { background: var(--cream); }
+
+      /* 사진 카드 */
+      .card--photo { padding: 0; border: 0; background: #22344f; justify-content: flex-end; min-height: 200px; }
+      .card--photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 1.2s var(--ease); }
+      .card--photo::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(14, 28, 48, 0) 28%, rgba(14, 28, 48, 0.55) 58%, rgba(14, 28, 48, 0.9) 100%); }
+      .card--photo:hover img { transform: scale(1.04); }
+      .photo-cap { position: relative; z-index: 2; padding: 20px 22px; color: #fff; }
+      .photo-cap .card-label { color: rgba(255, 255, 255, 0.82); }
+      .photo-cap .card-title { color: #fff; margin-top: 4px; }
+      @media (min-width: 768px) { .photo-cap { padding: 22px 26px; } }
+
+      /* 히어로 벤토 — 6칸 퍼즐 */
+      .bento-hero { grid-template-areas: "a a" "b b" "c d" "c e" "f f"; grid-auto-rows: minmax(184px, auto); }
+      .b-a { grid-area: a; } .b-b { grid-area: b; } .b-c { grid-area: c; } .b-d { grid-area: d; } .b-e { grid-area: e; } .b-f { grid-area: f; }
+      @media (min-width: 900px) {
+        .bento-hero { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: "a a b b" "a a c d" "f f c e"; grid-template-rows: repeat(3, minmax(196px, auto)); }
+      }
+
+      /* A — 합격 실적 */
+      .stats { margin-top: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 22px; }
+      .stats > div { padding: 16px 0 18px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+      .stats > div:nth-child(odd) { padding-right: 14px; }
+      .stats > div:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, 0.16); }
+      .stats dt { font-size: 13px; color: var(--on-navy-soft); }
+      .stats dd { margin-top: 4px; font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: clamp(34px, 3.2vw, 48px); line-height: 1.05; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+      .stats dd small { margin-left: 3px; font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0; color: var(--on-navy-soft); }
+      .b-a .card-link { margin-top: 14px; color: var(--yellow); }
+      .b-a h2 { margin-top: 14px; font-size: 22px; font-weight: 600; line-height: 1.35; letter-spacing: -0.03em; }
+
+      /* C — 월간 리포트 미리보기 (CSS 목업) */
+      .paper { margin: 16px 0 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 16px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: 0 14px 28px -20px rgba(21, 36, 58, 0.45); font-size: 11px; line-height: 1.4; color: var(--ink); }
+      .paper-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; border-bottom: 1px dashed var(--line-strong); }
+      .paper-head b { font-size: 9.5px; letter-spacing: .16em; color: var(--navy); }
+      .paper-head span { font-family: var(--serif); font-weight: 700; font-size: 16px; color: var(--navy); letter-spacing: -0.02em; }
+      .paper-who { font-size: 10.5px; color: var(--ink-soft); }
+      .bars { display: grid; gap: 7px; }
+      .bar { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 6px; font-size: 10.5px; color: var(--ink-soft); }
+      .bar i { height: 7px; border-radius: 6px; background: var(--bg-soft); overflow: hidden; }
+      .bar i::before { content: ''; display: block; height: 100%; width: var(--w); border-radius: inherit; background: var(--navy-soft); transform-origin: left; transform: scaleX(.08); transition: transform 1.1s var(--ease) .45s; }
+      .bar.up i::before { background: var(--yellow); }
+      .in .bar i::before { transform: scaleX(1); }
+      .memo { margin-top: auto; display: grid; gap: 6px; padding-top: 8px; border-top: 1px dashed var(--line-strong); }
+      .memo em { font-style: normal; font-size: 9.5px; letter-spacing: .12em; color: var(--ink-soft); }
+      .memo span { height: 6px; border-radius: 4px; background: var(--bg-soft); }
+      .memo span.hlite { background: var(--yellow-soft); width: 82%; }
+      .memo span.short { width: 60%; }
+      .paper-sign { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; font-size: 9.5px; color: var(--ink-soft); }
+      .paper-sign i { width: 18px; height: 18px; border-radius: 50%; background: var(--navy); }
+      .b-c .card-text { margin-top: 0; font-size: 14px; }
+
+      /* D — 학부모 */
+      .b-d .card-title { font-size: 17px; }
+
+      /* E — 무료 진단 CTA */
+      .b-e { justify-content: space-between; }
+      .b-e .cta-big { font-family: var(--serif); font-weight: 700; font-synthesis: none; font-size: 24px; line-height: 1.25; letter-spacing: -0.03em; }
+      .b-e .go { align-self: flex-end; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; transition: transform .35s var(--ease); }
+      .b-e .go svg { width: 18px; height: 18px; }
+      .b-e:hover .go { transform: rotate(-45deg); }
+
+      /* F — 예시 후기 */
+      .quote { margin-top: 14px; font-family: var(--serif); font-weight: 500; font-synthesis: none; font-size: 20px; line-height: 1.5; letter-spacing: -0.025em; color: var(--ink); }
+      .quote-by { margin-top: auto; padding-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
+
+      /* ───────── 공통 섹션 ───────── */
+      .sec { padding: 88px 0; }
+      .sec--soft { background: var(--bg-soft); }
+      @media (min-width: 768px) { .sec { padding: 120px 0; } }
+      .sec-head { max-width: 760px; margin-bottom: 48px; }
+      .sec-head h2 { margin-top: 18px; font-size: clamp(30px, 5.4vw, 46px); line-height: 1.24; color: var(--navy); }
+      .sec-head p.sub { margin-top: 18px; font-size: 17px; line-height: 1.75; color: var(--ink-soft); }
+      @media (min-width: 768px) { .sec-head { margin-bottom: 64px; } }
+
+      /* 선택 이유 — 차분한 3단 */
+      .why-grid { display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+      .why-item { display: grid; grid-template-columns: 56px 1fr; gap: 8px 16px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+      .why-item .num { grid-row: span 2; font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 22px; color: var(--amber); line-height: 1.2; }
+      .why-item h3 { font-size: 20px; font-weight: 650; letter-spacing: -0.02em; }
+      .why-item p:not(.num) { grid-column: 2; font-size: 16px; line-height: 1.75; color: var(--ink-soft); }
+      @media (min-width: 900px) {
+        .why-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 0; gap: 40px; }
+        .why-item { display: block; padding: 28px 0 0; border-bottom: 0; border-top: 2px solid var(--navy); }
+        .why-item h3 { margin-top: 18px; }
+        .why-item p:not(.num) { margin-top: 10px; }
+      }
+
+      /* 합격 실적 — 표 */
+      .record-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+      .record-list { display: grid; gap: 0 56px; border-top: 1px solid var(--line-strong); }
+      .record-list > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+      .record-list dt { font-weight: 600; font-size: 16px; }
+      .record-list dd { font-size: 15px; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .record-list dd b { font-weight: 700; color: var(--navy); }
+      @media (min-width: 768px) { .record-list { grid-template-columns: 1fr 1fr; } }
+      .footnote { margin-top: 28px; font-size: 13.5px; line-height: 1.8; color: var(--ink-soft); }
+
+      /* 커리큘럼 벤토 */
+      .bento-cur { grid-template-areas: "t t" "s1 s1" "s2 s2" "s3 s3" "s4 s4" "p p" "w w" "r r"; grid-auto-rows: minmax(150px, auto); }
+      @media (min-width: 560px) { .bento-cur { grid-template-areas: "t t" "s1 s2" "s3 s4" "p p" "w r"; grid-auto-rows: minmax(180px, auto); } }
+      @media (min-width: 900px) {
+        .bento-cur { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: "t t s1 s2" "t t s3 s4" "p p w r"; grid-template-rows: repeat(3, minmax(216px, auto)); }
+      }
+      .c-t { grid-area: t; } .c-s1 { grid-area: s1; } .c-s2 { grid-area: s2; } .c-s3 { grid-area: s3; } .c-s4 { grid-area: s4; } .c-p { grid-area: p; } .c-w { grid-area: w; } .c-r { grid-area: r; }
+      .step-tag { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; color: var(--ink-soft); }
+      .step-tag i { width: 26px; height: 8px; border-radius: 6px; background: var(--sw); flex: none; }
+      .step h3 { margin-top: 14px; font-size: 21px; font-weight: 700; letter-spacing: -0.025em; }
+      .step p { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+      .step--final { background: var(--navy); border-color: var(--navy); color: #fff; }
+      .step--final .step-tag, .step--final p { color: var(--on-navy-soft); }
+
+      /* 12개월 타임라인 */
+      .c-t h3 { margin-top: 10px; font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.3; letter-spacing: -0.03em; color: var(--navy); }
+      .tl { margin-top: auto; padding-top: 28px; }
+      .tl-months, .tl-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+      .tl-months { font-size: 12px; color: var(--ink-soft); text-align: center; font-variant-numeric: tabular-nums; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+      .tl-months span:nth-child(odd) { color: var(--ink); }
+      .tl-rows { position: relative; display: grid; gap: 8px; padding-top: 12px; background-image: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px calc(100% / 12)); background-size: 100% 100%; }
+      .tl-row b { display: flex; align-items: center; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--sw); font-size: 12.5px; font-weight: 650; color: var(--navy-deep); white-space: nowrap; overflow: hidden; transform-origin: left; transform: scaleX(.05); transition: transform 1s var(--ease); }
+      .tl-row:nth-child(2) b { transition-delay: .12s; } .tl-row:nth-child(3) b { transition-delay: .24s; } .tl-row:nth-child(4) b { transition-delay: .36s; }
+      .in .tl-row b { transform: none; }
+      .tl-row b.dark { color: #fff; }
+      .tl-events { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); margin-top: 14px; font-size: 11.5px; color: var(--ink-soft); line-height: 1.35; }
+      .tl-events span { position: relative; padding-top: 12px; white-space: nowrap; }
+      .tl-events span::before { content: ''; position: absolute; top: 0; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--navy); }
+      @media (max-width: 559px) { .tl-events { row-gap: 8px; } .tl-events span { font-size: 11px; grid-row: 1; } .tl-events span:nth-child(even) { grid-row: 2; } .tl-row b { font-size: 11px; padding: 0 7px; } }
+
+      .c-w .price, .c-r .price { white-space: nowrap; margin-top: auto; padding-top: 18px; font-family: var(--serif); font-weight: 700; font-synthesis: none; font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.03em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+      .price small { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 0; margin-left: 2px; }
+      .c-w .card-text { color: var(--on-navy-soft); }
+
+      /* 학년별 로드맵 — 차분한 표 */
+      .road { border-top: 1px solid var(--line-strong); }
+      .road li { display: grid; gap: 4px 32px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+      .road .grade { font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 20px; color: var(--navy); letter-spacing: -0.02em; }
+      .road h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.02em; }
+      .road p { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+      @media (min-width: 900px) { .road li { grid-template-columns: 180px 260px 1fr; align-items: baseline; padding: 28px 0; } }
+
+      /* 컨설턴트 */
+      .mentors { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      @media (min-width: 960px) { .mentors { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      .mentor { padding: 22px 20px 22px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
+      .mentor .mono { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sky-pale); font-family: var(--serif); font-weight: 700; font-synthesis: none; font-size: 22px; color: var(--navy); }
+      .mentor:first-child .mono { background: var(--navy); color: #fff; }
+      .mentor .role { margin-top: 18px; font-size: 13.5px; font-weight: 700; color: var(--amber); }
+      .mentor h3 { margin-top: 4px; font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 26px; letter-spacing: -0.02em; }
+      .mentor .bio { margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+
+      /* 후기 */
+      .voices { display: grid; gap: 16px; }
+      @media (min-width: 900px) { .voices { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .voice { display: flex; flex-direction: column; padding: 28px 26px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
+      .voice blockquote { margin-top: 18px; font-family: var(--serif); font-weight: 500; font-synthesis: none; font-size: 20px; line-height: 1.55; letter-spacing: -0.025em; }
+      .voice figcaption { margin-top: auto; padding-top: 22px; font-size: 14px; color: var(--ink-soft); }
+
+      /* 동행 */
+      .journey { display: grid; gap: 40px; align-items: center; }
+      .journey-photo { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: #22344f; }
+      .journey-photo img { width: 100%; height: 100%; object-fit: cover; }
+      .journey-steps { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+      .journey-steps li { display: grid; grid-template-columns: 44px 1fr; gap: 2px 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+      .journey-steps .n { grid-row: span 2; font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 20px; color: var(--amber); }
+      .journey-steps h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.02em; }
+      .journey-steps p { font-size: 15px; color: var(--ink-soft); }
+      @media (min-width: 960px) { .journey { grid-template-columns: 1fr 1fr; gap: 72px; } }
+      .stakes { margin-top: 56px; display: grid; gap: 16px; }
+      .stakes > div { padding: 24px 26px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); }
+      .stakes > div.good { background: var(--yellow-soft); border-color: #f0dfa6; }
+      .stakes .k { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--ink-soft); }
+      .stakes .good .k { color: #6b4500; }
+      .stakes p:not(.k) { margin-top: 8px; font-size: 18px; line-height: 1.6; letter-spacing: -0.015em; }
+      @media (min-width: 768px) { .stakes { grid-template-columns: 1fr 1fr; } }
+
+      /* 상담 신청 */
+      .consult { background: var(--navy); color: #fff; }
+      .consult .eyebrow { color: var(--yellow); }
+      .consult h2 { color: #fff; }
+      .consult-grid { display: grid; gap: 48px; }
+      @media (min-width: 960px) { .consult-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 72px; align-items: start; } }
+      .consult .sub { color: var(--on-navy-soft); }
+      .facts { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid rgba(255, 255, 255, 0.18); }
+      .facts > div { display: grid; gap: 4px 20px; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); font-size: 15px; line-height: 1.7; }
+      .facts dt { font-weight: 700; color: var(--yellow); }
+      .facts dd { color: rgba(255, 255, 255, 0.86); }
+      @media (min-width: 640px) { .facts > div { grid-template-columns: 112px 1fr; } }
+      .form { padding: 28px 24px; border-radius: var(--radius); background: #fff; color: var(--ink); }
+      @media (min-width: 768px) { .form { padding: 36px; } }
+      .form h3 { font-family: var(--serif); font-weight: 600; font-synthesis: none; font-size: 26px; letter-spacing: -0.03em; color: var(--navy); }
+      .form .form-sub { margin-top: 6px; font-size: 14px; color: var(--ink-soft); }
+      .fields { margin-top: 24px; display: grid; gap: 16px; }
+      .fields label.lbl { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 600; color: var(--ink); }
+      .fields label.lbl span { font-weight: 500; color: var(--ink-soft); }
+      .field { width: 100%; padding: 13px 15px; border: 1px solid var(--line-strong); border-radius: 12px; background: #fff; font-size: 16px; color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+      .field:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 4px rgba(240, 180, 41, 0.35); }
+      .two { display: grid; gap: 16px; }
+      @media (min-width: 520px) { .two { grid-template-columns: 1fr 1fr; } }
+      .agree { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--ink-soft); cursor: pointer; }
+      .agree input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--navy); flex: none; }
+      .agree a { text-decoration: underline; text-underline-offset: 2px; }
+      .form .btn { width: 100%; }
+      .form-status { min-height: 0; font-size: 14px; font-weight: 600; color: var(--navy); }
+      .form-status:not(:empty) { margin-top: 2px; padding: 12px 14px; border-radius: 12px; background: var(--yellow-soft); }
+
+      /* 푸터 */
+      .foot { padding: 40px 0 120px; font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--line); }
+      .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+      .foot a { color: var(--navy); }
+      .foot a:hover { text-decoration: underline; }
+      .foot .note { margin-top: 18px; font-size: 12px; color: var(--ink-soft); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hl { animation: none; }
+        .bar i::before, .tl-row b { transform: none !important; transition: none !important; }
+        .card, .card--photo img, .btn svg { transition: none !important; }
+      }
     </style>
     <meta name="theme-color" content="#1e3a5f" />
     <script type="application/ld+json">
@@ -91,332 +399,439 @@
     <!-- End Google Tag Manager (noscript) -->
     <a href="/" class="fab-back" aria-label="쇼룸으로 돌아가기"><span class="arrow">←</span> 쇼룸</a>
     <header class="top">
-      <div class="container-x flex items-center justify-between h-16">
-        <a href="#top" class="font-bold tracking-tight text-lg" style="color:var(--primary)">MERIT <span class="serif" style="color:var(--accent)">·</span> 메리트</a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" style="color: var(--ink-soft)">
+      <div class="wrap top-in">
+        <a href="#top" class="logo" aria-label="메리트 입시컨설팅 처음으로">MERIT <i aria-hidden="true"></i> 메리트</a>
+        <nav class="nav" aria-label="주요 메뉴">
           <a href="#why">선택 이유</a>
           <a href="#record">합격 실적</a>
           <a href="#curriculum">커리큘럼</a>
           <a href="#mentors">컨설턴트</a>
           <a href="#consult">무료 진단 신청</a>
         </nav>
-        <a href="#consult" class="btn-primary text-sm" style="padding:10px 18px">무료 진단 신청</a>
+        <a href="#consult" class="btn btn-navy">무료 진단 신청</a>
       </div>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="container-x pt-16 md:pt-28 pb-24 md:pb-32">
-        <div class="grid md:grid-cols-12 gap-12 items-end">
-          <div class="md:col-span-7 reveal">
-            <p class="eyebrow mb-6">1:1 입시컨설팅 · EST. 2014</p>
-            <h1 class="serif text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight">
-              길을 잘 아는<br />사람과 걷는 <span style="color: var(--accent)">1년</span>.
-            </h1>
-            <p class="mt-8 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft)">
-              메리트는 학생의 진로를 끝까지 따라가는 1:1 컨설팅입니다.<br />
-              진학 결과와 함께, 한 사람의 1년을 책임집니다.
-            </p>
-            <div class="mt-10 flex flex-wrap gap-3">
-              <a href="#consult" class="btn-primary">무료 진단 신청 <span aria-hidden="true">→</span></a>
-              <a href="#record" class="btn-ghost">합격 실적 보기</a>
+      <!-- HERO — 메시지 + 벤토 -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">1:1 입시컨설팅 · EST. 2014</p>
+            <h1 id="hero-title" class="serif hero-title">길을 잘 아는<br /><span class="nw">사람과 걷는 <span class="hl">1년</span>.</span></h1>
+            <div class="hero-side">
+            <p class="lead"><span>메리트는 학생의 진로를 끝까지 따라가는 1:1 컨설팅입니다.</span> <span>진학 결과와 함께, 한 사람의 1년을 책임집니다.</span></p>
+            <div class="cta-row">
+              <a href="#consult" class="btn btn-navy">무료 진단 신청 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a href="#record" class="btn btn-line">합격 실적 보기</a>
+            </div>
+            <ul class="hero-meta">
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.4 1.6" stroke-linecap="round"/></svg>평일 14:00—22:00 · 토 10:00—18:00</li>
+              <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 14.5s-4.8-4.2-4.8-8a4.8 4.8 0 0 1 9.6 0c0 3.8-4.8 8-4.8 8z"/><circle cx="8" cy="6.5" r="1.7"/></svg>서울 강남구 도곡로</li>
+            </ul>
             </div>
           </div>
-          <div class="md:col-span-5 reveal grid grid-cols-2 gap-3">
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 정시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="71">0</span><span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">2025 수시 합격</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="94">0</span><span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">의·치·약·수의대</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="12">0</span><span class="text-base">명</span></p></div>
-            <div class="stat-card"><p class="text-xs" style="color: var(--ink-soft)">SKY · KAIST</p><p class="serif text-3xl mt-2" style="color: var(--primary)"><span data-count="38">0</span><span class="text-base">명</span></p></div>
+
+          <div class="bento bento-hero">
+            <!-- A: 합격 실적 (큰 칸) -->
+            <article class="card card--navy b-a is-link reveal" aria-labelledby="ba-title">
+              <div class="card-top">
+                <p class="card-label">2025 합격 실적</p>
+                <span class="chip chip--navy">예시 수치</span>
+              </div>
+              <h2 id="ba-title">등록 학생 245명이<br />지난 한 해 받아 든 결과</h2>
+              <dl class="stats">
+                <div><dt>정시 합격</dt><dd><span data-count="71">71</span><small>명</small></dd></div>
+                <div><dt>수시 합격</dt><dd><span data-count="94">94</span><small>명</small></dd></div>
+                <div><dt>의·치·약·수의대</dt><dd><span data-count="12">12</span><small>명</small></dd></div>
+                <div><dt>SKY · KAIST</dt><dd><span data-count="38">38</span><small>명</small></dd></div>
+              </dl>
+              <a class="card-link" href="#record">대학별 실적 보기 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </article>
+
+            <!-- B: 1:1 담당 컨설턴트 -->
+            <article class="card card--photo b-b reveal">
+              <img src="../assets/images/academy/01-consult.webp" width="1376" height="768" alt="담당 컨설턴트가 학생과 마주 앉아 노트를 보며 학습 계획을 짚어 주는 모습" />
+              <div class="photo-cap">
+                <p class="card-label">1:1 담당 컨설턴트</p>
+                <p class="card-title">1년 내내 담당이 바뀌지 않습니다.</p>
+              </div>
+            </article>
+
+            <!-- C: 월간 리포트 미리보기 -->
+            <article class="card card--cream b-c reveal">
+              <p class="card-label">월간 리포트 미리보기</p>
+              <div class="paper" aria-hidden="true">
+                <div class="paper-head"><b>MERIT REPORT</b><span>10월</span></div>
+                <p class="paper-who">고2 · 예시 학생</p>
+                <div class="bars">
+                  <div class="bar"><span>국어</span><i style="--w:72%"></i></div>
+                  <div class="bar up"><span>수학</span><i style="--w:88%"></i></div>
+                  <div class="bar"><span>영어</span><i style="--w:64%"></i></div>
+                  <div class="bar"><span>탐구</span><i style="--w:80%"></i></div>
+                </div>
+                <div class="memo">
+                  <em>이번 달 메모</em>
+                  <span class="hlite"></span>
+                  <span></span>
+                  <span class="short"></span>
+                </div>
+                <div class="paper-sign"><span>담당 컨설턴트</span><i></i></div>
+              </div>
+              <p class="card-text">학생·학부모·컨설턴트가 같은 진단표를 봅니다.</p>
+            </article>
+
+            <!-- D: 학부모 상담 -->
+            <article class="card card--photo b-d reveal">
+              <img src="../assets/images/academy/03-parent.webp" width="1376" height="768" alt="학부모와 학생이 컨설턴트와 함께 자료를 보며 상담하는 모습" style="object-position: 40% 50%" />
+              <div class="photo-cap">
+                <p class="card-label">학부모 상담</p>
+                <p class="card-title">불안을 함께 줄입니다.</p>
+              </div>
+            </article>
+
+            <!-- E: 무료 진단 CTA -->
+            <a class="card card--yellow b-e reveal" href="#consult">
+              <p class="card-label">무료 진단 · 1시간</p>
+              <p class="cta-big">진단부터<br />받아 보기</p>
+              <span class="go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+
+            <!-- F: 예시 후기 -->
+            <figure class="card b-f reveal">
+              <div class="card-top">
+                <p class="card-label">합격생 이야기</p>
+                <span class="chip">예시 후기</span>
+              </div>
+              <blockquote class="quote">“주제 탐구 보고서를 1년간 한 흐름으로 끌고 갔습니다.”</blockquote>
+              <figcaption class="quote-by">연세대 의예 합격생 · 25학번</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <!-- WHY -->
-      <section id="why" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">선택 이유</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              잘하는 학원이 아니라,<br />지치지 않게 함께 가는 컨설팅.
-            </h2>
+      <!-- WHY — 차분한 3단 -->
+      <section id="why" class="sec sec--soft" aria-labelledby="why-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <p class="eyebrow">선택 이유</p>
+            <h2 id="why-title" class="serif">잘하는 학원이 아니라,<br />지치지 않게 함께 가는 컨설팅.</h2>
           </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <p class="serif text-3xl" style="color:var(--accent)">01</p>
-              <h3 class="mt-6 text-xl font-semibold">한 명, 한 명의 컨설턴트</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">담당 컨설턴트가 1년 내내 바뀌지 않습니다. 학생의 지난 시험·과목별 패턴을 가장 잘 아는 사람이 끝까지 함께합니다.</p>
+          <div class="why-grid">
+            <article class="why-item reveal">
+              <p class="num" aria-hidden="true">01</p>
+              <h3>한 명, 한 명의 컨설턴트</h3>
+              <p>담당 컨설턴트가 1년 내내 바뀌지 않습니다. 학생의 지난 시험과 과목별 패턴을 가장 잘 아는 사람이 끝까지 함께합니다.</p>
             </article>
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <p class="serif text-3xl" style="color:var(--accent)">02</p>
-              <h3 class="mt-6 text-xl font-semibold">주간 1:1 점검</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">매주 30분, 학습량과 멘탈을 함께 점검합니다. 시험은 결국 한 학기 단위의 페이스 관리라는 걸 알기에.</p>
+            <article class="why-item reveal">
+              <p class="num" aria-hidden="true">02</p>
+              <h3>주간 1:1 점검</h3>
+              <p>매주 30분, 학습량과 멘탈을 함께 점검합니다. 시험은 결국 한 학기 단위의 페이스 관리라는 걸 알기 때문입니다.</p>
             </article>
-            <article class="bg-white rounded-2xl p-8 reveal" style="border:1px solid var(--line)">
-              <p class="serif text-3xl" style="color:var(--accent)">03</p>
-              <h3 class="mt-6 text-xl font-semibold">학부모와 함께 보는 진단표</h3>
-              <p class="mt-3 leading-relaxed" style="color:var(--ink-soft)">학생·학부모·컨설턴트가 같은 진단표를 봅니다. 모르는 것에 대한 불안을 함께 줄이는 일이 시작입니다.</p>
+            <article class="why-item reveal">
+              <p class="num" aria-hidden="true">03</p>
+              <h3>학부모와 함께 보는 진단표</h3>
+              <p>학생·학부모·컨설턴트가 같은 진단표를 봅니다. 모르는 데서 오는 불안을 함께 줄이는 것부터 시작합니다.</p>
             </article>
           </div>
         </div>
       </section>
 
       <!-- RECORD -->
-      <section id="record" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">2025 합격 실적</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-            한 줄로 정리한,<br />지난 한 해의 자취.
-          </h2>
+      <section id="record" class="sec" aria-labelledby="record-title">
+        <div class="wrap">
+          <div class="record-head sec-head reveal" style="max-width:none">
+            <div style="max-width:760px">
+              <p class="eyebrow">2025 합격 실적</p>
+              <h2 id="record-title" class="serif">한 줄로 정리한,<br />지난 한 해의 자취.</h2>
+            </div>
+            <span class="chip">예시 수치 · 실제 데이터로 교체</span>
+          </div>
+          <dl class="record-list reveal">
+            <div><dt>서울대학교</dt><dd>정시 <b>8</b> / 수시 <b>6</b></dd></div>
+            <div><dt>연세대학교</dt><dd>정시 <b>11</b> / 수시 <b>9</b></dd></div>
+            <div><dt>고려대학교</dt><dd>정시 <b>7</b> / 수시 <b>12</b></dd></div>
+            <div><dt>KAIST · POSTECH</dt><dd>정시 <b>4</b> / 수시 <b>5</b></dd></div>
+            <div><dt>서강 / 한양 / 성균관</dt><dd>정시 <b>14</b> / 수시 <b>22</b></dd></div>
+            <div><dt>의·치·약·수의대</dt><dd><b>12</b>명</dd></div>
+            <div><dt>교대 · 사범대</dt><dd>정시 <b>6</b> / 수시 <b>10</b></dd></div>
+            <div><dt>예체능 (서울대 미대 외)</dt><dd>정시 <b>5</b> / 수시 <b>9</b></dd></div>
+          </dl>
+          <p class="footnote reveal">
+            · 2024학년도 등록 컨설팅 학생 245명 기준 실적입니다. 학생·학부모 서면 동의를 받아 정리했습니다.<br />
+            · 같은 학생의 복수 합격은 1명으로 셉니다. 학원의 설립·운영 및 과외교습에 관한 법률의 광고 가이드라인을 따릅니다.
+          </p>
         </div>
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-2">
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">서울대학교</span><span style="color:var(--ink-soft)">정시 8 / 수시 6</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">연세대학교</span><span style="color:var(--ink-soft)">정시 11 / 수시 9</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">고려대학교</span><span style="color:var(--ink-soft)">정시 7 / 수시 12</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">KAIST · POSTECH</span><span style="color:var(--ink-soft)">정시 4 / 수시 5</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">서강 / 한양 / 성균관</span><span style="color:var(--ink-soft)">정시 14 / 수시 22</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">의·치·약·수의대</span><span style="color:var(--ink-soft)">12명</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">교대 · 사범대</span><span style="color:var(--ink-soft)">정시 6 / 수시 10</span></div>
-          <div class="border-t pt-5 pb-5 flex justify-between" style="border-color: var(--line)"><span class="font-medium">예체능 (서울대 미대 외)</span><span style="color:var(--ink-soft)">정시 5 / 수시 9</span></div>
-        </div>
-        <p class="mt-8 text-xs" style="color: var(--ink-soft)">
-          · 2024학년도 등록 컨설팅 학생 245명 기준 실적입니다. 학생·학부모 서면 동의 하에 정리되었습니다.<br />
-          · 동일 학생의 복수 합격은 1명으로 카운트했습니다. 학원의 설립·운영 및 과외교습에 관한 법률 광고 가이드라인을 준수합니다.
-        </p>
       </section>
 
-      <!-- CURRICULUM -->
-      <section id="curriculum" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-2xl">
-            <p class="eyebrow mb-4">커리큘럼</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">12개월,<br />학년별 4단계.</h2>
+      <!-- CURRICULUM — 두 번째 벤토 -->
+      <section id="curriculum" class="sec sec--soft" aria-labelledby="cur-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <p class="eyebrow">커리큘럼</p>
+            <h2 id="cur-title" class="serif">12개월,<br />학년별 4단계.</h2>
           </div>
-          <div class="grid md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 01 · 3 — 5월</p>
-              <h3 class="mt-3 text-lg font-semibold">진단</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">과목별 강·약점 분석. 1년 학습 동선과 목표 대학을 함께 그립니다.</p>
-            </div>
-            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 02 · 6 — 8월</p>
-              <h3 class="mt-3 text-lg font-semibold">기초 정리</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">시험에서 ‘아는데 틀리는’ 자리부터 메웁니다. 동시 EBS 연계 분석.</p>
-            </div>
-            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 03 · 9 — 11월</p>
-              <h3 class="mt-3 text-lg font-semibold">실전 가속</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">주 2회 모의고사 분석 · 주 1회 멘탈 점검 면담 병행.</p>
-            </div>
-            <div class="bg-white rounded-2xl p-7 reveal" style="border:1px solid var(--line)">
-              <p class="text-xs" style="color: var(--accent); font-weight:700">STEP 04 · 12월 — 다음 해</p>
-              <h3 class="mt-3 text-lg font-semibold">정시·수시 매니징</h3>
-              <p class="mt-3 text-sm" style="color: var(--ink-soft)">대학별 환산점·면접 준비. 등록 마감일까지 함께 의사결정.</p>
-            </div>
+          <div class="bento bento-cur">
+            <article class="card c-t reveal" aria-labelledby="ct-title">
+              <p class="card-label">1년 한눈에 보기</p>
+              <h3 id="ct-title">입시 달력에 맞춰<br />네 구간으로 나눠 갑니다.</h3>
+              <div class="tl" role="img" aria-label="3월부터 다음 해 2월까지의 12개월 일정. 3—5월 진단, 6—8월 기초 정리, 9—11월 실전 가속, 12월부터 다음 해까지 정시·수시 매니징. 6월·9월 모의평가, 9월 수시 원서, 11월 수능, 12—1월 정시 원서.">
+                <div class="tl-months" aria-hidden="true"><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>1</span><span>2</span></div>
+                <div class="tl-rows" aria-hidden="true">
+                  <div class="tl-row"><b style="grid-column:1 / 4; --sw:var(--sky-pale)">01 진단</b></div>
+                  <div class="tl-row"><b style="grid-column:4 / 7; --sw:var(--sky)">02 기초 정리</b></div>
+                  <div class="tl-row"><b class="dark" style="grid-column:7 / 10; --sw:var(--navy-soft)">03 실전 가속</b></div>
+                  <div class="tl-row"><b style="grid-column:10 / 13; --sw:var(--yellow)">04 매니징</b></div>
+                </div>
+                <div class="tl-events" aria-hidden="true">
+                  <span style="grid-column:4">6월 모평</span>
+                  <span style="grid-column:7">9월 모평·수시</span>
+                  <span style="grid-column:9">수능</span>
+                  <span style="grid-column:10">정시 원서</span>
+                </div>
+              </div>
+            </article>
+            <article class="card step c-s1 reveal" style="--sw:var(--sky-pale)">
+              <p class="step-tag"><i aria-hidden="true"></i>STEP 01 · 3—5월</p>
+              <h3>진단</h3>
+              <p>과목별 강점과 약점을 나눠 봅니다. 1년 학습 동선과 목표 대학을 함께 그립니다.</p>
+            </article>
+            <article class="card step c-s2 reveal" style="--sw:var(--sky)">
+              <p class="step-tag"><i aria-hidden="true"></i>STEP 02 · 6—8월</p>
+              <h3>기초 정리</h3>
+              <p>시험에서 ‘아는데 틀리는’ 자리부터 메웁니다. EBS 연계 분석도 같이 갑니다.</p>
+            </article>
+            <article class="card step c-s3 reveal" style="--sw:var(--navy-soft)">
+              <p class="step-tag"><i aria-hidden="true"></i>STEP 03 · 9—11월</p>
+              <h3>실전 가속</h3>
+              <p>주 2회 모의고사 분석, 주 1회 멘탈 점검 면담을 함께 진행합니다.</p>
+            </article>
+            <article class="card step step--final c-s4 reveal" style="--sw:var(--yellow)">
+              <p class="step-tag"><i aria-hidden="true"></i>STEP 04 · 12월—다음 해</p>
+              <h3>정시·수시 매니징</h3>
+              <p>대학별 환산점과 면접을 준비하고, 등록 마감일까지 함께 결정합니다.</p>
+            </article>
+            <article class="card card--photo c-p reveal">
+              <img src="../assets/images/academy/04-teaching.webp" width="1376" height="768" alt="컨설턴트가 화이트보드 앞에서 학생들에게 문제 풀이를 설명하는 수업 장면" loading="lazy" style="object-position: 50% 35%" />
+              <div class="photo-cap">
+                <p class="card-label">모의고사 분석</p>
+                <p class="card-title">풀고 끝내지 않고, 틀린 이유까지 함께 봅니다.</p>
+              </div>
+            </article>
+            <article class="card card--navy c-w reveal">
+              <p class="card-label">1:1 정시·수시 패키지</p>
+              <p class="price">월 ₩900,000<small>부터</small></p>
+              <p class="card-text">학년과 과목 수에 따라 달라집니다.</p>
+            </article>
+            <article class="card c-r reveal">
+              <p class="card-label">1회 컨설팅</p>
+              <p class="price" style="color:var(--navy)">₩200,000</p>
+              <p class="card-text">패키지 등록 없이 한 번만 받아 볼 수 있습니다.</p>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <!-- ROADMAP BY GRADE -->
+      <section id="roadmap" class="sec" aria-labelledby="road-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <p class="eyebrow">학년별 로드맵</p>
+            <h2 id="road-title" class="serif">학년별, 지금 해야 할 한 가지</h2>
+          </div>
+          <ol class="road reveal">
+            <li><p class="grade">예비고1</p><h3>진로 가설 세우기</h3><p>관심 분야 세 가지를 좁혀, 1학기 독서·활동 주제를 미리 정합니다.</p></li>
+            <li><p class="grade">고1</p><h3>생기부 첫 단추</h3><p>교과 세특 한 줄까지 의도해, 2학년 심화 활동의 토대를 만듭니다.</p></li>
+            <li><p class="grade">고2</p><h3>탐구의 깊이</h3><p>1년짜리 주제 탐구 보고서로 서사를 다지는, 가장 중요한 시기입니다.</p></li>
+            <li><p class="grade">고3 1학기</p><h3>자소서·면접</h3><p>5월부터 자소서 초고를, 7월부터 모의 면접을 시작합니다.</p></li>
+            <li><p class="grade">고3 2학기</p><h3>실전</h3><p>수시 6장의 우선순위와 면접·논술 디테일을 다듬는 단계입니다.</p></li>
+          </ol>
         </div>
       </section>
 
       <!-- MENTORS -->
-      <section id="mentors" class="container-x py-24 md:py-32">
-        <div class="reveal mb-14 max-w-2xl">
-          <p class="eyebrow mb-4">컨설턴트</p>
-          <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">합격 직후의 그 길을<br />가장 잘 기억하는 사람.</h2>
+      <section id="mentors" class="sec sec--soft" aria-labelledby="mentor-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <p class="eyebrow">컨설턴트</p>
+            <h2 id="mentor-title" class="serif">합격 직후의 그 길을<br />가장 잘 기억하는 사람.</h2>
+          </div>
+          <div class="mentors">
+            <article class="mentor reveal">
+              <p class="mono" aria-hidden="true">강</p>
+              <p class="role">대표 컨설턴트</p>
+              <h3>강윤도</h3>
+              <p class="bio">서울대 경영 · 11년차</p>
+            </article>
+            <article class="mentor reveal">
+              <p class="mono" aria-hidden="true">윤</p>
+              <p class="role">국어 · 영어</p>
+              <h3>윤서영</h3>
+              <p class="bio">연세대 영문 · 8년차</p>
+            </article>
+            <article class="mentor reveal">
+              <p class="mono" aria-hidden="true">장</p>
+              <p class="role">수학 · 과학</p>
+              <h3>장도현</h3>
+              <p class="bio">KAIST 화학 · 7년차</p>
+            </article>
+            <article class="mentor reveal">
+              <p class="mono" aria-hidden="true">오</p>
+              <p class="role">의대 · 약대 전담</p>
+              <h3>오정인</h3>
+              <p class="bio">고려대 의예 · 6년차</p>
+            </article>
+          </div>
         </div>
-        <div class="grid md:grid-cols-4 gap-6">
-          <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/01-consult.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">대표 컨설턴트</p>
-            <h3 class="serif text-xl mt-1">강윤도</h3>
-            <p class="mt-2 text-sm" style="color: var(--ink-soft)">서울대 경영 · 11년차</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/04-teaching.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">국어 · 영어</p>
-            <h3 class="serif text-xl mt-1">윤서영</h3>
-            <p class="mt-2 text-sm" style="color: var(--ink-soft)">연세대 영문 · 8년차</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/03-parent.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">수학 · 과학</p>
-            <h3 class="serif text-xl mt-1">장도현</h3>
-            <p class="mt-2 text-sm" style="color: var(--ink-soft)">KAIST 화학 · 7년차</p>
-          </article>
-          <article class="reveal">
-            <div class="ph aspect-[4/5] rounded-2xl"  style="background-image:url('../assets/images/academy/02-student.webp');background-size:cover;background-position:center;"></div>
-            <p class="mt-5 text-sm" style="color:var(--accent); font-weight:600">의대 · 약대 전담</p>
-            <h3 class="serif text-xl mt-1">오정인</h3>
-            <p class="mt-2 text-sm" style="color: var(--ink-soft)">고려대 의예 · 6년차</p>
-          </article>
+      </section>
+
+      <!-- ALUMNI VOICE -->
+      <section id="alumni" class="sec" aria-labelledby="alumni-title">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <p class="eyebrow">합격생 이야기</p>
+            <h2 id="alumni-title" class="serif">메리트와 함께한 합격의 기록</h2>
+            <p class="sub">본인과 학부모 동의를 받은 인터뷰만 싣습니다. 아래는 화면 구성을 보여 주는 예시 후기입니다.</p>
+          </div>
+          <div class="voices">
+            <figure class="voice reveal">
+              <span class="chip" style="align-self:flex-start">예시 후기</span>
+              <blockquote>“고2 1학기, 생기부 방향을 다시 잡은 게 결정적이었어요.”</blockquote>
+              <figcaption>서울대 경영 합격생 · 25학번</figcaption>
+            </figure>
+            <figure class="voice reveal">
+              <span class="chip" style="align-self:flex-start">예시 후기</span>
+              <blockquote>“스펙 나열이 아닌 서사 만들기를 처음 배웠습니다.”</blockquote>
+              <figcaption>고려대 컴퓨터 합격생 · 24학번</figcaption>
+            </figure>
+            <figure class="voice reveal">
+              <span class="chip" style="align-self:flex-start">예시 후기</span>
+              <blockquote>“면접 1:1 모의가 실전 분위기와 거의 같았어요.”</blockquote>
+              <figcaption>성균관 글로벌 합격생 · 24학번</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOURNEY -->
+      <section id="journey" class="sec sec--soft" aria-labelledby="journey-title">
+        <div class="wrap">
+          <div class="journey">
+            <div class="journey-photo reveal">
+              <img src="../assets/images/academy/02-student.webp" width="1376" height="768" alt="교복을 입은 학생이 책상에서 노트에 풀이를 적으며 공부하는 모습" loading="lazy" />
+            </div>
+            <div class="reveal">
+              <p class="eyebrow">입시 앞에서 길을 잃은 가정에</p>
+              <h2 id="journey-title" class="serif" style="margin-top:18px;font-size:clamp(28px,4.4vw,40px);line-height:1.3;color:var(--navy)">정보의 홍수 속, 우리 아이만의 길이 보이지 않을 때.</h2>
+              <ol class="journey-steps">
+                <li><span class="n" aria-hidden="true">01</span><h3>학생 1:1 진단</h3><p>성적·성향·목표를 한 번에 정리합니다.</p></li>
+                <li><span class="n" aria-hidden="true">02</span><h3>전형별 로드맵 설계</h3><p>수시·정시·논술 중 가장 유리한 길을 고릅니다.</p></li>
+                <li><span class="n" aria-hidden="true">03</span><h3>원서 제출까지 동행</h3><p>자소서와 면접까지 같은 컨설턴트가 끝까지 봅니다.</p></li>
+              </ol>
+            </div>
+          </div>
+          <div class="stakes reveal">
+            <div>
+              <p class="k">미루시면</p>
+              <p>전형 하나를 잘못 고르면, 1년의 노력이 12월에 무너집니다.</p>
+            </div>
+            <div class="good">
+              <p class="k">시작하시면</p>
+              <p>12월, 가족이 함께 웃으며 합격 발표를 확인하는 저녁.</p>
+            </div>
+          </div>
+          <div class="cta-row reveal" style="margin-top:28px">
+            <a href="#consult" class="btn btn-navy">1:1 컨설팅 예약 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#roadmap" class="btn btn-line">학년별 로드맵 보기</a>
+          </div>
         </div>
       </section>
 
       <!-- CONSULT -->
-      
-      <!-- JOURNEY (StoryBrand) -->
-      
-      <!-- ====================== ALUMNI VOICE ====================== -->
-      <section id="alumni" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">ALUMNI VOICE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">메리트와 함께한 합격의 기록</h2>
-            <p class="mt-6 leading-relaxed text-base md:text-lg" style="color: var(--ink-soft)">본인과 학부모 동의를 받은 인터뷰만 게재합니다.</p>
-          </div>
-          <div class="grid md:grid-cols-2 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">서울대 경영 — 이OO (25학번)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'고2 1학기, 생기부 방향을 다시 잡은 게 결정적이었어요.'</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">연세대 의예 — 박OO (25학번)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'주제 탐구 보고서를 1년간 한 흐름으로 끌고 갔습니다.'</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">고려대 컴퓨터 — 김OO (24학번)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'스펙 나열이 아닌 서사 만들기를 처음 배웠습니다.'</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">성균관 글로벌 — 최OO (24학번)</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">'면접 1:1 모의가 실전 분위기와 거의 같았어요.'</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="journey" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x max-w-5xl">
+      <section id="consult" class="sec consult" aria-labelledby="consult-title">
+        <div class="wrap consult-grid">
           <div class="reveal">
-            <p class="eyebrow mb-5">입시 앞에서 길을 잃은 가정에</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-3xl">
-              정보의 홍수 속, 우리 아이만의 길이 보이지 않을 때.
-            </h2>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-8 mt-16">
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">01</p>
-              <h3 class="mt-4 text-lg font-semibold">학생 1:1 진단</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">성적·성향·목표를 한 번에 정리합니다</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">02</p>
-              <h3 class="mt-4 text-lg font-semibold">전형별 로드맵 설계</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">수시·정시·논술 중 가장 유리한 길로</p>
-            </article>
-            <article class="reveal">
-              <p class="serif text-3xl" style="color: var(--accent)">03</p>
-              <h3 class="mt-4 text-lg font-semibold">원서 제출까지 동행</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: var(--ink-soft)">자소서·면접까지 같은 컨설턴트가 끝까지</p>
-            </article>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t reveal" style="border-color: var(--line)">
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase">미루시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">전형 하나 잘못 고르면, 1년의 노력이 12월에 무너집니다.</p>
-            </div>
-            <div>
-              <p class="text-xs font-semibold" style="color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase">시작하시면</p>
-              <p class="mt-3 text-base md:text-lg leading-relaxed">12월, 가족이 함께 웃으며 합격 발표를 확인하는 저녁.</p>
-            </div>
-          </div>
-
-          <div class="mt-12 flex flex-wrap gap-3 reveal">
-            <a href="#consult" class="btn-primary">1:1 컨설팅 예약 <span aria-hidden="true">→</span></a>
-            <a href="#" class="btn-ghost">학년별 입시 로드맵 받기</a>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- ====================== ROADMAP BY GRADE ====================== -->
-      <section id="roadmap" class="py-24 md:py-32" style="background: var(--bg-soft)">
-        <div class="container-x">
-          <div class="reveal mb-14 max-w-3xl">
-            <p class="eyebrow mb-4">ROADMAP BY GRADE</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">학년별, 지금 해야 할 한 가지</h2>
-          </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">예비고1 — 진로 가설 세우기</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">관심 분야 3개를 좁혀, 1학기 독서·활동 주제를 미리 정합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">고1 — 생기부 첫 단추</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">교과 세특 한 줄까지 의도해, 2학년 심화 활동의 토대를 만듭니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">고2 — 탐구의 깊이</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">1년짜리 주제 탐구 보고서로 서사를 강화할 가장 중요한 시기.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">고3 1학기 — 자소서·면접</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">5월부터 자소서 초고, 7월부터 모의 면접을 시작합니다.</p>
-            </article>
-            <article class="reveal pt-6 pb-6" style="border-top: 1px solid var(--line);">
-              <h3 class="font-semibold text-lg leading-snug">고3 2학기 — 실전</h3>
-              <p class="mt-2 leading-relaxed text-[15px]" style="color: var(--ink-soft)">수시 6장의 우선순위와 면접·논술 디테일을 다듬는 단계.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="consult" class="py-24 md:py-32" style="background: var(--primary); color: #fff">
-        <div class="container-x grid md:grid-cols-2 gap-12">
-          <div class="reveal">
-            <p class="eyebrow mb-4" style="color: var(--accent)">무료 진단 상담</p>
-            <h2 class="serif text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-              먼저, 한 시간의<br />진단으로 시작합니다.
-            </h2>
-            <p class="mt-8 leading-relaxed" style="color: rgba(255,255,255,.75)">
-              학생·학부모 동석 가능. 지난 시험지 한 회분만 가져오시면 됩니다.
-              상담 후 등록 여부는 그 자리에서 결정하지 않으셔도 됩니다.
-            </p>
-            <ul class="mt-6 text-sm space-y-2" style="color: rgba(255,255,255,.7)">
-              <li>· <strong>수강료</strong>: 1:1 정시·수시 패키지 월 ₩900,000부터 (학년·과목 수에 따라 상이) · 1회 컨설팅 ₩200,000</li>
-              <li>· <strong>운영 시간</strong>: 평일 14:00 — 22:00 / 토요일 10:00 — 18:00 / 일요일 휴무</li>
-              <li>· <strong>환불 규정</strong> (학원법 시행령 별표): 시작 전 100% / 1/3 경과 전 2/3 / 1/2 경과 전 1/2 / 1/2 경과 후 환불 불가</li>
-              <li>· <strong>안전</strong>: CCTV 설치 · 학생 야간 귀가 안내 동행 가능</li>
-            </ul>
-            <dl class="mt-10 space-y-4">
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:var(--accent)">대표전화</dt><dd>02 · 555 · 0101</dd></div>
-              <div class="border-t pt-4 flex justify-between" style="border-color: rgba(255,255,255,.18)"><dt style="color:var(--accent)">위치</dt><dd>서울 강남구 도곡로 OO길 8, 3층</dd></div>
+            <p class="eyebrow">무료 진단 상담</p>
+            <h2 id="consult-title" class="serif" style="margin-top:18px;font-size:clamp(30px,5.4vw,46px);line-height:1.24">먼저, 한 시간의<br />진단으로 시작합니다.</h2>
+            <p class="sub" style="margin-top:20px;font-size:17px;line-height:1.75">학생·학부모 동석 가능합니다. 지난 시험지 한 회분만 가져오시면 됩니다. 상담 뒤 등록 여부는 그 자리에서 정하지 않으셔도 됩니다.</p>
+            <dl class="facts">
+              <div><dt>수강료</dt><dd>1:1 정시·수시 패키지 월 ₩900,000부터 (학년·과목 수에 따라 다름) · 1회 컨설팅 ₩200,000</dd></div>
+              <div><dt>운영 시간</dt><dd>평일 14:00—22:00 · 토요일 10:00—18:00 · 일요일 휴무</dd></div>
+              <div><dt>환불 규정</dt><dd>학원법 시행령 별표 기준 — 시작 전 100% · 1/3 경과 전 2/3 · 1/2 경과 전 1/2 · 1/2 경과 후 환불 불가</dd></div>
+              <div><dt>안전</dt><dd>CCTV 설치 · 학생 야간 귀가 안내 동행 가능</dd></div>
+              <div><dt>대표전화</dt><dd>02 · 555 · 0101</dd></div>
+              <div><dt>위치</dt><dd>서울 강남구 도곡로 OO길 8, 3층</dd></div>
             </dl>
           </div>
-          <form class="bg-white p-8 rounded-2xl reveal" onsubmit="event.preventDefault(); alert('무료 진단 신청이 접수되었습니다. 확인 후 연락드리겠습니다.');" style="color: var(--ink)">
-            <h3 class="serif text-2xl mb-6">무료 진단 신청서</h3>
-            <div class="space-y-4">
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학생 성함</label><input class="field" required /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학년</label>
-                <select class="field" required><option value="">선택</option><option>고1</option><option>고2</option><option>고3</option><option>N수</option><option>중3</option></select>
+          <form class="form reveal" id="consult-form" novalidate>
+            <h3>무료 진단 신청서</h3>
+            <p class="form-sub">확인 후 담당 컨설턴트가 연락드립니다.</p>
+            <div class="fields">
+              <div class="two">
+                <div><label class="lbl" for="f-name">학생 성함</label><input id="f-name" name="name" class="field" required autocomplete="name" /></div>
+                <div><label class="lbl" for="f-grade">학년</label>
+                  <select id="f-grade" name="grade" class="field" required><option value="">선택</option><option>중3</option><option>고1</option><option>고2</option><option>고3</option><option>N수</option></select>
+                </div>
               </div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">학부모 연락처</label><input class="field" required type="tel" /></div>
-              <div><label class="block text-sm mb-2" style="color:var(--ink-soft)">목표 / 가장 어려운 과목 (선택)</label><textarea class="field" rows="3"></textarea></div>
-              <label class="flex items-start gap-2 mt-4 mb-3 text-xs cursor-pointer" style="color: var(--ink-soft); line-height:1.5">
-                <input type="checkbox" required style="margin-top:3px; flex-shrink:0;" />
-                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간 등 자세한 사항은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
+              <div><label class="lbl" for="f-tel">학부모 연락처</label><input id="f-tel" name="tel" class="field" required type="tel" inputmode="tel" placeholder="010-0000-0000" autocomplete="tel" /></div>
+              <div><label class="lbl" for="f-goal">목표 / 가장 어려운 과목 <span>(선택)</span></label><textarea id="f-goal" name="goal" class="field" rows="3"></textarea></div>
+              <label class="agree">
+                <input type="checkbox" id="f-agree" required />
+                <span><strong>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목·목적·보유 기간은 <a href="#consult">개인정보처리방침</a>에서 확인하실 수 있습니다.</span>
               </label>
-              <button class="btn-primary w-full justify-center mt-2">무료 진단 신청</button>
+              <button type="submit" class="btn btn-navy">무료 진단 신청 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
             </div>
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="py-10 text-sm" style="color: var(--ink-soft)">
-      <div class="container-x flex flex-wrap justify-between gap-4">
+    <footer class="foot">
+      <div class="wrap foot-row">
         <span>© 2026 메리트 입시컨설팅 · 강남구교육지원청 등록 제0000호 (입시상담) · 사업자등록번호 000-00-00000</span>
-        <a href="/" class="hover:underline" style="color: var(--primary)">← 쇼룸으로 돌아가기</a>
+        <a href="/">← 쇼룸으로 돌아가기</a>
       </div>
-      <p class="container-x mt-6 text-[11px]" style="opacity:.6">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
+      <p class="wrap note">본 페이지는 NOAH 레퍼런스 디자인 시안입니다. 업체명·연락처·수치는 가상의 예시입니다.</p>
     </footer>
 
     <script>
-      const io = new IntersectionObserver((es) => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { rootMargin:'0px 0px -10% 0px', threshold:.05 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      (function () {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // 모션 줄이기: 카운트업 없이 최종 숫자를 그대로 보여 줌 (showroom.js 보다 먼저 실행)
+        if (reduce) document.querySelectorAll('[data-count]').forEach(function (el) { el.removeAttribute('data-count'); });
+
+        // 스크롤 등장 — .reveal 에 .in 추가
+        var items = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+          items.forEach(function (el) { io.observe(el); });
+        } else {
+          items.forEach(function (el) { el.classList.add('in'); });
+        }
+        // 벤토 카드 순차 등장
+        document.querySelectorAll('.bento').forEach(function (b) {
+          Array.prototype.forEach.call(b.children, function (c, i) { c.style.transitionDelay = (reduce ? 0 : i * 70) + 'ms'; });
+        });
+
+        // 데모 폼 — 실제 전송 없음
+        var form = document.getElementById('consult-form');
+        var status = document.getElementById('form-status');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            var bad = form.querySelector(':invalid');
+            status.textContent = '필수 항목을 입력해 주세요.';
+            if (bad) bad.focus();
+            return;
+          }
+          status.textContent = '시안 데모 — 실제로 전송되지 않습니다.';
+        });
+      })();
     </script>
-      <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
+    <script src="../assets/js/showroom.js?v=f9a06350" defer></script>
 
     <!-- 가로 하단 배너 -->
     <div class="banner-bottom" data-banner-id="academy" role="region" aria-label="알림 배너">
