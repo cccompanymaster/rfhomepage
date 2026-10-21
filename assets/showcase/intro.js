@@ -234,7 +234,7 @@ function endSplash(method) {
     splash.classList.remove('is-out');
     scheduleScroll();
     $('.sc-stage').focus({ preventScroll: true });
-  }, reduceMotion.matches ? 200 : 700);
+  }, reduceMotion.matches ? 200 : 900);
 }
 splash?.addEventListener('click', (e) => { e.stopPropagation(); endSplash('click'); });
 root?.addEventListener('keydown', (e) => {
@@ -244,10 +244,10 @@ root?.addEventListener('keydown', (e) => {
   endSplash('key');
 }, true);
 if (splashOn()) {
-  // 글꼴이 준비돼 재생이 시작된 시점(index.html 게이트의 __splashT0)부터 약 3.3초(움직임 줄이기면 1.8초) 뒤에 걷음
+  // 글꼴이 준비돼 재생이 시작된 시점(index.html 게이트의 __splashT0)부터 약 5.2초(움직임 줄이기면 2.4초) 뒤에 걷음
   const arm = () => {
     const played = performance.now() - (window.__splashT0 ?? performance.now());
-    splashTimer = setTimeout(endSplash, Math.max(300, (reduceMotion.matches ? 1800 : 3300) - played));
+    splashTimer = setTimeout(endSplash, Math.max(300, (reduceMotion.matches ? 2400 : 5200) - played));
   };
   if (window.__splashT0 != null) arm(); else window.addEventListener('splash:start', arm, { once: true });
 }
