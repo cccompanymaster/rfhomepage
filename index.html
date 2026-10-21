@@ -76,6 +76,25 @@
     <link rel="stylesheet" href="/assets/showcase/intro.css?v=54610172" />
     <link rel="stylesheet" href="/assets/css/site.css?v=eb96b2ba" />
     <style>
+      /* 사진 — 히어로 와이드 · 제목 옆 카드 · 진행 방식 오른쪽 칸 · 수정 상자 띠 */
+      .photo-hero { margin: 56px 0 0; border-radius: 28px; overflow: hidden; aspect-ratio: 16 / 7; background: var(--bg-soft); }
+      .photo-hero img, .photo-band img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .photo-hero img { object-position: 62% 42%; }
+      .photo-split { display: grid; gap: 40px; align-items: center; }
+      @media (min-width: 1024px) { .photo-split { grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 56px; } }
+      .photo-card { margin: 0; }
+      .photo-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 24px; background: var(--bg-soft); }
+      .photo-card figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.6; color: var(--text-quiet); }
+      .how-side { display: grid; gap: 24px; }
+      .photo-band { margin: 0 0 40px; border-radius: 20px; overflow: hidden; aspect-ratio: 21 / 8; background: var(--bg); }
+      .photo-band img { object-position: 55% 38%; }
+      @media (max-width: 640px) {
+        .photo-hero { margin-top: 40px; border-radius: 20px; aspect-ratio: 4 / 3; }
+        .photo-hero img { object-position: 72% 50%; }
+        .photo-band { aspect-ratio: 4 / 3; margin-bottom: 28px; }
+        .photo-band img { object-position: 62% 50%; }
+      }
+
       /* 한눈에 보기 */
       .facts { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 40px 56px; padding-top: 48px; border-top: 1px solid var(--line); }
       .fact-list { margin: 0; }
@@ -407,6 +426,10 @@
         </div>
       </div>
 
+      <figure class="photo-hero">
+        <img src="/assets/images/home/hero-collaboration.webp" alt="밝은 작업실에서 사장님과 NOAH 담당자가 노트북 화면을 함께 보며 홈페이지를 이야기하는 모습" width="1600" height="900" decoding="async" />
+      </figure>
+
       <!-- 신뢰 stats -->
       <dl class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
         <div class="stat-block">
@@ -431,9 +454,15 @@
 
     <!-- 2. 문제 제기 -->
     <section class="container-x py-24 md:py-32 border-t border-black/[0.06]" id="problem">
-      <div class="page-lead reveal mb-14">
-        <h2 class="serif" style="font-size: clamp(28px,4.6vw,46px); line-height:1.26">홈페이지 제작하는 게<br />왜 이렇게 어려울까요?</h2>
-        <p class="mt-5 text-base" style="color: var(--text-dim)">이런 생각, 지금 하고 계신가요?</p>
+      <div class="photo-split mb-14">
+        <div class="page-lead reveal">
+          <h2 class="serif" style="font-size: clamp(28px,4.6vw,46px); line-height:1.26">홈페이지 제작하는 게<br />왜 이렇게 어려울까요?</h2>
+          <p class="mt-5 text-base" style="color: var(--text-dim)">이런 생각, 지금 하고 계신가요?</p>
+        </div>
+        <figure class="photo-card reveal">
+          <img src="/assets/images/home/problem-no-response.webp" alt="손님 없는 저녁 카페 계산대에서 조용한 휴대폰을 바라보며 턱을 괸 사장님" width="1536" height="1024" loading="lazy" decoding="async" />
+          <figcaption>오픈하고 나니 제작사는 답이 없고, 홈페이지는 그대로 멈춰 있습니다.</figcaption>
+        </figure>
       </div>
       <div class="grid sm:grid-cols-2 gap-5 reveal">
         <div class="q-card">
@@ -539,6 +568,11 @@
           </div>
         </div>
 
+        <div class="how-side">
+        <figure class="photo-card reveal">
+          <img src="/assets/images/home/materials-handoff.webp" alt="테이블에 메뉴 사진과 인쇄물을 펼쳐 놓고 사장님이 NOAH 담당자에게 자료를 건네는 모습" width="1448" height="1086" loading="lazy" decoding="async" />
+          <figcaption>메뉴판·사진·명함처럼 지금 있는 자료면 충분합니다. 모자란 건 진행하면서 같이 채웁니다.</figcaption>
+        </figure>
         <aside class="reveal rounded-3xl p-8" style="background:var(--bg-soft); border:1px solid var(--line)">
           <p class="text-xs tracking-[0.2em]" style="color: var(--text-quiet)">이 금액에 들어 있는 것</p>
           <p class="serif mt-3" style="font-size:clamp(30px,4vw,40px); color:var(--accent)">₩199,000</p>
@@ -554,10 +588,14 @@
           </div>
           <a href="/pricing" class="mt-7 w-full inline-flex justify-center px-6 py-3.5 rounded-full font-bold text-sm nb-cta">가격 자세히 보기</a>
         </aside>
+        </div>
       </div>
 
       <!-- 수정 빈도 우려 해소 -->
       <div class="reveal mt-16 md:mt-20 rounded-3xl px-7 py-10 md:px-14 md:py-14" style="border:1px solid var(--line); background: var(--bg-soft)">
+        <figure class="photo-band">
+          <img src="/assets/images/home/responsive-edit.webp" alt="가게 카운터에서 노트북을 펼친 채 웃으며 통화로 수정 내용을 말하는 사장님" width="1536" height="1024" loading="lazy" decoding="async" />
+        </figure>
         <div class="grid lg:grid-cols-[1fr_320px] gap-10 items-center">
           <div>
             <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">UNLIMITED EDITS</p>
