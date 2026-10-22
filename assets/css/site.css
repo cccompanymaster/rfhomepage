@@ -392,3 +392,38 @@ select.field-dark option[value=""] {
 .mnav a { padding: 17px 4px; font-size: 22px; font-weight: 700; border-bottom: 1px solid var(--line); }
 .page-lead { max-width: 720px; }
 .page-lead h1 { font-size: clamp(30px, 5.2vw, 50px); line-height: 1.24; font-weight: 800; letter-spacing: -0.035em; }
+
+/* 가격 비교 카드 (홈·가격 페이지) — 막대: 진한 부분 = 시작가, 흐린 부분 = 범위 끝 (300만 원 = 100%) */
+.cmp-card { max-width: 780px; margin: 0 auto; padding: clamp(16px, 3vw, 28px); border-radius: 28px;
+  background: #131b2c; border: 1px solid rgba(255,255,255,.1); color: #f4f5f7; box-shadow: 0 30px 70px rgba(17,24,33,.18); }
+.cmp-visual { margin: 0; border-radius: 20px; overflow: hidden; aspect-ratio: 2 / 1; background: #0d1219; }
+.cmp-visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cmp-body { padding: clamp(22px, 3.4vw, 34px) clamp(4px, 1.6vw, 14px) 6px; }
+.cmp-eyebrow { margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; color: rgba(244,245,247,.6); }
+.cmp-title { margin: 0; font-size: clamp(23px, 3.2vw, 32px); font-weight: 800; letter-spacing: -.03em; line-height: 1.3; }
+.cmp-list { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 22px; }
+.cmp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.cmp-name { font-size: clamp(16px, 2.2vw, 18px); font-weight: 700; }
+.cmp-price { font-size: clamp(16px, 2.2vw, 19px); font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cmp-bar { position: relative; height: 12px; margin-top: 10px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+.cmp-bar::before, .cmp-bar i { content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(.2,.8,.2,1); }
+.cmp-bar::before { width: var(--to); background: rgba(168,178,198,.28); }
+.cmp-bar i { width: var(--from); background: #a9b3c6; }
+.cmp-note { margin: 8px 0 0; font-size: 14px; line-height: 1.55; color: rgba(244,245,247,.66); }
+.cmp-row.is-noah { margin-top: 6px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1); }
+.cmp-row.is-noah .cmp-name { color: #ff9a6f; }
+.cmp-row.is-noah .cmp-price { font-size: clamp(24px, 3.6vw, 32px); letter-spacing: -.02em;
+  background: linear-gradient(100deg, #ff5a2b, #ffb300); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cmp-row.is-noah .cmp-bar i { background: linear-gradient(90deg, #ff5a2b, #ffb300); box-shadow: 0 0 14px rgba(255,122,60,.6); }
+.cmp-row.is-noah .cmp-note { color: rgba(244,245,247,.86); }
+.cmp-foot { margin: 26px 0 0; font-size: 13px; line-height: 1.65; color: rgba(244,245,247,.58); }
+.cmp-more { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 700; color: #ff9a6f; text-decoration: underline; text-underline-offset: 3px; }
+.cmp-more:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+/* 화면에 들어오면 막대가 왼쪽에서 자람 — site.js 가 is-armed(대기) → is-on(재생). 스크립트가 없으면 처음부터 다 보임 */
+.cmp-card.is-armed:not(.is-on) .cmp-bar::before, .cmp-card.is-armed:not(.is-on) .cmp-bar i { transform: scaleX(0); }
+.cmp-row:nth-child(2) .cmp-bar i, .cmp-row:nth-child(2) .cmp-bar::before { transition-delay: .08s; }
+.cmp-row:nth-child(3) .cmp-bar i, .cmp-row:nth-child(3) .cmp-bar::before { transition-delay: .16s; }
+.cmp-row:nth-child(4) .cmp-bar i, .cmp-row:nth-child(4) .cmp-bar::before { transition-delay: .24s; }
+.cmp-row:nth-child(5) .cmp-bar i, .cmp-row:nth-child(5) .cmp-bar::before { transition-delay: .5s; }
+@media (prefers-reduced-motion: reduce) { .cmp-bar::before, .cmp-bar i { transition: none; transform: none !important; } }

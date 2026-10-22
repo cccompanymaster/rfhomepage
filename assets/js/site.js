@@ -5,6 +5,16 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQm
 function closeNav(){document.getElementById('mnav').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
 
+// 가격 비교 카드 — 화면에 들어오면 막대가 자람 (움직임 줄이기면 바로 다 보임)
+document.querySelectorAll('.cmp-card').forEach((card) => {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  card.classList.add('is-armed');
+  const io = new IntersectionObserver((es) => {
+    if (es.some((e) => e.isIntersecting)) { card.classList.add('is-on'); io.disconnect(); }
+  }, { threshold: 0.25 });
+  io.observe(card);
+});
+
 // ====================== 소개서 모달 토글 ======================
 const brochureModal = document.getElementById('brochure-modal');
 const brochureTrigger = document.getElementById('brochure-trigger');
