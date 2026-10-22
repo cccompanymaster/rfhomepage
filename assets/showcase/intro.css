@@ -146,6 +146,32 @@
 .sc-row { position: relative; flex: none; perspective: 1800px; }
 .sc-row--monitor { height: var(--mrow, 380px); }
 .sc-row--phone { height: var(--prow, 300px); }
+/* 넓은 화면: 두 줄을 무대 전체에 겹치고 모니터+휴대폰을 한 쌍씩 세움 (intro.js measure 가 data-layout 지정) */
+.sc-intro[data-layout="pair"] .sc-stage { display: block; }
+.sc-intro[data-layout="pair"] .sc-row { position: absolute; inset: 0; height: auto; pointer-events: none; }
+.sc-intro[data-layout="pair"] .sc-item:not(.is-far) { pointer-events: auto; }
+/* 양옆에 디자인이 더 있다는 표시: 가장자리 페이드 + 큰 화살표(넓은 화면) */
+.sc-stage::before, .sc-stage::after {
+  content: ''; position: absolute; top: 0; bottom: 0; z-index: 25; pointer-events: none;
+  width: clamp(28px, 8vw, 150px);
+}
+.sc-stage::before { left: 0; background: linear-gradient(90deg, #0d0f13 8%, rgba(13, 15, 19, 0)); }
+.sc-stage::after { right: 0; background: linear-gradient(270deg, #0d0f13 8%, rgba(13, 15, 19, 0)); }
+.sc-side {
+  position: absolute; top: 50%; z-index: 26; width: 56px; height: 56px; margin-top: -28px;
+  display: grid; place-items: center; padding: 0 0 3px; border-radius: 50%; cursor: pointer;
+  font: inherit; font-size: 28px; line-height: 1; color: #fff;
+  background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
+}
+.sc-side:hover { background: rgba(255, 255, 255, 0.18); }
+.sc-side.is-prev { left: clamp(12px, 2.4vw, 40px); }
+.sc-side.is-prev:hover { transform: translateX(-2px); }
+.sc-side.is-next { right: clamp(12px, 2.4vw, 40px); }
+.sc-side.is-next:hover { transform: translateX(2px); }
+.sc-intro[data-mode="detail"] .sc-side { opacity: 0; pointer-events: none; }
+.sc-intro[data-layout="rows"] .sc-side { display: none; }
 
 .sc-item {
   position: absolute; left: 50%; bottom: 0;
@@ -260,6 +286,19 @@
   .sc-bar { border-radius: 22px; }
 }
 @media (max-height: 720px) { .sc-sub { font-size: 13.5px; margin-top: 6px; line-height: 1.5; } .sc-eyebrow { margin-bottom: 6px; } }
+/* 키가 낮은 넓은 화면: 위 문구·아래 막대를 줄여 기기에 높이를 더 줌 */
+@media (min-width: 720px) and (max-height: 820px) {
+  .sc-top { padding-top: 12px; padding-bottom: 8px; }
+  .sc-eyebrow { display: none; }
+  .sc-copy h2 { font-size: clamp(22px, 2.5vw, 32px); }
+  .sc-sub { margin-top: 6px; font-size: 14px; }
+  .sc-sub br { display: none; }
+  .sc-dock { gap: 8px; padding-bottom: 12px; }
+  .sc-caption { min-height: 0; }
+  .sc-caption-name, .sc-caption-meta { display: inline; }
+  .sc-caption-name { font-size: 17px; }
+  .sc-caption-meta { margin: 0 0 0 10px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .sc-item, .sc-copy > *, .sc-glow { transition: none; }

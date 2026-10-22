@@ -20,7 +20,7 @@ let sel = 0;
 let mode = 'shelf';
 let built = false;
 let leaving = false;
-let geo = { mw: 560, pw: 150, mrow: 380, prow: 300, gap: 18, spacing: 380, narrow: false };
+let geo = { mw: 560, pw: 150, H: 600, W: 1200, narrow: false };
 let items = [];   // [{ mon, phone }]
 
 const $ = (s) => root.querySelector(s);
@@ -70,64 +70,93 @@ function loadNear(radius = 3) {
   });
 }
 
-/* ── 크기 계산: 화면 높이·폭에 맞춰 두 줄을 배치 ── */
+/* ── 크기 계산 ──
+   넓은 화면: 모니터 + 오른쪽 아래에 겹쳐 선 휴대폰을 한 쌍으로, 가운데 한 쌍을 무대에 꽉 차게.
+   좁은 화면: 위 모니터 · 아래 휴대폰 두 줄, 화면 폭을 거의 다 쓰게. 양옆엔 다음 디자인이 살짝 보임 */
 function measure() {
   const stage = $('.sc-stage');
   const H = stage.clientHeight;
   const W = root.clientWidth;
   const narrow = W < 720;
-  const gap = Math.round(Math.max(10, H * 0.035));
-  const mrow = Math.round((H - gap) * 0.56);
-  const prow = H - gap - mrow;
-  const mw = Math.floor(Math.min(mrow / 0.725, W * (narrow ? 0.8 : 0.48), 860));
-  const pw = Math.floor(Math.min((prow * 0.97) / 2.164, mw * 0.34));
-  const spacing = narrow ? mw * 0.96 : mw * 0.7;
-  geo = { mw, pw, mrow, prow, gap, spacing, narrow };
-  root.style.setProperty('--mw', `${mw}px`);
-  root.style.setProperty('--pw', `${pw}px`);
-  root.style.setProperty('--mrow', `${mrow}px`);
-  root.style.setProperty('--prow', `${prow}px`);
-  root.style.setProperty('--row-gap', `${gap}px`);
+  root.dataset.layout = narrow ? 'rows' : 'pair';
+  if (!narrow) {
+    // 모니터(받침 포함) 높이 = 폭 × 0.725 — 무대 높이의 86%, 화면 폭의 58%까지
+    const mw = Math.floor(Math.min((H * 0.86) / 0.725, W * 0.58, 1180));
+    geo = { mw, pw: Math.round(mw * 0.26), H, W, narrow };
+  } else {
+    const gap = Math.round(Math.max(10, H * 0.03));
+    const mrow = Math.round((H - gap) * 0.5);
+    const prow = H - gap - mrow;
+    const mw = Math.floor(Math.min(mrow / 0.725, W * 0.84));
+    const pw = Math.floor(Math.min((prow * 0.97) / 2.164, mw * 0.42));
+    geo = { mw, pw, mrow, prow, gap, H, W, narrow };
+    root.style.setProperty('--mrow', `${mrow}px`);
+    root.style.setProperty('--prow', `${prow}px`);
+    root.style.setProperty('--row-gap', `${gap}px`);
+  }
+  root.style.setProperty('--mw', `${geo.mw}px`);
+  root.style.setProperty('--pw', `${geo.pw}px`);
 }
 
-/* ── 배치: 가운데 크게, 양옆은 작게 기울여서 (모니터·휴대폰 같은 x 로 세로 정렬) ── */
+/* 넓은 화면의 한 쌍: 가운데 x, 배율 k, 기울기 rot → [모니터, 휴대폰] transform.
+   두 줄이 무대 전체에 겹쳐 있고(바닥 = 무대 바닥), 쌍을 세로 가운데에 세움 */
+function pairT(x, k, rot) {
+  const { mw, H } = geo;
+  const monBottom = H / 2 + (mw * 0.725 * k) / 2;
+  const mx = x - mw * k * 0.08;
+  const px = mx + mw * k * 0.42;
+  const r = rot ? ` rotateY(${rot}deg)` : '';
+  return [
+    `translateX(-50%) translate(${mx}px, ${monBottom - H}px)${r} scale(${k})`,
+    `translateX(-50%) translate(${px}px, ${monBottom + mw * k * 0.02 - H}px)${r} scale(${k})`,
+  ];
+}
+
 const SCALE = [1, 0.78, 0.64, 0.56];
-const ALPHA = [1, 0.85, 0.5, 0.22];
 function place() {
-  const { mw, pw, prow, gap, spacing, narrow } = geo;
-  const maxVisible = narrow ? 1 : 3;
+  const { mw, H, W, narrow } = geo;
   items.forEach(({ mon, phone }, i) => {
     const off = circ(i);
     const a = Math.abs(off);
     const sgn = Math.sign(off);
-    const far = a > maxVisible;
-    const x = a === 0 ? 0 : sgn * spacing * (1 + (a - 1) * 0.62);
-    const s = SCALE[Math.min(a, 3)];
-    const rot = -sgn * Math.min(a, 3) * (narrow ? 10 : 15);
-    let op = far ? 0 : ALPHA[Math.min(a, 3)];
-    let mT = `translateX(-50%) translateX(${x}px) rotateY(${rot}deg) scale(${s})`;
-    let pT = mT;
+    let op, mT, pT;
 
-    if (mode === 'detail') {
-      if (a !== 0) {
-        op = 0;
-        mT = `translateX(-50%) translateX(${x * 1.5}px) rotateY(${rot}deg) scale(${s * 0.9})`;
-        pT = mT;
+    if (!narrow) {
+      if (mode === 'detail') {
+        // 펼침: 옆 디자인은 치우고 가운데 한 쌍만 조금 더 크게
+        const k = Math.max(1, Math.min(1.12, (H * 0.92) / (mw * 0.725), (W * 0.66) / mw));
+        op = a === 0 ? 1 : 0;
+        [mT, pT] = a === 0 ? pairT(0, k, 0) : pairT(sgn * W * 0.75, 0.7, -sgn * 14);
       } else {
-        // 펼침: 비어 있는 두 줄 공간을 한 쌍이 채우도록 키우고 세로 가운데로.
-        // 모니터는 살짝 왼쪽, 휴대폰은 모니터 오른쪽 아래에 겹쳐 세움.
-        const H = geo.mrow + gap + prow;
-        const W = root.clientWidth;
-        const mh = mw * 0.725;                                   // 모니터(받침 포함) 높이
-        const k = Math.max(1, Math.min(narrow ? 1.12 : 1.6, (H * 0.86) / mh, (W * (narrow ? 0.84 : 0.62)) / mw));
-        const dyMon = H * 0.5 + (k * mh) / 2 - geo.mrow;         // 모니터 세로 가운데
-        const shift = narrow ? -mw * k * 0.02 : -mw * k * 0.08;
-        mT = `translateX(-50%) translate(${shift}px, ${dyMon}px) scale(${k})`;
-        const kp = k * (narrow ? 0.92 : 1.02);
-        const monBottom = geo.mrow + dyMon;                       // 모니터 받침 바닥
-        const dyPhone = monBottom + mw * k * 0.02 - H;            // 휴대폰 바닥을 받침 높이에
-        const px = shift + mw * k * (narrow ? 0.36 : 0.42);
-        pT = `translateX(-50%) translate(${px}px, ${dyPhone}px) scale(${kp})`;
+        // 고르기: 가운데 크게, 바로 옆 디자인은 화면 가장자리에 반쯤 걸쳐 보이게
+        op = a === 0 ? 1 : a === 1 ? 0.55 : 0;
+        [mT, pT] = a === 0 ? pairT(0, 1, 0) : pairT(sgn * W * (a === 1 ? 0.52 : 0.9), a === 1 ? 0.72 : 0.6, -sgn * 14);
+      }
+    } else {
+      const { pw, prow, gap } = geo;
+      const x = a === 0 ? 0 : sgn * W * (0.7 + (a - 1) * 0.5);   // 바로 옆 디자인이 가장자리에 걸쳐 보이게
+      const s = SCALE[Math.min(a, 3)];
+      const rot = -sgn * Math.min(a, 3) * 10;
+      op = a === 0 ? 1 : a === 1 ? 0.5 : 0;
+      mT = `translateX(-50%) translateX(${x}px) rotateY(${rot}deg) scale(${s})`;
+      pT = mT;
+      if (mode === 'detail') {
+        if (a !== 0) {
+          op = 0;
+          mT = `translateX(-50%) translateX(${x * 1.5}px) rotateY(${rot}deg) scale(${s * 0.9})`;
+          pT = mT;
+        } else {
+          // 펼침: 비어 있는 두 줄 공간을 한 쌍이 채우도록 키우고 세로 가운데로 (휴대폰은 모니터 오른쪽 아래에 겹침)
+          const HH = geo.mrow + gap + prow;
+          const mh = mw * 0.725;
+          const k = Math.max(1, Math.min(1.12, (HH * 0.86) / mh, (W * 0.84) / mw));
+          const dyMon = HH * 0.5 + (k * mh) / 2 - geo.mrow;
+          const shift = -mw * k * 0.02;
+          mT = `translateX(-50%) translate(${shift}px, ${dyMon}px) scale(${k})`;
+          const dyPhone = geo.mrow + dyMon + mw * k * 0.02 - HH;
+          const kp = Math.min(k * 0.92, (mw * k * 0.36) / pw);
+          pT = `translateX(-50%) translate(${shift + mw * k * 0.36}px, ${dyPhone}px) scale(${kp})`;
+        }
       }
     }
     for (const [el, t] of [[mon, mT], [phone, pT]]) {
