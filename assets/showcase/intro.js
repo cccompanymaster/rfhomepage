@@ -77,7 +77,7 @@ function measure() {
   const stage = $('.sc-stage');
   const H = stage.clientHeight;
   const W = root.clientWidth;
-  const narrow = W < 720;
+  const narrow = W < 720 || W < root.clientHeight * 0.95;   // 휴대폰·세로로 긴 화면(태블릿 세로)은 위아래 두 줄이 더 크게 보임
   root.dataset.layout = narrow ? 'rows' : 'pair';
   if (!narrow) {
     // 모니터(받침 포함) 높이 = 폭 × 0.725 — 무대 높이의 86%, 화면 폭의 58%까지
@@ -128,13 +128,21 @@ function place() {
         op = a === 0 ? 1 : 0;
         [mT, pT] = a === 0 ? pairT(0, k, 0) : pairT(sgn * W * 0.75, 0.7, -sgn * 14);
       } else {
-        // 고르기: 가운데 크게, 바로 옆 디자인은 화면 가장자리에 반쯤 걸쳐 보이게
+        // 고르기: 가운데 크게, 바로 옆 디자인은 화면 가장자리에 반쯤 걸쳐 보이게.
+        // 옆 쌍이 가운데 쌍을 덮지 않도록 기기 크기로 거리를 잡음 (휴대폰 줄이 모니터 줄보다 위에 그려지므로
+        // 왼쪽 옆 쌍의 휴대폰 오른쪽 끝 ≤ 가운데 모니터 왼쪽 끝, 오른쪽 옆 쌍의 모니터 왼쪽 끝 ≥ 가운데 휴대폰 오른쪽 끝)
+        const s = a === 1 ? 0.72 : 0.6;
+        const gap = 32;
+        const dx = sgn < 0
+          ? Math.max(W * 0.52, mw * (0.58 + 0.47 * s) + gap)
+          : Math.max(W * 0.52, mw * (0.47 + 0.58 * s) + gap);
         op = a === 0 ? 1 : a === 1 ? 0.55 : 0;
-        [mT, pT] = a === 0 ? pairT(0, 1, 0) : pairT(sgn * W * (a === 1 ? 0.52 : 0.9), a === 1 ? 0.72 : 0.6, -sgn * 14);
+        [mT, pT] = a === 0 ? pairT(0, 1, 0) : pairT(sgn * (a === 1 ? dx : dx + W * 0.4), s, -sgn * 14);
       }
     } else {
       const { pw, prow, gap } = geo;
-      const x = a === 0 ? 0 : sgn * W * (0.7 + (a - 1) * 0.5);   // 바로 옆 디자인이 가장자리에 걸쳐 보이게
+      // 바로 옆 디자인이 화면 폭의 12%쯤 가장자리에 걸쳐 보이게 (같은 줄끼리는 가운데가 위에 그려져 겹쳐도 가려짐)
+      const x = a === 0 ? 0 : sgn * (W * 0.38 + mw * 0.39 + (a - 1) * W * 0.5);
       const s = SCALE[Math.min(a, 3)];
       const rot = -sgn * Math.min(a, 3) * 10;
       op = a === 0 ? 1 : a === 1 ? 0.5 : 0;
