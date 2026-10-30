@@ -18,6 +18,15 @@
 | 스마트스토어와 홈페이지 차이 | 추정 | comparison | **published 10-09** | /columns/smartstore-vs-homepage |
 | 홈페이지 7일 만에 만들 수 있나 | 추정 · '제작 기간' 칼럼은 일반론, NOAH 일정 근거 페이지 없음 | question | **published 10-09** | /columns/homepage-in-7-days |
 | 송도·연수구 홈페이지 제작 | 추정 · 사업장 소재지 | question | **보류** — '인천 홈페이지 제작' 칼럼과 같은 질문. 실제 송도 고객 사례가 생기면 사례 중심으로 | |
+| ChatGPT·AI 검색에 가게가 나오게 하려면 | 추정 · AI 인용 0/8(10-23 측정)·옵션 개편(빙·AI 강조) | question | **published 10-30** | /columns/ai-search-visibility |
+| 빙 웹마스터 도구 등록 방법 | 추정 · 무료 검색 등록 옵션에 빙 추가, 전용 글 없음 | question | **published 10-30** | /columns/bing-webmaster |
+| 홈페이지 통신판매업 신고 (호스트서버 소재지) | 사장님 실제 질문(10-28) · 결제 받는 고객 공통 질문 | question | **published 10-30** | /columns/mail-order-registration |
+| 카카오톡 공유 미리보기가 안 바뀔 때 | NOAH 실제 겪은 문제(10-20 OG 교체) | question | **published 10-30** | /columns/kakao-share-preview |
+| www 붙이면 홈페이지가 안 열릴 때 | NOAH 실측(www 522, 10-11·10-23) | question | **published 10-30** | /columns/www-not-working |
+| 홈페이지 예약 기능 직접 vs 네이버 예약 | 옵션 개편(예약 캘린더 삭제) 뒤 대안 안내 | comparison | **published 10-30** | /columns/booking-system |
+
+10-30 6편 검수 메모: AI 초안 → 수치·제도는 원출처 대조(정부24·소비자24·일간NTN·SEC 10-K·Microsoft Bing 블로그·IndexNow·카카오 데브톡·Cloudflare 문서·네이버 리포트), 각 글 끝 '참고한 자료'에 링크.
+확인 못 한 것은 쓰지 않음: 등록면허세 금액·처리기간(지역마다 다름 → "구청 확인"), ChatGPT의 현재 검색 제공자(2023년 빙 발표 사실만), 네이버 예약 수수료(결제 붙이면 "확인 필요"). **사장님 최종 검수 필요.**
 
 ## B. 기존 칼럼 보강 — 첫 문단 직답 (AEO 최우선)
 

@@ -64,9 +64,15 @@
 - [인스타그램만 있으면 홈페이지는 없어도 되나요?](https://noahhomepage.co.kr/columns/instagram-vs-homepage): 역할 비교와 함께 쓰는 법
 - [스마트스토어가 있으면 홈페이지는 필요 없나요?](https://noahhomepage.co.kr/columns/smartstore-vs-homepage): 판매 채널과 브랜드 공간의 차이
 - [1인 사업자도 홈페이지가 필요한가요?](https://noahhomepage.co.kr/columns/solo-business-homepage): 판단 기준과 한 페이지 최소 구성
+- [ChatGPT·AI 검색에 우리 가게가 나오게 하려면](https://noahhomepage.co.kr/columns/ai-search-visibility): AI 크롤러 차단 확인, 색인, 직답 문장 등 5가지 (노출 보장 아님)
+- [빙 웹마스터 도구 등록 방법](https://noahhomepage.co.kr/columns/bing-webmaster): 서치콘솔 가져오기, 사이트맵, IndexNow
+- [홈페이지 통신판매업 신고](https://noahhomepage.co.kr/columns/mail-order-registration): 신고 대상·면제 기준, 호스트서버 소재지 쓰는 법
+- [카카오톡 공유 미리보기가 안 바뀔 때](https://noahhomepage.co.kr/columns/kakao-share-preview): 공유 디버거 캐시 초기화와 이미지 주소 바꾸기
+- [www 붙이면 홈페이지가 안 열릴 때](https://noahhomepage.co.kr/columns/www-not-working): DNS·인증서·301 리다이렉트 순서
+- [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 방법별·업종별 비교
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
 
-## 홈페이지 제작 칼럼 (105편)
+## 홈페이지 제작 칼럼 (111편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준

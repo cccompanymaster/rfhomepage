@@ -72,6 +72,10 @@ ANCHOR_TERMS = {
     '스타트업': 'startup-homepage', '검색 순위': 'ranking-problems', '방문자 분석': 'visitor-analysis',
     '네이버 검색 등록': 'naver-register', '상위노출': 'blog-ranking', '콘텐츠': 'content-strategy',
     '메인페이지': 'main-page-structure', '사진': 'photo-prepare', '서브페이지': 'essential-pages',
+    # 2026-10-30 추가 글
+    '빙 웹마스터': 'bing-webmaster', 'IndexNow': 'bing-webmaster', 'AI 검색': 'ai-search-visibility',
+    '통신판매업': 'mail-order-registration', '공유 미리보기': 'kakao-share-preview',
+    '리다이렉트': 'www-not-working', '네이버 예약': 'booking-system',
 }
 ANCHOR_TERMS = {k: v for k, v in ANCHOR_TERMS.items() if v}
 

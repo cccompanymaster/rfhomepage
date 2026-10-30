@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서 · NOAH 칼럼</title>
+    <meta name="description" content="주소 앞에 www를 붙이면 홈페이지가 안 열리거나 보안 경고가 뜰 때 원인과 해결 순서를 정리했습니다. 대표 주소 정하기, DNS, 인증서, 301 리다이렉트까지." />
+    <link rel="canonical" href="https://noahhomepage.co.kr/columns/www-not-working" />
+    <link rel="prev" href="https://noahhomepage.co.kr/columns/kakao-share-preview" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서" />
+    <meta property="og:description" content="주소 앞에 www를 붙이면 홈페이지가 안 열리거나 보안 경고가 뜰 때 원인과 해결 순서를 정리했습니다. 대표 주소 정하기, DNS, 인증서, 301 리다이렉트까지." />
+    <meta property="og:url" content="https://noahhomepage.co.kr/columns/www-not-working" />
+    <meta property="og:site_name" content="NOAH 노아홈페이지" />
+    <meta property="og:image" content="https://noahhomepage.co.kr/assets/images/og/www-not-working.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="article:published_time" content="2026-10-30" />
+    <meta property="article:modified_time" content="2026-10-30" />
+    <meta property="article:section" content="운영·유지보수" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서" />
+    <meta name="twitter:description" content="주소 앞에 www를 붙이면 홈페이지가 안 열리거나 보안 경고가 뜰 때 원인과 해결 순서를 정리했습니다. 대표 주소 정하기, DNS, 인증서, 301 리다이렉트까지." />
+    <meta name="twitter:image" content="https://noahhomepage.co.kr/assets/images/og/www-not-working.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title="NOAH 칼럼" href="/columns/feed.xml" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=c6fd5aca" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=b1fa8595" />
+    <link rel="stylesheet" href="/assets/css/columns.css?v=4834d11e" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서", "description": "주소 앞에 www를 붙이면 홈페이지가 안 열리거나 보안 경고가 뜰 때 원인과 해결 순서를 정리했습니다. 대표 주소 정하기, DNS, 인증서, 301 리다이렉트까지.", "abstract": "www가 붙은 주소는 별개의 주소라서 따로 연결해 줘야 합니다. 도메인 설정에 www를 추가하고 호스팅에도 연결한 뒤, 한쪽 대표 주소로 301 리다이렉트하면 해결됩니다.", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "inLanguage": "ko-KR", "wordCount": 1354, "articleSection": "운영·유지보수", "keywords": "www 접속 안됨, 도메인, DNS, 리다이렉트", "image": "https://noahhomepage.co.kr/assets/images/og/www-not-working.png", "author": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "url": "https://noahhomepage.co.kr"}, "publisher": {"@type": "Organization", "@id": "https://noahhomepage.co.kr/#org", "name": "NOAH 노아홈페이지", "logo": {"@type": "ImageObject", "url": "https://noahhomepage.co.kr/favicon.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://noahhomepage.co.kr/columns/www-not-working"}, "isPartOf": {"@type": "Blog", "name": "NOAH 홈페이지 제작 칼럼", "@id": "https://noahhomepage.co.kr/columns/"}, "about": {"@type": "Thing", "name": "www 접속 안됨"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://noahhomepage.co.kr"}, {"@type": "ListItem", "position": 2, "name": "칼럼", "item": "https://noahhomepage.co.kr/columns/"}, {"@type": "ListItem", "position": 3, "name": "운영·유지보수", "item": "https://noahhomepage.co.kr/columns/topic/ops"}, {"@type": "ListItem", "position": 4, "name": "www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서", "item": "https://noahhomepage.co.kr/columns/www-not-working"}]}</script>
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="bg-blobs" aria-hidden="true"></div>
+    <header class="container-x pt-8 pb-2 flex items-center justify-between gap-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm shrink-0" style="color: var(--text-dim)">
+        <span style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#FF5A2B,#FFB300);display:inline-block"></span>
+        <span class="font-semibold" style="color: var(--text)">NOAH</span>
+        <span class="hidden sm:inline" style="color: var(--text-quiet)">· 칼럼</span>
+      </a>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/references" class="text-sm hidden sm:inline" style="color: var(--text-dim)">레퍼런스</a>
+        <a href="/columns/" class="text-sm hidden sm:inline" style="color: var(--text-dim)">칼럼 목록</a>
+        <a href="/contact" class="text-sm font-bold px-5 py-2.5 rounded-full" style="background:var(--accent);color:var(--on-accent)">무료 상담</a>
+      </div>
+    </header>
+
+    <main class="container-x py-10" style="max-width: 760px">
+      <nav class="text-xs mb-7" style="color: var(--text-quiet)" aria-label="위치">
+        <a href="/" class="hover:text-[color:var(--text)]">홈</a> ·
+        <a href="/columns/" class="hover:text-[color:var(--text)]">칼럼</a> ·
+        <a href="/columns/topic/ops" class="hover:text-[color:var(--text)]">운영·유지보수</a>
+      </nav>
+
+      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">운영·유지보수</p>
+      <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서</h1>
+      <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">주소 앞에 www를 붙이면 홈페이지가 안 열리거나 보안 경고가 뜰 때 원인과 해결 순서를 정리했습니다. 대표 주소 정하기, DNS, 인증서, 301 리다이렉트까지.</p>
+      <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
+        <time datetime="2026-10-30">2026.10.30</time>
+        <span>·</span><span>약 4분</span>
+        <span>·</span><a href="/about" class="underline-offset-2 hover:underline">NOAH 편집팀</a>
+      </div>
+
+      <section class="answer-box mt-8" aria-label="한 줄 답">
+        <p class="answer-q">주소 앞에 www를 붙이면 홈페이지가 안 열려요. 왜 그런가요?</p>
+        <p class="answer-a">www가 붙은 주소는 별개의 주소라서 따로 연결해 줘야 합니다. 도메인 설정에 www를 추가하고 호스팅에도 연결한 뒤, 한쪽 대표 주소로 301 리다이렉트하면 해결됩니다.</p>
+      </section>
+      <nav class="toc mt-10" aria-label="목차">
+        <p class="lb">이 글의 순서</p>
+        <ol>
+          <li><a href="#증상으로-원인-찾기">증상으로 원인 찾기</a></li>
+          <li><a href="#해결-순서">해결 순서</a></li>
+          <li><a href="#리다이렉트까지-해야-하는-이유">리다이렉트까지 해야 하는 이유</a></li>
+          <li><a href="#다-됐는지-확인하는-법">다 됐는지 확인하는 법</a></li>
+          <li><a href="#참고한-자료">참고한 자료</a></li>
+        </ol>
+      </nav>
+
+      <article class="prose mt-10">
+<p>example.co.kr과 www.example.co.kr은 사람 눈에는 같아 보여도 인터넷에서는 서로 다른 주소입니다. 한쪽만 연결해 두면 다른 쪽은 열리지 않습니다. 명함이나 전단에 www를 붙여 인쇄했거나 손님이 습관적으로 www를 치는 경우가 많으니, 두 주소 모두 열리게 하고 한쪽으로 모아 두는 것이 좋습니다.</p><h2 id="증상으로-원인-찾기">증상으로 원인 찾기</h2><table><thead><tr><th>증상</th><th>원인</th><th>해결</th></tr></thead><tbody><tr><td>사이트에 연결할 수 없음, 주소를 찾을 수 없음</td><td>도메인 설정(DNS)에 www 기록이 없음</td><td>DNS에 www 레코드 추가 (보통 CNAME)</td></tr><tr><td>보안 경고, 인증서 오류</td><td>SSL 인증서가 www 주소를 포함하지 않음</td><td>www까지 포함한 인증서 발급</td></tr><tr><td>522 같은 숫자 오류, 호스팅 기본 안내 페이지</td><td>DNS는 있는데 호스팅·CDN이 www 주소를 모름</td><td>호스팅에 www 도메인 연결 또는 리다이렉트 규칙 추가</td></tr></tbody></table><p>522는 클라우드플레어가 쓰는 오류 번호로, 원본 서버에서 응답을 받지 못했다는 뜻입니다. www 주소가 클라우드플레어를 거치도록 설정만 되고 실제 연결 대상이 없을 때 자주 보입니다.</p><h2 id="해결-순서">해결 순서</h2><ol><li><b>대표 주소 하나 정하기</b> — www 없는 쪽이든 있는 쪽이든 하나를 고릅니다. 요즘은 짧은 쪽(www 없음)을 많이 씁니다.</li><li><b>DNS에 www 추가</b> — <a href="/columns/domain-register">도메인</a> 관리 화면에서 www를 대표 주소나 <a href="/columns/web-hosting">호스팅</a> 주소로 연결합니다.</li><li><b>인증서 확인</b> — https://www. 주소로 열었을 때 자물쇠가 뜨는지 봅니다.</li><li><b>301 리다이렉트</b> — 대표가 아닌 주소로 들어오면 대표 주소로 영구 이동시킵니다. 호스팅 관리 화면이나 CDN의 리다이렉트 규칙에서 설정합니다.</li><li><b>http도 함께</b> — http:// 로 들어온 요청도 https:// 대표 주소로 301 이동시킵니다.</li><li><b><a href="/columns/sitemap-submit">사이트맵</a>·canonical 맞추기</b> — 사이트맵과 각 페이지의 canonical 주소를 대표 주소로 통일합니다.</li></ol><h2 id="리다이렉트까지-해야-하는-이유">리다이렉트까지 해야 하는 이유</h2><p>두 주소가 같은 내용을 따로 보여 주면 검색엔진은 같은 페이지가 두 개 있다고 보고 평가를 나눠 버릴 수 있습니다. 301 리다이렉트는 이 주소가 저 주소로 옮겼다는 표시라서 평가가 대표 주소 한곳에 모입니다.</p><h2 id="다-됐는지-확인하는-법">다 됐는지 확인하는 법</h2><p>브라우저 주소창에 아래 네 가지를 차례로 넣어 보세요. 모두 같은 대표 주소(https)로 도착하면 끝입니다.</p><ul><li>http://example.co.kr</li><li>http://www.example.co.kr</li><li>https://example.co.kr</li><li>https://www.example.co.kr</li></ul><p>노아홈페이지도 2026년 10월 자체 측정에서 www 주소가 522 오류를 내고 http가 https로 넘어가지 않는 것을 발견해, 이 순서대로 정리하고 있습니다. 도메인을 직접 관리하기 어렵다면 제작 업체에 위 네 주소가 모두 대표 주소로 가는지 확인을 요청하세요.</p><h2 id="참고한-자료">참고한 자료</h2><ul class="refs"><li><a href="https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-522/" rel="noopener" target="_blank">Cloudflare 문서 — Error 522</a></li></ul>
+      </article>
+
+      <div class="flex gap-2 flex-wrap mt-10"><span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#도메인</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#DNS</span> <span class="text-xs px-3 py-1.5 rounded-full" style="border:1px solid var(--line); color:var(--text-quiet)">#리다이렉트</span></div>
+
+      <section class="cta-box mt-14">
+        <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
+        <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
+          21개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
+          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+        </p>
+        <div class="flex gap-2.5 mt-6 flex-wrap">
+          <a href="/references" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:var(--on-accent)">레퍼런스 보기</a>
+          <a href="/contact" class="px-6 py-3 rounded-full font-bold text-sm" style="border:1px solid var(--line); color:var(--text)">무료 상담</a>
+        </div>
+      </section>
+
+      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
+        <a href="/columns/kakao-share-preview" rel="prev">
+          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">카카오톡 공유 미리보기가 안 바뀔 때 — 이미지·제목 고치는 순서</p>
+        </a>
+      </nav>
+
+      <section class="mt-14">
+        <h2 class="disp text-lg mb-4">함께 읽으면 좋은 글</h2>
+        <div class="rel grid sm:grid-cols-2 gap-3">
+        <a href="/columns/maintenance-scope">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 유지보수 범위, 어디까지가 유지보수일까</p>
+        </a>
+        <a href="/columns/backup-guide">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 백업 방법, 종류와 주기를 한 번에 정리</p>
+        </a>
+        <a href="/columns/security-check">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">운영·유지보수</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 보안 점검, 사장님이 직접 확인하는 기본기</p>
+        </a>
+        <a href="/columns/font-choice">
+          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">디자인·기획</span>
+          <p class="text-sm font-bold mt-1.5 leading-6">홈페이지 폰트 선택, 가독성과 라이선스가 먼저입니다</p>
+        </a>
+        </div>
+      </section>
+
+      <div class="mt-12 text-center">
+        <a href="/columns/topic/ops" class="hub-pill">운영·유지보수 글 전체 보기 →</a>
+      </div>
+    </main>
+    <footer class="container-x py-12 mt-16 text-xs" style="border-top: 1px solid var(--line); color: var(--text-quiet)">
+      
+      <div class="flex gap-5 justify-center flex-wrap mb-4">
+        <a href="/" class="hover:text-[color:var(--text)]">홈</a>
+        <a href="/references" class="hover:text-[color:var(--text)]">레퍼런스</a>
+        <a href="/columns/" class="hover:text-[color:var(--text)]">칼럼</a>
+        <a href="/pricing" class="hover:text-[color:var(--text)]">가격</a>
+        <a href="/contact" class="hover:text-[color:var(--text)]">상담 신청</a>
+      </div>
+      <p class="text-center">NOAH · 노아홈페이지 — 씨씨컴퍼니(CC Company) · 대표: 채희준 · 사업자등록번호: 275-05-01613</p>
+      <p class="mt-1 text-center">본 칼럼은 일반적인 정보 제공을 목적으로 하며, 법률·세무 등 전문 자문을 대체하지 않습니다.</p>
+    </footer>
+  </body>
+</html>

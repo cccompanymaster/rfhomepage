@@ -644,6 +644,42 @@
       "kw": "1인 사업자 홈페이지",
       "slug": "solo-business-homepage",
       "cluster": "guide"
+    },
+    {
+      "n": 106,
+      "kw": "빙 웹마스터 도구 등록",
+      "slug": "bing-webmaster",
+      "cluster": "seo"
+    },
+    {
+      "n": 107,
+      "kw": "AI 검색 노출",
+      "slug": "ai-search-visibility",
+      "cluster": "seo"
+    },
+    {
+      "n": 108,
+      "kw": "통신판매업 신고 홈페이지",
+      "slug": "mail-order-registration",
+      "cluster": "guide"
+    },
+    {
+      "n": 109,
+      "kw": "카카오톡 미리보기 이미지 변경",
+      "slug": "kakao-share-preview",
+      "cluster": "ops"
+    },
+    {
+      "n": 110,
+      "kw": "www 접속 안됨",
+      "slug": "www-not-working",
+      "cluster": "ops"
+    },
+    {
+      "n": 111,
+      "kw": "홈페이지 예약 기능",
+      "slug": "booking-system",
+      "cluster": "compare"
     }
   ]
 }
