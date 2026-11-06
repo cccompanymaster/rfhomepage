@@ -14,13 +14,15 @@ NICEPAY_API_BASE=http://127.0.0.1:8788/sandbox
 NICEPAY_TIMEOUT_MS=1500
 NICEPAY_WEBHOOK_IPS=
 GAS_URL=http://127.0.0.1:8788/gas
+RECORD_RETRY_AFTER_MS=2000
+ORDER_LIMIT_OFF=1
 ```
 
 ## 실행
 
 ```bash
 node tools/payment-test/mock-nicepay.mjs &               # 가짜 나이스페이 :8788
-npx wrangler@4 dev --port 8787 --ip 127.0.0.1 &          # 사이트 + 결제 서버 :8787
+npx wrangler@4 dev --port 8787 --ip 127.0.0.1 --test-scheduled &   # 사이트 + 결제 서버 :8787 (크론 테스트 포함)
 node tools/payment-test/run.mjs                          # API 테스트
 python3 tools/payment-test/browser.py                    # 브라우저 테스트 (Playwright)
 ```
@@ -36,3 +38,8 @@ NICEPAY_API_BASE=https://sandbox-api.nicepay.co.kr
 ```
 
 `.dev.vars`의 `NICEPAY_TIMEOUT_MS`·`NICEPAY_WEBHOOK_IPS` 줄은 지우면 `wrangler.toml` 기본값(30초·나이스페이 IP)을 씁니다.
+
+## 운영 주소에서 샌드박스 테스트
+
+샌드박스 키일 때 운영 주소(noahhomepage.co.kr)에서는 손님에게 테스트 결제창이 열리지 않도록 결제가 꺼져(주문 접수) 보입니다.
+테스트하는 사람만 `https://noahhomepage.co.kr/checkout?paytest=1` 로 들어가면 "테스트 결제 모드" 표시와 함께 샌드박스 결제창이 열립니다.

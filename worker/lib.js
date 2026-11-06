@@ -20,7 +20,17 @@ export function config(env) {
     timeoutMs: Number(env.NICEPAY_TIMEOUT_MS) > 0 ? Number(env.NICEPAY_TIMEOUT_MS) : 30000,
     gasUrl: String(env.GAS_URL || '').trim(),
     webhookIps: String(env.NICEPAY_WEBHOOK_IPS || '').split(',').map((s) => s.trim()).filter(Boolean),
+    retryAfterMs: Number(env.RECORD_RETRY_AFTER_MS) > 0 ? Number(env.RECORD_RETRY_AFTER_MS) : 120000,
   };
+}
+
+// 운영 주소에서 샌드박스 키로 결제창이 열리면 손님이 "결제 완료"를 보고도 실제로는 결제되지 않는다.
+// 그래서 샌드박스 키일 때 운영 주소에서는 테스트 표시(?paytest=1)가 있는 요청만 결제를 켠다.
+const PROD_HOSTS = ['noahhomepage.co.kr', 'www.noahhomepage.co.kr'];
+export function paymentMode(c, url, testFlag) {
+  if (!c.live) return 'demo';
+  if (c.sandbox && PROD_HOSTS.includes(url.hostname) && !testFlag) return 'demo';
+  return 'live';
 }
 
 /* ── 응답 ── */

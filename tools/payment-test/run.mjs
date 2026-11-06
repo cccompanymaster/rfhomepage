@@ -3,6 +3,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import http from 'node:http';
 
 const W = process.env.WORKER || 'http://127.0.0.1:8787';
 const M = 'http://127.0.0.1:8788';
@@ -63,6 +64,18 @@ for (const [p, code] of [['/', 200], ['/checkout', 200], ['/checkout/complete', 
 const cfg = await (await fetch(W + '/api/config')).json();
 check('결제 키 설정됨 → /api/config live', cfg.mode === 'live', JSON.stringify(cfg));
 
+// 운영 주소 + 샌드박스 키 → 테스트 표시 없으면 결제 꺼짐 (Host 헤더로 운영 주소 흉내)
+function hostGet(path, host) {
+  return new Promise((ok) => http.get({ host: '127.0.0.1', port: 8787, path, headers: { Host: host } }, (r) => { let b = ''; r.on('data', (c) => (b += c)); r.on('end', () => ok(JSON.parse(b))); }));
+}
+function hostPost(path, host, body) {
+  return new Promise((ok) => { const q = http.request({ host: '127.0.0.1', port: 8787, path, method: 'POST', headers: { Host: host, 'Content-Type': 'application/json' } }, (r) => { let b = ''; r.on('data', (c) => (b += c)); r.on('end', () => ok(JSON.parse(b))); }); q.end(JSON.stringify(body)); });
+}
+check('운영 주소 + 샌드박스 키 → demo (손님에게 테스트 결제창 안 열림)', (await hostGet('/api/config', 'noahhomepage.co.kr')).mode === 'demo');
+check('운영 주소 + 샌드박스 + ?test=1 → live(sandbox 표시)', JSON.stringify(await hostGet('/api/config?test=1', 'noahhomepage.co.kr')) === '{"mode":"live","sandbox":true}');
+check('운영 주소 + 샌드박스 주문 → demo 응답(KV 저장 안 함)', (await hostPost('/api/order', 'www.noahhomepage.co.kr', { items: [], ...buyer })).mode === 'demo');
+check('운영 주소 + 샌드박스 주문 + test → live', (await hostPost('/api/order', 'noahhomepage.co.kr', { items: [], ...buyer, test: true })).mode === 'live');
+
 /* ── 2. 금액은 서버가 단가표로 계산 ── */
 for (const [label, items] of [
   ['기본 패키지만', []],
@@ -109,11 +122,12 @@ const r1 = await ret(authFields(o, tid));
 check('승인 성공 → 303 /checkout/complete', r1.status === 303 && r1.loc === `/checkout/complete?o=${o.orderId}`, `${r1.status} ${r1.loc}`);
 check('승인 API 1번 호출', (await state()).approvals[tid] === 1);
 const st = await status(o.orderId);
-check('상태 조회 paid·금액', st.status === 'paid' && st.amount === o.amount, JSON.stringify(st));
+check('상태 조회 paid·금액·sandbox 표시', st.status === 'paid' && st.amount === o.amount && st.sandbox === true, JSON.stringify(st));
 check('상태 조회에 개인정보·tid 없음', !/테스트|010-1234|test@example|NICEUNTT/.test(JSON.stringify(st)) && !('tid' in st));
 const rec = await waitFor(async () => (await state()).gas.slice(g0).find((x) => x.orderId === o.orderId));
 check('Apps Script 기록 도착 (type consult·kind order·status paid·tid)', rec && rec.type === 'consult' && rec.kind === 'order' && rec.status === 'paid' && rec.tid === tid && rec.sendBrochure === false);
 check('시트에 남는 칸(업종·메시지)에 결제 완료·tid·금액', rec && rec.industry.includes('카드결제 완료') && rec.message.includes(tid) && rec.message.includes('₩'), rec && rec.industry);
+check('시트 메시지에 진위 확인 링크', rec && rec.message.includes(`/checkout/complete?o=${o.orderId}`));
 check('샌드박스 주문은 [샌드박스 테스트] 표시', rec && rec.industry.startsWith('[샌드박스 테스트]'));
 const k1 = await waitFor(async () => { const v = kv(o.orderId); return v && v.recorded ? v : null; });
 check('기록 성공 후 KV에서 이름·연락처·이메일 삭제', k1 && !k1.buyer && k1.status === 'paid' && k1.tid === tid && k1.amount === o.amount, k1 ? Object.keys(k1).join(',') : 'kv 없음');
@@ -160,6 +174,13 @@ check('망취소 호출 (orderId·ediDate·signData 서명 맞음)', nc && nc.ok
 check('타임아웃 주문은 paid 아님(check)', (await status(os.orderId)).status === 'check');
 const recS = await waitFor(async () => (await state()).gas.slice(gs).find((x) => x.orderId === os.orderId));
 check('사장님께 "결제 확인 필요" 기록', recS && recS.industry.includes('결제 확인 필요') && recS.message.includes('망취소'));
+
+// 망취소까지 실패 → "다시 결제" 화면이 아니라 완료 페이지(확인 필요)로, 망취소 한 번 더
+const on = (await order([])).body; const tn = tidOf('SLOWNC'); await register(tn, on);
+const rn = await ret(authFields(on, tn));
+check('승인 지연 + 망취소 실패 → 완료 페이지(check), 재결제 안내 안 함', rn.loc === `/checkout/complete?o=${on.orderId}` && (await status(on.orderId)).status === 'check', rn.loc);
+const nc2 = await waitFor(async () => (await state()).netcancels.filter((x) => x.orderId === on.orderId).length >= 2, 10000);
+check('망취소 재시도', Boolean(nc2));
 
 /* ── 7. 승인 응답 서명 틀림 → 완료 처리 안 함 ── */
 const ob = (await order([])).body; const tb = tidOf('BADSIG'); await register(tb, ob);
@@ -215,6 +236,13 @@ const kf = kv(of.orderId);
 check('시트 기록 실패해도 결제 완료 페이지', rf.loc.startsWith('/checkout/complete') && (await status(of.orderId)).status === 'paid');
 check('시트 기록 실패 → KV에 주문자 정보 유지(recorded=false)', kf && kf.buyer && kf.recorded === false);
 await fetch(M + '/__gasfail?on=0');
+// 크론이 기록 안 된 결제를 다시 보냄
+const gc = (await state()).gas.length;
+await sleep(2500);
+const sr = await fetch(W + '/cdn-cgi/handler/scheduled?cron=*/15+*+*+*+*');
+const recC = await waitFor(async () => (await state()).gas.slice(gc).find((x) => x.orderId === of.orderId), 15000);
+const kc = await waitFor(async () => { const v = kv(of.orderId); return v && v.recorded ? v : null; }, 15000);
+check('크론 재시도 → 시트 기록 + KV 개인정보 삭제', recC && kc && !kc.buyer, `scheduled ${sr.status}`);
 
 /* ── 결과 ── */
 console.log(results.join('\n'));

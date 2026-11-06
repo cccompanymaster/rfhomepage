@@ -1,6 +1,6 @@
 // 가짜 나이스페이 API + 가짜 Apps Script — 로컬 결제 흐름 테스트용 (실제 결제·네트워크 없음)
 //   node tools/payment-test/mock-nicepay.mjs   →  http://127.0.0.1:8788
-// tid 접두어로 동작을 고른다: OK…(정상) SLOW…(응답 지연) BADSIG…(응답 서명 틀림) DECLINE…(승인 거절) DUPE…(두 번째 승인부터 '이미 승인')
+// tid 접두어로 동작을 고른다: OK…(정상) SLOW…(응답 지연) SLOWNC…(지연 + 망취소 실패) BADSIG…(응답 서명 틀림) DECLINE…(승인 거절) DUPE…(두 번째 승인부터 '이미 승인')
 import http from 'node:http';
 import { createHash } from 'node:crypto';
 
@@ -51,6 +51,8 @@ const server = http.createServer(async (req, res) => {
     const d = JSON.parse(raw);
     const okSig = d.signData === sha(d.orderId + d.ediDate + SECRET);
     S.netcancels.push({ ...d, okSig });
+    const reg = Object.values(S.registered).find((r) => r.orderId === d.orderId);
+    if (reg && reg.tid.startsWith('SLOWNC')) return send(res, 200, { resultCode: '2015', resultMsg: '망취소 불가', orderId: d.orderId });
     return send(res, 200, { resultCode: okSig ? '0000' : 'A123', resultMsg: okSig ? '망취소 성공' : '서명 오류', orderId: d.orderId });
   }
   const m = p.match(/^\/sandbox\/v1\/payments\/([^/]+)$/);

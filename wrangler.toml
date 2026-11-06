@@ -25,6 +25,20 @@ NICEPAY_TIMEOUT_MS = "30000"                             # 승인 응답 대기 
 NICEPAY_WEBHOOK_IPS = "121.133.126.86,121.133.126.87"    # 웹훅 발신 IP (나이스페이 매뉴얼 방화벽 정책). 비우면 IP 확인 안 함
 GAS_URL = "https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec"
 
+# Workers 로그 보관 (결제 승인·기록 실패를 대시보드에서 확인). 로그에는 주문번호·결과코드만 남기고 개인정보·키는 남기지 않는다.
+[observability]
+enabled = true
+
+# 15분마다: Apps Script 기록에 실패한 결제(paid·확인 필요)를 다시 보낸다
+[triggers]
+crons = ["*/15 * * * *"]
+
+# 같은 IP에서 1분에 주문 10건까지 (KV 쓰기 한도 보호)
+[[ratelimits]]
+name = "ORDER_LIMIT"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
+
 # 결제 대기 주문 저장소 (Cloudflare 대시보드 → Storage & Databases → KV 에서 만든 네임스페이스 id)
 [[kv_namespaces]]
 binding = "ORDERS"

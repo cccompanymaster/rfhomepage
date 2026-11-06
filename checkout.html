@@ -292,7 +292,9 @@
       // 결제창 레이어(iframe) 안에서 이 페이지가 열렸다면 전체 창으로 옮깁니다.
       if (window.top !== window.self) { try { window.top.location.href = location.href; } catch (_) {} }
 
-      let BASE = null, OPTIONS = [], GROUPS = {}, VAT_RATE = 0.1;
+      let BASE = null, OPTIONS = [], GROUPS = {}, VAT_RATE = 0.1, MODE = '';
+      // 샌드박스 테스트 표시: 운영 주소에서는 /checkout?paytest=1 로 들어온 사람만 테스트 결제창이 열립니다.
+      const PAYTEST = (() => { try { if (new URLSearchParams(location.search).get('paytest') === '1') sessionStorage.setItem('noah_paytest', '1'); return sessionStorage.getItem('noah_paytest') === '1'; } catch (_) { return false; } })();
       const $ = (s) => document.querySelector(s);
       const won = (n) => '₩' + n.toLocaleString('ko-KR');
       const plus = (n) => n ? '+' + won(n) : '무료';   // 옵션 가격 표시 (0원 = 무료 옵션)
@@ -374,7 +376,7 @@
           const d = JSON.parse(sessionStorage.getItem(STORE_KEY) || 'null');
           if (!d) return;
           ['name','phone','email','biz','memo','bizno'].forEach(k => { if (d[k]) $('#b-' + k).value = d[k]; });
-          const r = document.querySelector(`input[name=receipt][value="${d.receipt}"]`); if (r) r.checked = true;
+          if (['none', 'cash', 'tax'].includes(d.receipt)) document.querySelector(`input[name=receipt][value="${d.receipt}"]`).checked = true;
           (d.qty || []).forEach(([k, n]) => { const o = OPTIONS.find(x => x.key === k); const el = document.querySelector(`.item[data-k="${k}"]`); if (o && el && o.qty) { n = Math.min(o.maxQty, Math.max(1, n | 0)); qty.set(k, n); el.querySelector('.qn').textContent = n; el.querySelector('.pr').textContent = plus(o.price * n); } });
           (d.sel || []).forEach(k => { const el = document.querySelector(`.item[data-k="${k}"] input`); if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); } });
         } catch (_) {}
@@ -494,12 +496,13 @@
         try {
           const r = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ items: o.req, name: o.name, phone: o.phone, email: o.email, biz: o.biz, memo: o.memo,
-              receipt: o.receipt, bizno: o.bizno, reference: pick?.nameKo || '', website: $('#b-site').value }) });
+              receipt: o.receipt, bizno: o.bizno, reference: pick?.nameKo || '', website: $('#b-site').value, test: PAYTEST }) });
           res = await r.json().catch(() => null);   // 결제 서버가 없으면(JSON 아님) 주문 접수로
         } catch (_) { res = null; }
         btn.disabled = false; btn.textContent = '결제하기';
 
         if (res && res.ok === false) { showFail(res.message || FAIL_MSG.error, '주문을 접수하지 못했습니다'); return; }
+        if (!res && MODE === 'live') { showFail(FAIL_MSG.error); return; }      // 결제가 켜져 있는데 서버 응답 실패 — 주문 접수로 넘기지 않음
         if (!res || res.mode !== 'live') return demoOrder(o, pick);
         if (res.amount !== o.total) { showFail('화면의 금액과 결제 금액이 다릅니다. 새로고침한 뒤 다시 시도해 주세요.'); return; }
         await openPayment(res, o);
@@ -583,9 +586,14 @@
 
       /* ── 결제 서버 상태: 결제가 켜져 있으면 결제창 스크립트를 미리 불러오고, 꺼져 있으면 주문 접수 안내 ── */
       async function loadMode() {
-        let mode = 'demo';
-        try { mode = (await (await fetch('/api/config', { cache: 'no-store' })).json()).mode || 'demo'; } catch (_) {}
-        if (mode === 'live') { ensureSdk().catch(() => {}); return; }
+        let cfg = {};
+        try { cfg = await (await fetch('/api/config' + (PAYTEST ? '?test=1' : ''), { cache: 'no-store' })).json(); } catch (_) {}
+        MODE = cfg.mode === 'live' ? 'live' : 'demo';
+        if (MODE === 'live') {
+          ensureSdk().catch(() => {});
+          if (cfg.sandbox) { const n = $('#pay-note'); n.textContent = '테스트 결제 모드 — 나이스페이 샌드박스입니다. 실제로 청구되지 않습니다.'; n.style.color = '#D93025'; n.style.fontWeight = '700'; }
+          return;
+        }
         $('#pay-note').textContent = '지금은 온라인 결제 대신 주문을 먼저 접수합니다. 영업일 1일 안에 연락드려 결제를 도와드리며, 결제 전에는 비용이 발생하지 않습니다.';
       }
 
@@ -596,7 +604,7 @@
         const reason = p.get('reason') || 'error';
         const code = /^[A-Z0-9]{4}$/i.test(p.get('code') || '') ? p.get('code') : '';
         history.replaceState(null, '', location.pathname);
-        showFail((FAIL_MSG[reason] || FAIL_MSG.error) + (code ? ` (코드 ${code})` : ''));
+        showFail((Object.prototype.hasOwnProperty.call(FAIL_MSG, reason) ? FAIL_MSG[reason] : FAIL_MSG.error) + (code ? ` (코드 ${code})` : ''));
       }
 
       /* ── 시작: 단가표 → 옵션 렌더 → 입력 복원 → 딥링크 ── */
@@ -614,6 +622,7 @@
         restore();
         /* URL ?add= 딥링크 (옵션·가격 페이지에서 진입) */
         new URLSearchParams(location.search).getAll('add').flatMap(v => v.split(',')).forEach(k => {
+          if (!OPTIONS.some(o => o.key === k)) return;                     // 단가표에 있는 키만
           const el = document.querySelector(`.item[data-k="${k}"] input`);
           if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); }
         });

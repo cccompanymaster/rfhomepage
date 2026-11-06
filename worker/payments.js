@@ -1,22 +1,30 @@
-// 결제 흐름: 주문 생성 → (결제창) → returnUrl 검증·승인 → 완료 페이지 / 웹훅 동기화
+// 결제 흐름: 주문 생성 → (결제창) → returnUrl 검증·승인 → 완료 페이지 / 웹훅 동기화 / 기록 재시도(크론)
 import catalog from '../assets/data/catalog.json';
-import { ORDER_ID_RE, TID_RE, PENDING_TTL, KEEP_TTL, config, json, text, redirect, won, newOrderId, priceItems, validateBuyer, readJson } from './lib.js';
+import { ORDER_ID_RE, TID_RE, PENDING_TTL, KEEP_TTL, config, paymentMode, json, text, redirect, won, newOrderId, priceItems, validateBuyer, readJson } from './lib.js';
 import { approve, getPayment, netCancel, checkAuthSignature, checkResultSignature, isVerifiedPaid, UnknownOutcome } from './nicepay.js';
 
 const key = (orderId) => `order:${orderId}`;
 const log = (ev, data) => console.log(JSON.stringify({ ev, ...data }));   // 개인정보·키는 넣지 않는다
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function getOrder(env, orderId) {
   if (!env.ORDERS || !ORDER_ID_RE.test(orderId)) return null;
   return env.ORDERS.get(key(orderId), 'json');
 }
+// metadata는 크론이 목록만 보고 "기록 안 된 주문"을 찾는 데 쓴다 (값을 읽지 않아도 됨)
 function putOrder(env, order, ttl) {
-  return env.ORDERS.put(key(order.orderId), JSON.stringify(order), { expirationTtl: ttl });
+  return env.ORDERS.put(key(order.orderId), JSON.stringify(order), {
+    expirationTtl: ttl,
+    metadata: { s: order.status, r: order.recorded ? 1 : 0, m: Date.parse(order.markedAt || order.createdAt) || 0 },
+  });
 }
 
 /* ════════ GET /api/config — 결제 켜짐 여부만 (키 값은 내보내지 않음) ════════ */
-export function getConfig(env) {
-  return json({ mode: config(env).live ? 'live' : 'demo' });
+export function getConfig(request, env) {
+  const c = config(env);
+  const url = new URL(request.url);
+  const mode = paymentMode(c, url, url.searchParams.get('test') === '1');
+  return json({ mode, sandbox: mode === 'live' && c.sandbox });
 }
 
 /* ════════ POST /api/order ════════ */
@@ -36,7 +44,13 @@ export async function createOrder(request, env) {
   const v = validateBuyer(body);
   if (v.error) return json({ ok: false, error: v.error, message: v.message }, 400);
 
-  if (!c.live) return json({ ok: true, mode: 'demo', amount: priced.total });
+  if (paymentMode(c, url, body.test === true) !== 'live') return json({ ok: true, mode: 'demo', amount: priced.total });
+
+  // 같은 IP의 연속 주문 제한 (KV 쓰기 한도 보호). 바인딩이 없으면 건너뜀.
+  if (env.ORDER_LIMIT && env.ORDER_LIMIT_OFF !== '1') {
+    const { success } = await env.ORDER_LIMIT.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+    if (!success) return json({ ok: false, error: 'rate', message: '주문 요청이 너무 잦습니다. 1분 뒤 다시 시도해 주세요.' }, 429);
+  }
 
   const order = {
     v: 1,
@@ -50,6 +64,7 @@ export async function createOrder(request, env) {
     goodsName: priced.goodsName,
     buyer: v.buyer,
     sandbox: c.sandbox,
+    origin: url.origin,
     createdAt: new Date().toISOString(),
   };
   await putOrder(env, order, PENDING_TTL);
@@ -57,6 +72,7 @@ export async function createOrder(request, env) {
   return json({
     ok: true,
     mode: 'live',
+    sandbox: c.sandbox,
     orderId: order.orderId,
     amount: order.amount,
     goodsName: order.goodsName,
@@ -74,6 +90,7 @@ export async function orderStatus(env, orderId) {
     status: order.status,
     amount: order.amount,
     itemText: order.itemText,
+    sandbox: Boolean(order.sandbox),
     items: order.lines.map(({ key, name, qty, price }) => ({ key, name, qty, price })),
   });
 }
@@ -121,45 +138,68 @@ export async function handleReturn(request, env, ctx) {
     d = await approve(c, f.tid, order.amount);
   } catch (err) {
     if (!(err instanceof UnknownOutcome)) throw err;
-    // 승인 결과를 모름 → 망취소 (1시간 안에만 가능하므로 즉시)
-    const nc = await netCancel(c, order.orderId);
-    log('approve_unknown', { orderId: order.orderId, reason: err.message, netcancel: nc });
-    order.status = 'check';
-    order.tid = f.tid;
-    order.note = `승인 응답 없음(${err.message}) → 망취소 요청 결과: ${nc === '0000' ? '성공' : nc}`;
-    order.markedAt = new Date().toISOString();
-    await putOrder(env, order, KEEP_TTL);
-    ctx.waitUntil(recordToSheet(env, c, order, request));
-    return fail('timeout');
+    return approveUnknown(env, c, ctx, order, f.tid, err.message);
   }
 
-  if (await isVerifiedPaid(c, d, order, f.tid)) return markPaid(env, c, ctx, order, d, request);
-
-  if (d && d.resultCode === '0000') {
-    // 성공 코드인데 금액·서명이 맞지 않음 — 결제됐을 수 있으므로 사장님 확인 필요
-    log('approve_mismatch', { orderId: order.orderId });
-    order.status = 'check';
-    order.tid = f.tid;
-    order.note = '승인 응답의 금액 또는 서명이 주문과 다름 — 나이스페이 관리자에서 확인 필요';
-    order.markedAt = new Date().toISOString();
-    await putOrder(env, order, KEEP_TTL);
-    ctx.waitUntil(recordToSheet(env, c, order, request));
-    return done(order.orderId);
-  }
-
-  // 승인 실패 — 같은 tid가 먼저 승인된 경우(동시 재전송)만 조회로 확인해 완료 처리
-  log('approve_failed', { orderId: order.orderId, code: d && d.resultCode });
+  // ── 여기부터는 승인 API가 응답한 뒤. 어떤 오류가 나도 "다시 결제" 화면으로 보내지 않는다. ──
   try {
-    const q = await getPayment(c, f.tid);
-    if (await isVerifiedPaid(c, q, order, f.tid)) {
+    if (await isVerifiedPaid(c, d, order, f.tid)) return await markPaid(env, c, ctx, order, d);
+
+    if (d && d.resultCode === '0000') {
+      // 성공 코드인데 금액·서명이 맞지 않음 — 결제됐을 수 있으므로 사장님 확인 필요
+      log('approve_mismatch', { orderId: order.orderId });
+      return await markCheck(env, c, ctx, order, f.tid, '승인 응답의 금액 또는 서명이 주문과 다름 — 나이스페이 관리자에서 확인 필요');
+    }
+
+    // 승인 실패 — 같은 tid가 먼저 승인된 경우(동시 재전송)만 조회로 확인해 완료 처리
+    log('approve_failed', { orderId: order.orderId, code: d && d.resultCode });
+    let q = null;
+    try {
+      q = await getPayment(c, f.tid);
+    } catch {
+      /* 조회 실패 — 승인 실패로 안내 */
+    }
+    if (q && (await isVerifiedPaid(c, q, order, f.tid))) {
       const again = await getOrder(env, order.orderId);
       if (again && again.status !== 'pending') return done(order.orderId);
-      return markPaid(env, c, ctx, order, q, request);
+      return await markPaid(env, c, ctx, order, q);
     }
-  } catch {
-    /* 조회 실패 — 승인 실패로 안내 */
+    return fail('approve', d && d.resultCode);
+  } catch (err) {
+    // 승인 뒤 저장 등에서 오류 — 결제는 됐을 수 있다. 사장님께 바로 알리고 완료 페이지(확인 중 안내)로.
+    log('after_approve_error', { orderId: order.orderId, name: err && err.name });
+    order.status = 'check';
+    order.tid = f.tid;
+    order.note = `승인 응답 뒤 서버 오류(${(err && err.name) || 'error'}) — 승인 여부를 나이스페이 관리자에서 확인 필요`;
+    order.markedAt = new Date().toISOString();
+    await postSheet(c, sheetPayload(order)).catch(() => false);
+    return done(order.orderId);
   }
-  return fail('approve', d && d.resultCode);
+}
+
+// 승인 결과를 모름(타임아웃·네트워크) → 망취소. 망취소가 확인되지 않으면 손님을 "다시 결제" 화면으로 보내지 않는다.
+async function approveUnknown(env, c, ctx, order, tid, reason) {
+  const nc = await netCancel(c, order.orderId);
+  log('approve_unknown', { orderId: order.orderId, reason, netcancel: nc });
+  order.status = 'check';
+  order.tid = tid;
+  order.note = `승인 응답 없음(${reason}) → 망취소 요청 결과: ${nc === '0000' ? '성공 (청구되지 않음)' : '확인 안 됨 ' + nc}`;
+  order.markedAt = new Date().toISOString();
+  await putOrder(env, order, KEEP_TTL).catch(() => {});
+  ctx.waitUntil(
+    (async () => {
+      if (nc !== '0000') {
+        await sleep(5000);
+        const nc2 = await netCancel(c, order.orderId);              // 망취소는 1시간 안에만 가능 — 한 번 더
+        order.note += ` / 재시도: ${nc2 === '0000' ? '성공 (청구되지 않음)' : '실패 ' + nc2}`;
+        log('netcancel_retry', { orderId: order.orderId, netcancel: nc2 });
+      }
+      await recordToSheet(env, c, order);
+    })(),
+  );
+  return nc === '0000'
+    ? redirect('/checkout?pay=fail&reason=timeout')
+    : redirect(`/checkout/complete?o=${order.orderId}`);           // 완료 페이지가 "확인 필요" 안내
 }
 
 // 승인 확인된 주문을 paid로 저장 (이름·연락처는 시트 기록이 끝날 때까지만 보관)
@@ -176,28 +216,35 @@ async function savePaid(env, order, d) {
   await putOrder(env, order, KEEP_TTL);
   log('paid', { orderId: order.orderId, amount: order.amount });
 }
-async function markPaid(env, c, ctx, order, d, request) {
+async function markPaid(env, c, ctx, order, d) {
   await savePaid(env, order, d);
-  ctx.waitUntil(recordToSheet(env, c, order, request));
+  ctx.waitUntil(recordToSheet(env, c, order));
+  return redirect(`/checkout/complete?o=${order.orderId}`);
+}
+async function markCheck(env, c, ctx, order, tid, note) {
+  order.status = 'check';
+  order.tid = tid;
+  order.note = note;
+  order.markedAt = new Date().toISOString();
+  await putOrder(env, order, KEEP_TTL);
+  ctx.waitUntil(recordToSheet(env, c, order));
   return redirect(`/checkout/complete?o=${order.orderId}`);
 }
 
 /* ── Apps Script(handleConsult)로 기록 → 성공하면 KV에서 이름·연락처·이메일 삭제 ── */
 // handleConsult는 이름·연락처·이메일·업종·관심 디자인·메시지만 시트에 적으므로 상태·tid는 업종·메시지 글자에 넣는다.
-function sheetPayload(c, order, request) {
+// Apps Script 주소는 공개돼 있어 누구나 비슷한 메일을 보낼 수 있다 → 메시지에 진위 확인 링크를 넣는다.
+function sheetPayload(order) {
   const b = order.buyer || {};
   const tag = order.sandbox ? '[샌드박스 테스트] ' : '';
+  const paid = order.status === 'paid';
   const rc = { none: '필요 없음', cash: '현금영수증', tax: `세금계산서 (${b.bizno})` }[b.receipt] || '필요 없음';
-  const head =
-    order.status === 'paid'
-      ? `${tag}[NOAH 결제 완료] ${order.orderId}`
-      : `${tag}[NOAH 결제 확인 필요] ${order.orderId}`;
-  const pay =
-    order.status === 'paid'
-      ? `결제: ${[order.payMethod, order.cardName].filter(Boolean).join(' · ') || '카드·간편결제'}${order.approveNo ? ` · 승인번호 ${order.approveNo}` : ''} · tid ${order.tid}`
-      : `확인 필요: ${order.note || ''} · tid ${order.tid || '-'}\n나이스페이 가맹점 관리자에서 주문번호로 결제 여부를 확인해 주세요.`;
+  const site = order.origin || 'https://noahhomepage.co.kr';
+  const pay = paid
+    ? `결제: ${[order.payMethod, order.cardName].filter(Boolean).join(' · ') || '카드·간편결제'}${order.approveNo ? ` · 승인번호 ${order.approveNo}` : ''} · tid ${order.tid}`
+    : `확인 필요: ${order.note || ''} · tid ${order.tid || '-'}\n나이스페이 가맹점 관리자에서 주문번호로 결제 여부를 확인해 주세요.`;
   const message = [
-    head,
+    `${tag}[NOAH ${paid ? '결제 완료' : '결제 확인 필요'}] ${order.orderId}`,
     `주문 내역: ${order.itemText}`,
     `공급가액 ${won(order.supply)} + 부가세 ${won(order.vat)} = 총 ${won(order.amount)}`,
     pay,
@@ -206,6 +253,7 @@ function sheetPayload(c, order, request) {
     b.biz ? `상호: ${b.biz}` : null,
     `영수증: ${rc}`,
     b.memo ? `메모: ${b.memo}` : null,
+    `진위 확인: ${site}/checkout/complete?o=${order.orderId} (착수 전 이 링크나 나이스페이 관리자에서 결제 상태를 확인하세요)`,
   ]
     .filter(Boolean)
     .join('\n');
@@ -219,7 +267,7 @@ function sheetPayload(c, order, request) {
     name: b.name,
     phone: b.phone,
     email: b.email,
-    industry: `${tag}${order.status === 'paid' ? '카드결제 완료' : '결제 확인 필요'} · 총 ${won(order.amount)}`,
+    industry: `${tag}${paid ? '카드결제 완료' : '결제 확인 필요'} · 총 ${won(order.amount)}`,
     reference: b.reference || '',
     message,
     total: order.amount,
@@ -227,14 +275,15 @@ function sheetPayload(c, order, request) {
     bizno: b.bizno,
     timestamp: new Date().toISOString(),
     referrer: '나이스페이 결제 서버',
-    page: new URL('/checkout', request.url).href,
+    page: `${site}/checkout`,
   };
 }
 
+// 한 번만 시도(최대 12초). Apps Script는 같은 내용을 두 번 받으면 두 번 기록하므로 바로 재시도하지 않고, 실패분은 크론이 다시 보낸다.
 async function postSheet(c, payload) {
   if (!c.gasUrl) return false;
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 20000);
+  const timer = setTimeout(() => ctrl.abort(), 12000);
   try {
     const r = await fetch(c.gasUrl, {
       method: 'POST',
@@ -252,23 +301,39 @@ async function postSheet(c, payload) {
   }
 }
 
-async function recordToSheet(env, c, order, request) {
-  const payload = sheetPayload(c, order, request);
-  let ok = await postSheet(c, payload);
-  if (!ok) {
-    await new Promise((r) => setTimeout(r, 3000));
-    ok = await postSheet(c, payload);
-  }
+async function recordToSheet(env, c, order) {
+  if (!order.buyer || order.recorded) return;
+  const ok = await postSheet(c, sheetPayload(order));
   if (!ok) {
     log('sheet_failed', { orderId: order.orderId, status: order.status });
     return;
   }
-  // 최신 상태를 다시 읽어 덮어쓰기 (그 사이 웹훅이 상태를 바꿨을 수 있음)
-  const latest = (await getOrder(env, order.orderId)) || order;
-  latest.recorded = true;
-  delete latest.buyer;
-  await putOrder(env, latest, KEEP_TTL);
-  log('sheet_recorded', { orderId: order.orderId, status: latest.status });
+  // 손에 든 최신 상태로 저장 (KV를 다시 읽으면 오래된 값으로 되돌릴 수 있어 읽지 않음)
+  order.recorded = true;
+  delete order.buyer;
+  await putOrder(env, order, KEEP_TTL);
+  log('sheet_recorded', { orderId: order.orderId, status: order.status });
+}
+
+/* ════════ 크론: 시트 기록에 실패한 결제(paid·check)를 다시 보낸다 ════════ */
+export async function retryUnrecorded(env) {
+  const c = config(env);
+  if (!env.ORDERS || !c.gasUrl) return;
+  let cursor;
+  let tried = 0;
+  do {
+    const page = await env.ORDERS.list({ prefix: 'order:', cursor });
+    for (const k of page.keys) {
+      const m = k.metadata || {};
+      if (m.r !== 0 || (m.s !== 'paid' && m.s !== 'check') || Date.now() - (m.m || 0) < c.retryAfterMs) continue;
+      const order = await env.ORDERS.get(k.name, 'json');
+      if (order && order.buyer && !order.recorded) {
+        await recordToSheet(env, c, order);
+        if (++tried >= 20) return;                                  // 한 번에 너무 많이 보내지 않음
+      }
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
 }
 
 /* ════════ POST /api/nicepay/webhook — 나이스페이 → 서버 ════════ */
@@ -298,22 +363,22 @@ export async function handleWebhook(request, env, ctx) {
       // 보통은 returnUrl 처리가 곧 paid로 바꾼다. 잠시 기다렸다가 그래도 대기면 웹훅 기준으로 완료 처리.
       ctx.waitUntil(
         (async () => {
-          await new Promise((r) => setTimeout(r, 8000));
+          await sleep(8000);
           const again = await getOrder(env, order.orderId);
           if (again && again.status === 'pending' && (await isVerifiedPaid(c, d, again))) {
             await savePaid(env, again, d);
-            await recordToSheet(env, c, again, request);
+            await recordToSheet(env, c, again);
           }
         })(),
       );
-    } else if (order.status === 'paid' && !order.recorded && Date.now() - Date.parse(order.markedAt || 0) > 60000) {
-      ctx.waitUntil(recordToSheet(env, c, order, request));  // 시트 기록이 실패했던 주문 — 웹훅 재전송 때 다시 시도
+    } else if (order.status === 'paid' && order.buyer && !order.recorded && Date.now() - Date.parse(order.markedAt || 0) > 60000) {
+      ctx.waitUntil(recordToSheet(env, c, order));           // 시트 기록이 실패했던 주문 — 웹훅 재전송 때 다시 시도
     }
   } else if ((d.status === 'cancelled' || d.status === 'partialCancelled') && order.status !== d.status) {
     order.status = d.status;
     order.cancelledAt = d.cancelledAt || new Date().toISOString();
+    order.markedAt = new Date().toISOString();
     await putOrder(env, order, KEEP_TTL);
   }
   return OK();
 }
-

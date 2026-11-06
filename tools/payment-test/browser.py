@@ -85,7 +85,8 @@ with sync_playwright() as p:
         page.click('.item[data-k=subpage] .qb[data-d="1"]')
     total_txt = page.inner_text('#sum-total')
     check('서브페이지 3 + SEO + 로고(무료) 합계 ₩438,900', total_txt == '₩438,900', total_txt)
-    check('결제 켜짐 → 결제 안내 문구(데모 문구 아님)', '나이스페이먼츠' in page.inner_text('#pay-note'))
+    note = page.inner_text('#pay-note')
+    check('결제 켜짐(샌드박스) → 테스트 결제 표시, 데모 문구 아님', '샌드박스' in note and '주문을 먼저 접수' not in note, note)
     fill(page)
     page.click('#pay-btn')
     wait_js(page, 'window.__payParams')
@@ -154,6 +155,19 @@ with sync_playwright() as p:
     page.click('#pay-btn')
     page.wait_for_selector('#done-modal.open')
     check('서버 금액 ≠ 화면 금액 → 결제창 안 엶', not page.evaluate('!!window.__payParams') and '금액' in page.inner_text('#done-modal'))
+    ctx.close()
+
+    # ── 3b. 결제가 켜져 있는데 /api/order 가 응답하지 않으면 주문 접수(데모)로 넘기지 않음 ──
+    ctx, page = new_page(browser, 1280)
+    ctx.route('**/api/order', lambda r: r.abort())
+    page.goto(W + '/checkout', wait_until='networkidle')
+    fill(page)
+    page.click('#pay-btn')
+    page.wait_for_selector('#done-modal.open')
+    m3 = page.inner_text('#done-modal')
+    check('결제 켜짐 + 서버 응답 실패 → 오류 안내(“준비 중” 데모 아님)', '일시적인 오류' in m3 and '준비 중' not in m3, m3.replace('\n', ' / ')[:100])
+    page.goto(W + '/checkout?add=seo,%22]x', wait_until='networkidle')
+    check('?add= 에 이상한 값 → 페이지 정상 동작', page.locator('#opt-list .item.on').count() == 1 and page.evaluate('window.__csp.length') == 0)
     ctx.close()
 
     # ── 4. 결제 키 없음(데모) → 지금과 같은 주문 접수 ──
