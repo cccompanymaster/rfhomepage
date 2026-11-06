@@ -91,7 +91,7 @@ HEADER_HTML = """<header class="container-x wide pt-7 pb-3" style="display:flex;
 
 FOOTER_HTML = """<footer class="container-x wide" style="padding:40px 20px 60px;border-top:1px solid var(--line-soft);margin-top:60px">
       <p style="font-size:12px;color:var(--text-quiet);line-height:1.8">
-        NOAH 노아홈페이지 · 씨씨컴퍼니(CC Company) · 대표 채희준 · 사업자등록번호 275-05-01613<br />
+        NOAH 노아홈페이지 · 노아데이터베이스 · 대표 채희준 · 사업자등록번호 224-73-00560 · 통신판매업 신고번호 제2026-인천서해-1228호<br />
         본 칼럼은 일반적인 정보 제공 목적이며, 법률·세무 등 전문 분야는 반드시 해당 전문가와 확인하시기 바랍니다.
       </p>
     </footer>"""

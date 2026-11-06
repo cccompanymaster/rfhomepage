@@ -17,7 +17,7 @@
 | 인스타그램만 있으면 홈페이지 없어도 되나 | 추정 · 문의 단골 질문으로 예상 | comparison | **published 10-09** | /columns/instagram-vs-homepage |
 | 스마트스토어와 홈페이지 차이 | 추정 | comparison | **published 10-09** | /columns/smartstore-vs-homepage |
 | 홈페이지 7일 만에 만들 수 있나 | 추정 · '제작 기간' 칼럼은 일반론, NOAH 일정 근거 페이지 없음 | question | **published 10-09** | /columns/homepage-in-7-days |
-| 송도·연수구 홈페이지 제작 | 추정 · 사업장 소재지 | question | **보류** — '인천 홈페이지 제작' 칼럼과 같은 질문. 실제 송도 고객 사례가 생기면 사례 중심으로 | |
+| 청라·서해구 홈페이지 제작 | 추정 · 사업장 소재지(2026-11 청라로 변경) | question | **보류** — '인천 홈페이지 제작' 칼럼과 같은 질문. 실제 청라 고객 사례가 생기면 사례 중심으로 | |
 | ChatGPT·AI 검색에 가게가 나오게 하려면 | 추정 · AI 인용 0/8(10-23 측정)·옵션 개편(빙·AI 강조) | question | **published 10-30** | /columns/ai-search-visibility |
 | 빙 웹마스터 도구 등록 방법 | 추정 · 무료 검색 등록 옵션에 빙 추가, 전용 글 없음 | question | **published 10-30** | /columns/bing-webmaster |
 | 홈페이지 통신판매업 신고 (호스트서버 소재지) | 사장님 실제 질문(10-28) · 결제 받는 고객 공통 질문 | question | **published 10-30** | /columns/mail-order-registration |
