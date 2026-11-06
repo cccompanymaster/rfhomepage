@@ -6,6 +6,7 @@ module.exports = {
   content: [
     './*.html',
     './templates/*.html',
+    './checkout/*.html',
     './columns/**/*.html',
     './assets/js/*.js',
     './tools/build_columns.py',

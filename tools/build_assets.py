@@ -33,7 +33,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TW_VERSION = '3.4.17'
-PAGES = ['*.html', 'templates/*.html', 'columns/*.html', 'columns/topic/*.html']
+PAGES = ['*.html', 'templates/*.html', 'columns/*.html', 'columns/topic/*.html', 'checkout/*.html']
 
 TW_SCRIPT = re.compile(r'<script src="https://cdn\.tailwindcss\.com"></script>')
 PRETENDARD_CDN = re.compile(r'<link\s+rel="stylesheet"\s+href="https://cdn\.jsdelivr\.net/gh/orioncactus/pretendard@[^"]+"\s*/>')

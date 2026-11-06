@@ -32,7 +32,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=c6fd5aca" />
-    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
     <link rel="stylesheet" href="/assets/css/common.css?v=b1fa8595" />
     <style>
       body { background: var(--bg); color: var(--text); }
@@ -160,10 +159,10 @@
             <label class="item base mt-4">
               <input type="checkbox" checked disabled aria-label="기본 패키지 (필수)" />
               <span class="flex-1 min-w-0">
-                <span class="nm">NOAH 홈페이지 패키지</span>
+                <span class="nm" id="base-name">NOAH 홈페이지 패키지</span>
                 <span class="ds">21개 디자인 중 선택 · 7일 오픈 · 1년 호스팅 · 1년 무제한 텍스트 수정 · 소스·계정 이전</span>
               </span>
-              <span class="pr">₩199,000</span>
+              <span class="pr" id="base-price">₩199,000</span>
             </label>
           </section>
 
@@ -178,7 +177,7 @@
             <div class="grid md:grid-cols-2 gap-4 mt-4">
               <div class="fld">
                 <label for="b-name">성함 <b>*</b></label>
-                <input class="f" id="b-name" name="name" placeholder="홍길동" autocomplete="name" required />
+                <input class="f" id="b-name" name="name" placeholder="홍길동" autocomplete="name" maxlength="30" required />
                 <p class="msg">성함을 입력해 주세요.</p>
               </div>
               <div class="fld">
@@ -188,12 +187,12 @@
               </div>
               <div class="fld md:col-span-2">
                 <label for="b-email">이메일 <b>*</b> <span class="font-normal">— 영수증·착수 안내 발송</span></label>
-                <input class="f" id="b-email" name="email" type="email" inputmode="email" placeholder="name@example.com" autocomplete="email" required />
+                <input class="f" id="b-email" name="email" type="email" inputmode="email" placeholder="name@example.com" autocomplete="email" maxlength="100" required />
                 <p class="msg">이메일 주소를 확인해 주세요.</p>
               </div>
               <div class="fld md:col-span-2">
                 <label for="b-biz">상호 / 가게 이름 <span class="font-normal">(선택)</span></label>
-                <input class="f" id="b-biz" name="biz" placeholder="예: 오월의 다정" autocomplete="organization" />
+                <input class="f" id="b-biz" name="biz" placeholder="예: 오월의 다정" autocomplete="organization" maxlength="60" />
               </div>
               <div class="fld md:col-span-2">
                 <label>영수증 <span class="font-normal">(선택)</span></label>
@@ -214,7 +213,7 @@
               </div>
               <div class="fld md:col-span-2">
                 <label for="b-memo">요청 메모 <span class="font-normal">(선택)</span></label>
-                <textarea class="f" id="b-memo" name="memo" rows="2" placeholder="예: 17번 디자인 희망, 10월 초 오픈 목표"></textarea>
+                <textarea class="f" id="b-memo" name="memo" rows="2" maxlength="500" placeholder="예: 17번 디자인 희망, 10월 초 오픈 목표"></textarea>
               </div>
             </div>
           </section>
@@ -238,7 +237,7 @@
           <div class="sum-row"><span class="k">부가세 (10%)</span><span class="v num" id="sum-vat">₩19,900</span></div>
           <div class="sum-row total"><span class="k">총 결제금액</span><span class="v" id="sum-total">₩218,900</span></div>
           <button type="submit" class="pay-btn mt-5" id="pay-btn">결제하기</button>
-          <p class="note mt-3" id="pay-note">카드 · 간편결제 (포트원 안전결제). 결제 정보는 저희 서버에 저장되지 않습니다.</p>
+          <p class="note mt-3" id="pay-note">카드 · 간편결제 (나이스페이먼츠 결제창). 카드 정보는 저희 서버에 저장되지 않습니다.</p>
           <div class="trust">
             <span>착수 전 100% 환불</span>
             <span>7일 안에 오픈</span>
@@ -283,71 +282,73 @@
 
     <script>
       /* ══════════ 설정 ══════════ */
-      // 포트원 V2 콘솔 값 입력 시 실결제 활성화. 비어 있으면 데모 모드(결제창 미호출, 주문만 접수).
-      const PORTONE = {
-        storeId: '',      // 예: 'store-xxxxxxxx-xxxx-...'
-        channelKey: '',   // 예: 'channel-key-xxxx...'
-      };
-      // 노아폼백엔드 (Apps Script) — 주문 접수는 type:'consult'(handleConsult), 카드결제 검증은 type:'payment'(handlePayment)
-      const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec';
+      // 금액 계산·결제 승인은 결제 서버(/api/*)가 합니다. 단가표는 /assets/data/catalog.json 한 곳에만 있습니다.
+      // 결제 키가 설정되지 않았으면 서버가 demo 모드를 알려 주고, 이 페이지는 결제창 없이 주문만 접수합니다.
+      const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec';  // 데모(주문 접수) 전용
+      const NICEPAY_SDK = 'https://pay.nicepay.co.kr/v1/js/';
       const KAKAO_URL = 'https://pf.kakao.com/_ENCKX/chat';
       const TEL = '010-6658-6482';
 
-      const BASE = { key: 'base', name: 'NOAH 홈페이지 패키지', price: 199000 };
-      const GROUPS = { design: '디자인 · 기능', ops: '검색 · 운영' };
-      const OPTIONS = [
-        { key: 'subpage',  g: 'design', name: '서브페이지 추가 (1p)',   price: 50000,  ds: '메뉴판·오시는 길·팀 소개 등 한 페이지 추가. 분량은 협의', qty: true },
-        { key: 'logo',     g: 'design', name: '로고 제작 — 심플',        price: 0,      ds: '무료 옵션 · 워드마크 중심 심플 로고, SVG·PNG 원본 제공' },
-        { key: 'card',     g: 'design', name: '명함 제작 (인쇄 별도)',   price: 50000,  ds: '홈페이지와 같은 톤의 명함 디자인 파일' },
-        { key: 'form',     g: 'design',   name: '문의 폼 + 자동 메일',     price: 50000,  ds: '문의가 오면 사장님 메일로 즉시 전달' },
-        { key: 'register', g: 'ops',    name: '네이버·구글·빙 검색 등록', price: 0,     ds: '무료 옵션 · AI 검색 대비 — 빙 웹마스터까지 등록, 소유 확인, 사이트맵 제출' },
-        { key: 'seo',      g: 'ops',    name: 'SEO 심화 세팅',           price: 50000,  ds: '페이지별 키워드·메타·구조화 데이터 심화 작업' },
-        { key: 'rush',     g: 'ops',    name: '당일 제작',               price: 50000,  ds: '자료가 모두 준비된 경우 작업 시작한 날 안에 오픈. 사전 협의 필수' },
-        { key: 'maint_y',  g: 'ops',    name: '유지보수 1년 (12개월)',   price: 200000, ds: '12개월 수정 횟수 제한 없음. 사진·배너·레이아웃까지' },
-      ];
+      // 결제창 레이어(iframe) 안에서 이 페이지가 열렸다면 전체 창으로 옮깁니다.
+      if (window.top !== window.self) { try { window.top.location.href = location.href; } catch (_) {} }
 
+      let BASE = null, OPTIONS = [], GROUPS = {}, VAT_RATE = 0.1;
       const $ = (s) => document.querySelector(s);
       const won = (n) => '₩' + n.toLocaleString('ko-KR');
       const plus = (n) => n ? '+' + won(n) : '무료';   // 옵션 가격 표시 (0원 = 무료 옵션)
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const selected = new Set();
       const qty = new Map();           // 수량 옵션 (서브페이지) — 미선택이면 없음
       const q = (k) => qty.get(k) || 1;
       const STORE_KEY = 'noah_checkout_v2';
+      const FAIL_MSG = {
+        auth: '결제 인증이 끝나지 않았습니다. 결제창을 닫았거나 카드 인증이 취소된 경우입니다. 다시 시도해 주세요.',
+        verify: '결제 정보를 확인하지 못해 결제를 진행하지 않았습니다. 다시 시도해 주세요.',
+        expired: '주문 시간이 지났거나 주문 정보를 찾지 못했습니다. 다시 결제해 주세요.',
+        approve: '카드사 승인이 되지 않았습니다. 다른 카드나 결제수단으로 다시 시도해 주세요.',
+        timeout: '결제 응답이 늦어 결제를 취소 요청했습니다. 카드 승인 문자를 받으셨다면 ' + TEL + ' 로 연락 주세요. 확인해 바로 처리해 드립니다.',
+        config: '지금은 온라인 결제를 할 수 없습니다. ' + TEL + ' 로 연락 주시면 결제를 도와드립니다.',
+        error: '일시적인 오류로 결제가 완료되지 않았습니다. 잠시 후 다시 시도하시거나 ' + TEL + ' 로 연락 주세요.',
+      };
 
-      /* ── 옵션 목록 렌더 (그룹별) ── */
-      $('#opt-list').innerHTML = Object.entries(GROUPS).map(([g, label]) => `
-        <p class="grp">${label}</p>
-        <div class="space-y-2">${OPTIONS.filter(o => o.g === g).map(o => `
-          <label class="item" data-k="${o.key}">
-            <input type="checkbox" aria-label="${o.name}" />
-            <span class="flex-1 min-w-0"><span class="nm">${o.name}</span><span class="ds">${o.ds}</span>${o.qty ? `<span class="qty" hidden><button type="button" class="qb" data-d="-1" aria-label="수량 줄이기">−</button><span class="qn num" aria-live="polite">1</span><button type="button" class="qb" data-d="1" aria-label="수량 늘리기">+</button><span class="ql">개</span></span>` : ''}</span>
-            <span class="pr">${plus(o.price)}</span>
-          </label>`).join('')}</div>`).join('');
-      /* 수량 스테퍼 — label 클릭 전파 차단 */
-      document.querySelectorAll('#opt-list .qb').forEach(b => b.addEventListener('click', e => {
-        e.preventDefault(); e.stopPropagation();
-        const el = b.closest('.item'), k = el.dataset.k;
-        const n = Math.min(10, Math.max(1, q(k) + Number(b.dataset.d)));
-        qty.set(k, n); el.querySelector('.qn').textContent = n;
-        el.querySelector('.pr').textContent = plus(OPTIONS.find(o => o.key === k).price * n);
-        renderSum(); persist();
-      }));
-
-      document.querySelectorAll('#opt-list .item').forEach(el => {
-        const k = el.dataset.k, cb = el.querySelector('input');
-        cb.addEventListener('change', () => {
-          cb.checked ? selected.add(k) : selected.delete(k);
-          el.classList.toggle('on', cb.checked);
-          const qbox = el.querySelector('.qty'); if (qbox) qbox.hidden = !cb.checked;
+      /* ── 단가표 불러와서 옵션 목록 렌더 (그룹별) ── */
+      function renderOptions() {
+        $('#base-name').textContent = BASE.name;
+        $('#base-price').textContent = won(BASE.price);
+        $('#opt-list').innerHTML = Object.entries(GROUPS).map(([g, label]) => `
+          <p class="grp">${label}</p>
+          <div class="space-y-2">${OPTIONS.filter(o => o.g === g).map(o => `
+            <label class="item" data-k="${o.key}">
+              <input type="checkbox" aria-label="${o.name}" />
+              <span class="flex-1 min-w-0"><span class="nm">${o.name}</span><span class="ds">${o.ds}</span>${o.qty ? `<span class="qty" hidden><button type="button" class="qb" data-d="-1" aria-label="수량 줄이기">−</button><span class="qn num" aria-live="polite">1</span><button type="button" class="qb" data-d="1" aria-label="수량 늘리기">+</button><span class="ql">개</span></span>` : ''}</span>
+              <span class="pr">${plus(o.price)}</span>
+            </label>`).join('')}</div>`).join('');
+        /* 수량 스테퍼 — label 클릭 전파 차단 */
+        document.querySelectorAll('#opt-list .qb').forEach(b => b.addEventListener('click', e => {
+          e.preventDefault(); e.stopPropagation();
+          const el = b.closest('.item'), k = el.dataset.k, o = OPTIONS.find(x => x.key === k);
+          const n = Math.min(o.maxQty, Math.max(1, q(k) + Number(b.dataset.d)));
+          qty.set(k, n); el.querySelector('.qn').textContent = n;
+          el.querySelector('.pr').textContent = plus(o.price * n);
           renderSum(); persist();
+        }));
+        document.querySelectorAll('#opt-list .item').forEach(el => {
+          const k = el.dataset.k, cb = el.querySelector('input');
+          cb.addEventListener('change', () => {
+            cb.checked ? selected.add(k) : selected.delete(k);
+            el.classList.toggle('on', cb.checked);
+            const qbox = el.querySelector('.qty'); if (qbox) qbox.hidden = !cb.checked;
+            renderSum(); persist();
+          });
         });
-      });
+      }
 
       function renderSum() {
+        if (!BASE) return null;
         const items = [BASE, ...OPTIONS.filter(o => selected.has(o.key)).map(o => o.qty && q(o.key) > 1
           ? { ...o, name: `${o.name} ×${q(o.key)}`, price: o.price * q(o.key), unit: o.price, n: q(o.key) } : o)];
         const supply = items.reduce((a, b) => a + b.price, 0);
-        const vat = Math.round(supply * 0.1);
+        const vat = Math.round(supply * VAT_RATE);
         $('#sum-lines').innerHTML = items.map(i => `<div class="sum-row"><span class="k">${i.name}</span><span class="v num">${i.price ? won(i.price) : '무료'}</span></div>`).join('');
         $('#sum-supply').textContent = won(supply);
         $('#sum-vat').textContent = won(vat);
@@ -357,7 +358,7 @@
         return { items, supply, vat, total: supply + vat };
       }
 
-      /* ── 입력 보존 (새로고침·뒤로가기 대비) ── */
+      /* ── 입력 보존 (새로고침·뒤로가기·결제 실패 복귀 대비) ── */
       function persist() {
         try {
           sessionStorage.setItem(STORE_KEY, JSON.stringify({
@@ -374,11 +375,10 @@
           if (!d) return;
           ['name','phone','email','biz','memo','bizno'].forEach(k => { if (d[k]) $('#b-' + k).value = d[k]; });
           const r = document.querySelector(`input[name=receipt][value="${d.receipt}"]`); if (r) r.checked = true;
-          (d.qty || []).forEach(([k, n]) => { qty.set(k, n); const el = document.querySelector(`.item[data-k="${k}"]`); if (el) { el.querySelector('.qn').textContent = n; el.querySelector('.pr').textContent = plus(OPTIONS.find(o => o.key === k).price * n); } });
+          (d.qty || []).forEach(([k, n]) => { const o = OPTIONS.find(x => x.key === k); const el = document.querySelector(`.item[data-k="${k}"]`); if (o && el && o.qty) { n = Math.min(o.maxQty, Math.max(1, n | 0)); qty.set(k, n); el.querySelector('.qn').textContent = n; el.querySelector('.pr').textContent = plus(o.price * n); } });
           (d.sel || []).forEach(k => { const el = document.querySelector(`.item[data-k="${k}"] input`); if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); } });
         } catch (_) {}
       }
-      restore();
       document.querySelectorAll('#order-form input, #order-form textarea').forEach(el => el.addEventListener('input', persist));
 
       /* ── 하단 결제바: 결제 카드가 화면에 보이면 숨김 ── */
@@ -386,13 +386,6 @@
         new IntersectionObserver(([e]) => { $('#mbar').style.transform = e.isIntersecting ? 'translateY(110%)' : ''; }, { threshold: 0.2 }).observe($('#pay-btn'));
         $('#mbar').style.transition = 'transform .25s ease';
       }
-
-      /* ── URL ?add= 딥링크 (옵션·가격 페이지에서 진입) ── */
-      new URLSearchParams(location.search).getAll('add').flatMap(v => v.split(',')).forEach(k => {
-        const el = document.querySelector(`.item[data-k="${k}"] input`);
-        if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); }
-      });
-      renderSum();
 
       /* ── 연락처 자동 하이픈 · 사업자번호 ── */
       $('#b-phone').addEventListener('input', e => {
@@ -408,7 +401,6 @@
         if (!$('#bizno-wrap').hidden) $('#b-bizno').focus();
         persist();
       }));
-      if (document.querySelector('input[name=receipt]:checked')?.value === 'tax') $('#bizno-wrap').hidden = false;
 
       /* ── 동의: 전체 선택 연동 ── */
       const ags = [...document.querySelectorAll('.ag')];
@@ -445,6 +437,7 @@
         const receipt = document.querySelector('input[name=receipt]:checked')?.value || 'none';
         return {
           items: items.map(i => ({ key: i.key, name: i.name, price: i.price })),
+          req: [...selected].map(k => ({ key: k, qty: OPTIONS.find(o => o.key === k)?.qty ? q(k) : 1 })),   // 서버에는 옵션 키·수량만 보냄
           itemText: items.map(i => i.name).join(' + '),
           supply, vat, total,
           name: $('#b-name').value.trim(), phone: $('#b-phone').value.trim(), email: $('#b-email').value.trim(),
@@ -468,100 +461,118 @@
         return fetch(GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ ...payload, timestamp: new Date().toISOString(), referrer: document.referrer || '직접 접속', page: location.href }) }).catch(() => {});
       }
+      // UTF-8 바이트 기준 자르기 (나이스페이 buyerName 30byte)
+      function byteCut(s, max) { let out = '', n = 0; for (const ch of s) { const b = new TextEncoder().encode(ch).length; if (n + b > max) break; out += ch; n += b; } return out; }
+
+      /* ── 나이스페이 결제창 스크립트 (결제가 켜졌을 때만 불러옴) ── */
+      let sdkLoading = null;
+      function ensureSdk() {
+        if (window.AUTHNICE) return Promise.resolve();
+        if (!sdkLoading) sdkLoading = new Promise((ok, no) => {
+          const s = document.createElement('script');
+          s.src = NICEPAY_SDK;
+          s.onload = () => window.AUTHNICE ? ok() : no(new Error('sdk'));
+          s.onerror = () => { sdkLoading = null; no(new Error('sdk')); };
+          document.head.appendChild(s);
+        });
+        return sdkLoading;
+      }
 
       /* ══════════ 결제 ══════════ */
       $('#mbar-btn').addEventListener('click', () => $('#pay-btn').click());
       $('#order-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!validate()) return;
+        if (!BASE || !validate()) return;
         if ($('#b-site').value) { showDone('<h3 id="done-title" class="disp text-xl">접수되었습니다</h3>'); return; }  // 봇 허니팟
         const o = buildOrder();
         const btn = $('#pay-btn');
+        const pick = window.NOAH_PICK?.get?.();
         if (typeof gtag === 'function') gtag('event', 'begin_checkout', { value: o.total, currency: 'KRW', items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })), design: window.NOAH_PICK?.current?.slug || '(none)' });
 
-        /* 데모 모드 — 포트원 키 미설정: 주문만 접수하고 결제는 안내 */
-        if (!PORTONE.storeId || !PORTONE.channelKey) {
-          const sig = JSON.stringify(o);
-          if (window.__sent && window.__sent.sig === sig) { showDone(window.__sent.html); return; }  // 같은 주문 두 번 접수 방지
-          const orderId = 'NO-' + new Date().toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
-          const txt = orderText(o, orderId);
-          const pick = window.NOAH_PICK?.get?.();
-          btn.disabled = true; btn.textContent = '주문 접수 중…';
-          // 이미 운영 중인 상담 접수(handleConsult)로 보냅니다 — 백엔드에 주문 전용 처리가 없어도 사장님 메일·시트에 도착
-          await postGAS({ type: 'consult', kind: 'order', sendBrochure: false, orderId, status: 'pending_manual',
-            name: o.name, phone: o.phone, email: o.email, industry: `결제 페이지 주문 · 총 ${won(o.total)}`, reference: pick?.nameKo || '',
-            message: txt, total: o.total, receipt: o.receipt, bizno: o.bizno });
-          btn.disabled = false; btn.textContent = '결제하기';
-          if (typeof gtag === 'function') gtag('event', 'generate_lead', { lead_source: 'checkout_order', value: o.total, currency: 'KRW', design: pick?.slug || '(none)', from_showcase: pick ? 'yes' : 'no' });
-          showDone(`
-            <span style="font-size:40px">📋</span>
-            <h3 id="done-title" class="disp text-xl mt-3">주문이 접수되었습니다</h3>
-            <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
-              온라인 카드결제는 준비 중입니다. 접수된 주문은 <b style="color:var(--text)">영업일 1일 안에</b> 연락드려
-              계좌이체 또는 카드결제 링크로 결제를 도와드립니다. 결제 전에는 비용이 발생하지 않습니다.
-            </p>
-            <div class="order-box" id="order-text">${txt.replace(/</g,'&lt;')}</div>
-            <div class="btn-row">
-              <button type="button" id="copy-btn">주문서 복사</button>
-              <a class="kakao" href="${KAKAO_URL}" target="_blank" rel="noopener">카카오톡으로 보내기</a>
-              <a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a>
-            </div>
-            <div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
-          window.__sent = { sig, html: $('#done-body').innerHTML };
-          $('#copy-btn').addEventListener('click', async () => {
-            try { await navigator.clipboard.writeText(txt); $('#copy-btn').textContent = '복사됨 ✓'; }
-            catch (_) { $('#copy-btn').textContent = '길게 눌러 복사하세요'; }
-          });
-          try { sessionStorage.removeItem(STORE_KEY); } catch (_) {}
-          return;
-        }
-
-        /* 실결제 — 포트원 V2 */
-        btn.disabled = true; btn.textContent = '결제창 여는 중…';
-        const paymentId = 'noah_' + crypto.randomUUID();
+        btn.disabled = true; btn.textContent = '확인 중…';
+        let res = null;
         try {
-          sessionStorage.setItem(STORE_KEY + '_pending', JSON.stringify({ paymentId, o }));
-          const res = await PortOne.requestPayment({
-            storeId: PORTONE.storeId,
-            channelKey: PORTONE.channelKey,
-            paymentId,
-            orderName: '맞춤 견적 결제',           // 백엔드 가변 카탈로그 항목 (5만~1,000만 검증)
-            totalAmount: o.total,
-            currency: 'CURRENCY_KRW',
-            payMethod: 'CARD',
-            customer: { fullName: o.name, phoneNumber: o.phone, email: o.email },
-            customData: { items: o.itemText, orderRef: paymentId },
-            redirectUrl: location.origin + '/checkout',   // 모바일(리다이렉트형 PG) 복귀 지점
-          });
-          if (res.code) { showFail(res.message || '결제가 취소되었습니다.'); return; }
-          await afterPayment(paymentId, o);
-        } catch (err) {
-          showFail('일시적인 오류입니다. 잠시 후 다시 시도하시거나 ' + TEL + ' 로 연락 주세요.');
-        } finally {
-          btn.disabled = false; btn.textContent = '결제하기';
-        }
+          const r = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: o.req, name: o.name, phone: o.phone, email: o.email, biz: o.biz, memo: o.memo,
+              receipt: o.receipt, bizno: o.bizno, reference: pick?.nameKo || '', website: $('#b-site').value }) });
+          res = await r.json().catch(() => null);   // 결제 서버가 없으면(JSON 아님) 주문 접수로
+        } catch (_) { res = null; }
+        btn.disabled = false; btn.textContent = '결제하기';
+
+        if (res && res.ok === false) { showFail(res.message || FAIL_MSG.error, '주문을 접수하지 못했습니다'); return; }
+        if (!res || res.mode !== 'live') return demoOrder(o, pick);
+        if (res.amount !== o.total) { showFail('화면의 금액과 결제 금액이 다릅니다. 새로고침한 뒤 다시 시도해 주세요.'); return; }
+        await openPayment(res, o);
       });
 
-      /* 결제창 통과 후: 서버 검증 요청 + 접수 안내 (검증 결과는 메일로) */
-      async function afterPayment(paymentId, o) {
-        await postGAS({ type: 'payment', paymentId, orderName: '맞춤 견적 결제', expectedAmount: o.total, ...o,
-          customer: { name: o.name, phone: o.phone, email: o.email, memo: o.itemText + (o.memo ? ' / ' + o.memo : '') } });
-        if (typeof gtag === 'function') gtag('event', 'purchase', { value: o.total, currency: 'KRW', transaction_id: paymentId, items: o.items.map(i => ({ item_id: i.key, item_name: i.name, price: i.price })) });
-        try { sessionStorage.removeItem(STORE_KEY); sessionStorage.removeItem(STORE_KEY + '_pending'); } catch (_) {}
-        showDone(`
-          <span style="font-size:40px">🎉</span>
-          <h3 id="done-title" class="disp text-xl mt-3">결제가 접수되었습니다</h3>
-          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
-            주문번호 <span class="num">${paymentId.slice(0, 18)}…</span><br />
-            ${o.itemText}<br />총 ${won(o.total)} (VAT 포함)<br /><br />
-            결제 확인 메일이 <b style="color:var(--text)">${o.email}</b> 로 발송되며,<br />영업일 1일 안에 착수 안내와 사전 정보 시트 링크를 보내드립니다.
-          </p>
-          <div class="btn-row"><a class="prime" href="/">홈으로</a><a href="/process">제작 과정 보기</a></div>`);
+      /* 실결제 — 나이스페이 결제창 (승인은 서버가 returnUrl에서 검증 후 처리) */
+      async function openPayment(res, o) {
+        const btn = $('#pay-btn');
+        btn.disabled = true; btn.textContent = '결제창 여는 중…';
+        try {
+          await ensureSdk();
+          AUTHNICE.requestPay({
+            clientId: res.clientId,
+            method: res.method,
+            orderId: res.orderId,
+            amount: res.amount,
+            goodsName: res.goodsName,
+            returnUrl: location.origin + '/api/nicepay/return',
+            buyerName: byteCut(o.name, 30),
+            buyerTel: o.phone.replace(/\D/g, ''),
+            buyerEmail: o.email.length <= 60 ? o.email : undefined,
+            fnError: function (result) {
+              showFail((result && result.msg) || '결제창을 열지 못했습니다. 잠시 후 다시 시도해 주세요.');
+            },
+          });
+        } catch (_) {
+          showFail('결제창을 불러오지 못했습니다. 잠시 후 다시 시도하시거나 ' + TEL + ' 로 연락 주세요.');
+        } finally {
+          setTimeout(() => { btn.disabled = false; btn.textContent = '결제하기'; }, 1500);
+        }
       }
-      function showFail(msg) {
-        showDone(`<span style="font-size:40px">⚠️</span><h3 id="done-title" class="disp text-xl mt-3">결제가 완료되지 않았습니다</h3>
-          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">${String(msg).replace(/</g,'&lt;')}</p>
-          <div class="btn-row"><button type="button" class="prime" onclick="document.getElementById('done-modal').classList.remove('open')">다시 시도</button><a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a></div>`);
+
+      /* 데모 모드 — 결제 키 미설정: 주문만 접수하고 결제는 안내 */
+      async function demoOrder(o, pick) {
+        const btn = $('#pay-btn');
+        const sig = JSON.stringify(o);
+        if (window.__sent && window.__sent.sig === sig) { showDone(window.__sent.html); return; }  // 같은 주문 두 번 접수 방지
+        const orderId = 'NO-' + new Date().toISOString().slice(2,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
+        const txt = orderText(o, orderId);
+        btn.disabled = true; btn.textContent = '주문 접수 중…';
+        // 이미 운영 중인 상담 접수(handleConsult)로 보냅니다 — 백엔드에 주문 전용 처리가 없어도 사장님 메일·시트에 도착
+        await postGAS({ type: 'consult', kind: 'order', sendBrochure: false, orderId, status: 'pending_manual',
+          name: o.name, phone: o.phone, email: o.email, industry: `결제 페이지 주문 · 총 ${won(o.total)}`, reference: pick?.nameKo || '',
+          message: txt, total: o.total, receipt: o.receipt, bizno: o.bizno });
+        btn.disabled = false; btn.textContent = '결제하기';
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { lead_source: 'checkout_order', value: o.total, currency: 'KRW', design: pick?.slug || '(none)', from_showcase: pick ? 'yes' : 'no' });
+        showDone(`
+          <span style="font-size:40px">📋</span>
+          <h3 id="done-title" class="disp text-xl mt-3">주문이 접수되었습니다</h3>
+          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">
+            온라인 카드결제는 준비 중입니다. 접수된 주문은 <b style="color:var(--text)">영업일 1일 안에</b> 연락드려
+            계좌이체 또는 카드결제 링크로 결제를 도와드립니다. 결제 전에는 비용이 발생하지 않습니다.
+          </p>
+          <div class="order-box" id="order-text">${esc(txt)}</div>
+          <div class="btn-row">
+            <button type="button" id="copy-btn">주문서 복사</button>
+            <a class="kakao" href="${KAKAO_URL}" target="_blank" rel="noopener">카카오톡으로 보내기</a>
+            <a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a>
+          </div>
+          <div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
+        window.__sent = { sig, html: $('#done-body').innerHTML };
+        $('#copy-btn').addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(txt); $('#copy-btn').textContent = '복사됨 ✓'; }
+          catch (_) { $('#copy-btn').textContent = '길게 눌러 복사하세요'; }
+        });
+        try { sessionStorage.removeItem(STORE_KEY); } catch (_) {}
+      }
+
+      function showFail(msg, title) {
+        showDone(`<span style="font-size:40px">⚠️</span><h3 id="done-title" class="disp text-xl mt-3">${esc(title || '결제가 완료되지 않았습니다')}</h3>
+          <p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">${esc(msg)}</p>
+          <div class="btn-row"><button type="button" class="prime" id="retry-btn">다시 시도</button><a href="tel:${TEL.replace(/-/g,'')}">전화 ${TEL}</a></div>`);
+        $('#retry-btn').addEventListener('click', () => $('#done-modal').classList.remove('open'));
       }
       function showDone(html) {
         $('#done-body').innerHTML = html;
@@ -570,15 +581,46 @@
       }
       document.addEventListener('keydown', e => { if (e.key === 'Escape') $('#done-modal').classList.remove('open'); });
 
-      /* 리다이렉트형 PG에서 복귀한 경우 (?paymentId=...&code=...) */
-      (async () => {
-        const q = new URLSearchParams(location.search);
-        if (!q.get('paymentId')) return;
+      /* ── 결제 서버 상태: 결제가 켜져 있으면 결제창 스크립트를 미리 불러오고, 꺼져 있으면 주문 접수 안내 ── */
+      async function loadMode() {
+        let mode = 'demo';
+        try { mode = (await (await fetch('/api/config', { cache: 'no-store' })).json()).mode || 'demo'; } catch (_) {}
+        if (mode === 'live') { ensureSdk().catch(() => {}); return; }
+        $('#pay-note').textContent = '지금은 온라인 결제 대신 주문을 먼저 접수합니다. 영업일 1일 안에 연락드려 결제를 도와드리며, 결제 전에는 비용이 발생하지 않습니다.';
+      }
+
+      /* ── 결제 서버에서 실패로 돌아온 경우 (/checkout?pay=fail&reason=...) ── */
+      function showReturnFail() {
+        const p = new URLSearchParams(location.search);
+        if (p.get('pay') !== 'fail') return;
+        const reason = p.get('reason') || 'error';
+        const code = /^[A-Z0-9]{4}$/i.test(p.get('code') || '') ? p.get('code') : '';
         history.replaceState(null, '', location.pathname);
-        let pend = null; try { pend = JSON.parse(sessionStorage.getItem(STORE_KEY + '_pending') || 'null'); } catch (_) {}
-        if (q.get('code')) { showFail(q.get('message') || '결제가 취소되었습니다.'); return; }
-        if (pend && pend.paymentId === q.get('paymentId')) await afterPayment(pend.paymentId, pend.o);
-        else showDone(`<span style="font-size:40px">🔎</span><h3 id="done-title" class="disp text-xl mt-3">결제 확인 중입니다</h3><p class="text-sm mt-3 leading-7" style="color:var(--text-dim)">결제 결과를 확인해 이메일로 안내드립니다. 안내가 없으면 ${TEL} 로 연락 주세요.</p><div class="btn-row"><a class="prime" href="/">홈으로</a></div>`);
+        showFail((FAIL_MSG[reason] || FAIL_MSG.error) + (code ? ` (코드 ${code})` : ''));
+      }
+
+      /* ── 시작: 단가표 → 옵션 렌더 → 입력 복원 → 딥링크 ── */
+      (async () => {
+        try {
+          const cat = await (await fetch('/assets/data/catalog.json', { cache: 'no-cache' })).json();
+          BASE = cat.base; GROUPS = cat.groups; VAT_RATE = cat.vatRate;
+          OPTIONS = cat.options.map(o => ({ ...o, maxQty: o.maxQty || 1, qty: (o.maxQty || 1) > 1 }));
+        } catch (_) {
+          $('#opt-list').innerHTML = `<p class="note">옵션 목록을 불러오지 못했습니다. 새로고침해 주세요. 계속 안 되면 ${TEL} 로 연락 주세요.</p>`;
+          $('#pay-btn').disabled = true; $('#mbar-btn').disabled = true;
+          return;
+        }
+        renderOptions();
+        restore();
+        /* URL ?add= 딥링크 (옵션·가격 페이지에서 진입) */
+        new URLSearchParams(location.search).getAll('add').flatMap(v => v.split(',')).forEach(k => {
+          const el = document.querySelector(`.item[data-k="${k}"] input`);
+          if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); }
+        });
+        if (document.querySelector('input[name=receipt]:checked')?.value === 'tax') $('#bizno-wrap').hidden = false;
+        renderSum();
+        loadMode();
+        showReturnFail();
       })();
     </script>
     <script src="/assets/js/pick.js?v=35edf0c2" defer></script>

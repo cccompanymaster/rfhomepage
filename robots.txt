@@ -32,6 +32,7 @@ Disallow: /intake.html
 Disallow: /start
 Disallow: /checkout
 Disallow: /checkout.html
+Disallow: /api/
 Disallow: /buy
 
 # ── 그 외 모든 크롤러 (구글·네이버 Yeti·빙·다음 포함) ──
@@ -44,6 +45,7 @@ Disallow: /intake.html
 Disallow: /start
 Disallow: /checkout
 Disallow: /checkout.html
+Disallow: /api/
 Disallow: /buy
 
 Sitemap: https://noahhomepage.co.kr/sitemap.xml

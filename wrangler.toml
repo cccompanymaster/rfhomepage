@@ -1,10 +1,31 @@
 name = "rfhomepage"
+main = "worker/index.js"
 compatibility_date = "2024-11-01"
 
-# 이 프로젝트는 정적 HTML 사이트입니다.
-# Workers Static Assets로 배포 — 빌드 단계 없이 파일을 그대로 업로드.
+# 정적 HTML 사이트 + 결제 API(/api/*)만 처리하는 작은 Worker.
 # https://developers.cloudflare.com/workers/static-assets/
+#  - /api/* 요청만 Worker가 먼저 받는다. 나머지는 정적 파일이 바로 응답 (_headers·_redirects 그대로).
+#  - directory = "." 이라 저장소 루트가 공개되므로 worker/·.dev.vars·.wrangler/ 는 .assetsignore 로 막는다.
 
 [assets]
 directory = "."
+binding = "ASSETS"
 not_found_handling = "404-page"
+run_worker_first = ["/api/*"]
+
+# 공개돼도 되는 설정 값.
+# 비밀 값 NICEPAY_SECRET_KEY 는 여기에 넣지 않는다:
+#   로컬 = .dev.vars (커밋·공개 제외) / 운영 = Cloudflare 대시보드 → Workers → rfhomepage → Settings → Variables and Secrets (Secret 타입)
+# NICEPAY_CLIENT_ID 나 NICEPAY_SECRET_KEY 가 비어 있으면 결제창 없이 "주문 접수"(데모) 흐름으로 동작한다.
+[vars]
+NICEPAY_CLIENT_ID = ""                                   # 나이스페이 클라이언트 키 (샌드박스 → 운영 전환 시 교체)
+NICEPAY_API_BASE = "https://sandbox-api.nicepay.co.kr"   # 운영: https://api.nicepay.co.kr
+NICEPAY_METHOD = "cardAndEasyPay"                        # 계약 수단에 맞춰 card / cardAndEasyPay
+NICEPAY_TIMEOUT_MS = "30000"                             # 승인 응답 대기 (나이스페이 권장 read-timeout 30초)
+NICEPAY_WEBHOOK_IPS = "121.133.126.86,121.133.126.87"    # 웹훅 발신 IP (나이스페이 매뉴얼 방화벽 정책). 비우면 IP 확인 안 함
+GAS_URL = "https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec"
+
+# 결제 대기 주문 저장소 (Cloudflare 대시보드 → Storage & Databases → KV 에서 만든 네임스페이스 id)
+[[kv_namespaces]]
+binding = "ORDERS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

@@ -11,3 +11,11 @@ __pycache__/
 
 # 로컬 빌드 도구 (심볼릭 링크 포함)
 node_modules
+
+# 결제 비밀 값(로컬 개발용) — 절대 커밋 금지
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+# wrangler dev 로컬 상태
+.wrangler/

@@ -36,3 +36,11 @@ package-lock.json
 tailwind.config.js
 assets/css/tw.src.css
 .claude/
+
+# 결제 서버 코드·로컬 비밀·wrangler 작업 폴더 — 공개 URL로 올라가면 안 됨
+worker/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+.wrangler/

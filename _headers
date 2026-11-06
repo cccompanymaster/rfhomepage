@@ -34,10 +34,10 @@
   Cross-Origin-Resource-Policy: same-site
 
   # 콘텐츠 보안 정책 (CSP) — 외부 스크립트/스타일 화이트리스트
-  # NOAH가 사용하는 CDN: Tailwind, Pretendard, Google Fonts, Apps Script
-  # ※ 포트원 채널(PG) 확정 후 해당 PG 도메인을 frame-src·form-action·connect-src 에 추가할 것
-  #    예) 토스페이먼츠 https://*.tosspayments.com / KG이니시스 https://*.inicis.com / NHN KCP https://*.kcp.co.kr
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.portone.io https://*.portone.io https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.portone.io https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.portone.io; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.portone.io; frame-ancestors 'self'; upgrade-insecure-requests
+  # NOAH가 사용하는 CDN: Tailwind, Pretendard, Google Fonts, Apps Script, 나이스페이먼츠 결제창
+  # ※ 나이스페이: script-src 는 결제창 SDK(pay.nicepay.co.kr)만. frame-src·form-action 은 결제창 레이어·복귀용(*.nicepay.co.kr).
+  #    샌드박스 결제창을 실제로 띄워 콘솔의 CSP 위반을 보고 필요한 것만 더하거나 좁힌다.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://pay.nicepay.co.kr https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.nicepay.co.kr; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.nicepay.co.kr; frame-ancestors 'self'; upgrade-insecure-requests
 
 # ════════════════════════════════════════════════════════════
 # 정적 자산 — 1년 immutable 캐시
