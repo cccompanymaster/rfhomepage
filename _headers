@@ -15,14 +15,17 @@
   # iframe 임베드는 동일 출처만
   X-Frame-Options: SAMEORIGIN
 
-  # XSS 필터 (구형 브라우저용, 최신은 CSP가 대체)
-  X-XSS-Protection: 1; mode=block
+  # 구형 XSS 필터는 끔 — 오히려 정보 유출에 악용될 수 있어 OWASP가 0을 권장 (CSP가 대신 막음)
+  X-XSS-Protection: 0
 
   # 외부 링크 클릭 시 레퍼러 최소화
   Referrer-Policy: strict-origin-when-cross-origin
 
-  # 사용 안 하는 브라우저 권한 명시적으로 차단
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(self), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()
+  # 사용 안 하는 브라우저 권한 명시적으로 차단 (payment는 결제창 때문에 자기 사이트만 허용)
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(self), usb=(), serial=(), hid=(), midi=(), magnetometer=(), gyroscope=(), accelerometer=(), browsing-topics=()
+
+  # 플래시·PDF 플러그인의 교차 도메인 정책 파일 차단
+  X-Permitted-Cross-Domain-Policies: none
 
   # HTTPS 강제 (1년) — 한 번 방문 후엔 HTTP 요청 자체가 막힘
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

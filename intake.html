@@ -588,6 +588,7 @@
             문의: 010-6658-6482 / cccompanymaster@gmail.com
           </p>
         </div>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label>웹사이트 (비워 두세요)<input name="website" tabindex="-1" autocomplete="off" /></label></div>
       </form>
     </main>
 
@@ -614,6 +615,7 @@
           statusEl.textContent = '필수 항목(A·B·C 및 이메일·동의)을 확인해주세요.';
           return;
         }
+        if (form.elements.website?.value) return;  // 봇 허니팟
 
         submitBtn.disabled = true;
         submitBtn.textContent = '제출 중...';

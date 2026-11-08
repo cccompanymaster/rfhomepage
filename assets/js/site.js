@@ -53,6 +53,7 @@ const triggerBrochureDownload = (source = 'unknown') => {
 brochureForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!brochureForm.checkValidity()) { brochureForm.reportValidity(); return; }
+  if (brochureForm.elements.website?.value) { brochureForm.reset(); return; }  // 봇 허니팟 (사람 눈엔 안 보이는 칸)
 
   brochureSubmit.disabled = true;
   brochureSubmit.textContent = '전송 중...';

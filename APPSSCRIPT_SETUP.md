@@ -13,6 +13,31 @@ NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 
 ---
 
+## 🔒 보안 강화판으로 바꾸기 (2026-11) — 이미 쓰고 계신 분은 이것만 하세요
+
+**왜 바꾸나요?** 웹 앱 주소는 사이트 코드에 들어 있어서 누구나 볼 수 있어요. 예전 코드는 이 주소로 아무 요청이나 보내면 사장님 Gmail로 **남에게 메일을 대신 보내 줬어요.** 입력값에 링크나 HTML을 넣으면 그대로 메일 본문에 들어갔고요. 이렇게 되면 스팸 발송에 악용되고, 하루 100통 한도가 바닥나서 진짜 상담 알림도 못 받게 돼요.
+
+**새 코드에서 달라진 점**
+- 입력값의 HTML·링크는 메일에 글자 그대로만 보여요.
+- 같은 주소로는 10분에 한 통만 보내요. 신청자 메일은 하루 40통, 운영자 알림은 하루 50통까지만 보내요.
+- 봇이 채우는 숨은 칸(`website`)이 채워진 요청은 무시해요.
+- 시트에 `=`로 시작하는 값은 수식이 아니라 글자로 저장해요.
+
+**바꾸는 순서 (5분)**
+1. 구글 시트 → **확장 프로그램 → Apps Script**를 여세요.
+2. 지금 코드 맨 위의 `NOTIFY_EMAIL` 값을 메모하세요. 알림을 받는 메일 주소예요.
+3. 코드를 **전부 지우고** 아래 2단계 코드를 통째로 붙여 넣으세요.
+4. 맨 위 `NOTIFY_EMAIL`을 2번에서 메모한 값으로 되돌리고 **저장(Ctrl+S)**을 누르세요.
+5. 함수 목록에서 `testSecurity`를 고르고 **▶ 실행**하세요. 권한 창이 뜨면 허용하세요.
+   - 운영자 메일에 `<b>굵게</b>`가 **글자 그대로** 보이면 정상이에요.
+   - 시트 `NOAH 상담` 탭에 `=1+1`이 **글자로** 들어가 있으면 정상이에요.
+   - 확인한 뒤 테스트 행은 지워도 돼요.
+6. **배포 → 배포 관리 → 연필(편집) → 버전: 새 버전 → 배포**를 누르세요.
+   - ⚠️ **새 배포**를 누르면 안 돼요. 웹 앱 주소가 바뀌어서 사이트 폼이 끊겨요. 반드시 **배포 관리**에서 기존 배포를 편집하세요.
+7. 사이트에서 소개서 받기를 한 번 해서 메일이 오는지 확인하세요.
+
+---
+
 ## 1단계 — 구글 시트 두 탭 만들기
 
 기존 시트에 새 탭 두 개를 추가합니다 (또는 새 시트를 만들어도 OK).
@@ -42,161 +67,165 @@ NOAH의 세 가지 폼을 **하나의 Apps Script로** 처리합니다.
 
 ```javascript
 // =============================================================
-// NOAH — 상담 신청 + 소개서 리드 기록 통합 스크립트 (기본 모드)
-// PDF는 사이트 리포지토리에서 직접 다운로드되므로 첨부하지 않습니다.
+// NOAH — 상담·소개서·사전정보·주문 접수 통합 스크립트 (보안 강화판 v2 · 2026-11)
+// PDF는 사이트에서 바로 내려받으므로 메일에 첨부하지 않습니다.
+//
+// v2에서 막은 것
+//  - 메일 본문에 들어가는 입력값을 모두 이스케이프 → 남의 링크·HTML을 끼워 넣은 스팸 메일 차단
+//  - 시트에 = + - @ 로 시작하는 값은 글자로 저장 → 수식 실행(외부로 시트 내용 빼돌리기) 차단
+//  - 사람 눈에 안 보이는 칸(website)이 채워진 요청은 봇으로 보고 무시
+//  - 발송 한도: 같은 주소로 10분에 1통, 신청자 메일 하루 40통, 운영자 알림 하루 50통
+//    → 누가 이 주소로 요청을 퍼부어도 Gmail 하루 100통 한도를 다 써 버리지 못함
+//  - 칸마다 글자 수 제한, 이메일 형식이 아니면 신청자 메일을 보내지 않음
+//  - 오류 내용은 밖으로 돌려주지 않고 실행 로그에만 남김
 // =============================================================
 
-const CONSULT_SHEET   = 'NOAH 상담';            // 상담 신청 탭 이름
-const BROCHURE_SHEET  = 'NOAH 소개서';          // 소개서 신청 탭 이름
-const INTAKE_SHEET    = 'NOAH 사전정보';        // 사전 정보 시트 탭 이름
-const NOTIFY_EMAIL    = 'noahmaster@gmail.com'; // 운영자 알림 메일
-const SITE_URL        = 'https://noahhomepage.co.kr'; // 배포된 사이트 URL (확인 메일 본문에 사용)
-const SEND_USER_EMAIL = true;                    // 신청자에게 확인 메일을 보낼지 여부 (false면 시트 기록만)
+// ▼ 이 네 줄은 지금 쓰시는 값을 그대로 두세요
+const NOTIFY_EMAIL    = 'noahmaster@gmail.com';          // 운영자 알림을 받을 메일
+const SITE_URL        = 'https://noahhomepage.co.kr';    // 사이트 주소 (메일 속 링크)
+const SEND_USER_EMAIL = true;                            // 신청자 확인 메일 (false면 시트 기록 + 운영자 알림만)
+const CONTACT_LINE    = '010-6658-6482 · cccompanymaster@gmail.com'; // 메일 서명
 
+const CONSULT_SHEET  = 'NOAH 상담';
+const BROCHURE_SHEET = 'NOAH 소개서';
+const INTAKE_SHEET   = 'NOAH 사전정보';
+
+// ▼ 발송·기록 한도 (필요하면 숫자만 조정)
+const LIMIT_USER_MAIL_PER_DAY   = 40;   // 신청자에게 가는 메일 하루 최대
+const LIMIT_NOTIFY_PER_DAY      = 50;   // 운영자 알림 하루 최대 (넘으면 시트에만 기록)
+const LIMIT_ROWS_PER_DAY        = 300;  // 시트 기록 하루 최대 (넘으면 버림)
+const SAME_ADDRESS_COOLDOWN_SEC = 600;  // 같은 주소로 다시 보내기까지 기다리는 시간(초)
+const KEEP_QUOTA_FOR_NOTIFY     = 10;   // Gmail 남은 한도가 이보다 적으면 신청자 메일은 보내지 않음
+
+// -------------------- 진입점 --------------------
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const raw = (e && e.postData && e.postData.contents) || '';
+    if (!raw || raw.length > 60000) return reply_(true);          // 비었거나 비정상적으로 큰 요청
+    const data = JSON.parse(raw);
+    if (!data || typeof data !== 'object' || Array.isArray(data)) return reply_(true);
+    if (data.website) return reply_(true);                         // 허니팟 칸이 채워짐 → 봇
 
-    if (data.type === 'brochure') {
-      handleBrochure(data);
-    } else if (data.type === 'intake') {
-      handleIntake(data);
-    } else {
-      handleConsult(data);
+    const lock = LockService.getScriptLock();
+    lock.waitLock(20000);
+    try {
+      if (!takeQuota_('rows', LIMIT_ROWS_PER_DAY)) return reply_(true);
+      if (data.type === 'brochure') handleBrochure(data, false);
+      else if (data.type === 'intake') handleIntake(data);
+      else handleConsult(data);                                    // 상담 · 결제 페이지 주문(kind: order) · payment
+    } finally {
+      lock.releaseLock();
     }
-
-    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return reply_(true);
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    console.error(err);
+    return reply_(false);
   }
 }
 
-// -------------------- 상담 신청 처리 --------------------
+// -------------------- 상담 신청 · 주문 접수 --------------------
 function handleConsult(data) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONSULT_SHEET);
   if (!sheet) throw new Error('Sheet not found: ' + CONSULT_SHEET);
 
   sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    data.name      || '',
-    data.phone     || '',
-    data.email     || '',
-    data.industry  || '',
-    data.reference || '',
-    data.message   || '',
-    data.referrer  || '',
+    cell_(data.timestamp || new Date().toISOString(), 40),
+    cell_(data.name, 60),
+    cell_(data.phone, 40),
+    cell_(data.email, 254),
+    cell_(data.industry, 200),
+    cell_(data.reference, 200),
+    cell_(data.message, 5000),
+    cell_(data.referrer, 500),
   ]);
 
-  // 운영자 알림
-  MailApp.sendEmail({
-    to: NOTIFY_EMAIL,
-    subject: `[NOAH] 새 상담 신청 — ${data.name}`,
+  const what = data.kind === 'order' ? '새 주문 접수' : data.type === 'payment' ? '결제 확인 필요' : '새 상담 신청';
+  const headline = data.kind === 'order' ? '새 주문이 접수되었습니다.' : data.type === 'payment' ? '결제 확인이 필요한 주문이 있습니다.' : '새 상담 신청이 도착했습니다.';
+  notify_({
+    subject: `[NOAH] ${what} — ${line_(data.name, 30) || '(이름 없음)'}`,
+    replyTo: email_(data.email),
     htmlBody: `
       <div style="font-family:-apple-system,sans-serif;line-height:1.6;">
-        <h3>새 상담 신청이 도착했습니다.</h3>
-        <p><strong>성함</strong>: ${data.name}<br/>
-        <strong>연락처</strong>: ${data.phone}<br/>
-        <strong>이메일</strong>: ${data.email || '미기입'}<br/>
-        <strong>업종</strong>: ${data.industry}<br/>
-        <strong>관심 디자인</strong>: ${data.reference || '미정'}<br/>
-        <strong>문의</strong>: ${data.message || '없음'}</p>
-        <p style="color:#888;font-size:12px;">시간: ${data.timestamp}</p>
-      </div>
-    `,
+        <h3>${headline}</h3>
+        <p><strong>성함</strong>: ${html_(data.name, 60)}<br/>
+        <strong>연락처</strong>: ${html_(data.phone, 40)}<br/>
+        <strong>이메일</strong>: ${html_(data.email, 254) || '미기입'}<br/>
+        <strong>업종</strong>: ${html_(data.industry, 200)}<br/>
+        <strong>관심 디자인</strong>: ${html_(data.reference || data.design_pick, 200) || '미정'}<br/>
+        <strong>문의</strong>: ${html_(data.message, 5000).replace(/\n/g, '<br/>') || '없음'}</p>
+        <p style="color:#888;font-size:12px;">시간: ${html_(data.timestamp, 40)} · 유입: ${html_(data.referrer, 300) || '직접'}</p>
+      </div>`,
   });
 
-  // 상담 신청자에게 자동 응답 + 소개서 자동 발송
-  // (사이트에서 sendBrochure: true 플래그를 함께 보내고 이메일이 있을 때만)
-  if (data.sendBrochure && data.email) {
+  // 상담 신청자에게 접수 안내 + 소개서 링크 (사이트가 sendBrochure: true를 보내고 이메일이 있을 때만)
+  if (data.sendBrochure === true && data.email) {
     handleBrochure({
-      timestamp: data.timestamp,
-      name:      data.name,
-      email:     data.email,
-      phone:     data.phone,
-      industry:  data.industry,
-      referrer:  '상담 신청 폼에서 자동 발송',
-      _fromConsult: true, // handleBrochure 안에서 메시지 톤을 살짝 다르게 쓰기 위함
-    });
+      timestamp: data.timestamp, name: data.name, email: data.email,
+      phone: data.phone, industry: data.industry, referrer: '상담 신청 폼에서 자동 발송',
+    }, true);
   }
 }
 
-// -------------------- 소개서 신청 처리 (PDF 첨부 없음) --------------------
-function handleBrochure(data) {
-  const fromConsult = !!data._fromConsult;
-
-  // 1) 시트에 리드 기록 (상담 폼에서 자동 호출된 경우는 이미 상담 시트에 기록되었으므로 생략)
+// -------------------- 소개서 신청 (PDF 첨부 없음) --------------------
+// fromConsult는 서버 안에서만 정합니다 (요청에 실린 값은 쓰지 않음)
+function handleBrochure(data, fromConsult) {
+  // 1) 시트 기록 (상담에서 넘어온 경우는 상담 시트에 이미 기록됨)
   if (!fromConsult) {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BROCHURE_SHEET);
     if (!sheet) throw new Error('Sheet not found: ' + BROCHURE_SHEET);
-
     sheet.appendRow([
-      data.timestamp || new Date().toISOString(),
-      data.name      || '',
-      data.email     || '',
-      data.phone     || '',
-      data.industry  || '',
-      data.referrer  || '',
+      cell_(data.timestamp || new Date().toISOString(), 40),
+      cell_(data.name, 60),
+      cell_(data.email, 254),
+      cell_(data.phone, 40),
+      cell_(data.industry, 200),
+      cell_(data.referrer, 500),
     ]);
   }
 
   // 2) 신청자에게 소개서 안내 메일
-  if (SEND_USER_EMAIL && data.email) {
-    const subject = fromConsult
-      ? '[NOAH] 상담 신청이 접수되었습니다 — 소개서 함께 보내드려요'
-      : '[NOAH] 소개서 다운로드 안내';
-    const leadLine = fromConsult
-      ? `방금 보내주신 상담 신청은 잘 접수되었습니다. 영업일 기준 1일 안에 회신드릴게요.<br/>회신 전에 천천히 살펴보실 수 있도록 소개서를 함께 보내드립니다.`
-      : `방금 신청하신 NOAH 소개서는 사이트에서 자동 다운로드가 시작되었을 거예요.<br/>혹시 다운로드가 안 되셨다면 아래 링크에서 다시 받으실 수 있습니다.`;
+  const subject = fromConsult
+    ? '[NOAH] 상담 신청이 접수되었습니다 — 소개서 함께 보내드려요'
+    : '[NOAH] 소개서 다운로드 안내';
+  const leadLine = fromConsult
+    ? '방금 보내주신 상담 신청은 잘 접수되었습니다. 영업일 기준 1일 안에 회신드릴게요.<br/>회신 전에 천천히 살펴보실 수 있도록 소개서를 함께 보내드립니다.'
+    : '방금 신청하신 NOAH 소개서는 사이트에서 자동 다운로드가 시작되었을 거예요.<br/>혹시 다운로드가 안 되셨다면 아래 버튼으로 다시 받으실 수 있습니다.';
+  sendToApplicant_(data.email, {
+    subject: subject,
+    htmlBody: `
+      <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif; max-width:560px; padding:24px; color:#222;">
+        <h2 style="font-size:26px; margin:0 0 16px;">NOAH 소개서</h2>
+        <p style="font-size:15px;">${html_(greetName_(data.name, '고객'))}님 안녕하세요,</p>
+        <p style="font-size:15px;">${leadLine}</p>
+        <p style="margin:24px 0;">
+          <a href="${SITE_URL}/assets/brochure/NOAH-brochure.pdf"
+             style="display:inline-block; padding:14px 28px; background:#0a0a0b; color:#fff; border-radius:9999px; text-decoration:none; font-weight:500;">
+            📄 소개서 다운로드
+          </a>
+        </p>
+        <p style="font-size:15px;">레퍼런스 디자인, 7일 제작 과정, 패키지와 옵션 가격을 한 권에 담았습니다.<br/>
+        궁금하신 점은 이 메일에 그대로 답장 주시거나 전화로 편하게 연락 주세요.</p>
+        <hr style="border:0; border-top:1px solid #eee; margin:24px 0;" />
+        <p style="font-size:13px; color:#666;">
+          <strong style="color:#222;">NOAH · 노아홈페이지</strong><br/>
+          ${CONTACT_LINE}<br/>
+          <a href="${SITE_URL}" style="color:#7c5cff;">${SITE_URL}</a>
+        </p>
+      </div>`,
+  });
 
-    MailApp.sendEmail({
-      to: data.email,
-      subject: subject,
-      htmlBody: `
-        <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif; max-width:560px; padding:24px; color:#222;">
-          <h2 style="background:linear-gradient(135deg,#7c5cff,#ff7ac6); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:28px; margin:0 0 16px;">NOAH 소개서</h2>
-          <p style="font-size:15px;">${data.name}님 안녕하세요,</p>
-          <p style="font-size:15px;">${leadLine}</p>
-
-          <p style="margin:24px 0;">
-            <a href="${SITE_URL}/assets/brochure/NOAH-brochure.pdf"
-               style="display:inline-block; padding:14px 28px; background:#0a0a0b; color:#fff; border-radius:9999px; text-decoration:none; font-weight:500;">
-              📄 소개서 다운로드
-            </a>
-          </p>
-
-          <p style="font-size:15px;">12개 업종 레퍼런스, 7일 제작 과정, ₩199,000 패키지 안내와 옵션 가격까지 한 권에 담겨 있습니다.<br/>
-          궁금하신 점은 이 메일에 그대로 답장 주시거나, 카카오톡 1:1 상담으로 편하게 연락 주세요.</p>
-
-          <hr style="border:0; border-top:1px solid #eee; margin:24px 0;" />
-          <p style="font-size:13px; color:#666;">
-            <strong style="color:#222;">NOAH · 노아홈페이지</strong><br/>
-            010-6658-6482<br/>
-            noahmaster@gmail.com<br/>
-            <a href="${SITE_URL}" style="color:#7c5cff;">${SITE_URL}</a>
-          </p>
-        </div>
-      `,
-      name: 'NOAH',
-    });
-  }
-
-  // 3) 운영자 알림 (상담에서 자동 호출되면 이미 상담 알림이 갔으므로 생략)
+  // 3) 운영자 알림 (상담에서 넘어온 경우는 상담 알림이 이미 감)
   if (!fromConsult) {
-    MailApp.sendEmail({
-      to: NOTIFY_EMAIL,
-      subject: `[NOAH] 새 소개서 다운로드 — ${data.name}`,
-      body: `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || '미기입'}\n업종: ${data.industry || '미기입'}\n유입: ${data.referrer || '직접'}\n시간: ${data.timestamp}\n\n→ 사용자는 사이트에서 PDF를 직접 다운로드했습니다.`,
+    notify_({
+      subject: `[NOAH] 새 소개서 다운로드 — ${line_(data.name, 30) || '(이름 없음)'}`,
+      body: `이름: ${line_(data.name, 60)}\n이메일: ${line_(data.email, 254)}\n연락처: ${line_(data.phone, 40) || '미기입'}\n업종: ${line_(data.industry, 200) || '미기입'}\n유입: ${line_(data.referrer, 300) || '직접'}\n시간: ${line_(data.timestamp, 40)}\n\n→ 사용자는 사이트에서 PDF를 직접 다운로드했습니다.`,
     });
   }
 }
 
-// -------------------- 사전 정보 시트(intake) 처리 --------------------
-// intake.html 폼 제출 → 운영자에게 전체 항목 메일 발송 + (선택) 고객 확인 메일
-// 항목이 많아 시트 컬럼 고정이 어려우므로, 들어온 모든 필드를 그대로 메일에 담습니다.
+// -------------------- 사전 정보 시트(intake) --------------------
+// 운영자에게 전체 항목 메일 + (선택) 고객 확인 메일. 아래 목록에 없는 칸은 기록하지 않습니다.
 function handleIntake(data) {
-  // 섹션별 라벨 매핑 (없는 키는 자동으로 건너뜀)
   const groups = [
     ['A · 사장님과 가게', [
       ['A_상호_한글', '상호(한글)'], ['A_상호_영문', '상호(영문)'],
@@ -236,11 +265,10 @@ function handleIntake(data) {
     ]],
   ];
 
-  const storeName = data['A_상호_한글'] || '(상호 미기입)';
-  const clientEmail = data.respondent_email || data['B_이메일'] || data.email || '';
+  const storeName = line_(data['A_상호_한글'], 60) || '(상호 미기입)';
+  const clientEmail = email_(data.respondent_email) || email_(data['B_이메일']) || email_(data.email);
 
-  // 0) 시트에 한 줄 기록 (모든 항목을 정해진 순서로)
-  // 컬럼 순서 = ORDER 배열. 탭이 없으면 자동 생성하고 헤더를 깝니다.
+  // 0) 시트에 한 줄 기록 (탭이 없으면 만들고 헤더까지)
   const ORDER = [];
   for (const [, fields] of groups) for (const [key] of fields) ORDER.push(key);
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -250,63 +278,131 @@ function handleIntake(data) {
     sheet.appendRow(['timestamp', '회신이메일', '상호', ...ORDER, 'referrer']);
   }
   sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    clientEmail, storeName,
-    ...ORDER.map((k) => data[k] || ''),
-    data.referrer || '',
+    cell_(data.timestamp || new Date().toISOString(), 40),
+    cell_(clientEmail, 254), cell_(storeName, 60),
+    ...ORDER.map((k) => cell_(data[k], 3000)),
+    cell_(data.referrer, 500),
   ]);
 
-  // 운영자용 HTML 메일 본문 구성
+  // 1) 운영자 알림 (작성된 항목만 섹션별 표로)
   let body = `<div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;line-height:1.7;max-width:640px;color:#222;">`;
-  body += `<h2 style="margin:0 0 4px;">📋 새 사전 정보 시트 — ${storeName}</h2>`;
-  body += `<p style="color:#888;font-size:13px;margin:0 0 20px;">회신 이메일: ${clientEmail || '미기입'} · 접수: ${data.timestamp || new Date().toISOString()} · 유입: ${data.referrer || '직접'}</p>`;
-
+  body += `<h2 style="margin:0 0 4px;">📋 새 사전 정보 시트 — ${html_(storeName)}</h2>`;
+  body += `<p style="color:#888;font-size:13px;margin:0 0 20px;">회신 이메일: ${html_(clientEmail) || '미기입'} · 접수: ${html_(data.timestamp, 40)} · 유입: ${html_(data.referrer, 300) || '직접'}</p>`;
   for (const [sectionTitle, fields] of groups) {
     const rows = fields
-      .filter(([key]) => data[key] && String(data[key]).trim() !== '')
+      .filter(([key]) => text_(data[key], 3000).trim() !== '')
       .map(([key, label]) =>
         `<tr><td style="padding:6px 12px 6px 0;color:#666;vertical-align:top;white-space:nowrap;">${label}</td>` +
-        `<td style="padding:6px 0;color:#111;">${String(data[key]).replace(/\n/g, '<br/>')}</td></tr>`
+        `<td style="padding:6px 0;color:#111;">${html_(data[key], 3000).replace(/\n/g, '<br/>')}</td></tr>`
       );
     if (rows.length === 0) continue;
     body += `<h3 style="margin:18px 0 6px;padding-bottom:6px;border-bottom:1px solid #eee;font-size:15px;">${sectionTitle}</h3>`;
     body += `<table style="border-collapse:collapse;font-size:14px;width:100%;">${rows.join('')}</table>`;
   }
   body += `</div>`;
-
-  // 1) 운영자 알림 (전체 항목)
-  MailApp.sendEmail({
-    to: NOTIFY_EMAIL,
-    subject: `[NOAH] 사전 정보 시트 — ${storeName}`,
-    htmlBody: body,
-    replyTo: clientEmail || NOTIFY_EMAIL,
-  });
+  notify_({ subject: `[NOAH] 사전 정보 시트 — ${line_(storeName, 30)}`, htmlBody: body, replyTo: clientEmail });
 
   // 2) 고객 확인 메일 (선택)
-  if (SEND_USER_EMAIL && clientEmail) {
-    MailApp.sendEmail({
-      to: clientEmail,
-      subject: '[NOAH] 사전 정보 시트가 접수되었습니다',
-      htmlBody: `
-        <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;max-width:560px;padding:24px;color:#222;line-height:1.7;">
-          <h2 style="background:linear-gradient(135deg,#7c5cff,#ff7ac6);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:26px;margin:0 0 16px;">NOAH</h2>
-          <p style="font-size:15px;">${storeName} 사장님, 사전 정보 시트가 잘 접수되었습니다.</p>
-          <p style="font-size:15px;">영업일 기준 1일 안에 검토 회신을 드린 뒤, Day 1 상담 일정을 잡아드릴게요.<br/>
-          추가로 보내주실 파일(로고·사진·사업자등록증 등)은 이 메일에 그대로 답장해 첨부해주시면 됩니다.</p>
-          <hr style="border:0;border-top:1px solid #eee;margin:24px 0;" />
-          <p style="font-size:13px;color:#666;">
-            <strong style="color:#222;">NOAH · 노아홈페이지</strong><br/>
-            010-6658-6482 · cccompanymaster@gmail.com<br/>
-            <a href="${SITE_URL}" style="color:#7c5cff;">${SITE_URL}</a>
-          </p>
-        </div>
-      `,
-      name: 'NOAH',
-    });
-  }
+  const storeGreet = greetName_(data['A_상호_한글'], '');
+  sendToApplicant_(clientEmail, {
+    subject: '[NOAH] 사전 정보 시트가 접수되었습니다',
+    htmlBody: `
+      <div style="font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;max-width:560px;padding:24px;color:#222;line-height:1.7;">
+        <h2 style="font-size:26px;margin:0 0 16px;">NOAH</h2>
+        <p style="font-size:15px;">${storeGreet ? html_(storeGreet) + ' ' : ''}사장님, 사전 정보 시트가 잘 접수되었습니다.</p>
+        <p style="font-size:15px;">영업일 기준 1일 안에 검토 회신을 드린 뒤, Day 1 상담 일정을 잡아드릴게요.<br/>
+        추가로 보내주실 파일(로고·사진·사업자등록증 등)은 이 메일에 그대로 답장해 첨부해주시면 됩니다.</p>
+        <hr style="border:0;border-top:1px solid #eee;margin:24px 0;" />
+        <p style="font-size:13px;color:#666;">
+          <strong style="color:#222;">NOAH · 노아홈페이지</strong><br/>
+          ${CONTACT_LINE}<br/>
+          <a href="${SITE_URL}" style="color:#7c5cff;">${SITE_URL}</a>
+        </p>
+      </div>`,
+  });
 }
 
-// -------------------- 테스트 함수 --------------------
+// -------------------- 메일 보내기 (한도 확인) --------------------
+function notify_(opts) {
+  if (!takeQuota_('notify', LIMIT_NOTIFY_PER_DAY) || MailApp.getRemainingDailyQuota() < 1) {
+    console.warn('운영자 알림 한도 초과 — 시트에만 기록: ' + opts.subject);
+    return;
+  }
+  const mail = { to: NOTIFY_EMAIL, subject: opts.subject };
+  if (opts.htmlBody) mail.htmlBody = opts.htmlBody;
+  if (opts.body) mail.body = opts.body;
+  if (opts.replyTo) mail.replyTo = opts.replyTo;
+  MailApp.sendEmail(mail);
+}
+
+function sendToApplicant_(address, opts) {
+  const to = email_(address);
+  if (!SEND_USER_EMAIL || !to) return;
+  if (MailApp.getRemainingDailyQuota() <= KEEP_QUOTA_FOR_NOTIFY) return;   // 운영자 알림 몫은 남겨 둠
+  if (!cooldownOk_(to)) return;                                          // 같은 주소로 연달아 보내지 않음
+  if (!takeQuota_('user', LIMIT_USER_MAIL_PER_DAY)) return;
+  const mail = { to: to, subject: opts.subject, htmlBody: opts.htmlBody, name: 'NOAH' };
+  if (opts.attachments) mail.attachments = opts.attachments;   // (선택) PDF 첨부 모드에서 사용
+  MailApp.sendEmail(mail);
+}
+
+// 오늘(한국 시간) 카운터가 한도 안이면 1 올리고 true
+function takeQuota_(kind, limit) {
+  const day = Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyyMMdd');
+  const props = PropertiesService.getScriptProperties();
+  const key = 'q_' + kind + '_' + day;
+  const current = props.getProperty(key);
+  if (current === null) {   // 그날 첫 요청이면 지난 날짜 카운터 정리
+    const all = props.getProperties();
+    Object.keys(all).forEach((k) => { if (k.indexOf('q_' + kind + '_') === 0 && k !== key) props.deleteProperty(k); });
+  }
+  const n = Number(current || 0);
+  if (n >= limit) return false;
+  props.setProperty(key, String(n + 1));
+  return true;
+}
+
+function cooldownOk_(address) {
+  const cache = CacheService.getScriptCache();
+  const key = 'cd_' + address.toLowerCase().slice(0, 200);
+  if (cache.get(key)) return false;
+  cache.put(key, '1', SAME_ADDRESS_COOLDOWN_SEC);
+  return true;
+}
+
+// -------------------- 입력값 다듬기 --------------------
+function text_(v, max) {                       // 문자열로 바꾸고 길이 자르기
+  if (v === null || v === undefined) return '';
+  if (typeof v === 'object') v = JSON.stringify(v);
+  return String(v).slice(0, max || 500);
+}
+function line_(v, max) {                       // 한 줄로 (메일 제목·일반 텍스트용)
+  return text_(v, max).replace(/[\r\n\t]+/g, ' ').trim();
+}
+function html_(v, max) {                       // 메일 HTML에 넣을 때
+  return text_(v, max)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function cell_(v, max) {                       // 시트에 넣을 때: 수식으로 실행되지 않게
+  const t = text_(v, max || 5000);
+  return /^[=+\-@\t\r]/.test(t) ? "'" + t : t;
+}
+function email_(v) {                           // 이메일 형식일 때만 돌려줌
+  const t = line_(v, 254);
+  return /^[^\s@<>()\[\]",;:\\]+@[^\s@<>()\[\]",;:\\]+\.[A-Za-z]{2,}$/.test(t) ? t : '';
+}
+function greetName_(v, fallback) {             // 신청자 메일 인사말: 짧게, 링크처럼 보이면 fallback
+  const t = line_(v, 20);
+  if (!t || /(https?:|\/\/|www\.|@|[a-z0-9-]+\.(com|net|org|kr|io|co|me|xyz|top|ly|link|site|shop|info|biz|app)\b)/i.test(t)) return fallback;
+  return t;
+}
+function reply_(ok) {
+  return ContentService.createTextOutput(JSON.stringify({ ok: ok }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// -------------------- 테스트 함수 (▶ 실행으로 확인) --------------------
 function testIntake() {
   handleIntake({
     type: 'intake',
@@ -316,7 +412,7 @@ function testIntake() {
     B_전화: '010-0000-0000', B_이메일: 'test@example.com', B_영업시간: '평일 10-19시',
     C_1순위: '01 DENTAL — 라온치과의원', C_이유: '여백이 좋아서',
     D_톤: '정중함, 단정함', E_소개: '동네에서 가장 친절한 치과입니다.',
-    F_운영: '유지보수 월간 플랜 (30,000원 / 월)',
+    F_운영: '유지보수 1년 (200,000원)',
     timestamp: new Date().toISOString(), referrer: '테스트',
   });
 }
@@ -333,13 +429,23 @@ function testBrochure() {
     timestamp: new Date().toISOString(),
     name: '테스트 소개서', email: 'YOUR_EMAIL@gmail.com',  // ← 본인 이메일로 변경
     phone: '010-0000-0000', industry: '카페·베이커리', referrer: '테스트',
+  }, false);
+}
+// 보안 확인용: 아래를 실행하면 메일 본문에 <b> 태그가 글자 그대로 보이고, 시트에는 '=1+1 이 글자로 들어가야 정상
+function testSecurity() {
+  handleConsult({
+    timestamp: new Date().toISOString(),
+    name: '<b>굵게</b> 테스트', phone: '=1+1', email: 'not-an-email',
+    industry: '<a href="https://example.com">링크</a>', message: '줄1\n줄2', referrer: '테스트',
   });
 }
 ```
 
-3. 코드 상단의 두 상수를 본인 값으로 수정:
+3. 코드 상단의 설정 네 줄을 본인 값으로 수정:
    - `NOTIFY_EMAIL` — 운영자 알림을 받을 메일
-   - `SITE_URL` — Cloudflare Pages 배포 URL (예: `https://noahhomepage.co.kr`)
+   - `SITE_URL` — 사이트 주소 (예: `https://noahhomepage.co.kr`)
+   - `SEND_USER_EMAIL` — 신청자 확인 메일 보낼지 여부
+   - `CONTACT_LINE` — 메일 맨 아래 서명 (전화 · 이메일)
 4. **저장 (Ctrl+S)**, 프로젝트 이름은 `NOAH 통합 폼`
 
 ---
@@ -367,16 +473,18 @@ function testBrochure() {
 
 ## 5단계 — 홈페이지에 URL 붙여넣기
 
-**두 파일** 모두에서 다음 줄을 찾아 교체합니다:
+**네 파일** 모두에서 다음 줄을 찾아 교체합니다 (보통은 할 일 없음 — 위 6번처럼 기존 배포를 편집하면 주소가 그대로입니다):
 
-- `index.html` (상담 + 소개서 폼)
+- `assets/js/site.js` (모든 페이지의 소개서 받기 모달)
+- `contact.html` (상담 신청 폼)
 - `intake.html` (사전 정보 시트)
+- `checkout.html` (결제 페이지 주문 접수)
 
 ```javascript
 const GAS_URL = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exec';
 ```
 
-위에서 복사한 URL로 교체. (두 파일이 같은 배포 URL을 공유합니다.)
+위에서 복사한 URL로 교체. (네 파일이 같은 배포 URL을 공유합니다.)
 
 ---
 
@@ -465,21 +573,14 @@ Apps Script 코드를 바꿨으면 반드시:
 const BROCHURE_FILE_ID = 'PASTE_YOUR_FILE_ID'; // 위에서 메모한 파일 ID
 ```
 
-### `handleBrochure` 안의 신청자 메일 발송 부분을 다음으로 교체
+### `handleBrochure` 안의 `sendToApplicant_(data.email, { ... })` 부분에 첨부 한 줄 추가
 
 ```javascript
-if (SEND_USER_EMAIL && data.email) {
-  const file = DriveApp.getFileById(BROCHURE_FILE_ID);
-  const blob = file.getBlob();
-
-  MailApp.sendEmail({
-    to: data.email,
-    subject: '[NOAH] 요청하신 소개서를 첨부해 드립니다',
-    htmlBody: `<!-- 본문은 동일, 다운로드 버튼 대신 첨부 안내 문구 -->`,
-    attachments: [blob],
-    name: 'NOAH',
-  });
-}
+sendToApplicant_(data.email, {
+  subject: '[NOAH] 요청하신 소개서를 첨부해 드립니다',
+  htmlBody: `<!-- 본문은 동일, 다운로드 버튼 대신 첨부 안내 문구 -->`,
+  attachments: [DriveApp.getFileById(BROCHURE_FILE_ID).getBlob()],
+});
 ```
 
 ### 주의
