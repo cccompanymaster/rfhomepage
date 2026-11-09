@@ -2,8 +2,63 @@
 // 노아폼백엔드 (Apps Script) — 소개서·상담 신청 기록
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-048UbQ15LMY3j847AqQmZ7Zu4hNDyqAQEVjD60BKsqQmZDvS1YBbmyab8jjscEz-/exec';
 
-function closeNav(){document.getElementById('mnav').classList.remove('open');document.body.style.overflow='';}
+// 모바일 메뉴 — 열고 닫을 때 버튼 상태(aria-expanded)와 포커스를 함께 옮김
+const navBtn = document.querySelector('[data-nav-open]');
+function openNav(){
+  const m=document.getElementById('mnav'); if(!m) return;
+  m.classList.add('open'); document.body.style.overflow='hidden';
+  navBtn?.setAttribute('aria-expanded','true');
+  m.querySelector('a, button')?.focus();
+}
+function closeNav(){
+  const m=document.getElementById('mnav'); if(!m || !m.classList.contains('open')) return;
+  m.classList.remove('open'); document.body.style.overflow='';
+  navBtn?.setAttribute('aria-expanded','false');
+  navBtn?.focus();
+}
+navBtn?.addEventListener('click', openNav);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
+
+// ====================== 떠 있는 요소 정리 ======================
+// 하단 상담 바: 첫 화면을 지나면 나타나고, 마지막 상담 블록·푸터([data-dock-stop])가 보이면 들어감.
+// 블로그 안내 팝업: 넓은 화면(1200px 이상)에서 페이지를 30% 넘게 읽은 뒤부터.
+(() => {
+  const root = document.documentElement;
+  const dock = document.querySelector('.banner-bottom');
+  const pop = document.getElementById('blog-pop');
+  if (!dock && !pop) return;
+  root.classList.add('dock-ready');
+  const stops = new Set();
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => (e.isIntersecting ? stops.add(e.target) : stops.delete(e.target)));
+      update();
+    });
+    document.querySelectorAll('[data-dock-stop]').forEach((el) => io.observe(el));
+  }
+  let popArmed = false;
+  const wide = matchMedia('(min-width: 1200px)');
+  function update() {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    if (dock && !dock.classList.contains('is-hidden')) {
+      dock.classList.toggle('is-shown', y > vh * 0.7 && stops.size === 0);
+    }
+    if (pop && wide.matches && !pop.classList.contains('is-hidden')) {
+      const max = document.documentElement.scrollHeight - vh;
+      if (max > 0 && y / max > 0.3) popArmed = true;
+      // 한 번 나타난 뒤에도 첫 화면·마지막 상담 블록·푸터에서는 숨김 — 본문을 가리지 않게
+      pop.classList.toggle('is-shown', popArmed && y > vh * 0.7 && stops.size === 0);
+    }
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => { ticking = false; update(); });
+  }, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
 
 // 가격 비교 카드 — 화면에 들어오면 막대가 자람 (움직임 줄이기면 바로 다 보임)
 document.querySelectorAll('.cmp-card').forEach((card) => {

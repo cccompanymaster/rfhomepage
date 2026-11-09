@@ -379,8 +379,8 @@ select.field-dark option[value=""] {
 }
 
 /* 라이트 리디자인 — CTA 버튼 */
-.nb-cta { background: var(--accent) !important; color: #fff !important; }
-.nb-cta:hover { filter: brightness(1.07); }
+.nb-cta { background: var(--cta) !important; color: #fff !important; transition: background-color .2s; }
+.nb-cta:hover { background: var(--cta-hover) !important; }
 /* 페이지 헤더 */
 .site-hd { position: sticky; top: 0; z-index: 70; background: rgba(255,255,255,.86);
   backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid var(--line); }
@@ -427,3 +427,120 @@ select.field-dark option[value=""] {
 .cmp-row:nth-child(4) .cmp-bar i, .cmp-row:nth-child(4) .cmp-bar::before { transition-delay: .24s; }
 .cmp-row:nth-child(5) .cmp-bar i, .cmp-row:nth-child(5) .cmp-bar::before { transition-delay: .5s; }
 @media (prefers-reduced-motion: reduce) { .cmp-bar::before, .cmp-bar i { transition: none; transform: none !important; } }
+
+
+/* ============================================================
+   2026-11 개선 — 메인 페이지 공통 (index·contact·pricing·process·references)
+   ============================================================ */
+
+/* 계속 움직이던 장식 정지 — 시선은 첫 방문 쇼케이스 한 곳에만 */
+.event-banner { animation: none; background-position: 0 0; }
+#brochure-trigger::before, #brochure-trigger::after { display: none; }
+.banner-bottom .cta { animation: none; }
+.banner-bottom .pulse::after { display: none; }
+.cmp-eyebrow { display: none; }
+
+/* 버튼·링크 터치 반응 */
+a, button { touch-action: manipulation; }
+:where(#hero, main) [id] { scroll-margin-top: 88px; }
+main section[id] { scroll-margin-top: 80px; }
+
+/* ── 떠 있는 요소 정리 ──
+   스크립트가 붙으면(html.dock-ready) 하단 상담 바는 첫 화면 버튼이 지나간 뒤에만 나타나고,
+   마지막 상담 블록·푸터가 보이면 들어갑니다. 스크립트가 없으면 예전처럼 그냥 보입니다. */
+.dock-ready .banner-bottom {
+  animation: none;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateX(-50%) translateY(calc(100% + 24px));
+  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.9,.2,1), visibility 0s linear .35s;
+}
+.dock-ready .banner-bottom.is-shown {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.9,.2,1), visibility 0s;
+}
+.banner-bottom .dock-ch { display: none; }
+
+/* 블로그 안내 팝업 — 넓은 화면에서만, 페이지를 어느 정도 읽은 뒤에 */
+.dock-ready .blog-pop { animation: none; opacity: 0; visibility: hidden; transform: translateY(16px);
+  transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s; }
+.dock-ready .blog-pop.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity .3s ease, transform .3s ease, visibility 0s; }
+@media (max-width: 1199px) { .blog-pop { display: none !important; } }
+
+@media (max-width: 767px) {
+  /* 휴대폰: 오른쪽 연락 버튼은 하단 바 안으로 합침 — 본문을 가리지 않게 */
+  .banner-side { display: none; }
+  .banner-bottom {
+    left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom));
+    transform: none; max-width: none; flex-wrap: nowrap;
+    gap: 8px; padding: 8px; border-radius: 18px;
+  }
+  .dock-ready .banner-bottom { transform: translateY(calc(100% + 24px)); }
+  .dock-ready .banner-bottom.is-shown { transform: none; }
+  .banner-bottom .pulse, .banner-bottom .label { display: none; }
+  .banner-bottom .dock-ch {
+    display: grid; place-items: center; flex: 0 0 auto;
+    width: 46px; height: 46px; border-radius: 13px; color: #fff; background: rgba(255,255,255,.1);
+  }
+  .banner-bottom .dock-ch.kakao { background: #FEE500; color: #191600; }
+  .banner-bottom .dock-ch svg { width: 21px; height: 21px; }
+  .banner-bottom .cta { flex: 1 1 auto; min-height: 46px; padding: 0 16px; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; }
+  .banner-bottom .close { width: 36px; height: 36px; font-size: 16px; }
+  /* 하단 바가 마지막 내용을 덮지 않게 */
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+
+/* ── 히어로 ── */
+.hero-sub { max-width: 34em; }
+.stat-label { font-size: 13.5px; color: var(--text-quiet); margin-bottom: 6px; }
+h1, h2, h3 { text-wrap: balance; }
+
+/* ── 작은 라벨: 넓은 자간·대문자 대신 평범한 한글 라벨 ── */
+.kicker { font-size: 14px; font-weight: 700; color: var(--accent-deep); margin-bottom: 10px; }
+
+/* ── NOAH는 다릅니다: 벤토 그리드 (카드 하나 = 약속 하나) ── */
+.bento { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: "price price days" "src edit edit"; }
+.bento-card { position: relative; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+  padding: clamp(24px, 3vw, 34px); border-radius: 24px; background: var(--bg-soft); border: 1px solid var(--line); }
+.bento-card h3 { font-size: clamp(19px, 2.2vw, 23px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.35; }
+.bento-card p.body { font-size: 15.5px; line-height: 1.8; color: var(--text-dim); margin-top: auto; }
+.bento-price { grid-area: price; background: var(--ink); border-color: transparent; color: #F4F5F7; padding: clamp(28px, 4vw, 48px); }
+.bento-price h3 { color: #F4F5F7; }
+.bento-price .figure { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+  font-size: clamp(52px, 8.4vw, 104px); font-variant-numeric: tabular-nums;
+  background: linear-gradient(110deg, #FF5A2B 0%, #FFA246 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bento-price .figure-note { font-size: 14px; color: rgba(244,245,247,.72); margin-top: -4px; }
+.bento-price p.body { color: rgba(244,245,247,.78); max-width: 40em; }
+.bento-days { grid-area: days; }
+.bento-src { grid-area: src; }
+.bento-edit { grid-area: edit; background: var(--accent-soft); border-color: rgba(201,56,12,.16); }
+
+/* 7일 띠 — 실제 순서가 있는 내용이라 숫자를 씀 */
+.days { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+.days li { display: grid; place-items: center; aspect-ratio: 1 / 1.15; border-radius: 9px; background: var(--bg); border: 1px solid var(--line);
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.days li.is-open { background: var(--cta); border-color: var(--cta); color: #fff; }
+.days-cap { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-quiet); margin-top: -6px; }
+
+/* 넘겨드리는 것 */
+.handover { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.handover li { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line);
+  font-size: 14px; font-weight: 600; color: var(--text); }
+.handover svg { width: 15px; height: 15px; color: var(--accent-deep); flex: none; }
+
+/* 글자 수정 예시 — 메뉴판 한 줄이 바뀌는 모습 */
+.edit-demo { display: grid; gap: 8px; max-width: 460px; padding: 16px 18px; border-radius: 16px; background: var(--bg); border: 1px solid rgba(201,56,12,.14); }
+.edit-line { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; }
+.edit-line .item { font-weight: 600; color: var(--text); }
+.edit-line .price { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--text); }
+.edit-line .was { color: var(--text-quiet); text-decoration: line-through; font-weight: 500; margin-right: 6px; }
+.edit-meta { font-size: 13px; color: var(--accent-deep); font-weight: 700; }
+
+@media (max-width: 1023px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "price price" "days src" "edit edit"; }
+}
+@media (max-width: 640px) {
+  .bento { grid-template-columns: minmax(0, 1fr); grid-template-areas: "price" "days" "edit" "src"; gap: 12px; }
+  .bento-card { border-radius: 20px; }
+}

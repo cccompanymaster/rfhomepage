@@ -43,8 +43,8 @@
     <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css?v=35af2173" />
     <link rel="stylesheet" href="/assets/fonts/space-grotesk/space-grotesk.css?v=ff64bde8" />
     <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css?v=40c0665d" />
-    <link rel="stylesheet" href="/assets/css/tw.css?v=c6fd5aca" />
-    <link rel="stylesheet" href="/assets/css/common.css?v=b1fa8595" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=ecf1fd40" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=86aca2d7" />
     <!-- 첫 진입 쇼케이스 게이트: 세션당 1회. 해시(#how 등)로 들어오거나 데이터 절약 모드면 건너뜀.
          스크립트가 4초 안에 안 뜨면(차단·오류) 자동으로 걷어서 본문이 막히지 않게 함 -->
     <script>
@@ -73,8 +73,8 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="/assets/showcase/intro.css?v=91eb6ccf" />
-    <link rel="stylesheet" href="/assets/css/site.css?v=9a2e0e41" />
+    <link rel="stylesheet" href="/assets/showcase/intro.css?v=2d12e32d" />
+    <link rel="stylesheet" href="/assets/css/site.css?v=9071ebf8" />
     <style>
       /* 사진 — 히어로 와이드 · 제목 옆 카드 · 진행 방식 오른쪽 칸 · 수정 상자 띠 */
       .photo-hero { margin: 56px 0 0; border-radius: 28px; overflow: hidden; aspect-ratio: 16 / 7; background: var(--bg-soft); }
@@ -126,11 +126,6 @@
       .q-mark { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:9px;
         background:var(--accent-soft); color:var(--accent-deep); font-weight:800; font-size: 16.5px; margin-bottom:14px; }
 
-      .diff-row { display:grid; grid-template-columns:34px 1fr; gap:16px; padding:24px 0; border-top:1px solid var(--line); }
-      .diff-row:last-child { border-bottom:1px solid var(--line); }
-      .diff-n { font-family:'Space Grotesk',sans-serif; font-size: 14px; font-weight:700; color:var(--accent); padding-top:4px; }
-      .diff-row h3 { font-size:clamp(18px,2.3vw,23px); font-weight:800; letter-spacing:-0.03em; }
-      .diff-row p { margin-top:8px; font-size: 16.5px; line-height:1.85; color:var(--text-dim); }
 
       /* 7일 타임라인 */
       .tl { position:relative; padding-left:26px; }
@@ -141,7 +136,7 @@
       .tl-item::before { content:''; position:absolute; left:-24px; top:6px; width:16px; height:16px; border-radius:50%;
         background:#fff; border:3px solid var(--accent); }
       .tl-day { font-family:'Space Grotesk',sans-serif; font-size: 13px; font-weight:700; letter-spacing:.14em; color:var(--accent-deep); }
-      .tl-item h4 { font-size: 18.5px; font-weight:800; letter-spacing:-0.025em; margin-top:5px; }
+      .tl-item h3 { font-size: 18.5px; font-weight:800; letter-spacing:-0.025em; margin-top:5px; }
       .tl-item p { margin-top:5px; font-size: 15px; line-height:1.8; color:var(--text-dim); }
       @media(max-width:640px){ .tl { padding-left:22px; } .tl-item::before { left:-21px; width:14px; height:14px; } }
 
@@ -356,7 +351,7 @@
     </div>
 
     <!-- 상단 이벤트 선정자 유도 배너 → 사전 정보 작성 페이지 -->
-    <div class="event-banner-wrap" id="event-banner">
+    <div class="event-banner-wrap" id="event-banner" role="region" aria-label="이벤트 선정자 안내">
       <a class="event-banner" href="/intake" data-banner-id="noah-intake">
         <span class="event-banner__emoji" aria-hidden="true">🎉</span>
         <span class="event-banner__text"><b>홈페이지 제작 이벤트 선정자</b>분들은 여기를 눌러 정보를 작성해주세요!</span>
@@ -365,7 +360,7 @@
       <button class="event-banner__close" id="event-banner-close" aria-label="이벤트 배너 닫기">×</button>
     </div>
 
-    <a href="#hero" class="skip-link">본문으로 건너뛰기</a>
+    <a href="#main" class="skip-link">본문으로 건너뛰기</a>
     <div class="bg-blobs" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header class="site-hd" id="site-hd">
@@ -385,8 +380,8 @@
         <div class="flex items-center gap-2">
           <button id="brochure-trigger" type="button" class="hidden lg:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2.5 rounded-full transition" style="border:1px solid var(--line); color:var(--text-dim)">소개서 받기</button>
           <a href="/contact" class="text-sm font-bold px-5 py-2.5 rounded-full nb-cta">무료 상담</a>
-          <button class="md:hidden p-2" aria-label="메뉴 열기" onclick="document.getElementById('mnav').classList.add('open');document.body.style.overflow='hidden'">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <button class="md:hidden p-2" aria-label="메뉴 열기" aria-controls="mnav" aria-expanded="false" data-nav-open>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
           </button>
         </div>
       </div>
@@ -402,19 +397,16 @@
       <a href="/contact" class="mt-8 py-4 rounded-full text-center nb-cta" onclick="closeNav()">무료 상담 신청</a>
     </div>
 
+    <main id="main" tabindex="-1">
     <!-- 1. 히어로 -->
-    <!-- ====================== HERO ====================== -->
     <section id="hero" class="container-x pt-16 md:pt-28 pb-24 md:pb-36 relative">
-      <p class="text-xs md:text-sm font-medium mb-8 tracking-[0.22em]" style="color: var(--text-quiet)">
-        HOMEPAGE IN 7 DAYS · NOAH · 2026
-      </p>
       <h1
         class="grad-text serif font-semibold leading-[1.18] tracking-[-0.02em] max-w-5xl" style="font-size: clamp(36px, 8.6vw, 104px)"
       >
-        <span class="typer" data-words="일주일이면 열리는|손님을 부르는|검색에 강한|문의가 들어오는" data-type-speed="90" data-delete-speed="45" data-pause="1800">일주일이면 열리는</span><br />홈페이지,<br /><span class="grad-pink">199,000원</span>으로.
+        일주일이면 열리는<br />홈페이지,<br /><span class="grad-pink">199,000원</span>으로.
       </h1>
       <div class="mt-12 grid md:grid-cols-12 gap-8 items-end">
-        <p class="md:col-span-7 text-base md:text-xl leading-relaxed" style="color: var(--text-dim)">
+        <p class="hero-sub md:col-span-7 text-base md:text-xl leading-relaxed" style="color: var(--text-dim)">
           21개 레퍼런스로 검증된 디자인을 그대로 가져갑니다.<br />
           모바일·검색 기본 설정·1년 호스팅까지 포함해, 자료 확인 후 <strong style="color:var(--text)">7일 안에 오픈</strong>.
         </p>
@@ -429,26 +421,26 @@
       </div>
 
       <figure class="photo-hero">
-        <img src="/assets/images/home/hero-collaboration.webp" alt="밝은 작업실에서 사장님과 NOAH 담당자가 노트북 화면을 함께 보며 홈페이지를 이야기하는 모습" width="1600" height="900" decoding="async" />
+        <img src="/assets/images/home/hero-collaboration.webp" alt="밝은 작업실에서 사장님과 NOAH 담당자가 노트북 화면을 함께 보며 홈페이지를 이야기하는 모습" width="1600" height="900" fetchpriority="high" decoding="async" />
       </figure>
 
       <!-- 신뢰 stats -->
       <dl class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
         <div class="stat-block">
-          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">제작 단가</dt>
+          <dt class="stat-label">제작 단가</dt>
           <dd class="serif stat-v stat-v-price number-tabular grad-pink">₩199,000</dd>
         </div>
         <div class="stat-block">
-          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">오픈까지</dt>
-          <dd class="serif stat-v number-tabular"><span data-count="7">0</span><span class="text-xl">일</span></dd>
+          <dt class="stat-label">오픈까지</dt>
+          <dd class="serif stat-v number-tabular"><span>7</span><span class="text-xl">일</span></dd>
         </div>
         <div class="stat-block">
-          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">고를 수 있는 디자인</dt>
-          <dd class="serif stat-v number-tabular"><span data-count="21">0</span><span class="text-xl">종</span></dd>
+          <dt class="stat-label">고를 수 있는 디자인</dt>
+          <dd class="serif stat-v number-tabular"><span>21</span><span class="text-xl">종</span></dd>
         </div>
         <div class="stat-block">
-          <dt class="text-xs mb-2" style="color: var(--text-quiet); letter-spacing:.18em; text-transform:uppercase">텍스트 수정</dt>
-          <dd class="serif stat-v number-tabular"><span data-count="1">0</span><span class="text-xl">년 무제한</span></dd>
+          <dt class="stat-label">텍스트 수정</dt>
+          <dd class="serif stat-v number-tabular"><span>1</span><span class="text-xl">년 무제한</span></dd>
         </div>
       </dl>
     </section>
@@ -497,7 +489,6 @@
           <img src="/assets/images/home/price-compare.webp" alt="199,000원 가격표가 달린 노트북과 휴대폰에 NOAH 레퍼런스 카페 홈페이지가 열려 있는 모습" width="1600" height="800" loading="lazy" decoding="async" />
         </figure>
         <div class="cmp-body">
-          <p class="cmp-eyebrow">PRICE CHECK</p>
           <h2 class="cmp-title" id="compare-title">홈페이지 제작, 보통 얼마 드나요?</h2>
           <ul class="cmp-list">
             <li class="cmp-row">
@@ -532,51 +523,57 @@
       </div>
     </section>
 
-    <!-- 3. 노아는 다릅니다 -->
-    <section class="container-x py-24 md:py-32 border-t border-black/[0.06]" id="different">
-      <div class="page-lead reveal mb-16">
-        <p class="text-sm tracking-[0.2em] mb-5 font-semibold" style="color: var(--accent-deep)">WHY NOAH</p>
-        <h2 class="serif" style="font-size: clamp(32px,5vw,52px); line-height:1.24">NOAH는 다릅니다.</h2>
-        <p class="mt-7 text-lg leading-9" style="color: var(--text-dim)">
+    <!-- 3. 노아는 다릅니다 — 벤토: 카드 하나에 약속 하나 -->
+    <section class="container-x py-24 md:py-32 border-t border-black/[0.06]" id="different" aria-labelledby="different-title">
+      <div class="page-lead reveal mb-12 md:mb-14">
+        <h2 id="different-title" class="serif" style="font-size: clamp(32px,5vw,52px); line-height:1.24">NOAH는 다릅니다.</h2>
+        <p class="mt-6 text-lg leading-9" style="color: var(--text-dim)">
           앞의 네 가지는 전부 <strong style="color:var(--text)">가격을 나중에 정하기 때문에</strong> 생기는 일입니다.
           저희는 그 순서를 뒤집었습니다.
         </p>
       </div>
 
-      <div class="reveal">
-        <article class="diff-row">
-          <span class="diff-n">01</span>
-          <div>
-            <h3>가격을 먼저 말합니다</h3>
-            <p>199,000원. 상담을 받아봐야 아는 금액이 아니라, 사장님이 저희를 찾기 전에 이미 정해져 있는 금액입니다. 부가세와 도메인 비용, 고르신 옵션만 별도입니다. 그 외에 붙는 건 없습니다.</p>
-          </div>
+      <div class="bento reveal">
+        <article class="bento-card bento-price">
+          <h3>가격을 먼저 말합니다</h3>
+          <p class="figure">₩199,000</p>
+          <p class="figure-note">부가세 별도, 1회 결제</p>
+          <p class="body">상담을 받아봐야 아는 금액이 아니라, 사장님이 저희를 찾기 전에 이미 정해져 있는 금액입니다. 부가세와 도메인 비용, 고르신 옵션만 별도입니다. 그 외에 붙는 건 없습니다.</p>
         </article>
-        <article class="diff-row">
-          <span class="diff-n">02</span>
-          <div>
-            <h3>7일 안에 엽니다</h3>
-            <p>디자인을 처음부터 그리지 않기 때문입니다. 21개 업종 디자인을 이미 만들어 뒀고 그 위에 사장님 브랜드만 옮깁니다. 자료가 모인 날부터 세어 7일, 그래서 두 달이 일주일이 됩니다.</p>
-          </div>
+
+        <article class="bento-card bento-days">
+          <h3>7일 안에 엽니다</h3>
+          <ol class="days" aria-label="자료가 모인 날부터 7일째 오픈">
+            <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li class="is-open">7</li>
+          </ol>
+          <p class="days-cap" aria-hidden="true"><span>자료 모인 날</span><span>오픈</span></p>
+          <p class="body">디자인을 처음부터 그리지 않기 때문입니다. 21개 업종 디자인을 이미 만들어 뒀고 그 위에 사장님 브랜드만 옮깁니다. 그래서 두 달이 일주일이 됩니다.</p>
         </article>
-        <article class="diff-row">
-          <span class="diff-n">03</span>
-          <div>
-            <h3>1년 동안 글자 수정은 무제한입니다</h3>
-            <p>가격이 바뀌든 메뉴가 바뀌든 연락 한 번이면 됩니다. 건당 비용을 받지 않습니다. 고칠 때마다 돈이 든다면 결국 안 고치게 됩니다. 그러면 홈페이지는 죽습니다.</p>
-          </div>
+
+        <article class="bento-card bento-src">
+          <h3>소스도 계정도 사장님 것입니다</h3>
+          <ul class="handover">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>소스 코드</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>관리 계정</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>도메인 명의</li>
+          </ul>
+          <p class="body">완료되면 전부 넘겨드립니다. 나중에 다른 곳에 맡기셔도 저희한테 허락받을 일이 없습니다.</p>
         </article>
-        <article class="diff-row">
-          <span class="diff-n">04</span>
-          <div>
-            <h3>소스도 계정도 사장님 것입니다</h3>
-            <p>완료되면 소스 코드와 계정을 전부 넘겨드립니다. 도메인도 사장님 명의로 만듭니다. 나중에 다른 곳에 맡기셔도 저희한테 허락받을 일이 없습니다.</p>
+
+        <article class="bento-card bento-edit">
+          <h3>1년 동안 글자 수정은 무제한입니다</h3>
+          <div class="edit-demo" aria-hidden="true">
+            <p class="edit-line"><span class="item">아메리카노</span><span class="price"><span class="was">4,500원</span>4,800원</span></p>
+            <p class="edit-line"><span class="item">평일 마감</span><span class="price"><span class="was">21시</span>22시</span></p>
+            <p class="edit-meta">카톡으로 말씀만 하시면 끝</p>
           </div>
+          <p class="body">가격이 바뀌든 메뉴가 바뀌든 연락 한 번이면 되고, 평균 1영업일 안에 반영합니다. 건당 비용은 받지 않습니다. 고칠 때마다 돈이 든다면 결국 안 고치게 되고, 그러면 홈페이지는 죽습니다.</p>
         </article>
       </div>
     </section>
+
     <section class="container-x py-24 md:py-32 border-t border-black/[0.06]" id="how">
       <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">HOW IT WORKS</p>
         <h2 class="serif" style="font-size: clamp(28px,4.6vw,46px); line-height:1.26">딱 199,000원,<br />일주일이면 완성됩니다.</h2>
         <p class="mt-6 text-[16.5px] leading-8" style="color: var(--text-dim)">
           업체 정보와 마음에 드는 디자인만 알려주세요. 나머지 자료는 진행하면서 같이 정리합니다.
@@ -587,27 +584,27 @@
         <div class="tl reveal">
           <div class="tl-item">
             <p class="tl-day">DAY 1</p>
-            <h4>30분 통화 + 디자인 고르기</h4>
+            <h3>30분 통화 + 디자인 고르기</h3>
             <p>어떤 가게인지, 손님이 오기 전에 무엇을 가장 궁금해하는지 여쭙고 21개 중 마음에 드는 디자인을 고릅니다. "이건 이 부분만 바꾸고 싶다" 정도만 말씀해주세요. 자료가 없어도 괜찮습니다.</p>
           </div>
           <div class="tl-item">
             <p class="tl-day">DAY 2–3</p>
-            <h4>문구·자료 정리</h4>
+            <h3>문구·자료 정리</h3>
             <p>통화 내용과 보내주신 자료로 소개·메뉴·가격 문구를 정리하고, 한국어 카피라이터가 손봅니다. 사진이 없으면 준비하는 방법부터 알려드립니다.</p>
           </div>
           <div class="tl-item">
             <p class="tl-day">DAY 4–5</p>
-            <h4>사장님 브랜드로 바꾸기</h4>
+            <h3>사장님 브랜드로 바꾸기</h3>
             <p>고르신 디자인에 가게 이름, 로고, 색, 사진, 문구를 넣습니다. 다 되면 완성본 링크를 보내드립니다.</p>
           </div>
           <div class="tl-item">
             <p class="tl-day">DAY 6</p>
-            <h4>보시고 고치기</h4>
+            <h3>보시고 고치기</h3>
             <p>휴대폰으로 열어보시고 고칠 곳을 편하게 말씀해주세요. 이 단계에서는 몇 번을 고치셔도 추가 비용이 없습니다.</p>
           </div>
           <div class="tl-item">
             <p class="tl-day">DAY 7</p>
-            <h4>오픈</h4>
+            <h3>오픈</h3>
             <p>도메인을 연결하고 검색 기본 설정을 마칩니다. 원하시면 네이버·구글·빙 검색 등록까지 무료로 대신해 드립니다. 관리 방법은 문서로 정리해 드립니다.</p>
           </div>
         </div>
@@ -618,8 +615,8 @@
           <figcaption>메뉴판·사진·명함처럼 지금 있는 자료면 충분합니다. 모자란 건 진행하면서 같이 채웁니다.</figcaption>
         </figure>
         <aside class="reveal rounded-3xl p-8" style="background:var(--bg-soft); border:1px solid var(--line)">
-          <p class="text-xs tracking-[0.2em]" style="color: var(--text-quiet)">이 금액에 들어 있는 것</p>
-          <p class="serif mt-3" style="font-size:clamp(30px,4vw,40px); color:var(--accent)">₩199,000</p>
+          <p class="text-sm font-semibold" style="color: var(--text-dim)">이 금액에 들어 있는 것</p>
+          <p class="serif mt-3" style="font-size:clamp(30px,4vw,40px); color:var(--cta)">₩199,000</p>
           <p class="text-xs mt-1" style="color: var(--text-quiet)">1회 결제 · 부가세 별도</p>
           <div class="mt-6">
             <p class="incl">21개 디자인 중 선택 + 브랜드 적용</p>
@@ -643,7 +640,6 @@
         </figure>
         <div class="grid lg:grid-cols-[1fr_320px] gap-10 items-center">
           <div>
-            <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">UNLIMITED EDITS</p>
             <h3 class="serif" style="font-size: clamp(25px,3.6vw,38px); line-height:1.28">수정이 잦을 것 같다구요?<br />괜찮습니다.</h3>
             <p class="mt-6 text-[16.5px] leading-8" style="color: var(--text-dim)">
               가격표, 메뉴, 영업시간처럼 <strong style="color:var(--text)">글자만 바뀌는 수정은 1년 내내 무제한</strong>입니다. 기본 패키지에 이미 들어 있고 건당 비용은 받지 않습니다.
@@ -654,8 +650,8 @@
             </p>
           </div>
           <div class="rounded-2xl px-7 py-8 text-center" style="background:var(--bg); border:1px solid var(--line)">
-            <p class="text-xs tracking-[0.18em]" style="color: var(--text-quiet)">유지보수 1년</p>
-            <p class="serif mt-3" style="font-size:clamp(30px,4vw,40px); color:var(--accent)">₩200,000</p>
+            <p class="text-sm font-semibold" style="color: var(--text-dim)">유지보수 1년</p>
+            <p class="serif mt-3" style="font-size:clamp(30px,4vw,40px); color:var(--cta)">₩200,000</p>
             <p class="text-xs mt-1" style="color: var(--text-quiet)">12개월 · 횟수 제한 없음</p>
             <a href="/checkout?add=maint_y" class="mt-6 w-full inline-flex justify-center px-6 py-3.5 rounded-full font-bold text-sm nb-cta">함께 담기 →</a>
           </div>
@@ -666,7 +662,6 @@
     <!-- 5. 싸니까 대충 만드는 거 아니냐고요? -->
     <section class="container-x py-24 md:py-32 border-t border-black/[0.06]" id="quality">
       <div class="page-lead reveal mb-12">
-        <p class="text-xs tracking-[0.22em] mb-4" style="color: var(--text-quiet)">REFERENCE · 21 DESIGNS</p>
         <h2 class="serif" style="font-size: clamp(28px,4.6vw,46px); line-height:1.26">싸니까 대충 만드는 거<br />아니냐고요?</h2>
         <p class="mt-6 text-base leading-8" style="color: var(--text-dim)">
           말로 설명하는 것보다 직접 보시는 게 빠릅니다.<br />
@@ -682,13 +677,13 @@
       </div>
 
       <div class="text-center mt-10 reveal">
-        <a href="/references" class="inline-flex px-7 py-4 rounded-full font-bold text-sm nb-cta">21개 전부 보기 →</a>
-        <p class="mt-4 text-sm" style="color: var(--text-quiet)">치과·법무법인·펜션·제조업까지, 업종별로 나눠 두었습니다.</p>
+        <p class="text-[15.5px]" style="color: var(--text-dim)">치과·법무법인·펜션·제조업까지 업종별로 나눠 두었습니다.
+          <a href="/references" class="font-bold underline underline-offset-4" style="color: var(--text)">업종별 목록으로 보기</a></p>
       </div>
     </section>
 
     <!-- 6. 이 정도는 199,000원으로 충분합니다 -->
-    <section class="container-x py-28 md:py-36 border-t border-black/[0.06]" id="enough">
+    <section class="container-x py-28 md:py-36 border-t border-black/[0.06]" id="enough" data-dock-stop>
       <div class="rounded-3xl px-8 py-16 md:px-16 md:py-20 text-center reveal"
            style="background:linear-gradient(165deg, var(--accent-soft), #fff); border:1px solid rgba(255,90,43,.24)">
         <h2 class="serif" style="font-size: clamp(30px,5vw,52px); line-height:1.24">
@@ -710,7 +705,6 @@
     <section class="container-x pb-20 md:pb-28" id="facts" aria-labelledby="facts-title">
       <div class="facts">
         <div class="facts-head">
-          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">AT A GLANCE</p>
           <h2 id="facts-title" class="serif" style="font-size: clamp(24px,3.4vw,34px); line-height:1.3">NOAH 한눈에 보기</h2>
           <p class="mt-4 text-[15.5px] leading-7" style="color: var(--text-dim)">노아홈페이지(NOAH)는 소상공인·중소기업을 위한 199,000원, 7일 홈페이지 제작 서비스입니다.</p>
           <a href="/process#faq" class="inline-block mt-5 text-sm font-semibold underline underline-offset-4" style="color: var(--text-dim)">자주 묻는 질문 더 보기 →</a>
@@ -748,7 +742,6 @@
     <section class="container-x pb-24 md:pb-32" id="guides" aria-labelledby="guides-title">
       <div class="flex items-end justify-between gap-6 flex-wrap mb-8">
         <div>
-          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">GUIDES · 105</p>
           <h2 id="guides-title" class="serif" style="font-size: clamp(24px,3.4vw,34px); line-height:1.3">맡기기 전에 읽어볼 글</h2>
         </div>
         <a href="/columns/" class="text-sm font-semibold underline underline-offset-4" style="color: var(--text-dim)">칼럼 111편 전체 보기 →</a>
@@ -796,9 +789,9 @@
         </a>
       </div>
     </section>
+    </main>
 
-
-    <footer class="container-x py-10 border-t border-black/[0.06] text-sm" style="color: var(--text-quiet)">
+    <footer data-dock-stop class="container-x py-10 border-t border-black/[0.06] text-sm" style="color: var(--text-quiet)">
       <div class="flex flex-wrap items-start justify-between gap-6">
         <div class="leading-relaxed">
           <p class="font-semibold" style="color: var(--text)">NOAH · 노아홈페이지</p>
@@ -806,7 +799,7 @@
           <p>사업자등록번호: 224-73-00560 · <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2247300560" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">사업자정보확인</a></p>
           <p>통신판매업 신고번호: 제2026-인천서해-1228호</p>
           <p>주소: 인천광역시 서해구 청라한내로100번길 10, 4층 411,412-L044호 (청라동, 청라 큐브시그니처 1차 오피스텔)</p>
-          <p class="mt-3 text-xs" style="color: rgba(17,24,33,0.32)">호스팅 서비스 제공자: Cloudflare, Inc.</p>
+          <p class="mt-3 text-xs" style="color: var(--text-quiet)">호스팅 서비스 제공자: Cloudflare, Inc.</p>
         </div>
         <div class="text-right leading-relaxed">
           <div class="flex gap-4 justify-end mb-4 flex-wrap">
@@ -825,15 +818,18 @@
     <div class="modal-mask" id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="brochure-title">
       <div class="modal-card">
         <button class="modal-close" type="button" id="brochure-close" aria-label="닫기">×</button>
-        <p class="text-xs tracking-[0.18em] mb-3" style="color: var(--text-quiet)">NOAH BROCHURE</p>
-        <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서,<br />지금 바로 받아보세요.</h2>
+                <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서,<br />지금 바로 받아보세요.</h2>
         <p class="mt-3 text-sm" style="color: var(--text-dim)">제출 즉시 PDF 다운로드가 시작되고 입력하신 이메일로도 한 번 더 보내드립니다. 업종별 레퍼런스와 7일 제작 과정, 199,000원 패키지를 한 권에 담았습니다.</p>
 
         <form id="brochure-form" class="mt-7 space-y-3" novalidate>
-          <input class="field-dark" name="name" required placeholder="성함 *" />
-          <input class="field-dark" name="email" type="email" required placeholder="이메일 (보관용으로도 보내드립니다) *" />
-          <input class="field-dark" name="phone" type="tel" placeholder="연락처 (선택)" />
-          <select class="field-dark" name="industry">
+          <label class="sr-only" for="bf-name">성함 (필수)</label>
+          <input class="field-dark" id="bf-name" name="name" required autocomplete="name" placeholder="성함 *" />
+          <label class="sr-only" for="bf-email">이메일 (필수)</label>
+          <input class="field-dark" id="bf-email" name="email" type="email" required autocomplete="email" spellcheck="false" placeholder="이메일 (보관용으로도 보내드립니다) *" />
+          <label class="sr-only" for="bf-phone">연락처 (선택)</label>
+          <input class="field-dark" id="bf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="연락처 (선택)" />
+          <label class="sr-only" for="bf-industry">관심 업종 (선택)</label>
+          <select class="field-dark" id="bf-industry" name="industry">
             <option value="">관심 업종 (선택)</option>
             <option>치과·병원</option>
             <option>법무·세무·회계</option>
@@ -876,6 +872,8 @@
     <div class="banner-bottom" data-banner-id="noah-main" role="region" aria-label="상담 안내 배너">
       <span class="pulse" aria-hidden="true"></span>
       <span class="label"><span class="strong">₩199,000 · 7일 오픈</span> · 영업일 1일 안에 회신</span>
+      <a class="dock-ch kakao" href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg></a>
+      <a class="dock-ch" href="tel:01066586482" aria-label="전화 상담 010-6658-6482"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
       <a class="cta" href="/contact">무료 상담 신청</a>
       <button class="close" aria-label="배너 닫기">×</button>
     </div>
@@ -895,8 +893,8 @@
         <span class="tip">cccompanymaster@gmail.com</span>
       </a>
     </div>
-    <script src="./assets/js/showroom.js?v=f9a06350" defer></script>
-    <script src="/assets/js/site.js?v=f2a13008"></script>
+    <script src="./assets/js/showroom.js?v=c8ceb05b" defer></script>
+    <script src="/assets/js/site.js?v=9522e45b"></script>
     <script type="module" src="/assets/showcase/intro.js?v=f77c980c"></script>
   </body>
 </html>

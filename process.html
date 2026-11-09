@@ -43,9 +43,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
-    <link rel="stylesheet" href="/assets/css/tw.css?v=c6fd5aca" />
-    <link rel="stylesheet" href="/assets/css/common.css?v=b1fa8595" />
-    <link rel="stylesheet" href="/assets/css/site.css?v=9a2e0e41" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=ecf1fd40" />
+    <link rel="stylesheet" href="/assets/css/common.css?v=86aca2d7" />
+    <link rel="stylesheet" href="/assets/css/site.css?v=9071ebf8" />
       <!-- ld:site -->
     <script type="application/ld+json">
     {
@@ -184,7 +184,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- 상단 이벤트 선정자 유도 배너 → 사전 정보 작성 페이지 -->
-    <div class="event-banner-wrap" id="event-banner">
+    <div class="event-banner-wrap" id="event-banner" role="region" aria-label="이벤트 선정자 안내">
       <a class="event-banner" href="/intake" data-banner-id="noah-intake">
         <span class="event-banner__emoji" aria-hidden="true">🎉</span>
         <span class="event-banner__text"><b>홈페이지 제작 이벤트 선정자</b>분들은 여기를 눌러 정보를 작성해주세요!</span>
@@ -193,7 +193,7 @@
       <button class="event-banner__close" id="event-banner-close" aria-label="이벤트 배너 닫기">×</button>
     </div>
 
-    <a href="#process" class="skip-link">본문으로 건너뛰기</a>
+    <a href="#main" class="skip-link">본문으로 건너뛰기</a>
     <div class="bg-blobs" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header class="site-hd" id="site-hd">
@@ -213,7 +213,7 @@
         <div class="flex items-center gap-2">
           <button id="brochure-trigger" type="button" class="hidden lg:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2.5 rounded-full transition" style="border:1px solid var(--line); color:var(--text-dim)">소개서 받기</button>
           <a href="/contact" class="text-sm font-bold px-5 py-2.5 rounded-full nb-cta">무료 상담</a>
-          <button class="md:hidden p-2" aria-label="메뉴 열기" onclick="document.getElementById('mnav').classList.add('open');document.body.style.overflow='hidden'">
+          <button class="md:hidden p-2" aria-label="메뉴 열기" aria-controls="mnav" aria-expanded="false" data-nav-open>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
           </button>
         </div>
@@ -231,10 +231,10 @@
     </div>
 
     <!-- ====================== PROCESS ====================== -->
+    <main id="main" tabindex="-1">
     <section id="process" class="container-x py-24 md:py-36 border-t border-black/[0.06]">
       <div class="grid md:grid-cols-12 gap-12 mb-16">
         <div class="md:col-span-5">
-          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">PROCESS · 7 DAYS</p>
           <h1 class="serif text-3xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
             상담부터 오픈까지<br />단 7일.
           </h1>
@@ -243,12 +243,13 @@
           NOAH는 미리 만들어 둔 21개의 디자인을 사장님 브랜드로 옮기는 방식입니다. 백지에서 시작하지 않으니 협업 회의가 짧고 결정도 빠릅니다.
         </p>
       </div>
+      <h2 class="sr-only">7일 진행 순서</h2>
       <ol class="grid md:grid-cols-7 gap-3">
-        <li class="feat md:col-span-1"><p class="text-xs" style="color:var(--accent)">DAY 1</p><h3 class="font-semibold mt-2">상담 + 디자인 선택</h3><p class="text-sm mt-2" style="color:var(--text-dim)">30분 통화 또는 미팅</p></li>
-        <li class="feat md:col-span-2"><p class="text-xs" style="color:var(--accent)">DAY 2 — 3</p><h3 class="font-semibold mt-2">콘텐츠 정리 + 카피</h3><p class="text-sm mt-2" style="color:var(--text-dim)">제공 자료 정리, 한국어 카피라이터 검수</p></li>
-        <li class="feat md:col-span-2"><p class="text-xs" style="color:var(--accent)">DAY 4 — 5</p><h3 class="font-semibold mt-2">디자인 적용</h3><p class="text-sm mt-2" style="color:var(--text-dim)">선택한 디자인에 브랜드 컬러·로고 적용</p></li>
-        <li class="feat md:col-span-1"><p class="text-xs" style="color:var(--accent)">DAY 6</p><h3 class="font-semibold mt-2">검수 + 수정</h3><p class="text-sm mt-2" style="color:var(--text-dim)">고칠 곳 전부 반영 · 횟수 제한 없음</p></li>
-        <li class="feat md:col-span-1"><p class="text-xs" style="color:var(--accent)">DAY 7</p><h3 class="font-semibold mt-2">오픈 🎉</h3><p class="text-sm mt-2" style="color:var(--text-dim)">도메인 연결 후 라이브</p></li>
+        <li class="feat md:col-span-1"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 1</p><h3 class="font-semibold mt-2">상담 + 디자인 선택</h3><p class="text-sm mt-2" style="color:var(--text-dim)">30분 통화 또는 미팅</p></li>
+        <li class="feat md:col-span-2"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 2 — 3</p><h3 class="font-semibold mt-2">콘텐츠 정리 + 카피</h3><p class="text-sm mt-2" style="color:var(--text-dim)">제공 자료 정리, 한국어 카피라이터 검수</p></li>
+        <li class="feat md:col-span-2"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 4 — 5</p><h3 class="font-semibold mt-2">디자인 적용</h3><p class="text-sm mt-2" style="color:var(--text-dim)">선택한 디자인에 브랜드 컬러·로고 적용</p></li>
+        <li class="feat md:col-span-1"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 6</p><h3 class="font-semibold mt-2">검수 + 수정</h3><p class="text-sm mt-2" style="color:var(--text-dim)">고칠 곳 전부 반영 · 횟수 제한 없음</p></li>
+        <li class="feat md:col-span-1"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 7</p><h3 class="font-semibold mt-2">오픈 🎉</h3><p class="text-sm mt-2" style="color:var(--text-dim)">도메인 연결 후 라이브</p></li>
       </ol>
     </section>
 
@@ -256,7 +257,6 @@
     <section id="faq" class="container-x py-24 md:py-32 border-t border-black/[0.06]">
       <div class="grid md:grid-cols-12 gap-12">
         <div class="md:col-span-4">
-          <p class="text-xs tracking-[0.22em] mb-3" style="color: var(--text-quiet)">FAQ</p>
           <h2 class="serif text-3xl md:text-4xl font-semibold leading-[1.15] tracking-tight">
             가장 많이 묻는<br />질문들.
           </h2>
@@ -307,7 +307,9 @@
     </section>
 
 
-    <footer class="container-x py-10 border-t border-black/[0.06] text-sm" style="color: var(--text-quiet)">
+    </main>
+
+    <footer data-dock-stop class="container-x py-10 border-t border-black/[0.06] text-sm" style="color: var(--text-quiet)">
       <div class="flex flex-wrap items-start justify-between gap-6">
         <div class="leading-relaxed">
           <p class="font-semibold" style="color: var(--text)">NOAH · 노아홈페이지</p>
@@ -315,7 +317,7 @@
           <p>사업자등록번호: 224-73-00560 · <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2247300560" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">사업자정보확인</a></p>
           <p>통신판매업 신고번호: 제2026-인천서해-1228호</p>
           <p>주소: 인천광역시 서해구 청라한내로100번길 10, 4층 411,412-L044호 (청라동, 청라 큐브시그니처 1차 오피스텔)</p>
-          <p class="mt-3 text-xs" style="color: rgba(17,24,33,0.32)">호스팅 서비스 제공자: Cloudflare, Inc.</p>
+          <p class="mt-3 text-xs" style="color: var(--text-quiet)">호스팅 서비스 제공자: Cloudflare, Inc.</p>
         </div>
         <div class="text-right leading-relaxed">
           <div class="flex gap-4 justify-end mb-4 flex-wrap">
@@ -334,15 +336,18 @@
     <div class="modal-mask" id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="brochure-title">
       <div class="modal-card">
         <button class="modal-close" type="button" id="brochure-close" aria-label="닫기">×</button>
-        <p class="text-xs tracking-[0.18em] mb-3" style="color: var(--text-quiet)">NOAH BROCHURE</p>
         <h2 id="brochure-title" class="serif text-3xl font-semibold leading-tight">정성껏 만든 소개서,<br />지금 바로 받아보세요.</h2>
         <p class="mt-3 text-sm" style="color: var(--text-dim)">제출 즉시 PDF 다운로드가 시작되고, 입력하신 이메일로도 한 번 더 보내드립니다. 업종별 레퍼런스 · 7일 제작 과정 · 199,000원 패키지가 한 권에.</p>
 
         <form id="brochure-form" class="mt-7 space-y-3" novalidate>
-          <input class="field-dark" name="name" required placeholder="성함 *" />
-          <input class="field-dark" name="email" type="email" required placeholder="이메일 (보관용으로도 보내드립니다) *" />
-          <input class="field-dark" name="phone" type="tel" placeholder="연락처 (선택)" />
-          <select class="field-dark" name="industry">
+          <label class="sr-only" for="bf-name">성함 (필수)</label>
+          <input class="field-dark" id="bf-name" name="name" required autocomplete="name" placeholder="성함 *" />
+          <label class="sr-only" for="bf-email">이메일 (필수)</label>
+          <input class="field-dark" id="bf-email" name="email" type="email" required autocomplete="email" spellcheck="false" placeholder="이메일 (보관용으로도 보내드립니다) *" />
+          <label class="sr-only" for="bf-phone">연락처 (선택)</label>
+          <input class="field-dark" id="bf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="연락처 (선택)" />
+          <label class="sr-only" for="bf-industry">관심 업종 (선택)</label>
+          <select class="field-dark" id="bf-industry" name="industry">
             <option value="">관심 업종 (선택)</option>
             <option>치과·병원</option>
             <option>법무·세무·회계</option>
@@ -385,6 +390,8 @@
     <div class="banner-bottom" data-banner-id="noah-main" role="region" aria-label="상담 안내 배너">
       <span class="pulse" aria-hidden="true"></span>
       <span class="label"><span class="strong">₩199,000 · 7일 오픈</span> · 영업일 1일 안에 회신</span>
+      <a class="dock-ch kakao" href="https://pf.kakao.com/_ENCKX/chat" target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C6.477 4 2 7.582 2 12c0 2.85 1.86 5.34 4.65 6.78l-.95 3.46c-.08.3.24.55.5.39L10.55 20.4c.48.06.96.1 1.45.1 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg></a>
+      <a class="dock-ch" href="tel:01066586482" aria-label="전화 상담 010-6658-6482"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
       <a class="cta" href="/contact">무료 상담 신청</a>
       <button class="close" aria-label="배너 닫기">×</button>
     </div>
@@ -404,8 +411,8 @@
         <span class="tip">cccompanymaster@gmail.com</span>
       </a>
     </div>
-    <script src="./assets/js/showroom.js?v=f9a06350" defer></script>
-    <script src="/assets/js/site.js?v=f2a13008"></script>
+    <script src="./assets/js/showroom.js?v=c8ceb05b" defer></script>
+    <script src="/assets/js/site.js?v=9522e45b"></script>
 
   </body>
 </html>

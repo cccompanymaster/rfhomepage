@@ -17,9 +17,11 @@
   --line-soft: rgba(17, 24, 33, 0.055);
   --text: #111821;
   --text-dim: #56606F;
-  --text-quiet: #8C94A2;
+  --text-quiet: #687180;   /* 보조 글씨 — 흰·연회색 배경 모두 4.5:1 이상 */
   --accent: #FF5A2B;        /* CTA·강조 — 흰 배경 대비 확보 */
-  --accent-deep: #E8431A;   /* 텍스트용 진한 오렌지 */
+  --accent-deep: #C9380C;   /* 텍스트용 진한 오렌지 — 작은 글씨도 4.5:1 이상 */
+  --cta: #D63A0F;           /* 흰 글씨 버튼 배경 — 4.7:1 */
+  --cta-hover: #C2350C;
   --accent-soft: #FFF1EC;   /* 연한 오렌지 배경 */
   --on-accent: #FFFFFF;     /* accent 위 글자색 */
   --lime: #C9FF4A;          /* 다크 섹션 전용 포인트 */

@@ -22,8 +22,9 @@
   if (chips.length && refCards.length) {
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        chips.forEach((c) => (c.dataset.active = 'false'));
+        chips.forEach((c) => { c.dataset.active = 'false'; c.setAttribute('aria-pressed', 'false'); });
         chip.dataset.active = 'true';
+        chip.setAttribute('aria-pressed', 'true');
         const cat = chip.dataset.cat;
         refCards.forEach((card) => {
           const match = cat === 'all' || card.dataset.cat === cat;
@@ -129,12 +130,17 @@
       this.idx = 0;
       this.charIdx = 0;
       this.deleting = false;
-      // 가장 긴 단어 기준으로 min-width 잡아 레이아웃 흔들림 최소화
-      const longest = this.words.reduce((a, b) => (a.length > b.length ? a : b));
-      // 빈 텍스트 시작 + 첫 단어부터 타이핑
-      this.el.textContent = '';
-      // 시작 약간 지연 (페이지 로드 호흡)
-      setTimeout(() => this.tick(), 600);
+      // HTML에 적힌 첫 단어를 지우지 않고 그대로 보여준 뒤 시작 —
+      // 검색엔진·AI가 읽는 제목이 비지 않고, 첫 화면 표시(LCP)도 늦어지지 않음
+      const initial = (this.el.textContent || '').trim();
+      if (initial && initial === this.words[0]) {
+        this.charIdx = initial.length;
+        this.deleting = true;
+        setTimeout(() => this.tick(), this.pauseAfterType);
+      } else {
+        this.el.textContent = '';
+        setTimeout(() => this.tick(), 600);
+      }
     }
     tick() {
       const word = this.words[this.idx];
