@@ -3,6 +3,7 @@
 CSS 빌드 + 캐시 버전 붙이기.  페이지·칼럼을 고친 뒤 마지막에 한 번 돌립니다.
 
   python3 tools/build_columns.py     # 칼럼을 고쳤다면 먼저
+  python3 tools/build_charts.py      # 차트(content/charts.json)를 고쳤다면
   python3 tools/build_assets.py      # 항상 마지막에
 
 하는 일

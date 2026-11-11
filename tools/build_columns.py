@@ -139,6 +139,12 @@ def footer(hubs_html=''):
     </footer>'''
 
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import viz  # noqa: E402
+VIZ_SPECS = viz.load_specs()
+VIZ_SLOT = re.compile(r'<!--\s*vz:([\w-]+)(?:\s+(light|dark))?\s*-->')
+
+
 def esc(s):
     return html.escape(str(s), quote=True)
 
@@ -263,6 +269,11 @@ def build_article(art, all_cols, slugset, by_cluster):
     body, toc = add_anchors_and_toc(art['body'])
     body = link_keywords(body, art['slug'], slugset)
     plain = re.sub(r'<[^>]+>', '', body)
+    # 표는 가로 스크롤 감싸기 · <!--vz:이름--> 자리에 차트 (content/charts.json, tools/viz.py)
+    body = body.replace('<table>', '<div class="tbl"><table>').replace('</table>', '</table></div>')
+    body, n_viz = VIZ_SLOT.subn(lambda m: '<div class="vz-box">\n' + viz.render(m.group(1), m.group(2) or 'light', VIZ_SPECS) + '\n</div>', body)
+    viz_css = '\n    <link rel="stylesheet" href="/assets/css/viz.css" />' if n_viz else ''
+    viz_js = '\n    <script src="/assets/js/viz.js" defer></script>' if n_viz else ''
 
     # 클러스터 내 이전/다음
     sib = by_cluster[cl]
@@ -378,7 +389,7 @@ def build_article(art, all_cols, slugset, by_cluster):
     <meta name="twitter:image" content="{SITE}/assets/images/og/{art['slug']}.png" />
     {HEAD_COMMON}
     <link rel="stylesheet" href="/assets/css/common.css" />
-    <link rel="stylesheet" href="/assets/css/columns.css" />
+    <link rel="stylesheet" href="/assets/css/columns.css" />{viz_css}
     <script type="application/ld+json">{json.dumps(ld_article, ensure_ascii=False)}</script>
     <script type="application/ld+json">{json.dumps(ld_crumb, ensure_ascii=False)}</script>
   </head>
@@ -436,7 +447,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         <a href="/columns/topic/{cl}" class="hub-pill">{esc(cat)} 글 전체 보기 →</a>
       </div>
     </main>
-{footer()}
+{footer()}{viz_js}
   </body>
 </html>
 '''

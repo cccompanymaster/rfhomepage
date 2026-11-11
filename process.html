@@ -45,7 +45,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=ecf1fd40" />
     <link rel="stylesheet" href="/assets/css/common.css?v=86aca2d7" />
-    <link rel="stylesheet" href="/assets/css/site.css?v=9071ebf8" />
+    <link rel="stylesheet" href="/assets/css/site.css?v=c8f727e8" />
+    <link rel="stylesheet" href="/assets/css/viz.css?v=0f14e818" />
       <!-- ld:site -->
     <script type="application/ld+json">
     {
@@ -244,6 +245,28 @@
         </p>
       </div>
       <h2 class="sr-only">7일 진행 순서</h2>
+      <div class="vz-box mb-6">
+        <!-- vz:seven-days -->
+        <figure class="vz vz-gantt" data-vz-grow style="--vz-days:7" aria-label="NOAH 7일 제작 일정 차트 — 날짜별로 NOAH가 하는 일과 사장님이 하실 일">
+          <div class="vz-g" aria-hidden="true">
+            <span class="vz-g-corner"></span><span class="vz-g-day" style="grid-column:2">1일</span><span class="vz-g-day" style="grid-column:3">2일</span><span class="vz-g-day" style="grid-column:4">3일</span><span class="vz-g-day" style="grid-column:5">4일</span><span class="vz-g-day" style="grid-column:6">5일</span><span class="vz-g-day" style="grid-column:7">6일</span><span class="vz-g-day" style="grid-column:8">7일</span>
+            <span class="vz-g-label" style="grid-row:2">NOAH</span>
+            <span class="vz-g-bg" style="grid-row:2"></span>
+            <span class="vz-g-lane vz-g-seg" style="grid-row:2;grid-column:2 / 3" data-vz-v="상담 + 디자인 선택" data-vz-k="Day 1 · NOAH"><b>상담</b></span>
+            <span class="vz-g-lane vz-g-seg" style="grid-row:2;grid-column:3 / 5" data-vz-v="콘텐츠 정리 + 한국어 카피 검수" data-vz-k="Day 2–3 · NOAH"><b>카피 정리</b></span>
+            <span class="vz-g-lane vz-g-seg" style="grid-row:2;grid-column:5 / 7" data-vz-v="고른 디자인에 브랜드 컬러·로고 적용" data-vz-k="Day 4–5 · NOAH"><b>디자인 적용</b></span>
+            <span class="vz-g-lane vz-g-seg" style="grid-row:2;grid-column:7 / 8" data-vz-v="검수 + 수정 (횟수 제한 없음)" data-vz-k="Day 6 · NOAH"><b>검수</b></span>
+            <span class="vz-g-lane vz-g-seg" style="grid-row:2;grid-column:8 / 9" data-vz-v="도메인 연결 후 오픈" data-vz-k="Day 7 · NOAH"><b>오픈</b></span>
+            <span class="vz-g-label" style="grid-row:3">사장님</span>
+            <span class="vz-g-bg" style="grid-row:3"></span>
+            <span class="vz-g-lane is-em vz-g-seg" style="grid-row:3;grid-column:2 / 3" data-vz-v="30분 통화, 마음에 드는 디자인 고르기" data-vz-k="Day 1 · 사장님"><b>통화</b></span>
+            <span class="vz-g-lane is-em vz-g-seg" style="grid-row:3;grid-column:3 / 5" data-vz-v="사진과 소개 문구 전달 (초안이면 충분)" data-vz-k="Day 2–3 · 사장님"><b>자료 전달</b></span>
+            <span class="vz-g-lane is-em vz-g-seg" style="grid-row:3;grid-column:7 / 8" data-vz-v="휴대폰으로 열어 보고 고칠 곳 전달" data-vz-k="Day 6 · 사장님"><b>확인</b></span>
+          </div>
+          <p class="vz-foot">사장님 줄의 세 칸(통화·자료 전달·확인)만 사장님 몫이고, 4·5·7일은 기다리시면 됩니다. 7일은 자료가 모인 날부터 셉니다.</p>
+        </figure>
+        <!-- /vz:seven-days -->
+      </div>
       <ol class="grid md:grid-cols-7 gap-3">
         <li class="feat md:col-span-1"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 1</p><h3 class="font-semibold mt-2">상담 + 디자인 선택</h3><p class="text-sm mt-2" style="color:var(--text-dim)">30분 통화 또는 미팅</p></li>
         <li class="feat md:col-span-2"><p class="text-xs font-semibold" style="color:var(--accent-deep)">DAY 2 — 3</p><h3 class="font-semibold mt-2">콘텐츠 정리 + 카피</h3><p class="text-sm mt-2" style="color:var(--text-dim)">제공 자료 정리, 한국어 카피라이터 검수</p></li>
@@ -412,7 +435,8 @@
       </a>
     </div>
     <script src="./assets/js/showroom.js?v=c8ceb05b" defer></script>
-    <script src="/assets/js/site.js?v=9522e45b"></script>
+    <script src="/assets/js/site.js?v=530f0bd4"></script>
+    <script src="/assets/js/viz.js?v=bd18d668" defer></script>
 
   </body>
 </html>

@@ -45,7 +45,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Serif+KR:wght@500;700&display=swap" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=ecf1fd40" />
     <link rel="stylesheet" href="/assets/css/common.css?v=86aca2d7" />
-    <link rel="stylesheet" href="/assets/css/site.css?v=9071ebf8" />
+    <link rel="stylesheet" href="/assets/css/site.css?v=c8f727e8" />
+    <link rel="stylesheet" href="/assets/css/viz.css?v=0f14e818" />
       <!-- ld:site -->
     <script type="application/ld+json">
     {
@@ -245,34 +246,40 @@
         </figure>
         <div class="cmp-body">
           <h2 class="cmp-title" id="compare-title">홈페이지 제작, 보통 얼마 드나요?</h2>
-          <ul class="cmp-list">
-            <li class="cmp-row">
-              <div class="cmp-head"><span class="cmp-name">에이전시 맞춤 제작</span><span class="cmp-price">300만 원~</span></div>
-              <div class="cmp-bar" style="--from:100%;--to:100%" aria-hidden="true"><i></i></div>
-              <p class="cmp-note">기획·디자인·개발 인력이 따로 붙음 · 규모에 따라 수천만 원까지</p>
-            </li>
-            <li class="cmp-row">
-              <div class="cmp-head"><span class="cmp-name">반맞춤 제작</span><span class="cmp-price">100만~300만 원</span></div>
-              <div class="cmp-bar" style="--from:33%;--to:100%" aria-hidden="true"><i></i></div>
-              <p class="cmp-note">템플릿 + 부분 수정 · 호스팅·유지보수는 따로 계산하는 곳이 많음</p>
-            </li>
-            <li class="cmp-row">
-              <div class="cmp-head"><span class="cmp-name">템플릿 소개형</span><span class="cmp-price">수십만 원대</span></div>
-              <div class="cmp-bar" style="--from:10%;--to:33%" aria-hidden="true"><i></i></div>
-              <p class="cmp-note">제작비 기준 · 오픈 뒤 수정은 건당 비용을 받는 곳도 있음</p>
-            </li>
-            <li class="cmp-row">
-              <div class="cmp-head"><span class="cmp-name">빌더로 직접 제작</span><span class="cmp-price">월 수만 원</span></div>
-              <div class="cmp-bar" style="--from:4%;--to:24%" aria-hidden="true"><i></i></div>
-              <p class="cmp-note">구독료만 1년이면 수십만 원 · 만들고 고치는 시간은 직접</p>
-            </li>
-            <li class="cmp-row is-noah">
-              <div class="cmp-head"><span class="cmp-name">NOAH 기본 패키지</span><span class="cmp-price">199,000원</span></div>
-              <div class="cmp-bar" style="--from:6.6%;--to:6.6%" aria-hidden="true"><i></i></div>
-              <p class="cmp-note">제작 + 1년 호스팅 + 1년 무제한 텍스트 수정까지 포함 · 부가세 별도</p>
-            </li>
-          </ul>
-          <p class="cmp-foot">시장 금액은 특정 업체 가격이 아니라 일반적으로 형성된 범위이며, 페이지 수·기능·업체에 따라 크게 달라집니다. 막대는 300만 원을 끝으로 둔 대략적인 비교입니다. NOAH 금액은 부가세·도메인(연 15,000원~) 별도입니다.</p>
+          <!-- vz:price-compare dark -->
+          <figure class="vz vz-range vz-dark" data-vz-grow style="--vz-gridbg: linear-gradient(var(--vz-grid), var(--vz-grid)) 33.333% 0 / 1px 100% no-repeat, linear-gradient(var(--vz-grid), var(--vz-grid)) 66.667% 0 / 1px 100% no-repeat, linear-gradient(var(--vz-grid), var(--vz-grid)) 100.0% 0 / 1px 100% no-repeat" aria-label="홈페이지 제작 방식별 일반적인 비용 범위와 NOAH 기본 패키지 비교 막대 차트">
+            <p class="vz-legend" aria-hidden="true"><span><i class="vz-key vz-key-lo"></i>시작 금액</span><span><i class="vz-key vz-key-hi"></i>범위 (흐린 부분)</span></p>
+            <ul class="vz-rows">
+              <li class="vz-row" data-vz-v="300만 원~" data-vz-k="에이전시 맞춤 제작" data-vz-n="막대 끝 화살표 = 300만 원보다 더 올라감">
+                <div class="vz-head"><span class="vz-name">에이전시 맞춤 제작</span><span class="vz-val">300만 원~</span></div>
+                <div class="vz-track" aria-hidden="true"><span class="vz-seg vz-lo is-clip" style="--a:0%;--b:100.0%"></span></div>
+                <p class="vz-note">기획·디자인·개발 인력이 따로 붙음 · 규모에 따라 수천만 원까지</p>
+              </li>
+              <li class="vz-row" data-vz-v="100만~300만 원" data-vz-k="반맞춤 제작">
+                <div class="vz-head"><span class="vz-name">반맞춤 제작</span><span class="vz-val">100만~300만 원</span></div>
+                <div class="vz-track" aria-hidden="true"><span class="vz-seg vz-lo" style="--a:0%;--b:33.333%"></span><span class="vz-seg vz-hi is-end" style="--a:33.333%;--b:100.0%"></span></div>
+                <p class="vz-note">템플릿 + 부분 수정 · 호스팅·유지보수는 따로 계산하는 곳이 많음</p>
+              </li>
+              <li class="vz-row" data-vz-v="수십만 원대" data-vz-k="템플릿 소개형" data-vz-n="업체마다 달라 끝을 흐리게 표시">
+                <div class="vz-head"><span class="vz-name">템플릿 소개형</span><span class="vz-val">수십만 원대</span></div>
+                <div class="vz-track" aria-hidden="true"><span class="vz-seg vz-lo" style="--a:0%;--b:10.0%"></span><span class="vz-seg vz-hi is-fuzzy" style="--a:10.0%;--b:30.0%"></span></div>
+                <p class="vz-note">제작비 기준 · 오픈 뒤 수정은 건당 비용을 받는 곳도 있음</p>
+              </li>
+              <li class="vz-row" data-vz-v="월 수만 원" data-vz-k="빌더로 직접 제작" data-vz-n="막대는 1년 구독료 기준 (월 1만~6만 원 × 12개월)">
+                <div class="vz-head"><span class="vz-name">빌더로 직접 제작</span><span class="vz-val">월 수만 원</span></div>
+                <div class="vz-track" aria-hidden="true"><span class="vz-seg vz-lo" style="--a:0%;--b:4.0%"></span><span class="vz-seg vz-hi is-fuzzy" style="--a:4.0%;--b:24.0%"></span></div>
+                <p class="vz-note">구독료만 1년이면 수십만 원 · 만들고 고치는 시간은 직접</p>
+              </li>
+              <li class="vz-row is-em" data-vz-v="199,000원" data-vz-k="NOAH 기본 패키지">
+                <div class="vz-head"><span class="vz-name">NOAH 기본 패키지</span><span class="vz-val">199,000원</span></div>
+                <div class="vz-track" aria-hidden="true"><span class="vz-seg vz-lo is-end" style="--a:0%;--b:6.633%"></span></div>
+                <p class="vz-note">제작 + 1년 호스팅 + 1년 무제한 텍스트 수정까지 포함 · 부가세 별도</p>
+              </li>
+            </ul>
+            <div class="vz-axis" aria-hidden="true"><span style="--x:0.0%">0</span><span style="--x:33.333%">100만</span><span style="--x:66.667%">200만</span><span style="--x:100.0%">300만 원+</span></div>
+            <p class="vz-foot">시장 금액은 특정 업체 가격이 아니라 일반적으로 형성된 범위이며, 페이지 수·기능·업체에 따라 크게 달라집니다. 막대는 300만 원을 끝으로 둔 대략적인 비교입니다. NOAH 금액은 부가세·도메인(연 15,000원~) 별도입니다.</p>
+          </figure>
+          <!-- /vz:price-compare -->
           <a class="cmp-more" href="/columns/homepage-cost">홈페이지 제작 비용 구조 자세히 보기 →</a>
         </div>
       </div>
@@ -390,7 +397,8 @@
       </a>
     </div>
     <script src="./assets/js/showroom.js?v=c8ceb05b" defer></script>
-    <script src="/assets/js/site.js?v=9522e45b"></script>
+    <script src="/assets/js/site.js?v=530f0bd4"></script>
+    <script src="/assets/js/viz.js?v=bd18d668" defer></script>
 
   </body>
 </html>
