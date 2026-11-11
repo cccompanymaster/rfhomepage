@@ -109,7 +109,7 @@ brochureForm?.addEventListener('submit', async (e) => {
   const payload = { type: 'brochure' };
   fd.forEach((v, k) => { payload[k] = v; });
   payload.timestamp = new Date().toISOString();
-  payload.referrer = document.referrer || '직접 접속';
+  payload.referrer = (window.NOAH_SRC?.text() || document.referrer || '직접 접속');  // 광고·검색·AI 등 들어온 경로 (assets/js/attrib.js)
 
   // 1) PDF 즉시 다운로드 (Apps Script 응답을 기다리지 않음)
   triggerBrochureDownload('brochure_modal');

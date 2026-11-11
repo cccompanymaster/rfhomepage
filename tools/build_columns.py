@@ -448,6 +448,7 @@ def build_article(art, all_cols, slugset, by_cluster):
       </div>
     </main>
 {footer()}{viz_js}
+    <script src="/assets/js/attrib.js" defer></script>
   </body>
 </html>
 '''
@@ -545,6 +546,7 @@ def build_hub(cl, arts, all_cols):
       </section>
     </main>
 {footer()}
+    <script src="/assets/js/attrib.js" defer></script>
   </body>
 </html>
 '''
@@ -725,6 +727,7 @@ def build_index(cols):
       document.getElementById('static-list').style.display = 'none';
       render();
     </script>
+    <script src="/assets/js/attrib.js" defer></script>
   </body>
 </html>
 '''

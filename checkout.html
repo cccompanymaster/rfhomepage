@@ -468,7 +468,7 @@
       }
       function postGAS(payload) {
         return fetch(GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ ...payload, timestamp: new Date().toISOString(), referrer: document.referrer || '직접 접속', page: location.href }) }).catch(() => {});
+          body: JSON.stringify({ ...payload, timestamp: new Date().toISOString(), referrer: (window.NOAH_SRC?.text() || document.referrer || '직접 접속'), page: location.href }) }).catch(() => {});
       }
 
       /* ══════════ 결제 ══════════ */
@@ -584,5 +584,6 @@
       })();
     </script>
     <script src="/assets/js/pick.js?v=35edf0c2" defer></script>
+    <script src="/assets/js/attrib.js?v=f241b9f5" defer></script>
   </body>
 </html>

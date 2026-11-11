@@ -631,7 +631,7 @@
         }
         payload.email = payload.respondent_email || payload['B_이메일'] || '';
         payload.timestamp = new Date().toISOString();
-        payload.referrer = document.referrer || '직접 접속';
+        payload.referrer = (window.NOAH_SRC?.text() || document.referrer || '직접 접속');  // 광고·검색·AI 등 들어온 경로 (assets/js/attrib.js)
 
         try {
           await fetch(GAS_URL, {
@@ -663,5 +663,6 @@
       });
     </script>
     <script src="/assets/js/pick.js?v=35edf0c2" defer></script>
+    <script src="/assets/js/attrib.js?v=f241b9f5" defer></script>
   </body>
 </html>
