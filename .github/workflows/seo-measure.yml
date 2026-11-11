@@ -3,7 +3,7 @@
 # 언제 도나: 매주 월요일 오전 9시(KST) · Actions 탭 → "SEO 측정" → Run workflow · 이 파일이나 스크립트를 고칠 때
 # 결과 보기: 실행 기록을 열면 Summary 에 표로 나옵니다. 원본 JSON 은 Artifacts(90일 보관).
 # 스크립트: tools/seo_measure.py   측정 기록: content/seo-measure.md
-# Lighthouse 는 GA4·GTM 요청을 막고 돌립니다 — 방문 통계가 측정 트래픽으로 오염되지 않게.
+# Lighthouse 는 GA4·Clarity·광고 픽셀 요청을 막고 돌립니다 — 방문 통계·광고 전환이 측정 트래픽으로 오염되지 않게.
 name: SEO 측정
 
 on:
@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
   push:
     branches: [claude/homepage-reference-designs-SXEMC]
-    paths: ['tools/seo_measure.py', '.github/workflows/seo-measure.yml']
+    paths: ['tools/seo_measure.py', 'tools/sync_tags.py', 'assets/js/tags.js', '.github/workflows/seo-measure.yml']
 
 permissions:
   contents: read
@@ -49,9 +49,17 @@ jobs:
               --blocked-url-patterns='*googletagmanager.com*' \
               --blocked-url-patterns='*google-analytics.com*' \
               --blocked-url-patterns='*analytics.google.com*' \
+              --blocked-url-patterns='*clarity.ms*' \
+              --blocked-url-patterns='*wcs.naver.net*' \
+              --blocked-url-patterns='*connect.facebook.net*' \
+              --blocked-url-patterns='*daumcdn.net*' \
+              --blocked-url-patterns='*daangn.com*' \
               || echo "::warning::Lighthouse 실패: $path ($n회차)"
             done
           done
+
+      - name: 측정 태그 ID ↔ CSP·개인정보처리방침·캐시 버전 일치 확인
+        run: python3 tools/sync_tags.py --check
 
       - name: 크롤러 점검 + 요약
         run: python3 tools/seo_measure.py --lighthouse measure/lh --json measure/result.json

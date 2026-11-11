@@ -19,23 +19,16 @@ CLUSTERS = {
     "design": "디자인·기획", "local": "지역별 제작",
 }
 
-GTM = """<!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WZWCZTKJ');</script>
-    <!-- End Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
+GTM = """<script async src="https://www.googletagmanager.com/gtag/js?id=G-5CRNX231R3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
-    </script>"""
+    </script>
+    <script src="/assets/js/tags.js" defer></script>"""
 
-GTM_NOSCRIPT = """<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZWCZTKJ"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>"""
+GTM_NOSCRIPT = ''  # 태그 관리자를 쓰지 않음 (측정은 assets/js/tags.js)
 
 HEAD_COMMON = """<link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />

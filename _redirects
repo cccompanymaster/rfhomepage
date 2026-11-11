@@ -9,6 +9,7 @@
 /소개서                    /assets/brochure/NOAH-brochure.pdf   302
 /kakao                    https://pf.kakao.com/_ENCKX/chat   302
 /blog                     /templates/blog                 301
+/feed.xml                 /columns/feed.xml               301
 # 예전 블로그 샘플 초안(삭제됨) → 블로그 레퍼런스
 /templates/blog-samples/magazine-reference       /templates/blog   301
 /templates/blog-samples/magazine-reference.html  /templates/blog   301

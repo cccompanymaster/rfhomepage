@@ -9,6 +9,10 @@
   python3 tools/seo_measure.py --json out.json        # 결과를 JSON 으로도 저장
   python3 tools/seo_measure.py --lighthouse lh/       # lh/*.json (Lighthouse 결과) 요약을 합침
 
+다른 사이트에도 그대로 씁니다 (환경 변수, 비우면 노아홈페이지 기본값):
+  SEO_HOST=noahgroup.co.kr  SEO_NAME=노아그룹  SEO_INDEXNOW_KEY=…  SEO_RSS=/feed.xml
+  SEO_REDIRECTS=/index.html,/pricing.html   (리다이렉트 확인할 경로, 쉼표 구분)
+
 요약(마크다운)은 표준출력으로, GITHUB_STEP_SUMMARY 가 있으면 Actions 실행 요약에도 씁니다.
 요청은 GET 만 보내고, 동시에 6개까지만 보냅니다. 분석 스크립트를 실행하지 않으므로
 GA4 방문 통계에는 잡히지 않습니다.
@@ -31,15 +35,30 @@ from concurrent.futures import ThreadPoolExecutor
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse
 
-HOST = 'noahhomepage.co.kr'
+HOST = os.environ.get('SEO_HOST') or 'noahhomepage.co.kr'
 SITE = f'https://{HOST}'
-UA = 'Mozilla/5.0 (compatible; NOAH-SEO-Measure/1.0; +https://noahhomepage.co.kr/about)'
-INDEXNOW_KEY = 'd1ebd682684f953fad9c2a85b7c238bf'
+NAME = os.environ.get('SEO_NAME') or 'NOAH'
+UA = f'Mozilla/5.0 (compatible; NOAH-SEO-Measure/1.0; +https://{HOST}/)'
+INDEXNOW_KEY = os.environ.get('SEO_INDEXNOW_KEY', 'd1ebd682684f953fad9c2a85b7c238bf' if HOST == 'noahhomepage.co.kr' else '')
+RSS_PATH = os.environ.get('SEO_RSS') or '/columns/feed.xml'
+REDIRECT_PATHS = [x.strip() for x in (os.environ.get('SEO_REDIRECTS') or '/index.html,/pricing.html').split(',') if x.strip()]
 KST = dt.timezone(dt.timedelta(hours=9))
 
 # robots.txt 로 허용 여부를 확인할 크롤러 (검색 + AI)
 BOTS = ['Googlebot', 'Bingbot', 'Yeti', 'GPTBot', 'OAI-SearchBot', 'ChatGPT-User',
-        'ClaudeBot', 'Claude-User', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']
+        'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']
+# 실제 응답 코드를 볼 크롤러 (User-Agent 만 바꾼 요청 — Cloudflare 'AI 크롤러 차단'은 이걸로 드러남)
+UA_PROBES = [
+    ('GPTBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.2; +https://openai.com/gptbot'),
+    ('OAI-SearchBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OAI-SearchBot/1.3; +https://openai.com/searchbot'),
+    ('ChatGPT-User', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot'),
+    ('ClaudeBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ClaudeBot/1.0; +claudebot@anthropic.com'),
+    ('Claude-SearchBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; Claude-SearchBot/1.0; +https://www.anthropic.com'),
+    ('PerplexityBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot'),
+    ('Yeti', 'Mozilla/5.0 (compatible; Yeti/1.1; +https://naver.me/spd)'),
+    ('Googlebot', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'),
+    ('bingbot', 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)'),
+]
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -228,10 +247,16 @@ def site_checks():
     rp = urllib.robotparser.RobotFileParser()
     rp.parse(body.splitlines())
     s['robots_allow'] = {b: rp.can_fetch(b, f'{SITE}/') for b in BOTS}
-    # sitemap
+    # Cloudflare 가 robots.txt 앞에 자기 차단 목록을 붙였는지 (대시보드 'Managed robots.txt')
+    s['robots_cf_managed'] = 'BEGIN Cloudflare Managed content' in body
+    # sitemap (사이트맵 인덱스면 하위 사이트맵까지)
     r = fetch(f'{SITE}/sitemap.xml')
     s['sitemap_status'] = r.get('status')
     sm = r.get('body', '')
+    if '<sitemapindex' in sm:
+        children = re.findall(r'<sitemap>\s*<loc>([^<]+)</loc>', sm)
+        sm = '\n'.join(fetch(c.strip()).get('body', '') for c in children)
+        s['sitemap_children'] = len(children)
     urls = sitemap_urls(sm)
     lastmods = re.findall(r'<lastmod>([^<]+)</lastmod>', sm)
     s['sitemap_urls'] = len(urls)
@@ -239,25 +264,24 @@ def site_checks():
     s['sitemap_offhost'] = [u for u in urls if urlparse(u).netloc != HOST]
     s['sitemap_lastmod_max'] = max(lastmods) if lastmods else None
     # llms.txt · 피드 · 키 파일 · 빙 인증
-    for name, path in [('llms', '/llms.txt'), ('rss', '/columns/feed.xml'), ('bing_auth', '/BingSiteAuth.xml')]:
+    for name, path in [('llms', '/llms.txt'), ('rss', RSS_PATH), ('bing_auth', '/BingSiteAuth.xml')]:
         s[f'{name}_status'] = fetch(f'{SITE}{path}').get('status')
-    k = fetch(f'{SITE}/{INDEXNOW_KEY}.txt')
-    s['indexnow_key_ok'] = k.get('status') == 200 and k.get('body', '').strip() == INDEXNOW_KEY
+    if INDEXNOW_KEY:
+        k = fetch(f'{SITE}/{INDEXNOW_KEY}.txt')
+        s['indexnow_key_ok'] = k.get('status') == 200 and k.get('body', '').strip() == INDEXNOW_KEY
+    else:
+        s['indexnow_key_ok'] = None
     # 404 가 진짜 404 인가 (소프트 404 방지)
     s['notfound_status'] = fetch(f'{SITE}/__seo_measure_not_found_check').get('status')
     # 리다이렉트 규칙
     redirs = {}
-    for label, u in [('http→https', f'http://{HOST}/'), ('www', f'https://www.{HOST}/'),
-                     ('/index.html', f'{SITE}/index.html'), ('/pricing.html', f'{SITE}/pricing.html')]:
+    for label, u in [('http→https', f'http://{HOST}/'), ('www', f'https://www.{HOST}/')] + [(x, f'{SITE}{x}') for x in REDIRECT_PATHS]:
         x = fetch(u)
         redirs[label] = x.get('error') or ' → '.join(f"{h['status']} {urlparse(h['to']).netloc}{urlparse(h['to']).path}" for h in x['hops']) + f" → {x.get('status')}"
     s['redirects'] = redirs
     # 참고: User-Agent 만 바꾼 요청 (IP 기반 봇 판별과는 다를 수 있음)
     probe = {}
-    for name, ua in [('브라우저', UA),
-                     ('GPTBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.2; +https://openai.com/gptbot'),
-                     ('ClaudeBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ClaudeBot/1.0; +claudebot@anthropic.com'),
-                     ('PerplexityBot', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot')]:
+    for name, ua in [('브라우저', UA)] + UA_PROBES:
         probe[name] = fetch(f'{SITE}/', ua=ua).get('status')
     s['ua_probe'] = probe
     return s, urls
@@ -372,7 +396,7 @@ def report(site, pages, lh, when):
 
     L = []
     w = L.append
-    w(f'## NOAH SEO 측정 — {when} (KST)')
+    w(f'## {NAME} SEO 측정 — {when} (KST)')
     w('')
     w(f'측정 위치: GitHub Actions 서버(미국) · 기준: 자바스크립트 없이 받은 HTML · 대상: 사이트맵 {len(pages)}개 URL')
     if os.environ.get('GITHUB_SHA'):
@@ -402,13 +426,18 @@ def report(site, pages, lh, when):
     w(f"- robots.txt {site['robots_status']} · 사이트맵 안내 {'있음' if site['robots_has_sitemap'] else '없음'}")
     blocked = [b for b, v in site['robots_allow'].items() if not v]
     w(f"- robots.txt 허용: {'모두 허용' if not blocked else '차단: ' + ', '.join(blocked)} ({', '.join(BOTS)})")
+    if site.get('robots_cf_managed'):
+        w("- ⚠️ robots.txt 앞에 **Cloudflare 관리형 차단 목록**이 붙어 있음 — 저장소의 robots.txt와 다른 신호가 나갈 수 있음 (Cloudflare → AI Crawl Control → Managed robots.txt)")
     w(f"- sitemap.xml {site['sitemap_status']} · URL {site['sitemap_urls']}개 · 중복 {site['sitemap_dupes']} · 다른 도메인 {len(site['sitemap_offhost'])} · 최근 lastmod {site['sitemap_lastmod_max']}")
-    w(f"- llms.txt {site['llms_status']} · RSS {site['rss_status']} · BingSiteAuth.xml {site['bing_auth_status']} · IndexNow 키 {'정상' if site['indexnow_key_ok'] else '확인 필요'}")
+    w(f"- llms.txt {site['llms_status']} · RSS {site['rss_status']} · BingSiteAuth.xml {site['bing_auth_status']} · IndexNow 키 {'해당 없음' if site['indexnow_key_ok'] is None else '정상' if site['indexnow_key_ok'] else '확인 필요'}")
     w(f"- 없는 주소 응답: {site['notfound_status']} {'(정상: 진짜 404)' if site['notfound_status'] == 404 else '(⚠️ 소프트 404 의심)'}")
     w(f"- 소유 확인 메타(홈): 구글 {'있음' if home.get('google_verify') else '없음(파일·DNS 방식이면 정상)'} · 네이버 {'있음' if home.get('naver_verify') else '없음'}")
     for k, v in site['redirects'].items():
         w(f'- 리다이렉트 {k}: {v}')
-    w(f"- 참고(User-Agent 만 바꾼 요청, 확정 아님): " + ' · '.join(f'{k} {v}' for k, v in site['ua_probe'].items()))
+    w(f"- 크롤러별 홈 응답(User-Agent 만 바꾼 요청, 확정 아님): " + ' · '.join(f'{k} {v}' for k, v in site['ua_probe'].items()))
+    refused = [k for k, v in site['ua_probe'].items() if v != 200]
+    if refused:
+        w(f"- ⚠️ 거절된 크롤러: {', '.join(refused)} — Cloudflare 'AI 크롤러 차단'이나 보안 규칙 확인")
     if lh:
         w('')
         w(f"### Lighthouse (모바일, 분석 스크립트 차단, 페이지당 {max(r['tries'] for r in lh)}회 중앙값)")
