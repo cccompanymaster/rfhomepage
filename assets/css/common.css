@@ -434,7 +434,7 @@ body { font-size: 17px; line-height: 1.75; }
 @media (max-width: 640px) {
   .ref-card { padding: 22px 22px 80px; border-radius: 20px; }
   .ref-card-title { font-size: 19px; }
-  .fab-back { top: 12px; left: 12px; font-size: 11px; padding: 8px 14px 8px 10px; }
+  .fab-back { top: 12px; left: 12px; font-size: 12px; padding: 8px 14px 8px 10px; }
 }
 
 /* ============================================================
@@ -605,7 +605,7 @@ body { font-size: 17px; line-height: 1.75; }
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 6px 10px;
   border-radius: 6px;

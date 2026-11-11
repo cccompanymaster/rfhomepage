@@ -284,7 +284,7 @@ def build_article(art, all_cols, slugset, by_cluster):
     rels = related(art, all_cols)
     rel_html = '\n'.join(
         f'''        <a href="/columns/{r['slug']}">
-          <span class="text-[11px] font-bold tracking-widest" style="color:var(--accent)">{esc(CLUSTERS[r['cluster']]['name'])}</span>
+          <span class="text-xs font-bold tracking-widest" style="color:var(--accent)">{esc(CLUSTERS[r['cluster']]['name'])}</span>
           <p class="text-sm font-bold mt-1.5 leading-6">{esc(r['title'])}</p>
         </a>''' for r in rels)
 
@@ -312,12 +312,12 @@ def build_article(art, all_cols, slugset, by_cluster):
         cells = []
         if prev_a:
             cells.append(f'''        <a href="/columns/{prev_a['slug']}" rel="prev">
-          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">← 이전 글</span>
+          <span class="text-xs font-bold" style="color:var(--text-quiet)">← 이전 글</span>
           <p class="text-sm font-bold mt-1.5 leading-6">{esc(prev_a['title'])}</p>
         </a>''')
         if next_a:
             cells.append(f'''        <a href="/columns/{next_a['slug']}" rel="next" class="sm:text-right">
-          <span class="text-[11px] font-bold" style="color:var(--text-quiet)">다음 글 →</span>
+          <span class="text-xs font-bold" style="color:var(--text-quiet)">다음 글 →</span>
           <p class="text-sm font-bold mt-1.5 leading-6">{esc(next_a['title'])}</p>
         </a>''')
         pn_html = f'''      <nav class="pn grid sm:grid-cols-2 gap-3 mt-12" aria-label="이어 읽기">
@@ -405,7 +405,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         <a href="/columns/topic/{cl}" class="hover:text-[color:var(--text)]">{esc(cat)}</a>
       </nav>
 
-      <p class="text-[11px] font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">{esc(cat).upper()}</p>
+      <p class="text-xs font-bold tracking-[0.2em] mb-4" style="color: var(--accent)">{esc(cat).upper()}</p>
       <h1 class="disp" style="font-size: clamp(28px, 5.6vw, 42px); line-height: 1.32">{esc(art['title'])}</h1>
       <p class="mt-5 text-[15px] leading-8" style="color: var(--text-dim)">{esc(art['desc'])}</p>
       <div class="flex items-center gap-3 mt-6 pb-8 text-xs col-head" style="color: var(--text-quiet)">
@@ -527,7 +527,7 @@ def build_hub(cl, arts, all_cols):
       </nav>
 
       <div class="max-w-2xl">
-        <p class="text-[11px] font-bold tracking-[0.2em]" style="color: var(--accent)">{esc(meta['name']).upper()}</p>
+        <p class="text-xs font-bold tracking-[0.2em]" style="color: var(--accent)">{esc(meta['name']).upper()}</p>
         <h1 class="disp mt-4" style="font-size: clamp(28px, 5vw, 44px); line-height: 1.3">{esc(meta['h'])}</h1>
         <p class="mt-6 text-[15px] leading-8" style="color: var(--text-dim)">{esc(meta['lead'])}</p>
         <p class="mt-4 text-sm" style="color: var(--text-quiet)">총 {len(arts)}편</p>

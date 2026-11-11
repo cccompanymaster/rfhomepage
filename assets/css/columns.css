@@ -24,7 +24,7 @@ body { background: var(--bg); color: var(--text); }
 .answer-q::before { content: 'Q. '; }
 .answer-a { font-size: 17px; line-height: 1.75; color: var(--text); font-weight: 600; }
 .toc { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 20px 22px; }
-.toc p.lb { font-size: 11px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+.toc p.lb { font-size: 12px; letter-spacing: .18em; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
 .toc ol { list-style: none; counter-reset: t; }
 .toc li { counter-increment: t; margin-bottom: 9px; }
 .toc li:last-child { margin-bottom: 0; }
@@ -70,3 +70,8 @@ body { background: var(--bg); color: var(--text); }
 .prose .tbl tbody td { color: var(--text-dim); font-variant-numeric: tabular-nums; }
 .prose .tbl tbody td:first-child { color: var(--text); font-weight: 600; }
 .prose .tbl tbody tr:last-child td { border-bottom-color: var(--line); }
+
+/* 칼럼 머리·위치 표시·바닥 링크: 누르는 영역을 눈에 안 보이게 넓힘 (손가락 터치) */
+body > header a.text-sm, nav[aria-label="위치"] a, footer .flex > a { position: relative; }
+body > header a.text-sm::after, footer .flex > a::after { content: ''; position: absolute; inset: -12px -7px; }
+nav[aria-label="위치"] a::after { content: ''; position: absolute; inset: -14px -4px; }

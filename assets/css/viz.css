@@ -40,7 +40,7 @@
 .vz-key { display: inline-block; width: 16px; height: 10px; border-radius: 0 3px 3px 0; }
 .vz-key-lo { background: var(--vz-de); }
 .vz-key-hi { background: var(--vz-de-hi); }
-.vz .vz-foot { margin: 18px 0 0; font-size: 13px; line-height: 1.65; color: var(--vz-ink-2); }
+.vz .vz-foot { max-width: 46em; margin: 18px 0 0; font-size: 13px; line-height: 1.65; color: var(--vz-ink-2); }
 
 /* ── 범위 막대 ── */
 .vz-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
