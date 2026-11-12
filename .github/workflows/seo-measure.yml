@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
   push:
     branches: [claude/homepage-reference-designs-SXEMC]
-    paths: ['tools/seo_measure.py', 'tools/sync_tags.py', 'assets/js/tags.js', '.github/workflows/seo-measure.yml']
+    paths: ['tools/critical_paths.py', 'tools/seo_measure.py', 'tools/sync_tags.py', 'assets/js/tags.js', '.github/workflows/seo-measure.yml']
 
 permissions:
   contents: read
@@ -63,6 +63,9 @@ jobs:
 
       - name: 크롤러 점검 + 요약
         run: python3 tools/seo_measure.py --lighthouse measure/lh --json measure/result.json
+
+      - name: 필수 운영 경로·HTTPS 응답 검증
+        run: python3 tools/critical_paths.py
 
       - uses: actions/upload-artifact@v4
         if: always()

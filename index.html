@@ -11,7 +11,7 @@
       gtag('config', 'G-5CRNX231R3', { anonymize_ip: true });
     </script>
     <!-- End Google Analytics -->
-    <script src="/assets/js/tags.js?v=675624b8" defer></script>
+    <script src="/assets/js/tags.js?v=7e54b78d" defer></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NOAH 노아홈페이지 — 딱 199,000원, 일주일이면 홈페이지가 열립니다</title>
@@ -39,34 +39,7 @@
     <link rel="stylesheet" href="/assets/fonts/noto-serif-kr/noto-serif-kr.css?v=40c0665d" />
     <link rel="stylesheet" href="/assets/css/tw.css?v=c69ed754" />
     <link rel="stylesheet" href="/assets/css/common.css?v=540a13bb" />
-    <!-- 첫 진입 쇼케이스 게이트: 세션당 1회. 해시(#how 등)로 들어오거나 데이터 절약 모드면 건너뜀.
-         스크립트가 4초 안에 안 뜨면(차단·오류) 자동으로 걷어서 본문이 막히지 않게 함 -->
-    <script>
-      (function () {
-        try {
-          if (location.hash || sessionStorage.getItem('noah_intro_seen')) return;
-          if (navigator.connection && navigator.connection.saveData) return;
-          var d = document.documentElement;
-          d.classList.add('intro-on');
-          setTimeout(function () { if (!window.__scReady) d.classList.remove('intro-on'); }, 4000);
-          // 브랜드 인트로는 글꼴이 준비된 뒤 재생(최대 1초) — 대체 글꼴로 시작했다가 바뀌며 글자가 튀지 않게
-          d.classList.add('splash-wait');
-          var go = function () {
-            if (!d.classList.contains('splash-wait')) return;
-            d.classList.remove('splash-wait');
-            window.__splashT0 = performance.now();
-            window.dispatchEvent(new Event('splash:start'));
-          };
-          if (document.fonts && document.fonts.load) {
-            Promise.all([
-              document.fonts.load('800 100px "Pretendard Variable"', '노아홈페이지,작은예산으로도풍성한홈페이지를제작합니다.'),
-              document.fonts.load('700 100px "Space Grotesk"', 'noah')
-            ]).then(go, go);
-          }
-          setTimeout(go, 1000);
-        } catch (e) {}
-      })();
-    </script>
+
     <link rel="stylesheet" href="/assets/showcase/intro.css?v=2d12e32d" />
     <link rel="stylesheet" href="/assets/css/site.css?v=0d24ac6b" />
     <link rel="stylesheet" href="/assets/css/viz.css?v=45da2f51" />
@@ -891,9 +864,9 @@
       </a>
     </div>
     <script src="./assets/js/showroom.js?v=c8ceb05b" defer></script>
-    <script src="/assets/js/site.js?v=71250ed6"></script>
+    <script src="/assets/js/site.js?v=30b54311"></script>
     <script src="/assets/js/viz.js?v=bd18d668" defer></script>
     <script type="module" src="/assets/showcase/intro.js?v=f77c980c"></script>
-    <script src="/assets/js/attrib.js?v=f241b9f5" defer></script>
+    <script src="/assets/js/attrib.js?v=55d85a2e" defer></script>
   </body>
 </html>

@@ -131,12 +131,12 @@ brochureForm?.addEventListener('submit', async (e) => {
       body: JSON.stringify(payload),
     });
     brochureStatus.style.color = '#34d399';
-    brochureStatus.textContent = '✓ 소개서 다운로드를 시작했어요. 입력하신 메일로도 한 번 더 보내드릴게요.';
+    brochureStatus.textContent = '소개서 다운로드를 시작했어요. 이메일 발송 여부는 받은편지함에서 확인해 주세요.';
     brochureForm.reset();
     setTimeout(closeBrochure, 2600);
   } catch (err) {
     brochureStatus.style.color = '#fbbf24';
-    brochureStatus.textContent = '✓ 다운로드는 시작했어요. (이메일 전송은 잠시 후 자동 처리됩니다)';
+    brochureStatus.textContent = '소개서 다운로드를 시작했어요. 이메일 요청은 확인하지 못했습니다.';
     brochureForm.reset();
     setTimeout(closeBrochure, 2600);
   } finally {
