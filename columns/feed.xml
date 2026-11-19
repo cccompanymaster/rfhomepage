@@ -6,7 +6,23 @@
     <atom:link href="https://noahhomepage.co.kr/columns/feed.xml" rel="self" type="application/rss+xml" />
     <description>홈페이지 제작 비용·업종별 제작·SEO·운영까지 정리한 칼럼</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 30 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <item>
+      <title>블로그 체험단 운영할 때 꼭 지켜야 할 광고 표시 — 2024년 12월부터 바뀐 위치까지</title>
+      <link>https://noahhomepage.co.kr/columns/blog-sponsored-disclosure</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/blog-sponsored-disclosure</guid>
+      <description>블로그 체험단·협찬 후기를 받을 때 사장님이 챙겨야 할 &#x27;경제적 이해관계&#x27; 표시 의무를 정리했습니다. 제목이나 첫 부분에 표시하도록 바뀐 기준, 대가로 보는 범위, 실제 제재 사례까지 다룹니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Thu, 19 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>플레이스 리워드·트래픽 작업, 순위 올려 준다는 제안을 받았을 때 알아야 할 것</title>
+      <link>https://noahhomepage.co.kr/columns/place-reward-traffic-risk</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/place-reward-traffic-risk</guid>
+      <description>보상을 주고 저장·방문 수를 늘리는 플레이스 리워드·트래픽 작업과 대가를 숨긴 영수증 리뷰가 왜 위험한지 법과 실제 제재 사례로 정리했습니다. 대신 할 수 있는 정직한 방법도 담았습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Thu, 19 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>빙 웹마스터 도구 등록 방법, AI 검색 시대에 빠뜨리면 안 되는 이유</title>
       <link>https://noahhomepage.co.kr/columns/bing-webmaster</link>
@@ -308,22 +324,6 @@
       <link>https://noahhomepage.co.kr/columns/incheon-homepage</link>
       <guid isPermaLink="true">https://noahhomepage.co.kr/columns/incheon-homepage</guid>
       <description>국제공항과 항만을 둔 인천에는 물류·무역·제조 기업이 많습니다. 해외 바이어가 검색으로 회사를 확인하는 시대에 필요한 영문 페이지 구성, 산업단지 B2B 홈페이지의 요건을 인천 관점에서 정리했습니다.</description>
-      <category>지역별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>대전 홈페이지 제작, 연구단지 도시에서 기술 신뢰를 보여주는 법</title>
-      <link>https://noahhomepage.co.kr/columns/daejeon-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/daejeon-homepage</guid>
-      <description>연구단지와 기술 기업이 모인 대전에서는 홈페이지가 기술력의 증거 역할을 해야 합니다. 연구소·기술기업이 갖춰야 할 페이지 구성, 정부 과제·협력사가 확인하는 정보, 지역 소비 업종의 검색 대응까지 정리했습니다.</description>
-      <category>지역별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>광주 홈페이지 제작, 문화 도시와 부품 산업이 공존하는 시장</title>
-      <link>https://noahhomepage.co.kr/columns/gwangju-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/gwangju-homepage</guid>
-      <description>예향으로 불리는 문화·예술 기반과 자동차 부품 산업이 함께 있는 광주. 창작자·문화 공간의 브랜드형 홈페이지와 제조 협력사의 B2B 홈페이지가 각각 갖춰야 할 요건을 광주 상권 관점에서 정리했습니다.</description>
       <category>지역별 제작</category>
       <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
     </item>

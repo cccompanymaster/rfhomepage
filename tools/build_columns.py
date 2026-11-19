@@ -42,6 +42,17 @@ CLUSTERS = {
                  'lead': '카피·컬러·사진·폼 설계까지, 방문자를 문의로 이어지게 만드는 구성 요소를 다룹니다.'},
     'local':    {'name': '지역별 제작',      'h': '우리 지역 손님에게 발견되려면',
                  'lead': '지역마다 주력 산업과 검색 습관이 다릅니다. 지역 검색 최적화와 함께 정리했습니다.'},
+    'marketing': {'name': '온라인 마케팅',   'h': '광고비를 쓰기 전에 알아 둘 것',
+                 'lead': '플레이스·블로그·검색광고·체험단까지. 효과를 약속하는 대신 비용 구조와 지켜야 할 규칙, 피해야 할 방법을 정리했습니다.'},
+}
+
+# llms.txt 칼럼 구역의 주제별 한 줄 설명 (없으면 CLUSTERS의 lead 사용)
+LLMS_HUB = {
+    'cost': '제작비 구성, 견적 비교 기준', 'guide': '도메인·호스팅·필수 페이지·법적 표기',
+    'industry': '치과·카페·제조업 등 업종별 고려사항', 'seo': '네이버·구글 등록, 사이트맵, 지역 검색',
+    'compare': '템플릿·맞춤 제작·빌더·에이전시', 'ops': '속도·보안·백업·콘텐츠 갱신',
+    'design': '카피·컬러·사진·문의 폼 설계', 'local': '지역별 홈페이지 제작과 지역 검색',
+    'marketing': '플레이스·블로그·검색광고·체험단의 비용 구조와 지켜야 할 규칙',
 }
 
 
@@ -458,7 +469,7 @@ def build_hub(cl, arts, all_cols):
 
     others = '\n'.join(
         f'<a href="/columns/topic/{k}" class="hub-pill">{esc(v["name"])}</a>'
-        for k, v in CLUSTERS.items() if k != cl)
+        for k, v in CLUSTERS.items() if k != cl and any(a['cluster'] == k for a in all_cols))   # 글이 있는 주제만
 
     ld = {
         "@context": "https://schema.org",
@@ -555,7 +566,7 @@ def build_index(cols):
 
     chips = '\n'.join(
         f'<button class="chip" data-c="{k}" aria-pressed="false">{esc(v["name"])}</button>'
-        for k, v in CLUSTERS.items())
+        for k, v in CLUSTERS.items() if any(a['cluster'] == k for a in cols))   # 글이 있는 주제만
 
     by_cat = {}
     for a in cols:
@@ -819,13 +830,43 @@ def update_sitemap(cols):
     sm = re.sub(r'\s*<url><loc>https://noahhomepage\.co\.kr/columns[^<]*</loc>.*?</url>', '', sm)
     today = max((a['updated'] for a in cols), default=date.today().isoformat())
     add = [f'  <url><loc>{SITE}/columns/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>']
-    for cl in CLUSTERS:
+    for cl in [k for k in CLUSTERS if any(a['cluster'] == k for a in cols)]:   # 글이 있는 주제 허브만
         add.append(f'  <url><loc>{SITE}/columns/topic/{cl}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>')
     for a in cols:
         add.append(f'  <url><loc>{SITE}/columns/{a["slug"]}</loc><lastmod>{a["updated"]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>')
     sm = sm.replace('</urlset>', '\n'.join(add) + '\n</urlset>')
     open(p, 'w', encoding='utf-8').write(sm)
     return sm.count('<url>')
+
+
+def sync_counts(cols):
+    """칼럼 수와 llms.txt 칼럼 구역을 원고에 맞춰 다시 씀 — 새 글을 올릴 때 손으로 고치지 않아도 되게.
+       홈 '칼럼 N편 전체 보기', llms.txt 마지막 구역(## 홈페이지 제작 칼럼 ~ 끝)."""
+    n, site = len(cols), 'https://noahhomepage.co.kr'
+    p = os.path.join(ROOT, 'index.html')
+    s = open(p, encoding='utf-8').read()
+    s2 = re.sub(r'칼럼 \d+편 전체 보기', f'칼럼 {n}편 전체 보기', s)
+    if s2 != s:
+        open(p, 'w', encoding='utf-8').write(s2)
+    p = os.path.join(ROOT, 'llms.txt')
+    s = open(p, encoding='utf-8').read()
+    i = s.find('## 홈페이지 제작 칼럼')
+    if i < 0:
+        return
+    def short(t, lim=90):
+        t = re.sub(r'\s+', ' ', t).strip()
+        cut = t.find('. ')
+        t = t[:cut + 1] if 0 < cut < lim else t
+        return t if len(t) <= lim else t[:lim - 1] + '…'
+    hubs = [k for k in CLUSTERS if any(a['cluster'] == k for a in cols)]
+    recent = sorted(cols, key=lambda a: (a['date'], a['n']), reverse=True)[:10]
+    lines = [f'## 홈페이지 제작 칼럼 ({n}편)', '', f'- [칼럼 전체]({site}/columns/)']
+    lines += [f'- [{CLUSTERS[k]["name"]}]({site}/columns/topic/{k}): {LLMS_HUB.get(k, CLUSTERS[k]["lead"])}' for k in hubs]
+    lines += [f'- [RSS]({site}/columns/feed.xml)', '', '### 최근 칼럼', '']
+    lines += [f'- [{a["title"]}]({site}/columns/{a["slug"]}): {short(a.get("answer") or a["desc"])}' for a in recent]
+    s2 = s[:i] + '\n'.join(lines) + '\n'
+    if s2 != s:
+        open(p, 'w', encoding='utf-8').write(s2)
 
 
 def main():
@@ -852,6 +893,7 @@ def main():
         f.write(build_rss(cols))
 
     n_url = update_sitemap(cols)
+    sync_counts(cols)
     print(f'✓ 칼럼 {len(cols)}편 · 토픽 허브 {len(by_cluster)}개 · 목록 · RSS')
     print(f'✓ sitemap {n_url} URL (lastmod 포함)')
 
