@@ -693,6 +693,18 @@
       "kw": "플레이스 리워드",
       "slug": "place-reward-traffic-risk",
       "cluster": "marketing"
+    },
+    {
+      "n": 114,
+      "kw": "네이버 플레이스 순위",
+      "slug": "naver-place-ranking",
+      "cluster": "marketing"
+    },
+    {
+      "n": 115,
+      "kw": "파워링크",
+      "slug": "naver-powerlink-cost",
+      "cluster": "marketing"
     }
   ]
 }
