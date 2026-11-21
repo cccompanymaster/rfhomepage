@@ -705,6 +705,18 @@
       "kw": "파워링크",
       "slug": "naver-powerlink-cost",
       "cluster": "marketing"
+    },
+    {
+      "n": 116,
+      "kw": "영수증 리뷰",
+      "slug": "place-review-honest",
+      "cluster": "marketing"
+    },
+    {
+      "n": 117,
+      "kw": "네이버 검색광고",
+      "slug": "naver-searchad-start",
+      "cluster": "marketing"
     }
   ]
 }
