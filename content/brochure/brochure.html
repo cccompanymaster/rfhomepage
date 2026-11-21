@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>NOAH 소개서</title>
+<!-- 노아홈페이지 소개서 원본 — python3 tools/build_brochure.py 로 assets/brochure/NOAH-brochure.pdf 생성
+     가격·옵션을 바꾸면 이 파일을 고치고 다시 만드세요. 가격 비교 차트는 content/charts.json(price-compare)에서 자동으로 들어옵니다. -->
+<link rel="stylesheet" href="../../assets/fonts/pretendard/pretendard.css" />
+<link rel="stylesheet" href="../../assets/fonts/cormorant-garamond/cormorant-garamond.css" />
+<link rel="stylesheet" href="../../assets/css/viz.css" />
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  :root { --ink:#141414; --ink2:#5d5a55; --mute:#8d887f; --paper:#fbfaf7; --black:#111214; --ivory:#f2efe9; --gold:#b8946a; --gold2:#d7b98f; --line:rgba(20,20,20,.12); --dline:rgba(242,239,233,.14); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #555; }
+  body { font-family: 'Pretendard Variable', Pretendard, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; word-break: keep-all; }
+  .s { width: 1280px; height: 720px; position: relative; overflow: hidden; padding: 64px 84px 56px; background: var(--paper); color: var(--ink); page-break-after: always; break-after: page; }
+  .s.dark { background: var(--black); color: var(--ivory); }
+  .hd { position: absolute; top: 40px; left: 84px; right: 84px; display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .42em; color: var(--mute); text-transform: uppercase; }
+  .hd b { font-weight: 700; color: inherit; letter-spacing: .3em; }
+  .pg { position: absolute; right: 84px; bottom: 34px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: var(--gold); }
+  .eyebrow { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 22px; letter-spacing: .02em; }
+  h1 { font-size: 52px; line-height: 1.28; font-weight: 800; letter-spacing: -.035em; }
+  h2 { font-size: 40px; line-height: 1.32; font-weight: 800; letter-spacing: -.03em; }
+  .lead { margin-top: 18px; font-size: 17px; line-height: 1.75; color: var(--ink2); }
+  .dark .lead { color: rgba(242,239,233,.72); }
+  .num { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; color: var(--gold); }
+  .rule { height: 1px; background: var(--line); }
+  .dark .rule { background: var(--dline); }
+  .note { font-size: 12.5px; line-height: 1.7; color: var(--mute); }
+  .dark .note { color: rgba(242,239,233,.55); }
+
+  /* 1 표지 */
+  .cover { padding-top: 150px; }
+  .cover h1 { font-size: 64px; margin-top: 18px; }
+  .cover h1 em { font-style: normal; color: var(--gold2); }
+  .cover .stats { position: absolute; left: 84px; right: 84px; bottom: 70px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .cover .stats div { border-top: 1px solid var(--dline); padding-top: 18px; }
+  .cover .stats .num { font-size: 40px; }
+  .cover .stats small { display: block; margin-top: 6px; font-size: 12px; letter-spacing: .3em; color: rgba(242,239,233,.55); }
+  .cover .stats p { margin-top: 4px; font-size: 14px; color: rgba(242,239,233,.8); }
+
+  /* 2 문제 */
+  .cards4 { margin-top: 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .cards4 article { border-top: 2px solid var(--gold); padding-top: 22px; }
+  .cards4 .q { font-size: 18px; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; }
+  .cards4 p { margin-top: 12px; font-size: 14px; line-height: 1.75; color: var(--ink2); }
+  .closing { position: absolute; left: 84px; bottom: 60px; font-size: 18px; font-weight: 700; }
+  .closing span { color: var(--gold); }
+
+  /* 3 강점 */
+  .cards3 { margin-top: 46px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .cards3 article { border: 1px solid var(--line); border-left: 3px solid var(--gold); padding: 26px 26px 28px; background: #fff; min-height: 270px; }
+  .cards3 .num { font-size: 26px; }
+  .cards3 h3 { margin-top: 14px; font-size: 22px; font-weight: 800; letter-spacing: -.02em; line-height: 1.4; }
+  .cards3 p { margin-top: 14px; font-size: 14.5px; line-height: 1.8; color: var(--ink2); }
+
+  /* 4 레퍼런스 */
+  .refs { margin-top: 34px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px 16px; }
+  .refs div { border-top: 1px solid var(--dline); padding-top: 10px; }
+  .refs .k { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 13px; }
+  .refs b { display: block; margin-top: 4px; font-size: 14.5px; font-weight: 700; color: var(--ivory); }
+  .refs span { display: block; margin-top: 3px; font-size: 11.5px; color: rgba(242,239,233,.55); }
+
+  /* 5 과정 */
+  .timeline { margin-top: 64px; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 10%; right: 10%; top: 58px; height: 1px; background: var(--line); }
+  .timeline div { text-align: center; padding: 0 10px; }
+  .timeline .d { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 17px; letter-spacing: .08em; }
+  .timeline i { position: relative; z-index: 1; display: grid; place-items: center; width: 34px; height: 34px; margin: 22px auto 0; border-radius: 50%; background: var(--black); color: #fff; font-style: normal; font-weight: 700; font-size: 14px; }
+  .timeline div:last-child i { background: var(--gold); }
+  .timeline h3 { margin-top: 22px; font-size: 17px; font-weight: 800; }
+  .timeline p { margin-top: 8px; font-size: 13px; line-height: 1.65; color: var(--ink2); }
+  .ps { position: absolute; left: 84px; right: 84px; bottom: 64px; text-align: center; font-size: 15px; color: var(--ink2); }
+  .ps b { color: var(--ink); }
+
+  /* 6 가격 */
+  .price-wrap { margin-top: 40px; display: grid; grid-template-columns: 400px 1fr; gap: 56px; align-items: start; }
+  .base { background: var(--ivory); color: var(--ink); border-left: 4px solid var(--gold); padding: 30px 32px; }
+  .base small { font-size: 11px; letter-spacing: .38em; color: var(--mute); }
+  .base h3 { margin-top: 8px; font-size: 20px; font-weight: 800; }
+  .base .won { margin-top: 22px; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 74px; line-height: 1; letter-spacing: -.01em; }
+  .base .won span { font-size: 40px; margin-right: 6px; }
+  .base p { margin-top: 14px; font-size: 13.5px; line-height: 1.7; color: var(--ink2); }
+  .inc small { font-size: 11px; letter-spacing: .38em; color: rgba(242,239,233,.55); }
+  .inc ul { list-style: none; margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 13px 28px; }
+  .inc li { font-size: 14.5px; line-height: 1.55; color: rgba(242,239,233,.88); padding-left: 22px; position: relative; }
+  .inc li::before { content: '✓'; position: absolute; left: 0; color: var(--gold2); font-weight: 700; }
+
+  /* 7 시장 가격 비교 (viz.css 차트, 다크 표면) */
+  .cmp { margin-top: 26px; max-width: 900px; }
+  .cmp .vz-dark { --vz-surface: var(--black); }
+  .cmp .vz-rows { gap: 12px; }
+  .cmp .vz-note { display: none; }
+  .cmp .vz-row.is-em { padding-top: 12px; }
+  .cmp .vz-name, .cmp .vz-val { font-size: 15px; }
+  .cmp .vz-row.is-em .vz-val { font-size: 24px; }
+  .cmp .vz .vz-foot { font-size: 11.5px; margin-top: 10px; max-width: none; }
+
+  /* 8 옵션 */
+  .opts { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  .opts h3 { font-size: 12px; letter-spacing: .36em; color: var(--gold); font-weight: 700; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .opts ul { list-style: none; }
+  .opts li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .opts li span { color: var(--ink); font-weight: 600; }
+  .opts li span small { display: block; margin-top: 3px; font-weight: 400; font-size: 12px; color: var(--mute); }
+  .opts li em { font-style: normal; white-space: nowrap; font-weight: 700; font-size: 15.5px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .opts li em.free { font-family: inherit; font-size: 14px; color: #0f6b3f; font-weight: 700; }
+  .opts li em.ask { font-family: inherit; font-size: 14px; color: #7a4d00; font-weight: 700; }
+  .opts-note { position: absolute; left: 84px; right: 84px; bottom: 54px; }
+
+  /* 9 결정 */
+  .two { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .two article { padding: 34px 36px; min-height: 290px; }
+  .two .a { border: 1px solid var(--line); background: #fff; border-left: 3px solid var(--gold); }
+  .two .b { background: var(--black); color: var(--ivory); }
+  .two small { font-size: 11px; letter-spacing: .36em; color: var(--mute); }
+  .two .b small { color: var(--gold2); }
+  .two h3 { margin-top: 14px; font-size: 24px; font-weight: 800; letter-spacing: -.02em; line-height: 1.4; }
+  .two p { margin-top: 18px; font-size: 15px; line-height: 1.85; color: var(--ink2); }
+  .two .b p { color: rgba(242,239,233,.75); }
+
+  /* 10 상담 */
+  .contact { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+  .contact div { border-top: 1px solid var(--dline); padding-top: 14px; }
+  .contact small { font-size: 11px; letter-spacing: .38em; color: rgba(242,239,233,.5); }
+  .contact p { margin-top: 10px; font-size: 18px; font-weight: 700; }
+  .biz { position: absolute; left: 84px; right: 84px; bottom: 54px; font-size: 11.5px; line-height: 1.8; color: rgba(242,239,233,.5); }
+  .thanks { position: absolute; right: 84px; bottom: 94px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; letter-spacing: .3em; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- 1 표지 -->
+<section class="s dark cover">
+  <div class="hd"><span><b>NOAH</b> &nbsp;노아홈페이지</span><span>Service Introduction · 2026</span></div>
+  <p class="eyebrow">₩149,000 &nbsp;/&nbsp; 7일 오픈</p>
+  <h1>일주일이면 열리는 홈페이지,<br /><em>149,000원</em>으로</h1>
+  <p class="lead">21개 레퍼런스로 검증된 디자인을 그대로 가져갑니다.<br />모바일·검색 기본 설정·1년 호스팅까지 포함, 자료 확인 후 7일 안에 오픈합니다.</p>
+  <div class="stats">
+    <div><span class="num">21</span><small>DESIGNS</small><p>업종별 레퍼런스 디자인</p></div>
+    <div><span class="num">7</span><small>DAYS</small><p>자료가 모인 날부터 오픈까지</p></div>
+    <div><span class="num">1</span><small>YEAR</small><p>무제한 텍스트 수정 · 무료 호스팅</p></div>
+  </div>
+  <span class="pg">01 / 10</span>
+</section>
+
+<!-- 2 문제 -->
+<section class="s">
+  <div class="hd"><span>Why NOAH · 01</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">홈페이지 제작하는 게<br />왜 이렇게 어려울까요?</h2>
+  <div class="cards4">
+    <article><p class="q">홈페이지 제작,<br />너무 비싸지 않았나요?</p><p>견적서를 받아 보면 400만 원, 500만 원부터 시작합니다. 설명을 들어도 뭐에 그만큼 드는 건지는 끝까지 모르겠고요.</p></article>
+    <article><p class="q">싸게 맡겼더니<br />연락이 안 되나요?</p><p>오픈 전까지는 전화를 잘 받습니다. 그 뒤로는 문자를 보내도 답이 없고, 수정 한 번에 며칠씩 기다리게 됩니다.</p></article>
+    <article><p class="q">한 줄 고치는 데도<br />또 견적이 오나요?</p><p>가격표 숫자 하나 바꾸는 데 비용이 붙습니다. 그러다 보니 그냥 두게 되고, 홈페이지는 작년 정보 그대로 남아 있습니다.</p></article>
+    <article><p class="q">만들긴 했는데<br />검색하면 안 나오나요?</p><p>주소를 직접 알려 드려야만 손님이 들어옵니다. 그러면 홈페이지가 아니라 온라인 명함에 가깝습니다.</p></article>
+  </div>
+  <p class="closing">NOAH는 이 흐름을 <span>처음부터 다르게</span> 짰습니다.</p>
+  <span class="pg">02 / 10</span>
+</section>
+
+<!-- 3 강점 -->
+<section class="s">
+  <div class="hd"><span>Why NOAH · 02</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">백지에서 시작하지 않습니다</h2>
+  <p class="lead">그래서 빠르고, 정확하고, 무엇보다 사장님이 결정할 일이 적습니다.</p>
+  <div class="cards3">
+    <article><span class="num">01</span><h3>검증된 디자인 21종에서<br />시작합니다</h3><p>치과·법무·카페부터 SaaS·제조까지, 이미 만들어 둔 디자인 위에 사장님 브랜드만 옮깁니다. 시안을 몇 번씩 다시 그리는 시간이 없습니다.</p></article>
+    <article><span class="num">02</span><h3>모바일·검색·호스팅까지<br />기본 포함</h3><p>반응형 디자인, 검색 기본 설정, 카카오톡 공유 미리보기, 1년 호스팅이 단가 안에 들어 있습니다. 원하시면 네이버·구글·빙 검색 등록도 무료입니다.</p></article>
+    <article><span class="num">03</span><h3>1년 무제한<br />텍스트 수정</h3><p>가격표·메뉴·영업시간처럼 글자만 바뀌는 수정은 1년 동안 횟수 제한 없이 무료이며, 평균 1영업일 안에 반영합니다.</p></article>
+  </div>
+  <span class="pg">03 / 10</span>
+</section>
+
+<!-- 4 레퍼런스 -->
+<section class="s dark">
+  <div class="hd"><span>Reference · 21 Designs</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">업종에 맞춰 만든<br />NOAH의 디자인 21종</h2>
+  <p class="lead">마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다. 모두 noahhomepage.co.kr/references 에서 실제 페이지로 열어 볼 수 있습니다.</p>
+  <div class="refs">
+    <div><span class="k">01</span><b>본연 클리닉</b><span>성형외과·피부과</span></div>
+    <div><span class="k">02</span><b>메리트 입시컨설팅</b><span>학원·교육</span></div>
+    <div><span class="k">03</span><b>산일호 풀빌라</b><span>펜션·풀빌라</span></div>
+    <div><span class="k">04</span><b>Stackline</b><span>SaaS·스타트업</span></div>
+    <div><span class="k">05</span><b>여백 스튜디오</b><span>인테리어</span></div>
+    <div><span class="k">06</span><b>라온치과의원</b><span>치과</span></div>
+    <div><span class="k">07</span><b>화월</b><span>한식 다이닝</span></div>
+    <div><span class="k">08</span><b>Kairos</b><span>AI 에이전트 SaaS</span></div>
+    <div><span class="k">09</span><b>위즈웍스</b><span>에이전시</span></div>
+    <div><span class="k">10</span><b>단정 에스테틱</b><span>피부관리</span></div>
+    <div><span class="k">11</span><b>오월의 다정</b><span>카페·베이커리</span></div>
+    <div><span class="k">12</span><b>hollow</b><span>키보드 쇼핑몰</span></div>
+    <div><span class="k">13</span><b>온재무설계</b><span>보험·재무설계</span></div>
+    <div><span class="k">14</span><b>한울정밀</b><span>제조업·B2B</span></div>
+    <div><span class="k">15</span><b>플럭스랩</b><span>인터랙티브 스튜디오</span></div>
+    <div><span class="k">16</span><b>논픽셀</b><span>디자인 스튜디오</span></div>
+    <div><span class="k">17</span><b>루티드 필라테스</b><span>필라테스</span></div>
+    <div><span class="k">18</span><b>Sumday</b><span>세무·회계 SaaS</span></div>
+    <div><span class="k">19</span><b>온플로우</b><span>핀테크</span></div>
+    <div><span class="k">20</span><b>무드그래프 스튜디오</b><span>사진·영상 스튜디오</span></div>
+    <div><span class="k">21</span><b>정평 법무법인</b><span>법무법인</span></div>
+  </div>
+  <span class="pg">04 / 10</span>
+</section>
+
+<!-- 5 과정 -->
+<section class="s">
+  <div class="hd"><span>Process · 7 Days</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">상담부터 오픈까지 단 7일</h2>
+  <p class="lead">백지에서 시작하지 않으니 회의가 짧고 결정도 빠릅니다.</p>
+  <div class="timeline">
+    <div><p class="d">DAY 1</p><i>1</i><h3>상담 + 디자인 선택</h3><p>30분 통화 또는 미팅</p></div>
+    <div><p class="d">DAY 2–3</p><i>2</i><h3>콘텐츠 정리 + 카피</h3><p>보내 주신 자료 정리,<br />한국어 카피 검수</p></div>
+    <div><p class="d">DAY 4–5</p><i>3</i><h3>디자인 적용</h3><p>브랜드 컬러·로고 반영</p></div>
+    <div><p class="d">DAY 6</p><i>4</i><h3>검수 + 수정</h3><p>고칠 곳 전부 반영<br />(횟수 제한 없음)</p></div>
+    <div><p class="d">DAY 7</p><i>5</i><h3>오픈</h3><p>도메인 연결 후 공개</p></div>
+  </div>
+  <p class="ps">사장님이 하실 일은 <b>1일 통화 · 2–3일 자료 전달 · 6일 확인</b> 세 번뿐입니다. 7일은 자료가 모인 날부터 셉니다.</p>
+  <span class="pg">05 / 10</span>
+</section>
+
+<!-- 6 가격 -->
+<section class="s dark">
+  <div class="hd"><span>Pricing</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">한 번 결제로<br />1년 내내 일하는 홈페이지</h2>
+  <div class="price-wrap">
+    <div class="base">
+      <small>BASE PACKAGE</small>
+      <h3>NOAH 홈페이지 패키지</h3>
+      <p class="won"><span>₩</span>149,000</p>
+      <p>1회 결제 · 부가세 별도 (부가세 포함 163,900원)<br />도메인 비용(연 15,000원~)은 별도입니다.</p>
+    </div>
+    <div class="inc">
+      <small>INCLUDED · 단가 안에 포함</small>
+      <ul>
+        <li>21개 디자인 중 선택 + 브랜드 적용</li>
+        <li>한국어 전문 카피라이터 검수</li>
+        <li>모바일·태블릿 반응형</li>
+        <li>검색 기본 설정</li>
+        <li>1년 무료 호스팅</li>
+        <li>도메인 연결 · SSL 안내</li>
+        <li>1년 무제한 텍스트 수정</li>
+        <li>카카오톡 공유 미리보기 카드</li>
+        <li>파비콘 제작 · 보유 로고 SVG 변환</li>
+        <li>원하면 무료: 심플 로고 제작</li>
+        <li>원하면 무료: 네이버·구글·빙 검색 등록</li>
+        <li>완료 후 소스 코드·계정 이전</li>
+      </ul>
+    </div>
+  </div>
+  <span class="pg">06 / 10</span>
+</section>
+
+<!-- 7 가격 비교 -->
+<section class="s dark">
+  <div class="hd"><span>Price Check</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:40px; font-size:34px">홈페이지 제작, 보통 얼마 드나요?</h2>
+  <div class="cmp">
+    <!-- vz:price-compare dark -->
+    <!-- /vz:price-compare -->
+  </div>
+  <span class="pg">07 / 10</span>
+</section>
+
+<!-- 8 옵션 -->
+<section class="s">
+  <div class="hd"><span>Add-ons · 선택 옵션</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:40px">필요한 것만 골라 더하세요</h2>
+  <p class="lead" style="margin-top:10px">기본 패키지로 충분한 분이 대부분입니다. 모든 가격은 부가세 별도입니다.</p>
+  <div class="opts">
+    <div>
+      <h3>제작</h3>
+      <ul>
+        <li><span>서브페이지 추가<small>소개·메뉴·오시는 길 등 한 페이지</small></span><em>50,000원~ / 페이지</em></li>
+        <li><span>로고 제작 — 심플<small>시안 2종 중 택1 + 1회 수정, SVG·PNG</small></span><em class="free">무료</em></li>
+        <li><span>문의 폼 + 자동 메일<small>문의가 오면 사장님 메일로 즉시, 고객 자동 회신</small></span><em>50,000원</em></li>
+        <li><span>당일 제작<small>자료가 모두 준비된 경우, 작업 시작한 날 안에 오픈</small></span><em>+50,000원</em></li>
+      </ul>
+    </div>
+    <div>
+      <h3>검색 · 운영</h3>
+      <ul>
+        <li><span>네이버·구글·빙 검색 등록<small>AI 검색 대비 — 빙 웹마스터까지</small></span><em class="free">무료</em></li>
+        <li><span>SEO 심화 세팅<small>키워드 조사, 메타·구조화 데이터</small></span><em>50,000원</em></li>
+        <li><span>AI 상위노출<small>AI 답변 인용 대비 구조·콘텐츠 작업</small></span><em class="ask">가격 문의</em></li>
+        <li><span>구글 상위노출<small>키워드 분석, 페이지·속도·콘텐츠 개선</small></span><em class="ask">가격 문의</em></li>
+        <li><span>유지보수 1년<small>이미 만든 페이지의 이미지·텍스트 수정 + 팝업 배너, 12개월 횟수 제한 없음</small></span><em>200,000원 / 년</em></li>
+      </ul>
+    </div>
+  </div>
+  <p class="note opts-note">유지보수 1년에 새 페이지 추가·레이아웃 변경·새 기능은 포함되지 않습니다. AI·구글 상위노출은 업종·경쟁에 따라 상담 후 견적이며, 검색 순위와 AI 인용은 각 서비스가 정하므로 보장하지 않습니다. 도메인(연 15,000원~), 자체 결제 모듈, 전용 디자인 외주는 별도 견적입니다.</p>
+  <span class="pg">08 / 10</span>
+</section>
+
+<!-- 9 결정 -->
+<section class="s">
+  <div class="hd"><span>Decide · 망설이고 계신다면</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:44px">홈페이지 한 번 만드는 일,<br />사장님 마음의 무게를 압니다</h2>
+  <div class="two">
+    <article class="a"><small>미루시면</small><h3>찾아온 손님이<br />확인할 곳이 없습니다</h3><p>검색이나 광고, 지인 소개로 가게 이름을 알게 된 손님은 가격과 위치, 예약 방법부터 찾아봅니다. 정리된 페이지가 없으면 그 관심은 다른 가게로 넘어가기 쉽습니다.</p></article>
+    <article class="b"><small>시작하시면</small><h3>7일 뒤 페이지가<br />일을 시작합니다</h3><p>가격·위치·예약 방법이 한 화면에 정리된 홈페이지가 손님의 질문에 먼저 답합니다. 오픈 뒤에도 1년 동안 글자 수정은 무료라, 일단 열고 다듬어 가실 수 있습니다.</p></article>
+  </div>
+  <span class="pg">09 / 10</span>
+</section>
+
+<!-- 10 상담 -->
+<section class="s dark">
+  <div class="hd"><span>Consult · 무료 상담</span><span><b>NOAH</b> · 노아홈페이지</span></div>
+  <h2 style="margin-top:60px; font-size:46px">먼저 한 통의<br />이야기로 시작합니다</h2>
+  <p class="lead">영업일 기준 1일 안에 회신드립니다. 어떤 업종이든, 어떤 규모든 한 번 들려주세요.<br />상담은 무료이며, 그 자리에서 결정하지 않으셔도 됩니다.</p>
+  <div class="contact">
+    <div><small>TEL</small><p>010 · 6658 · 6482</p></div>
+    <div><small>EMAIL</small><p>cccompanymaster@gmail.com</p></div>
+    <div><small>WEB</small><p>noahhomepage.co.kr</p></div>
+    <div><small>HOURS</small><p>평일 10:00 — 19:00</p></div>
+  </div>
+  <p class="thanks">THANK YOU</p>
+  <p class="biz">노아홈페이지(NOAH) · 상호 노아데이터베이스 · 대표 채희준 · 사업자등록번호 224-73-00560 · 통신판매업 신고번호 제2026-인천서해-1228호<br />주소 인천광역시 서해구 청라한내로100번길 10, 4층 411,412-L044호 · 모든 가격은 부가세 별도 · 2026년 11월 기준</p>
+  <span class="pg" style="bottom:20px">10 / 10</span>
+</section>
+
+</body>
+</html>
