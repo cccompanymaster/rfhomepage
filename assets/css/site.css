@@ -543,3 +543,22 @@ h1, h2, h3 { text-wrap: balance; }
 .site-hd .nv::after, footer[data-dock-stop] .flex > a::after, .tap-link::after {
   content: ''; position: absolute; inset: -12px -7px;
 }
+
+/* ── 옵션 안내 (가격 페이지 #options) — 예전 options.html에서 옮김 (2026-11-21) ── */
+.opts .opt-card { border: 1px solid var(--line); border-radius: 18px; background: var(--bg-soft); padding: 26px; display: flex; flex-direction: column; transition: transform .25s, border-color .25s; }
+.opts .opt-card:hover { transform: translateY(-4px); border-color: rgba(17,24,33,.20); }
+.opts .price { font-family: 'Space Grotesk', 'Pretendard Variable', sans-serif; font-size: 26px; font-weight: 700; color: var(--accent-deep); }
+.opts .price small { font-size: 14px; color: var(--text-quiet); font-weight: 500; }
+.opts .price.ask { font-family: inherit; font-size: 22px; color: var(--text); }
+.opts .inc li { display: flex; gap: 8px; font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+.opts .inc li::before { content: '—'; color: var(--accent-deep); flex-shrink: 0; }
+.opts .opt-note { margin: 0 0 18px; font-size: 12.5px; line-height: 1.6; color: var(--text-quiet); }
+.opts .buy-btn { margin-top: auto; display: inline-flex; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 15px; transition: filter .2s, transform .2s; }
+.opts .buy-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.opts .grp-title { font-size: 13px; letter-spacing: .24em; color: var(--accent-deep); font-weight: 700; text-transform: uppercase; }
+.opts .badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
+.opts .badge { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
+.opts .badge.free { background: #e3f6ec; color: #0f6b3f; }
+.opts .badge.ai { background: #ece9ff; color: #4b33c4; }
+.opts .badge.ask { background: #fff1d6; color: #7a4d00; }
+.opts .opt-card.opt-ai { border-color: rgba(75,51,196,.32); background: linear-gradient(160deg, rgba(120,100,255,.08), rgba(255,255,255,0) 60%); }

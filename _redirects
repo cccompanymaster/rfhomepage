@@ -10,6 +10,8 @@
 /kakao                    https://pf.kakao.com/_ENCKX/chat   302
 /blog                     /templates/blog                 301
 /feed.xml                 /columns/feed.xml               301
+/options                  /pricing#options                301
+/options.html             /pricing#options                301
 # 예전 블로그 샘플 초안(삭제됨) → 블로그 레퍼런스
 /templates/blog-samples/magazine-reference       /templates/blog   301
 /templates/blog-samples/magazine-reference.html  /templates/blog   301
@@ -47,7 +49,7 @@
 /agent                    /templates/ai-agent             301
 /keyboard                 /templates/keyboard             301
 /accounting               /templates/accounting           301
-# ※ /options 는 규칙 불필요 — Workers가 options.html을 /options 로 자동 서빙
+# ※ 옵션 안내(/options)는 가격 페이지 안으로 합침 — 위쪽 규칙으로 /pricing#options 로 보냄
 #   (.html 목적지로 보내면 자동 리다이렉트와 핑퐁 → 무한루프. intake 때와 동일)
 /buy                      /checkout                            301
 /결제                      /checkout                            301

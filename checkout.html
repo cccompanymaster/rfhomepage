@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>주문 · 결제 · NOAH 노아홈페이지</title>
-    <meta name="description" content="NOAH 홈페이지 패키지(₩199,000)와 필요한 옵션만 골라 결제합니다. 부가세 포함 총액을 미리 확인하고, 결제 후 영업일 1일 안에 착수 안내를 받습니다." />
+    <meta name="description" content="NOAH 홈페이지 패키지(₩149,000)와 필요한 옵션만 골라 결제합니다. 부가세 포함 총액을 미리 확인하고, 결제 후 영업일 1일 안에 착수 안내를 받습니다." />
     <link rel="canonical" href="https://noahhomepage.co.kr/checkout" />
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" />
-    <link rel="stylesheet" href="/assets/css/tw.css?v=c69ed754" />
+    <link rel="stylesheet" href="/assets/css/tw.css?v=d92e7755" />
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
     <link rel="stylesheet" href="/assets/css/common.css?v=540a13bb" />
     <style>
@@ -131,7 +131,7 @@
       </a>
       <nav class="flex items-center gap-4 text-sm" style="color: var(--text-dim)">
         <a href="/pricing" class="hidden sm:inline underline underline-offset-4">가격</a>
-        <a href="/options" class="underline underline-offset-4">옵션 안내</a>
+        <a href="/pricing#options" class="underline underline-offset-4">옵션 안내</a>
       </nav>
     </header>
 
@@ -153,13 +153,13 @@
                 <span class="nm">NOAH 홈페이지 패키지</span>
                 <span class="ds">21개 디자인 중 선택 · 7일 오픈 · 1년 호스팅 · 1년 무제한 텍스트 수정 · 소스·계정 이전</span>
               </span>
-              <span class="pr">₩199,000</span>
+              <span class="pr">₩149,000</span>
             </label>
           </section>
 
           <section class="panel">
             <h2><span class="step">2</span>옵션 추가 <span class="text-xs font-normal" style="color:var(--text-quiet)">(선택)</span></h2>
-            <p class="note mt-2 mb-3">필요한 것만 고르세요. 자세한 설명은 <a href="/options" class="underline" style="color:var(--accent-deep)">옵션 안내</a>에 있습니다. 모든 단가는 부가세 별도입니다.</p>
+            <p class="note mt-2 mb-3">필요한 것만 고르세요. 자세한 설명은 <a href="/pricing#options" class="underline" style="color:var(--accent-deep)">옵션 안내</a>에 있습니다. 모든 단가는 부가세 별도입니다. AI·구글 상위노출은 상담 후 견적이라 <a href="/contact" class="underline" style="color:var(--accent-deep)">문의</a>로 받습니다.</p>
             <div id="opt-list"></div>
           </section>
 
@@ -224,9 +224,9 @@
         <aside class="panel lg:sticky lg:top-6">
           <h2>결제 금액</h2>
           <div id="sum-lines" class="mt-3"></div>
-          <div class="sum-row sub"><span class="k">공급가액</span><span class="v num" id="sum-supply">₩199,000</span></div>
-          <div class="sum-row"><span class="k">부가세 (10%)</span><span class="v num" id="sum-vat">₩19,900</span></div>
-          <div class="sum-row total"><span class="k">총 결제금액</span><span class="v" id="sum-total">₩218,900</span></div>
+          <div class="sum-row sub"><span class="k">공급가액</span><span class="v num" id="sum-supply">₩149,000</span></div>
+          <div class="sum-row"><span class="k">부가세 (10%)</span><span class="v num" id="sum-vat">₩14,900</span></div>
+          <div class="sum-row total"><span class="k">총 결제금액</span><span class="v" id="sum-total">₩163,900</span></div>
           <button type="submit" class="pay-btn mt-5" id="pay-btn">결제하기</button>
           <p class="note mt-3" id="pay-note">카드 · 간편결제 (포트원 안전결제). 결제 정보는 저희 서버에 저장되지 않습니다.</p>
           <div class="trust">
@@ -253,7 +253,7 @@
     <div class="mbar" id="mbar" aria-hidden="true">
       <div>
         <div class="t">총 결제금액 · VAT 포함 <span id="mbar-count"></span></div>
-        <div class="a" id="mbar-total">₩218,900</div>
+        <div class="a" id="mbar-total">₩163,900</div>
       </div>
       <button type="button" id="mbar-btn">결제하기</button>
     </div>
@@ -286,17 +286,16 @@
       const KAKAO_URL = 'https://pf.kakao.com/_ENCKX/chat';
       const TEL = '010-6658-6482';
 
-      const BASE = { key: 'base', name: 'NOAH 홈페이지 패키지', price: 199000 };
+      const BASE = { key: 'base', name: 'NOAH 홈페이지 패키지', price: 149000 };
       const GROUPS = { design: '디자인 · 기능', ops: '검색 · 운영' };
       const OPTIONS = [
         { key: 'subpage',  g: 'design', name: '서브페이지 추가 (1p)',   price: 50000,  ds: '메뉴판·오시는 길·팀 소개 등 한 페이지 추가. 분량은 협의', qty: true },
         { key: 'logo',     g: 'design', name: '로고 제작 — 심플',        price: 0,      ds: '무료 옵션 · 워드마크 중심 심플 로고, SVG·PNG 원본 제공' },
-        { key: 'card',     g: 'design', name: '명함 제작 (인쇄 별도)',   price: 50000,  ds: '홈페이지와 같은 톤의 명함 디자인 파일' },
         { key: 'form',     g: 'design',   name: '문의 폼 + 자동 메일',     price: 50000,  ds: '문의가 오면 사장님 메일로 즉시 전달' },
         { key: 'register', g: 'ops',    name: '네이버·구글·빙 검색 등록', price: 0,     ds: '무료 옵션 · AI 검색 대비 — 빙 웹마스터까지 등록, 소유 확인, 사이트맵 제출' },
         { key: 'seo',      g: 'ops',    name: 'SEO 심화 세팅',           price: 50000,  ds: '페이지별 키워드·메타·구조화 데이터 심화 작업' },
         { key: 'rush',     g: 'ops',    name: '당일 제작',               price: 50000,  ds: '자료가 모두 준비된 경우 작업 시작한 날 안에 오픈. 사전 협의 필수' },
-        { key: 'maint_y',  g: 'ops',    name: '유지보수 1년 (12개월)',   price: 200000, ds: '12개월 수정 횟수 제한 없음. 사진·배너·레이아웃까지' },
+        { key: 'maint_y',  g: 'ops',    name: '유지보수 1년 (12개월)',   price: 200000, ds: '이미 만든 페이지의 이미지·텍스트 수정 + 팝업 배너, 12개월 횟수 제한 없음 (새 페이지·레이아웃 변경 제외)' },
       ];
 
       const $ = (s) => document.querySelector(s);

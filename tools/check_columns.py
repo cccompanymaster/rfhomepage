@@ -10,7 +10,7 @@
   - 날짜 형식, 발행일이 오늘(한국 시간)보다 뒤가 아님
   - 본문: <h1> 없음, 태그 짝 맞음, 본문 속 /columns/… 링크가 실제 글
   - 새 글: 한 줄 답 150자 이하, 소제목(h2) 3개 이상, 표나 목록 1개 이상, 출처 링크 1개 이상,
-          순위·효과 보장 표현 없음, 기본 패키지 금액은 199,000원만
+          순위·효과 보장 표현 없음, 기본 패키지 금액은 149,000원만
 페이지(columns/**/*.html)
   - 사이트 안 링크가 실제 파일로 이어짐, 구조화 데이터(JSON-LD)가 읽힘
 """
@@ -121,8 +121,8 @@ def check_drafts(since):
                 if m:
                     errors.append(f'{where} — 보장 표현 금지: "{m.group(0)}"')
             for m in re.finditer(r'기본\s*패키지[^.。]{0,30}?([\d,]{5,})\s*원', text):
-                if m.group(1).replace(',', '') != '199000':
-                    errors.append(f'{where} — 기본 패키지 금액이 199,000원이 아님: {m.group(0)}')
+                if m.group(1).replace(',', '') != '149000':
+                    errors.append(f'{where} — 기본 패키지 금액이 149,000원이 아님: {m.group(0)}')
             if len(text) < 1800:
                 warns.append(f'{where} — 본문이 짧음 ({len(text)}자)')
     return len(items)

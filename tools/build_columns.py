@@ -430,7 +430,7 @@ def build_article(art, all_cols, slugset, by_cluster):
         <h2 class="disp text-xl">홈페이지, 7일이면 열립니다</h2>
         <p class="mt-3 text-sm leading-7" style="color: var(--text-dim)">
           21개 업종 레퍼런스 중 마음에 드는 디자인을 고르시면, 그 위에 사장님 브랜드를 옮겨 드립니다.
-          199,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
+          149,000원(부가세 별도) · 1년 무료 호스팅 · 1년 무제한 텍스트 수정 포함.
         </p>
         <div class="flex gap-2.5 mt-6 flex-wrap">
           <a href="/references" class="px-6 py-3 rounded-full font-bold text-sm" style="background:var(--accent); color:var(--on-accent)">레퍼런스 보기</a>

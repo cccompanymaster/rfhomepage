@@ -26,16 +26,16 @@
 ## 2. 지금 결제 페이지 상태 (`checkout.html`)
 
 - 상품 정의(부가세 별도 단가, 원):
-  - BASE `base` NOAH 홈페이지 패키지 199,000
+  - BASE `base` NOAH 홈페이지 패키지 149,000
   - `subpage` 서브페이지 추가 50,000 × 수량(1–10)
   - `logo` 로고 제작 — 심플 0 (무료 옵션)
-  - `card` 명함 제작 50,000
   - `form` 문의 폼 + 자동 메일 50,000
   - `register` 네이버·구글·빙 검색 등록 0 (무료 옵션)
   - `seo` SEO 심화 세팅 50,000
   - `rush` 당일 제작 50,000
-  - `maint_y` 유지보수 1년 200,000
-  - 합계 = 공급가 + 부가세 `Math.round(공급가 × 0.1)` (예: 기본만 199,000 + 19,900 = 218,900)
+  - `maint_y` 유지보수 1년 200,000 (이미 만든 페이지의 이미지·텍스트 수정 + 팝업 배너)
+  - AI 상위노출·구글 상위노출은 가격 문의(상담 후 견적) 옵션이라 결제 단가표에 넣지 않는다
+  - 합계 = 공급가 + 부가세 `Math.round(공급가 × 0.1)` (예: 기본만 149,000 + 14,900 = 163,900)
 - 결제 모듈은 **포트원(PortOne) V2 코드**가 들어 있지만 키가 비어 있어 **데모 모드**로 동작한다: 결제창 없이 주문만 Google Apps Script(`GAS_URL`)로 보내고 "영업일 1일 안에 연락" 안내를 띄운다.
   - 주문 전송: `postGAS({ type: 'consult', kind: 'order', sendBrochure: false, orderId, status, name, phone, email, industry, reference, message, total, receipt, bizno })` — Apps Script `handleConsult`가 시트에 적고 사장님께 메일을 보낸다. **이 경로를 그대로 재사용**한다(Apps Script 수정 없이 주문이 사장님께 도착).
 - 포트원 관련: `<script src="https://cdn.portone.io/v2/browser-sdk.js">`, `PORTONE` 설정, `PortOne.requestPayment`, `afterPayment`, `?paymentId=` 복귀 처리, `_headers` CSP의 portone 도메인, 이용약관 3조 "포트원 연동", 개인정보처리방침 위탁표 "포트원(PortOne)" — **나이스페이로 교체하면서 모두 정리**한다.

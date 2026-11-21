@@ -190,7 +190,7 @@ def build_article(arts, a):
 
       <div class="cta-box" style="margin-top:52px">
         <p class="disp" style="font-size:20px">홈페이지, 고민만 길어지고 있다면</p>
-        <p style="font-size:14px;color:var(--text-dim);margin-top:8px">NOAH는 17개 업종 레퍼런스 중 골라 7일 안에 오픈합니다. 199,000원(부가세 별도).</p>
+        <p style="font-size:14px;color:var(--text-dim);margin-top:8px">NOAH는 17개 업종 레퍼런스 중 골라 7일 안에 오픈합니다. 149,000원(부가세 별도).</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
           <a class="btn-lime" href="/#consult">무료 상담 신청 →</a>
           <a class="btn-line" href="/#showroom">레퍼런스 구경하기</a>
