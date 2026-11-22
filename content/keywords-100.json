@@ -717,6 +717,18 @@
       "kw": "네이버 검색광고",
       "slug": "naver-searchad-start",
       "cluster": "marketing"
+    },
+    {
+      "n": 118,
+      "kw": "블로그 마케팅 대행",
+      "slug": "blog-agency-checklist",
+      "cluster": "marketing"
+    },
+    {
+      "n": 119,
+      "kw": "네이버 플레이스 광고",
+      "slug": "place-ad-vs-local-ad",
+      "cluster": "marketing"
     }
   ]
 }
