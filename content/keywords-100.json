@@ -729,6 +729,18 @@
       "kw": "네이버 플레이스 광고",
       "slug": "place-ad-vs-local-ad",
       "cluster": "marketing"
+    },
+    {
+      "n": 120,
+      "kw": "블로그 지수",
+      "slug": "blog-index-myths",
+      "cluster": "marketing"
+    },
+    {
+      "n": 121,
+      "kw": "광고대행사",
+      "slug": "ad-agency-fee-guide",
+      "cluster": "marketing"
     }
   ]
 }

@@ -73,7 +73,7 @@
 - [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 방법별·업종별 비교
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
 
-## 홈페이지 제작 칼럼 (119편)
+## 홈페이지 제작 칼럼 (121편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준
@@ -89,6 +89,8 @@
 
 ### 최근 칼럼
 
+- [광고대행사 수수료는 누가 낼까 — 네이버 광고 대행 맡기기 전 확인할 것](https://noahhomepage.co.kr/columns/ad-agency-fee-guide): 네이버 검색광고에 등록된 공식 대행사는 광고주가 쓴 광고비에 따라 네이버로부터 수수료를 받는 구조로 설명됩니다.
+- ['블로그 지수'·'최적화 블로그'는 네이버 공식 용어일까 — C-Rank와 D.I.A.로 보는 사실과 오해](https://noahhomepage.co.kr/columns/blog-index-myths): 아닙니다.
 - [네이버 플레이스 광고와 지역소상공인 광고, 무엇이 다를까](https://noahhomepage.co.kr/columns/place-ad-vs-local-ad): 플레이스 광고는 손님이 검색한 말에 맞춰 검색 결과에 뜨고 클릭할 때 비용이 나갑니다.
 - [블로그 마케팅 대행, 계약하기 전에 확인할 7가지](https://noahhomepage.co.kr/columns/blog-agency-checklist): 작업 범위와 결과물 확인 방법, 해지·위약금 조건을 계약서에 적었는지, 대가성 글에 협찬 표시를 하는지, 남의 블로그 계정을 빌려 쓰지 않는지부터 확인하세요.
 - [네이버 검색광고 처음 시작하는 순서 — 가입부터 첫 광고가 뜨기까지](https://noahhomepage.co.kr/columns/naver-searchad-start): 검색광고 가입과 사업자 인증 → 광고비 충전 → 캠페인 → 광고그룹 → 키워드·광고 문구 등록 → 검토 순서입니다.
@@ -97,5 +99,3 @@
 - [네이버 플레이스 순위는 어떻게 정해질까 — 네이버가 밝힌 기준과 사장님이 손댈 수 있는 것](https://noahhomepage.co.kr/columns/naver-place-ranking): 네이버는 검색어와 업체의 유사도, 업종 안에서의 인기도, 거리, 정보의 충실성 등을 함께 따져 정한다고 안내합니다.
 - [플레이스 리워드·트래픽 작업, 순위 올려 준다는 제안을 받았을 때 알아야 할 것](https://noahhomepage.co.kr/columns/place-reward-traffic-risk): 잠깐 숫자가 움직일 수는 있어도 실제 손님이 늘어난 게 아니고, 네이버는 조작된 리뷰를 차단·제재하고 있습니다.
 - [블로그 체험단 운영할 때 꼭 지켜야 할 광고 표시 — 2024년 12월부터 바뀐 위치까지](https://noahhomepage.co.kr/columns/blog-sponsored-disclosure): 식사·제품·할인처럼 대가를 주고 받은 후기는 협찬이나 광고라는 사실을 글 제목이나 첫 부분에 밝혀야 합니다.
-- [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 대부분의 동네 가게는 직접 만들 필요가 없습니다.
-- [www 붙이면 홈페이지가 안 열릴 때 — 원인 3가지와 해결 순서](https://noahhomepage.co.kr/columns/www-not-working): www가 붙은 주소는 별개의 주소라서 따로 연결해 줘야 합니다.
