@@ -741,6 +741,18 @@
       "kw": "광고대행사",
       "slug": "ad-agency-fee-guide",
       "cluster": "marketing"
+    },
+    {
+      "n": 122,
+      "kw": "키워드 광고",
+      "slug": "ad-keyword-selection",
+      "cluster": "marketing"
+    },
+    {
+      "n": 123,
+      "kw": "네이버 브랜드검색",
+      "slug": "naver-brand-search-ad",
+      "cluster": "marketing"
     }
   ]
 }

@@ -73,7 +73,7 @@
 - [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 방법별·업종별 비교
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
 
-## 홈페이지 제작 칼럼 (121편)
+## 홈페이지 제작 칼럼 (123편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준
@@ -89,6 +89,8 @@
 
 ### 최근 칼럼
 
+- [네이버 브랜드검색 광고란 — 비용이 정해지는 방식과 동네 가게에 필요한지](https://noahhomepage.co.kr/columns/naver-brand-search-ad): 클릭당 과금이 아니라 기간을 정해 금액을 먼저 내는 정액제입니다.
+- [키워드 광고, 어떤 검색어에 돈을 쓸까 — 네이버 키워드 도구로 고르는 법](https://noahhomepage.co.kr/columns/ad-keyword-selection): 네이버 검색광고의 키워드 도구에서 월간 검색수와 월평균 클릭수, 경쟁정도를 함께 보고, 손님이 실제로 칠 만한 '지역+업종+서비스' 세부 키워드부터 고르세요.
 - [광고대행사 수수료는 누가 낼까 — 네이버 광고 대행 맡기기 전 확인할 것](https://noahhomepage.co.kr/columns/ad-agency-fee-guide): 네이버 검색광고에 등록된 공식 대행사는 광고주가 쓴 광고비에 따라 네이버로부터 수수료를 받는 구조로 설명됩니다.
 - ['블로그 지수'·'최적화 블로그'는 네이버 공식 용어일까 — C-Rank와 D.I.A.로 보는 사실과 오해](https://noahhomepage.co.kr/columns/blog-index-myths): 아닙니다.
 - [네이버 플레이스 광고와 지역소상공인 광고, 무엇이 다를까](https://noahhomepage.co.kr/columns/place-ad-vs-local-ad): 플레이스 광고는 손님이 검색한 말에 맞춰 검색 결과에 뜨고 클릭할 때 비용이 나갑니다.
@@ -97,5 +99,3 @@
 - [영수증 리뷰와 방문자 리뷰, 무엇이 다르고 어떻게 정직하게 늘릴까](https://noahhomepage.co.kr/columns/place-review-honest): 네이버 플레이스의 방문자 리뷰는 방문을 인증한 사람만 쓸 수 있고, 영수증 리뷰는 그 인증을 영수증 사진으로 하는 방식입니다.
 - [네이버 파워링크 광고, 비용은 어떻게 매겨지나 — 클릭당 과금과 입찰가·품질지수](https://noahhomepage.co.kr/columns/naver-powerlink-cost): 광고가 보이기만 해서는 돈이 나가지 않고, 누군가 클릭할 때마다 나갑니다.
 - [네이버 플레이스 순위는 어떻게 정해질까 — 네이버가 밝힌 기준과 사장님이 손댈 수 있는 것](https://noahhomepage.co.kr/columns/naver-place-ranking): 네이버는 검색어와 업체의 유사도, 업종 안에서의 인기도, 거리, 정보의 충실성 등을 함께 따져 정한다고 안내합니다.
-- [플레이스 리워드·트래픽 작업, 순위 올려 준다는 제안을 받았을 때 알아야 할 것](https://noahhomepage.co.kr/columns/place-reward-traffic-risk): 잠깐 숫자가 움직일 수는 있어도 실제 손님이 늘어난 게 아니고, 네이버는 조작된 리뷰를 차단·제재하고 있습니다.
-- [블로그 체험단 운영할 때 꼭 지켜야 할 광고 표시 — 2024년 12월부터 바뀐 위치까지](https://noahhomepage.co.kr/columns/blog-sponsored-disclosure): 식사·제품·할인처럼 대가를 주고 받은 후기는 협찬이나 광고라는 사실을 글 제목이나 첫 부분에 밝혀야 합니다.
