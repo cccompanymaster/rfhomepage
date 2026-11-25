@@ -753,6 +753,18 @@
       "kw": "네이버 브랜드검색",
       "slug": "naver-brand-search-ad",
       "cluster": "marketing"
+    },
+    {
+      "n": 124,
+      "kw": "쇼핑검색광고",
+      "slug": "naver-shopping-search-ad",
+      "cluster": "marketing"
+    },
+    {
+      "n": 125,
+      "kw": "네이버 GFA",
+      "slug": "naver-gfa-basics",
+      "cluster": "marketing"
     }
   ]
 }

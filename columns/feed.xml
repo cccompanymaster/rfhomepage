@@ -6,7 +6,23 @@
     <atom:link href="https://noahhomepage.co.kr/columns/feed.xml" rel="self" type="application/rss+xml" />
     <description>홈페이지 제작 비용·업종별 제작·SEO·운영까지 정리한 칼럼</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 24 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <item>
+      <title>네이버 쇼핑검색광고 기본 — 세 가지 유형과 시작하기 전에 갖출 것</title>
+      <link>https://noahhomepage.co.kr/columns/naver-shopping-search-ad</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/naver-shopping-search-ad</guid>
+      <description>네이버 쇼핑 검색 결과에 상품을 보여 주는 쇼핑검색광고의 세 가지 유형(쇼핑몰 상품형·제품 카탈로그형·쇼핑 브랜드형), 클릭당 과금과 순위가 정해지는 방식, 시작하기 전에 갖출 것을 정리했습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Wed, 25 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>네이버 GFA(성과형 디스플레이 광고) 기본 — 어디에 뜨고 비용은 어떻게 나가나</title>
+      <link>https://noahhomepage.co.kr/columns/naver-gfa-basics</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/naver-gfa-basics</guid>
+      <description>네이버 메인·뉴스 같은 화면에 이미지·영상으로 뜨는 성과형 디스플레이 광고(GFA)가 무엇인지, 실시간 입찰과 노출·클릭·재생 과금, 대상 설정, 검색광고와 무엇이 다른지 정리했습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Wed, 25 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>키워드 광고, 어떤 검색어에 돈을 쓸까 — 네이버 키워드 도구로 고르는 법</title>
       <link>https://noahhomepage.co.kr/columns/ad-keyword-selection</link>
@@ -308,22 +324,6 @@
       <link>https://noahhomepage.co.kr/columns/plastic-surgery</link>
       <guid isPermaLink="true">https://noahhomepage.co.kr/columns/plastic-surgery</guid>
       <description>성형외과 홈페이지는 전후사진·이벤트 가격 표현이 의료광고 규제와 가장 자주 부딪히는 영역입니다. 게시 요건, 초상권 동의, 상담 전환 설계를 실무 순서로 정리했습니다.</description>
-      <category>업종별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>피부과 홈페이지 제작, 시술 100개를 정리하는 기술</title>
-      <link>https://noahhomepage.co.kr/columns/dermatology-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/dermatology-homepage</guid>
-      <description>피부과는 레이저·토닝 등 시술 종류가 많아 홈페이지 구조 설계가 승부처입니다. 시술 분류법, 비급여 가격표 게시, 이벤트 표현 주의점과 예약 연동까지 담았습니다.</description>
-      <category>업종별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>카페 홈페이지 제작, 인스타만으로 부족한 이유</title>
-      <link>https://noahhomepage.co.kr/columns/cafe-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/cafe-homepage</guid>
-      <description>카페는 인스타그램과 네이버 플레이스가 있어도 홈페이지가 할 일이 따로 있습니다. 사진 톤 잡기, 메뉴·영업시간 표기, 플레이스 연동, 단체·대관 문의 설계를 정리했습니다.</description>
       <category>업종별 제작</category>
       <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
     </item>
