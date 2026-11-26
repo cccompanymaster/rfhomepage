@@ -765,6 +765,18 @@
       "kw": "네이버 GFA",
       "slug": "naver-gfa-basics",
       "cluster": "marketing"
+    },
+    {
+      "n": 126,
+      "kw": "파워컨텐츠",
+      "slug": "naver-power-content-ad",
+      "cluster": "marketing"
+    },
+    {
+      "n": 127,
+      "kw": "블로그 기자단",
+      "slug": "blog-reporter-distribution-risk",
+      "cluster": "marketing"
     }
   ]
 }

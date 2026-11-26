@@ -6,7 +6,23 @@
     <atom:link href="https://noahhomepage.co.kr/columns/feed.xml" rel="self" type="application/rss+xml" />
     <description>홈페이지 제작 비용·업종별 제작·SEO·운영까지 정리한 칼럼</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 25 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <item>
+      <title>네이버 파워컨텐츠 광고란 — 블로그 글을 검색 광고로 보여 주는 방식</title>
+      <link>https://noahhomepage.co.kr/columns/naver-power-content-ad</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/naver-power-content-ad</guid>
+      <description>네이버 블로그·카페·포스트 글을 검색 결과의 광고 자리에 보여 주는 파워컨텐츠(콘텐츠검색광고)가 무엇인지, 클릭당 과금과 광고할 수 있는 키워드 제한, 어떤 가게에 맞는지 정리했습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Thu, 26 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>블로그 기자단·원고 배포, 무엇이 문제일까 — 체험 없는 후기와 복사 글의 위험</title>
+      <link>https://noahhomepage.co.kr/columns/blog-reporter-distribution-risk</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/blog-reporter-distribution-risk</guid>
+      <description>업체가 써 준 원고를 여러 블로그에 나눠 올리는 블로그 기자단·배포 마케팅이 왜 위험한지 정리했습니다. 체험 없는 후기에 대한 공정위 기준, 대가 표시, 같은 글이 여러 곳에 있을 때 네이버가 원본을 가려내는 방식까지 다룹니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Thu, 26 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>네이버 쇼핑검색광고 기본 — 세 가지 유형과 시작하기 전에 갖출 것</title>
       <link>https://noahhomepage.co.kr/columns/naver-shopping-search-ad</link>
@@ -308,22 +324,6 @@
       <link>https://noahhomepage.co.kr/columns/hospital-homepage</link>
       <guid isPermaLink="true">https://noahhomepage.co.kr/columns/hospital-homepage</guid>
       <description>병원 홈페이지는 의료광고 규제와 환자 예약 동선을 동시에 풀어야 합니다. 사전심의, 비급여 고지, 의료진 소개, 예약 설계까지 제작 순서대로 정리한 가이드입니다.</description>
-      <category>업종별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>한의원 홈페이지 제작, 한약 효능 표현이 가장 어렵습니다</title>
-      <link>https://noahhomepage.co.kr/columns/oriental-clinic</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/oriental-clinic</guid>
-      <description>한의원 홈페이지는 한약·추나 등 효능 표현의 수위 조절이 관건입니다. 과장광고 주의 표현과 다이어트 한약 문구, 비급여 고지, 증상별 상담 유입 설계까지 정리한 제작 가이드입니다.</description>
-      <category>업종별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>성형외과 홈페이지 제작, 전후사진 관리가 전부입니다</title>
-      <link>https://noahhomepage.co.kr/columns/plastic-surgery</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/plastic-surgery</guid>
-      <description>성형외과 홈페이지는 전후사진·이벤트 가격 표현이 의료광고 규제와 가장 자주 부딪히는 영역입니다. 게시 요건, 초상권 동의, 상담 전환 설계를 실무 순서로 정리했습니다.</description>
       <category>업종별 제작</category>
       <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
     </item>
