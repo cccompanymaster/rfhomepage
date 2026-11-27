@@ -6,7 +6,23 @@
     <atom:link href="https://noahhomepage.co.kr/columns/feed.xml" rel="self" type="application/rss+xml" />
     <description>홈페이지 제작 비용·업종별 제작·SEO·운영까지 정리한 칼럼</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 26 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <item>
+      <title>사장님이 직접 하는 네이버 블로그 마케팅 — 시작 순서와 글감 20개</title>
+      <link>https://noahhomepage.co.kr/columns/owner-naver-blog-start</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/owner-naver-blog-start</guid>
+      <description>대행 없이 사장님이 직접 네이버 블로그를 운영할 때의 시작 순서, 글감 고르는 법, 한 편을 쓰는 구성, 글에 가게 장소를 붙여 플레이스와 연결하는 방법을 정리했습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>인플루언서 마케팅, 작은 가게는 어떻게 할까 — 네이버 인플루언서와 협업 전에 정할 것</title>
+      <link>https://noahhomepage.co.kr/columns/influencer-marketing-naver</link>
+      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/influencer-marketing-naver</guid>
+      <description>작은 가게가 인플루언서와 협업할 때 알아 둘 네이버 인플루언서·브랜드커넥트, 비용을 정하는 요소, 계약 전에 정할 것, 광고 표시 의무까지 정리했습니다. 근거 없는 평균 단가 대신 판단 기준을 담았습니다.</description>
+      <category>온라인 마케팅</category>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>네이버 파워컨텐츠 광고란 — 블로그 글을 검색 광고로 보여 주는 방식</title>
       <link>https://noahhomepage.co.kr/columns/naver-power-content-ad</link>
@@ -309,22 +325,6 @@
       <guid isPermaLink="true">https://noahhomepage.co.kr/columns/free-homepage</guid>
       <description>무료 홈페이지 제작 도구의 장점과 함께 광고 노출, 도메인 제약, 검색 노출, 이전의 어려움 등 한계를 솔직하게 정리했습니다. 무료가 맞는 경우도 안내합니다.</description>
       <category>제작 가이드</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>치과 홈페이지 제작, 비급여 안내와 심의까지 챙기는 법</title>
-      <link>https://noahhomepage.co.kr/columns/dental-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/dental-homepage</guid>
-      <description>치과 홈페이지는 임플란트·교정 같은 비급여 진료 안내와 의료광고 사전심의가 핵심입니다. 전후사진·후기 게재 기준까지, 개원가 눈높이에서 제작 전 반드시 확인할 항목을 정리했습니다.</description>
-      <category>업종별 제작</category>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>병원 홈페이지 제작 전 체크리스트, 심의부터 예약 동선까지</title>
-      <link>https://noahhomepage.co.kr/columns/hospital-homepage</link>
-      <guid isPermaLink="true">https://noahhomepage.co.kr/columns/hospital-homepage</guid>
-      <description>병원 홈페이지는 의료광고 규제와 환자 예약 동선을 동시에 풀어야 합니다. 사전심의, 비급여 고지, 의료진 소개, 예약 설계까지 제작 순서대로 정리한 가이드입니다.</description>
-      <category>업종별 제작</category>
       <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>

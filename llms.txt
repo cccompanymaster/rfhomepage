@@ -73,7 +73,7 @@
 - [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 방법별·업종별 비교
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
 
-## 홈페이지 제작 칼럼 (127편)
+## 홈페이지 제작 칼럼 (129편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준
@@ -89,6 +89,8 @@
 
 ### 최근 칼럼
 
+- [인플루언서 마케팅, 작은 가게는 어떻게 할까 — 네이버 인플루언서와 협업 전에 정할 것](https://noahhomepage.co.kr/columns/influencer-marketing-naver): 할 수 있지만 팔로워 수보다 우리 동네·업종 손님이 실제로 보는 채널인지가 중요합니다.
+- [사장님이 직접 하는 네이버 블로그 마케팅 — 시작 순서와 글감 20개](https://noahhomepage.co.kr/columns/owner-naver-blog-start): 가게 이름으로 블로그를 하나 만들고, 손님이 자주 묻는 질문과 메뉴·가격·오시는 길부터 한 편씩 쓰세요.
 - [블로그 기자단·원고 배포, 무엇이 문제일까 — 체험 없는 후기와 복사 글의 위험](https://noahhomepage.co.kr/columns/blog-reporter-distribution-risk): 대가를 받고 쓴 글은 협찬 사실을 밝혀야 하고, 써 보지 않은 상품을 써 본 것처럼 쓰면 거짓 광고가 될 수 있습니다.
 - [네이버 파워컨텐츠 광고란 — 블로그 글을 검색 광고로 보여 주는 방식](https://noahhomepage.co.kr/columns/naver-power-content-ad): 사장님이 쓴 네이버 블로그·카페·포스트 글을 검색 결과의 광고 자리에 보여 주는 광고로, 클릭할 때 비용이 나갑니다.
 - [네이버 GFA(성과형 디스플레이 광고) 기본 — 어디에 뜨고 비용은 어떻게 나가나](https://noahhomepage.co.kr/columns/naver-gfa-basics): 네이버 메인·뉴스 같은 화면에 이미지·동영상 광고를 보여 주는 성과형 디스플레이 광고입니다.
@@ -97,5 +99,3 @@
 - [키워드 광고, 어떤 검색어에 돈을 쓸까 — 네이버 키워드 도구로 고르는 법](https://noahhomepage.co.kr/columns/ad-keyword-selection): 네이버 검색광고의 키워드 도구에서 월간 검색수와 월평균 클릭수, 경쟁정도를 함께 보고, 손님이 실제로 칠 만한 '지역+업종+서비스' 세부 키워드부터 고르세요.
 - [광고대행사 수수료는 누가 낼까 — 네이버 광고 대행 맡기기 전 확인할 것](https://noahhomepage.co.kr/columns/ad-agency-fee-guide): 네이버 검색광고에 등록된 공식 대행사는 광고주가 쓴 광고비에 따라 네이버로부터 수수료를 받는 구조로 설명됩니다.
 - ['블로그 지수'·'최적화 블로그'는 네이버 공식 용어일까 — C-Rank와 D.I.A.로 보는 사실과 오해](https://noahhomepage.co.kr/columns/blog-index-myths): 아닙니다.
-- [네이버 플레이스 광고와 지역소상공인 광고, 무엇이 다를까](https://noahhomepage.co.kr/columns/place-ad-vs-local-ad): 플레이스 광고는 손님이 검색한 말에 맞춰 검색 결과에 뜨고 클릭할 때 비용이 나갑니다.
-- [블로그 마케팅 대행, 계약하기 전에 확인할 7가지](https://noahhomepage.co.kr/columns/blog-agency-checklist): 작업 범위와 결과물 확인 방법, 해지·위약금 조건을 계약서에 적었는지, 대가성 글에 협찬 표시를 하는지, 남의 블로그 계정을 빌려 쓰지 않는지부터 확인하세요.

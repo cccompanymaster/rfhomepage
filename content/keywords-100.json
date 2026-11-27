@@ -777,6 +777,18 @@
       "kw": "블로그 기자단",
       "slug": "blog-reporter-distribution-risk",
       "cluster": "marketing"
+    },
+    {
+      "n": 128,
+      "kw": "네이버 블로그 마케팅",
+      "slug": "owner-naver-blog-start",
+      "cluster": "marketing"
+    },
+    {
+      "n": 129,
+      "kw": "인플루언서 마케팅",
+      "slug": "influencer-marketing-naver",
+      "cluster": "marketing"
     }
   ]
 }
