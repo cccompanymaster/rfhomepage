@@ -73,7 +73,7 @@
 - [홈페이지 예약 기능, 직접 만들까 네이버 예약을 붙일까](https://noahhomepage.co.kr/columns/booking-system): 방법별·업종별 비교
 - [제작 과정·자주 묻는 질문](https://noahhomepage.co.kr/process#faq): 포함 항목, 수정 범위, 호스팅·도메인
 
-## 홈페이지 제작 칼럼 (129편)
+## 홈페이지 제작 칼럼 (131편)
 
 - [칼럼 전체](https://noahhomepage.co.kr/columns/)
 - [비용·견적](https://noahhomepage.co.kr/columns/topic/cost): 제작비 구성, 견적 비교 기준
@@ -89,6 +89,8 @@
 
 ### 최근 칼럼
 
+- [바이럴 마케팅 대행, 무엇을 사는 건가 — 견적서에서 '광고 아닌 척'을 걸러 내는 법](https://noahhomepage.co.kr/columns/viral-marketing-agency-risk): 보통 블로그·카페·SNS·커뮤니티에 우리 가게 이야기가 퍼지도록 글을 올려 줍니다.
+- [네이버 브랜드 커넥트란 — 작은 가게·스마트스토어가 창작자와 협업하는 네 가지 방법](https://noahhomepage.co.kr/columns/naver-brand-connect): 네이버가 운영하는 사업자와 창작자(인플루언서·블로거) 협업 플랫폼입니다.
 - [인플루언서 마케팅, 작은 가게는 어떻게 할까 — 네이버 인플루언서와 협업 전에 정할 것](https://noahhomepage.co.kr/columns/influencer-marketing-naver): 할 수 있지만 팔로워 수보다 우리 동네·업종 손님이 실제로 보는 채널인지가 중요합니다.
 - [사장님이 직접 하는 네이버 블로그 마케팅 — 시작 순서와 글감 20개](https://noahhomepage.co.kr/columns/owner-naver-blog-start): 가게 이름으로 블로그를 하나 만들고, 손님이 자주 묻는 질문과 메뉴·가격·오시는 길부터 한 편씩 쓰세요.
 - [블로그 기자단·원고 배포, 무엇이 문제일까 — 체험 없는 후기와 복사 글의 위험](https://noahhomepage.co.kr/columns/blog-reporter-distribution-risk): 대가를 받고 쓴 글은 협찬 사실을 밝혀야 하고, 써 보지 않은 상품을 써 본 것처럼 쓰면 거짓 광고가 될 수 있습니다.
@@ -97,5 +99,3 @@
 - [네이버 쇼핑검색광고 기본 — 세 가지 유형과 시작하기 전에 갖출 것](https://noahhomepage.co.kr/columns/naver-shopping-search-ad): 네이버 쇼핑 검색 결과와 통합검색의 쇼핑 영역에 상품을 보여 주는 광고로, 클릭할 때 비용이 나갑니다.
 - [네이버 브랜드검색 광고란 — 비용이 정해지는 방식과 동네 가게에 필요한지](https://noahhomepage.co.kr/columns/naver-brand-search-ad): 클릭당 과금이 아니라 기간을 정해 금액을 먼저 내는 정액제입니다.
 - [키워드 광고, 어떤 검색어에 돈을 쓸까 — 네이버 키워드 도구로 고르는 법](https://noahhomepage.co.kr/columns/ad-keyword-selection): 네이버 검색광고의 키워드 도구에서 월간 검색수와 월평균 클릭수, 경쟁정도를 함께 보고, 손님이 실제로 칠 만한 '지역+업종+서비스' 세부 키워드부터 고르세요.
-- [광고대행사 수수료는 누가 낼까 — 네이버 광고 대행 맡기기 전 확인할 것](https://noahhomepage.co.kr/columns/ad-agency-fee-guide): 네이버 검색광고에 등록된 공식 대행사는 광고주가 쓴 광고비에 따라 네이버로부터 수수료를 받는 구조로 설명됩니다.
-- ['블로그 지수'·'최적화 블로그'는 네이버 공식 용어일까 — C-Rank와 D.I.A.로 보는 사실과 오해](https://noahhomepage.co.kr/columns/blog-index-myths): 아닙니다.

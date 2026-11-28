@@ -789,6 +789,18 @@
       "kw": "인플루언서 마케팅",
       "slug": "influencer-marketing-naver",
       "cluster": "marketing"
+    },
+    {
+      "n": 130,
+      "kw": "네이버 브랜드 커넥트",
+      "slug": "naver-brand-connect",
+      "cluster": "marketing"
+    },
+    {
+      "n": 131,
+      "kw": "바이럴 마케팅",
+      "slug": "viral-marketing-agency-risk",
+      "cluster": "marketing"
     }
   ]
 }
